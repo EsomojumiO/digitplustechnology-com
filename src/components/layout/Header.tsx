@@ -1,0 +1,368 @@
+"use client";
+
+import * as React from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Button, Container } from "@/components/ui";
+import { cn } from "@/lib/utils";
+import { mainNav, type NavItem } from "@/lib/site";
+import { Logo } from "./Logo";
+
+/* ---------------------------------------------------------------------------
+   Small chevron icon (pixel-aligned, consistent stroke).
+   --------------------------------------------------------------------------- */
+function Chevron({ className }: { className?: string }) {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 16 16"
+      fill="none"
+      className={cn("h-3.5 w-3.5", className)}
+    >
+      <path
+        d="M4 6l4 4 4-4"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+/* ---------------------------------------------------------------------------
+   Desktop dropdown — accessible: hover + focus open, Escape closes, arrow-key
+   roving, and aria-expanded wiring.
+   --------------------------------------------------------------------------- */
+function DesktopDropdown({
+  item,
+  active,
+}: {
+  item: NavItem;
+  active: boolean;
+}) {
+  const [open, setOpen] = React.useState(false);
+  const closeTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+  const wrapRef = React.useRef<HTMLLIElement>(null);
+  const id = React.useId();
+
+  const cancelClose = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+  };
+  const scheduleClose = () => {
+    cancelClose();
+    closeTimer.current = setTimeout(() => setOpen(false), 120);
+  };
+
+  React.useEffect(() => () => cancelClose(), []);
+
+  const onKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Escape") {
+      setOpen(false);
+    } else if (e.key === "ArrowDown" && !open) {
+      e.preventDefault();
+      setOpen(true);
+    }
+  };
+
+  // Close when focus leaves the whole group.
+  const onBlur = (e: React.FocusEvent<HTMLLIElement>) => {
+    if (!e.currentTarget.contains(e.relatedTarget as Node)) setOpen(false);
+  };
+
+  return (
+    <li
+      ref={wrapRef}
+      className="relative"
+      onMouseEnter={() => {
+        cancelClose();
+        setOpen(true);
+      }}
+      onMouseLeave={scheduleClose}
+      onBlur={onBlur}
+      onKeyDown={onKeyDown}
+    >
+      <Link
+        href={item.href}
+        aria-haspopup="true"
+        aria-expanded={open}
+        aria-controls={id}
+        className={cn(
+          "inline-flex items-center gap-1 rounded-md px-3 py-2 text-small font-medium",
+          "transition-colors duration-[var(--dur-fast)] ease-[var(--ease-out)]",
+          "hover:text-text",
+          active ? "text-text" : "text-muted",
+        )}
+      >
+        {item.label}
+        <Chevron
+          className={cn(
+            "text-muted transition-transform duration-[var(--dur-fast)]",
+            open && "rotate-180",
+          )}
+        />
+      </Link>
+
+      <div
+        id={id}
+        role="menu"
+        aria-label={item.label}
+        className={cn(
+          "absolute left-0 top-full z-50 pt-2",
+          "transition-[opacity,transform] duration-[var(--dur-base)] ease-[var(--ease-out)]",
+          open
+            ? "pointer-events-auto translate-y-0 opacity-100"
+            : "pointer-events-none -translate-y-1 opacity-0",
+        )}
+      >
+        <ul
+          className={cn(
+            "grid w-[34rem] max-w-[calc(100vw-2rem)] grid-cols-2 gap-1 rounded-xl p-2",
+            "border border-hairline bg-surface-raised shadow-[var(--shadow-lg)]",
+          )}
+        >
+          {item.children?.map((child) => (
+            <li key={child.href} role="none">
+              <Link
+                role="menuitem"
+                href={child.href}
+                tabIndex={open ? 0 : -1}
+                className={cn(
+                  "block rounded-lg px-3 py-2.5",
+                  "transition-colors duration-[var(--dur-fast)] ease-[var(--ease-out)]",
+                  "hover:bg-surface focus-visible:bg-surface",
+                )}
+              >
+                <span className="block text-small font-medium text-text">
+                  {child.label}
+                </span>
+                {child.description && (
+                  <span className="mt-0.5 block text-caption text-muted">
+                    {child.description}
+                  </span>
+                )}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </li>
+  );
+}
+
+/* ---------------------------------------------------------------------------
+   Mobile menu — full-screen slide-over. Locks scroll, Escape + backdrop close,
+   focus moves into the panel on open.
+   --------------------------------------------------------------------------- */
+function MobileMenu({
+  open,
+  onClose,
+}: {
+  open: boolean;
+  onClose: () => void;
+}) {
+  const panelRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", onKey);
+    // Move focus into the panel.
+    const t = setTimeout(() => panelRef.current?.focus(), 0);
+    return () => {
+      document.body.style.overflow = prev;
+      document.removeEventListener("keydown", onKey);
+      clearTimeout(t);
+    };
+  }, [open, onClose]);
+
+  return (
+    <div
+      className={cn(
+        "fixed inset-0 z-[60] lg:hidden",
+        open ? "pointer-events-auto" : "pointer-events-none",
+      )}
+      aria-hidden={!open}
+    >
+      {/* Backdrop */}
+      <div
+        onClick={onClose}
+        className={cn(
+          "absolute inset-0 bg-neutral-950/40 backdrop-blur-sm",
+          "transition-opacity duration-[var(--dur-base)] ease-[var(--ease-out)]",
+          open ? "opacity-100" : "opacity-0",
+        )}
+      />
+      {/* Panel */}
+      <div
+        ref={panelRef}
+        tabIndex={-1}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Site navigation"
+        className={cn(
+          "absolute inset-y-0 right-0 flex w-full max-w-sm flex-col",
+          "border-l border-hairline bg-surface-raised shadow-[var(--shadow-lg)] outline-none",
+          "transition-transform duration-[var(--dur-slow)] ease-[var(--ease-out)]",
+          open ? "translate-x-0" : "translate-x-full",
+        )}
+      >
+        <div className="flex h-16 items-center justify-between border-b border-hairline px-5">
+          <Logo />
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close menu"
+            className={cn(
+              "grid h-10 w-10 place-items-center rounded-md text-muted",
+              "transition-colors duration-[var(--dur-fast)] hover:bg-surface hover:text-text",
+              "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
+            )}
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5">
+              <path
+                d="M6 6l12 12M18 6L6 18"
+                stroke="currentColor"
+                strokeWidth="1.75"
+                strokeLinecap="round"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <nav
+          aria-label="Mobile"
+          className="flex-1 overflow-y-auto overscroll-contain px-3 py-4"
+        >
+          <ul className="flex flex-col gap-0.5">
+            {mainNav.map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  onClick={onClose}
+                  className={cn(
+                    "block rounded-lg px-3 py-2.5 text-body font-medium text-text",
+                    "transition-colors duration-[var(--dur-fast)] hover:bg-surface",
+                  )}
+                >
+                  {item.label}
+                </Link>
+                {item.children && (
+                  <ul className="mb-1 ml-3 flex flex-col gap-0.5 border-l border-hairline pl-3">
+                    {item.children.map((child) => (
+                      <li key={child.href}>
+                        <Link
+                          href={child.href}
+                          onClick={onClose}
+                          className={cn(
+                            "block rounded-md px-3 py-2 text-small text-muted",
+                            "transition-colors duration-[var(--dur-fast)] hover:bg-surface hover:text-text",
+                          )}
+                        >
+                          {child.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className="border-t border-hairline p-4">
+          <Button href="/contact" size="lg" className="w-full" onClick={onClose}>
+            Request Assessment
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ---------------------------------------------------------------------------
+   Header
+   --------------------------------------------------------------------------- */
+export function Header() {
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const pathname = usePathname();
+
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
+
+  return (
+    <header
+      className={cn(
+        "sticky top-0 z-50 w-full border-b border-hairline",
+        "bg-background/80 backdrop-blur-md backdrop-saturate-150 supports-[backdrop-filter]:bg-background/65",
+      )}
+    >
+      <Container as="div" className="flex h-16 items-center justify-between gap-4">
+        <Logo />
+
+        <nav aria-label="Primary" className="hidden lg:block">
+          <ul className="flex items-center gap-0.5">
+            {mainNav.map((item) =>
+              item.children ? (
+                <DesktopDropdown
+                  key={item.href}
+                  item={item}
+                  active={isActive(item.href)}
+                />
+              ) : (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    aria-current={isActive(item.href) ? "page" : undefined}
+                    className={cn(
+                      "inline-flex items-center rounded-md px-3 py-2 text-small font-medium",
+                      "transition-colors duration-[var(--dur-fast)] ease-[var(--ease-out)] hover:text-text",
+                      isActive(item.href) ? "text-text" : "text-muted",
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ),
+            )}
+          </ul>
+        </nav>
+
+        <div className="flex items-center gap-2">
+          <Button href="/contact" size="sm" className="hidden sm:inline-flex">
+            Request Assessment
+          </Button>
+
+          <button
+            type="button"
+            onClick={() => setMobileOpen(true)}
+            aria-label="Open menu"
+            aria-expanded={mobileOpen}
+            className={cn(
+              "grid h-10 w-10 place-items-center rounded-md text-text lg:hidden",
+              "transition-colors duration-[var(--dur-fast)] hover:bg-surface",
+              "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
+            )}
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5">
+              <path
+                d="M4 7h16M4 12h16M4 17h16"
+                stroke="currentColor"
+                strokeWidth="1.75"
+                strokeLinecap="round"
+              />
+            </svg>
+          </button>
+        </div>
+      </Container>
+
+      <MobileMenu open={mobileOpen} onClose={() => setMobileOpen(false)} />
+    </header>
+  );
+}
+
+export default Header;
