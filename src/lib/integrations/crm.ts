@@ -28,7 +28,7 @@ async function createLead(
 ): Promise<AdapterResult> {
   // ---- STUB MODE -----------------------------------------------------------
   if (!hasWebhook() && !hasApiKey()) {
-    // eslint-disable-next-line no-console
+     
     console.info(
       "[crm:stub] createLead (no CRM_* env — not pushed):",
       JSON.stringify(payload),
@@ -78,7 +78,7 @@ async function createLead(
     }
   }
 
-  // eslint-disable-next-line no-console
+   
   console.warn(
     "[crm] CRM_API_KEY present but no SDK implementation wired — skipping.",
   );

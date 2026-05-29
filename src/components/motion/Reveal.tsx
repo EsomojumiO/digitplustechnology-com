@@ -19,6 +19,19 @@ export interface RevealProps extends React.HTMLAttributes<HTMLDivElement> {
  * `prefers-reduced-motion`: when reduced, content is shown immediately with no
  * transform. Content is always present in the DOM (SSR-friendly, crawlable).
  */
+/** Subscribe to the user's reduced-motion preference without setState-in-effect. */
+function usePrefersReducedMotion(): boolean {
+  return React.useSyncExternalStore(
+    (onChange) => {
+      const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+      mq.addEventListener("change", onChange);
+      return () => mq.removeEventListener("change", onChange);
+    },
+    () => window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+    () => false, // server snapshot: assume motion is allowed
+  );
+}
+
 export function Reveal({
   as: Comp = "div",
   delay = 0,
@@ -31,17 +44,11 @@ export function Reveal({
 }: RevealProps) {
   const ref = React.useRef<HTMLElement | null>(null);
   const [visible, setVisible] = React.useState(false);
-  const [enabled, setEnabled] = React.useState(true);
+  const reduced = usePrefersReducedMotion();
+  const enabled = !reduced;
 
   React.useEffect(() => {
-    const reduce =
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) {
-      setEnabled(false);
-      setVisible(true);
-      return;
-    }
+    if (reduced) return;
 
     const node = ref.current;
     if (!node) return;
@@ -62,12 +69,14 @@ export function Reveal({
 
     observer.observe(node);
     return () => observer.disconnect();
-  }, [once]);
+  }, [once, reduced]);
+
+  const shown = visible || reduced;
 
   return (
     <Comp
       ref={ref}
-      data-reveal={visible ? "visible" : "hidden"}
+      data-reveal={shown ? "visible" : "hidden"}
       className={cn(
         enabled &&
           "motion-safe:transition-[opacity,transform] motion-safe:duration-[var(--dur-slow)] motion-safe:ease-[var(--ease-out)]",
@@ -76,11 +85,11 @@ export function Reveal({
       style={{
         ...(enabled
           ? {
-              opacity: visible ? 1 : 0,
-              transform: visible
+              opacity: shown ? 1 : 0,
+              transform: shown
                 ? "translateY(0)"
                 : `translateY(${distance}px)`,
-              transitionDelay: visible && delay ? `${delay}ms` : undefined,
+              transitionDelay: shown && delay ? `${delay}ms` : undefined,
               willChange: "opacity, transform",
             }
           : null),

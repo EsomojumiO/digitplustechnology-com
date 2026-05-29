@@ -65,7 +65,7 @@ export async function POST(req: Request) {
       200,
     );
   } catch (err) {
-    // eslint-disable-next-line no-console
+     
     console.error("[api/report-lead] unexpected error:", err);
     return json(
       { ok: false, message: "Something went wrong. Please try again." },

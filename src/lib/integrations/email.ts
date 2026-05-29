@@ -27,7 +27,7 @@ function hasSmtp(): boolean {
 async function notify(input: EmailNotification): Promise<AdapterResult> {
   // ---- STUB MODE -----------------------------------------------------------
   if (!hasResend() && !hasSmtp()) {
-    // eslint-disable-next-line no-console
+     
     console.info(
       "[email:stub] notification (no SMTP/RESEND env — not sent):",
       JSON.stringify({
@@ -76,7 +76,7 @@ async function notify(input: EmailNotification): Promise<AdapterResult> {
 
   // Until a provider above is implemented, treat configured-but-unimplemented
   // as a soft skip rather than a hard failure (keeps requests succeeding).
-  // eslint-disable-next-line no-console
+   
   console.warn(
     "[email] provider env present but no implementation wired — skipping send.",
   );

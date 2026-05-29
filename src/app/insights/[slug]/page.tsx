@@ -7,7 +7,6 @@ import {
   Container,
   Grid,
   Badge,
-  Eyebrow,
   Prose,
   Breadcrumbs,
   SectionHeading,

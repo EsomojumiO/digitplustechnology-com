@@ -33,7 +33,7 @@ export function record(lead: LeadPayload): { id: string } {
     if (buffer.length > MAX_RETAINED) buffer.shift();
 
     // Structured-ish console record so it shows in server logs / Vercel logs.
-    // eslint-disable-next-line no-console
+     
     console.info(
       `[leads] recorded ${lead.kind} (${id})`,
       JSON.stringify(redact(lead)),

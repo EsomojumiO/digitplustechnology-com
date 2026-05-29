@@ -28,7 +28,7 @@ async function upsert(
 ): Promise<AdapterResult> {
   // ---- STUB MODE -----------------------------------------------------------
   if (!isConfigured()) {
-    // eslint-disable-next-line no-console
+     
     console.info(
       `[marketing:stub] ${context} (no MARKETING_* env — not subscribed):`,
       JSON.stringify({ email, attributes }),
@@ -58,7 +58,7 @@ async function upsert(
   // (Mailchimp uses PUT /lists/{list_id}/members/{subscriber_hash}.)
   // --------------------------------------------------------------------------
 
-  // eslint-disable-next-line no-console
+   
   console.warn(
     "[marketing] provider env present but no implementation wired — skipping.",
   );

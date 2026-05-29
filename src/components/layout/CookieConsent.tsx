@@ -6,7 +6,39 @@ import { Button } from "@/components/ui";
 import { cn } from "@/lib/utils";
 
 const STORAGE_KEY = "dpt-cookie-consent";
+const CHANGE_EVENT = "dpt-consent-change";
 type Choice = "accepted" | "declined";
+
+/** Read the persisted consent choice; "unset" means undecided (show banner). */
+function readChoice(): string {
+  try {
+    return window.localStorage.getItem(STORAGE_KEY) ?? "unset";
+  } catch {
+    // localStorage unavailable (private mode) — treat as undecided, fail safe.
+    return "unset";
+  }
+}
+
+/**
+ * Subscribe to the consent choice via an external store (localStorage), so the
+ * banner's visibility is derived state — no setState inside an effect body.
+ * The server snapshot ("ssr") keeps the banner out of the SSR markup, avoiding a
+ * hydration flash; the client snapshot decides on first paint after hydration.
+ */
+function useConsentChoice(): string {
+  return React.useSyncExternalStore(
+    (onChange) => {
+      window.addEventListener("storage", onChange);
+      window.addEventListener(CHANGE_EVENT, onChange);
+      return () => {
+        window.removeEventListener("storage", onChange);
+        window.removeEventListener(CHANGE_EVENT, onChange);
+      };
+    },
+    readChoice,
+    () => "ssr",
+  );
+}
 
 /**
  * CookieConsent — privacy-first banner.
@@ -16,25 +48,17 @@ type Choice = "accepted" | "declined";
  * records the choice in localStorage. Analytics agents should gate behind it.
  */
 export function CookieConsent() {
-  const [visible, setVisible] = React.useState(false);
+  const choice = useConsentChoice();
+  const visible = choice === "unset";
 
-  React.useEffect(() => {
+  const choose = (next: Choice) => {
     try {
-      const stored = window.localStorage.getItem(STORAGE_KEY);
-      if (stored !== "accepted" && stored !== "declined") setVisible(true);
-    } catch {
-      // localStorage unavailable (private mode) — show banner, fail safe.
-      setVisible(true);
-    }
-  }, []);
-
-  const choose = (choice: Choice) => {
-    try {
-      window.localStorage.setItem(STORAGE_KEY, choice);
+      window.localStorage.setItem(STORAGE_KEY, next);
     } catch {
       // ignore persistence failure; still dismiss for this session.
     }
-    setVisible(false);
+    // Notify same-tab subscribers (the "storage" event only fires cross-tab).
+    window.dispatchEvent(new Event(CHANGE_EVENT));
   };
 
   if (!visible) return null;

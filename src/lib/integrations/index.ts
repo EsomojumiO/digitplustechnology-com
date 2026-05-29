@@ -56,7 +56,7 @@ async function safe(
     const result = await fn();
     return [name, result];
   } catch (err) {
-    // eslint-disable-next-line no-console
+     
     console.error(`[integrations] provider "${name}" threw:`, err);
     return [
       name,

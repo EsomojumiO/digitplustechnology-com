@@ -51,7 +51,7 @@ export function track(event: AnalyticsEvent, props?: AnalyticsProps): void {
     if (typeof w.plausible === "function") {
       w.plausible(event, props ? { props } : undefined);
     } else if (process.env.NODE_ENV !== "production") {
-      // eslint-disable-next-line no-console
+       
       console.debug("[analytics]", event, props ?? {});
     }
   } catch {
