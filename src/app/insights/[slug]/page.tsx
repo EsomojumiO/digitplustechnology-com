@@ -23,6 +23,8 @@ import {
   type Category,
 } from "@/lib/content";
 import { siteConfig } from "@/lib/site";
+import { JsonLd } from "@/lib/seo/jsonld";
+import { articleSchema, breadcrumbSchema } from "@/lib/seo/schema";
 import { ArticleCard } from "../_components/ArticleCard";
 import { ShareBar } from "../_components/ShareBar";
 import { formatDate, isoDate } from "../_components/format";
@@ -127,6 +129,14 @@ export default async function ArticlePage({
 
   return (
     <>
+      <JsonLd data={articleSchema(article, url)} />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", url: "/" },
+          { name: "Insights", url: "/insights" },
+          { name: article.title },
+        ])}
+      />
       <Section spacing="sm">
         <Breadcrumbs
           items={[

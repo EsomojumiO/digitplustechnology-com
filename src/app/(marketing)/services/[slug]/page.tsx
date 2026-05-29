@@ -17,6 +17,8 @@ import { Reveal } from "@/components/motion/Reveal";
 import { services, industries } from "@/lib/site";
 import { getServiceContent } from "@/data/services";
 import { testimonials } from "@/data/testimonials";
+import { JsonLd } from "@/lib/seo/jsonld";
+import { serviceSchema, faqSchema, breadcrumbSchema } from "@/lib/seo/schema";
 
 export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
@@ -35,6 +37,7 @@ export async function generateMetadata({
   return {
     title: content.metaTitle,
     description: content.metaDescription,
+    alternates: { canonical: `/services/${content.slug}` },
   };
 }
 
@@ -57,6 +60,17 @@ export default async function ServiceDetailPage({
 
   return (
     <>
+      <JsonLd data={serviceSchema(content)} />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", url: "/" },
+          { name: "Services", url: "/services" },
+          { name: content.title },
+        ])}
+      />
+      {content.faqs.length > 0 ? (
+        <JsonLd data={faqSchema(content.faqs)} />
+      ) : null}
       <Section spacing="sm">
         <Breadcrumbs
           items={[

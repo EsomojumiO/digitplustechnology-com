@@ -15,6 +15,7 @@ export const metadata: Metadata = {
   title: "IT Services — Procurement, Infrastructure & Managed Services | Digitplus",
   description:
     "Six end-to-end IT service lines for organisations across Nigeria: procurement, hardware supply, infrastructure, managed services, technology advisory, and deployment.",
+  alternates: { canonical: "/services" },
 };
 
 export default function ServicesOverviewPage() {

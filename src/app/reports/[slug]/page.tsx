@@ -17,6 +17,8 @@ import {
   MDXContent,
 } from "@/lib/content";
 import { siteConfig } from "@/lib/site";
+import { JsonLd } from "@/lib/seo/jsonld";
+import { reportSchema, breadcrumbSchema } from "@/lib/seo/schema";
 
 /** Static generation: one page per known report, no on-demand params. */
 export const dynamicParams = false;
@@ -81,8 +83,18 @@ export default async function ReportLandingPage({
     { year: "numeric", month: "long" },
   );
 
+  const url = `${siteConfig.url}/reports/${report.slug}`;
+
   return (
     <>
+      <JsonLd data={reportSchema(report, url)} />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", url: "/" },
+          { name: "Reports", url: "/reports" },
+          { name: report.title },
+        ])}
+      />
       {/* ── Ungated, indexable preview ─────────────────────────────────── */}
       <Section spacing="lg" className="pb-10 sm:pb-12">
         <Breadcrumbs

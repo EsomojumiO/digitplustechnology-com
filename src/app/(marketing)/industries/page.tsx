@@ -15,6 +15,7 @@ export const metadata: Metadata = {
   title: "Industries We Serve — Government, Banking, Healthcare & More | Digitplus",
   description:
     "Sector-specific IT solutions for government, banking, enterprise, SME, healthcare, education, oil & gas, and logistics across Nigeria. Built around how each sector works.",
+  alternates: { canonical: "/industries" },
 };
 
 export default function IndustriesOverviewPage() {

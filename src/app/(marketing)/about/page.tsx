@@ -14,16 +14,25 @@ import {
 import { Reveal } from "@/components/motion/Reveal";
 import { siteConfig } from "@/lib/site";
 import { stats, whyUs } from "@/data";
+import { JsonLd } from "@/lib/seo/jsonld";
+import { breadcrumbSchema } from "@/lib/seo/schema";
 
 export const metadata: Metadata = {
   title: "About Digitplus Technology — A Disciplined Nigerian IT Partner",
   description:
     "Digitplus Technology Limited is a CAC-registered, Abuja-based B2B IT solutions company with 8+ years and 50+ enterprise clients. End-to-end IT built on operational discipline.",
+  alternates: { canonical: "/about" },
 };
 
 export default function AboutPage() {
   return (
     <>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", url: "/" },
+          { name: "About" },
+        ])}
+      />
       <Section spacing="sm">
         <Breadcrumbs
           items={[{ label: "Home", href: "/" }, { label: "About" }]}

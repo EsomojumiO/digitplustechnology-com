@@ -9,6 +9,8 @@ import {
   CookieConsent,
   SkipLink,
 } from "@/components/layout";
+import { JsonLd } from "@/lib/seo/jsonld";
+import { organizationSchema, websiteSchema } from "@/lib/seo/schema";
 
 // Inter loaded as the design-system's --font-geist-sans token so tokens resolve.
 const inter = Inter({
@@ -81,6 +83,9 @@ export default function RootLayout({
         <Footer />
         <WhatsAppWidget />
         <CookieConsent />
+        {/* Sitewide structured data — Organization + WebSite. */}
+        <JsonLd data={organizationSchema()} />
+        <JsonLd data={websiteSchema()} />
       </body>
     </html>
   );

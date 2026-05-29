@@ -12,12 +12,15 @@ import {
 import { Reveal } from "@/components/motion/Reveal";
 import { siteConfig } from "@/lib/site";
 import { getLocation } from "@/data/locations";
+import { JsonLd } from "@/lib/seo/jsonld";
+import { localBusinessSchema, breadcrumbSchema } from "@/lib/seo/schema";
 
 const location = getLocation("port-harcourt")!;
 
 export const metadata: Metadata = {
   title: location.metaTitle,
   description: location.metaDescription,
+  alternates: { canonical: "/locations/port-harcourt" },
 };
 
 export default function PortHarcourtPage() {
@@ -26,6 +29,14 @@ export default function PortHarcourtPage() {
 
   return (
     <>
+      <JsonLd data={localBusinessSchema(loc)} />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", url: "/" },
+          { name: "Locations", url: "/locations" },
+          { name: loc.city },
+        ])}
+      />
       <Section spacing="sm">
         <Breadcrumbs
           items={[

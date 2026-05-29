@@ -15,6 +15,8 @@ import {
 import { Reveal } from "@/components/motion/Reveal";
 import { industries, services } from "@/lib/site";
 import { getIndustryContent } from "@/data/industries";
+import { JsonLd } from "@/lib/seo/jsonld";
+import { faqSchema, breadcrumbSchema } from "@/lib/seo/schema";
 
 export function generateStaticParams() {
   return industries.map((i) => ({ slug: i.slug }));
@@ -33,6 +35,7 @@ export async function generateMetadata({
   return {
     title: content.metaTitle,
     description: content.metaDescription,
+    alternates: { canonical: `/industries/${content.slug}` },
   };
 }
 
@@ -51,6 +54,16 @@ export default async function IndustryDetailPage({
 
   return (
     <>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", url: "/" },
+          { name: "Industries", url: "/industries" },
+          { name: content.title },
+        ])}
+      />
+      {content.faqs && content.faqs.length > 0 ? (
+        <JsonLd data={faqSchema(content.faqs)} />
+      ) : null}
       <Section spacing="sm">
         <Breadcrumbs
           items={[

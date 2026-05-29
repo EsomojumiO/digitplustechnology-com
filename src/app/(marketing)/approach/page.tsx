@@ -15,6 +15,7 @@ export const metadata: Metadata = {
   title: "Our Approach — A Clear, Documented IT Delivery Process | Digitplus",
   description:
     "How Digitplus delivers IT: a six-step process from discovery and design through procurement, deployment, testing, and ongoing support — documented and accountable at every step.",
+  alternates: { canonical: "/approach" },
 };
 
 export default function ApproachPage() {

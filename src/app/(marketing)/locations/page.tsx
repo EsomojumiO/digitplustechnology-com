@@ -16,6 +16,7 @@ export const metadata: Metadata = {
   title: "Our Locations — Abuja, Lagos & Port Harcourt | Digitplus Technology",
   description:
     "Digitplus Technology Limited is headquartered in Abuja with delivery hubs in Lagos and Port Harcourt, and nationwide coverage on request across Nigeria.",
+  alternates: { canonical: "/locations" },
 };
 
 export default function LocationsPage() {
