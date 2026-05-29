@@ -1,14 +1,168 @@
-import { Section, Container } from "@/components/ui";
+import type { Metadata } from "next";
+import {
+  Section,
+  SectionHeading,
+  Grid,
+  Card,
+  Button,
+  Breadcrumbs,
+  StatGrid,
+  CTABand,
+  Eyebrow,
+  Prose,
+} from "@/components/ui";
+import { Reveal } from "@/components/motion/Reveal";
+import { siteConfig } from "@/lib/site";
+import { stats, whyUs } from "@/data";
 
-export const metadata = { title: "About" };
+export const metadata: Metadata = {
+  title: "About Digitplus Technology — A Disciplined Nigerian IT Partner",
+  description:
+    "Digitplus Technology Limited is a CAC-registered, Abuja-based B2B IT solutions company with 8+ years and 50+ enterprise clients. End-to-end IT built on operational discipline.",
+};
 
-export default function Page() {
+export default function AboutPage() {
   return (
-    <Section>
-      <Container>
-        <h1 className="text-h1">About Digitplus</h1>
-        <p className="mt-4 text-body text-muted">Placeholder — under construction.</p>
-      </Container>
-    </Section>
+    <>
+      <Section spacing="sm">
+        <Breadcrumbs
+          items={[{ label: "Home", href: "/" }, { label: "About" }]}
+        />
+      </Section>
+
+      <Section spacing="sm">
+        <Reveal>
+          <SectionHeading
+            as="h1"
+            eyebrow="About us"
+            title="A disciplined IT partner, not just a supplier"
+            lede="Digitplus Technology Limited exists to take the uncertainty out of IT for Nigerian organisations — by owning the whole journey from plan to support, and doing it with the discipline that serious operations require."
+          />
+        </Reveal>
+      </Section>
+
+      {/* Story */}
+      <Section spacing="md">
+        <Reveal>
+          <Prose>
+            <h2>Why we exist</h2>
+            <p>
+              Across government, banking, healthcare, and enterprise, we kept
+              seeing the same pattern: capable organisations let down not by bad
+              equipment, but by the gaps around it. Procurement that couldn’t
+              survive an audit. Hardware bought from one place, installed by
+              another, supported by no one. Projects where everyone was involved
+              and no one was accountable.
+            </p>
+            <p>
+              Digitplus was built to close those gaps. We bring procurement,
+              hardware supply, infrastructure, deployment, advisory, and managed
+              services under one accountable roof — so there is a single partner
+              responsible for the outcome, with the documentation to prove how it
+              was delivered.
+            </p>
+            <h2>Operational discipline</h2>
+            <p>
+              Discipline is the thread through everything we do. We source only
+              through authorised channels. We document every step of a purchase.
+              We test against agreed criteria before we sign off. We put our
+              service commitments in writing. None of this is glamorous — it is
+              simply what it takes to be a partner serious organisations can
+              depend on, year after year.
+            </p>
+          </Prose>
+        </Reveal>
+      </Section>
+
+      {/* Credentials */}
+      <Section tone="muted">
+        <Reveal>
+          <SectionHeading
+            eyebrow="Credentials"
+            title="The foundations behind the work"
+          />
+        </Reveal>
+        <Reveal>
+          <Grid columns={3} gap="md" className="mt-12">
+            <Card padding="lg">
+              <h3 className="text-h4 text-text">CAC-registered</h3>
+              <p className="text-body text-muted measure mt-3">
+                A registered Nigerian limited company, operating formally and
+                accountably as Digitplus Technology Limited.
+              </p>
+            </Card>
+            <Card padding="lg">
+              <h3 className="text-h4 text-text">8+ years operating</h3>
+              <p className="text-body text-muted measure mt-3">
+                Nearly a decade delivering IT to enterprises, government, and
+                institutions across Nigeria — and supporting it long-term.
+              </p>
+            </Card>
+            <Card padding="lg">
+              <h3 className="text-h4 text-text">Authorised channels</h3>
+              <p className="text-body text-muted measure mt-3">
+                We supply through authorised reseller and distribution channels,
+                so equipment is genuine and warranties are valid.
+              </p>
+            </Card>
+          </Grid>
+        </Reveal>
+      </Section>
+
+      {/* By the numbers */}
+      <Section tone="raised">
+        <Reveal>
+          <SectionHeading eyebrow="By the numbers" title="Track record" />
+        </Reveal>
+        <Reveal>
+          <StatGrid items={stats} className="mt-12" />
+        </Reveal>
+      </Section>
+
+      {/* What sets us apart */}
+      <Section>
+        <Reveal>
+          <SectionHeading
+            eyebrow="What sets us apart"
+            title="Four commitments we hold to"
+          />
+        </Reveal>
+        <Reveal>
+          <Grid columns={2} gap="lg" className="mt-12">
+            {whyUs.map((pillar) => (
+              <Card key={pillar.title} padding="lg">
+                <h3 className="text-h4 text-text">{pillar.title}</h3>
+                <p className="text-body text-muted measure mt-3">
+                  {pillar.description}
+                </p>
+              </Card>
+            ))}
+          </Grid>
+        </Reveal>
+      </Section>
+
+      {/* Trust / compliance statement */}
+      <Section tone="inverse" spacing="lg">
+        <Reveal className="mx-auto max-w-3xl text-center">
+          <Eyebrow className="text-neutral-400">Our commitment</Eyebrow>
+          <p className="text-h3 mt-6 font-medium tracking-tight text-neutral-50">
+            We treat your procurement, your data, and your operations with the
+            same care we would expect for our own — genuine equipment,
+            transparent records, and a privacy-first stance on the information
+            you share with us.
+          </p>
+        </Reveal>
+      </Section>
+
+      <CTABand
+        title="Let’s build something dependable"
+        description={`Reach us at ${siteConfig.email} or request a free IT assessment. We’ll respond with practical next steps.`}
+        actions={
+          <Button href="/contact" size="lg" variant="secondary">
+            Request a Free IT Assessment
+          </Button>
+        }
+      />
+    </>
   );
 }
