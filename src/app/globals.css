@@ -1,26 +1,407 @@
 @import "tailwindcss";
 
+/* ============================================================================
+   Digitplus Technology — Design Tokens
+   Apple-grade: calm, inevitable, premium. Restrained neutrals + ONE accent.
+   TODO: replace with official brand kit when delivered.
+   ============================================================================ */
+
+/* ---------------------------------------------------------------------------
+   1. PRIMITIVE RAMPS (raw values)
+   Neutral ramp: ink near-black -> true greys -> near-white surfaces.
+   Accent: a confident, trustworthy blue.
+   TODO: replace with official brand kit.
+   --------------------------------------------------------------------------- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Neutral ramp */
+  --neutral-0: #ffffff;
+  --neutral-50: #fafafb;
+  --neutral-100: #f4f4f6;
+  --neutral-150: #ececed;
+  --neutral-200: #e3e3e6;
+  --neutral-300: #cfcfd4;
+  --neutral-400: #a6a6ae;
+  --neutral-500: #76767f;
+  --neutral-600: #56565e;
+  --neutral-700: #3d3d44;
+  --neutral-800: #27272c;
+  --neutral-900: #161619;
+  --neutral-950: #0b0b0d;
+
+  /* Accent ramp — confident blue ~hsl(222 80% 52%). TODO: replace with official brand kit */
+  --accent-50: hsl(222 90% 97%);
+  --accent-100: hsl(222 88% 94%);
+  --accent-200: hsl(222 86% 87%);
+  --accent-300: hsl(222 84% 77%);
+  --accent-400: hsl(222 82% 65%);
+  --accent-500: hsl(222 80% 52%);
+  --accent-600: hsl(222 80% 46%);
+  --accent-700: hsl(222 78% 39%);
+  --accent-800: hsl(222 70% 31%);
+  --accent-900: hsl(222 62% 25%);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ---------------------------------------------------------------------------
+   2. SEMANTIC TOKENS — light scheme (default)
+   --------------------------------------------------------------------------- */
+:root {
+  --background: var(--neutral-0);
+  --surface: var(--neutral-50);
+  --surface-raised: var(--neutral-0);
+  --border-hairline: var(--neutral-200);
+  --text: var(--neutral-900);
+  --text-muted: var(--neutral-500);
+  --accent: var(--accent-600);
+  --accent-hover: var(--accent-700);
+  --accent-foreground: var(--neutral-0);
+  --accent-subtle: var(--accent-50);
+
+  /* Elevation — soft, low-opacity, layered */
+  --shadow-sm: 0 1px 2px -1px hsl(222 20% 12% / 0.06), 0 1px 1px hsl(222 20% 12% / 0.04);
+  --shadow-md:
+    0 4px 12px -2px hsl(222 20% 12% / 0.07), 0 2px 6px -2px hsl(222 20% 12% / 0.05);
+  --shadow-lg:
+    0 18px 40px -12px hsl(222 24% 12% / 0.14), 0 6px 14px -6px hsl(222 24% 12% / 0.08);
+
+  color-scheme: light;
 }
 
+/* ---------------------------------------------------------------------------
+   3. SEMANTIC TOKENS — dark scheme
+   --------------------------------------------------------------------------- */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: var(--neutral-950);
+    --surface: var(--neutral-900);
+    --surface-raised: var(--neutral-800);
+    --border-hairline: hsl(240 6% 100% / 0.1);
+    --text: var(--neutral-50);
+    --text-muted: var(--neutral-400);
+    --accent: var(--accent-400);
+    --accent-hover: var(--accent-300);
+    --accent-foreground: var(--neutral-950);
+    --accent-subtle: hsl(222 50% 20% / 0.4);
+
+    --shadow-sm: 0 1px 2px -1px hsl(0 0% 0% / 0.5);
+    --shadow-md: 0 4px 14px -2px hsl(0 0% 0% / 0.55);
+    --shadow-lg: 0 18px 44px -12px hsl(0 0% 0% / 0.65);
+
+    color-scheme: dark;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Explicit .dark opt-in (class-based override) */
+.dark {
+  --background: var(--neutral-950);
+  --surface: var(--neutral-900);
+  --surface-raised: var(--neutral-800);
+  --border-hairline: hsl(240 6% 100% / 0.1);
+  --text: var(--neutral-50);
+  --text-muted: var(--neutral-400);
+  --accent: var(--accent-400);
+  --accent-hover: var(--accent-300);
+  --accent-foreground: var(--neutral-950);
+  --accent-subtle: hsl(222 50% 20% / 0.4);
+
+  --shadow-sm: 0 1px 2px -1px hsl(0 0% 0% / 0.5);
+  --shadow-md: 0 4px 14px -2px hsl(0 0% 0% / 0.55);
+  --shadow-lg: 0 18px 44px -12px hsl(0 0% 0% / 0.65);
+
+  color-scheme: dark;
+}
+
+/* ---------------------------------------------------------------------------
+   4. TAILWIND v4 @theme — wire semantic tokens into utilities
+   Enables: bg-surface, text-muted, border-hairline, bg-accent, etc.
+   --------------------------------------------------------------------------- */
+@theme inline {
+  /* Fonts — layout.tsx provides --font-geist-sans; fall back gracefully. */
+  --font-sans:
+    var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono:
+    var(--font-geist-mono), ui-monospace, "SF Mono", "Menlo", monospace;
+
+  /* Semantic colors */
+  --color-background: var(--background);
+  --color-foreground: var(--text);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-text: var(--text);
+  --color-muted: var(--text-muted);
+  --color-hairline: var(--border-hairline);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent-subtle: var(--accent-subtle);
+
+  /* Accent ramp exposed for fine control */
+  --color-accent-50: var(--accent-50);
+  --color-accent-100: var(--accent-100);
+  --color-accent-200: var(--accent-200);
+  --color-accent-300: var(--accent-300);
+  --color-accent-400: var(--accent-400);
+  --color-accent-500: var(--accent-500);
+  --color-accent-600: var(--accent-600);
+  --color-accent-700: var(--accent-700);
+  --color-accent-800: var(--accent-800);
+  --color-accent-900: var(--accent-900);
+
+  /* Neutral ramp exposed */
+  --color-ink: var(--neutral-900);
+  --color-neutral-0: var(--neutral-0);
+  --color-neutral-50: var(--neutral-50);
+  --color-neutral-100: var(--neutral-100);
+  --color-neutral-200: var(--neutral-200);
+  --color-neutral-300: var(--neutral-300);
+  --color-neutral-400: var(--neutral-400);
+  --color-neutral-500: var(--neutral-500);
+  --color-neutral-600: var(--neutral-600);
+  --color-neutral-700: var(--neutral-700);
+  --color-neutral-800: var(--neutral-800);
+  --color-neutral-900: var(--neutral-900);
+
+  /* ---- 8pt spacing scale ----
+     We KEEP Tailwind's default spacing step (0.25rem / 4px) so the whole scale
+     stays predictable for every agent. Rhythm is 8pt-based by convention:
+     use even steps for primary spacing (p-2=8px, p-4=16px, p-6=24px, p-8=32px,
+     p-12=48px, p-16=64px, p-24=96px, p-32=128px); 4px half-steps are reserved
+     for optical fine-tuning only. */
+  --spacing: 0.25rem;
+
+  /* ---- Radius set ---- */
+  --radius-sm: 0.5rem; /* 8px  */
+  --radius-md: 0.75rem; /* 12px */
+  --radius-lg: 1rem; /* 16px */
+  --radius-xl: 1.5rem; /* 24px */
+  --radius-full: 9999px;
+
+  /* ---- Elevation shadows ---- */
+  --shadow-soft-sm: var(--shadow-sm);
+  --shadow-soft-md: var(--shadow-md);
+  --shadow-soft-lg: var(--shadow-lg);
+
+  /* ---- Motion ---- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* ---- Container ---- */
+  --container-prose: 65ch;
+
+}
+
+/* ---- Fluid type scale (clamp) ----
+   Kept under a custom --type-* namespace (not --text-*) so they do NOT
+   auto-generate Tailwind font-size utilities and collide with the richer
+   .text-* heading classes defined in the components layer below. */
+:root {
+  --type-caption: 0.75rem;
+  --type-small: 0.8125rem;
+  --type-body: 1rem;
+  --type-body-lg: clamp(1.0625rem, 0.99rem + 0.35vw, 1.1875rem);
+  --type-h4: clamp(1.125rem, 1.05rem + 0.4vw, 1.3125rem);
+  --type-h3: clamp(1.375rem, 1.2rem + 0.85vw, 1.75rem);
+  --type-h2: clamp(1.75rem, 1.45rem + 1.5vw, 2.5rem);
+  --type-h1: clamp(2.25rem, 1.75rem + 2.6vw, 3.5rem);
+  --type-display: clamp(2.75rem, 1.9rem + 4.3vw, 5rem);
+}
+
+/* Motion duration tokens (used in component transitions) */
+:root {
+  --dur-fast: 150ms;
+  --dur-base: 220ms;
+  --dur-slow: 320ms;
+}
+
+/* ---------------------------------------------------------------------------
+   5. BASE LAYER
+   --------------------------------------------------------------------------- */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    border-color: var(--border-hairline);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    background: var(--background);
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-synthesis-weight: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.6;
+  }
+
+  /* Visible, accent-tinted focus ring for keyboard users */
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Remove default outline only where focus-visible is supported */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-foreground);
+  }
+
+  /* Respect reduced motion globally */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Balanced wrapping for headings out of the box */
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   6. TYPOGRAPHY UTILITIES — fluid modular scale
+   Large headings: negative tracking + tight leading. Body: 1.6 line-height.
+   --------------------------------------------------------------------------- */
+@layer components {
+  .text-display {
+    font-size: var(--type-display);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    font-weight: 600;
+  }
+  .text-h1 {
+    font-size: var(--type-h1);
+    line-height: 1.06;
+    letter-spacing: -0.03em;
+    font-weight: 600;
+  }
+  .text-h2 {
+    font-size: var(--type-h2);
+    line-height: 1.12;
+    letter-spacing: -0.022em;
+    font-weight: 600;
+  }
+  .text-h3 {
+    font-size: var(--type-h3);
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    font-weight: 600;
+  }
+  .text-h4 {
+    font-size: var(--type-h4);
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    font-weight: 600;
+  }
+  .text-body-lg {
+    font-size: var(--type-body-lg);
+    line-height: 1.6;
+    letter-spacing: -0.005em;
+  }
+  .text-body {
+    font-size: var(--type-body);
+    line-height: 1.6;
+  }
+  .text-small {
+    font-size: var(--type-small);
+    line-height: 1.5;
+  }
+  .text-caption {
+    font-size: var(--type-caption);
+    line-height: 1.45;
+    letter-spacing: 0.01em;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   7. HELPER UTILITIES
+   --------------------------------------------------------------------------- */
+@layer utilities {
+  /* Optimal reading measure ~65ch */
+  .measure {
+    max-width: 65ch;
+  }
+  .measure-tight {
+    max-width: 52ch;
+  }
+  .measure-wide {
+    max-width: 78ch;
+  }
+
+  /* Hairline border helper: full 1px border in the theme hairline color.
+     (Distinct from the Tailwind `border-hairline` *color* utility generated
+     from --color-hairline, which only sets border-color.) */
+  .hairline {
+    border-width: 1px;
+    border-color: var(--border-hairline);
+  }
+
+  /* Screen-reader-only (skip-link friendly: becomes visible on focus) */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+  .not-sr-only {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+
+  /* Skip link: visually hidden until focused */
+  .skip-link {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    z-index: 100;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-md);
+    background: var(--surface-raised);
+    color: var(--text);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-150%);
+    transition: transform var(--dur-base) var(--ease-out);
+  }
+  .skip-link:focus {
+    transform: translateY(0);
+  }
 }
