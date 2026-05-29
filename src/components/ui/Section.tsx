@@ -19,7 +19,7 @@ const tones: Record<SectionTone, string> = {
   default: "bg-background text-text",
   muted: "bg-surface text-text",
   raised: "bg-surface-raised text-text border-y border-hairline",
-  inverse: "bg-neutral-900 text-neutral-50",
+  inverse: "bg-brand text-brand-foreground",
 };
 
 const spacings = {

@@ -3,9 +3,9 @@
  *
  * Rendered at the edge via Next's ImageResponse. Used for any page that does
  * not supply its own `openGraph.images` (articles/reports override this with
- * their own cover via metadata). Brand wordmark + tagline on a calm dark
- * surface with the single confident accent — literal colour values, because
- * ImageResponse cannot read CSS custom properties.
+ * their own cover via metadata). Brand wordmark + tagline on the forest-green
+ * brand surface with the single confident ember accent — literal colour values,
+ * because ImageResponse cannot read CSS custom properties.
  */
 import { ImageResponse } from "next/og";
 import { siteConfig } from "@/lib/site";
@@ -15,11 +15,11 @@ export const alt = `${siteConfig.name} — ${siteConfig.tagline}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-// Literal token values mirrored from globals.css (@theme cannot be read here).
-const NEUTRAL_950 = "#0b0b0d";
-const NEUTRAL_0 = "#ffffff";
-const ACCENT = "#1d4ed8"; // ≈ hsl(222 80% 46%) accent-600
-const MUTED = "#a1a1aa";
+// Literal brand values mirrored from globals.css (@theme cannot be read here).
+const BRAND = "#20493b"; // Forest Green
+const CREAM = "#f7f1e0"; // Light Orange / cream
+const ACCENT = "#c75334"; // Ember Red
+const MUTED = "#a8c2b3"; // brand-200
 
 export default function OpengraphImage() {
   return new ImageResponse(
@@ -31,7 +31,7 @@ export default function OpengraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: NEUTRAL_950,
+          background: BRAND,
           padding: "80px",
           fontFamily: "sans-serif",
         }}
@@ -47,7 +47,7 @@ export default function OpengraphImage() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              color: NEUTRAL_0,
+              color: CREAM,
               fontSize: "36px",
               fontWeight: 700,
             }}
@@ -56,7 +56,7 @@ export default function OpengraphImage() {
           </div>
           <div
             style={{
-              color: NEUTRAL_0,
+              color: CREAM,
               fontSize: "30px",
               fontWeight: 600,
               letterSpacing: "-0.01em",
@@ -70,7 +70,7 @@ export default function OpengraphImage() {
         <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
           <div
             style={{
-              color: NEUTRAL_0,
+              color: CREAM,
               fontSize: "84px",
               fontWeight: 700,
               letterSpacing: "-0.03em",

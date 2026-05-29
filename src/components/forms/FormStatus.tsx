@@ -22,7 +22,7 @@ export function FormStatus({ status, children, className }: FormStatusProps) {
         "flex items-start gap-2.5 rounded-sm border px-3.5 py-3 text-small",
         status === "success"
           ? "border-accent/30 bg-accent-subtle text-text"
-          : "border-red-500/30 bg-red-50 text-red-700 dark:bg-red-950/30 dark:text-red-300",
+          : "border-red-500/30 bg-red-50 text-red-700",
         className,
       )}
     >

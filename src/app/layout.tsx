@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Montserrat } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/lib/site";
 import {
@@ -12,10 +12,18 @@ import {
 import { JsonLd } from "@/lib/seo/jsonld";
 import { organizationSchema, websiteSchema } from "@/lib/seo/schema";
 
-// Inter loaded as the design-system's --font-geist-sans token so tokens resolve.
+// Inter — primary UI/body face (exposed as --font-geist-sans so tokens resolve).
 const inter = Inter({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
+});
+
+// Montserrat — brand headline face (display / H1 / H2).
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
   display: "swap",
 });
 
@@ -73,7 +81,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} h-full antialiased`}>
+    <html
+      lang="en"
+      className={`${inter.variable} ${montserrat.variable} h-full antialiased`}
+    >
       <body className="flex min-h-full flex-col">
         <SkipLink />
         <Header />

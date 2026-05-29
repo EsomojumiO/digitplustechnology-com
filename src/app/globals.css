@@ -2,123 +2,102 @@
 
 /* ============================================================================
    Digitplus Technology — Design Tokens
-   Apple-grade: calm, inevitable, premium. Restrained neutrals + ONE accent.
-   TODO: replace with official brand kit when delivered.
+   Official brand kit (Pishon Design Studio, Apr 2026). Light theme only.
+   Palette: Forest Green (brand), Ember Red (accent), Cream + warm Khaki neutrals.
+   Aesthetic: minimal, clean, premium, enterprise-grade. One confident accent.
    ============================================================================ */
 
 /* ---------------------------------------------------------------------------
-   1. PRIMITIVE RAMPS (raw values)
-   Neutral ramp: ink near-black -> true greys -> near-white surfaces.
-   Accent: a confident, trustworthy blue.
-   TODO: replace with official brand kit.
+   1. PRIMITIVE RAMPS (raw brand values)
    --------------------------------------------------------------------------- */
 :root {
-  /* Neutral ramp */
+  /* Warm neutral ramp — cream/khaki tinted, white -> warm near-black */
   --neutral-0: #ffffff;
-  --neutral-50: #fafafb;
-  --neutral-100: #f4f4f6;
-  --neutral-150: #ececed;
-  --neutral-200: #e3e3e6;
-  --neutral-300: #cfcfd4;
-  --neutral-400: #a6a6ae;
-  --neutral-500: #76767f;
-  --neutral-600: #56565e;
-  --neutral-700: #3d3d44;
-  --neutral-800: #27272c;
-  --neutral-900: #161619;
-  --neutral-950: #0b0b0d;
+  --neutral-50: #faf9f4;
+  --neutral-100: #f3f1e9;
+  --neutral-150: #ece9dd;
+  --neutral-200: #e6e2d4; /* hairline */
+  --neutral-300: #d2cfbf;
+  --neutral-400: #a8a99b; /* ~ khaki grey #C6C7BB family, slightly deeper */
+  --neutral-500: #71746a;
+  --neutral-600: #54564c;
+  --neutral-700: #3d3f36;
+  --neutral-800: #2a2c24;
+  --neutral-900: #1b1d17;
+  --neutral-950: #111208;
 
-  /* Accent ramp — confident blue ~hsl(222 80% 52%). TODO: replace with official brand kit */
-  --accent-50: hsl(222 90% 97%);
-  --accent-100: hsl(222 88% 94%);
-  --accent-200: hsl(222 86% 87%);
-  --accent-300: hsl(222 84% 77%);
-  --accent-400: hsl(222 82% 65%);
-  --accent-500: hsl(222 80% 52%);
-  --accent-600: hsl(222 80% 46%);
-  --accent-700: hsl(222 78% 39%);
-  --accent-800: hsl(222 70% 31%);
-  --accent-900: hsl(222 62% 25%);
+  /* Accent ramp — Ember Red #C75334 (energy, urgency, precision) */
+  --accent-50: #fbeee8;
+  --accent-100: #f6d9cd;
+  --accent-200: #ecb39e;
+  --accent-300: #e08d6e;
+  --accent-400: #d56f4b;
+  --accent-500: #c75334; /* brand Ember Red */
+  --accent-600: #ad4527;
+  --accent-700: #8c3820;
+  --accent-800: #6b2c1a;
+  --accent-900: #4d2014;
+
+  /* Brand ramp — Forest Green #20493B (trust, stability, longevity) */
+  --brand-50: #ebf1ed;
+  --brand-100: #d3e1d8;
+  --brand-200: #a8c2b3;
+  --brand-300: #79a089;
+  --brand-400: #4c7a63;
+  --brand-500: #2d5d49;
+  --brand-600: #20493b; /* brand Forest Green */
+  --brand-700: #1a3b30;
+  --brand-800: #142d25;
+  --brand-900: #0e201a;
+
+  /* Cream — Light Orange #F7F1E0 (warmth, authority) */
+  --cream: #f7f1e0;
+  --cream-deep: #f1ead6;
 }
 
 /* ---------------------------------------------------------------------------
-   2. SEMANTIC TOKENS — light scheme (default)
+   2. SEMANTIC TOKENS — single light scheme
    --------------------------------------------------------------------------- */
 :root {
-  --background: var(--neutral-0);
-  --surface: var(--neutral-50);
-  --surface-raised: var(--neutral-0);
+  --background: #fbfaf5; /* warm white page */
+  --surface: var(--cream); /* cream — alternate / muted sections */
+  --surface-raised: var(--neutral-0); /* crisp white — cards */
   --border-hairline: var(--neutral-200);
-  --text: var(--neutral-900);
-  --text-muted: var(--neutral-500);
-  --accent: var(--accent-600);
-  --accent-hover: var(--accent-700);
-  --accent-foreground: var(--neutral-0);
+  --text: #232620; /* warm near-black */
+  --text-muted: #6a6d62; /* warm grey, AA on warm white */
+
+  --accent: var(--accent-500);
+  --accent-hover: var(--accent-600);
+  --accent-foreground: #ffffff;
   --accent-subtle: var(--accent-50);
 
-  /* Elevation — soft, low-opacity, layered */
-  --shadow-sm: 0 1px 2px -1px hsl(222 20% 12% / 0.06), 0 1px 1px hsl(222 20% 12% / 0.04);
-  --shadow-md:
-    0 4px 12px -2px hsl(222 20% 12% / 0.07), 0 2px 6px -2px hsl(222 20% 12% / 0.05);
-  --shadow-lg:
-    0 18px 40px -12px hsl(222 24% 12% / 0.14), 0 6px 14px -6px hsl(222 24% 12% / 0.08);
+  /* Brand (forest green) — dark bands, footer, logo, deep CTAs */
+  --brand: var(--brand-600);
+  --brand-hover: var(--brand-700);
+  --brand-foreground: var(--cream);
+  --brand-subtle: var(--brand-50);
+
+  /* Elevation — minimal, soft, warm-tinted, low-opacity */
+  --shadow-sm: 0 1px 2px hsl(80 12% 18% / 0.05);
+  --shadow-md: 0 6px 18px -8px hsl(80 12% 18% / 0.1);
+  --shadow-lg: 0 24px 48px -20px hsl(80 14% 16% / 0.16);
 
   color-scheme: light;
 }
 
 /* ---------------------------------------------------------------------------
-   3. SEMANTIC TOKENS — dark scheme
-   --------------------------------------------------------------------------- */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: var(--neutral-950);
-    --surface: var(--neutral-900);
-    --surface-raised: var(--neutral-800);
-    --border-hairline: hsl(240 6% 100% / 0.1);
-    --text: var(--neutral-50);
-    --text-muted: var(--neutral-400);
-    --accent: var(--accent-400);
-    --accent-hover: var(--accent-300);
-    --accent-foreground: var(--neutral-950);
-    --accent-subtle: hsl(222 50% 20% / 0.4);
-
-    --shadow-sm: 0 1px 2px -1px hsl(0 0% 0% / 0.5);
-    --shadow-md: 0 4px 14px -2px hsl(0 0% 0% / 0.55);
-    --shadow-lg: 0 18px 44px -12px hsl(0 0% 0% / 0.65);
-
-    color-scheme: dark;
-  }
-}
-
-/* Explicit .dark opt-in (class-based override) */
-.dark {
-  --background: var(--neutral-950);
-  --surface: var(--neutral-900);
-  --surface-raised: var(--neutral-800);
-  --border-hairline: hsl(240 6% 100% / 0.1);
-  --text: var(--neutral-50);
-  --text-muted: var(--neutral-400);
-  --accent: var(--accent-400);
-  --accent-hover: var(--accent-300);
-  --accent-foreground: var(--neutral-950);
-  --accent-subtle: hsl(222 50% 20% / 0.4);
-
-  --shadow-sm: 0 1px 2px -1px hsl(0 0% 0% / 0.5);
-  --shadow-md: 0 4px 14px -2px hsl(0 0% 0% / 0.55);
-  --shadow-lg: 0 18px 44px -12px hsl(0 0% 0% / 0.65);
-
-  color-scheme: dark;
-}
-
-/* ---------------------------------------------------------------------------
-   4. TAILWIND v4 @theme — wire semantic tokens into utilities
-   Enables: bg-surface, text-muted, border-hairline, bg-accent, etc.
+   3. TAILWIND v4 @theme — wire semantic tokens into utilities
+   Enables: bg-surface, text-muted, border-hairline, bg-accent, bg-brand, etc.
    --------------------------------------------------------------------------- */
 @theme inline {
-  /* Fonts — layout.tsx provides --font-geist-sans; fall back gracefully. */
+  /* Fonts — layout.tsx provides Inter (--font-geist-sans) and Montserrat
+     (--font-montserrat). Display headings use Montserrat; everything else Inter. */
   --font-sans:
     var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-display:
+    var(--font-montserrat), var(--font-geist-sans), ui-sans-serif, system-ui,
+    sans-serif;
   --font-mono:
     var(--font-geist-mono), ui-monospace, "SF Mono", "Menlo", monospace;
 
@@ -130,10 +109,17 @@
   --color-text: var(--text);
   --color-muted: var(--text-muted);
   --color-hairline: var(--border-hairline);
+  --color-cream: var(--cream);
+
   --color-accent: var(--accent);
   --color-accent-hover: var(--accent-hover);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent-subtle: var(--accent-subtle);
+
+  --color-brand: var(--brand);
+  --color-brand-hover: var(--brand-hover);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-brand-subtle: var(--brand-subtle);
 
   /* Accent ramp exposed for fine control */
   --color-accent-50: var(--accent-50);
@@ -147,8 +133,20 @@
   --color-accent-800: var(--accent-800);
   --color-accent-900: var(--accent-900);
 
+  /* Brand ramp exposed */
+  --color-brand-50: var(--brand-50);
+  --color-brand-100: var(--brand-100);
+  --color-brand-200: var(--brand-200);
+  --color-brand-300: var(--brand-300);
+  --color-brand-400: var(--brand-400);
+  --color-brand-500: var(--brand-500);
+  --color-brand-600: var(--brand-600);
+  --color-brand-700: var(--brand-700);
+  --color-brand-800: var(--brand-800);
+  --color-brand-900: var(--brand-900);
+
   /* Neutral ramp exposed */
-  --color-ink: var(--neutral-900);
+  --color-ink: var(--text);
   --color-neutral-0: var(--neutral-0);
   --color-neutral-50: var(--neutral-50);
   --color-neutral-100: var(--neutral-100);
@@ -160,13 +158,9 @@
   --color-neutral-700: var(--neutral-700);
   --color-neutral-800: var(--neutral-800);
   --color-neutral-900: var(--neutral-900);
+  --color-neutral-950: var(--neutral-950);
 
-  /* ---- 8pt spacing scale ----
-     We KEEP Tailwind's default spacing step (0.25rem / 4px) so the whole scale
-     stays predictable for every agent. Rhythm is 8pt-based by convention:
-     use even steps for primary spacing (p-2=8px, p-4=16px, p-6=24px, p-8=32px,
-     p-12=48px, p-16=64px, p-24=96px, p-32=128px); 4px half-steps are reserved
-     for optical fine-tuning only. */
+  /* ---- Spacing: keep Tailwind's 4px step; rhythm is 8pt-based by convention. */
   --spacing: 0.25rem;
 
   /* ---- Radius set ---- */
@@ -187,13 +181,11 @@
 
   /* ---- Container ---- */
   --container-prose: 65ch;
-
 }
 
 /* ---- Fluid type scale (clamp) ----
-   Kept under a custom --type-* namespace (not --text-*) so they do NOT
-   auto-generate Tailwind font-size utilities and collide with the richer
-   .text-* heading classes defined in the components layer below. */
+   Under a --type-* namespace so they don't auto-generate font-size utilities
+   that collide with the .text-* heading classes in the components layer. */
 :root {
   --type-caption: 0.75rem;
   --type-small: 0.8125rem;
@@ -214,7 +206,7 @@
 }
 
 /* ---------------------------------------------------------------------------
-   5. BASE LAYER
+   4. BASE LAYER
    --------------------------------------------------------------------------- */
 @layer base {
   *,
@@ -251,17 +243,15 @@
     border-radius: 2px;
   }
 
-  /* Remove default outline only where focus-visible is supported */
   :focus:not(:focus-visible) {
     outline: none;
   }
 
   ::selection {
-    background: var(--accent);
-    color: var(--accent-foreground);
+    background: var(--brand);
+    color: var(--brand-foreground);
   }
 
-  /* Respect reduced motion globally */
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -273,7 +263,6 @@
     }
   }
 
-  /* Balanced wrapping for headings out of the box */
   h1,
   h2,
   h3,
@@ -287,27 +276,31 @@
 }
 
 /* ---------------------------------------------------------------------------
-   6. TYPOGRAPHY UTILITIES — fluid modular scale
+   5. TYPOGRAPHY UTILITIES — fluid modular scale
+   Display/H1/H2 set in Montserrat (brand headline face); rest in Inter.
    Large headings: negative tracking + tight leading. Body: 1.6 line-height.
    --------------------------------------------------------------------------- */
 @layer components {
   .text-display {
+    font-family: var(--font-display);
     font-size: var(--type-display);
     line-height: 1.02;
-    letter-spacing: -0.035em;
-    font-weight: 600;
+    letter-spacing: -0.025em;
+    font-weight: 700;
   }
   .text-h1 {
+    font-family: var(--font-display);
     font-size: var(--type-h1);
-    line-height: 1.06;
-    letter-spacing: -0.03em;
-    font-weight: 600;
+    line-height: 1.07;
+    letter-spacing: -0.02em;
+    font-weight: 700;
   }
   .text-h2 {
+    font-family: var(--font-display);
     font-size: var(--type-h2);
-    line-height: 1.12;
-    letter-spacing: -0.022em;
-    font-weight: 600;
+    line-height: 1.13;
+    letter-spacing: -0.015em;
+    font-weight: 700;
   }
   .text-h3 {
     font-size: var(--type-h3);
@@ -342,9 +335,13 @@
 }
 
 /* ---------------------------------------------------------------------------
-   7. HELPER UTILITIES
+   6. HELPER UTILITIES
    --------------------------------------------------------------------------- */
 @layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+
   /* Optimal reading measure ~65ch */
   .measure {
     max-width: 65ch;
@@ -356,15 +353,12 @@
     max-width: 78ch;
   }
 
-  /* Hairline border helper: full 1px border in the theme hairline color.
-     (Distinct from the Tailwind `border-hairline` *color* utility generated
-     from --color-hairline, which only sets border-color.) */
+  /* Hairline border helper (full 1px border in the theme hairline color). */
   .hairline {
     border-width: 1px;
     border-color: var(--border-hairline);
   }
 
-  /* Screen-reader-only (skip-link friendly: becomes visible on focus) */
   .sr-only {
     position: absolute;
     width: 1px;

@@ -12,7 +12,7 @@ export interface CTABandProps extends Omit<React.HTMLAttributes<HTMLElement>, "t
 
 const tones = {
   accent: "bg-accent text-accent-foreground",
-  inverse: "bg-neutral-900 text-neutral-50",
+  inverse: "bg-brand text-brand-foreground",
   surface: "bg-surface text-text border-y border-hairline",
 };
 

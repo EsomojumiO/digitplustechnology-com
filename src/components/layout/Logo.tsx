@@ -1,22 +1,23 @@
 import Link from "next/link";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/lib/site";
 
 export interface LogoProps {
   className?: string;
-  /** Tone of the wordmark text — defaults to current text color. */
+  /** Tone of the wordmark — "inverse" for use on the forest-green brand surfaces. */
   tone?: "default" | "inverse";
 }
 
 /**
- * Logo — wordmark for Digitplus.
+ * Logo — official Digitplus chain-link mark + DIGITPLUS wordmark.
  *
- * NOTE: brand logo assets (logo-full.png / logo-full-white.png) are not yet in
- * /public (logged in docs/BLOCKERS.md). We render a crafted text wordmark with a
- * small geometric mark so the brand reads cleanly until the real asset lands.
- * When the asset arrives, swap the mark+text for a <next/image>.
+ * Uses the brand icon (Pishon Design Studio kit) from /public/brand. The wordmark
+ * is set in Montserrat to match the brand headline face. On forest-green surfaces
+ * pass tone="inverse" to swap to the white mark + cream wordmark.
  */
 export function Logo({ className, tone = "default" }: LogoProps) {
+  const inverse = tone === "inverse";
   return (
     <Link
       href="/"
@@ -27,21 +28,23 @@ export function Logo({ className, tone = "default" }: LogoProps) {
         className,
       )}
     >
-      <span
+      <Image
+        src={inverse ? "/brand/digitplus-icon-white.png" : "/brand/digitplus-icon.png"}
+        alt=""
         aria-hidden="true"
+        width={45}
+        height={32}
+        priority
         className={cn(
-          "grid h-8 w-8 place-items-center rounded-[0.625rem] bg-accent text-accent-foreground",
-          "text-[0.95rem] font-bold leading-none shadow-[var(--shadow-sm)]",
+          "h-7 w-auto",
           "transition-transform duration-[var(--dur-fast)] ease-[var(--ease-out)]",
           "group-hover:scale-[1.04]",
         )}
-      >
-        D
-      </span>
+      />
       <span
         className={cn(
-          "text-[1.0625rem] font-semibold tracking-[-0.015em]",
-          tone === "inverse" ? "text-neutral-50" : "text-text",
+          "font-display text-[1.0625rem] font-bold uppercase tracking-[0.02em] leading-none",
+          inverse ? "text-[var(--cream)]" : "text-brand",
         )}
       >
         Digitplus
