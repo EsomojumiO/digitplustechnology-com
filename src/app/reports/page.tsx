@@ -1,14 +1,109 @@
-import { Section, Container } from "@/components/ui";
+import type { Metadata } from "next";
+import { Section, SectionHeading, Card } from "@/components/ui";
+import { Reveal } from "@/components/motion/Reveal";
+import { NewsletterForm } from "@/components/forms";
+import { getAllReports, getFeaturedReport } from "@/lib/content";
+import { siteConfig } from "@/lib/site";
+import { ReportCard } from "./_components/ReportCard";
 
-export const metadata = { title: "Reports" };
+const TITLE = "Quarterly Reports";
+const DESCRIPTION =
+  "Data-rich, citable research on enterprise IT in Nigeria from Digitplus Technology — pricing, procurement, and infrastructure trends for decision-makers. Read the public findings, download the full reports.";
 
-export default function Page() {
+export const metadata: Metadata = {
+  title: TITLE,
+  description: DESCRIPTION,
+  alternates: { canonical: "/reports" },
+  openGraph: {
+    title: `${TITLE} | ${siteConfig.shortName}`,
+    description: DESCRIPTION,
+    url: `${siteConfig.url}/reports`,
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${TITLE} | ${siteConfig.shortName}`,
+    description: DESCRIPTION,
+  },
+};
+
+export default function ReportsHubPage() {
+  const featured = getFeaturedReport();
+  const all = getAllReports();
+  // Archive = everything except the featured slot (featured is the latest
+  // non-archived; the rest, including archived, fall into the archive grid).
+  const archive = featured
+    ? all.filter((r) => r.slug !== featured.slug)
+    : all;
+
   return (
-    <Section>
-      <Container>
-        <h1 className="text-h1">Reports</h1>
-        <p className="mt-4 text-body text-muted">Placeholder — under construction.</p>
-      </Container>
-    </Section>
+    <>
+      <Section spacing="lg" className="pb-12 sm:pb-16">
+        <SectionHeading
+          as="h1"
+          eyebrow="Research"
+          title="Quarterly reports"
+          lede="Independent, data-led research on the cost and shape of enterprise IT in Nigeria — written to be read, cited, and acted on. Every report opens with public findings; the full analysis is a free download."
+        />
+      </Section>
+
+      {featured ? (
+        <Section spacing="sm" className="pt-0">
+          <Reveal>
+            <ReportCard report={featured} variant="feature" headingLevel="h2" />
+          </Reveal>
+        </Section>
+      ) : null}
+
+      {archive.length > 0 ? (
+        <Section tone="muted" spacing="md">
+          <SectionHeading
+            as="h2"
+            title="Report archive"
+            lede="Past editions remain available in full — track how the numbers have moved quarter on quarter."
+            className="mb-10 sm:mb-12"
+          />
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {archive.map((report, i) => (
+              <Reveal key={report.slug} delay={i * 60}>
+                <ReportCard report={report} className="h-full" />
+              </Reveal>
+            ))}
+          </div>
+        </Section>
+      ) : null}
+
+      {!featured && archive.length === 0 ? (
+        <Section spacing="md" className="pt-0">
+          <Card padding="lg">
+            <p className="text-body-lg text-muted">
+              Our first quarterly report is in preparation. Subscribe below and
+              we will send it the day it publishes.
+            </p>
+          </Card>
+        </Section>
+      ) : null}
+
+      <Section spacing="md">
+        <Card padding="lg" className="bg-surface">
+          <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+            <div className="flex max-w-xl flex-col gap-3">
+              <h2 className="text-h3 text-balance text-text">
+                Get the next report first
+              </h2>
+              <p className="text-body text-muted">
+                One quarterly email when a new report is published. No noise, no
+                third-party sharing — unsubscribe any time.
+              </p>
+            </div>
+            <NewsletterForm
+              idPrefix="reports-newsletter"
+              buttonLabel="Notify me"
+              className="w-full lg:max-w-md"
+            />
+          </div>
+        </Card>
+      </Section>
+    </>
   );
 }
