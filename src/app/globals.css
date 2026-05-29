@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+/* Class-based dark mode: `dark:` utilities key off `.dark` on <html>, not the OS
+   preference. Light is the default; dark is an explicit opt-in toggle. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* ============================================================================
    Digitplus Technology — Design Tokens
    Official brand kit (Pishon Design Studio, Apr 2026). Light theme only.
@@ -83,6 +87,37 @@
   --shadow-lg: 0 24px 48px -20px hsl(80 14% 16% / 0.16);
 
   color-scheme: light;
+}
+
+/* ---------------------------------------------------------------------------
+   2b. DARK SCHEME — opt-in via `.dark` on <html>. On-brand: the canvas is built
+   from deep forest green (not generic near-black) so it stays Digitplus.
+   --------------------------------------------------------------------------- */
+.dark {
+  --background: #0b1612; /* deep forest near-black */
+  --surface: #10201a; /* muted sections */
+  --surface-raised: #16271f; /* cards */
+  --border-hairline: hsl(150 22% 82% / 0.12);
+  --text: #edf2ee; /* near-white, faint warm-green */
+  --text-muted: #9fb1a6;
+
+  --accent: var(--accent-500);
+  --accent-hover: var(--accent-400);
+  --accent-foreground: #ffffff;
+  --accent-subtle: hsl(14 50% 24% / 0.45);
+
+  /* Brand surfaces lift slightly off the canvas in dark */
+  --brand: var(--brand-500);
+  --brand-hover: var(--brand-400);
+  --brand-foreground: var(--cream);
+  --brand-subtle: hsl(154 40% 16% / 0.6);
+
+  /* Elevation — deeper, cooler shadows on the dark canvas */
+  --shadow-sm: 0 1px 2px hsl(160 30% 3% / 0.5);
+  --shadow-md: 0 8px 22px -8px hsl(160 30% 3% / 0.6);
+  --shadow-lg: 0 28px 56px -20px hsl(160 32% 2% / 0.7);
+
+  color-scheme: dark;
 }
 
 /* ---------------------------------------------------------------------------
@@ -340,6 +375,69 @@
 @layer utilities {
   .font-display {
     font-family: var(--font-display);
+  }
+
+  /* Fine grain/noise texture — restrained futurism. Tiled SVG turbulence,
+     fixed, pointer-events-none, very low opacity. Slightly stronger in dark. */
+  .grain-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 160px 160px;
+  }
+  .dark .grain-overlay {
+    opacity: 0.04;
+  }
+
+  /* Aurora — ONE subtle gradient-mesh moment (hero only), built from brand
+     greens + ember. Gentle drift, disabled under reduced motion. */
+  .aurora {
+    position: absolute;
+    inset: -20% -10% auto -10%;
+    height: 130%;
+    pointer-events: none;
+    z-index: 0;
+    background:
+      radial-gradient(
+        38% 50% at 18% 22%,
+        color-mix(in oklab, var(--brand-500) 38%, transparent),
+        transparent 70%
+      ),
+      radial-gradient(
+        32% 44% at 82% 12%,
+        color-mix(in oklab, var(--accent-500) 22%, transparent),
+        transparent 70%
+      ),
+      radial-gradient(
+        46% 56% at 60% 60%,
+        color-mix(in oklab, var(--brand-400) 26%, transparent),
+        transparent 72%
+      );
+    filter: blur(56px) saturate(108%);
+    opacity: 0.5;
+    will-change: transform;
+  }
+  .dark .aurora {
+    opacity: 0.42;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .aurora {
+      animation: aurora-drift 26s var(--ease-in-out) infinite alternate;
+    }
+  }
+  @keyframes aurora-drift {
+    0% {
+      transform: translate3d(-2%, -1%, 0) scale(1);
+    }
+    50% {
+      transform: translate3d(3%, 2%, 0) scale(1.06);
+    }
+    100% {
+      transform: translate3d(-1%, 3%, 0) scale(1.02);
+    }
   }
 
   /* Optimal reading measure ~65ch */

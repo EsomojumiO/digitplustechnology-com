@@ -42,6 +42,7 @@ export default function HomePage() {
     <>
       {/* Hero */}
       <Hero
+        aurora
         eyebrow="End-to-end IT solutions"
         title={siteConfig.tagline}
         subhead="One accountable partner for the full lifecycle of your IT — from planning and procurement to deployment and ongoing management. Built for organisations that need their technology to simply work."

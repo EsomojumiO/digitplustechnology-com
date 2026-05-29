@@ -18,7 +18,8 @@ export function Eyebrow({
   return (
     <Comp
       className={cn(
-        "text-caption font-semibold uppercase tracking-[0.12em] text-accent",
+        // Monospace technical label — restrained-futurism precision signal.
+        "font-mono text-caption font-medium uppercase tracking-[0.18em] text-accent",
         className,
       )}
       {...props}

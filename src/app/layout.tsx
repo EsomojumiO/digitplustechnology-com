@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Montserrat } from "next/font/google";
+import { Inter, Montserrat, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/lib/site";
 import {
@@ -26,6 +26,19 @@ const montserrat = Montserrat({
   weight: ["500", "600", "700"],
   display: "swap",
 });
+
+// JetBrains Mono — technical-precision face (eyebrows, labels, stats, metadata),
+// exposed as --font-geist-mono so the design token resolves.
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  display: "swap",
+});
+
+// Set the theme class before paint to avoid a flash. Light is the default; dark
+// is applied only when explicitly chosen (persisted in localStorage).
+const themeInitScript = `(function(){try{var t=localStorage.getItem('dpt-theme');if(t==='dark'){document.documentElement.classList.add('dark');}}catch(e){}})();`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -83,9 +96,15 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${montserrat.variable} h-full antialiased`}
+      className={`${inter.variable} ${montserrat.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body className="flex min-h-full flex-col">
+        {/* Fine grain texture — restrained futurism (fixed, non-interactive). */}
+        <div className="grain-overlay" aria-hidden="true" />
         <SkipLink />
         <Header />
         <main id="main" className="flex-1">

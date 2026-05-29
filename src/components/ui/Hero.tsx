@@ -13,6 +13,8 @@ export interface HeroProps extends Omit<React.HTMLAttributes<HTMLElement>, "titl
   coverage?: React.ReactNode;
   /** Optional visual placed alongside on wide screens. */
   media?: React.ReactNode;
+  /** Render the subtle aurora gradient-mesh moment behind the hero (flagship use). */
+  aurora?: boolean;
 }
 
 /**
@@ -26,6 +28,7 @@ export function Hero({
   actions,
   coverage,
   media,
+  aurora = false,
   className,
   ...props
 }: HeroProps) {
@@ -37,7 +40,8 @@ export function Hero({
       )}
       {...props}
     >
-      <Container>
+      {aurora ? <div className="aurora" aria-hidden="true" /> : null}
+      <Container className="relative z-10">
         <div
           className={cn(
             "flex flex-col gap-10",

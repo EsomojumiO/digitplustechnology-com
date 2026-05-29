@@ -22,10 +22,12 @@ export function Stat({
 }: StatProps) {
   return (
     <div className={cn("flex flex-col gap-1.5", className)} {...props}>
-      <span className="text-h1 font-semibold tracking-tight text-text">
+      <span className="font-mono text-[clamp(2.25rem,1.8rem+2vw,3rem)] font-medium leading-none tracking-[-0.03em] tabular-nums text-text">
         {value}
       </span>
-      <span className="text-body font-medium text-text">{label}</span>
+      <span className="font-mono text-caption font-medium uppercase tracking-[0.14em] text-muted">
+        {label}
+      </span>
       {description ? (
         <span className="text-small text-muted">{description}</span>
       ) : null}
