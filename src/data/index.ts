@@ -18,3 +18,4 @@ export { testimonials } from "./testimonials";
 export { processSteps } from "./process";
 export { stats } from "./stats";
 export { whyUs } from "./whyUs";
+export { authors, getAuthor, type Author } from "./authors";

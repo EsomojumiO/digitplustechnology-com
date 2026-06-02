@@ -11,6 +11,7 @@
  * These resolve relative to siteConfig.url.
  */
 import { siteConfig } from "@/lib/site";
+import { getAuthor } from "@/data";
 import type { ServiceContent } from "@/data/types";
 import type { ArticleMeta, ReportMeta } from "@/lib/content";
 import type { LocationContent } from "@/data/locations";
@@ -148,11 +149,18 @@ export function articleSchema(article: ArticleMeta, url: string) {
     articleSection: article.category.label,
     keywords: article.tags.length ? article.tags.join(", ") : undefined,
     inLanguage: "en-NG",
-    author: {
-      "@type": "Organization",
-      "@id": ORG_ID,
-      name: article.author || siteConfig.name,
-    },
+    author: (() => {
+      const a = getAuthor(article.author);
+      return a.type === "person"
+        ? {
+            "@type": "Person",
+            name: a.name,
+            jobTitle: a.role,
+            worksFor: { "@id": ORG_ID },
+            url: siteConfig.url,
+          }
+        : { "@type": "Organization", "@id": ORG_ID, name: siteConfig.name };
+    })(),
     publisher: {
       "@type": "Organization",
       "@id": ORG_ID,

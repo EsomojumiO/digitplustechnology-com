@@ -25,7 +25,9 @@ import { JsonLd } from "@/lib/seo/jsonld";
 import { articleSchema, breadcrumbSchema } from "@/lib/seo/schema";
 import { ArticleCard } from "../_components/ArticleCard";
 import { ShareBar } from "../_components/ShareBar";
+import { AuthorBio } from "../_components/AuthorBio";
 import { formatDate, isoDate } from "../_components/format";
+import { getAuthor } from "@/data";
 
 /**
  * Article template — /insights/[slug]
@@ -121,6 +123,7 @@ export default async function ArticlePage({
   if (!article) notFound();
 
   const related = getRelatedArticles(slug, 3);
+  const author = getAuthor(article.author);
   const hub = relatedHub(article.category);
   const url = `${siteConfig.url}/insights/${article.slug}`;
   const updated = article.updatedAt && article.updatedAt !== article.publishedAt;
@@ -165,7 +168,7 @@ export default async function ArticlePage({
             </p>
 
             <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-small text-muted">
-              <span className="font-medium text-text">{article.author}</span>
+              <span className="font-medium text-text">{author.name}</span>
               <span aria-hidden="true" className="text-muted/50">
                 &middot;
               </span>
@@ -247,6 +250,9 @@ export default async function ArticlePage({
             </Link>
             .
           </p>
+
+          {/* Author / E-E-A-T */}
+          <AuthorBio author={author} />
         </Container>
       </Section>
 
