@@ -39,6 +39,13 @@ export default function PrivacyPage() {
             approach: we collect as little as we reasonably can, use it only for
             the purpose you gave it to us, and never sell it.
           </p>
+          <p>
+            We aim to handle personal data in line with the{" "}
+            <strong>Nigeria Data Protection Act, 2023 (NDPA)</strong> and the
+            Nigeria Data Protection Regulation (NDPR). Where this policy refers to
+            your rights, it refers to the rights those laws give you as a data
+            subject.
+          </p>
 
           <h2>Information we collect</h2>
           <p>
@@ -77,6 +84,27 @@ export default function PrivacyPage() {
             do not send marketing you did not ask for.
           </p>
 
+          <h2>Lawful basis for processing</h2>
+          <p>Under the NDPA, we rely on the following bases:</p>
+          <ul>
+            <li>
+              <strong>Consent</strong> — for newsletter sign-ups and any
+              non-essential analytics.
+            </li>
+            <li>
+              <strong>Legitimate interest</strong> — to respond to a business
+              enquiry you send us and to keep the site secure.
+            </li>
+            <li>
+              <strong>Steps prior to a contract</strong> — to prepare a proposal
+              or assessment you request.
+            </li>
+            <li>
+              <strong>Legal obligation</strong> — where we must retain or
+              disclose information to comply with the law.
+            </li>
+          </ul>
+
           <h2>Cookies and consent</h2>
           <p>
             Essential cookies needed for the site to function may be set without
@@ -94,6 +122,19 @@ export default function PrivacyPage() {
             the extent needed to provide that service. We may disclose
             information where required by law.
           </p>
+          <p>
+            The providers that help us operate may include an email-delivery
+            service, an email-marketing platform, a CRM, and privacy-respecting
+            analytics. We engage them as data processors under appropriate terms.
+          </p>
+
+          <h2>International transfers</h2>
+          <p>
+            Some of our service providers may store or process data outside
+            Nigeria. Where that happens, we take reasonable steps to ensure your
+            information remains protected to a standard consistent with the NDPA,
+            including through the providers’ contractual and security commitments.
+          </p>
 
           <h2>Data retention</h2>
           <p>
@@ -102,12 +143,22 @@ export default function PrivacyPage() {
             delete or anonymise it.
           </p>
 
-          <h2>Your rights and requests</h2>
+          <h2>Your rights as a data subject</h2>
+          <p>Under the NDPA and NDPR, you have the right to:</p>
+          <ul>
+            <li>access the personal data we hold about you;</li>
+            <li>request correction of inaccurate or incomplete data;</li>
+            <li>request deletion of your data where there is no lawful reason to keep it;</li>
+            <li>object to, or request restriction of, certain processing;</li>
+            <li>withdraw consent at any time (without affecting prior processing);</li>
+            <li>request portability of data you provided to us.</li>
+          </ul>
           <p>
-            You can ask us what information we hold about you, request a
-            correction, or ask us to delete it. To make a request, email{" "}
+            To exercise any of these, email{" "}
             <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a> and we
-            will respond promptly.
+            will respond promptly. If you believe we have not handled your data
+            lawfully, you may also lodge a complaint with the{" "}
+            <strong>Nigeria Data Protection Commission (NDPC)</strong>.
           </p>
 
           <h2>Security</h2>
