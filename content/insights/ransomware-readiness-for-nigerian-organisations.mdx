@@ -1,0 +1,262 @@
+---
+title: "Ransomware Readiness for Nigerian Organisations"
+slug: "ransomware-readiness-for-nigerian-organisations"
+excerpt: "Ransomware attacks have reached organisations across every sector in Nigeria. Readiness is not about hoping to avoid attack — it is about building the capability to recover without paying."
+category: "Cybersecurity"
+tags:
+  - "ransomware"
+  - "cybersecurity"
+  - "Nigeria"
+  - "incident response"
+  - "backup"
+author: "Digitplus Technology"
+publishedAt: "2026-02-17"
+updatedAt: "2026-02-17"
+cover: "/images/insights/ransomware-readiness-for-nigerian-organisations.jpg"
+coverAlt: "A Nigerian IT security team reviewing an incident response plan on a whiteboard"
+draft: false
+seo:
+  metaTitle: "Ransomware Readiness for Nigerian Organisations"
+  metaDescription: "Build ransomware readiness across Nigerian enterprise and public sector — covering backup architecture, network defences, incident response, and recovery planning."
+  ogImage: "/images/insights/ransomware-readiness-for-nigerian-organisations.jpg"
+---
+
+Ransomware has reached Nigeria in force. Hospitals, financial institutions,
+manufacturers, government agencies, and universities have all experienced attacks.
+The attack model is not new — malware encrypts files and systems, and operators
+demand payment for decryption — but the sophistication of delivery methods, the
+scale of impact, and the business pressure to pay have all increased significantly
+in recent years.
+
+The uncomfortable truth about ransomware is that no organisation can guarantee
+it will never be attacked. The malware enters via phishing, unpatched
+vulnerabilities, compromised remote access, and — increasingly — through
+third-party software and managed service provider access chains. The realistic
+goal is not immunity; it is the ability to recover without paying the ransom,
+to limit the blast radius of an attack, and to restore operations in a timeframe
+that is survivable for the business.
+
+This article is a readiness framework, not a product guide. It describes the
+capabilities an organisation needs to build before an attack, and what to do
+when one is detected.
+
+## Why ransomware is particularly damaging in Nigeria
+
+Several features of the Nigerian operating environment increase ransomware
+exposure and impact:
+
+**Backup infrastructure gaps.** Many organisations lack reliable, tested offsite
+backups. Power instability that interrupts backup jobs, limited cloud adoption
+for backup storage, and the absence of backup validation mean that even
+organisations that think they have backups may discover in a crisis that their
+backups are incomplete or unrestorable.
+
+**Extended recovery timelines.** Recovering from a major ransomware incident
+requires hardware, software licenses, clean installation media, and technical
+capacity. Supply chain delays for hardware, FX constraints on software licensing,
+and limited specialist incident response capacity in Nigeria all extend the time
+from detection to recovery.
+
+**Ransom payment pressure.** When recovery looks impossible or would take months,
+the pressure to pay a ransom — even knowing that it does not guarantee decryption
+and funds criminal operations — becomes intense. Building genuine recovery
+capability is the only sustainable alternative to that choice.
+
+**Limited security monitoring.** Most Nigerian organisations cannot detect that
+ransomware is staging in their environment — accessing systems, exfiltrating data,
+disabling backups — before it detonates. Early detection is the difference between
+a contained incident and an organisation-wide catastrophe.
+
+## The four pillars of ransomware readiness
+
+### Pillar 1: Backup architecture that survives an attack
+
+Ransomware operators know that backups are the primary recovery tool. Modern
+ransomware frequently targets backup infrastructure specifically — deleting
+volume shadow copies, encrypting backup destinations, disabling backup agents.
+A backup architecture that survives a ransomware attack must be designed with
+this in mind.
+
+**The 3-2-1 rule as a minimum:** Three copies of data, on two different media
+types, with one copy offsite. The offsite copy is the one that survives when
+the on-premise environment is encrypted.
+
+**Air-gapped or immutable backups:** The backup destination must not be
+continuously writable from the production environment. Ransomware will encrypt
+any destination it can reach. Options include:
+
+- Cloud storage with immutable (write-once) object storage, where backups are
+  written but cannot be deleted or overwritten for a defined period
+- Tape backups physically removed from the environment after each job
+- A backup server that is not joined to the primary domain and has a different
+  credential set
+
+**Backup validation:** Run quarterly restoration tests from backup. Document
+the test — what was restored, from which backup, how long it took, what the
+result was. The test results should be reviewed by management, not just the IT
+team. An untested backup is not a recovery capability; it is an assumption.
+
+**Offline backup copies:** For the most critical data, maintain at least one
+backup copy that is entirely disconnected from any network. This survives even
+the most thorough ransomware deployment.
+
+### Pillar 2: Limiting the blast radius
+
+When ransomware executes, it spreads to every system the compromised account can
+reach. Limiting the blast radius means reducing what an attacker can access from
+any single compromised position.
+
+**Network segmentation:** Divide the network so that a compromised device in one
+segment cannot directly reach systems in other segments. Finance, HR, production,
+and general user segments should not have unrestricted access to each other or
+to server infrastructure. A ransomware outbreak that spreads to the entire flat
+network is far more damaging than one contained to a single segment.
+
+**Privilege management:** Ransomware runs with the permissions of the compromised
+account. A user account that has local administrator rights on every workstation
+in the organisation and write access to every file share gives ransomware enormous
+reach. Remove unnecessary admin rights. Use dedicated administrator accounts for
+IT administrative tasks — not the same accounts used for daily email and browsing.
+
+**Disable unused remote access:** Every open remote access point is a potential
+entry vector. Remote Desktop Protocol (RDP) exposed to the internet without
+additional controls is a well-documented ransomware entry point. Require VPN
+with MFA for all remote access. Disable RDP where it is not needed.
+
+> **Ransomware readiness is not about making attack impossible. It is about
+> building the recovery architecture that makes payment unnecessary, and the
+> network design that makes containment possible.**
+
+### Pillar 3: Detection before detonation
+
+Modern ransomware typically dwells in an environment for days or weeks before
+encrypting. During this dwell period, attackers map the network, elevate
+privileges, access backup systems, and exfiltrate sensitive data. Detection
+during this period — before encryption begins — converts a catastrophic incident
+into a serious but containable one.
+
+**Indicators to monitor:**
+
+- Unusual authentication activity: login attempts at unusual hours, accounts
+  suddenly accessing many files, lateral movement between systems
+- Disabling of security tools or backup agents
+- Large volumes of files being accessed or copied within short periods
+- Volume shadow copy deletion commands
+- New administrator accounts created outside normal provisioning processes
+- Outbound connections to unusual destinations
+
+Most of these indicators require active monitoring — either a security information
+and event management (SIEM) system or a [managed security monitoring](/services/managed-services)
+service that performs this function. Organisations that rely on users reporting
+suspicious activity, or on reviewing logs reactively after an incident, will
+typically not detect ransomware during the dwell period.
+
+**Phishing resistance:** A significant proportion of ransomware enters via
+phishing email. Anti-phishing controls at the email gateway, staff training that
+includes simulated phishing exercises, and attachment sandboxing reduce the
+frequency of initial compromise.
+
+### Pillar 4: Incident response planning
+
+A ransomware incident is a high-stress, time-pressured event. Decisions made in
+the first hours — what to isolate, who to notify, whether to engage law
+enforcement, whether the backup infrastructure is intact — significantly affect
+the outcome. Making these decisions for the first time during the incident,
+without a pre-agreed plan, is slow and error-prone.
+
+An incident response plan for ransomware should cover:
+
+**Detection and initial response:**
+- How an incident is declared and by whom
+- Immediate isolation steps — which systems to disconnect from the network first
+- Who is notified internally and in what order
+
+**Communication:**
+- Who communicates with senior management and the board?
+- Who communicates with customers, suppliers, regulators, and law enforcement?
+- What is the holding statement while assessment is ongoing?
+
+**Technical response:**
+- Who leads the technical investigation?
+- Is there an external incident response retainer that can be activated?
+- What evidence must be preserved and how?
+
+**Recovery:**
+- What is the priority order for restoring systems?
+- Who has the authority to approve restoration from backup?
+- What verification is required before systems are returned to production?
+
+**Post-incident:**
+- What root-cause analysis is required?
+- What changes will prevent recurrence?
+- What are the regulatory notification obligations — including NDPR and
+  sector-specific requirements?
+
+The plan should be tested through a tabletop exercise — a structured walkthrough
+of a simulated ransomware scenario — at least annually. The exercise will identify
+gaps in the plan and ensure that key personnel know their roles before the
+real event.
+
+## Working with managed security services
+
+For most Nigerian organisations, building all of these capabilities in-house is
+neither practical nor economical. The backup architecture, network monitoring,
+and incident response planning described above require specialist skills and
+ongoing operational investment.
+
+A [managed IT services](/services/managed-services) provider that understands
+the ransomware threat landscape can implement and operate many of these controls
+as part of their service scope. The critical questions to ask:
+
+- Do you manage backup architecture specifically with ransomware resilience in
+  mind — including immutable or offsite copies?
+- Do you monitor for ransomware indicators during dwell periods, not only after
+  encryption begins?
+- Do you have an incident response capability, or can you recommend one?
+- Is backup restoration tested on a defined schedule, and are results documented?
+
+A provider who cannot give specific answers to these questions should not be
+trusted to provide ransomware-relevant managed services.
+
+---
+
+## Frequently asked questions
+
+### Should an organisation pay a ransomware demand?
+
+This is ultimately a business decision, but the practical case for paying is
+weaker than it appears under pressure. Payment does not guarantee decryption —
+decryption tools provided by attackers frequently fail or produce partial results.
+Payment funds criminal operations and may make the organisation a repeat target.
+It may also violate regulatory obligations if the attackers are on sanctions
+lists. Building genuine recovery capability makes payment unnecessary and is the
+only durable strategy.
+
+### How long does recovery from a ransomware attack typically take?
+
+Recovery time varies enormously with the scope of the attack, the quality of
+backup infrastructure, and the availability of technical resources. Organisations
+with good, tested backups and a pre-planned response often restore core systems
+within days. Organisations without backups face weeks or months, and some never
+fully recover. In the Nigerian context, hardware supply delays and limited local
+incident response capacity can extend timelines further — which makes
+pre-incident preparation more important, not less.
+
+### What is the first thing to do when ransomware is detected?
+
+Isolate — immediately disconnect affected systems from the network to limit
+spread. Do not power off infected systems (unless technically necessary) as this
+may destroy forensic evidence. Activate the incident response plan and notify
+the incident response lead. Document the time of discovery and the initial
+symptoms. Do not attempt to interact with ransom notes or delete files before
+getting professional advice.
+
+### Are cloud systems protected from ransomware?
+
+Not automatically. Cloud storage services like OneDrive and SharePoint sync files
+between local devices and the cloud — ransomware encrypting files on a local
+device will sync those encrypted files to the cloud, potentially overwriting clean
+versions. Ransomware resilience for cloud storage requires version history with
+a retention period long enough to cover the dwell period, and immutable backup
+options that are separate from the primary sync relationship. Check your cloud
+storage configuration; default settings may not provide adequate protection.

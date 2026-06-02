@@ -1,0 +1,225 @@
+---
+title: "What an IT SLA Should Actually Cover"
+slug: "what-an-it-sla-should-cover"
+excerpt: "Most IT service agreements stop at uptime percentages. Here is what a genuinely useful SLA should contain — and what to watch for in the fine print."
+category: "Managed Services"
+tags:
+  - "SLA"
+  - "managed services"
+  - "IT support"
+  - "service levels"
+  - "contracts"
+author: "Digitplus Technology"
+publishedAt: "2026-01-05"
+updatedAt: "2026-01-05"
+cover: "/images/insights/what-an-it-sla-should-cover.jpg"
+coverAlt: "A manager and IT provider reviewing a service agreement document at a desk"
+draft: false
+seo:
+  metaTitle: "What an IT SLA Should Cover in Nigeria"
+  metaDescription: "An IT SLA that only lists uptime percentages is not enough. Learn what a useful service-level agreement must contain to protect your organisation."
+  ogImage: "/images/insights/what-an-it-sla-should-cover.jpg"
+---
+
+An IT service-level agreement (SLA) that merely states "99% uptime" gives your
+organisation almost nothing to stand on when things go wrong. The percentage
+sounds reassuring until you discover that "uptime" was defined to exclude
+scheduled maintenance windows, that support calls are answered on best-efforts
+basis, and that the remedies for failure amount to a credit note worth a
+fraction of your downtime loss.
+
+A well-constructed SLA is one of the most important governance documents your IT
+function will produce. It sets expectations, allocates risk, and gives both
+parties a shared language when performance is disputed. This article explains
+what a serious SLA should contain and what to scrutinise before you sign.
+
+## Why most IT SLAs fall short
+
+The typical IT support contract in Nigeria — whether with an in-house team or an
+external provider — is written to protect the provider, not the customer. It
+defines success in terms that are easy to meet, not in terms that actually
+reflect business impact. Common gaps include:
+
+- Response times stated without any definition of what constitutes a "response"
+- Uptime measured over a calendar month with no penalty for timing — a two-hour
+  outage at 3 a.m. on a Sunday is treated the same as a two-hour outage on
+  payday processing morning
+- No distinction between incident resolution and workaround
+- Escalation paths listed but no timeboxes on each escalation stage
+- Remedies capped at one month's fee, which rarely covers actual loss
+
+The result is a document that looks comprehensive in procurement but provides
+little leverage in practice. Getting this right requires knowing which clauses
+to demand and which soft language to push back on.
+
+## The core elements of a serviceable SLA
+
+### 1. Scope — what is and is not covered
+
+Every SLA must open with an unambiguous scope statement. This should identify
+covered infrastructure (specific servers, switches, endpoints, cloud tenancies),
+covered services (helpdesk, patch management, monitoring, backup, etc.), and,
+critically, what falls outside the agreement. Providers often exclude third-party
+applications, end-user error, and anything that happens during a power outage —
+all predictable realities of the Nigerian operating environment that should be
+addressed explicitly, not silently excluded.
+
+### 2. Service hours and coverage windows
+
+State the hours during which SLA commitments apply. "Business hours" is not
+adequate — define the time zone, start and end times, and how public holidays are
+treated. If your organisation runs shift operations (common in banking, hospitals,
+manufacturing, and oil-and-gas), you need after-hours coverage written into the
+agreement, not assumed.
+
+### 3. Response and resolution times by priority
+
+This is where most agreements are vaguest. A proper SLA defines at least three or
+four priority tiers and attaches measurable commitments to each:
+
+| Priority | Example | Response target | Resolution target |
+|----------|---------|-----------------|-------------------|
+| Critical | Core banking system down | 15 minutes | 2 hours |
+| High | Departmental system unavailable | 30 minutes | 4 hours |
+| Medium | Single-user issue, workaround exists | 2 hours | Next business day |
+| Low | Feature request, cosmetic issue | 4 hours | Agreed schedule |
+
+Response time must be defined as the time until a qualified engineer acknowledges
+the ticket and begins active work — not the time until an automated email is sent.
+Resolution time should distinguish between full resolution and temporary
+workaround, and the SLA should specify when workarounds are acceptable and for
+how long.
+
+### 4. Escalation procedures
+
+Every priority tier needs an escalation path with explicit timeboxes. If a
+Critical incident is not resolved within two hours, who is notified, and what
+changes in the response? Define the names or roles at each escalation stage and
+the commitment that attaches to each. An escalation path written in vague terms
+("management will be informed as appropriate") gives you nothing.
+
+### 5. Availability and performance metrics
+
+Uptime percentages should be accompanied by:
+
+- The measurement period (monthly is typical)
+- The measurement method (synthetic monitoring, log analysis, or both)
+- Exclusions stated explicitly — scheduled maintenance, force majeure, and ISP
+  outages are all legitimate exclusions, but they must be written down, not
+  assumed
+- Business-hours vs. total-time calculation, since the two yield very different
+  numbers
+
+> **A useful SLA measures the things your business actually cares about — not the
+> things that are easiest for a provider to report.**
+
+### 6. Reporting obligations
+
+Require monthly service reports covering: incident volumes by priority, mean time
+to respond (MTTR), mean time to resolve, outstanding items, and any trend
+observations. Reports delivered on a fixed schedule create accountability and
+give you early sight of deteriorating performance before it becomes a crisis.
+
+### 7. Remedies and penalties
+
+Remedies must be proportionate and automatic — not dependent on you filing a claim.
+Service credits are the most common remedy, but they should be meaningful: credits
+equal to one day's contracted value for each hour of excess downtime, for example,
+rather than a flat monthly cap. Where your exposure is high (financial services,
+hospitals, government), negotiate a right to terminate without penalty if SLA
+breaches exceed a threshold over a rolling period.
+
+### 8. Change management and notification obligations
+
+The provider must notify you of planned changes — hardware replacements, software
+upgrades, network reconfigurations — in advance, with a defined change window.
+Emergency changes need a shorter notice period plus a post-change report. Without
+this clause, providers can make infrastructure changes that affect your operations
+with no prior communication.
+
+### 9. Data and security obligations
+
+Any provider with access to your systems should have data handling obligations
+written into the SLA or an attached schedule. In line with the Nigeria Data
+Protection Regulation (NDPR), this should cover how data is stored, who has
+access, breach notification timelines, and what happens to data when the contract
+ends. Do not leave this to a generic confidentiality clause.
+
+### 10. Disaster recovery and business continuity expectations
+
+If the provider manages your backup or recovery infrastructure, the SLA should
+state recovery point objectives (RPO) and recovery time objectives (RTO) — and
+these should be tested at least annually, with test results reported to you.
+Untested recovery plans are not recovery plans.
+
+## What to watch for in the fine print
+
+Several clauses appear benign but can substantially weaken your position:
+
+- **Force majeure language that includes power failure.** In Nigeria, grid
+  instability is a known operating condition, not an unforeseen event. A provider
+  whose SLA excludes obligations during "power-related events" may be exempt from
+  commitments during the outages most likely to affect you.
+- **"Best efforts" language.** This is not a commitment. Replace it with
+  measurable targets.
+- **Unilateral amendment rights.** Some providers reserve the right to amend SLA
+  terms with 30 days' notice. Negotiate mutual agreement, or at minimum a right
+  to exit if terms change materially.
+- **Liability caps set to the monthly fee.** For mission-critical systems, this
+  cap may be a small fraction of your actual exposure. Negotiate a higher cap or
+  require the provider to carry adequate professional indemnity insurance.
+
+## SLA governance in practice
+
+Signing the SLA is the beginning, not the end. Designate a named person on your
+side as the service relationship owner. Review monthly reports and hold a formal
+service review quarterly. When incidents occur, require root-cause analysis
+documents — not just closure emails. Document every conversation about
+performance; informal assurances have no standing when a dispute reaches a
+formal stage.
+
+Organisations that treat SLA governance as an administrative burden tend to
+discover its value only after a major incident. Those that treat it as an ongoing
+management discipline rarely reach that point.
+
+For organisations that want structured [managed IT support](/services/managed-services)
+with clearly defined service levels, the SLA is the foundation everything else
+sits on. Get it right before work begins.
+
+---
+
+## Frequently asked questions
+
+### What is a reasonable response time for a Critical IT incident?
+
+For systems that affect core business operations — payment processing, patient
+records, production systems — a 15-minute response commitment from a qualified
+engineer is reasonable. Resolution targets of two to four hours for Critical
+incidents are standard in well-structured managed service agreements, though the
+appropriate figure depends on the complexity of the environment.
+
+### Can an SLA cover issues caused by power failure in Nigeria?
+
+Yes, and it should. Power instability is a known operating condition, not an
+unpredictable event. A properly structured SLA will distinguish between incidents
+caused by utility failure (where the provider's obligation is to restore service
+as quickly as possible after power returns) and incidents caused by inadequate
+backup power infrastructure (where the provider, if responsible for that
+infrastructure, should be held to a response obligation). The key is that the
+language is explicit, not that the provider is exempt by default.
+
+### How often should SLA performance be reviewed?
+
+Monthly reporting is a minimum standard. Formal service reviews — where both
+parties examine trends, open issues, and planned changes — should happen quarterly.
+Annual reviews should cover the SLA document itself to ensure targets remain
+aligned with your business needs and technical environment.
+
+### What should happen when a provider consistently misses SLA targets?
+
+First, invoke the escalation procedure written into the SLA. Document every
+breach with dates, times, and business impact. If breaches persist, most
+well-written agreements include a remediation plan obligation — the provider must
+submit a written plan with milestones. If performance does not improve within the
+remediation period, the right to terminate without penalty should be available.
+Retain records of all breach notifications throughout.

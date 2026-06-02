@@ -1,0 +1,144 @@
+---
+title: "Designing a Server Room in Nigeria: Power, Cooling and UPS"
+slug: "designing-a-server-room-power-cooling-ups"
+excerpt: "A server room designed without accounting for Nigeria's grid realities will fail in ways that are entirely predictable. This guide covers what the design must address before equipment goes in."
+category: "Infrastructure"
+tags:
+  - "server room"
+  - "UPS"
+  - "power infrastructure"
+  - "cooling"
+  - "Nigeria"
+  - "data centre"
+author: "Digitplus Technology"
+publishedAt: "2025-11-18"
+updatedAt: "2025-11-18"
+cover: "/images/insights/designing-a-server-room-power-cooling-ups.jpg"
+coverAlt: "A server room in a Nigerian enterprise building showing rack-mounted servers, UPS units, and precision cooling equipment"
+draft: false
+seo:
+  metaTitle: "Designing a Server Room in Nigeria: Power, Cooling, UPS Guide"
+  metaDescription: "A practical guide to server room design in Nigeria — sizing power and UPS, choosing cooling, managing generator integration, and avoiding the most common failures."
+  ogImage: "/images/insights/designing-a-server-room-power-cooling-ups.jpg"
+---
+
+A server room in Nigeria operates in a fundamentally different power environment from one in Western Europe or North America. Grid supply is intermittent and variable. Generator switchover creates voltage transients. Harmonic distortion is common. Ambient temperatures in the building envelope are higher. Each of these factors affects the design of a server room that will actually protect the equipment inside it — and each is routinely underestimated by organisations that copy a design from a context where these conditions don't apply.
+
+This guide covers the critical design decisions for power, UPS, and cooling in a Nigerian server room. It assumes a room hosting on-premises servers, networking equipment, and storage — from a small office server closet up to a purpose-built data room for a bank or enterprise.
+
+## Site selection and physical requirements
+
+The server room must be designed before it is fitted out, not after. Retrofitting power and cooling into a space that was not designed for them is consistently more expensive and less effective than getting the design right at the start.
+
+### Physical space
+
+A server room should be:
+
+- **Dedicated:** not shared with general office storage, cleaning equipment, or other non-IT functions
+- **Access-controlled:** with a separate lock, preferably electronic access control with an audit log
+- **Free from water risk:** no plumbing, drainage, or roof leaks above or adjacent to the space
+- **Properly sealed:** with cable penetrations sealed against fire, pests, and airflow bypass
+
+Size the room for current equipment plus realistic growth — the cost of a slightly larger room at construction is negligible against the cost of expanding or moving when capacity is exhausted.
+
+### Raised floor vs slab floor
+
+Raised floors allow underfloor cable management and underfloor cooling distribution. They are appropriate for larger data rooms. For small to medium server rooms in Nigerian offices, slab floors with overhead cable management are simpler, cheaper, and less prone to the maintenance issues that come with raised floors in humid tropical environments.
+
+## Power design
+
+### Load calculation
+
+Before specifying any power or UPS equipment, calculate the total IT load the room will carry. Every server, switch, storage unit, and piece of active networking equipment has a rated power draw. Add these up to get the total IT load in watts.
+
+Add the cooling load — the power consumed by the air conditioning units serving the room. Precision cooling units serving a server room may consume 30–60% of the IT load or more, depending on type.
+
+Add a growth margin — typically 30–50% above current calculated load — so that the power infrastructure does not need to be replaced when equipment expands.
+
+The result is your design power load, which drives the sizing of every other power component.
+
+### UPS selection and sizing
+
+A UPS (Uninterruptible Power Supply) is not optional for a server room in Nigeria. It serves two distinct functions that are often conflated:
+
+**Instantaneous protection:** Bridging the gap between grid failure and generator start — typically two to five seconds, depending on the ATS and generator configuration. Without UPS, every power outage causes an uncontrolled server shutdown.
+
+**Power conditioning:** Online double-conversion UPS units regenerate clean power from the battery bus, eliminating the voltage sags, spikes, harmonic distortion, and frequency variations that characterise Nigerian grid supply. This protection is continuous, not just during outages.
+
+For any server room in Nigeria, an **online double-conversion UPS** is the correct specification. Line-interactive UPS units (sometimes marketed as "online" but actually switching to battery only on complete failure) do not provide the continuous power conditioning that Nigerian grid conditions require.
+
+Size the UPS to cover the total IT load (not including cooling, which should be on a separate circuit or a separate UPS line). Runtime specification — how long the UPS runs on battery — should be sufficient to cover the generator start time plus a margin. For most installations, 10–20 minutes of runtime at full load is a practical starting point. Longer runtimes require larger battery banks.
+
+### Generator integration
+
+Most Nigerian server rooms operate on generator supply for a significant fraction of the year. Key design requirements for generator integration:
+
+- The generator must be properly sized for the combined IT and cooling load, with headroom. An undersized generator that drops voltage under load is as harmful as no generator at all.
+- An Automatic Transfer Switch (ATS) handles the changeover from grid to generator without manual intervention. The ATS must be rated for the full building load, not just the IT load.
+- Generator supply is not as clean as the claimed output suggests — voltage and frequency variation during the initial run-up phase creates transients that a well-specified UPS absorbs. This is another argument for online double-conversion UPS.
+
+> A UPS that is sized correctly for the IT load and an ATS that is correctly rated for the generator — these two components handle the majority of power-related server failures in Nigeria. Most of the failures that remain are from organisations that skimped on one or both.
+
+### Dedicated power distribution
+
+The server room should have its own sub-distribution board fed from the main distribution board. This provides:
+
+- Clean separation between IT power and general office power
+- The ability to switch non-critical loads without affecting server room supply
+- A clear point for measuring IT power consumption
+- Protection against electrical faults in the general office affecting server room supply
+
+Each rack should have its own Power Distribution Unit (PDU) — preferably rack-mounted, with individual outlet switching — fed from the sub-distribution board. For critical servers, dual-feed PDUs connected to two separate UPS output circuits provide N+1 power redundancy at the rack level.
+
+## Cooling design
+
+### Why standard office air conditioning is not enough
+
+Standard office split-unit air conditioners are designed to cool human-occupied spaces. They cycle on and off, create humidity variation, and move air in patterns designed for human comfort rather than equipment cooling. Server equipment generates consistent heat loads that require continuous, stable, controlled cooling — not comfort air conditioning.
+
+### Cooling approaches for Nigerian server rooms
+
+**Precision cooling units** (also called CRACs — Computer Room Air Conditioning) are designed specifically for data room environments. They maintain tighter temperature and humidity ranges, operate continuously, and are specified for the heat density of IT equipment. They are the appropriate choice for any server room above the smallest scale.
+
+**N+1 cooling redundancy** — one additional cooling unit beyond the minimum required to handle the heat load — is the standard for any room where equipment availability is important. When one unit fails or requires maintenance, the room continues to cool.
+
+**Hot aisle/cold aisle containment** organises server racks so that equipment intakes face one aisle (cold) and exhausts face the opposite aisle (hot). This simple layout significantly improves cooling efficiency and reduces the required cooling capacity for a given IT load. It costs nothing to implement at the design stage and is expensive to retrofit.
+
+### Target environmental conditions
+
+Data centre standards (ASHRAE A1/A2) define the acceptable temperature and humidity ranges for IT equipment. In practice, server rooms should be maintained at:
+
+- Temperature: 18–27°C (64–80°F) at equipment intake
+- Relative humidity: 45–55%
+
+In Nigerian climates, maintaining these conditions requires continuous cooling and may require supplementary dehumidification in coastal cities like Lagos and Port Harcourt where ambient humidity is high.
+
+## Monitoring and alerting
+
+A server room that is not monitored is one where problems are discovered after they have caused damage. Minimum monitoring for a Nigerian server room includes:
+
+- Temperature and humidity sensors at rack inlet level (not just at the room thermostat)
+- UPS battery health and runtime monitoring, with alerting on battery degradation
+- Power consumption monitoring to track load trends
+- Generator fuel level monitoring if the generator is owned and on-site
+- Access log monitoring from the door control system
+
+Environmental monitoring can be implemented with standalone environmental monitoring units that send alerts by email or SMS. For [infrastructure solutions](/services/infrastructure-solutions) of any significant scale, centralised monitoring with escalation to an IT team or service provider is the appropriate standard.
+
+## Frequently asked questions
+
+### How long should a UPS provide battery backup?
+
+The practical requirement is to bridge from grid failure to generator start — which for a properly maintained generator and ATS is typically two to five seconds. Beyond that, additional runtime is buffer against generator start failures. A target of 15–20 minutes at full IT load is a common design point. For organisations that want to run through generator maintenance windows or extended outages, longer runtime can be achieved with extended battery modules.
+
+### Should the UPS also supply the cooling equipment?
+
+This is a design choice with real implications. Cooling equipment on UPS power means the room continues to be cooled during power transitions — but it significantly increases the UPS load and reduces runtime. For most installations, the cooling load is on a separate circuit with a shorter-bridge UPS or on generator supply only. The server equipment UPS is sized for IT load only.
+
+### What temperature is too hot for a server room in Nigeria?
+
+Most server equipment is rated to operate up to 35–40°C inlet temperature in short-term elevated conditions, but sustained operation above 27°C inlet reduces equipment life and increases failure rates. In Nigerian ambient conditions, an uncoooled or under-cooled room can reach 40°C or higher within 30–60 minutes of cooling failure. This is why cooling redundancy and temperature alerting are non-optional for serious installations.
+
+### Can we use a residential inverter and battery system for the server room?
+
+Residential inverter systems are designed for small loads — fans, lights, appliances. They are not designed for the continuous load, power conditioning requirements, or duty cycle of IT equipment. In a pinch, a good quality inverter may bridge a short outage, but it is not a substitute for a properly specified online UPS. The failure mode of an underpowered or inappropriate UPS — an ungraceful shutdown at the worst moment — is exactly what you are trying to avoid.

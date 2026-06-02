@@ -1,0 +1,251 @@
+---
+title: "NDPR Compliance: What Your IT Team Must Know"
+slug: "ndpr-compliance-for-it-teams"
+excerpt: "The Nigeria Data Protection Regulation places specific technical obligations on IT teams. Here is a practical breakdown of what compliance requires in practice — not just on paper."
+category: "Cybersecurity"
+tags:
+  - "NDPR"
+  - "data protection"
+  - "compliance"
+  - "Nigeria"
+  - "banking"
+author: "Digitplus Technology"
+publishedAt: "2026-02-10"
+updatedAt: "2026-02-10"
+cover: "/images/insights/ndpr-compliance-for-it-teams.jpg"
+coverAlt: "An IT compliance officer reviewing data protection documentation alongside a server infrastructure diagram"
+draft: false
+seo:
+  metaTitle: "NDPR Compliance Guide for IT Teams in Nigeria"
+  metaDescription: "A practical breakdown of what the Nigeria Data Protection Regulation requires from IT teams — covering technical controls, data mapping, breach response, and audits."
+  ogImage: "/images/insights/ndpr-compliance-for-it-teams.jpg"
+---
+
+The Nigeria Data Protection Regulation (NDPR), issued by NITDA in 2019 and now
+administered under the framework established by the Nigeria Data Protection Act
+2023, places legal obligations on any organisation that collects, stores, or
+processes personal data of Nigerian residents. These obligations are not purely
+a legal or compliance matter — they translate directly into technical
+requirements that IT teams must implement and maintain.
+
+Many IT teams encounter the NDPR primarily through a memo from legal or compliance
+instructing them to "ensure compliance." Without a practical understanding of what
+the regulation actually demands at the technical level, that instruction is
+impossible to act on meaningfully. This article translates the key requirements
+into operational terms.
+
+## What the NDPR requires: the IT perspective
+
+### Lawful basis and data inventory
+
+Compliance begins with knowing what personal data you hold. The NDPR requires
+that data be processed on a lawful basis — consent, contract, legal obligation,
+legitimate interest, or vital interest. Before IT can implement appropriate
+controls, the organisation must have mapped its data: what categories of personal
+data are collected, from whom, for what purpose, where it is stored, who has
+access, and how long it is retained.
+
+The IT team's role in this exercise is to provide an accurate technical picture:
+which databases hold personal data, which applications process it, what the
+data flows are between systems, and where data is transmitted outside the
+organisation (to cloud providers, payment processors, third-party services).
+
+Without this inventory, all subsequent compliance activity is guesswork.
+Build it as a living document that is updated when systems change.
+
+### Appropriate technical security measures
+
+Article 2.1(b) of the NDPR requires data controllers to "implement appropriate
+technical and organisational measures to protect personal data." This is the
+most directly technical obligation, and it is intentionally broad — "appropriate"
+means proportionate to the sensitivity of the data and the risk of harm if it
+is compromised.
+
+For organisations processing high-sensitivity data — financial records, health
+data, government identification data — the bar is higher. Nigerian
+[financial institutions](/industries/banking-financial-services) are also subject
+to CBN IT Standards and the Revised Assessment Criteria for Banking Supervision,
+which impose additional specific requirements.
+
+The measures NITDA expects to see include:
+
+- **Encryption at rest and in transit** for personal data. Data sitting in a
+  database in plaintext, or transmitted over unencrypted channels, is not
+  adequately protected.
+- **Access controls** limiting who can view, edit, and export personal data to
+  those with a legitimate role-based need. Administrative access to production
+  databases should be logged and reviewed.
+- **Network security controls** — firewalls, network segmentation — that prevent
+  unauthorised access to systems holding personal data.
+- **Patch management** keeping systems that process personal data current with
+  security updates.
+- **Logging and audit trails** so that access to personal data can be reviewed
+  after the fact.
+
+### Data retention and deletion
+
+The NDPR requires that personal data not be kept longer than necessary for the
+purpose for which it was collected. This has a practical IT implementation
+requirement: data must actually be deleted when the retention period expires.
+Systems that accumulate personal data indefinitely — because deletion is
+inconvenient or never configured — are out of compliance even if no breach occurs.
+
+The IT implication is a defined retention schedule for each data category and a
+mechanism for enforcing it: automated deletion scripts, archive policies that
+purge data after a specified period, or a regular manual review process for
+categories where automated deletion is not feasible.
+
+Backup retention is a specific consideration. An organisation that retains data
+in backups long after the primary-system retention period has expired is still
+holding that data for NDPR purposes. Backup retention schedules should be
+aligned with data retention policies.
+
+### Third-party data processors
+
+Organisations that transfer personal data to third-party service providers —
+cloud platforms, payroll processors, CRM providers, email services — are
+responsible for ensuring that those processors provide adequate protection. The
+NDPR requires a written data processing agreement with any third party that
+processes personal data on your behalf.
+
+The IT team needs to be able to enumerate all such third parties. Cloud storage
+services, monitoring tools, analytics platforms, and software-as-a-service
+applications all potentially receive personal data. A cloud platform that
+stores customer records in data centres outside Nigeria requires particular
+attention: cross-border data transfers under the NDPR are permitted only where
+adequate protections are in place.
+
+> **NDPR compliance is not a once-and-done exercise. It is a set of operational
+> disciplines — data mapping, access control, breach detection, retention
+> enforcement — that must be maintained as the IT environment changes.**
+
+### Breach detection and notification
+
+One of the most operationally demanding requirements is the breach notification
+obligation. Under the NDPR, data breaches that may harm data subjects must be
+reported to NITDA within 72 hours of discovery. The organisation must also notify
+affected individuals without undue delay.
+
+Meeting a 72-hour notification window requires that:
+
+1. The organisation can detect breaches in a timeframe that leaves room to
+   investigate and notify within the window
+2. There is a defined internal escalation path so that a breach detected by IT
+   reaches the compliance or legal function immediately
+3. The organisation knows what information NITDA requires in a breach notification
+   and can gather it quickly
+
+This makes security monitoring and logging not just an IT best practice but a
+compliance requirement. An organisation that discovers a breach only weeks after
+it occurred — because it lacked monitoring — has already failed the notification
+requirement, regardless of what it does next.
+
+### Data Subject Rights
+
+The NDPR grants data subjects rights including access, rectification, deletion,
+and objection. Handling these requests requires IT cooperation: the ability to
+identify and export all personal data held on a specific individual, the ability
+to delete or pseudonymise a specific individual's data across all systems where
+it appears, and the ability to restrict processing in defined scenarios.
+
+For organisations with data spread across multiple systems — CRM, ERP, email
+archives, file servers, backup — responding to a subject access request or a
+deletion request is a significant IT coordination exercise. Building a process
+for this before requests arrive is considerably less costly than scrambling to
+respond on a 30-day deadline.
+
+## Practical compliance steps for IT teams
+
+### Step 1: Complete a data inventory
+
+Work with business stakeholders to map every system that holds personal data.
+Record: what data, whose data, stored where, accessed by whom, transmitted to
+which third parties, retained for how long. This is the foundation everything
+else depends on.
+
+### Step 2: Assess controls against the inventory
+
+For each system holding personal data, assess: Is data encrypted at rest and in
+transit? Are access controls in place and appropriate? Is access logged? Is the
+system patched? Are retention periods configured and enforced?
+
+Gaps identified in this assessment become the remediation backlog.
+
+### Step 3: Establish breach detection and response capability
+
+Ensure that logging is enabled on systems holding personal data, that logs are
+reviewed, and that there is a defined process for escalating potential breach
+indicators. Document the breach response procedure, including the 72-hour
+notification commitment.
+
+### Step 4: Review third-party data flows
+
+List all third-party services receiving personal data. Confirm data processing
+agreements are in place. Assess where data is physically stored and whether
+cross-border transfers require additional safeguards.
+
+### Step 5: Appoint or engage a Data Protection Officer
+
+Organisations that process personal data at scale, or that process sensitive
+categories of data, are required to appoint a Data Protection Officer (DPO)
+under the Nigeria Data Protection Act. This role has specific responsibilities
+and, in many regulated sectors, NITDA engagement requirements.
+
+For [banking and financial services organisations](/industries/banking-financial-services),
+the intersection of NDPR, CBN requirements, and NITDA guidelines means that
+compliance cannot be treated as a single framework — it requires a coordinated
+approach across IT, legal, compliance, and risk functions.
+
+## Working with managed services for NDPR-relevant controls
+
+Many of the technical controls required under the NDPR — monitoring, access
+management, patching, backup, and encryption — are functions that [managed IT services](/services/managed-services)
+providers typically deliver. When engaging a managed service provider, verify
+that their service scope covers these controls explicitly and that their own
+data handling practices as a processor are documented and compliant.
+
+A provider with access to your systems and data is a data processor for NDPR
+purposes. A data processing agreement is not optional.
+
+---
+
+## Frequently asked questions
+
+### Does the NDPR apply to small organisations?
+
+Yes. The NDPR applies to any organisation that processes personal data of
+Nigerian residents, regardless of the organisation's size or sector. The
+proportionality principle means that the expected security measures are
+calibrated to the sensitivity of the data and the scale of processing —
+a small business processing basic customer contact information has a lower
+bar than a hospital processing health records — but the obligation exists
+at all scales.
+
+### What counts as a data breach under the NDPR?
+
+A data breach is any incident involving unauthorised access, disclosure,
+alteration, or destruction of personal data, or accidental loss of personal data.
+This includes: a hacked email account containing customer data; a laptop with
+unencrypted customer records that is lost or stolen; a database left publicly
+accessible due to a misconfiguration; ransomware encrypting personal data.
+Not every breach must be reported — the obligation is triggered where the breach
+is likely to result in harm to data subjects.
+
+### What information must be included in a breach notification to NITDA?
+
+Notifications should include: a description of the nature of the breach and
+the categories and approximate number of individuals affected; the likely
+consequences of the breach; the measures taken or proposed to address it; and
+the name and contact details of the Data Protection Officer or other contact
+point. NITDA has published guidance on the notification process, and the
+72-hour window should be treated as a hard deadline.
+
+### How does the NDPR interact with CBN IT requirements for banks?
+
+Banks and financial institutions are subject to both NDPR and CBN's own
+cybersecurity and data management frameworks. These frameworks are largely
+complementary — the CBN requirements tend to be more prescriptive and add
+sector-specific obligations around transaction data, customer verification records,
+and incident reporting to the CBN itself. Compliance programmes for banks need
+to satisfy both frameworks simultaneously, which requires coordination between
+IT, risk, and compliance functions.
