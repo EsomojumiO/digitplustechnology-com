@@ -3,12 +3,11 @@ import { notFound } from "next/navigation";
 import {
   Section,
   SectionHeading,
-  Grid,
   Breadcrumbs,
   Button,
   CTABand,
 } from "@/components/ui";
-import { Reveal } from "@/components/motion/Reveal";
+import { FadeIn, Stagger, StaggerItem } from "@/components/motion";
 import {
   getAllCategories,
   getArticlesByCategory,
@@ -74,29 +73,28 @@ export default async function CategoryArchivePage({
       </Section>
 
       <Section spacing="sm">
-        <Reveal>
+        <FadeIn>
           <SectionHeading
             as="h1"
             eyebrow="Category"
             title={category.label}
             lede={category.description}
           />
-        </Reveal>
+        </FadeIn>
       </Section>
 
       <Section spacing="sm">
-        <Reveal>
-          <Grid columns={3} gap="lg">
-            {articles.map((article, i) => (
+        <Stagger className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {articles.map((article, i) => (
+            <StaggerItem key={article.slug} className="h-full">
               <ArticleCard
-                key={article.slug}
                 article={article}
                 headingAs="h2"
                 priority={i < 3}
               />
-            ))}
-          </Grid>
-        </Reveal>
+            </StaggerItem>
+          ))}
+        </Stagger>
 
         <div className="mt-12 border-t border-hairline pt-6">
           <Button href="/insights" variant="secondary">

@@ -8,23 +8,25 @@ import {
   Card,
   Button,
   ServiceCard,
-  IndustryCard,
-  TrustStrip,
   StatGrid,
   Testimonial,
   ProcessStep,
   CTABand,
   Eyebrow,
-  Badge,
 } from "@/components/ui";
-import { Reveal } from "@/components/motion/Reveal";
-import { siteConfig, services, industries } from "@/lib/site";
 import {
-  whyUs,
-  processSteps,
-  stats,
-  testimonials,
-} from "@/data";
+  FadeIn,
+  Stagger,
+  StaggerItem,
+  CountUp,
+  Magnetic,
+} from "@/components/motion";
+import { TrustMarquee } from "@/components/home/TrustMarquee";
+import { WhyPillar } from "@/components/home/WhyPillar";
+import { IndustriesFilter } from "@/components/home/IndustriesFilter";
+import { InsightShelfCard } from "@/components/home/ContentShelf";
+import { siteConfig, services, industries } from "@/lib/site";
+import { whyUs, processSteps, stats, testimonials } from "@/data";
 import { getFeaturedArticles, getFeaturedReport } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -34,23 +36,43 @@ export const metadata: Metadata = {
     "Digitplus Technology Limited is an end-to-end B2B IT partner for enterprises, government, and institutions across Nigeria — procurement, hardware supply, infrastructure, deployment, and managed services. Abuja HQ; Lagos and Port Harcourt delivery.",
 };
 
+/* Raycast-style two-beat leads for the four Why Digitplus pillars, mapped to
+   the existing whyUs data (which carries the longer supporting copy). */
+const whyBeats: { label: string; beat: string }[] = [
+  { label: "Accountable", beat: "one partner, end to end." },
+  { label: "Nationwide", beat: "Abuja, Lagos, Port Harcourt." },
+  { label: "Trusted", beat: "8+ years, 50+ clients." },
+  { label: "Disciplined", beat: "documented, audit-ready." },
+];
+
+/* Map the by-the-numbers stats to animated CountUp figures. "Abuja" stays plain
+   text. Pattern: leading integer + suffix. */
+function StatValue({ value }: { value: string }) {
+  const match = /^(\d+)(.*)$/.exec(value);
+  if (!match) return <>{value}</>;
+  return <CountUp value={Number(match[1])} suffix={match[2]} />;
+}
+
 export default function HomePage() {
   const featuredArticles = getFeaturedArticles(3);
   const featuredReport = getFeaturedReport();
 
   return (
     <>
-      {/* Hero */}
+      {/* Hero — signature motif + aurora; magnetic primary CTA */}
       <Hero
         aurora
+        motif
         eyebrow="End-to-end IT solutions"
         title={siteConfig.tagline}
         subhead="One accountable partner for the full lifecycle of your IT — from planning and procurement to deployment and ongoing management. Built for organisations that need their technology to simply work."
         actions={
           <>
-            <Button href="/contact" size="lg">
-              Request a Free IT Assessment
-            </Button>
+            <Magnetic strength={6}>
+              <Button href="/contact" size="lg">
+                Request a Free IT Assessment
+              </Button>
+            </Magnetic>
             <Button href="/approach" size="lg" variant="secondary">
               See How We Work
             </Button>
@@ -59,80 +81,83 @@ export default function HomePage() {
         coverage={`Abuja • Lagos • Port Harcourt`}
       />
 
-      {/* Trust strip */}
+      {/* Trust strip — partner logos on a slow seamless marquee */}
       <Section tone="muted" spacing="sm">
-        <Reveal>
-          <TrustStrip label="Authorised technology partners" />
-        </Reveal>
+        <FadeIn>
+          <TrustMarquee label="Authorised technology partners" />
+        </FadeIn>
       </Section>
 
       {/* Services snapshot */}
       <Section>
-        <Reveal>
+        <FadeIn>
           <SectionHeading
             eyebrow="What we do"
             title="Six service lines, one accountable partner"
             lede="Each capability stands on its own — and works better together. Most clients start with one and grow into the rest."
           />
-        </Reveal>
-        <Reveal>
+        </FadeIn>
+        <Stagger>
           <Grid columns={3} gap="md" className="mt-12">
             {services.map((s) => (
-              <ServiceCard
-                key={s.slug}
-                href={`/services/${s.slug}`}
-                title={s.title}
-                blurb={s.short}
-              />
+              <StaggerItem key={s.slug} className="h-full">
+                <ServiceCard
+                  href={`/services/${s.slug}`}
+                  title={s.title}
+                  blurb={s.short}
+                  className="h-full"
+                />
+              </StaggerItem>
             ))}
           </Grid>
-        </Reveal>
-        <Reveal className="mt-10">
+        </Stagger>
+        <FadeIn className="mt-10">
           <Button href="/services" variant="ghost">
             View all services →
           </Button>
-        </Reveal>
+        </FadeIn>
       </Section>
 
-      {/* Why Digitplus */}
+      {/* Why Digitplus — two-beat pillars */}
       <Section tone="muted">
-        <Reveal>
+        <FadeIn>
           <SectionHeading
             eyebrow="Why Digitplus"
             title="The difference is accountability"
             lede="Plenty of companies will sell you equipment. Fewer will own the outcome from end to end — and stand behind it afterwards."
           />
-        </Reveal>
-        <Reveal>
+        </FadeIn>
+        <Stagger>
           <Grid columns={2} gap="lg" className="mt-12">
-            {whyUs.map((pillar) => (
-              <Card key={pillar.title} padding="lg">
-                <h3 className="text-h4 text-text">{pillar.title}</h3>
-                <p className="text-body text-muted measure mt-3">
-                  {pillar.description}
-                </p>
-              </Card>
+            {whyUs.map((pillar, i) => (
+              <StaggerItem key={pillar.title} className="h-full">
+                <WhyPillar
+                  label={whyBeats[i]?.label ?? pillar.title}
+                  beat={whyBeats[i]?.beat ?? ""}
+                  description={pillar.description}
+                />
+              </StaggerItem>
             ))}
           </Grid>
-        </Reveal>
+        </Stagger>
       </Section>
 
       {/* Philosophy quote */}
       <Section tone="inverse" spacing="lg">
-        <Reveal className="mx-auto max-w-3xl text-center">
+        <FadeIn className="mx-auto max-w-3xl text-center">
           <Eyebrow className="text-neutral-400">Our standard</Eyebrow>
           <p className="text-h2 mt-6 font-medium tracking-tight text-neutral-50">
             “Most IT projects don’t fail on the equipment. They fail in the gaps
             — between vendors, between purchase and deployment, between handover
             and support. We exist to close those gaps.”
           </p>
-        </Reveal>
+        </FadeIn>
       </Section>
 
       {/* Process preview */}
       <Section>
         <div className="grid gap-12 lg:grid-cols-[minmax(0,22rem)_1fr] lg:gap-16">
-          <Reveal>
+          <FadeIn>
             <SectionHeading
               eyebrow="How we work"
               title="A clear, documented process"
@@ -144,84 +169,84 @@ export default function HomePage() {
                 Explore our approach
               </Button>
             </div>
-          </Reveal>
-          <Reveal>
-            <ol className="flex flex-col gap-8">
-              {processSteps.map((s) => (
-                <li key={s.step}>
-                  <ProcessStep
-                    step={s.step}
-                    title={s.title}
-                    description={s.description}
-                  />
-                </li>
-              ))}
-            </ol>
-          </Reveal>
+          </FadeIn>
+          <Stagger role="list" className="flex flex-col gap-8">
+            {processSteps.map((s) => (
+              <StaggerItem key={s.step} role="listitem">
+                <ProcessStep
+                  step={s.step}
+                  title={s.title}
+                  description={s.description}
+                />
+              </StaggerItem>
+            ))}
+          </Stagger>
         </div>
       </Section>
 
-      {/* Industries */}
+      {/* Industries — filterable grid */}
       <Section tone="muted">
-        <Reveal>
+        <FadeIn>
           <SectionHeading
             eyebrow="Who we serve"
             title="Built around how your sector works"
             lede="Government procurement, branch uptime, clinical reliability, campus budgets — every sector has its own demands. We deliver to each."
           />
-        </Reveal>
-        <Reveal>
-          <Grid columns={2} gap="md" className="mt-12">
-            {industries.map((i) => (
-              <IndustryCard
-                key={i.slug}
-                href={`/industries/${i.slug}`}
-                title={i.title}
-                blurb={i.short}
-              />
-            ))}
-          </Grid>
-        </Reveal>
+        </FadeIn>
+        <IndustriesFilter
+          industries={industries.map((i) => ({
+            slug: i.slug,
+            title: i.title,
+            short: i.short,
+          }))}
+        />
       </Section>
 
       {/* Testimonials */}
       <Section>
-        <Reveal>
+        <FadeIn>
           <SectionHeading
             eyebrow="In their words"
             title="What partnership looks like"
           />
-        </Reveal>
-        <Reveal>
+        </FadeIn>
+        <Stagger>
           <Grid columns={3} gap="lg" className="mt-12">
             {testimonials.map((t, i) => (
-              <Testimonial
-                key={i}
-                quote={t.quote}
-                author={t.author}
-                role={t.role}
-                organization={t.organization}
-                className="[&_blockquote]:text-body-lg"
-              />
+              <StaggerItem key={i} className="h-full">
+                <Testimonial
+                  quote={t.quote}
+                  author={t.author}
+                  role={t.role}
+                  organization={t.organization}
+                  className="h-full [&_blockquote]:text-body-lg"
+                />
+              </StaggerItem>
             ))}
           </Grid>
-        </Reveal>
+        </Stagger>
       </Section>
 
-      {/* By the numbers */}
+      {/* By the numbers — animated count-up */}
       <Section tone="raised">
-        <Reveal>
+        <FadeIn>
           <SectionHeading eyebrow="By the numbers" title="Track record" />
-        </Reveal>
-        <Reveal>
-          <StatGrid items={stats} className="mt-12" />
-        </Reveal>
+        </FadeIn>
+        <FadeIn>
+          <StatGrid
+            className="mt-12"
+            items={stats.map((s) => ({
+              ...s,
+              value: <StatValue value={s.value} />,
+            }))}
+          />
+        </FadeIn>
       </Section>
 
-      {/* Featured insights */}
+      {/* Featured insights — glass-framed content shelf */}
       {featuredArticles.length > 0 ? (
         <Section>
-          <Reveal>
+          <FadeIn>
             <div className="flex flex-wrap items-end justify-between gap-6">
               <SectionHeading
                 eyebrow="Insights"
@@ -231,48 +256,40 @@ export default function HomePage() {
                 All insights →
               </Button>
             </div>
-          </Reveal>
-          <Reveal>
+          </FadeIn>
+          <Stagger>
             <Grid columns={3} gap="md" className="mt-12">
               {featuredArticles.map((a) => (
-                <a
-                  key={a.slug}
-                  href={`/insights/${a.slug}`}
-                  className="group flex flex-col overflow-hidden rounded-lg border border-hairline bg-surface-raised transition-[box-shadow,transform,border-color] duration-[var(--dur-base)] ease-[var(--ease-out)] hover:-translate-y-0.5 hover:border-neutral-300 hover:shadow-[var(--shadow-md)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-                >
-                  <div className="relative aspect-[16/9] w-full overflow-hidden bg-surface">
-                    <Image
-                      src={a.cover}
-                      alt={a.coverAlt}
-                      fill
-                      sizes="(min-width: 1024px) 24rem, (min-width: 640px) 50vw, 100vw"
-                      className="object-cover transition-transform duration-[var(--dur-base)] ease-[var(--ease-out)] group-hover:scale-[1.03]"
-                    />
-                  </div>
-                  <div className="flex flex-1 flex-col gap-3 p-6">
-                    <div className="flex items-center gap-3 text-caption text-muted">
-                      <Badge tone="accent">{a.category.label}</Badge>
-                      <span>{a.readingTime.text}</span>
-                    </div>
-                    <h3 className="text-h4 text-text">{a.title}</h3>
-                    <p className="text-small text-muted measure">{a.excerpt}</p>
-                  </div>
-                </a>
+                <StaggerItem key={a.slug} className="h-full">
+                  <InsightShelfCard
+                    href={`/insights/${a.slug}`}
+                    cover={a.cover}
+                    coverAlt={a.coverAlt}
+                    categoryLabel={a.category.label}
+                    readingTime={a.readingTime.text}
+                    title={a.title}
+                    excerpt={a.excerpt}
+                  />
+                </StaggerItem>
               ))}
             </Grid>
-          </Reveal>
+          </Stagger>
         </Section>
       ) : null}
 
-      {/* Featured report */}
+      {/* Featured report — frosted glass shelf */}
       {featuredReport ? (
         <Section tone="muted">
-          <Reveal>
-            <Card padding="lg" className="overflow-hidden">
+          <FadeIn>
+            <Card
+              padding="lg"
+              className="overflow-hidden border-hairline bg-surface-raised/70 backdrop-blur-md"
+            >
               <div className="grid gap-10 lg:grid-cols-[1fr_minmax(0,20rem)] lg:items-center lg:gap-16">
                 <div className="flex flex-col gap-5">
                   <Eyebrow>
-                    Featured report · {featuredReport.quarter} {featuredReport.year}
+                    Featured report · {featuredReport.quarter}{" "}
+                    {featuredReport.year}
                   </Eyebrow>
                   <h2 className="text-h2 text-text">{featuredReport.title}</h2>
                   <p className="text-body-lg text-muted measure">
@@ -284,7 +301,7 @@ export default function HomePage() {
                     </Button>
                   </div>
                 </div>
-                <div className="relative mx-auto aspect-[3/4] w-full max-w-[18rem] overflow-hidden rounded-lg border border-hairline bg-surface">
+                <div className="relative mx-auto aspect-[3/4] w-full max-w-[18rem] overflow-hidden rounded-lg border border-hairline bg-surface shadow-[var(--shadow-lg)]">
                   <Image
                     src={featuredReport.cover}
                     alt={featuredReport.coverAlt}
@@ -295,30 +312,37 @@ export default function HomePage() {
                 </div>
               </div>
             </Card>
-          </Reveal>
+          </FadeIn>
         </Section>
       ) : null}
 
-      {/* Closing CTA */}
-      <CTABand
-        title="Tell us what you’re planning"
-        description="A short conversation is the fastest way to find out how we can help. Request a free IT assessment and we’ll come back with practical next steps — no obligation."
-        actions={
-          <>
-            <Button href="/contact" size="lg" variant="secondary">
-              Request a Free IT Assessment
-            </Button>
-            <Button
-              href={siteConfig.whatsapp}
-              size="lg"
-              variant="ghost"
-              className="text-neutral-50 hover:bg-white/10"
-            >
-              Chat on WhatsApp
-            </Button>
-          </>
-        }
-      />
+      {/* Closing CTA band over an aurora glow */}
+      <div className="relative overflow-hidden bg-brand">
+        <div className="aurora" aria-hidden="true" />
+        <CTABand
+          className="relative z-10 bg-transparent"
+          tone="inverse"
+          title="Tell us what you’re planning"
+          description="A short conversation is the fastest way to find out how we can help. Request a free IT assessment and we’ll come back with practical next steps — no obligation."
+          actions={
+            <>
+              <Magnetic strength={6}>
+                <Button href="/contact" size="lg" variant="secondary">
+                  Request a Free IT Assessment
+                </Button>
+              </Magnetic>
+              <Button
+                href={siteConfig.whatsapp}
+                size="lg"
+                variant="ghost"
+                className="text-neutral-50 hover:bg-white/10"
+              >
+                Chat on WhatsApp
+              </Button>
+            </>
+          }
+        />
+      </div>
     </>
   );
 }

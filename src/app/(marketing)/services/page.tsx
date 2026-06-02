@@ -8,7 +8,7 @@ import {
   CTABand,
   Button,
 } from "@/components/ui";
-import { Reveal } from "@/components/motion/Reveal";
+import { FadeIn, Stagger, StaggerItem } from "@/components/motion";
 import { services } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -28,40 +28,42 @@ export default function ServicesOverviewPage() {
       </Section>
 
       <Section spacing="sm">
-        <Reveal>
+        <FadeIn>
           <SectionHeading
             as="h1"
             eyebrow="Services"
             title="End-to-end IT, delivered with accountability"
             lede="From the first plan to long-term support, our six service lines cover the full lifecycle of your technology. Engage one or several — the standard of delivery is the same."
           />
-        </Reveal>
+        </FadeIn>
       </Section>
 
       <Section spacing="md">
-        <Reveal>
-          <Grid columns={3} gap="md">
-            {services.map((s) => (
+        <Grid as={Stagger} columns={3} gap="md">
+          {services.map((s) => (
+            <StaggerItem key={s.slug} className="h-full">
               <ServiceCard
-                key={s.slug}
                 href={`/services/${s.slug}`}
                 title={s.title}
                 blurb={s.short}
+                className="h-full"
               />
-            ))}
-          </Grid>
-        </Reveal>
+            </StaggerItem>
+          ))}
+        </Grid>
       </Section>
 
-      <CTABand
-        title="Not sure where to start?"
-        description="Tell us what you’re trying to achieve. We’ll point you to the right service — or design a plan that combines several."
-        actions={
-          <Button href="/contact" size="lg" variant="secondary">
-            Request a Free IT Assessment
-          </Button>
-        }
-      />
+      <FadeIn>
+        <CTABand
+          title="Not sure where to start?"
+          description="Tell us what you’re trying to achieve. We’ll point you to the right service — or design a plan that combines several."
+          actions={
+            <Button href="/contact" size="lg" variant="secondary">
+              Request a Free IT Assessment
+            </Button>
+          }
+        />
+      </FadeIn>
     </>
   );
 }

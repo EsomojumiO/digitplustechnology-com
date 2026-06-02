@@ -8,7 +8,7 @@ import {
   CTABand,
   Button,
 } from "@/components/ui";
-import { Reveal } from "@/components/motion/Reveal";
+import { FadeIn, Stagger, StaggerItem } from "@/components/motion";
 import { industries } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -28,40 +28,42 @@ export default function IndustriesOverviewPage() {
       </Section>
 
       <Section spacing="sm">
-        <Reveal>
+        <FadeIn>
           <SectionHeading
             as="h1"
             eyebrow="Industries"
             title="Built around how your sector works"
             lede="Documentation for government, uptime for banking, reliability for healthcare, budgets for education — every sector has its own demands. We deliver to each."
           />
-        </Reveal>
+        </FadeIn>
       </Section>
 
       <Section spacing="md">
-        <Reveal>
-          <Grid columns={2} gap="md">
-            {industries.map((i) => (
+        <Grid as={Stagger} columns={2} gap="md">
+          {industries.map((i) => (
+            <StaggerItem key={i.slug} className="h-full">
               <IndustryCard
-                key={i.slug}
                 href={`/industries/${i.slug}`}
                 title={i.title}
                 blurb={i.short}
+                className="h-full"
               />
-            ))}
-          </Grid>
-        </Reveal>
+            </StaggerItem>
+          ))}
+        </Grid>
       </Section>
 
-      <CTABand
-        title="Don’t see your sector?"
-        description="We work across many industries. Tell us about your environment and we’ll explain exactly how we’d approach it."
-        actions={
-          <Button href="/contact" size="lg" variant="secondary">
-            Talk to us
-          </Button>
-        }
-      />
+      <FadeIn>
+        <CTABand
+          title="Don’t see your sector?"
+          description="We work across many industries. Tell us about your environment and we’ll explain exactly how we’d approach it."
+          actions={
+            <Button href="/contact" size="lg" variant="secondary">
+              Talk to us
+            </Button>
+          }
+        />
+      </FadeIn>
     </>
   );
 }

@@ -5,12 +5,11 @@ import { notFound } from "next/navigation";
 import {
   Section,
   SectionHeading,
-  Grid,
   Badge,
   Eyebrow,
   Button,
 } from "@/components/ui";
-import { Reveal } from "@/components/motion/Reveal";
+import { FadeIn, Stagger, StaggerItem } from "@/components/motion";
 import {
   getAllArticles,
   getFeaturedArticles,
@@ -81,20 +80,20 @@ export default async function InsightsHubPage({
 
       {/* Intro */}
       <Section spacing="md">
-        <Reveal>
+        <FadeIn>
           <SectionHeading
             as="h1"
             eyebrow="Insights"
             title="Practical thinking for IT decision-makers"
             lede="Strategy, procurement discipline, infrastructure, and managed services — top-of-funnel guidance written for enterprises, government, and institutions. No hype, no product pitch."
           />
-        </Reveal>
+        </FadeIn>
       </Section>
 
       {/* Featured highlight */}
       {featured ? (
         <Section spacing="sm" tone="muted">
-          <Reveal>
+          <FadeIn>
             <Link
               href={`/insights/${featured.slug}`}
               className="group grid items-center gap-8 rounded-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent lg:grid-cols-2 lg:gap-12"
@@ -135,7 +134,7 @@ export default async function InsightsHubPage({
                 </div>
               </div>
             </Link>
-          </Reveal>
+          </FadeIn>
         </Section>
       ) : null}
 
@@ -180,18 +179,17 @@ export default async function InsightsHubPage({
 
         <div id="insights-grid" className="mt-2">
           {pageItems.length > 0 ? (
-            <Reveal>
-              <Grid columns={3} gap="lg">
-                {pageItems.map((article, i) => (
+            <Stagger className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+              {pageItems.map((article, i) => (
+                <StaggerItem key={article.slug} className="h-full">
                   <ArticleCard
-                    key={article.slug}
                     article={article}
                     headingAs="h3"
                     priority={page === 1 && i < 3}
                   />
-                ))}
-              </Grid>
-            </Reveal>
+                </StaggerItem>
+              ))}
+            </Stagger>
           ) : (
             <p className="text-body text-muted">
               No insights published yet. Check back soon.

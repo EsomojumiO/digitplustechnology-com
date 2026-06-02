@@ -6,7 +6,7 @@ import {
   Breadcrumbs,
   Eyebrow,
 } from "@/components/ui";
-import { Reveal } from "@/components/motion/Reveal";
+import { FadeIn } from "@/components/motion";
 import { ContactForm } from "@/components/forms";
 import { siteConfig } from "@/lib/site";
 
@@ -44,26 +44,29 @@ export default function ContactPage() {
       </Section>
 
       <Section spacing="sm">
-        <Reveal>
+        <FadeIn>
           <SectionHeading
             as="h1"
             eyebrow="Contact"
             title="Tell us what you’re planning"
             lede="Share a little about your project, timeline, and the locations involved. We’ll respond with practical next steps — and there’s no obligation."
           />
-        </Reveal>
+        </FadeIn>
       </Section>
 
       <Section spacing="md">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr] lg:gap-16">
           {/* Form */}
-          <Reveal>
+          <FadeIn>
             <ContactForm />
-          </Reveal>
+          </FadeIn>
 
           {/* Direct details */}
-          <Reveal>
-            <Card padding="lg" className="flex flex-col gap-6">
+          <FadeIn delay={0.08}>
+            <Card
+              padding="lg"
+              className="flex flex-col gap-6 lg:sticky lg:top-28"
+            >
               <div>
                 <Eyebrow>Reach us directly</Eyebrow>
                 <p className="text-body text-muted measure mt-3">
@@ -110,7 +113,7 @@ export default function ContactPage() {
                 sell or share them with third parties.
               </p>
             </Card>
-          </Reveal>
+          </FadeIn>
         </div>
       </Section>
     </>

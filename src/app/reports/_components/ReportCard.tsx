@@ -77,7 +77,10 @@ export function ReportCard({
       <Card
         padding="none"
         interactive
-        className={cn("group relative overflow-hidden", className)}
+        className={cn(
+          "group relative overflow-hidden bg-surface-raised/70 backdrop-blur-sm transition-[box-shadow,transform,border-color] duration-[var(--dur-base)] ease-[var(--ease-out)] hover:-translate-y-1 hover:border-accent/40 hover:shadow-[var(--shadow-lg)]",
+          className,
+        )}
       >
         <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
           <Cover
@@ -129,7 +132,10 @@ export function ReportCard({
       as="article"
       padding="none"
       interactive
-      className={cn("group relative flex flex-col overflow-hidden", className)}
+      className={cn(
+        "group relative flex flex-col overflow-hidden bg-surface-raised/70 backdrop-blur-sm transition-[box-shadow,transform,border-color] duration-[var(--dur-base)] ease-[var(--ease-out)] hover:-translate-y-1 hover:border-accent/40 hover:shadow-[var(--shadow-lg)]",
+        className,
+      )}
     >
       <Cover report={report} variant="compact" className="aspect-[16/10]" />
       <div className="flex flex-1 flex-col gap-3 p-6">

@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Grid } from "@/components/ui";
+import { Stagger, StaggerItem } from "@/components/motion";
 import type { ArticleMeta } from "@/lib/content";
 import { ArticleCard } from "./ArticleCard";
 
@@ -102,11 +102,16 @@ export function InsightsSearch({ articles, controlsId }: InsightsSearchProps) {
                 } for “${query.trim()}”.`}
           </p>
           {results.length > 0 ? (
-            <Grid columns={3} gap="lg">
+            <Stagger
+              key={trimmed}
+              className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
+            >
               {results.map((article) => (
-                <ArticleCard key={article.slug} article={article} />
+                <StaggerItem key={article.slug} className="h-full">
+                  <ArticleCard article={article} />
+                </StaggerItem>
               ))}
-            </Grid>
+            </Stagger>
           ) : null}
         </div>
       ) : null}

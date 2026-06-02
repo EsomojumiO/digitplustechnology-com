@@ -11,9 +11,9 @@ import {
   Eyebrow,
   Prose,
 } from "@/components/ui";
-import { Reveal } from "@/components/motion/Reveal";
+import { FadeIn, CountUp } from "@/components/motion";
 import { siteConfig } from "@/lib/site";
-import { stats, whyUs } from "@/data";
+import { whyUs } from "@/data";
 import { JsonLd } from "@/lib/seo/jsonld";
 import { breadcrumbSchema } from "@/lib/seo/schema";
 
@@ -40,19 +40,19 @@ export default function AboutPage() {
       </Section>
 
       <Section spacing="sm">
-        <Reveal>
+        <FadeIn>
           <SectionHeading
             as="h1"
             eyebrow="About us"
             title="A disciplined IT partner, not just a supplier"
             lede="Digitplus Technology Limited exists to take the uncertainty out of IT for Nigerian organisations — by owning the whole journey from plan to support, and doing it with the discipline that serious operations require."
           />
-        </Reveal>
+        </FadeIn>
       </Section>
 
       {/* Story */}
       <Section spacing="md">
-        <Reveal>
+        <FadeIn>
           <Prose>
             <h2>Why we exist</h2>
             <p>
@@ -80,18 +80,18 @@ export default function AboutPage() {
               depend on, year after year.
             </p>
           </Prose>
-        </Reveal>
+        </FadeIn>
       </Section>
 
       {/* Credentials */}
       <Section tone="muted">
-        <Reveal>
+        <FadeIn>
           <SectionHeading
             eyebrow="Credentials"
             title="The foundations behind the work"
           />
-        </Reveal>
-        <Reveal>
+        </FadeIn>
+        <FadeIn>
           <Grid columns={3} gap="md" className="mt-12">
             <Card padding="lg">
               <h3 className="text-h4 text-text">CAC-registered</h3>
@@ -115,28 +115,45 @@ export default function AboutPage() {
               </p>
             </Card>
           </Grid>
-        </Reveal>
+        </FadeIn>
       </Section>
 
       {/* By the numbers */}
       <Section tone="raised">
-        <Reveal>
+        <FadeIn>
           <SectionHeading eyebrow="By the numbers" title="Track record" />
-        </Reveal>
-        <Reveal>
-          <StatGrid items={stats} className="mt-12" />
-        </Reveal>
+        </FadeIn>
+        <FadeIn>
+          <StatGrid
+            className="mt-12"
+            items={[
+              {
+                value: <CountUp value={50} suffix="+" />,
+                label: "Enterprise clients",
+              },
+              {
+                value: <CountUp value={8} suffix="+" />,
+                label: "Years operating",
+              },
+              {
+                value: <CountUp value={6} />,
+                label: "Service lines",
+              },
+              { value: "Abuja", label: "Headquarters" },
+            ]}
+          />
+        </FadeIn>
       </Section>
 
       {/* What sets us apart */}
       <Section>
-        <Reveal>
+        <FadeIn>
           <SectionHeading
             eyebrow="What sets us apart"
             title="Four commitments we hold to"
           />
-        </Reveal>
-        <Reveal>
+        </FadeIn>
+        <FadeIn>
           <Grid columns={2} gap="lg" className="mt-12">
             {whyUs.map((pillar) => (
               <Card key={pillar.title} padding="lg">
@@ -147,12 +164,12 @@ export default function AboutPage() {
               </Card>
             ))}
           </Grid>
-        </Reveal>
+        </FadeIn>
       </Section>
 
       {/* Trust / compliance statement */}
       <Section tone="inverse" spacing="lg">
-        <Reveal className="mx-auto max-w-3xl text-center">
+        <FadeIn className="mx-auto max-w-3xl text-center">
           <Eyebrow className="text-neutral-400">Our commitment</Eyebrow>
           <p className="text-h3 mt-6 font-medium tracking-tight text-neutral-50">
             We treat your procurement, your data, and your operations with the
@@ -160,7 +177,7 @@ export default function AboutPage() {
             transparent records, and a privacy-first stance on the information
             you share with us.
           </p>
-        </Reveal>
+        </FadeIn>
       </Section>
 
       <CTABand

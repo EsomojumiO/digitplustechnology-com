@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Section, SectionHeading, Card } from "@/components/ui";
-import { Reveal } from "@/components/motion/Reveal";
+import { FadeIn, Stagger, StaggerItem } from "@/components/motion";
 import { NewsletterForm } from "@/components/forms";
 import { getAllReports, getFeaturedReport } from "@/lib/content";
 import { siteConfig } from "@/lib/site";
@@ -39,19 +39,21 @@ export default function ReportsHubPage() {
   return (
     <>
       <Section spacing="lg" className="pb-12 sm:pb-16">
-        <SectionHeading
-          as="h1"
-          eyebrow="Research"
-          title="Quarterly reports"
-          lede="Independent, data-led research on the cost and shape of enterprise IT in Nigeria — written to be read, cited, and acted on. Every report opens with public findings; the full analysis is a free download."
-        />
+        <FadeIn>
+          <SectionHeading
+            as="h1"
+            eyebrow="Research"
+            title="Quarterly reports"
+            lede="Independent, data-led research on the cost and shape of enterprise IT in Nigeria — written to be read, cited, and acted on. Every report opens with public findings; the full analysis is a free download."
+          />
+        </FadeIn>
       </Section>
 
       {featured ? (
         <Section spacing="sm" className="pt-0">
-          <Reveal>
+          <FadeIn>
             <ReportCard report={featured} variant="feature" headingLevel="h2" />
-          </Reveal>
+          </FadeIn>
         </Section>
       ) : null}
 
@@ -63,13 +65,13 @@ export default function ReportsHubPage() {
             lede="Past editions remain available in full — track how the numbers have moved quarter on quarter."
             className="mb-10 sm:mb-12"
           />
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {archive.map((report, i) => (
-              <Reveal key={report.slug} delay={i * 60}>
+          <Stagger className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {archive.map((report) => (
+              <StaggerItem key={report.slug} className="h-full">
                 <ReportCard report={report} className="h-full" />
-              </Reveal>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </Section>
       ) : null}
 

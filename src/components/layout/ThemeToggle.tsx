@@ -22,7 +22,7 @@ function useIsDark(): boolean {
       };
     },
     () => document.documentElement.classList.contains("dark"),
-    () => false,
+    () => true, // dark is the default/showcase theme
   );
 }
 

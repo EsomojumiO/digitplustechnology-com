@@ -10,6 +10,7 @@ import {
   Prose,
   Eyebrow,
 } from "@/components/ui";
+import { FadeIn } from "@/components/motion";
 import { ReportGateForm } from "@/components/forms";
 import {
   getAllReports,
@@ -107,7 +108,7 @@ export default async function ReportLandingPage({
         />
 
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-14">
-          <div className="flex flex-col gap-5">
+          <FadeIn className="flex flex-col gap-5">
             <div className="flex flex-wrap items-center gap-2.5">
               {period ? <Badge tone="accent">{period}</Badge> : null}
               <Badge tone="neutral">Quarterly report</Badge>
@@ -119,10 +120,13 @@ export default async function ReportLandingPage({
             <p className="text-small text-muted">
               Published {publishedLabel} · Digitplus Technology
             </p>
-          </div>
+          </FadeIn>
 
           {/* Cover — neutral surface fallback when the asset is absent. */}
-          <div className="relative order-first aspect-[3/4] overflow-hidden rounded-lg bg-surface ring-1 ring-hairline ring-inset lg:order-none">
+          <FadeIn
+            delay={0.08}
+            className="relative order-first aspect-[3/4] overflow-hidden rounded-lg bg-surface ring-1 ring-hairline ring-inset lg:order-none"
+          >
             {report.cover ? (
               <Image
                 src={report.cover}
@@ -133,13 +137,13 @@ export default async function ReportLandingPage({
                 className="object-cover"
               />
             ) : null}
-          </div>
+          </FadeIn>
         </div>
       </Section>
 
       {report.keyFindings.length > 0 ? (
         <Section tone="muted" spacing="md">
-          <div className="flex flex-col gap-8 lg:max-w-3xl">
+          <FadeIn className="flex flex-col gap-8 lg:max-w-3xl">
             <div className="flex flex-col gap-3">
               <Eyebrow>Key findings</Eyebrow>
               <h2 className="text-h2 text-balance text-text">
@@ -162,16 +166,18 @@ export default async function ReportLandingPage({
                 </li>
               ))}
             </ul>
-          </div>
+          </FadeIn>
         </Section>
       ) : null}
 
       {report.body.trim() ? (
         <Section spacing="md">
           <Container width="narrow" className="px-0">
-            <Prose>
-              <MDXContent source={report.body} />
-            </Prose>
+            <FadeIn>
+              <Prose>
+                <MDXContent source={report.body} />
+              </Prose>
+            </FadeIn>
           </Container>
         </Section>
       ) : null}

@@ -3,13 +3,13 @@ import {
   Section,
   SectionHeading,
   Breadcrumbs,
-  ProcessStep,
   CTABand,
   Button,
   Eyebrow,
 } from "@/components/ui";
-import { Reveal } from "@/components/motion/Reveal";
+import { FadeIn } from "@/components/motion";
 import { processSteps } from "@/data/process";
+import { ProcessTimeline } from "./_components/ProcessTimeline";
 
 export const metadata: Metadata = {
   title: "Our Approach — A Clear, Documented IT Delivery Process | Digitplus",
@@ -28,44 +28,31 @@ export default function ApproachPage() {
       </Section>
 
       <Section spacing="sm">
-        <Reveal>
+        <FadeIn>
           <SectionHeading
             as="h1"
             eyebrow="How we work"
             title="One disciplined process, every time"
             lede="Good IT outcomes are not luck — they’re the result of a repeatable process. We run the same six steps on every engagement, with documentation and accountability throughout."
           />
-        </Reveal>
+        </FadeIn>
       </Section>
 
-      {/* Vertical stepper */}
+      {/* Signature: the six-step delivery process as a scroll-revealed timeline */}
       <Section spacing="md">
-        <Reveal>
-          <ol className="relative flex flex-col gap-12 border-l border-hairline pl-0 sm:pl-2">
-            {processSteps.map((step) => (
-              <li key={step.step} className="relative">
-                <ProcessStep
-                  step={step.step}
-                  title={step.title}
-                  description={step.description}
-                  className="pl-6"
-                />
-              </li>
-            ))}
-          </ol>
-        </Reveal>
+        <ProcessTimeline steps={processSteps} />
       </Section>
 
       {/* Principle */}
       <Section tone="inverse" spacing="lg">
-        <Reveal className="mx-auto max-w-3xl text-center">
+        <FadeIn className="mx-auto max-w-3xl text-center">
           <Eyebrow className="text-neutral-400">The point of process</Eyebrow>
           <p className="text-h3 mt-6 font-medium tracking-tight text-neutral-50">
             Every step exists to remove a way projects usually go wrong. The
             result is fewer surprises, a clean paper trail, and technology that
             works on the day you need it to.
           </p>
-        </Reveal>
+        </FadeIn>
       </Section>
 
       <CTABand

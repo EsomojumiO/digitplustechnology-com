@@ -5,7 +5,6 @@ import { notFound } from "next/navigation";
 import {
   Section,
   Container,
-  Grid,
   Badge,
   Prose,
   Breadcrumbs,
@@ -13,7 +12,7 @@ import {
   CTABand,
   Button,
 } from "@/components/ui";
-import { Reveal } from "@/components/motion/Reveal";
+import { FadeIn, Stagger, StaggerItem } from "@/components/motion";
 import {
   getAllArticles,
   getArticleBySlug,
@@ -149,7 +148,7 @@ export default async function ArticlePage({
       {/* Article header */}
       <Section spacing="sm" contained={false}>
         <Container width="narrow">
-          <Reveal className="flex flex-col gap-5">
+          <FadeIn className="flex flex-col gap-5">
             <div>
               <Link
                 href={`/insights/category/${article.category.slug}`}
@@ -191,14 +190,14 @@ export default async function ArticlePage({
                 </>
               ) : null}
             </div>
-          </Reveal>
+          </FadeIn>
         </Container>
       </Section>
 
       {/* Featured image — fixed frame, neutral fallback for layout stability */}
       <Section spacing="sm" contained={false}>
         <Container width="wide">
-          <Reveal>
+          <FadeIn>
             <div className="relative aspect-[16/9] w-full overflow-hidden rounded-xl border border-hairline bg-surface">
               <Image
                 src={article.cover}
@@ -209,17 +208,19 @@ export default async function ArticlePage({
                 className="object-cover"
               />
             </div>
-          </Reveal>
+          </FadeIn>
         </Container>
       </Section>
 
       {/* Body */}
       <Section spacing="sm" contained={false}>
         <Container width="narrow">
-          <Prose as="article">
-            {/* Prose styles MDX elements incl. blockquotes (pull-quote treatment). */}
-            <MDXContent source={article.body} />
-          </Prose>
+          <FadeIn>
+            <Prose as="article">
+              {/* Prose styles MDX elements incl. blockquotes (pull-quote treatment). */}
+              <MDXContent source={article.body} />
+            </Prose>
+          </FadeIn>
 
           {/* Tags + share */}
           <div className="mt-12 flex flex-col gap-6 border-t border-hairline pt-8">
@@ -252,19 +253,19 @@ export default async function ArticlePage({
       {/* Related articles */}
       {related.length > 0 ? (
         <Section tone="muted">
-          <Reveal>
+          <FadeIn>
             <SectionHeading
               eyebrow="Keep reading"
               title="Related insights"
             />
-          </Reveal>
-          <Reveal>
-            <Grid columns={3} gap="lg" className="mt-12">
-              {related.map((r) => (
-                <ArticleCard key={r.slug} article={r} headingAs="h3" />
-              ))}
-            </Grid>
-          </Reveal>
+          </FadeIn>
+          <Stagger className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {related.map((r) => (
+              <StaggerItem key={r.slug} className="h-full">
+                <ArticleCard article={r} headingAs="h3" />
+              </StaggerItem>
+            ))}
+          </Stagger>
         </Section>
       ) : null}
 

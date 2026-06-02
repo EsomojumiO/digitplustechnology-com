@@ -36,9 +36,9 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
-// Set the theme class before paint to avoid a flash. Light is the default; dark
-// is applied only when explicitly chosen (persisted in localStorage).
-const themeInitScript = `(function(){try{var t=localStorage.getItem('dpt-theme');if(t==='dark'){document.documentElement.classList.add('dark');}}catch(e){}})();`;
+// Set the theme class before paint to avoid a flash. DARK is the default/showcase;
+// light is applied only when explicitly chosen (persisted in localStorage).
+const themeInitScript = `(function(){try{var t=localStorage.getItem('dpt-theme');if(t==='light'){document.documentElement.classList.remove('dark');}else{document.documentElement.classList.add('dark');}}catch(e){document.documentElement.classList.add('dark');}})();`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),

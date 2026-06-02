@@ -440,6 +440,37 @@
     }
   }
 
+  /* Marquee — seamless horizontal loop (two duplicated tracks). */
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+
+  /* Route entrance — plays on each navigation (template.tsx). Resting state is
+     fully visible, so content is never hidden without JS / for crawlers. */
+  @keyframes route-enter {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .route-enter {
+    animation: route-enter var(--dur-slow) var(--ease-out) both;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .route-enter {
+      animation: none;
+    }
+  }
+
   /* Optimal reading measure ~65ch */
   .measure {
     max-width: 65ch;

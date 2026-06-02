@@ -12,7 +12,7 @@ import {
   CTABand,
   Eyebrow,
 } from "@/components/ui";
-import { Reveal } from "@/components/motion/Reveal";
+import { FadeIn, Stagger, StaggerItem } from "@/components/motion";
 import { industries, services } from "@/lib/site";
 import { getIndustryContent } from "@/data/industries";
 import { JsonLd } from "@/lib/seo/jsonld";
@@ -75,71 +75,77 @@ export default async function IndustryDetailPage({
       </Section>
 
       {/* Intro */}
-      <Section spacing="sm">
-        <Reveal className="flex flex-col gap-6">
-          <Eyebrow>Industry</Eyebrow>
-          <h1 className="text-h1 text-text">{content.title}</h1>
-          <div className="flex flex-col gap-5">
+      <Section spacing="md">
+        <Stagger className="flex max-w-3xl flex-col gap-6">
+          <StaggerItem>
+            <Eyebrow>Industry</Eyebrow>
+          </StaggerItem>
+          <StaggerItem>
+            <h1 className="text-display text-text text-balance">
+              {content.title}
+            </h1>
+          </StaggerItem>
+          <StaggerItem className="flex flex-col gap-5">
             {content.intro.map((para, i) => (
               <p key={i} className="text-body-lg text-muted measure">
                 {para}
               </p>
             ))}
-          </div>
-          <div className="mt-2 flex flex-wrap gap-3">
+          </StaggerItem>
+          <StaggerItem className="mt-2 flex flex-wrap gap-3">
             <Button href="/contact" size="lg">
               Request a Free IT Assessment
             </Button>
             <Button href="/industries" size="lg" variant="secondary">
               All industries
             </Button>
-          </div>
-        </Reveal>
+          </StaggerItem>
+        </Stagger>
       </Section>
 
       {/* Concerns we address */}
       <Section tone="muted">
-        <Reveal>
+        <FadeIn>
           <SectionHeading
             eyebrow="What we address"
             title={`What ${content.title.toLowerCase()} demands`}
             lede="The concerns we hear most in this sector — and how we meet them."
           />
-        </Reveal>
-        <Reveal>
-          <Grid columns={2} gap="md" className="mt-12">
-            {content.concerns.map((item) => (
-              <Card key={item.title} padding="lg">
+        </FadeIn>
+        <Grid as={Stagger} columns={2} gap="md" className="mt-12">
+          {content.concerns.map((item) => (
+            <StaggerItem key={item.title} className="h-full">
+              <Card padding="lg" className="h-full">
                 <h3 className="text-h4 text-text">{item.title}</h3>
                 <p className="text-body text-muted measure mt-3">{item.desc}</p>
               </Card>
-            ))}
-          </Grid>
-        </Reveal>
+            </StaggerItem>
+          ))}
+        </Grid>
       </Section>
 
       {/* Relevant services */}
       {relatedServices.length > 0 ? (
         <Section>
-          <Reveal>
+          <FadeIn>
             <SectionHeading
               eyebrow="How we help"
               title="Relevant services"
               lede="The service lines we most often bring to this sector."
             />
-          </Reveal>
-          <Reveal>
-            <Grid columns={2} gap="md" className="mt-12">
-              {relatedServices.map((s) => (
+          </FadeIn>
+          <Grid as={Stagger} columns={2} gap="md" className="mt-12">
+            {relatedServices.map((s) => (
+              <StaggerItem key={s.slug} className="h-full">
                 <ServiceCard
-                  key={s.slug}
                   href={`/services/${s.slug}`}
                   title={s.title}
                   blurb={s.short}
+                  className="h-full"
                 />
-              ))}
-            </Grid>
-          </Reveal>
+              </StaggerItem>
+            ))}
+          </Grid>
         </Section>
       ) : null}
 
@@ -147,34 +153,36 @@ export default async function IndustryDetailPage({
       {content.faqs && content.faqs.length > 0 ? (
         <Section tone="muted">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,20rem)_1fr] lg:gap-16">
-            <Reveal>
+            <FadeIn>
               <SectionHeading
                 eyebrow="FAQ"
                 title="Questions, answered"
                 className="lg:sticky lg:top-28"
               />
-            </Reveal>
-            <Reveal>
+            </FadeIn>
+            <FadeIn>
               <FAQ
                 items={content.faqs.map((f) => ({
                   question: f.q,
                   answer: f.a,
                 }))}
               />
-            </Reveal>
+            </FadeIn>
           </div>
         </Section>
       ) : null}
 
-      <CTABand
-        title={`IT for ${content.title.toLowerCase()}, done right`}
-        description="Tell us about your environment and what you’re planning. We’ll explain exactly how we’d approach it — no obligation."
-        actions={
-          <Button href="/contact" size="lg" variant="secondary">
-            Request a Free IT Assessment
-          </Button>
-        }
-      />
+      <FadeIn>
+        <CTABand
+          title={`IT for ${content.title.toLowerCase()}, done right`}
+          description="Tell us about your environment and what you’re planning. We’ll explain exactly how we’d approach it — no obligation."
+          actions={
+            <Button href="/contact" size="lg" variant="secondary">
+              Request a Free IT Assessment
+            </Button>
+          }
+        />
+      </FadeIn>
     </>
   );
 }

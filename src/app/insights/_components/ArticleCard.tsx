@@ -31,7 +31,7 @@ export function ArticleCard({
       as="article"
       padding="none"
       interactive
-      className="group flex flex-col overflow-hidden"
+      className="group flex flex-col overflow-hidden bg-surface-raised/70 backdrop-blur-sm transition-[box-shadow,transform,border-color] duration-[var(--dur-base)] ease-[var(--ease-out)] hover:-translate-y-1 hover:border-accent/40 hover:shadow-[var(--shadow-lg)]"
     >
       <Link
         href={href}
