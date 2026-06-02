@@ -13,7 +13,7 @@ import { siteConfig } from "@/lib/site";
 import { locations } from "@/data/locations";
 
 export const metadata: Metadata = {
-  title: "Our Locations — Abuja, Lagos & Port Harcourt | Digitplus Technology",
+  title: "Our Locations — Abuja, Lagos & Port Harcourt",
   description:
     "Digitplus Technology Limited is headquartered in Abuja with delivery hubs in Lagos and Port Harcourt, and nationwide coverage on request across Nigeria.",
   alternates: { canonical: "/locations" },

@@ -10,7 +10,7 @@ import {
 import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Digitplus Technology",
+  title: "Privacy Policy",
   description:
     "How Digitplus Technology Limited collects, uses, and protects your information. A privacy-first policy: minimal data, no selling of data, and clear contact for data requests.",
   alternates: { canonical: "/privacy" },

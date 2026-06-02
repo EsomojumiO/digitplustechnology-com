@@ -29,7 +29,7 @@ export const siteConfig = {
   shortName: "Digitplus",
   url: "https://digitplustechnology.com",
   description:
-    "Digitplus Technology Limited is a Nigerian B2B IT solutions partner — end-to-end IT procurement, hardware supply, infrastructure, and managed services for enterprises, government, and institutions. Abuja HQ, nationwide delivery.",
+    "Digitplus Technology Limited is a B2B IT solutions company in Nigeria. We deliver IT procurement, hardware supply, infrastructure, and managed IT services for enterprises, government, banks, hospitals, and schools. Abuja HQ; delivery in Lagos and Port Harcourt.",
   tagline: "Plan. Procure. Deploy. Manage.",
   email: "hello@digitplustechnology.com",
   phone: "+234 803 786 8120",
@@ -54,37 +54,37 @@ export const services = [
     slug: "it-procurement",
     title: "IT Procurement",
     short:
-      "Documented, accountable sourcing of hardware and software — LPO support across multiple sites.",
+      "Documented IT procurement in Nigeria — hardware and software sourcing with LPO support across multiple sites.",
   },
   {
     slug: "hardware-supply",
     title: "Hardware Supply",
     short:
-      "Servers, workstations, networking, and peripherals from authorized channels, with warranties.",
+      "Genuine servers, workstations, and networking from authorised channels — hardware supply with valid warranties.",
   },
   {
     slug: "infrastructure-solutions",
     title: "Infrastructure Solutions",
     short:
-      "Structured cabling, LAN/WAN, server rooms, and UPS/power — built to last.",
+      "Structured cabling, network installation, server room setup, and UPS/power — built to last.",
   },
   {
     slug: "managed-services",
     title: "Managed Services",
     short:
-      "Remote and on-site support, monitoring, and SLAs that keep operations running.",
+      "Managed IT services in Nigeria — remote and on-site support, monitoring, and SLAs that keep operations running.",
   },
   {
     slug: "technology-advisory",
     title: "Technology Advisory",
     short:
-      "IT strategy, budgeting, vendor selection, and multi-year roadmaps for decision-makers.",
+      "IT strategy, budgeting, vendor selection, and multi-year roadmaps for decision-makers and procurement teams.",
   },
   {
     slug: "deployment-implementation",
     title: "Deployment & Implementation",
     short:
-      "Installation, configuration, testing, and training — handover done right.",
+      "Installation, configuration, testing, and staff training — IT deployment and handover done right.",
   },
 ] as const satisfies readonly ServiceSummary[];
 
@@ -104,19 +104,19 @@ export const industries = [
     slug: "government",
     title: "Government",
     short:
-      "Documented procurement, LPO support, and audit-ready compliance for the public sector.",
+      "Government IT procurement — documented sourcing, LPO support, and audit-ready records for the public sector.",
   },
   {
     slug: "banking-financial-services",
     title: "Banking & Financial Services",
     short:
-      "Branch infrastructure, vendor accountability, and compliance-aligned delivery.",
+      "Bank branch IT infrastructure, vendor accountability, and compliance-aligned delivery.",
   },
   {
     slug: "enterprise",
     title: "Enterprise",
     short:
-      "Multi-site infrastructure, SLAs, and a single accountable IT partner.",
+      "Multi-site IT infrastructure, SLAs, and enterprise IT support from one accountable partner.",
   },
   {
     slug: "sme",
@@ -128,7 +128,7 @@ export const industries = [
     slug: "healthcare",
     title: "Healthcare",
     short:
-      "Reliable, high-uptime infrastructure for hospitals and clinics.",
+      "Reliable, high-uptime IT infrastructure and support for hospitals and clinics.",
   },
   {
     slug: "education",

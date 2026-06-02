@@ -12,7 +12,7 @@ import { processSteps } from "@/data/process";
 import { ProcessTimeline } from "./_components/ProcessTimeline";
 
 export const metadata: Metadata = {
-  title: "Our Approach — A Clear, Documented IT Delivery Process | Digitplus",
+  title: "Our Approach — A Clear, Documented IT Delivery Process",
   description:
     "How Digitplus delivers IT: a six-step process from discovery and design through procurement, deployment, testing, and ongoing support — documented and accountable at every step.",
   alternates: { canonical: "/approach" },
@@ -57,10 +57,10 @@ export default function ApproachPage() {
 
       <CTABand
         title="Start with discovery"
-        description="The first step costs you nothing but a conversation. Request a free IT assessment and we’ll begin understanding what you actually need."
+        description="The first step costs you nothing but a conversation. Book a discovery call and we’ll begin understanding what you actually need."
         actions={
           <Button href="/contact" size="lg" variant="secondary">
-            Request a Free IT Assessment
+            Start with a discovery call
           </Button>
         }
       />

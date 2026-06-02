@@ -10,7 +10,7 @@ import {
 import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Terms of Use | Digitplus Technology",
+  title: "Terms of Use",
   description:
     "The terms governing use of the Digitplus Technology Limited website, including acceptable use, intellectual property, and limitations of liability.",
   alternates: { canonical: "/terms" },

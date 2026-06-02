@@ -275,10 +275,10 @@ export default async function ArticlePage({
         actions={
           <>
             <Button href="/contact" size="lg" variant="secondary">
-              Request a Free IT Assessment
+              Book a Consultation
             </Button>
             <Button href={hub.href} size="lg" variant="ghost">
-              Explore {hub.label}
+              Read our insights
             </Button>
           </>
         }

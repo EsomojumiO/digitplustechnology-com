@@ -11,9 +11,9 @@ export const servicesContent: Record<ServiceSlug, ServiceContent> = {
   "it-procurement": {
     slug: "it-procurement",
     title: "IT Procurement",
-    tagline: "Documented, accountable sourcing — from requisition to delivery.",
+    tagline: "Documented IT procurement in Nigeria — from requisition to delivery.",
     intro: [
-      "IT procurement is where most projects quietly go wrong: untraceable quotes, grey-market hardware, mismatched specifications, and paperwork that fails an audit. Digitplus runs procurement as a disciplined, documented process so every purchase is justified, sourced from authorised channels, and traceable end to end.",
+      "IT procurement is where most projects quietly go wrong: untraceable quotes, grey-market hardware, mismatched specifications, and paperwork that fails an audit. As an IT procurement company in Nigeria, Digitplus runs sourcing as a disciplined, documented process so every purchase is justified, sourced from authorised channels, and traceable end to end.",
       "We handle hardware and software sourcing for single offices and multi-site rollouts alike, working within your budget cycle, approval chain, and Local Purchase Order (LPO) requirements. You get a single accountable partner instead of a scatter of vendors — and a paper trail that stands up to scrutiny.",
     ],
     whatsIncluded: [
@@ -57,7 +57,7 @@ export const servicesContent: Record<ServiceSlug, ServiceContent> = {
         a: "Always. We source through authorised distribution channels, so hardware arrives with valid manufacturer warranties and verifiable provenance. We do not deal in grey-market stock.",
       },
       {
-        q: "Can you handle procurement for multiple locations at once?",
+        q: "Can you handle IT procurement for multiple locations in Nigeria at once?",
         a: "Yes. We routinely consolidate orders and coordinate staged delivery across Abuja, Lagos, Port Harcourt, and other sites, keeping a single, auditable record for the whole programme.",
       },
       {
@@ -69,7 +69,7 @@ export const servicesContent: Record<ServiceSlug, ServiceContent> = {
         a: "We start with your actual requirement, not a product list. If specification is unclear, our advisory team helps you right-size before any money is committed.",
       },
     ],
-    metaTitle: "IT Procurement Services in Nigeria | Digitplus Technology",
+    metaTitle: "IT Procurement Services in Nigeria",
     metaDescription:
       "Documented, audit-ready IT procurement for enterprises, government, and institutions. Authorised-channel hardware and software, LPO support, and multi-site coordination.",
   },
@@ -77,9 +77,9 @@ export const servicesContent: Record<ServiceSlug, ServiceContent> = {
   "hardware-supply": {
     slug: "hardware-supply",
     title: "Hardware Supply",
-    tagline: "Genuine equipment from authorised channels, with real warranties.",
+    tagline: "Genuine hardware supply in Nigeria — authorised channels, real warranties.",
     intro: [
-      "The hardware you deploy today sets your reliability and support costs for years. Digitplus supplies servers, workstations, networking, and peripherals sourced exclusively through authorised distribution — equipment that arrives genuine, correctly specified, and covered by valid manufacturer warranties.",
+      "The hardware you deploy today sets your reliability and support costs for years. Digitplus is a hardware supply company in Nigeria: we supply servers, workstations, networking, and peripherals sourced exclusively through authorised distribution — equipment that arrives genuine, correctly specified, and covered by valid manufacturer warranties.",
       "We help you standardise on the right platforms, avoid over- and under-specifying, and plan refresh cycles that fit your budget. Whether you need a single server room build or a fleet of workstations across several sites, you get equipment chosen for fitness, not just price.",
     ],
     whatsIncluded: [
@@ -119,7 +119,7 @@ export const servicesContent: Record<ServiceSlug, ServiceContent> = {
         a: "Yes. We supply only through authorised distribution, so equipment is genuine and arrives with valid manufacturer warranties you can verify.",
       },
       {
-        q: "Which brands do you supply?",
+        q: "Which hardware brands do you supply in Nigeria?",
         a: "We work across established enterprise vendors — including HP, Dell, Lenovo, Cisco, and Fortinet — and recommend based on fit for your environment rather than pushing a single brand.",
       },
       {
@@ -131,7 +131,7 @@ export const servicesContent: Record<ServiceSlug, ServiceContent> = {
         a: "Yes. We can arrange extended manufacturer cover and pair hardware with our managed-services SLAs so support is in place from day one.",
       },
     ],
-    metaTitle: "Hardware Supply: Servers, Workstations & Networking | Digitplus",
+    metaTitle: "IT Hardware Supply in Nigeria — Servers & Networking",
     metaDescription:
       "Genuine, warrantied IT hardware from authorised channels — servers, workstations, networking, and peripherals — specified, supplied, and lifecycle-managed across Nigeria.",
   },
@@ -139,10 +139,10 @@ export const servicesContent: Record<ServiceSlug, ServiceContent> = {
   "infrastructure-solutions": {
     slug: "infrastructure-solutions",
     title: "Infrastructure Solutions",
-    tagline: "The physical foundations of reliable operations — built to last.",
+    tagline: "Structured cabling, network installation, and server room setup — built to last.",
     intro: [
-      "Reliable IT starts with reliable infrastructure: clean cabling, well-designed networks, properly conditioned server rooms, and power that holds. Get these wrong and you inherit years of intermittent faults that are expensive to diagnose. Digitplus designs and builds infrastructure to standard, the first time.",
-      "We deliver structured cabling, LAN/WAN connectivity, server-room fit-outs, and UPS/power systems as a coordinated whole — so your network, environment, and power work together rather than fighting each other. Every build is documented and labelled for the people who will support it later.",
+      "Reliable IT starts with reliable infrastructure: clean cabling, well-designed networks, properly conditioned server rooms, and power that holds. Get these wrong and you inherit years of intermittent faults that are expensive to diagnose. As an IT infrastructure company working across Abuja, Lagos, and Port Harcourt, Digitplus designs and builds infrastructure to standard, the first time.",
+      "We deliver structured cabling, LAN/WAN network installation, server room setup, and UPS/power systems as a coordinated whole — so your network, environment, and power work together rather than fighting each other. Every build is documented and labelled for the people who will support it later.",
     ],
     whatsIncluded: [
       {
@@ -177,7 +177,7 @@ export const servicesContent: Record<ServiceSlug, ServiceContent> = {
     ],
     faqs: [
       {
-        q: "Do you test and certify cabling?",
+        q: "Do you test and certify structured cabling?",
         a: "Yes. We test and certify every run, label both ends, and hand over the results as part of the as-built documentation, so faults are quick to trace later.",
       },
       {
@@ -193,7 +193,7 @@ export const servicesContent: Record<ServiceSlug, ServiceContent> = {
         a: "We design with headroom and clear documentation so adding floors, branches, or capacity later is straightforward rather than a rebuild.",
       },
     ],
-    metaTitle: "IT Infrastructure Solutions: Cabling, Networks & Power | Digitplus",
+    metaTitle: "IT Infrastructure Company in Nigeria — Cabling & Networks",
     metaDescription:
       "Structured cabling, LAN/WAN, server rooms, and UPS/power — designed and built to standard, tested, and documented for long-term reliability across Nigeria.",
   },
@@ -201,9 +201,9 @@ export const servicesContent: Record<ServiceSlug, ServiceContent> = {
   "managed-services": {
     slug: "managed-services",
     title: "Managed Services",
-    tagline: "Support and monitoring that keep operations running.",
+    tagline: "Managed IT services in Nigeria — support and monitoring that keep operations running.",
     intro: [
-      "Most organisations do not need more IT staff — they need their IT to simply work, with someone accountable when it does not. Digitplus managed services give you that: proactive monitoring, responsive remote and on-site support, and SLAs that put commitments in writing.",
+      "Most organisations do not need more IT staff — they need their IT to simply work, with someone accountable when it does not. Our managed IT services in Nigeria give you that: proactive monitoring, responsive remote and on-site support, and SLAs that put commitments in writing.",
       "We become the dependable extension of your team, watching the systems that matter, resolving issues before they spread, and reporting clearly on what we are doing. The result is fewer surprises, predictable costs, and time back for your people to focus on the business.",
     ],
     whatsIncluded: [
@@ -243,7 +243,7 @@ export const servicesContent: Record<ServiceSlug, ServiceContent> = {
         a: "Defined response and resolution targets for different issue priorities, the scope of what is covered, and regular reporting against those targets. It is written down, so expectations are clear on both sides.",
       },
       {
-        q: "Do you support multiple locations?",
+        q: "Do you provide managed IT support across multiple locations in Nigeria?",
         a: "Yes. We deliver remote support nationwide and on-site support across Abuja, Lagos, Port Harcourt, and other agreed locations.",
       },
       {
@@ -255,7 +255,7 @@ export const servicesContent: Record<ServiceSlug, ServiceContent> = {
         a: "Typically servers, networks, internet links, and the business-critical services you depend on. We tailor monitoring to your environment so alerts are meaningful, not noise.",
       },
     ],
-    metaTitle: "Managed IT Services & Support with SLAs | Digitplus Technology",
+    metaTitle: "Managed IT Services & Support with SLAs",
     metaDescription:
       "Proactive monitoring, remote and on-site support, and clear SLAs that keep your operations running. Managed IT services for organisations across Nigeria.",
   },
@@ -317,7 +317,7 @@ export const servicesContent: Record<ServiceSlug, ServiceContent> = {
         a: "It depends on scope. A focused vendor selection can be a couple of weeks; a full strategy and multi-year roadmap takes longer. We agree timeframes up front.",
       },
     ],
-    metaTitle: "IT Strategy & Technology Advisory Services | Digitplus Technology",
+    metaTitle: "IT Strategy & Technology Advisory Services",
     metaDescription:
       "Vendor-neutral IT strategy, budgeting, vendor selection, and multi-year roadmaps for decision-makers. Practical advisory from a partner who also delivers.",
   },
@@ -327,7 +327,7 @@ export const servicesContent: Record<ServiceSlug, ServiceContent> = {
     title: "Deployment & Implementation",
     tagline: "From delivered boxes to working systems — handover done right.",
     intro: [
-      "Hardware on a loading dock is not a working system. The gap between the two is deployment — and it is where rushed projects fail. Digitplus handles installation, configuration, testing, and user training as a managed process, so what you bought actually works and your people can use it.",
+      "Hardware on a loading dock is not a working system. The gap between the two is deployment — and it is where rushed projects fail. Digitplus handles IT deployment and implementation in Nigeria as a managed process — installation, configuration, testing, and user training — so what you bought actually works and your people can use it.",
       "We plan rollouts around your operations, configure to agreed standards, test against clear acceptance criteria, and only sign off when everything works as intended. You get a clean, documented handover and users who are ready on day one — not weeks of teething problems.",
     ],
     whatsIncluded: [
@@ -379,7 +379,7 @@ export const servicesContent: Record<ServiceSlug, ServiceContent> = {
         a: "Yes. We coordinate multi-site rollouts with consistent configuration and a single plan, so every location ends up at the same standard.",
       },
     ],
-    metaTitle: "IT Deployment & Implementation Services | Digitplus Technology",
+    metaTitle: "IT Deployment & Implementation Services",
     metaDescription:
       "Installation, configuration, testing, and user training delivered as a managed process. Clean, documented IT deployment and implementation across Nigeria.",
   },

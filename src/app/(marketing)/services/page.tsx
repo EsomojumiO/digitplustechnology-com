@@ -12,9 +12,9 @@ import { FadeIn, Stagger, StaggerItem } from "@/components/motion";
 import { services } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "IT Services — Procurement, Infrastructure & Managed Services | Digitplus",
+  title: "IT Services in Nigeria — Procurement & Managed IT",
   description:
-    "Six end-to-end IT service lines for organisations across Nigeria: procurement, hardware supply, infrastructure, managed services, technology advisory, and deployment.",
+    "Six IT service lines for organisations across Nigeria: IT procurement, hardware supply, infrastructure, managed IT services, technology advisory, and deployment. Get a quote.",
   alternates: { canonical: "/services" },
 };
 
@@ -32,7 +32,7 @@ export default function ServicesOverviewPage() {
           <SectionHeading
             as="h1"
             eyebrow="Services"
-            title="End-to-end IT, delivered with accountability"
+            title="IT solutions in Nigeria, delivered with accountability"
             lede="From the first plan to long-term support, our six service lines cover the full lifecycle of your technology. Engage one or several — the standard of delivery is the same."
           />
         </FadeIn>
@@ -59,7 +59,7 @@ export default function ServicesOverviewPage() {
           description="Tell us what you’re trying to achieve. We’ll point you to the right service — or design a plan that combines several."
           actions={
             <Button href="/contact" size="lg" variant="secondary">
-              Request a Free IT Assessment
+              Speak to Our Team
             </Button>
           }
         />

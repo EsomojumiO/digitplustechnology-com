@@ -6,7 +6,7 @@ import { getAllReports, getFeaturedReport } from "@/lib/content";
 import { siteConfig } from "@/lib/site";
 import { ReportCard } from "./_components/ReportCard";
 
-const TITLE = "Quarterly Reports";
+const TITLE = "Enterprise IT Reports for Nigeria";
 const DESCRIPTION =
   "Data-rich, citable research on enterprise IT in Nigeria from Digitplus Technology — pricing, procurement, and infrastructure trends for decision-makers. Read the public findings, download the full reports.";
 

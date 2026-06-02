@@ -108,7 +108,7 @@ export default async function CategoryArchivePage({
         description="Tell us what you’re working on. We’ll come back with practical next steps — no obligation."
         actions={
           <Button href="/contact" size="lg" variant="secondary">
-            Request a Free IT Assessment
+            Talk to an Expert
           </Button>
         }
       />

@@ -12,7 +12,7 @@ import { FadeIn, Stagger, StaggerItem } from "@/components/motion";
 import { industries } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Industries We Serve — Government, Banking, Healthcare & More | Digitplus",
+  title: "Industries We Serve — Government, Banking, Healthcare & More",
   description:
     "Sector-specific IT solutions for government, banking, enterprise, SME, healthcare, education, oil & gas, and logistics across Nigeria. Built around how each sector works.",
   alternates: { canonical: "/industries" },
@@ -32,8 +32,8 @@ export default function IndustriesOverviewPage() {
           <SectionHeading
             as="h1"
             eyebrow="Industries"
-            title="Built around how your sector works"
-            lede="Documentation for government, uptime for banking, reliability for healthcare, budgets for education — every sector has its own demands. We deliver to each."
+            title="Industry IT solutions, built around your sector"
+            lede="Documentation for government, uptime for banking, reliability for healthcare, budgets for education — every sector in Nigeria has its own demands. We deliver to each."
           />
         </FadeIn>
       </Section>
@@ -59,7 +59,7 @@ export default function IndustriesOverviewPage() {
           description="We work across many industries. Tell us about your environment and we’ll explain exactly how we’d approach it."
           actions={
             <Button href="/contact" size="lg" variant="secondary">
-              Talk to us
+              Talk to an Expert
             </Button>
           }
         />

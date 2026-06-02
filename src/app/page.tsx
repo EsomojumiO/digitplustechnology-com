@@ -30,10 +30,9 @@ import { whyUs, processSteps, stats, testimonials } from "@/data";
 import { getFeaturedArticles, getFeaturedReport } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title:
-    "Digitplus Technology — Plan. Procure. Deploy. Manage. | B2B IT Partner in Nigeria",
+  title: "IT Solutions Company in Nigeria | Digitplus Technology",
   description:
-    "Digitplus Technology Limited is an end-to-end B2B IT partner for enterprises, government, and institutions across Nigeria — procurement, hardware supply, infrastructure, deployment, and managed services. Abuja HQ; Lagos and Port Harcourt delivery.",
+    "Digitplus is a B2B IT solutions company in Nigeria — IT procurement, hardware supply, infrastructure, and managed IT services for enterprises, government, and banks. Abuja, Lagos, Port Harcourt.",
 };
 
 /* Raycast-style two-beat leads for the four Why Digitplus pillars, mapped to
@@ -63,9 +62,9 @@ export default function HomePage() {
       <Hero
         aurora
         motif
-        eyebrow="End-to-end IT solutions"
+        eyebrow="IT solutions company in Nigeria"
         title={siteConfig.tagline}
-        subhead="One accountable partner for the full lifecycle of your IT — from planning and procurement to deployment and ongoing management. Built for organisations that need their technology to simply work."
+        subhead="Digitplus is your one accountable partner for the full lifecycle of your IT — from planning and procurement to deployment and managed services. Built for enterprises, government, and institutions that need their technology to simply work."
         actions={
           <>
             <Magnetic strength={6}>
@@ -297,7 +296,7 @@ export default function HomePage() {
                   </p>
                   <div className="mt-2">
                     <Button href={`/reports/${featuredReport.slug}`} size="lg">
-                      Read the report
+                      Download the {featuredReport.quarter} report
                     </Button>
                   </div>
                 </div>

@@ -22,9 +22,9 @@ import { formatDate, isoDate } from "./_components/format";
 const PER_PAGE = 9;
 
 export const metadata: Metadata = {
-  title: "Insights",
+  title: "IT Insights for Nigerian Business Leaders",
   description:
-    "Authority articles for IT decision-makers — strategy, procurement, infrastructure, cybersecurity, and managed services from Digitplus Technology.",
+    "Practical articles for IT decision-makers in Nigeria — IT strategy, procurement, infrastructure, cybersecurity, and managed services from Digitplus Technology.",
   alternates: { canonical: "/insights" },
 };
 

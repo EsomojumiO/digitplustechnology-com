@@ -18,7 +18,7 @@ import { JsonLd } from "@/lib/seo/jsonld";
 import { breadcrumbSchema } from "@/lib/seo/schema";
 
 export const metadata: Metadata = {
-  title: "About Digitplus Technology — A Disciplined Nigerian IT Partner",
+  title: "About Us — A Disciplined, Accountable Nigerian IT Partner",
   description:
     "Digitplus Technology Limited is a CAC-registered, Abuja-based B2B IT solutions company with 8+ years and 50+ enterprise clients. End-to-end IT built on operational discipline.",
   alternates: { canonical: "/about" },
@@ -182,10 +182,10 @@ export default function AboutPage() {
 
       <CTABand
         title="Let’s build something dependable"
-        description={`Reach us at ${siteConfig.email} or request a free IT assessment. We’ll respond with practical next steps.`}
+        description={`Reach us at ${siteConfig.email} or start a conversation. We’ll respond with practical next steps.`}
         actions={
           <Button href="/contact" size="lg" variant="secondary">
-            Request a Free IT Assessment
+            Partner with Digitplus
           </Button>
         }
       />

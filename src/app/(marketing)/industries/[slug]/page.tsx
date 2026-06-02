@@ -178,7 +178,7 @@ export default async function IndustryDetailPage({
           description="Tell us about your environment and what you’re planning. We’ll explain exactly how we’d approach it — no obligation."
           actions={
             <Button href="/contact" size="lg" variant="secondary">
-              Request a Free IT Assessment
+              {`Talk to our ${content.title} team`}
             </Button>
           }
         />

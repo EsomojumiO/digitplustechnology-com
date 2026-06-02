@@ -5,13 +5,14 @@ import {
   Card,
   Breadcrumbs,
   Eyebrow,
+  Button,
 } from "@/components/ui";
 import { FadeIn } from "@/components/motion";
 import { ContactForm } from "@/components/forms";
 import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Contact Digitplus Technology — Request a Free IT Assessment",
+  title: "Contact Us — Request a Free IT Assessment",
   description:
     "Talk to Digitplus Technology Limited about your IT needs. Email, phone, or WhatsApp — Abuja HQ with delivery across Lagos and Port Harcourt. Request a free IT assessment.",
   alternates: { canonical: "/contact" },
@@ -106,6 +107,23 @@ export default function ContactPage() {
                 <DetailRow label="Coverage">
                   {siteConfig.coverage.join(" • ")} — and nationwide on request
                 </DetailRow>
+              </div>
+
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <Button
+                  href={siteConfig.whatsapp}
+                  variant="secondary"
+                  className="w-full sm:w-auto"
+                >
+                  Chat with us on WhatsApp
+                </Button>
+                <Button
+                  href={siteConfig.phoneHref}
+                  variant="ghost"
+                  className="w-full sm:w-auto"
+                >
+                  Call us
+                </Button>
               </div>
 
               <p className="text-caption text-muted">
