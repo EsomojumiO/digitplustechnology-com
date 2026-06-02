@@ -35,9 +35,9 @@ export function NetworkField({ className, density = 48 }: NetworkFieldProps) {
     // Theme-aware colors pulled from CSS tokens (fallbacks for safety).
     const styles = getComputedStyle(document.documentElement);
     const accent = styles.getPropertyValue("--accent").trim() || "#c75334";
-    const isDark = document.documentElement.classList.contains("dark");
-    const nodeColor = isDark ? "rgba(168,194,179," : "rgba(32,73,59,"; // brand greens
-    const lineColor = isDark ? "rgba(168,194,179," : "rgba(32,73,59,";
+    // Dark-only theme: light sage nodes/lines read well on the forest-green canvas.
+    const nodeColor = "rgba(168,194,179,"; // brand-200 sage
+    const lineColor = "rgba(168,194,179,";
 
     let width = 0;
     let height = 0;

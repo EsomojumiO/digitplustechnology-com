@@ -36,10 +36,6 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
-// Set the theme class before paint to avoid a flash. DARK is the default/showcase;
-// light is applied only when explicitly chosen (persisted in localStorage).
-const themeInitScript = `(function(){try{var t=localStorage.getItem('dpt-theme');if(t==='light'){document.documentElement.classList.remove('dark');}else{document.documentElement.classList.add('dark');}}catch(e){document.documentElement.classList.add('dark');}})();`;
-
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
@@ -97,11 +93,7 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${inter.variable} ${montserrat.variable} ${jetbrainsMono.variable} h-full antialiased`}
-      suppressHydrationWarning
     >
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
-      </head>
       <body className="flex min-h-full flex-col">
         {/* Fine grain texture — restrained futurism (fixed, non-interactive). */}
         <div className="grain-overlay" aria-hidden="true" />

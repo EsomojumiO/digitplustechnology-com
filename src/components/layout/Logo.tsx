@@ -17,7 +17,10 @@ export interface LogoProps {
  * pass tone="inverse" to swap to the white mark + cream wordmark.
  */
 export function Logo({ className, tone = "default" }: LogoProps) {
-  const inverse = tone === "inverse";
+  // Dark-only theme: every surface is dark, so the white mark + cream wordmark
+  // is the legible treatment everywhere (the `tone` prop is kept for API stability).
+  void tone;
+  const inverse = true;
   return (
     <Link
       href="/"

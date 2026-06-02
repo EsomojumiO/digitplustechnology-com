@@ -7,7 +7,6 @@ import { Button, Container } from "@/components/ui";
 import { cn } from "@/lib/utils";
 import { mainNav, type NavItem } from "@/lib/site";
 import { Logo } from "./Logo";
-import { ThemeToggle } from "./ThemeToggle";
 
 /* ---------------------------------------------------------------------------
    Small chevron icon (pixel-aligned, consistent stroke).
@@ -334,7 +333,6 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-1.5">
-          <ThemeToggle />
           <Button href="/contact" size="sm" className="hidden sm:inline-flex">
             Request Assessment
           </Button>
