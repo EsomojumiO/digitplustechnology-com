@@ -95,6 +95,16 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${montserrat.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
+      <head>
+        {/* Enable scroll-reveal ONLY when JS is alive (set before paint so there's
+            no flash). Without this class, [data-reveal] content stays visible. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "document.documentElement.classList.add('reveal-ready')",
+          }}
+        />
+      </head>
       <body className="flex min-h-full flex-col">
         {/* Fine grain texture — restrained futurism (fixed, non-interactive). */}
         <div className="grain-overlay" aria-hidden="true" />

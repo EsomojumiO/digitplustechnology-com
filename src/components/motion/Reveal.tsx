@@ -1,37 +1,88 @@
 "use client";
 
 import * as React from "react";
-import { cn } from "@/lib/utils";
 
-export interface RevealProps extends React.HTMLAttributes<HTMLDivElement> {
+/**
+ * useReveal — reveals an element on scroll via a CSS `data-reveal` attribute.
+ *
+ * Robustness (this is the important part):
+ * - The element is only hidden when `html.reveal-ready` is set (a pre-paint
+ *   script in the root layout). With no JS / a hydration failure, content stays
+ *   visible — it can never get stuck invisible.
+ * - On mount we IMMEDIATELY reveal anything already in the viewport (no waiting
+ *   on an IntersectionObserver callback), so above-the-fold headings show at once.
+ * - Below-the-fold elements reveal as they scroll in. No React state is used, so
+ *   there's no setState-in-effect and no re-render fighting the DOM attribute.
+ */
+export function useReveal<T extends HTMLElement>(once = true) {
+  const ref = React.useRef<T | null>(null);
+
+  React.useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+    const reveal = () => node.setAttribute("data-reveal", "visible");
+
+    // No IntersectionObserver support → just show it.
+    if (typeof IntersectionObserver === "undefined") {
+      reveal();
+      return;
+    }
+
+    // Already on screen at mount → reveal now (don't wait for a scroll/callback).
+    const rect = node.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      reveal();
+      return;
+    }
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            e.target.setAttribute("data-reveal", "visible");
+            if (once) io.unobserve(e.target);
+          } else if (!once) {
+            e.target.setAttribute("data-reveal", "hidden");
+          }
+        }
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -8% 0px" },
+    );
+    io.observe(node);
+    return () => io.disconnect();
+  }, [once]);
+
+  return ref;
+}
+
+function revealStyle(
+  distance: number,
+  delay: number,
+  style?: React.CSSProperties,
+): React.CSSProperties {
+  return {
+    ...({
+      "--reveal-distance": `${distance}px`,
+      "--reveal-delay": delay ? `${delay}ms` : "0ms",
+    } as React.CSSProperties),
+    ...style,
+  };
+}
+
+export interface RevealProps extends React.HTMLAttributes<HTMLElement> {
   as?: React.ElementType;
-  /** Stagger the reveal by N ms (useful for sequenced lists). */
+  /** Stagger the reveal by N ms. */
   delay?: number;
   /** Translate distance in px before reveal. */
   distance?: number;
-  /** Only animate the first time it enters the viewport (default true). */
+  /** Re-hide when scrolled out of view (default false = reveal once). */
   once?: boolean;
 }
 
 /**
- * Reveal — lightweight scroll-reveal (fade + small translate up) driven by
- * IntersectionObserver. Fully dependency-free. Respects
- * `prefers-reduced-motion`: when reduced, content is shown immediately with no
- * transform. Content is always present in the DOM (SSR-friendly, crawlable).
+ * Reveal — scroll-reveal wrapper (fade + small rise). Content is visible without
+ * JS; the rise/fade only plays when JS is alive and the element scrolls in.
  */
-/** Subscribe to the user's reduced-motion preference without setState-in-effect. */
-function usePrefersReducedMotion(): boolean {
-  return React.useSyncExternalStore(
-    (onChange) => {
-      const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-      mq.addEventListener("change", onChange);
-      return () => mq.removeEventListener("change", onChange);
-    },
-    () => window.matchMedia("(prefers-reduced-motion: reduce)").matches,
-    () => false, // server snapshot: assume motion is allowed
-  );
-}
-
 export function Reveal({
   as: Comp = "div",
   delay = 0,
@@ -42,59 +93,13 @@ export function Reveal({
   children,
   ...props
 }: RevealProps) {
-  const ref = React.useRef<HTMLElement | null>(null);
-  const [visible, setVisible] = React.useState(false);
-  const reduced = usePrefersReducedMotion();
-  const enabled = !reduced;
-
-  React.useEffect(() => {
-    if (reduced) return;
-
-    const node = ref.current;
-    if (!node) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            setVisible(true);
-            if (once) observer.unobserve(entry.target);
-          } else if (!once) {
-            setVisible(false);
-          }
-        }
-      },
-      { threshold: 0.15, rootMargin: "0px 0px -10% 0px" },
-    );
-
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, [once, reduced]);
-
-  const shown = visible || reduced;
-
+  const ref = useReveal<HTMLElement>(once);
   return (
     <Comp
       ref={ref}
-      data-reveal={shown ? "visible" : "hidden"}
-      className={cn(
-        enabled &&
-          "motion-safe:transition-[opacity,transform] motion-safe:duration-[var(--dur-slow)] motion-safe:ease-[var(--ease-out)]",
-        className,
-      )}
-      style={{
-        ...(enabled
-          ? {
-              opacity: shown ? 1 : 0,
-              transform: shown
-                ? "translateY(0)"
-                : `translateY(${distance}px)`,
-              transitionDelay: shown && delay ? `${delay}ms` : undefined,
-              willChange: "opacity, transform",
-            }
-          : null),
-        ...style,
-      }}
+      data-reveal="hidden"
+      className={className}
+      style={revealStyle(distance, delay, style)}
       {...props}
     >
       {children}
@@ -102,4 +107,5 @@ export function Reveal({
   );
 }
 
+export { revealStyle };
 export default Reveal;

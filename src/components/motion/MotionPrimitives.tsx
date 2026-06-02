@@ -1,84 +1,95 @@
 "use client";
 
 import * as React from "react";
-import {
-  motion,
-  useReducedMotion,
-  type Variants,
-  type HTMLMotionProps,
-} from "framer-motion";
-import { DUR, EASE_OUT, STAGGER } from "./tokens";
+import { useReveal, revealStyle } from "./Reveal";
 
 /* ---------------------------------------------------------------------------
-   FadeIn — scroll-reveal (opacity + small translate) on first view.
-   Reduced motion → instant fade only (no translate).
+   Scroll-reveal primitives — CSS `data-reveal` driven (see Reveal.tsx).
+   Content is VISIBLE without JS; the fade+rise only plays when JS is alive and
+   the element enters the viewport. Above-the-fold elements reveal immediately.
+   These are server-renderable-friendly client islands with stable APIs.
    --------------------------------------------------------------------------- */
-export interface FadeInProps extends Omit<HTMLMotionProps<"div">, "ref"> {
+
+export interface FadeInProps extends React.HTMLAttributes<HTMLElement> {
+  as?: React.ElementType;
   /** Translate distance in px before reveal. */
   y?: number;
-  /** Delay in seconds. */
+  /** Delay in ms (number) — kept as a small convenience. */
   delay?: number;
-  as?: keyof typeof motion;
 }
 
 export function FadeIn({
+  as: Comp = "div",
   y = 16,
   delay = 0,
+  className,
+  style,
   children,
   ...props
 }: FadeInProps) {
-  const reduce = useReducedMotion();
+  const ref = useReveal<HTMLElement>(true);
   return (
-    <motion.div
-      initial={{ opacity: 0, y: reduce ? 0 : y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "0px 0px -10% 0px" }}
-      transition={{ duration: DUR.slow, ease: EASE_OUT, delay }}
+    <Comp
+      ref={ref}
+      data-reveal="hidden"
+      className={className}
+      style={revealStyle(y, delay, style)}
       {...props}
     >
       {children}
-    </motion.div>
+    </Comp>
   );
 }
 
-/* ---------------------------------------------------------------------------
-   Stagger — container that staggers its <StaggerItem> children into view.
-   --------------------------------------------------------------------------- */
-const containerVariants: Variants = {
-  hidden: {},
-  show: { transition: { staggerChildren: STAGGER } },
-};
+/**
+ * Stagger — passthrough container for a group of <StaggerItem>s. Each item
+ * reveals itself as it enters view (naturally staggering on scroll), so there is
+ * no parent orchestration that could leave content hidden.
+ */
+export interface StaggerProps extends React.HTMLAttributes<HTMLElement> {
+  as?: React.ElementType;
+}
 
 export function Stagger({
+  as: Comp = "div",
+  className,
   children,
   ...props
-}: Omit<HTMLMotionProps<"div">, "ref">) {
+}: StaggerProps) {
   return (
-    <motion.div
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, margin: "0px 0px -10% 0px" }}
-      variants={containerVariants}
-      {...props}
-    >
+    <Comp className={className} {...props}>
       {children}
-    </motion.div>
+    </Comp>
   );
+}
+
+export interface StaggerItemProps extends React.HTMLAttributes<HTMLElement> {
+  as?: React.ElementType;
+  /** Translate distance in px before reveal. */
+  y?: number;
+  /** Delay in ms. */
+  delay?: number;
 }
 
 export function StaggerItem({
+  as: Comp = "div",
   y = 16,
+  delay = 0,
+  className,
+  style,
   children,
   ...props
-}: Omit<HTMLMotionProps<"div">, "ref"> & { y?: number }) {
-  const reduce = useReducedMotion();
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: reduce ? 0 : y },
-    show: { opacity: 1, y: 0, transition: { duration: DUR.slow, ease: EASE_OUT } },
-  };
+}: StaggerItemProps) {
+  const ref = useReveal<HTMLElement>(true);
   return (
-    <motion.div variants={itemVariants} {...props}>
+    <Comp
+      ref={ref}
+      data-reveal="hidden"
+      className={className}
+      style={revealStyle(y, delay, style)}
+      {...props}
+    >
       {children}
-    </motion.div>
+    </Comp>
   );
 }
