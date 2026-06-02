@@ -36,33 +36,43 @@ async function upsert(
     return { ok: true, skipped: true };
   }
 
-  // ---- TODO: REAL PROVIDER -------------------------------------------------
-  // Example — Brevo (Sendinblue) contacts upsert via REST:
-  //   const res = await fetch("https://api.brevo.com/v3/contacts", {
-  //     method: "POST",
-  //     headers: {
-  //       "api-key": process.env.MARKETING_API_KEY!,
-  //       "content-type": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       email,
-  //       attributes,
-  //       listIds: [Number(process.env.MARKETING_LIST_ID)],
-  //       updateEnabled: true,
-  //     }),
-  //   });
-  //   if (!res.ok) return { ok: false, error: `marketing ${res.status}` };
-  //   const data = await res.json().catch(() => ({}));
-  //   return { ok: true, id: String(data?.id ?? email) };
-  //
-  // (Mailchimp uses PUT /lists/{list_id}/members/{subscriber_hash}.)
-  // --------------------------------------------------------------------------
-
-   
-  console.warn(
-    "[marketing] provider env present but no implementation wired — skipping.",
-  );
-  return { ok: true, skipped: true };
+  // ---- REAL PROVIDER: Brevo (Sendinblue) contacts upsert via REST ----------
+  // Default to Brevo. (Mailchimp differs — see note at the end of this block.)
+  try {
+    const res = await fetch("https://api.brevo.com/v3/contacts", {
+      method: "POST",
+      headers: {
+        "api-key": process.env.MARKETING_API_KEY as string,
+        "content-type": "application/json",
+        accept: "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        attributes,
+        listIds: [Number(process.env.MARKETING_LIST_ID)],
+        updateEnabled: true,
+      }),
+    });
+    // Brevo returns 201 (created) or 204 (updated, when updateEnabled). Treat
+    // "already in list" (400 duplicate) as success so newsletter re-signups
+    // never surface an error to the user.
+    if (res.ok || res.status === 204) {
+      const data = (await res.json().catch(() => ({}))) as { id?: number };
+      return { ok: true, id: String(data.id ?? email) };
+    }
+    const detail = await res.text().catch(() => "");
+    if (res.status === 400 && /duplicate|already/i.test(detail)) {
+      return { ok: true, id: email };
+    }
+    return { ok: false, error: `marketing ${res.status}: ${detail.slice(0, 200)}` };
+  } catch (e) {
+    return {
+      ok: false,
+      error: e instanceof Error ? e.message : "marketing request failed",
+    };
+  }
+  // For Mailchimp instead: PUT /3.0/lists/{list_id}/members/{md5(lowercase email)}
+  // with { email_address, status: "subscribed", merge_fields } and Basic auth.
 }
 
 async function subscribe(payload: NewsletterPayload): Promise<AdapterResult> {

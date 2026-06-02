@@ -36,34 +36,10 @@ async function createLead(
     return { ok: true, skipped: true };
   }
 
-  // ---- TODO: REAL PROVIDER -------------------------------------------------
-  // (A) Generic webhook (works with Zapier/Make/HubSpot workflows):
-  //   const res = await fetch(process.env.CRM_WEBHOOK_URL!, {
-  //     method: "POST",
-  //     headers: { "content-type": "application/json" },
-  //     body: JSON.stringify(payload),
-  //   });
-  //   if (!res.ok) return { ok: false, error: `crm webhook ${res.status}` };
-  //   return { ok: true };
-  //
-  // (B) HubSpot Contacts API (CRM_API_KEY = private-app token):
-  //   const res = await fetch("https://api.hubapi.com/crm/v3/objects/contacts", {
-  //     method: "POST",
-  //     headers: {
-  //       authorization: `Bearer ${process.env.CRM_API_KEY}`,
-  //       "content-type": "application/json",
-  //     },
-  //     body: JSON.stringify({ properties: mapToHubspot(payload) }),
-  //   });
-  //   if (!res.ok) return { ok: false, error: `hubspot ${res.status}` };
-  //   const data = await res.json().catch(() => ({}));
-  //   return { ok: true, id: String(data?.id ?? "") };
-  // --------------------------------------------------------------------------
-
+  // ---- REAL PROVIDER (A): generic webhook (Zapier/Make/HubSpot workflows) ---
   if (hasWebhook()) {
-    // The webhook path is safe to actually run when configured (no SDK needed).
     try {
-      const res = await fetch(process.env.CRM_WEBHOOK_URL!, {
+      const res = await fetch(process.env.CRM_WEBHOOK_URL as string, {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(payload),
@@ -78,11 +54,54 @@ async function createLead(
     }
   }
 
-   
-  console.warn(
-    "[crm] CRM_API_KEY present but no SDK implementation wired — skipping.",
-  );
-  return { ok: true, skipped: true };
+  // ---- REAL PROVIDER (B): HubSpot Contacts API (CRM_API_KEY = private token) -
+  try {
+    const res = await fetch(
+      "https://api.hubapi.com/crm/v3/objects/contacts",
+      {
+        method: "POST",
+        headers: {
+          authorization: `Bearer ${process.env.CRM_API_KEY}`,
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ properties: mapToHubspot(payload) }),
+      },
+    );
+    // 409 = contact already exists; treat as success (don't error the user).
+    if (res.ok || res.status === 409) {
+      const data = (await res.json().catch(() => ({}))) as { id?: string };
+      return { ok: true, id: data.id };
+    }
+    const detail = await res.text().catch(() => "");
+    return { ok: false, error: `hubspot ${res.status}: ${detail.slice(0, 200)}` };
+  } catch (err) {
+    return {
+      ok: false,
+      error: err instanceof Error ? err.message : "hubspot request failed",
+    };
+  }
+}
+
+/** Map a contact/report-lead payload to HubSpot contact properties. */
+function mapToHubspot(
+  payload: ContactPayload | ReportLeadPayload,
+): Record<string, string> {
+  const email = "email" in payload ? payload.email : payload.workEmail;
+  const [firstname, ...rest] = payload.fullName.trim().split(/\s+/);
+  const props: Record<string, string> = {
+    email,
+    firstname: firstname ?? "",
+    lastname: rest.join(" "),
+    company: payload.company,
+    hs_lead_status: "NEW",
+  };
+  if ("phone" in payload && payload.phone) props.phone = payload.phone;
+  if ("message" in payload && payload.message) props.message = payload.message;
+  if ("serviceInterest" in payload)
+    props.message = `Service interest: ${payload.serviceInterest}\n\n${props.message ?? ""}`.trim();
+  if ("reportSlug" in payload)
+    props.message = `Report download: ${payload.reportSlug}${payload.role ? ` · Role: ${payload.role}` : ""}`;
+  return props;
 }
 
 export const crmProvider: CrmProvider = { createLead };

@@ -11,6 +11,7 @@ import {
 } from "@/components/layout";
 import { JsonLd } from "@/lib/seo/jsonld";
 import { organizationSchema, websiteSchema } from "@/lib/seo/schema";
+import { Analytics } from "@/components/analytics/Analytics";
 
 // Inter — primary UI/body face (exposed as --font-geist-sans so tokens resolve).
 const inter = Inter({
@@ -108,6 +109,7 @@ export default function RootLayout({
         {/* Sitewide structured data — Organization + WebSite. */}
         <JsonLd data={organizationSchema()} />
         <JsonLd data={websiteSchema()} />
+        <Analytics />
       </body>
     </html>
   );
