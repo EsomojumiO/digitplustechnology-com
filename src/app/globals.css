@@ -430,28 +430,29 @@
     }
   }
 
-  /* ---- Scroll reveal (robust) ----
+  /* ---- Scroll reveal (robust, React-independent) ----
      Content is VISIBLE by default. It is hidden ONLY once JS has confirmed it
      can reveal it (html.reveal-ready, set before paint) — so no-JS, older
-     browsers, or a failed IntersectionObserver always show content. JS flips
-     [data-reveal] from "hidden" to "visible" when the element scrolls into view. */
-  [data-reveal] {
+     browsers, or any JS failure always show content. A tiny vanilla script
+     (/reveal.js) adds `.reveal-in` when an element scrolls into view; this does
+     NOT depend on React/framer, so it works identically in every browser. */
+  .reveal-init {
     transition:
       opacity var(--dur-slow) var(--ease-out),
       transform var(--dur-slow) var(--ease-out);
     transition-delay: var(--reveal-delay, 0ms);
   }
-  html.reveal-ready [data-reveal="hidden"] {
+  html.reveal-ready .reveal-init:not(.reveal-in) {
     opacity: 0;
     transform: translateY(var(--reveal-distance, 16px));
   }
   @media (prefers-reduced-motion: reduce) {
     /* Never hide under reduced motion, and don't animate. */
-    html.reveal-ready [data-reveal="hidden"] {
+    html.reveal-ready .reveal-init:not(.reveal-in) {
       opacity: 1;
       transform: none;
     }
-    [data-reveal] {
+    .reveal-init {
       transition: none;
     }
   }

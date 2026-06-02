@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Inter, Montserrat, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/lib/site";
@@ -95,16 +96,6 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${montserrat.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
-      <head>
-        {/* Enable scroll-reveal ONLY when JS is alive (set before paint so there's
-            no flash). Without this class, [data-reveal] content stays visible. */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html:
-              "document.documentElement.classList.add('reveal-ready')",
-          }}
-        />
-      </head>
       <body className="flex min-h-full flex-col">
         {/* Fine grain texture — restrained futurism (fixed, non-interactive). */}
         <div className="grain-overlay" aria-hidden="true" />
@@ -119,6 +110,10 @@ export default function RootLayout({
         {/* Sitewide structured data — Organization + WebSite. */}
         <JsonLd data={organizationSchema()} />
         <JsonLd data={websiteSchema()} />
+        {/* React-independent scroll-reveal (works in every browser, incl. Safari).
+            beforeInteractive: sets `reveal-ready` before paint (no flash) and is
+            coupled to this script — if it never runs, content stays visible. */}
+        <Script src="/reveal.js" strategy="beforeInteractive" />
         <Analytics />
       </body>
     </html>

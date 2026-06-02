@@ -1,20 +1,19 @@
-"use client";
-
 import * as React from "react";
-import { useReveal, revealStyle } from "./Reveal";
+import { cn } from "@/lib/utils";
+import { revealStyle } from "./Reveal";
 
 /* ---------------------------------------------------------------------------
-   Scroll-reveal primitives — CSS `data-reveal` driven (see Reveal.tsx).
-   Content is VISIBLE without JS; the fade+rise only plays when JS is alive and
-   the element enters the viewport. Above-the-fold elements reveal immediately.
-   These are server-renderable-friendly client islands with stable APIs.
+   Scroll-reveal primitives — React-INDEPENDENT (see Reveal.tsx + /reveal.js).
+   Each renders a `.reveal-init` marker; the vanilla reveal script reveals it on
+   scroll. Content is visible by default and can never get stuck hidden. Plain
+   components (no hooks) so they work in server and client trees alike.
    --------------------------------------------------------------------------- */
 
 export interface FadeInProps extends React.HTMLAttributes<HTMLElement> {
   as?: React.ElementType;
   /** Translate distance in px before reveal. */
   y?: number;
-  /** Delay in ms (number) — kept as a small convenience. */
+  /** Delay in ms. */
   delay?: number;
 }
 
@@ -27,12 +26,9 @@ export function FadeIn({
   children,
   ...props
 }: FadeInProps) {
-  const ref = useReveal<HTMLElement>(true);
   return (
     <Comp
-      ref={ref}
-      data-reveal="hidden"
-      className={className}
+      className={cn("reveal-init", className)}
       style={revealStyle(y, delay, style)}
       {...props}
     >
@@ -43,8 +39,8 @@ export function FadeIn({
 
 /**
  * Stagger — passthrough container for a group of <StaggerItem>s. Each item
- * reveals itself as it enters view (naturally staggering on scroll), so there is
- * no parent orchestration that could leave content hidden.
+ * reveals itself as it scrolls in (naturally staggering), so there's no parent
+ * orchestration that could leave content hidden.
  */
 export interface StaggerProps extends React.HTMLAttributes<HTMLElement> {
   as?: React.ElementType;
@@ -80,12 +76,9 @@ export function StaggerItem({
   children,
   ...props
 }: StaggerItemProps) {
-  const ref = useReveal<HTMLElement>(true);
   return (
     <Comp
-      ref={ref}
-      data-reveal="hidden"
-      className={className}
+      className={cn("reveal-init", className)}
       style={revealStyle(y, delay, style)}
       {...props}
     >
