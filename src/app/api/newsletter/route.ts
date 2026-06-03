@@ -1,5 +1,5 @@
 /**
- * POST /api/newsletter — newsletter signup (footer + report pages).
+ * POST /api/newsletter, newsletter signup (footer + report pages).
  *
  * Flow: parse JSON -> honeypot (silent 200) -> rate-limit (429) -> zod (400)
  * -> integrations.handleNewsletter (marketing list) -> 200 / 500.
@@ -30,7 +30,7 @@ export async function POST(req: Request) {
     return json({ ok: true, message: "You're subscribed. Thank you." }, 200);
   }
 
-  const limited = enforceRateLimit(req, ENDPOINT);
+  const limited = await enforceRateLimit(req, ENDPOINT);
   if (limited) return limited;
 
   const result = validate(newsletterSchema, body);

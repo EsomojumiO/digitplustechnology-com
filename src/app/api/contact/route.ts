@@ -1,5 +1,5 @@
 /**
- * POST /api/contact — contact form submission.
+ * POST /api/contact, contact form submission.
  *
  * Flow: parse JSON -> honeypot (silent 200) -> rate-limit (429) -> zod (400)
  * -> integrations.handleContact (email notify + CRM) -> 200 / 500.
@@ -28,10 +28,10 @@ export async function POST(req: Request) {
 
   // Honeypot: respond 200 OK silently so bots don't learn they were caught.
   if (honeypotTripped(body)) {
-    return json({ ok: true, message: "Thanks — we'll be in touch shortly." }, 200);
+    return json({ ok: true, message: "Thanks, we'll be in touch shortly." }, 200);
   }
 
-  const limited = enforceRateLimit(req, ENDPOINT);
+  const limited = await enforceRateLimit(req, ENDPOINT);
   if (limited) return limited;
 
   const result = validate(contactSchema, body);
@@ -58,7 +58,7 @@ export async function POST(req: Request) {
       {
         ok: true,
         message:
-          "Thanks — your message has been received. Our team will respond shortly.",
+          "Thanks, your message has been received. Our team will respond shortly.",
       },
       200,
     );

@@ -1,5 +1,5 @@
 /**
- * POST /api/report-lead — gated quarterly-report download lead.
+ * POST /api/report-lead, gated quarterly-report download lead.
  *
  * Flow: parse JSON -> honeypot (silent 200 + pdfUrl) -> rate-limit (429) ->
  * zod (400) -> integrations.handleReportLead (marketing + CRM + opt-in) ->
@@ -33,7 +33,7 @@ export async function POST(req: Request) {
     return json({ ok: true, message: "Thank you. Your download is ready." }, 200);
   }
 
-  const limited = enforceRateLimit(req, ENDPOINT);
+  const limited = await enforceRateLimit(req, ENDPOINT);
   if (limited) return limited;
 
   const result = validate(reportLeadSchema, body);

@@ -62,6 +62,25 @@ const nextConfig: NextConfig = {
      *     redirect to/from it; cross-links only.
      */
     return [
+      // ---- Host canonicalization (single canonical host for SEO) ----------
+      // Force www → non-www on the canonical domain. Works at the app level so
+      // it holds regardless of Vercel domain config (belt-and-braces with the
+      // Vercel "Redirect to" on the secondary domain).
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.digitplustechnology.com" }],
+        destination: "https://digitplustechnology.com/:path*",
+        permanent: true,
+      },
+      // Stray legacy domain → canonical. Only fires once digitplus.tech is
+      // pointed at this Vercel project & assigned to it (DNS step is yours).
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "(www\\.)?digitplus\\.tech" }],
+        destination: "https://digitplustechnology.com/:path*",
+        permanent: true,
+      },
+
       // Home aliases
       { source: "/home", destination: "/", permanent: true },
       { source: "/index", destination: "/", permanent: true },

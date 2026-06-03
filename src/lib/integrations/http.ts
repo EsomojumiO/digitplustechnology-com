@@ -46,12 +46,12 @@ export function honeypotTripped(body: unknown): boolean {
 }
 
 /** Enforce the per-endpoint, per-IP rate limit. Returns a 429 response if hit. */
-export function enforceRateLimit(
+export async function enforceRateLimit(
   req: Request,
   endpoint: string,
-): NextResponse | null {
+): Promise<NextResponse | null> {
   const ip = clientIp(req.headers);
-  const result = rateLimit(ip, endpoint);
+  const result = await rateLimit(ip, endpoint);
   if (!result.allowed) {
     return json(
       {

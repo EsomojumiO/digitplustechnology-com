@@ -1,12 +1,19 @@
 /**
- * rate-limit.ts — Lightweight in-memory fixed-window rate limiter.
+ * rate-limit.ts — Fixed-window rate limiter with a shared-store backend.
  *
  * Keyed by `${endpoint}:${ip}`. Default: 5 requests / 60s per endpoint per IP.
  *
- *   BLOCKER: this is PER-INSTANCE in-memory state. On serverless/multi-instance
- *   hosting (Vercel) each instance has its own window, and cold starts reset it,
- *   so it is best-effort abuse mitigation only. Production should use a shared
- *   store (Upstash Redis / @upstash/ratelimit). Logged in docs/BLOCKERS.md.
+ * Two backends, selected by env (no SDK dependency, mirrors the other REST
+ * adapters):
+ *   1. Upstash Redis (PRODUCTION) — when UPSTASH_REDIS_REST_URL +
+ *      UPSTASH_REDIS_REST_TOKEN are set. A single atomic EVAL (INCR + EXPIRE +
+ *      PTTL) gives a correct shared window across all serverless instances.
+ *   2. In-memory fallback (DEV / no env) — per-instance fixed window. Fine for
+ *      local dev; on multi-instance serverless each instance keeps its own
+ *      window, so set Upstash for production.
+ *
+ * Fails OPEN: if Upstash is unreachable, the request is allowed (availability
+ * over strictness) and a warning is logged.
  */
 
 export interface RateLimitOptions {
@@ -35,7 +42,19 @@ interface Bucket {
 
 const buckets = new Map<string, Bucket>();
 
-/** Occasionally sweep expired buckets so the map can't grow unbounded. */
+function hasUpstash(): boolean {
+  return Boolean(
+    process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN,
+  );
+}
+
+/** Atomic INCR + first-hit EXPIRE; returns [count, pttlMs]. */
+const WINDOW_SCRIPT =
+  "local c = redis.call('INCR', KEYS[1]) " +
+  "if c == 1 then redis.call('PEXPIRE', KEYS[1], ARGV[1]) end " +
+  "return {c, redis.call('PTTL', KEYS[1])}";
+
+/** Occasionally sweep expired buckets so the in-memory map can't grow unbounded. */
 function sweep(now: number): void {
   if (buckets.size < 5000) return;
   for (const [key, bucket] of buckets) {
@@ -43,20 +62,12 @@ function sweep(now: number): void {
   }
 }
 
-/**
- * Check (and consume) one unit of budget for `key` under `endpoint`.
- * Call once per request, before doing work.
- */
-export function rateLimit(
-  key: string,
-  endpoint: string,
-  options: RateLimitOptions = {},
+function inMemory(
+  id: string,
+  limit: number,
+  windowMs: number,
 ): RateLimitResult {
-  const limit = options.limit ?? 5;
-  const windowMs = options.windowMs ?? 60_000;
   const now = Date.now();
-  const id = `${endpoint}:${key}`;
-
   sweep(now);
 
   let bucket = buckets.get(id);
@@ -71,13 +82,79 @@ export function rateLimit(
   if (bucket.count > limit) {
     return { allowed: false, remaining: 0, limit, retryAfter };
   }
-
   return {
     allowed: true,
     remaining: Math.max(0, limit - bucket.count),
     limit,
     retryAfter,
   };
+}
+
+async function upstash(
+  id: string,
+  limit: number,
+  windowMs: number,
+): Promise<RateLimitResult> {
+  const url = process.env.UPSTASH_REDIS_REST_URL!.replace(/\/$/, "");
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN!;
+
+  const res = await fetch(url, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(["EVAL", WINDOW_SCRIPT, "1", id, String(windowMs)]),
+    // Don't let a slow Redis stall a form submission.
+    signal: AbortSignal.timeout(2000),
+  });
+
+  if (!res.ok) {
+    throw new Error(`Upstash ${res.status}`);
+  }
+
+  const data = (await res.json()) as { result?: [number, number] };
+  const [count, pttl] = data.result ?? [1, windowMs];
+  const retryAfter = Math.max(0, Math.ceil(pttl / 1000));
+
+  if (count > limit) {
+    return { allowed: false, remaining: 0, limit, retryAfter };
+  }
+  return {
+    allowed: true,
+    remaining: Math.max(0, limit - count),
+    limit,
+    retryAfter,
+  };
+}
+
+/**
+ * Check (and consume) one unit of budget for `key` under `endpoint`.
+ * Call once per request, before doing work.
+ */
+export async function rateLimit(
+  key: string,
+  endpoint: string,
+  options: RateLimitOptions = {},
+): Promise<RateLimitResult> {
+  const limit = options.limit ?? 5;
+  const windowMs = options.windowMs ?? 60_000;
+  const id = `rl:${endpoint}:${key}`;
+
+  if (hasUpstash()) {
+    try {
+      return await upstash(id, limit, windowMs);
+    } catch (e) {
+      // Fail open — availability over strictness — but make it visible.
+      console.warn(
+        `[rate-limit] Upstash unreachable, allowing request:`,
+        e instanceof Error ? e.message : e,
+      );
+      return { allowed: true, remaining: limit, limit, retryAfter: 0 };
+    }
+  }
+
+  return inMemory(id, limit, windowMs);
 }
 
 /**

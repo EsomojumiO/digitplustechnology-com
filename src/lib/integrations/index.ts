@@ -15,10 +15,11 @@ import { siteConfig } from "@/lib/site";
 import { crmProvider } from "./crm";
 import { emailNotifier } from "./email";
 import { marketingProvider } from "./marketing";
-import { record } from "./store";
+import { persist, record } from "./store";
 import type {
   AdapterResult,
   ContactPayload,
+  LeadPayload,
   NewsletterPayload,
   ReportLeadPayload,
 } from "./types";
@@ -74,9 +75,11 @@ function aggregate(
 /* ------------------------------------------------------------------------- */
 
 async function handleContact(payload: ContactPayload): Promise<HandleResult> {
-  const { id: leadId } = record({ kind: "contact", ...payload });
+  const lead: LeadPayload = { kind: "contact", ...payload };
+  const { id: leadId } = record(lead);
 
   const entries = await Promise.all([
+    safe("store", () => persist(lead, leadId)),
     safe("email", () =>
       emailNotifier.notify({
         to: siteConfig.email,
@@ -103,9 +106,11 @@ async function handleContact(payload: ContactPayload): Promise<HandleResult> {
 async function handleNewsletter(
   payload: NewsletterPayload,
 ): Promise<HandleResult> {
-  const { id: leadId } = record({ kind: "newsletter", ...payload });
+  const lead: LeadPayload = { kind: "newsletter", ...payload };
+  const { id: leadId } = record(lead);
 
   const entries = await Promise.all([
+    safe("store", () => persist(lead, leadId)),
     safe("marketing", () => marketingProvider.subscribe(payload)),
   ]);
 
@@ -115,9 +120,11 @@ async function handleNewsletter(
 async function handleReportLead(
   payload: ReportLeadPayload,
 ): Promise<HandleResult> {
-  const { id: leadId } = record({ kind: "report-lead", ...payload });
+  const lead: LeadPayload = { kind: "report-lead", ...payload };
+  const { id: leadId } = record(lead);
 
   const calls: Array<Promise<[string, AdapterResult]>> = [
+    safe("store", () => persist(lead, leadId)),
     safe("marketing", () => marketingProvider.addLead(payload)),
     safe("crm", () => crmProvider.createLead(payload)),
   ];
