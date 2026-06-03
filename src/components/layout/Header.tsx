@@ -31,7 +31,7 @@ function Chevron({ className }: { className?: string }) {
 }
 
 /* ---------------------------------------------------------------------------
-   Desktop dropdown — accessible: hover + focus open, Escape closes, arrow-key
+   Desktop dropdown, accessible: hover + focus open, Escape closes, arrow-key
    roving, and aria-expanded wiring.
    --------------------------------------------------------------------------- */
 function DesktopDropdown({
@@ -127,14 +127,32 @@ function DesktopDropdown({
                 role="menuitem"
                 href={child.href}
                 tabIndex={open ? 0 : -1}
+                target={child.external ? "_blank" : undefined}
+                rel={child.external ? "noreferrer noopener" : undefined}
                 className={cn(
                   "block rounded-lg px-3 py-2.5",
                   "transition-colors duration-[var(--dur-fast)] ease-[var(--ease-out)]",
                   "hover:bg-surface focus-visible:bg-surface",
                 )}
               >
-                <span className="block text-small font-medium text-text">
+                <span className="flex items-center gap-1 text-small font-medium text-text">
                   {child.label}
+                  {child.external && (
+                    <svg
+                      aria-hidden="true"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      className="h-3 w-3 text-muted"
+                    >
+                      <path
+                        d="M6 3h7v7M13 3l-8 8"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  )}
                 </span>
                 {child.description && (
                   <span className="mt-0.5 block text-caption text-muted">
@@ -151,7 +169,7 @@ function DesktopDropdown({
 }
 
 /* ---------------------------------------------------------------------------
-   Mobile menu — full-screen slide-over. Locks scroll, Escape + backdrop close,
+   Mobile menu, full-screen slide-over. Locks scroll, Escape + backdrop close,
    focus moves into the panel on open.
    --------------------------------------------------------------------------- */
 function MobileMenu({
@@ -258,12 +276,15 @@ function MobileMenu({
                         <Link
                           href={child.href}
                           onClick={onClose}
+                          target={child.external ? "_blank" : undefined}
+                          rel={child.external ? "noreferrer noopener" : undefined}
                           className={cn(
                             "block rounded-md px-3 py-2 text-small text-muted",
                             "transition-colors duration-[var(--dur-fast)] hover:bg-surface hover:text-text",
                           )}
                         >
                           {child.label}
+                          {child.external ? " ↗" : ""}
                         </Link>
                       </li>
                     ))}

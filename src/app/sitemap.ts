@@ -1,5 +1,5 @@
 /**
- * sitemap.ts — Auto-generated sitemap.xml (Next MetadataRoute.Sitemap).
+ * sitemap.ts, Auto-generated sitemap.xml (Next MetadataRoute.Sitemap).
  *
  * Covers every indexable route:
  *   - static marketing pages
@@ -37,6 +37,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: url("/industries"), lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: url("/approach"), lastModified: now, changeFrequency: "yearly", priority: 0.6 },
     { url: url("/about"), lastModified: now, changeFrequency: "yearly", priority: 0.7 },
+    { url: url("/ecosystem"), lastModified: now, changeFrequency: "monthly", priority: 0.5 },
     { url: url("/insights"), lastModified: now, changeFrequency: "daily", priority: 0.8 },
     { url: url("/reports"), lastModified: now, changeFrequency: "weekly", priority: 0.8 },
     { url: url("/locations"), lastModified: now, changeFrequency: "yearly", priority: 0.5 },

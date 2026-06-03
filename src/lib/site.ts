@@ -1,11 +1,11 @@
 /**
- * site.ts — Canonical site configuration + NAP (Name, Address, Phone).
+ * site.ts, Canonical site configuration + NAP (Name, Address, Phone).
  *
  * SINGLE SOURCE OF TRUTH for: brand identity, contact facts, the service &
  * industry slug lists, and the header/footer navigation structure.
  *
  * Labels and blurbs here are intentionally SHORT. Long marketing copy lives in
- * `src/data/*` (owned by pages-builder). Slug lists here are authoritative —
+ * `src/data/*` (owned by pages-builder). Slug lists here are authoritative, 
  * other agents derive routes/static params from them.
  */
 
@@ -41,7 +41,7 @@ export const siteConfig = {
 } as const satisfies SiteConfig;
 
 /* ---------------------------------------------------------------------------
-   Services — authoritative slug list (6). Titles + short blurbs only.
+   Services, authoritative slug list (6). Titles + short blurbs only.
    --------------------------------------------------------------------------- */
 export interface ServiceSummary {
   slug: string;
@@ -54,25 +54,25 @@ export const services = [
     slug: "it-procurement",
     title: "IT Procurement",
     short:
-      "Documented IT procurement in Nigeria — hardware and software sourcing with LPO support across multiple sites.",
+      "Documented IT procurement in Nigeria, hardware and software sourcing with LPO support across multiple sites.",
   },
   {
     slug: "hardware-supply",
     title: "Hardware Supply",
     short:
-      "Genuine servers, workstations, and networking from authorised channels — hardware supply with valid warranties.",
+      "Genuine servers, workstations, and networking from authorised channels, hardware supply with valid warranties.",
   },
   {
     slug: "infrastructure-solutions",
     title: "Infrastructure Solutions",
     short:
-      "Structured cabling, network installation, server room setup, and UPS/power — built to last.",
+      "Structured cabling, network installation, server room setup, and UPS/power, built to last.",
   },
   {
     slug: "managed-services",
     title: "Managed Services",
     short:
-      "Managed IT services in Nigeria — remote and on-site support, monitoring, and SLAs that keep operations running.",
+      "Managed IT services in Nigeria, remote and on-site support, monitoring, and SLAs that keep operations running.",
   },
   {
     slug: "technology-advisory",
@@ -84,14 +84,14 @@ export const services = [
     slug: "deployment-implementation",
     title: "Deployment & Implementation",
     short:
-      "Installation, configuration, testing, and staff training — IT deployment and handover done right.",
+      "Installation, configuration, testing, and staff training, IT deployment and handover done right.",
   },
 ] as const satisfies readonly ServiceSummary[];
 
 export type ServiceSlug = (typeof services)[number]["slug"];
 
 /* ---------------------------------------------------------------------------
-   Industries — authoritative slug list (8). Titles + short blurbs only.
+   Industries, authoritative slug list (8). Titles + short blurbs only.
    --------------------------------------------------------------------------- */
 export interface IndustrySummary {
   slug: string;
@@ -104,7 +104,7 @@ export const industries = [
     slug: "government",
     title: "Government",
     short:
-      "Government IT procurement — documented sourcing, LPO support, and audit-ready records for the public sector.",
+      "Government IT procurement, documented sourcing, LPO support, and audit-ready records for the public sector.",
   },
   {
     slug: "banking-financial-services",
@@ -122,7 +122,7 @@ export const industries = [
     slug: "sme",
     title: "SME",
     short:
-      "Practical guidance and dependable IT for growing businesses — no jargon.",
+      "Practical guidance and dependable IT for growing businesses, no jargon.",
   },
   {
     slug: "healthcare",
@@ -160,33 +160,84 @@ export interface NavItem {
   href: string;
   /** Optional short blurb shown in dropdown/mega-menu rows. */
   description?: string;
-  /** Child links — presence signals a dropdown/mega-menu. */
+  /** Child links, presence signals a dropdown/mega-menu. */
   children?: NavItem[];
+  /** External destination, opens in a new tab. */
+  external?: boolean;
 }
 
 export const mainNav: NavItem[] = [
   {
     label: "Services",
     href: "/services",
-    children: services.map((s) => ({
-      label: s.title,
-      href: `/services/${s.slug}`,
-      description: s.short,
-    })),
+    // Industries now live under Services rather than as a top-level item.
+    children: [
+      ...services.map((s) => ({
+        label: s.title,
+        href: `/services/${s.slug}`,
+        description: s.short,
+      })),
+      {
+        label: "Industries",
+        href: "/industries",
+        description:
+          "Sector-specific delivery: government, banking, healthcare, education, oil & gas, SME and more.",
+      },
+    ],
   },
   {
-    label: "Industries",
-    href: "/industries",
-    children: industries.map((i) => ({
-      label: i.title,
-      href: `/industries/${i.slug}`,
-      description: i.short,
-    })),
+    label: "Insights",
+    href: "/insights",
+    // Insights + Reports merged into one menu.
+    children: [
+      {
+        label: "Articles",
+        href: "/insights",
+        description: "Strategy and guidance for IT decision-makers.",
+      },
+      {
+        label: "Reports",
+        href: "/reports",
+        description: "Original-data research and quarterly benchmarks.",
+      },
+    ],
   },
-  { label: "Approach", href: "/approach" },
-  { label: "Insights", href: "/insights" },
-  { label: "Reports", href: "/reports" },
-  { label: "About", href: "/about" },
+  {
+    label: "About",
+    href: "/about",
+    // Approach now lives under About.
+    children: [
+      {
+        label: "Overview",
+        href: "/about",
+        description: "Who we are, our coverage, and how we deliver.",
+      },
+      {
+        label: "Approach",
+        href: "/approach",
+        description: "Our delivery method, from plan to procure to manage.",
+      },
+    ],
+  },
+  {
+    label: "Ecosystem",
+    href: "/ecosystem",
+    // Sister Digitplus products (separate properties).
+    children: [
+      {
+        label: "Digitplus Store",
+        href: "https://thedigitplus.com",
+        description: "Our e-commerce store for IT hardware. Coming soon.",
+        external: true,
+      },
+      {
+        label: "Digitplus Retail",
+        href: "https://digitplusretail.com",
+        description: "POS and inventory platform for retail. Coming soon.",
+        external: true,
+      },
+    ],
+  },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -217,6 +268,7 @@ export const footerNav: FooterColumn[] = [
       { label: "Approach", href: "/approach" },
       { label: "Insights", href: "/insights" },
       { label: "Reports", href: "/reports" },
+      { label: "Ecosystem", href: "/ecosystem" },
       { label: "Contact", href: "/contact" },
     ],
   },

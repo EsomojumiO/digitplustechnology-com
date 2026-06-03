@@ -24,7 +24,7 @@ function ArrowRight({ className }: { className?: string }) {
 }
 
 /**
- * Footer — multi-column nav, NAP block, store cross-link, a minimal newsletter
+ * Footer, multi-column nav, NAP block, store cross-link, a minimal newsletter
  * slot (forms agent replaces with a richer component later), and a legal row.
  */
 export function Footer() {
@@ -124,7 +124,7 @@ export function Footer() {
           </nav>
         </div>
 
-        {/* Newsletter slot — minimal accessible placeholder; forms agent enriches. */}
+        {/* Newsletter slot, minimal accessible placeholder; forms agent enriches. */}
         <div className="mt-12 border-t border-white/10 pt-10">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:items-center">
             <div>
