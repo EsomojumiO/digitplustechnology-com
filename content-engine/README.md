@@ -69,8 +69,12 @@ npm run content:generate -- --count 1 --dry-run
 npm run content:generate -- --count 4
 npm run content:generate -- --count 8 --cluster banking --market Kenya
 
-# 4) Fetch covers for the new slugs (reuses the Unsplash fetcher), review drafts,
-#    then flip draft:false a cluster at a time.
+# 4) Fetch cover images for any articles missing one (Unsplash, free commercial
+#    licence). Needs UNSPLASH_ACCESS_KEY (free app at unsplash.com/developers).
+UNSPLASH_ACCESS_KEY=... npm run content:covers           # only missing covers
+UNSPLASH_ACCESS_KEY=... npm run content:covers -- --all  # refresh every cover
+
+# 5) Review the drafts, then flip draft:false a cluster at a time.
 ```
 
 `--count` batch size · `--dry-run` preview only · `--cluster <key>` / `--market <country>`

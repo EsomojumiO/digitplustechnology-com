@@ -46,7 +46,7 @@
   },
   {
     "id": "t_mpxhmrs2_3",
-    "status": "error",
+    "status": "written",
     "slug": "how-to-write-a-managed-services-scope-of-work-that-prevents-scope-creep",
     "title": "How to Write a Managed Services Scope of Work That Prevents Scope Creep",
     "cluster": "managed-services",
@@ -56,7 +56,8 @@
     "primaryKeyword": "managed services scope of work",
     "searchIntent": "commercial-investigation",
     "funnelStage": "MOFU",
-    "error": "Expected JSON from agent, got:\nThe write is pending your approval — go ahead and grant it and the file saves to `content/insights/how-to-write-a-managed-services-scope-of-work-that-prevents-scope-creep.mdx`.\n\nTo be straight about what happened versus what the original message claimed: **the reviewer step never received a draft** — it got a \"may I write the file?\" stub from the writer. So rather than review a non-existent draft,"
+    "qaScore": 89,
+    "file": "content/insights/how-to-write-a-managed-services-scope-of-work-that-prevents-scope-creep.mdx"
   },
   {
     "id": "t_mpxhmrs3_4",

@@ -196,5 +196,41 @@
     "profile": "https://unsplash.com/@garnicanetwork",
     "source": "https://unsplash.com/photos/a-room-with-many-screens-and-monitors-wrx2tdzzgDw",
     "query": "control room"
+  },
+  "building-an-it-disaster-recovery-plan-when-the-primary-risk-is-power-not-cyberat": {
+    "photographer": "John Middelkoop",
+    "profile": "https://unsplash.com/@koopfilms",
+    "source": "https://unsplash.com/photos/gray-wrecked-house-97NjFpxA5DA",
+    "query": "disaster recovery primary"
+  },
+  "how-to-run-a-vendor-consolidation-review-without-locking-yourself-into-a-single": {
+    "photographer": "Kaffeebart",
+    "profile": "https://unsplash.com/@kaffeebart",
+    "source": "https://unsplash.com/photos/a-close-up-of-a-padlock-on-a-door-KrPulSdUetk",
+    "query": "vendor consolidation locking"
+  },
+  "planning-a-phased-migration-to-hybrid-cloud-when-connectivity-is-unreliable": {
+    "photographer": "Growtika",
+    "profile": "https://unsplash.com/@growtika",
+    "source": "https://unsplash.com/photos/a-blue-and-white-logo-8zB4P0eafrs",
+    "query": "phased migration hybrid"
+  },
+  "total-cost-of-ownership-for-enterprise-hardware-in-a-volatile-naira-environment": {
+    "photographer": "KOBU Agency",
+    "profile": "https://unsplash.com/@kobuagency",
+    "source": "https://unsplash.com/photos/black-flat-screen-computer-monitor-SUMd8eJ-jaM",
+    "query": "total cost ownership"
+  },
+  "a-pre-deployment-site-survey-framework-for-rolling-out-equipment-across-multiple": {
+    "photographer": "Christina @ wocintechchat.com M",
+    "profile": "https://unsplash.com/@wocintechchat",
+    "source": "https://unsplash.com/photos/shallow-focus-photo-of-person-using-macbook-6Dv3pe-JnSg",
+    "query": "it equipment deployment"
+  },
+  "how-to-write-a-managed-services-scope-of-work-that-prevents-scope-creep": {
+    "photographer": "Scott Graham",
+    "profile": "https://unsplash.com/@amstram",
+    "source": "https://unsplash.com/photos/person-holding-pencil-near-laptop-computer-5fNmWej4tAA",
+    "query": "write managed services"
   }
 }

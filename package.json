@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "content:plan": "node content-engine/plan.mjs",
-    "content:generate": "node content-engine/generate.mjs"
+    "content:generate": "node content-engine/generate.mjs",
+    "content:covers": "node content-engine/fetch-covers.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",
