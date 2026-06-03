@@ -19,10 +19,21 @@ export interface TrustStripProps
 const DEFAULT_LOGOS: TrustLogo[] = [
   { name: "Microsoft", src: "/logos/microsoft.svg" },
   { name: "HP", src: "/logos/hp.svg" },
+  { name: "HPE", src: "/logos/hpe.svg" },
   { name: "Dell", src: "/logos/dell.svg" },
-  { name: "Cisco", src: "/logos/cisco.svg" },
   { name: "Lenovo", src: "/logos/lenovo.svg" },
+  { name: "Cisco", src: "/logos/cisco.svg" },
+  { name: "Juniper Networks", src: "/logos/juniper.svg" },
+  { name: "Aruba", src: "/logos/aruba.svg" },
   { name: "Fortinet", src: "/logos/fortinet.svg" },
+  { name: "Sophos", src: "/logos/sophos.svg" },
+  { name: "Kaspersky", src: "/logos/kaspersky.svg" },
+  { name: "VMware", src: "/logos/vmware.svg" },
+  { name: "Veeam", src: "/logos/veeam.svg" },
+  { name: "Schneider Electric", src: "/logos/schneider.svg" },
+  { name: "Eaton", src: "/logos/eaton.svg" },
+  { name: "IBM", src: "/logos/ibm.svg" },
+  { name: "Oracle", src: "/logos/oracle.svg" },
 ];
 
 /**
@@ -32,7 +43,7 @@ const DEFAULT_LOGOS: TrustLogo[] = [
  * when a logo has no `src`.
  */
 export function TrustStrip({
-  label = "Trusted technology partners",
+  label,
   logos = DEFAULT_LOGOS,
   className,
   ...props

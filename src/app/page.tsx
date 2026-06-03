@@ -83,7 +83,7 @@ export default function HomePage() {
       {/* Trust strip, partner logos on a slow seamless marquee */}
       <Section tone="muted" spacing="sm">
         <FadeIn>
-          <TrustMarquee label="Authorised technology partners" />
+          <TrustMarquee />
         </FadeIn>
       </Section>
 
