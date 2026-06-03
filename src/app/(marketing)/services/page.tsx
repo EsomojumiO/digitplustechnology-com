@@ -12,7 +12,7 @@ import { FadeIn, Stagger, StaggerItem } from "@/components/motion";
 import { services } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "IT Services in Nigeria — Procurement & Managed IT",
+  title: "IT Services in Nigeria, Procurement & Managed IT",
   description:
     "Six IT service lines for organisations across Nigeria: IT procurement, hardware supply, infrastructure, managed IT services, technology advisory, and deployment. Get a quote.",
   alternates: { canonical: "/services" },
@@ -33,7 +33,7 @@ export default function ServicesOverviewPage() {
             as="h1"
             eyebrow="Services"
             title="IT solutions in Nigeria, delivered with accountability"
-            lede="From the first plan to long-term support, our six service lines cover the full lifecycle of your technology. Engage one or several — the standard of delivery is the same."
+            lede="From the first plan to long-term support, our six service lines cover the full lifecycle of your technology. Engage one or several, the standard of delivery is the same."
           />
         </FadeIn>
       </Section>
@@ -56,7 +56,7 @@ export default function ServicesOverviewPage() {
       <FadeIn>
         <CTABand
           title="Not sure where to start?"
-          description="Tell us what you’re trying to achieve. We’ll point you to the right service — or design a plan that combines several."
+          description="Tell us what you’re trying to achieve. We’ll point you to the right service, or design a plan that combines several."
           actions={
             <Button href="/contact" size="lg" variant="secondary">
               Speak to Our Team

@@ -1,5 +1,5 @@
 /**
- * index.ts — Barrel for the content access layer.
+ * index.ts, Barrel for the content access layer.
  *
  * Pages should import from "@/lib/content" only. This is the stable public
  * surface; the file structure behind it (source.ts, MDX vs CMS) may change.

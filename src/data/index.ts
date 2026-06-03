@@ -1,5 +1,5 @@
 /**
- * data/index.ts — Barrel for the marketing copy layer.
+ * data/index.ts, Barrel for the marketing copy layer.
  *
  *   import { servicesContent, industriesContent, processSteps } from "@/data";
  */

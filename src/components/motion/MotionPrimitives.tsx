@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import { revealStyle } from "./Reveal";
 
 /* ---------------------------------------------------------------------------
-   Scroll-reveal primitives — React-INDEPENDENT (see Reveal.tsx + /reveal.js).
+   Scroll-reveal primitives, React-INDEPENDENT (see Reveal.tsx + /reveal.js).
    Each renders a `.reveal-init` marker; the vanilla reveal script reveals it on
    scroll. Content is visible by default and can never get stuck hidden. Plain
    components (no hooks) so they work in server and client trees alike.
@@ -38,7 +38,7 @@ export function FadeIn({
 }
 
 /**
- * Stagger — passthrough container for a group of <StaggerItem>s. Each item
+ * Stagger, passthrough container for a group of <StaggerItem>s. Each item
  * reveals itself as it scrolls in (naturally staggering), so there's no parent
  * orchestration that could leave content hidden.
  */

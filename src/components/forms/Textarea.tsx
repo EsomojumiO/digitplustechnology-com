@@ -6,7 +6,7 @@ import { controlBase } from "./controls";
 
 export type TextareaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement>;
 
-/** Textarea — token-styled multiline input. Pair with <Field>. */
+/** Textarea, token-styled multiline input. Pair with <Field>. */
 export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   function Textarea({ className, rows = 5, ...props }, ref) {
     return (

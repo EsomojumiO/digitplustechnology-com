@@ -8,7 +8,7 @@ import { ReportCard } from "./_components/ReportCard";
 
 const TITLE = "Enterprise IT Reports for Nigeria";
 const DESCRIPTION =
-  "Data-rich, citable research on enterprise IT in Nigeria from Digitplus Technology — pricing, procurement, and infrastructure trends for decision-makers. Read the public findings, download the full reports.";
+  "Data-rich, citable research on enterprise IT in Nigeria from Digitplus Technology, pricing, procurement, and infrastructure trends for decision-makers. Read the public findings, download the full reports.";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -44,7 +44,7 @@ export default function ReportsHubPage() {
             as="h1"
             eyebrow="Research"
             title="Quarterly reports"
-            lede="Independent, data-led research on the cost and shape of enterprise IT in Nigeria — written to be read, cited, and acted on. Every report opens with public findings; the full analysis is a free download."
+            lede="Independent, data-led research on the cost and shape of enterprise IT in Nigeria, written to be read, cited, and acted on. Every report opens with public findings; the full analysis is a free download."
           />
         </FadeIn>
       </Section>
@@ -62,7 +62,7 @@ export default function ReportsHubPage() {
           <SectionHeading
             as="h2"
             title="Report archive"
-            lede="Past editions remain available in full — track how the numbers have moved quarter on quarter."
+            lede="Past editions remain available in full, track how the numbers have moved quarter on quarter."
             className="mb-10 sm:mb-12"
           />
           <Stagger className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -95,7 +95,7 @@ export default function ReportsHubPage() {
               </h2>
               <p className="text-body text-muted">
                 One quarterly email when a new report is published. No noise, no
-                third-party sharing — unsubscribe any time.
+                third-party sharing, unsubscribe any time.
               </p>
             </div>
             <NewsletterForm

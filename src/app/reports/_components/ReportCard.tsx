@@ -23,7 +23,7 @@ function periodLabel(report: ReportMeta): string {
 }
 
 /**
- * Cover — next/image over a neutral surface so a missing asset degrades to a
+ * Cover, next/image over a neutral surface so a missing asset degrades to a
  * clean panel rather than broken-image chrome. `sizes` is tuned per variant.
  */
 function Cover({
@@ -60,7 +60,7 @@ function Cover({
 }
 
 /**
- * ReportCard — the single card primitive used across the reports hub for both
+ * ReportCard, the single card primitive used across the reports hub for both
  * the featured hero and the archive grid. Composed from design-system Card.
  */
 export function ReportCard({

@@ -14,14 +14,14 @@ import { JsonLd } from "@/lib/seo/jsonld";
 import { organizationSchema, websiteSchema } from "@/lib/seo/schema";
 import { Analytics } from "@/components/analytics/Analytics";
 
-// Inter — primary UI/body face (exposed as --font-geist-sans so tokens resolve).
+// Inter, primary UI/body face (exposed as --font-geist-sans so tokens resolve).
 const inter = Inter({
   variable: "--font-geist-sans",
   subsets: ["latin"],
   display: "swap",
 });
 
-// Montserrat — brand headline face (display / H1 / H2).
+// Montserrat, brand headline face (display / H1 / H2).
 const montserrat = Montserrat({
   variable: "--font-montserrat",
   subsets: ["latin"],
@@ -29,7 +29,7 @@ const montserrat = Montserrat({
   display: "swap",
 });
 
-// JetBrains Mono — technical-precision face (eyebrows, labels, stats, metadata),
+// JetBrains Mono, technical-precision face (eyebrows, labels, stats, metadata),
 // exposed as --font-geist-mono so the design token resolves.
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-geist-mono",
@@ -41,7 +41,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.name} — ${siteConfig.tagline}`,
+    default: `${siteConfig.name}, ${siteConfig.tagline}`,
     template: `%s · Digitplus Technology`,
   },
   description: siteConfig.description,
@@ -65,12 +65,12 @@ export const metadata: Metadata = {
     locale: "en_NG",
     url: siteConfig.url,
     siteName: siteConfig.name,
-    title: `${siteConfig.name} — ${siteConfig.tagline}`,
+    title: `${siteConfig.name}, ${siteConfig.tagline}`,
     description: siteConfig.description,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.name} — ${siteConfig.tagline}`,
+    title: `${siteConfig.name}, ${siteConfig.tagline}`,
     description: siteConfig.description,
   },
   robots: {
@@ -97,7 +97,7 @@ export default function RootLayout({
       className={`${inter.variable} ${montserrat.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
-        {/* Fine grain texture — restrained futurism (fixed, non-interactive). */}
+        {/* Fine grain texture, restrained futurism (fixed, non-interactive). */}
         <div className="grain-overlay" aria-hidden="true" />
         <SkipLink />
         <Header />
@@ -107,12 +107,12 @@ export default function RootLayout({
         <Footer />
         <WhatsAppWidget />
         <CookieConsent />
-        {/* Sitewide structured data — Organization + WebSite. */}
+        {/* Sitewide structured data, Organization + WebSite. */}
         <JsonLd data={organizationSchema()} />
         <JsonLd data={websiteSchema()} />
         {/* React-independent scroll-reveal (works in every browser, incl. Safari).
             beforeInteractive: sets `reveal-ready` before paint (no flash) and is
-            coupled to this script — if it never runs, content stays visible. */}
+            coupled to this script, if it never runs, content stays visible. */}
         <Script src="/reveal.js" strategy="beforeInteractive" />
         <Analytics />
       </body>

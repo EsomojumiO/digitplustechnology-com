@@ -30,7 +30,7 @@ function ArrowIcon() {
 }
 
 /**
- * ServiceCard — link card with title, blurb and an arrow affordance.
+ * ServiceCard, link card with title, blurb and an arrow affordance.
  * The whole card is clickable; arrow nudges on hover.
  */
 export function ServiceCard({

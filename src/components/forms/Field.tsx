@@ -27,7 +27,7 @@ export interface FieldProps {
 }
 
 /**
- * Field — accessible label + control + hint/error wrapper.
+ * Field, accessible label + control + hint/error wrapper.
  * Generates aria-describedby/aria-invalid and passes them to the control.
  */
 export function Field({

@@ -1,7 +1,7 @@
 /**
- * reports.ts — Public access layer for quarterly Reports.
+ * reports.ts, Public access layer for quarterly Reports.
  *
- * PUBLIC API (the CMS seam — keep these signatures stable):
+ * PUBLIC API (the CMS seam, keep these signatures stable):
  *   getAllReports(): ReportMeta[]      // non-archived first, newest first
  *   getReportBySlug(slug): Report | null
  *   getFeaturedReport(): ReportMeta | null   // latest non-archived

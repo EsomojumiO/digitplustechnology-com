@@ -12,9 +12,9 @@ import { ContactForm } from "@/components/forms";
 import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Contact Us — Request a Free IT Assessment",
+  title: "Contact Us, Request a Free IT Assessment",
   description:
-    "Talk to Digitplus Technology Limited about your IT needs. Email, phone, or WhatsApp — Abuja HQ with delivery across Lagos and Port Harcourt. Request a free IT assessment.",
+    "Talk to Digitplus Technology Limited about your IT needs. Email, phone, or WhatsApp, Abuja HQ with delivery across Lagos and Port Harcourt. Request a free IT assessment.",
   alternates: { canonical: "/contact" },
 };
 
@@ -50,7 +50,7 @@ export default function ContactPage() {
             as="h1"
             eyebrow="Contact"
             title="Tell us what you’re planning"
-            lede="Share a little about your project, timeline, and the locations involved. We’ll respond with practical next steps — and there’s no obligation."
+            lede="Share a little about your project, timeline, and the locations involved. We’ll respond with practical next steps, and there’s no obligation."
           />
         </FadeIn>
       </Section>
@@ -71,7 +71,7 @@ export default function ContactPage() {
               <div>
                 <Eyebrow>Reach us directly</Eyebrow>
                 <p className="text-body text-muted measure mt-3">
-                  Prefer to talk first? Use any of the channels below — we read
+                  Prefer to talk first? Use any of the channels below, we read
                   everything that comes in.
                 </p>
               </div>
@@ -105,7 +105,7 @@ export default function ContactPage() {
                 </DetailRow>
                 <DetailRow label="Headquarters">{siteConfig.hq}</DetailRow>
                 <DetailRow label="Coverage">
-                  {siteConfig.coverage.join(" • ")} — and nationwide on request
+                  {siteConfig.coverage.join(" • ")}, and nationwide on request
                 </DetailRow>
               </div>
 

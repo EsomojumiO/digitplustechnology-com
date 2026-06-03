@@ -10,7 +10,7 @@ export interface WhyPillarProps {
 }
 
 /**
- * WhyPillar — Raycast-style two-beat pillar: a mono keyword + one-line
+ * WhyPillar, Raycast-style two-beat pillar: a mono keyword + one-line
  * consequence leading the longer supporting copy. Presentational; the parent
  * staggers these in.
  */
@@ -22,7 +22,7 @@ export function WhyPillar({ label, beat, description }: WhyPillarProps) {
           {label}
         </span>
         <span className="text-muted/60" aria-hidden="true">
-          —
+, 
         </span>
         <span className="font-medium">{beat}</span>
       </p>

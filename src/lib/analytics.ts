@@ -1,5 +1,5 @@
 /**
- * analytics.ts — Privacy-respecting analytics hook (shared infra).
+ * analytics.ts, Privacy-respecting analytics hook (shared infra).
  *
  * `track(event, props?)` is a NO-OP unless `NEXT_PUBLIC_ANALYTICS` is set,
  * keeping the site tracker-free by default (cookie consent defaults to decline;
@@ -7,7 +7,7 @@
  * referral clicks can import this later.
  *
  * When enabled, it dispatches to whatever lightweight provider is wired below
- * (Plausible / Fathom / GA4-conservative) — implement the TODO once the client
+ * (Plausible / Fathom / GA4-conservative), implement the TODO once the client
  * confirms a platform. Safe on both server and client (guards `window`).
  */
 

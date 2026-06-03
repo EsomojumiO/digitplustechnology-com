@@ -12,9 +12,9 @@ import { processSteps } from "@/data/process";
 import { ProcessTimeline } from "./_components/ProcessTimeline";
 
 export const metadata: Metadata = {
-  title: "Our Approach — A Clear, Documented IT Delivery Process",
+  title: "Our Approach, A Clear, Documented IT Delivery Process",
   description:
-    "How Digitplus delivers IT: a six-step process from discovery and design through procurement, deployment, testing, and ongoing support — documented and accountable at every step.",
+    "How Digitplus delivers IT: a six-step process from discovery and design through procurement, deployment, testing, and ongoing support, documented and accountable at every step.",
   alternates: { canonical: "/approach" },
 };
 
@@ -33,7 +33,7 @@ export default function ApproachPage() {
             as="h1"
             eyebrow="How we work"
             title="One disciplined process, every time"
-            lede="Good IT outcomes are not luck — they’re the result of a repeatable process. We run the same six steps on every engagement, with documentation and accountability throughout."
+            lede="Good IT outcomes are not luck, they’re the result of a repeatable process. We run the same six steps on every engagement, with documentation and accountability throughout."
           />
         </FadeIn>
       </Section>

@@ -45,7 +45,7 @@ type ButtonAsLink = CommonProps &
 export type ButtonProps = ButtonAsButton | ButtonAsLink;
 
 /**
- * Button — primary | secondary | ghost; sizes sm | md | lg.
+ * Button, primary | secondary | ghost; sizes sm | md | lg.
  * Renders an <a> when `href` is provided, otherwise a <button>.
  */
 export const Button = React.forwardRef<

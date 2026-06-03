@@ -1,21 +1,21 @@
 /**
- * types.ts — Canonical content domain types + category taxonomy.
+ * types.ts, Canonical content domain types + category taxonomy.
  *
  * This is the CMS SEAM. These types describe the shape of content as the rest
  * of the application consumes it. When MDX is swapped for a headless CMS
- * (Sanity/Payload — see docs/CMS-MIGRATION.md), the loader internals change but
+ * (Sanity/Payload, see docs/CMS-MIGRATION.md), the loader internals change but
  * THESE TYPES and the public function signatures in articles.ts / reports.ts
  * MUST stay stable. Pages depend only on these.
  *
  * Convention:
- *  - `*Meta` types describe a content item WITHOUT its rendered body — cheap to
+ *  - `*Meta` types describe a content item WITHOUT its rendered body, cheap to
  *    list (cards, grids, sitemaps).
  *  - The full type (`Article`, `Report`) extends the meta with the body + any
  *    expensive/computed fields, returned only for single-item detail pages.
  */
 
 /* ---------------------------------------------------------------------------
-   SEO — shared, per-item overrides. All fields optional; pages fall back to
+   SEO, shared, per-item overrides. All fields optional; pages fall back to
    sensible defaults (title/excerpt) when a field is absent.
    --------------------------------------------------------------------------- */
 export interface SeoMeta {
@@ -28,7 +28,7 @@ export interface SeoMeta {
 }
 
 /* ---------------------------------------------------------------------------
-   Categories — the canonical taxonomy (brief §7). The slug is the URL segment
+   Categories, the canonical taxonomy (brief §7). The slug is the URL segment
    used by /insights/[category]; the label is the human-facing name.
 
    This list is AUTHORITATIVE. Article frontmatter `category` must use one of
@@ -54,25 +54,25 @@ export const CATEGORIES: readonly Category[] = [
     slug: "it-strategy-advisory",
     label: "IT Strategy & Advisory",
     description:
-      "Planning, budgeting, and roadmap thinking for IT decision-makers — turning technology spend into accountable outcomes.",
+      "Planning, budgeting, and roadmap thinking for IT decision-makers, turning technology spend into accountable outcomes.",
   },
   {
     slug: "infrastructure",
     label: "Infrastructure",
     description:
-      "Structured cabling, networks, server rooms, and power — the physical foundations of reliable operations.",
+      "Structured cabling, networks, server rooms, and power, the physical foundations of reliable operations.",
   },
   {
     slug: "procurement",
     label: "Procurement",
     description:
-      "Disciplined, documented IT sourcing — vendor accountability, LPO workflows, and audit-ready buying.",
+      "Disciplined, documented IT sourcing, vendor accountability, LPO workflows, and audit-ready buying.",
   },
   {
     slug: "cybersecurity",
     label: "Cybersecurity",
     description:
-      "Practical security posture for Nigerian enterprises and institutions — risk, resilience, and compliance.",
+      "Practical security posture for Nigerian enterprises and institutions, risk, resilience, and compliance.",
   },
   {
     slug: "managed-services",
@@ -90,7 +90,7 @@ export const CATEGORIES: readonly Category[] = [
     slug: "guides",
     label: "Guides",
     description:
-      "Step-by-step, vendor-neutral guidance for planning and running IT — strategy, not product selling.",
+      "Step-by-step, vendor-neutral guidance for planning and running IT, strategy, not product selling.",
   },
 ] as const;
 
@@ -123,12 +123,12 @@ export interface ArticleMeta {
 
 /** A fully-loaded article including its raw MDX body, for detail pages. */
 export interface Article extends ArticleMeta {
-  /** Raw MDX source string — render with the <MDXContent /> wrapper. */
+  /** Raw MDX source string, render with the <MDXContent /> wrapper. */
   body: string;
 }
 
 export interface ReadingTime {
-  /** Estimated minutes, rounded up — e.g. 7. */
+  /** Estimated minutes, rounded up, e.g. 7. */
   minutes: number;
   /** Human label, e.g. "7 min read". */
   text: string;
@@ -143,7 +143,7 @@ export interface ReportMeta {
   title: string;
   /** Must equal the filename (without .mdx). */
   slug: string;
-  /** e.g. "Q2" — calendar quarter the report covers. */
+  /** e.g. "Q2", calendar quarter the report covers. */
   quarter: string;
   /** e.g. 2026. */
   year: number;
@@ -170,7 +170,7 @@ export interface Report extends ReportMeta {
 }
 
 /* ---------------------------------------------------------------------------
-   Taxonomy helpers — the single mapping point between editor-facing labels and
+   Taxonomy helpers, the single mapping point between editor-facing labels and
    URL slugs. Used by the loader and by category archive pages.
    --------------------------------------------------------------------------- */
 

@@ -11,7 +11,7 @@ export interface MagneticProps {
 }
 
 /**
- * Magnetic — wraps an interactive element so it subtly drifts toward the cursor
+ * Magnetic, wraps an interactive element so it subtly drifts toward the cursor
  * (a "magnetic" pull), settling back via spring on leave. Disabled under reduced
  * motion and on touch (no hover). Inline-block so it hugs its child.
  */

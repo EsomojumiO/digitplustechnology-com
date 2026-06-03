@@ -18,7 +18,7 @@ export interface NewsletterFormProps {
 }
 
 /**
- * NewsletterForm — compact email signup posting to /api/newsletter.
+ * NewsletterForm, compact email signup posting to /api/newsletter.
  * Replaces the footer's static form. Inline success/error states.
  */
 export function NewsletterForm({

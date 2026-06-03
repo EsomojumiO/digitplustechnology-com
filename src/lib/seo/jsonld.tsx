@@ -1,5 +1,5 @@
 /**
- * jsonld.tsx — Tiny server component that emits a JSON-LD <script> tag.
+ * jsonld.tsx, Tiny server component that emits a JSON-LD <script> tag.
  *
  * Usage:
  *   import { JsonLd } from "@/lib/seo/jsonld";

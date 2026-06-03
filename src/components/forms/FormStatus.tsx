@@ -10,7 +10,7 @@ export interface FormStatusProps {
 }
 
 /**
- * FormStatus — inline success/error banner with an aria-live region so screen
+ * FormStatus, inline success/error banner with an aria-live region so screen
  * readers announce the result. Success uses accent-subtle; error uses red.
  */
 export function FormStatus({ status, children, className }: FormStatusProps) {

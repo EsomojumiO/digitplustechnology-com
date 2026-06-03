@@ -1,5 +1,5 @@
 /**
- * data/whyUs.ts — The four "Why Digitplus" pillars.
+ * data/whyUs.ts, The four "Why Digitplus" pillars.
  */
 import type { WhyUsPillar } from "./types";
 
@@ -7,7 +7,7 @@ export const whyUs: WhyUsPillar[] = [
   {
     title: "End-to-End Accountability",
     description:
-      "One partner owns the whole journey — planning, procurement, deployment, and support. No hand-offs, no finger-pointing, one place the responsibility stops.",
+      "One partner owns the whole journey, planning, procurement, deployment, and support. No hand-offs, no finger-pointing, one place the responsibility stops.",
   },
   {
     title: "Nationwide Reach",

@@ -32,7 +32,7 @@ function Separator() {
 }
 
 /**
- * Breadcrumbs — accessible trail. Renders an ordered list inside a labelled
+ * Breadcrumbs, accessible trail. Renders an ordered list inside a labelled
  * <nav>; the current page is marked with aria-current. Visual only
  * (JSON-LD is handled separately by the SEO layer).
  */

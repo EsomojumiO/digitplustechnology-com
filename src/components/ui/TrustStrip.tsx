@@ -17,17 +17,19 @@ export interface TrustStripProps
 }
 
 const DEFAULT_LOGOS: TrustLogo[] = [
-  { name: "Microsoft" },
-  { name: "HP" },
-  { name: "Dell" },
-  { name: "Cisco" },
-  { name: "Lenovo" },
-  { name: "Fortinet" },
+  { name: "Microsoft", src: "/logos/microsoft.svg" },
+  { name: "HP", src: "/logos/hp.svg" },
+  { name: "Dell", src: "/logos/dell.svg" },
+  { name: "Cisco", src: "/logos/cisco.svg" },
+  { name: "Lenovo", src: "/logos/lenovo.svg" },
+  { name: "Fortinet", src: "/logos/fortinet.svg" },
 ];
 
 /**
- * TrustStrip — monochrome partner logo row. Renders text wordmark placeholders
- * when no image src is supplied. TODO: replace placeholders with real logos.
+ * TrustStrip, monochrome partner logo row. Real brand marks are forced to a
+ * uniform white (`brightness(0) invert(1)`) and muted via opacity so the row
+ * reads as one consistent set on the dark theme; falls back to a text wordmark
+ * when a logo has no `src`.
  */
 export function TrustStrip({
   label = "Trusted technology partners",
@@ -50,7 +52,7 @@ export function TrustStrip({
               <img
                 src={logo.src}
                 alt={logo.name}
-                className="h-6 w-auto opacity-60 grayscale transition-opacity duration-[var(--dur-base)] hover:opacity-100"
+                className="h-6 w-auto opacity-60 [filter:brightness(0)_invert(1)] transition-opacity duration-[var(--dur-base)] hover:opacity-100"
                 loading="lazy"
               />
             ) : (

@@ -1,5 +1,5 @@
 /**
- * format.ts — Small, dependency-free formatting helpers for Insights pages.
+ * format.ts, Small, dependency-free formatting helpers for Insights pages.
  *
  * Dates are rendered with a fixed locale + UTC time zone so server (build) and
  * any client island agree byte-for-byte (no hydration mismatch).

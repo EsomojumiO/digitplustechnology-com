@@ -21,7 +21,7 @@ export interface HeroProps extends Omit<React.HTMLAttributes<HTMLElement>, "titl
 }
 
 /**
- * Hero — large, confident hero scaffold with generous air.
+ * Hero, large, confident hero scaffold with generous air.
  * Eyebrow, title, subhead, CTA slot and a coverage line.
  */
 export function Hero({

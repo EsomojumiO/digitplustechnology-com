@@ -17,45 +17,45 @@ coverAlt: "An offshore operations control room with industrial workstations, a s
 draft: false
 seo:
   metaTitle: "IT for Oil, Gas and Energy Operations in Nigeria"
-  metaDescription: "A guide to enterprise and operational IT for Nigerian oil, gas and energy operators — covering field connectivity, OT/IT convergence, security, and resilient infrastructure."
+  metaDescription: "A guide to enterprise and operational IT for Nigerian oil, gas and energy operators, covering field connectivity, OT/IT convergence, security, and resilient infrastructure."
   ogImage: "/images/insights/it-for-oil-gas-and-energy-operations.jpg"
 ---
 
-IT for oil, gas and energy operations in Nigeria is not a variation on standard enterprise technology. The operating environments — remote locations, harsh physical conditions, continuous operations, and the convergence of enterprise IT with operational technology (OT) systems — place demands that require a different approach to infrastructure design, procurement, and support.
+IT for oil, gas and energy operations in Nigeria is not a variation on standard enterprise technology. The operating environments, remote locations, harsh physical conditions, continuous operations, and the convergence of enterprise IT with operational technology (OT) systems, place demands that require a different approach to infrastructure design, procurement, and support.
 
 This guide is for IT leads, project managers, and operations directors in upstream, midstream, and downstream energy businesses who are planning or reviewing their technology infrastructure. It covers the decisions that determine whether IT actually performs where the work happens.
 
 ## The oil and gas IT environment is different by nature
 
-In a conventional office, an IT failure is disruptive. In an energy operation, the consequences can be significantly more serious — production disruption, safety system failures, regulatory reporting gaps, or environmental monitoring outages. The starting point for planning IT in this sector is an honest assessment of what depends on technology and what the operational impact of each system failing looks like.
+In a conventional office, an IT failure is disruptive. In an energy operation, the consequences can be significantly more serious, production disruption, safety system failures, regulatory reporting gaps, or environmental monitoring outages. The starting point for planning IT in this sector is an honest assessment of what depends on technology and what the operational impact of each system failing looks like.
 
-> When IT supports production, safety, and environmental systems, uptime is not a preference — it is an operational and regulatory obligation. Design accordingly.
+> When IT supports production, safety, and environmental systems, uptime is not a preference, it is an operational and regulatory obligation. Design accordingly.
 
 This does not mean over-engineering every system. It means being precise about which systems are mission-critical, designing those to appropriate availability standards, and having an honest, documented plan for when they fail.
 
 ## Operational technology and the IT convergence challenge
 
-Modern energy operations use a combination of enterprise IT (ERP, document management, HR, finance, communications) and operational technology (SCADA systems, DCS, PLC-based control systems, process historians, safety instrumented systems). These two domains are increasingly interconnected — process data flows into enterprise systems, production reporting is automated, and remote monitoring requires connectivity between field systems and central operations.
+Modern energy operations use a combination of enterprise IT (ERP, document management, HR, finance, communications) and operational technology (SCADA systems, DCS, PLC-based control systems, process historians, safety instrumented systems). These two domains are increasingly interconnected, process data flows into enterprise systems, production reporting is automated, and remote monitoring requires connectivity between field systems and central operations.
 
-This convergence brings efficiency benefits and introduces risk. OT systems were not designed with cybersecurity as a primary consideration. Many run legacy operating systems that are no longer supported. They have long operational lifecycles — a SCADA system installed with a facility may be expected to run for 15–20 years. Connecting these systems to enterprise networks, and through enterprise networks to the internet or cloud platforms, creates attack surfaces that require deliberate management.
+This convergence brings efficiency benefits and introduces risk. OT systems were not designed with cybersecurity as a primary consideration. Many run legacy operating systems that are no longer supported. They have long operational lifecycles, a SCADA system installed with a facility may be expected to run for 15–20 years. Connecting these systems to enterprise networks, and through enterprise networks to the internet or cloud platforms, creates attack surfaces that require deliberate management.
 
 Key principles for OT/IT convergence in Nigerian energy operations:
 
 - **Network segmentation is mandatory.** OT systems should sit in a clearly defined, isolated network zone. Communication between OT and IT networks should be one-directional where possible (data goes from OT to IT; commands do not flow back) and controlled through a properly configured demilitarised zone (DMZ) or data diode where bidirectional communication is required.
 - **OT system access should be controlled and logged.** Who can connect to which OT system, from where, and via what method should be defined and enforced, not assumed.
-- **Legacy OS management needs a specific strategy.** OT systems running end-of-life operating systems (Windows XP, Windows 7) cannot be simply patched. The management strategy may involve network isolation, application whitelisting, and compensating controls — but it must be deliberate, not ignored.
+- **Legacy OS management needs a specific strategy.** OT systems running end-of-life operating systems (Windows XP, Windows 7) cannot be simply patched. The management strategy may involve network isolation, application whitelisting, and compensating controls, but it must be deliberate, not ignored.
 - **Changes to OT systems require a managed process.** In an office environment, patching a server is a maintenance task. In an OT environment, the same action can affect a control system that is managing an active process. Change management for OT systems must involve operations leadership, not just IT.
 
 ## Field connectivity: the persistent challenge
 
-Connectivity in Nigerian energy operations — particularly in the Niger Delta, offshore, and remote onshore locations — is one of the most operationally consequential infrastructure decisions. Options vary by location:
+Connectivity in Nigerian energy operations, particularly in the Niger Delta, offshore, and remote onshore locations, is one of the most operationally consequential infrastructure decisions. Options vary by location:
 
 - **VSAT (satellite):** The most broadly available option for remote and offshore locations. Latency is higher than terrestrial links (particularly with traditional geostationary satellites), which affects real-time applications. Low-earth-orbit (LEO) satellite services have changed the latency picture in recent years and are now practical for many applications that traditional VSAT could not support well.
 - **Microwave point-to-point:** Viable where line-of-sight exists between locations and the distances involved are manageable. Often used for site-to-site links within an asset cluster.
 - **LTE/4G fixed wireless:** Available in areas with carrier coverage. Less reliable in remote locations but improving as network coverage expands.
 - **Fibre:** Available at onshore facilities near established infrastructure; rare at remote sites.
 
-For any critical field operation, a single connectivity link is a single point of failure. Design for redundancy: primary and secondary links on different technologies or carriers, with automatic failover. The failover mechanism should be tested regularly — not just confirmed to exist.
+For any critical field operation, a single connectivity link is a single point of failure. Design for redundancy: primary and secondary links on different technologies or carriers, with automatic failover. The failover mechanism should be tested regularly, not just confirmed to exist.
 
 ## Infrastructure for harsh environments
 
@@ -70,11 +70,11 @@ Standard office IT equipment is not rated for field environments. Equipment depl
 
 Beyond the field, energy companies have substantial corporate IT requirements: ERP systems for production accounting, procurement, and finance; document management for technical documentation and regulatory submissions; HSE management systems; HR and payroll; and increasingly, data analytics and reporting platforms.
 
-The [infrastructure solutions](/services/infrastructure-solutions) required at the corporate level are broadly similar to those of other large enterprises — but with some sector-specific additions:
+The [infrastructure solutions](/services/infrastructure-solutions) required at the corporate level are broadly similar to those of other large enterprises, but with some sector-specific additions:
 
 - **Production data integration:** Enterprise systems need clean, timely feeds of production data. The integration between SCADA/historian systems and ERP is often technically complex and operationally critical.
 - **Regulatory reporting:** DPR (now the Nigerian Upstream Petroleum Regulatory Commission, NUPRC) and other regulatory bodies require timely and accurate data submissions. Systems that support these submissions need to be treated as mission-critical.
-- **Document control:** In the energy sector, maintaining version control over technical documents — well files, pipeline schematics, HSE manuals — is both a safety and a regulatory requirement. Document management systems need to be designed with this in mind.
+- **Document control:** In the energy sector, maintaining version control over technical documents, well files, pipeline schematics, HSE manuals, is both a safety and a regulatory requirement. Document management systems need to be designed with this in mind.
 
 ## Security in energy IT
 
@@ -95,7 +95,7 @@ For the [oil, gas and energy](/industries/oil-gas-energy) sector, effective supp
 
 ### Should a Nigerian energy company maintain OT systems in-house or rely on vendor support?
 
-Most OT systems — SCADA, DCS, safety instrumented systems — are vendor-specific enough that the original equipment manufacturer (OEM) or their authorised service partner is involved in significant maintenance and changes. That does not mean in-house OT competence is unnecessary. Having internal staff who understand the systems well enough to diagnose issues, execute guided procedures, and manage vendor relationships is a significant operational advantage, particularly for assets in remote locations where OEM response times may be long.
+Most OT systems, SCADA, DCS, safety instrumented systems, are vendor-specific enough that the original equipment manufacturer (OEM) or their authorised service partner is involved in significant maintenance and changes. That does not mean in-house OT competence is unnecessary. Having internal staff who understand the systems well enough to diagnose issues, execute guided procedures, and manage vendor relationships is a significant operational advantage, particularly for assets in remote locations where OEM response times may be long.
 
 ### What is the appropriate approach to cybersecurity for OT systems that cannot be patched?
 
@@ -107,4 +107,4 @@ Evaluate on the basis of latency requirements, reliability, bandwidth, and cost.
 
 ### Is cloud adoption practical for Nigerian energy operations?
 
-For corporate functions — HR, finance, document management, collaboration — cloud adoption is entirely practical and increasingly common. For operational systems at field level, the answer depends on connectivity reliability: cloud-dependent systems at field sites with intermittent connectivity create operational risk. The practical model is often cloud for corporate, on-premise or edge compute for field operations, with cloud connectivity for data aggregation and reporting when available.
+For corporate functions, HR, finance, document management, collaboration, cloud adoption is entirely practical and increasingly common. For operational systems at field level, the answer depends on connectivity reliability: cloud-dependent systems at field sites with intermittent connectivity create operational risk. The practical model is often cloud for corporate, on-premise or edge compute for field operations, with cloud connectivity for data aggregation and reporting when available.

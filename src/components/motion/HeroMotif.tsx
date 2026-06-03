@@ -10,7 +10,7 @@ const NetworkField = dynamic(
 );
 
 /**
- * HeroMotif — positions the signature network motif as a hero backdrop. Sits
+ * HeroMotif, positions the signature network motif as a hero backdrop. Sits
  * above the aurora glow but below hero content. Masked to fade out toward the
  * bottom so it hands off cleanly to the next section.
  */

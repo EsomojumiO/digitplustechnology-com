@@ -24,7 +24,7 @@ export interface ContactFormProps {
 }
 
 /**
- * ContactForm — full contact form posting to /api/contact.
+ * ContactForm, full contact form posting to /api/contact.
  * Client validation mirrors the zod rules; the server stays authoritative.
  */
 export function ContactForm({ className }: ContactFormProps) {
@@ -129,7 +129,7 @@ export function ContactForm({ className }: ContactFormProps) {
         style={{ outline: "none" }}
       >
         <FormStatus status="success">
-          <p className="font-medium">Thank you — your message has been received.</p>
+          <p className="font-medium">Thank you, your message has been received.</p>
           <p className="mt-1 text-muted">
             Our team will respond shortly. For anything urgent, call{" "}
             <a className="underline" href={siteConfig.phoneHref}>

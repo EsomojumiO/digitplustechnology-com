@@ -23,7 +23,7 @@ import { reportSchema, breadcrumbSchema } from "@/lib/seo/schema";
 
 /** Static generation: one page per known report, no on-demand params. */
 export const dynamicParams = false;
-/** ISR — revalidate hourly so freshly-published reports appear without a redeploy. */
+/** ISR, revalidate hourly so freshly-published reports appear without a redeploy. */
 export const revalidate = 3600;
 
 export function generateStaticParams() {
@@ -122,7 +122,7 @@ export default async function ReportLandingPage({
             </p>
           </FadeIn>
 
-          {/* Cover — neutral surface fallback when the asset is absent. */}
+          {/* Cover, neutral surface fallback when the asset is absent. */}
           <FadeIn
             delay={0.08}
             className="relative order-first aspect-[3/4] overflow-hidden rounded-lg bg-surface ring-1 ring-hairline ring-inset lg:order-none"

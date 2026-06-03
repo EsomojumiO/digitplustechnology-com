@@ -18,13 +18,13 @@ coverAlt: "A network diagram showing interconnected branch offices across Nigeri
 draft: false
 seo:
   metaTitle: "LAN and WAN Design for Multi-Branch Businesses in Nigeria"
-  metaDescription: "How to design LAN and WAN architecture for Nigerian multi-site organisations — connectivity options, resilience, routing, and security across branches."
+  metaDescription: "How to design LAN and WAN architecture for Nigerian multi-site organisations, connectivity options, resilience, routing, and security across branches."
   ogImage: "/images/insights/lan-wan-design-for-multi-branch-businesses.jpg"
 ---
 
 Running IT across multiple locations introduces a category of design challenge that simply does not exist in a single-site organisation. How do branch offices connect to each other and to central systems? What happens when the WAN link at a branch fails? How are security policies applied consistently across sites? How are remote users managed without creating administrative overhead that scales linearly with the number of branches?
 
-These are design questions, not product questions. The answers must be established before any equipment is procured or any cable is pulled. For Nigerian businesses operating across Abuja, Lagos, Port Harcourt, and other cities, the design must also account for connectivity realities — ISP quality and availability that varies significantly by city and by location within cities.
+These are design questions, not product questions. The answers must be established before any equipment is procured or any cable is pulled. For Nigerian businesses operating across Abuja, Lagos, Port Harcourt, and other cities, the design must also account for connectivity realities, ISP quality and availability that varies significantly by city and by location within cities.
 
 ## LAN design: what happens within each site
 
@@ -32,30 +32,30 @@ The LAN (Local Area Network) at each branch should be designed to a consistent s
 
 ### Network segmentation at branch level
 
-A flat network where all devices — servers, workstations, printers, IP phones, visitor Wi-Fi — share the same broadcast domain is simple to set up and increasingly difficult to manage and secure as it grows. A segmented network uses VLANs (Virtual Local Area Networks) to group devices by function or security level:
+A flat network where all devices, servers, workstations, printers, IP phones, visitor Wi-Fi, share the same broadcast domain is simple to set up and increasingly difficult to manage and secure as it grows. A segmented network uses VLANs (Virtual Local Area Networks) to group devices by function or security level:
 
 - A corporate data VLAN for workstations and servers
 - A VoIP VLAN for IP telephone systems (QoS priority markings ensure call quality)
-- A management VLAN for network devices — switches, access points, UPS monitoring
+- A management VLAN for network devices, switches, access points, UPS monitoring
 - A guest VLAN for visitor Wi-Fi, isolated from corporate resources
 
-At branch level, this segmentation is implemented on the local switches. Traffic between VLANs is routed at the branch router or firewall — not on the switch — which gives the security team control over inter-VLAN traffic policies.
+At branch level, this segmentation is implemented on the local switches. Traffic between VLANs is routed at the branch router or firewall, not on the switch, which gives the security team control over inter-VLAN traffic policies.
 
 ### Branch switching architecture
 
 A well-designed branch LAN has a simple hierarchy: one or two switches in the network room, fed from the branch router, distributing to access-layer switches on each floor or wing. The access switches connect to wall outlets and wireless access points.
 
-The alternative — a single large switch with cables running the full length of a building — is inflexible, harder to troubleshoot, and creates single points of failure. A hierarchical design with modest-sized switches at each layer is easier to manage and more resilient.
+The alternative, a single large switch with cables running the full length of a building, is inflexible, harder to troubleshoot, and creates single points of failure. A hierarchical design with modest-sized switches at each layer is easier to manage and more resilient.
 
 ### Wireless at branch level
 
 For Nigerian office environments, enterprise-grade wireless (from vendors with centralised management platforms) is preferable to standalone consumer access points for two reasons: centralised management means configuration can be pushed from headquarters to all branch access points simultaneously; and enterprise wireless supports proper VLAN separation between corporate and guest traffic.
 
-Access point placement should be based on a survey of the space — not on guesswork. Insufficient access points create coverage dead spots; too many on the same channel create interference. Either condition degrades wireless performance.
+Access point placement should be based on a survey of the space, not on guesswork. Insufficient access points create coverage dead spots; too many on the same channel create interference. Either condition degrades wireless performance.
 
 ## WAN design: connecting the branches
 
-The WAN (Wide Area Network) links your branch sites to each other and to central resources. WAN design in Nigeria is substantially more constrained than in markets with ubiquitous fibre — the available connectivity options, their reliability, and their cost vary significantly by city and by building location.
+The WAN (Wide Area Network) links your branch sites to each other and to central resources. WAN design in Nigeria is substantially more constrained than in markets with ubiquitous fibre, the available connectivity options, their reliability, and their cost vary significantly by city and by building location.
 
 ### Connectivity options in the Nigerian context
 
@@ -65,11 +65,11 @@ The WAN (Wide Area Network) links your branch sites to each other and to central
 
 **4G/LTE enterprise** connections via mobile broadband are widely used as primary connections in locations without fibre and as failover links everywhere. Bandwidth is shared and variable during peak usage periods, and latency is higher than fibre, but 4G LTE is available almost everywhere in urban Nigeria and can be provisioned quickly.
 
-**VSAT** remains relevant for locations outside urban centres — remote oil and gas sites, hospitals in secondary cities, agricultural operations. Latency is high (typically 600–800ms round-trip to geostationary satellites) which affects real-time applications like VoIP and video conferencing.
+**VSAT** remains relevant for locations outside urban centres, remote oil and gas sites, hospitals in secondary cities, agricultural operations. Latency is high (typically 600–800ms round-trip to geostationary satellites) which affects real-time applications like VoIP and video conferencing.
 
 ### Resilience: dual-link design for critical sites
 
-A branch with a single WAN link has a single point of failure. When the link fails, the branch loses connectivity to all centralised systems — ERP, email, file servers, cloud services. For branches where connectivity is operationally critical, dual-link design is the standard:
+A branch with a single WAN link has a single point of failure. When the link fails, the branch loses connectivity to all centralised systems, ERP, email, file servers, cloud services. For branches where connectivity is operationally critical, dual-link design is the standard:
 
 - **Primary link:** fibre or fixed wireless, sized for normal traffic demand
 - **Secondary link:** 4G LTE router on a separate SIM/provider, capable of carrying essential traffic
@@ -86,13 +86,13 @@ Branch connectivity over the public internet requires encryption. The two main a
 
 **IPsec VPN** (site-to-site): Branch routers establish encrypted tunnels to the central firewall. All inter-branch and branch-to-headquarters traffic passes through the tunnel. This is well-established, widely supported, and appropriate for most multi-branch Nigerian organisations.
 
-**SD-WAN (Software-Defined WAN):** An overlay architecture that manages multiple WAN links intelligently — routing traffic across the best available link based on application requirements, link quality, and policy. SD-WAN is more sophisticated and more expensive than basic IPsec, but delivers significant operational benefits for organisations with many branches or complex multi-link environments. A bank with 20+ branches across multiple cities is a candidate for SD-WAN; a five-branch professional services firm probably is not.
+**SD-WAN (Software-Defined WAN):** An overlay architecture that manages multiple WAN links intelligently, routing traffic across the best available link based on application requirements, link quality, and policy. SD-WAN is more sophisticated and more expensive than basic IPsec, but delivers significant operational benefits for organisations with many branches or complex multi-link environments. A bank with 20+ branches across multiple cities is a candidate for SD-WAN; a five-branch professional services firm probably is not.
 
 ### Centralised vs distributed resources
 
 A key design question for multi-branch organisations is where resources live:
 
-**Centralised model:** Applications, file servers, and databases sit at headquarters or in a cloud data centre. Branch users access everything over the WAN. This simplifies management — one place to update, patch, and back up — but puts the WAN link on the critical path for all branch operations.
+**Centralised model:** Applications, file servers, and databases sit at headquarters or in a cloud data centre. Branch users access everything over the WAN. This simplifies management, one place to update, patch, and back up, but puts the WAN link on the critical path for all branch operations.
 
 **Distributed model:** Each branch has its own local server or at least local caching of frequently accessed data. This reduces WAN dependency but increases management complexity.
 
@@ -115,11 +115,11 @@ The case for SD-WAN strengthens as the number of branches increases, as the numb
 
 ### What internet speed do we need at each branch?
 
-There is no universal answer — it depends on the number of users, the applications they use, and how much traffic is local versus over the WAN. As a starting point, 10–20 Mbps per concurrent user for general office applications is a reasonable planning figure. VoIP adds modest bandwidth but is sensitive to latency and jitter. Video conferencing is bandwidth-intensive. The right figure requires understanding your actual application mix.
+There is no universal answer, it depends on the number of users, the applications they use, and how much traffic is local versus over the WAN. As a starting point, 10–20 Mbps per concurrent user for general office applications is a reasonable planning figure. VoIP adds modest bandwidth but is sensitive to latency and jitter. Video conferencing is bandwidth-intensive. The right figure requires understanding your actual application mix.
 
 ### How do we handle power failures at remote branch sites?
 
-Each branch network room requires UPS protection for the local networking equipment — router, switches, access points. The runtime required is enough to bridge the local generator start time, which is the same requirement as for the headquarters server room. A branch with no generator requires longer UPS runtime or acceptance that the network goes down during extended outages.
+Each branch network room requires UPS protection for the local networking equipment, router, switches, access points. The runtime required is enough to bridge the local generator start time, which is the same requirement as for the headquarters server room. A branch with no generator requires longer UPS runtime or acceptance that the network goes down during extended outages.
 
 ### Can we use consumer-grade routers to save costs at smaller branches?
 

@@ -10,7 +10,7 @@ function initials(name: string) {
 }
 
 /**
- * AuthorBio — E-E-A-T author card shown at the foot of an article. Shows who
+ * AuthorBio, E-E-A-T author card shown at the foot of an article. Shows who
  * wrote/reviewed the piece and why they're credible. Server component.
  */
 export function AuthorBio({ author }: { author: Author }) {

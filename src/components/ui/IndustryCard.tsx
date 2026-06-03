@@ -29,7 +29,7 @@ function ArrowIcon() {
 }
 
 /**
- * IndustryCard — compact link card for a sector, with title, blurb and arrow.
+ * IndustryCard, compact link card for a sector, with title, blurb and arrow.
  */
 export function IndustryCard({
   href,

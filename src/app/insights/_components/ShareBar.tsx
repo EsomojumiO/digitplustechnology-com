@@ -3,7 +3,7 @@
 import * as React from "react";
 
 /**
- * ShareBar — accessible social-share row with no external SDKs.
+ * ShareBar, accessible social-share row with no external SDKs.
  *
  * X/Twitter and LinkedIn are plain anchors to their share intents (work without
  * JS). Copy-link is a button that uses the Clipboard API with a graceful
@@ -66,7 +66,7 @@ export function ShareBar({ url, title }: ShareBarProps) {
       if (timer.current) clearTimeout(timer.current);
       timer.current = setTimeout(() => setCopied(false), 2000);
     } catch {
-      /* no-op — clipboard unavailable */
+      /* no-op, clipboard unavailable */
     }
   }
 

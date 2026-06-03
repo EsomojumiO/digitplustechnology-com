@@ -1,5 +1,5 @@
 /**
- * controls.ts — shared styling for form controls so Input / Textarea / Select
+ * controls.ts, shared styling for form controls so Input / Textarea / Select
  * match the token system: hairline border, soft surface, accent focus ring,
  * sm radius. Invalid state (aria-invalid) tints the border red.
  */

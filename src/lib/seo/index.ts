@@ -1,5 +1,5 @@
 /**
- * index.ts — Public barrel for the SEO library.
+ * index.ts, Public barrel for the SEO library.
  *
  *   import { JsonLd, organizationSchema, breadcrumbSchema } from "@/lib/seo";
  */

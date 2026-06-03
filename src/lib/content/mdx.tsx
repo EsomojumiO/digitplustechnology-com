@@ -1,8 +1,8 @@
 /**
- * mdx.tsx — Server-component wrapper that renders a raw MDX source string.
+ * mdx.tsx, Server-component wrapper that renders a raw MDX source string.
  *
  * Uses `next-mdx-remote/rsc` so MDX is compiled + rendered inside a React
- * Server Component at request/build time — no extra webpack/MDX build config,
+ * Server Component at request/build time, no extra webpack/MDX build config,
  * no client bundle cost for the content itself.
  *
  * Pages (insights-engine / reports-engine) pass the `body` string from
@@ -12,7 +12,7 @@
  * overridable: defaults are unstyled passthrough so this library never
  * hard-codes design decisions it doesn't own.
  *
- * Server-only — relies on next-mdx-remote's RSC entrypoint.
+ * Server-only, relies on next-mdx-remote's RSC entrypoint.
  */
 
 import "server-only";

@@ -13,7 +13,7 @@ export interface SectionHeadingProps
 }
 
 /**
- * SectionHeading — eyebrow + title + lede with consistent rhythm.
+ * SectionHeading, eyebrow + title + lede with consistent rhythm.
  */
 export function SectionHeading({
   eyebrow,

@@ -27,7 +27,7 @@ export default function TermsPage() {
         <Eyebrow>Legal</Eyebrow>
         <h1 className="text-h1 mt-3 text-text">Terms of Use</h1>
         <div className="mt-4 flex flex-wrap items-center gap-3">
-          <Badge tone="outline">DRAFT — pending legal counsel review</Badge>
+          <Badge tone="outline">DRAFT, pending legal counsel review</Badge>
           <span className="text-small text-muted">Last updated: May 2026</span>
         </div>
 
@@ -71,8 +71,8 @@ export default function TermsPage() {
 
           <h2>Intellectual property</h2>
           <p>
-            The Site and its content — including text, graphics, logos, and
-            layout — are owned by or licensed to Digitplus Technology Limited and
+            The Site and its content, including text, graphics, logos, and
+            layout, are owned by or licensed to Digitplus Technology Limited and
             are protected by applicable law. You may view and share content for
             lawful, non-commercial purposes with attribution, but you may not
             reproduce or exploit it commercially without our written permission.

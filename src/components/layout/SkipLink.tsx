@@ -1,5 +1,5 @@
 /**
- * SkipLink — keyboard users can jump straight to the main content.
+ * SkipLink, keyboard users can jump straight to the main content.
  * Visually hidden until focused (see `.skip-link` in globals.css). Targets #main.
  */
 export function SkipLink() {

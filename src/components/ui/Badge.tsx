@@ -14,7 +14,7 @@ const tones: Record<BadgeTone, string> = {
 };
 
 /**
- * Badge — small inline label/tag.
+ * Badge, small inline label/tag.
  */
 export function Badge({
   tone = "neutral",

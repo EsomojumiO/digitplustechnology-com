@@ -24,8 +24,8 @@ seo:
 Most IT support models are reactive by design: a user reports a problem, a
 ticket is raised, an engineer investigates and resolves it. That model is
 familiar, and for low-severity issues it works adequately. Where it fails is on
-the category of incidents that actually cause serious business disruption — server
-failures, storage exhaustion, network degradation, backup corruption — because
+the category of incidents that actually cause serious business disruption, server
+failures, storage exhaustion, network degradation, backup corruption, because
 by the time a user notices, the damage is already done.
 
 Proactive monitoring is the practice of watching IT systems continuously so that
@@ -40,9 +40,9 @@ practice, what good monitoring covers, and what it requires to work.
 In a reactive model, the trigger for action is a user complaint. The sequence
 runs: user experiences problem → user logs ticket → helpdesk assigns engineer →
 engineer diagnoses → resolution. At the point the ticket is raised, the issue
-has already affected at least one person. For major incidents — a server running
+has already affected at least one person. For major incidents, a server running
 out of disk space and crashing a database, a network switch failing and taking
-a branch offline — the impact may already be organisation-wide before the first
+a branch offline, the impact may already be organisation-wide before the first
 ticket lands.
 
 In a proactive model, monitoring agents and sensors generate alerts the moment
@@ -66,15 +66,15 @@ A complete monitoring implementation typically spans the following domains:
 Server hardware monitoring tracks processor temperature, fan status, disk health
 (SMART data), memory errors, and power supply status. These hardware-layer
 signals frequently give advance warning of failure by hours or days. A hard drive
-showing reallocated sectors in its SMART data is a drive that will fail — the
+showing reallocated sectors in its SMART data is a drive that will fail, the
 question is when, and proactive monitoring moves that question from "how do we
 recover after it failed" to "let us replace it on a planned schedule."
 
 ### Capacity and performance
 
 Disk usage, memory utilisation, CPU load, and network throughput are all
-continuous metrics. Thresholds trigger alerts at defined levels — typically a
-warning at 75–80% and a critical alert at 90% — giving time to expand capacity
+continuous metrics. Thresholds trigger alerts at defined levels, typically a
+warning at 75–80% and a critical alert at 90%, giving time to expand capacity
 or redistribute load before the resource is exhausted.
 
 ### Service and application availability
@@ -83,8 +83,8 @@ Monitoring whether a service is running is the most basic layer, but useful
 monitoring goes further: checking whether the service is responding correctly
 (a web server can be "up" while returning errors to users), whether response
 times are within acceptable bounds, and whether dependent services are healthy.
-For organisations running critical applications — ERP, core banking, hospital
-information systems — application-layer monitoring is essential.
+For organisations running critical applications, ERP, core banking, hospital
+information systems, application-layer monitoring is essential.
 
 ### Backup integrity
 
@@ -106,14 +106,14 @@ fails completely.
 ### Power and environmental
 
 For on-premise infrastructure, UPS monitoring is critical. A UPS that has
-degraded battery capacity may appear functional until the next power outage —
+degraded battery capacity may appear functional until the next power outage,
 at which point it fails to hold load long enough for a clean shutdown. Monitoring
 that tracks UPS battery health and runtime estimates allows replacement before
 failure. Temperature monitoring in server rooms flags cooling problems before
 they cause thermal shutdowns.
 
 > **Good monitoring is not about generating alerts. It is about generating the
-> right alerts — enough to catch genuine problems early, with sufficient context
+> right alerts, enough to catch genuine problems early, with sufficient context
 > to enable fast diagnosis, and filtered to prevent alert fatigue that causes
 > engineers to stop paying attention.**
 
@@ -133,7 +133,7 @@ baselining: observing normal behaviour over a period of weeks to understand what
 ### Alert review and tuning
 
 Most monitoring deployments generate too many alerts initially. Engineers learn
-to ignore alerts that consistently fire without indicating a real problem — alert
+to ignore alerts that consistently fire without indicating a real problem, alert
 fatigue. Effective monitoring requires ongoing tuning: suppressing known false
 positives, adjusting thresholds that are too sensitive or too loose, and
 periodically reviewing whether alert definitions still reflect real risk.
@@ -149,8 +149,8 @@ arrangement with defined response commitments.
 ### Runbooks for common alerts
 
 When an alert fires, the first question is: what should the engineer do? For
-common alerts, this should be answered by a documented runbook — a set of steps
-for initial diagnosis and standard remediation — so that response is fast and
+common alerts, this should be answered by a documented runbook, a set of steps
+for initial diagnosis and standard remediation, so that response is fast and
 consistent regardless of which engineer is on duty.
 
 ### Regular review of monitoring coverage
@@ -173,8 +173,8 @@ monitoring function is part of the service, it runs continuously, and the
 investment in tooling and process is shared across many clients rather than
 borne by a single organisation.
 
-The critical question to ask any provider is not whether they do monitoring — most
-will say yes — but what specific metrics they monitor for your environment, what
+The critical question to ask any provider is not whether they do monitoring, most
+will say yes, but what specific metrics they monitor for your environment, what
 the alert thresholds are, who responds to after-hours alerts and within what
 timeframe, and what the escalation path is when an alert indicates a developing
 incident. A provider who cannot answer these questions in detail is not doing
@@ -187,7 +187,7 @@ proactive monitoring in any meaningful sense.
 ### How is proactive monitoring different from standard IT support?
 
 Standard reactive IT support begins responding when a user reports a problem.
-Proactive monitoring begins responding when sensors detect a warning condition —
+Proactive monitoring begins responding when sensors detect a warning condition,
 before any user is affected. The two are not mutually exclusive; proactive
 monitoring is most effective when combined with a responsive support function
 that can act quickly on alerts.
@@ -206,8 +206,8 @@ No. It reduces the frequency of unplanned outages and shrinks the window of
 impact when incidents do occur. Hardware failures can happen faster than any
 monitoring system can detect and respond; human error and cyber incidents have
 their own dynamics. The value is in catching the large class of degradation-type
-failures — capacity exhaustion, overheating, backup corruption, network
-degradation — early enough to intervene.
+failures, capacity exhaustion, overheating, backup corruption, network
+degradation, early enough to intervene.
 
 ### How much does proactive IT monitoring cost?
 

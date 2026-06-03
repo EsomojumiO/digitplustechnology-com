@@ -1,5 +1,5 @@
 /**
- * data/stats.ts — "By the numbers" figures.
+ * data/stats.ts, "By the numbers" figures.
  */
 import type { StatContent } from "./types";
 

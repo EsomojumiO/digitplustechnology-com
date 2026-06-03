@@ -1,12 +1,12 @@
 /**
- * Author registry — powers article bylines, author-bio cards, and author
+ * Author registry, powers article bylines, author-bio cards, and author
  * structured data (E-E-A-T signals).
  *
  * NOTE on E-E-A-T: Google rewards content with clear, credible authorship.
  * We ship a truthful organisational author ("Digitplus Editorial Team") now.
  * For stronger E-E-A-T, add REAL named experts below (a practitioner's name,
  * role, short bio, and credentials) and set the matching `author:` value in the
- * article frontmatter. Do NOT invent people — see docs/BLOCKERS.md.
+ * article frontmatter. Do NOT invent people, see docs/BLOCKERS.md.
  */
 export interface Author {
   /** URL-safe id (reserved for a future /insights/author/[slug] page). */
@@ -39,7 +39,7 @@ export const authors: Author[] = [
     ],
     type: "organization",
   },
-  // EXAMPLE — add real named experts here for stronger E-E-A-T, then set the
+  // EXAMPLE, add real named experts here for stronger E-E-A-T, then set the
   // article frontmatter `author:` to the exact `name` below. (Placeholder, do
   // not publish until it's a real person.)
   // {

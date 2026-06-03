@@ -6,7 +6,7 @@ import { controlBase } from "./controls";
 
 export type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
-/** Input — token-styled text input. Pair with <Field> for labels/errors. */
+/** Input, token-styled text input. Pair with <Field> for labels/errors. */
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   function Input({ className, type = "text", ...props }, ref) {
     return (

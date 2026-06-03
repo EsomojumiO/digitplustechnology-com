@@ -13,7 +13,7 @@ export interface ArticleCardProps {
 }
 
 /**
- * ArticleCard — reusable article preview card.
+ * ArticleCard, reusable article preview card.
  *
  * The whole card is a link to the article; the cover image sits in a fixed
  * aspect-ratio frame with a neutral surface fallback, so the layout stays
@@ -37,7 +37,7 @@ export function ArticleCard({
         href={href}
         className="flex h-full flex-col rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
       >
-        {/* Cover — fixed 16:10 frame with neutral fallback for layout stability */}
+        {/* Cover, fixed 16:10 frame with neutral fallback for layout stability */}
         <div className="relative aspect-[16/10] w-full overflow-hidden bg-surface">
           <Image
             src={article.cover}

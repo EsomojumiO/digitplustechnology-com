@@ -16,7 +16,7 @@ const widths = {
 };
 
 /**
- * Container — centered max-width wrapper (~1200px) with fluid gutters.
+ * Container, centered max-width wrapper (~1200px) with fluid gutters.
  */
 export function Container({
   as: Comp = "div",

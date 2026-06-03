@@ -30,7 +30,7 @@ import { formatDate, isoDate } from "../_components/format";
 import { getAuthor } from "@/data";
 
 /**
- * Article template — /insights/[slug]
+ * Article template, /insights/[slug]
  *
  * SSG: one static page per published article. ISR: revalidate hourly so editors
  * can publish/update without a redeploy once a CMS is wired in.
@@ -197,7 +197,7 @@ export default async function ArticlePage({
         </Container>
       </Section>
 
-      {/* Featured image — fixed frame, neutral fallback for layout stability */}
+      {/* Featured image, fixed frame, neutral fallback for layout stability */}
       <Section spacing="sm" contained={false}>
         <Container width="wide">
           <FadeIn>
@@ -277,7 +277,7 @@ export default async function ArticlePage({
 
       <CTABand
         title="Have a project that needs this thinking?"
-        description="Tell us what you’re planning. We’ll come back with practical next steps and a clear, line-itemised proposal — no obligation."
+        description="Tell us what you’re planning. We’ll come back with practical next steps and a clear, line-itemised proposal, no obligation."
         actions={
           <>
             <Button href="/contact" size="lg" variant="secondary">

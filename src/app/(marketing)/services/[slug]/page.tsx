@@ -215,7 +215,7 @@ export default async function ServiceDetailPage({
       <FadeIn>
         <CTABand
           title={`Ready to talk about ${content.title.toLowerCase()}?`}
-          description="Tell us what you’re planning. We’ll come back with practical next steps and a clear, line-itemised proposal — no obligation."
+          description="Tell us what you’re planning. We’ll come back with practical next steps and a clear, line-itemised proposal, no obligation."
           actions={
             <Button href="/contact" size="lg" variant="secondary">
               {`Get a quote for ${content.title}`}

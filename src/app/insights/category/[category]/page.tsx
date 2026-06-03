@@ -16,7 +16,7 @@ import {
 import { ArticleCard } from "../../_components/ArticleCard";
 
 /**
- * Category archive — /insights/category/[category]
+ * Category archive, /insights/category/[category]
  *
  * ROUTING NOTE: the brief specified /insights/[category], but Next.js forbids
  * two differently-named dynamic segments at one level (we already use
@@ -105,7 +105,7 @@ export default async function CategoryArchivePage({
 
       <CTABand
         title="Planning something in this area?"
-        description="Tell us what you’re working on. We’ll come back with practical next steps — no obligation."
+        description="Tell us what you’re working on. We’ll come back with practical next steps, no obligation."
         actions={
           <Button href="/contact" size="lg" variant="secondary">
             Talk to an Expert

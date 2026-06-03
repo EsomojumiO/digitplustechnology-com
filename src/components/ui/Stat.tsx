@@ -11,7 +11,7 @@ export interface StatProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 /**
- * Stat — a single by-the-numbers figure with label.
+ * Stat, a single by-the-numbers figure with label.
  */
 export function Stat({
   value,

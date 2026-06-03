@@ -109,7 +109,7 @@ export default async function IndustryDetailPage({
           <SectionHeading
             eyebrow="What we address"
             title={`What ${content.title.toLowerCase()} demands`}
-            lede="The concerns we hear most in this sector — and how we meet them."
+            lede="The concerns we hear most in this sector, and how we meet them."
           />
         </FadeIn>
         <Grid as={Stagger} columns={2} gap="md" className="mt-12">
@@ -175,7 +175,7 @@ export default async function IndustryDetailPage({
       <FadeIn>
         <CTABand
           title={`IT for ${content.title.toLowerCase()}, done right`}
-          description="Tell us about your environment and what you’re planning. We’ll explain exactly how we’d approach it — no obligation."
+          description="Tell us about your environment and what you’re planning. We’ll explain exactly how we’d approach it, no obligation."
           actions={
             <Button href="/contact" size="lg" variant="secondary">
               {`Talk to our ${content.title} team`}

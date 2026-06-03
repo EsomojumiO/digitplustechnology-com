@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import { siteConfig } from "@/lib/site";
 
 /**
- * WhatsAppWidget — persistent floating contact button (fixed bottom-right).
+ * WhatsAppWidget, persistent floating contact button (fixed bottom-right).
  * Sits above content; respects reduced motion via global CSS. Plain anchor so
  * it never participates in a modal focus trap.
  */

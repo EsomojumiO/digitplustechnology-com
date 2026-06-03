@@ -13,7 +13,7 @@ export interface MarqueeProps {
 }
 
 /**
- * Marquee — slow, seamless horizontal scroll (CSS-driven, lightweight). Content
+ * Marquee, slow, seamless horizontal scroll (CSS-driven, lightweight). Content
  * is duplicated for a seamless loop. Pauses on hover; halts under reduced motion
  * (content remains static and fully visible/readable). Edges are masked to fade.
  */

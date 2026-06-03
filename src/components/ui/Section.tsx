@@ -29,7 +29,7 @@ const spacings = {
 };
 
 /**
- * Section — consistent vertical rhythm with optional alternating surface tone.
+ * Section, consistent vertical rhythm with optional alternating surface tone.
  */
 export function Section({
   tone = "default",

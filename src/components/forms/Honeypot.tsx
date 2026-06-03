@@ -3,12 +3,12 @@
 import * as React from "react";
 
 /**
- * Honeypot — visually hidden bot trap. Field name `company_website` must stay
+ * Honeypot, visually hidden bot trap. Field name `company_website` must stay
  * empty; the server treats a filled value as a bot and silently 200s.
  *
  * Hidden from sighted users AND assistive tech (aria-hidden), removed from tab
  * order (tabIndex -1), autocomplete off. Not `display:none` (some bots skip
- * those) — uses an off-screen clip instead.
+ * those), uses an off-screen clip instead.
  */
 export function Honeypot() {
   return (

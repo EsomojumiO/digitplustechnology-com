@@ -1,5 +1,5 @@
 /**
- * data/industries.ts — Full marketing copy for the eight industries served.
+ * data/industries.ts, Full marketing copy for the eight industries served.
  *
  * Keyed by the authoritative slugs in `src/lib/site.ts`. The SEO agent reads
  * `faqs`, `metaTitle`, and `metaDescription` for schema and metadata.
@@ -12,7 +12,7 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
     title: "Government",
     intro: [
       "Public-sector IT lives and dies by documentation. Procurement must be traceable, spending must withstand audit, and delivery must match what was specified and approved. Digitplus is built for exactly this kind of accountability in government IT procurement across Nigeria.",
-      "We support ministries, departments, agencies, and parastatals with documented procurement, LPO-aligned purchasing, and delivery that leaves a clean paper trail from requisition to handover — so your technology programmes are defensible at every level.",
+      "We support ministries, departments, agencies, and parastatals with documented procurement, LPO-aligned purchasing, and delivery that leaves a clean paper trail from requisition to handover, so your technology programmes are defensible at every level.",
     ],
     concerns: [
       {
@@ -41,7 +41,7 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
     faqs: [
       {
         q: "Can you work within government IT procurement and LPO processes?",
-        a: "Yes. We are set up for formal public-sector purchasing — quotations, proforma invoices, LPO fulfilment, and complete delivery documentation that aligns with your approval chain.",
+        a: "Yes. We are set up for formal public-sector purchasing, quotations, proforma invoices, LPO fulfilment, and complete delivery documentation that aligns with your approval chain.",
       },
       {
         q: "How do you support audit requirements?",
@@ -57,7 +57,7 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
     slug: "banking-financial-services",
     title: "Banking & Financial Services",
     intro: [
-      "In financial services, downtime and compliance gaps carry direct cost and risk. Branch networks, data centres, and back-office systems have to stay available, secure, and well-documented — across many locations at once.",
+      "In financial services, downtime and compliance gaps carry direct cost and risk. Branch networks, data centres, and back-office systems have to stay available, secure, and well-documented, across many locations at once.",
       "Digitplus delivers bank branch IT infrastructure, resilient networks, and accountable managed services for banks, microfinance institutions, and fintechs across Nigeria, with the vendor accountability and documentation that regulated environments demand.",
     ],
     concerns: [
@@ -75,7 +75,7 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
       },
       {
         title: "Vendor accountability",
-        desc: "A single accountable partner across procurement, build, and support — fewer hand-offs, clearer ownership when something needs fixing.",
+        desc: "A single accountable partner across procurement, build, and support, fewer hand-offs, clearer ownership when something needs fixing.",
       },
     ],
     relevantServices: [
@@ -91,19 +91,19 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
       },
       {
         q: "How do you support uptime requirements?",
-        a: "Through proactive monitoring, defined SLAs, and power protection — designed to keep core and customer-facing systems available.",
+        a: "Through proactive monitoring, defined SLAs, and power protection, designed to keep core and customer-facing systems available.",
       },
     ],
     metaTitle: "IT Solutions for Banking & Financial Services",
     metaDescription:
-      "Branch infrastructure, resilient networks, and managed services for banks, microfinance, and fintech in Nigeria — with vendor accountability and compliance-aligned delivery.",
+      "Branch infrastructure, resilient networks, and managed services for banks, microfinance, and fintech in Nigeria, with vendor accountability and compliance-aligned delivery.",
   },
 
   enterprise: {
     slug: "enterprise",
     title: "Enterprise",
     intro: [
-      "Large organisations rarely struggle for vendors — they struggle for accountability. Multiple sites, mixed equipment, and a patchwork of suppliers make it hard to know who owns a problem. Digitplus consolidates that into a single, accountable IT partner.",
+      "Large organisations rarely struggle for vendors, they struggle for accountability. Multiple sites, mixed equipment, and a patchwork of suppliers make it hard to know who owns a problem. Digitplus consolidates that into a single, accountable IT partner.",
       "From multi-site IT infrastructure to enterprise IT support under clear SLAs, we give organisations across Nigeria consistent standards, one point of ownership, and the documentation to manage IT as a discipline rather than a series of fire-fights.",
     ],
     concerns: [
@@ -113,7 +113,7 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
       },
       {
         title: "Single point of accountability",
-        desc: "Procurement, deployment, and support under one partner — clear ownership instead of vendors pointing at each other.",
+        desc: "Procurement, deployment, and support under one partner, clear ownership instead of vendors pointing at each other.",
       },
       {
         title: "Service-level agreements",
@@ -137,7 +137,7 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
       },
       {
         q: "Will you work alongside our in-house IT team?",
-        a: "Yes. We frequently extend in-house teams — covering monitoring, specialist work, or additional locations — rather than replacing them.",
+        a: "Yes. We frequently extend in-house teams, covering monitoring, specialist work, or additional locations, rather than replacing them.",
       },
     ],
     metaTitle: "Enterprise IT Solutions & Managed Services",
@@ -150,12 +150,12 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
     title: "SME",
     intro: [
       "Growing businesses need IT that works without needing a department to run it. What they usually get instead is jargon, oversized proposals, and support that disappears after the invoice is paid. Digitplus takes a different approach.",
-      "We give small and medium enterprises practical guidance, right-sized equipment, and dependable support — explained in plain language, priced to fit, and built to grow with you rather than lock you in.",
+      "We give small and medium enterprises practical guidance, right-sized equipment, and dependable support, explained in plain language, priced to fit, and built to grow with you rather than lock you in.",
     ],
     concerns: [
       {
         title: "Practical, plain-spoken advice",
-        desc: "Recommendations in language you can act on, focused on what your business actually needs — not the biggest possible spend.",
+        desc: "Recommendations in language you can act on, focused on what your business actually needs, not the biggest possible spend.",
       },
       {
         title: "Right-sized investment",
@@ -178,7 +178,7 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
     ],
     faqs: [
       {
-        q: "We do not have an IT team — can you handle everything?",
+        q: "We do not have an IT team, can you handle everything?",
         a: "Yes. Many SME clients rely on us as their whole IT function, from advice and procurement to support, so they can focus on the business.",
       },
       {
@@ -188,14 +188,14 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
     ],
     metaTitle: "IT Solutions & Support for SMEs in Nigeria",
     metaDescription:
-      "Practical, plain-spoken IT for growing businesses — right-sized equipment, dependable support, and guidance without the jargon. SME IT solutions across Nigeria.",
+      "Practical, plain-spoken IT for growing businesses, right-sized equipment, dependable support, and guidance without the jargon. SME IT solutions across Nigeria.",
   },
 
   healthcare: {
     slug: "healthcare",
     title: "Healthcare",
     intro: [
-      "In hospitals and clinics, IT failure is not an inconvenience — it interrupts care. Records systems, networks, and the equipment that depends on them must stay available, and the power behind them must hold even when the grid does not.",
+      "In hospitals and clinics, IT failure is not an inconvenience, it interrupts care. Records systems, networks, and the equipment that depends on them must stay available, and the power behind them must hold even when the grid does not.",
       "Digitplus delivers reliable, high-uptime infrastructure and responsive support for healthcare providers, with the resilience and documentation that clinical environments require.",
     ],
     concerns: [
@@ -242,7 +242,7 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
     title: "Education",
     intro: [
       "Schools, colleges, and universities have to make limited budgets stretch across labs, offices, classrooms, and growing student numbers. The pressure is to spend carefully and avoid replacing things twice.",
-      "Digitplus delivers budget-conscious, dependable IT for the education sector — durable equipment, sensible infrastructure, and support that keeps learning environments running without overspending.",
+      "Digitplus delivers budget-conscious, dependable IT for the education sector, durable equipment, sensible infrastructure, and support that keeps learning environments running without overspending.",
     ],
     concerns: [
       {
@@ -280,7 +280,7 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
     ],
     metaTitle: "Budget-Conscious IT Solutions for Education",
     metaDescription:
-      "Durable, budget-conscious IT for schools, colleges, and universities in Nigeria — computer labs, campus connectivity, and dependable support that keeps learning running.",
+      "Durable, budget-conscious IT for schools, colleges, and universities in Nigeria, computer labs, campus connectivity, and dependable support that keeps learning running.",
   },
 
   "oil-gas-energy": {
@@ -288,7 +288,7 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
     title: "Oil, Gas & Energy",
     intro: [
       "Energy-sector operations are demanding by nature: remote sites, harsh conditions, and a low tolerance for downtime. IT here has to be resilient, well-documented, and supportable far from the nearest city.",
-      "Digitplus delivers robust infrastructure, dependable hardware, and managed services for oil, gas, and energy operations — built for resilience and backed by support that reaches your sites.",
+      "Digitplus delivers robust infrastructure, dependable hardware, and managed services for oil, gas, and energy operations, built for resilience and backed by support that reaches your sites.",
     ],
     concerns: [
       {
@@ -326,7 +326,7 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
     ],
     metaTitle: "IT Solutions for Oil, Gas & Energy",
     metaDescription:
-      "Resilient infrastructure, robust hardware, and managed services for oil, gas, and energy operations in Nigeria — built for demanding and remote environments.",
+      "Resilient infrastructure, robust hardware, and managed services for oil, gas, and energy operations in Nigeria, built for demanding and remote environments.",
   },
 
   "logistics-manufacturing": {
@@ -372,7 +372,7 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
     ],
     metaTitle: "IT Solutions for Logistics & Manufacturing",
     metaDescription:
-      "Connected-site infrastructure, dependable hardware, and responsive support for logistics and manufacturing in Nigeria — keeping warehouses and plants moving.",
+      "Connected-site infrastructure, dependable hardware, and responsive support for logistics and manufacturing in Nigeria, keeping warehouses and plants moving.",
   },
 };
 

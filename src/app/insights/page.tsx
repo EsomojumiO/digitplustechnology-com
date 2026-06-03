@@ -24,7 +24,7 @@ const PER_PAGE = 9;
 export const metadata: Metadata = {
   title: "IT Insights for Nigerian Business Leaders",
   description:
-    "Practical articles for IT decision-makers in Nigeria — IT strategy, procurement, infrastructure, cybersecurity, and managed services from Digitplus Technology.",
+    "Practical articles for IT decision-makers in Nigeria, IT strategy, procurement, infrastructure, cybersecurity, and managed services from Digitplus Technology.",
   alternates: { canonical: "/insights" },
 };
 
@@ -85,7 +85,7 @@ export default async function InsightsHubPage({
             as="h1"
             eyebrow="Insights"
             title="Practical thinking for IT decision-makers"
-            lede="Strategy, procurement discipline, infrastructure, and managed services — top-of-funnel guidance written for enterprises, government, and institutions. No hype, no product pitch."
+            lede="Strategy, procurement discipline, infrastructure, and managed services, top-of-funnel guidance written for enterprises, government, and institutions. No hype, no product pitch."
           />
         </FadeIn>
       </Section>
@@ -138,7 +138,7 @@ export default async function InsightsHubPage({
         </Section>
       ) : null}
 
-      {/* Category filter — server-rendered crawlable links, not client state */}
+      {/* Category filter, server-rendered crawlable links, not client state */}
       {categories.length > 0 ? (
         <Section spacing="sm">
           <nav aria-label="Filter insights by category">

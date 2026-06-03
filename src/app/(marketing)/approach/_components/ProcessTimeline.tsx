@@ -10,7 +10,7 @@ export interface ProcessTimelineProps {
 }
 
 /**
- * ProcessTimeline — the signature treatment for the Approach page.
+ * ProcessTimeline, the signature treatment for the Approach page.
  *
  * The six delivery steps sit along a single vertical spine. As the section
  * scrolls into view, an Ember-Red progress line draws down the spine (scroll
@@ -20,7 +20,7 @@ export interface ProcessTimelineProps {
  * Accessibility / reduced motion:
  *  - The steps are an ordered list (role="list" / "listitem" so the motion
  *    wrappers keep list semantics). Content is always present in the DOM
- *    (crawlable, no-JS friendly — the primitives never hide content without JS).
+ *    (crawlable, no-JS friendly, the primitives never hide content without JS).
  *  - The scroll-drawn accent line + drift are gated behind
  *    prefers-reduced-motion; reduced users get a static, fully-visible spine.
  */
@@ -81,7 +81,7 @@ function ProcessNode({
 }) {
   return (
     <div className="group flex gap-5 sm:gap-6">
-      {/* Numbered node sitting on the spine — glass disc, accent numeral. */}
+      {/* Numbered node sitting on the spine, glass disc, accent numeral. */}
       <span
         aria-hidden="true"
         className="relative z-10 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-hairline bg-surface/80 text-small font-semibold tabular-nums text-accent shadow-[0_0_0_4px_var(--color-background)] backdrop-blur-sm transition-colors duration-[var(--dur-base)] ease-[var(--ease-out)] group-hover:border-accent sm:h-11 sm:w-11"

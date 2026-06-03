@@ -12,7 +12,7 @@ import { isEmail } from "./validation";
 type Errors = Partial<Record<string, string>>;
 
 export interface ReportGateFormProps {
-  /** Report slug — determines the PDF url returned on success. */
+  /** Report slug, determines the PDF url returned on success. */
   reportSlug: string;
   /** Human title, used in the success message. */
   reportTitle: string;
@@ -20,7 +20,7 @@ export interface ReportGateFormProps {
 }
 
 /**
- * ReportGateForm — gates a quarterly-report PDF behind a lead form.
+ * ReportGateForm, gates a quarterly-report PDF behind a lead form.
  * On success it reveals the download link returned by the server.
  */
 export function ReportGateForm({

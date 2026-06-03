@@ -1,5 +1,5 @@
 /**
- * validation.ts — tiny client-side mirrors of server rules (UX only).
+ * validation.ts, tiny client-side mirrors of server rules (UX only).
  * The server (zod) is always the source of truth.
  */
 

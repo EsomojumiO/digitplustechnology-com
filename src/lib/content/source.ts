@@ -1,5 +1,5 @@
 /**
- * source.ts — Low-level content SOURCE adapter (the swappable internals).
+ * source.ts, Low-level content SOURCE adapter (the swappable internals).
  *
  * This is the ONLY module that knows content lives as MDX files on disk and is
  * parsed with gray-matter. Everything above it (articles.ts, reports.ts) works
@@ -24,7 +24,7 @@ export interface RawEntry {
   data: Record<string, unknown>;
   /** Raw MDX/markdown body (no frontmatter). */
   content: string;
-  /** Filename without extension — the canonical slug. */
+  /** Filename without extension, the canonical slug. */
   slug: string;
 }
 
@@ -69,7 +69,7 @@ function parseFile(dir: string, file: string): RawEntry {
 }
 
 /* ---------------------------------------------------------------------------
-   Frontmatter normalization helpers — defensive coercion so a small editor
+   Frontmatter normalization helpers, defensive coercion so a small editor
    mistake (a date typed as a JS Date, a missing boolean) never breaks a build.
    --------------------------------------------------------------------------- */
 

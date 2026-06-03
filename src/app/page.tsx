@@ -32,7 +32,7 @@ import { getFeaturedArticles, getFeaturedReport } from "@/lib/content";
 export const metadata: Metadata = {
   title: "IT Solutions Company in Nigeria | Digitplus Technology",
   description:
-    "Digitplus is a B2B IT solutions company in Nigeria — IT procurement, hardware supply, infrastructure, and managed IT services for enterprises, government, and banks. Abuja, Lagos, Port Harcourt.",
+    "Digitplus is a B2B IT solutions company in Nigeria, IT procurement, hardware supply, infrastructure, and managed IT services for enterprises, government, and banks. Abuja, Lagos, Port Harcourt.",
 };
 
 /* Raycast-style two-beat leads for the four Why Digitplus pillars, mapped to
@@ -58,13 +58,13 @@ export default function HomePage() {
 
   return (
     <>
-      {/* Hero — signature motif + aurora; magnetic primary CTA */}
+      {/* Hero, signature motif + aurora; magnetic primary CTA */}
       <Hero
         aurora
         motif
         eyebrow="IT solutions company in Nigeria"
         title={siteConfig.tagline}
-        subhead="Digitplus is your one accountable partner for the full lifecycle of your IT — from planning and procurement to deployment and managed services. Built for enterprises, government, and institutions that need their technology to simply work."
+        subhead="Digitplus is your one accountable partner for the full lifecycle of your IT, from planning and procurement to deployment and managed services. Built for enterprises, government, and institutions that need their technology to simply work."
         actions={
           <>
             <Magnetic strength={6}>
@@ -80,7 +80,7 @@ export default function HomePage() {
         coverage={`Abuja • Lagos • Port Harcourt`}
       />
 
-      {/* Trust strip — partner logos on a slow seamless marquee */}
+      {/* Trust strip, partner logos on a slow seamless marquee */}
       <Section tone="muted" spacing="sm">
         <FadeIn>
           <TrustMarquee label="Authorised technology partners" />
@@ -93,7 +93,7 @@ export default function HomePage() {
           <SectionHeading
             eyebrow="What we do"
             title="Six service lines, one accountable partner"
-            lede="Each capability stands on its own — and works better together. Most clients start with one and grow into the rest."
+            lede="Each capability stands on its own, and works better together. Most clients start with one and grow into the rest."
           />
         </FadeIn>
         <Stagger>
@@ -117,13 +117,13 @@ export default function HomePage() {
         </FadeIn>
       </Section>
 
-      {/* Why Digitplus — two-beat pillars */}
+      {/* Why Digitplus, two-beat pillars */}
       <Section tone="muted">
         <FadeIn>
           <SectionHeading
             eyebrow="Why Digitplus"
             title="The difference is accountability"
-            lede="Plenty of companies will sell you equipment. Fewer will own the outcome from end to end — and stand behind it afterwards."
+            lede="Plenty of companies will sell you equipment. Fewer will own the outcome from end to end, and stand behind it afterwards."
           />
         </FadeIn>
         <Stagger>
@@ -147,7 +147,7 @@ export default function HomePage() {
           <Eyebrow className="text-neutral-400">Our standard</Eyebrow>
           <p className="text-h2 mt-6 font-medium tracking-tight text-neutral-50">
             “Most IT projects don’t fail on the equipment. They fail in the gaps
-            — between vendors, between purchase and deployment, between handover
+, between vendors, between purchase and deployment, between handover
             and support. We exist to close those gaps.”
           </p>
         </FadeIn>
@@ -160,7 +160,7 @@ export default function HomePage() {
             <SectionHeading
               eyebrow="How we work"
               title="A clear, documented process"
-              lede="Six steps, the same discipline every time — from first conversation to long-term support."
+              lede="Six steps, the same discipline every time, from first conversation to long-term support."
               className="lg:sticky lg:top-28"
             />
             <div className="mt-8 lg:sticky lg:top-64">
@@ -183,13 +183,13 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* Industries — filterable grid */}
+      {/* Industries, filterable grid */}
       <Section tone="muted">
         <FadeIn>
           <SectionHeading
             eyebrow="Who we serve"
             title="Built around how your sector works"
-            lede="Government procurement, branch uptime, clinical reliability, campus budgets — every sector has its own demands. We deliver to each."
+            lede="Government procurement, branch uptime, clinical reliability, campus budgets, every sector has its own demands. We deliver to each."
           />
         </FadeIn>
         <IndustriesFilter
@@ -226,7 +226,7 @@ export default function HomePage() {
         </Stagger>
       </Section>
 
-      {/* By the numbers — animated count-up */}
+      {/* By the numbers, animated count-up */}
       <Section tone="raised">
         <FadeIn>
           <SectionHeading eyebrow="By the numbers" title="Track record" />
@@ -242,7 +242,7 @@ export default function HomePage() {
         </FadeIn>
       </Section>
 
-      {/* Featured insights — glass-framed content shelf */}
+      {/* Featured insights, glass-framed content shelf */}
       {featuredArticles.length > 0 ? (
         <Section>
           <FadeIn>
@@ -276,7 +276,7 @@ export default function HomePage() {
         </Section>
       ) : null}
 
-      {/* Featured report — frosted glass shelf */}
+      {/* Featured report, frosted glass shelf */}
       {featuredReport ? (
         <Section tone="muted">
           <FadeIn>
@@ -322,7 +322,7 @@ export default function HomePage() {
           className="relative z-10 bg-transparent"
           tone="inverse"
           title="Tell us what you’re planning"
-          description="A short conversation is the fastest way to find out how we can help. Request a free IT assessment and we’ll come back with practical next steps — no obligation."
+          description="A short conversation is the fastest way to find out how we can help. Request a free IT assessment and we’ll come back with practical next steps, no obligation."
           actions={
             <>
               <Magnetic strength={6}>

@@ -6,7 +6,7 @@ import type { ArticleMeta } from "@/lib/content";
 import { ArticleCard } from "./ArticleCard";
 
 /**
- * InsightsSearch — progressive-enhancement search island.
+ * InsightsSearch, progressive-enhancement search island.
  *
  * PROGRESSIVE ENHANCEMENT CONTRACT:
  * The server (page.tsx) ALWAYS renders the full paginated grid of articles as
@@ -19,7 +19,7 @@ import { ArticleCard } from "./ArticleCard";
  * Filtering is purely client-side over title + excerpt + tags + category; it is
  * intentionally lightweight (substring match, no fuzzy lib). When the query is
  * empty the island shows nothing extra and defers to the server grid for the
- * current page — so pagination behaviour is preserved until the user searches.
+ * current page, so pagination behaviour is preserved until the user searches.
  */
 export interface InsightsSearchProps {
   /** Full set of published articles (all pages) for client-side filtering. */

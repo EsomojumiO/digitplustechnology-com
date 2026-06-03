@@ -1,17 +1,17 @@
 /**
- * opengraph-image.tsx — Default site-wide Open Graph image (1200x630).
+ * opengraph-image.tsx, Default site-wide Open Graph image (1200x630).
  *
  * Rendered at the edge via Next's ImageResponse. Used for any page that does
  * not supply its own `openGraph.images` (articles/reports override this with
  * their own cover via metadata). Brand wordmark + tagline on the forest-green
- * brand surface with the single confident ember accent — literal colour values,
+ * brand surface with the single confident ember accent, literal colour values,
  * because ImageResponse cannot read CSS custom properties.
  */
 import { ImageResponse } from "next/og";
 import { siteConfig } from "@/lib/site";
 
 export const runtime = "edge";
-export const alt = `${siteConfig.name} — ${siteConfig.tagline}`;
+export const alt = `${siteConfig.name}, ${siteConfig.tagline}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

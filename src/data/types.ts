@@ -1,5 +1,5 @@
 /**
- * data/types.ts — Shared shapes for the marketing copy layer.
+ * data/types.ts, Shared shapes for the marketing copy layer.
  *
  * This is editorial copy (owned by pages-builder), kept separate from the
  * canonical slug/NAP config in `src/lib/site.ts`. Slugs referenced here MUST

@@ -6,7 +6,7 @@ export interface ProseProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 /**
- * Prose — typographic wrapper for long-form / MDX content. Establishes
+ * Prose, typographic wrapper for long-form / MDX content. Establishes
  * heading and spacing rhythm and constrains to a ~65ch measure. Styles are
  * applied to child elements via descendant selectors (no Tailwind typography
  * plugin needed).

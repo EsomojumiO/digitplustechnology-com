@@ -1,5 +1,5 @@
 /**
- * data/testimonials.ts — Illustrative testimonials.
+ * data/testimonials.ts, Illustrative testimonials.
  *
  * NOTE: These are ILLUSTRATIVE placeholders, not attributable quotes. They must
  * be replaced with real, attributable client testimonials before launch. This
@@ -17,7 +17,7 @@ export const testimonials: TestimonialContent[] = [
   },
   {
     quote:
-      "What stood out was accountability. One partner owned the whole rollout — supply, cabling, configuration, training — and stood behind it afterwards.",
+      "What stood out was accountability. One partner owned the whole rollout, supply, cabling, configuration, training, and stood behind it afterwards.",
     author: "Head of IT",
     role: "Head of IT",
     organization: "Commercial bank (illustrative)",

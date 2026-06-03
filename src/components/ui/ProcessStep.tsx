@@ -10,7 +10,7 @@ export interface ProcessStepProps
 }
 
 /**
- * ProcessStep — a numbered step in a how-we-work sequence.
+ * ProcessStep, a numbered step in a how-we-work sequence.
  */
 export function ProcessStep({
   step,

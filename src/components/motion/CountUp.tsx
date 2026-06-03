@@ -20,7 +20,7 @@ export interface CountUpProps {
 }
 
 /**
- * CountUp — animates a figure from 0 to `value` when scrolled into view.
+ * CountUp, animates a figure from 0 to `value` when scrolled into view.
  * Reduced motion (or no-JS via SSR text) shows the final value immediately.
  */
 export function CountUp({

@@ -39,7 +39,7 @@ function ChevronIcon({ open }: { open: boolean }) {
 }
 
 /**
- * FAQ — accessible disclosure list. Each row is a <button> toggling an answer
+ * FAQ, accessible disclosure list. Each row is a <button> toggling an answer
  * region with aria-expanded / aria-controls. Keyboard accessible by default.
  */
 export function FAQ({

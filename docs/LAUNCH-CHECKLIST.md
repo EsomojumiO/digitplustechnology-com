@@ -31,13 +31,18 @@ and run **axe** for full WCAG AA (article a11y 92 → check muted-text contrast 
 - [ ] `CRM_WEBHOOK_URL` or `CRM_API_KEY` (HubSpot) — lead sync
 - [ ] `NEXT_PUBLIC_ANALYTICS` = domain (Plausible) — analytics + event tracking
 
-**Infrastructure**
-- [ ] **Lead persistence → real DB** (current store is in-memory, lost on redeploy). Wire
-      `src/lib/integrations/store.ts` to Postgres/Supabase.
-- [ ] **Rate-limiting → shared store** (Upstash Redis) for serverless correctness.
+**Infrastructure** (code complete — activate with env)
+- [x] **Lead persistence → Supabase** — WIRED via REST in `src/lib/integrations/store.ts`.
+      Set `SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY` and run
+      `supabase/migrations/0001_leads.sql`. Falls back to in-memory if unset.
+- [x] **Rate-limiting → Upstash Redis** — WIRED via REST in
+      `src/lib/integrations/rate-limit.ts`. Set `UPSTASH_REDIS_REST_URL` +
+      `UPSTASH_REDIS_REST_TOKEN`. Falls back to in-memory if unset; fails open.
 
 **Assets & trust**
-- [ ] Partner-logo files + authorization (Microsoft/HP/Dell/Cisco/Lenovo/Fortinet)
+- [x] Partner-logo files — official SVGs in `/public/logos` (Microsoft/HP/Dell/Cisco/
+      Lenovo/Fortinet), wired into TrustStrip + TrustMarquee (forced uniform white).
+      ⚠️ STILL NEEDS reseller **authorization** per brand before public use.
 - [ ] Real, attributable testimonials / named case studies
 - [ ] Real project/team photography (replace /public/images placeholders)
 - [ ] Real **named expert authors** in `src/data/authors.ts` (stronger E-E-A-T)
@@ -48,7 +53,8 @@ and run **axe** for full WCAG AA (article a11y 92 → check muted-text contrast 
 
 **Deploy & SEO ops**
 - [ ] Deploy to Vercel on the canonical domain over HTTPS; set env vars
-- [ ] Resolve `www` vs non-`www` to one host; 301 stray domains (`digitplus.tech`) → canonical
+- [x] App-level `www → non-www` + `digitplus.tech → canonical` 308s in `next.config.ts`
+      (`digitplus.tech` rule fires once that domain is attached to the Vercel project)
 - [ ] Verify in **Google Search Console**; submit `sitemap.xml`
 - [ ] **Google Business Profile** — NAP identical to `src/lib/site.ts`
 - [ ] Confirm 301s from old single-page anchors are live

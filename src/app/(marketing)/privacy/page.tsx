@@ -27,7 +27,7 @@ export default function PrivacyPage() {
         <Eyebrow>Legal</Eyebrow>
         <h1 className="text-h1 mt-3 text-text">Privacy Policy</h1>
         <div className="mt-4 flex flex-wrap items-center gap-3">
-          <Badge tone="outline">DRAFT — pending legal counsel review</Badge>
+          <Badge tone="outline">DRAFT, pending legal counsel review</Badge>
           <span className="text-small text-muted">Last updated: May 2026</span>
         </div>
 
@@ -88,19 +88,19 @@ export default function PrivacyPage() {
           <p>Under the NDPA, we rely on the following bases:</p>
           <ul>
             <li>
-              <strong>Consent</strong> — for newsletter sign-ups and any
+              <strong>Consent</strong>, for newsletter sign-ups and any
               non-essential analytics.
             </li>
             <li>
-              <strong>Legitimate interest</strong> — to respond to a business
+              <strong>Legitimate interest</strong>, to respond to a business
               enquiry you send us and to keep the site secure.
             </li>
             <li>
-              <strong>Steps prior to a contract</strong> — to prepare a proposal
+              <strong>Steps prior to a contract</strong>, to prepare a proposal
               or assessment you request.
             </li>
             <li>
-              <strong>Legal obligation</strong> — where we must retain or
+              <strong>Legal obligation</strong>, where we must retain or
               disclose information to comply with the law.
             </li>
           </ul>

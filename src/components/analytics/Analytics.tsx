@@ -1,7 +1,7 @@
 import Script from "next/script";
 
 /**
- * Analytics — loads Plausible (privacy-friendly, cookieless) ONLY when
+ * Analytics, loads Plausible (privacy-friendly, cookieless) ONLY when
  * `NEXT_PUBLIC_ANALYTICS` is set to the site's domain. Renders nothing
  * otherwise, keeping the site tracker-free by default.
  *

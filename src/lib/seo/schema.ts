@@ -1,13 +1,13 @@
 /**
- * schema.ts — Typed schema.org builders.
+ * schema.ts, Typed schema.org builders.
  *
  * Each function returns a plain JSON-serializable object (or array) ready to be
  * passed to <JsonLd data={...} />. All values derive from siteConfig / content
  * so the NAP (Name, Address, Phone) stays identical everywhere.
  *
  * Stable, well-known @id anchors are used so nodes can reference each other:
- *   #organization   — the Organization node
- *   #website        — the WebSite node
+ *   #organization, the Organization node
+ *   #website, the WebSite node
  * These resolve relative to siteConfig.url.
  */
 import { siteConfig } from "@/lib/site";
@@ -80,7 +80,7 @@ export function organizationSchema() {
 }
 
 /* ---------------------------------------------------------------------------
-   WebSite (sitewide) — with a SearchAction pointing at the Insights hub.
+   WebSite (sitewide), with a SearchAction pointing at the Insights hub.
    --------------------------------------------------------------------------- */
 export function websiteSchema() {
   return {
@@ -178,7 +178,7 @@ export function articleSchema(article: ArticleMeta, url: string) {
 }
 
 /* ---------------------------------------------------------------------------
-   Report — modeled as an Article (data-rich, citable, ungated preview).
+   Report, modeled as an Article (data-rich, citable, ungated preview).
    --------------------------------------------------------------------------- */
 export function reportSchema(report: ReportMeta, url: string) {
   const image = report.seo.ogImage ?? report.cover;
@@ -278,7 +278,7 @@ export function localBusinessSchema(location: LocationContent) {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "@id": `${url}#localbusiness`,
-    name: `${siteConfig.name} — ${location.city}`,
+    name: `${siteConfig.name}, ${location.city}`,
     description: location.metaDescription,
     url,
     image: LOGO_URL,

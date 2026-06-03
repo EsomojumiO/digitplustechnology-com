@@ -1,7 +1,7 @@
 /**
- * articles.ts — Public access layer for Insights articles.
+ * articles.ts, Public access layer for Insights articles.
  *
- * PUBLIC API (the CMS seam — keep these signatures stable):
+ * PUBLIC API (the CMS seam, keep these signatures stable):
  *   getAllArticles(): ArticleMeta[]
  *   getArticleBySlug(slug): Article | null
  *   getArticlesByCategory(categorySlug): ArticleMeta[]
@@ -10,7 +10,7 @@
  *   getRelatedArticles(slug, n?): ArticleMeta[]
  *
  * Server-only (reads the filesystem at build time). Drafts are excluded from
- * every query here — there is no public path to a draft.
+ * every query here, there is no public path to a draft.
  */
 
 import "server-only";
@@ -100,7 +100,7 @@ export function getAllArticles(): ArticleMeta[] {
 
 /**
  * Full article (incl. raw MDX body + reading time) by slug.
- * Returns null for missing OR draft articles — there is no public draft route.
+ * Returns null for missing OR draft articles, there is no public draft route.
  */
 export function getArticleBySlug(slug: string): Article | null {
   const entry = readEntry(COLLECTION, slug);

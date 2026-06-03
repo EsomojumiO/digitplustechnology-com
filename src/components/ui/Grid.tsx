@@ -25,7 +25,7 @@ const gaps = {
 };
 
 /**
- * Grid — responsive column grid (1–4 columns) with consistent gaps.
+ * Grid, responsive column grid (1–4 columns) with consistent gaps.
  */
 export function Grid({
   as: Comp = "div",

@@ -1,5 +1,5 @@
 /**
- * Motion tokens — single source of truth for JS-driven animation (Framer Motion),
+ * Motion tokens, single source of truth for JS-driven animation (Framer Motion),
  * mirroring the CSS duration/easing tokens in globals.css.
  */
 export const DUR = {
@@ -8,7 +8,7 @@ export const DUR = {
   slow: 0.32,
 } as const;
 
-/** Signature entrance easing — matches --ease-out: cubic-bezier(0.22,1,0.36,1). */
+/** Signature entrance easing, matches --ease-out: cubic-bezier(0.22,1,0.36,1). */
 export const EASE_OUT = [0.22, 1, 0.36, 1] as const;
 export const EASE_IN_OUT = [0.65, 0, 0.35, 1] as const;
 

@@ -22,7 +22,7 @@ const glass =
   "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";
 
 /**
- * InsightShelfCard — a premium frosted insight card for the home content shelf.
+ * InsightShelfCard, a premium frosted insight card for the home content shelf.
  */
 export function InsightShelfCard({
   href,

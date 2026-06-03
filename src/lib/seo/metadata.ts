@@ -1,12 +1,12 @@
 /**
- * metadata.ts — buildMetadata() helper.
+ * metadata.ts, buildMetadata() helper.
  *
  * Produces a Next.js `Metadata` object with an absolute canonical, OpenGraph,
  * Twitter card, and robots directives, all derived from siteConfig. Pages may
  * use this to reduce duplication.
  *
  * Note: `metadataBase` is already set in the root layout, so OpenGraph/Twitter
- * image paths here may be root-relative — Next resolves them. The `canonical`
+ * image paths here may be root-relative, Next resolves them. The `canonical`
  * we set is the relative `path`; Next combines it with metadataBase to emit an
  * absolute <link rel="canonical">.
  */

@@ -17,7 +17,7 @@ const paddings = {
 };
 
 /**
- * Card — soft surface with hairline border and optional hover elevation.
+ * Card, soft surface with hairline border and optional hover elevation.
  */
 export function Card({
   as: Comp = "div",

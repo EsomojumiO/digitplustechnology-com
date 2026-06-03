@@ -9,7 +9,7 @@ export interface StatGridProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 /**
- * StatGrid — responsive row of Stat figures, optionally divided by hairlines.
+ * StatGrid, responsive row of Stat figures, optionally divided by hairlines.
  */
 export function StatGrid({
   items,

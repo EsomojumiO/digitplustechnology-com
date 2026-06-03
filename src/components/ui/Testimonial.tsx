@@ -10,7 +10,7 @@ export interface TestimonialProps
 }
 
 /**
- * Testimonial — quote with attribution. Uses a semantic <figure>/<blockquote>.
+ * Testimonial, quote with attribution. Uses a semantic <figure>/<blockquote>.
  */
 export function Testimonial({
   quote,

@@ -13,7 +13,7 @@ import { siteConfig } from "@/lib/site";
 import { locations } from "@/data/locations";
 
 export const metadata: Metadata = {
-  title: "Our Locations — Abuja, Lagos & Port Harcourt",
+  title: "Our Locations, Abuja, Lagos & Port Harcourt",
   description:
     "Digitplus Technology Limited is headquartered in Abuja with delivery hubs in Lagos and Port Harcourt, and nationwide coverage on request across Nigeria.",
   alternates: { canonical: "/locations" },
@@ -34,7 +34,7 @@ export default function LocationsPage() {
             as="h1"
             eyebrow="Locations"
             title="Headquartered in Abuja, delivering nationwide"
-            lede={`From our ${siteConfig.hq} headquarters, with delivery hubs in Lagos and Port Harcourt, we coordinate IT programmes to a single standard wherever your operations are — and reach further across Nigeria on request.`}
+            lede={`From our ${siteConfig.hq} headquarters, with delivery hubs in Lagos and Port Harcourt, we coordinate IT programmes to a single standard wherever your operations are, and reach further across Nigeria on request.`}
           />
         </Reveal>
       </Section>

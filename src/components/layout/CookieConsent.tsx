@@ -14,14 +14,14 @@ function readChoice(): string {
   try {
     return window.localStorage.getItem(STORAGE_KEY) ?? "unset";
   } catch {
-    // localStorage unavailable (private mode) — treat as undecided, fail safe.
+    // localStorage unavailable (private mode), treat as undecided, fail safe.
     return "unset";
   }
 }
 
 /**
  * Subscribe to the consent choice via an external store (localStorage), so the
- * banner's visibility is derived state — no setState inside an effect body.
+ * banner's visibility is derived state, no setState inside an effect body.
  * The server snapshot ("ssr") keeps the banner out of the SSR markup, avoiding a
  * hydration flash; the client snapshot decides on first paint after hydration.
  */
@@ -41,10 +41,10 @@ function useConsentChoice(): string {
 }
 
 /**
- * CookieConsent — privacy-first banner.
+ * CookieConsent, privacy-first banner.
  *
  * Defaults to DECLINING non-essential cookies: nothing is loaded until the user
- * explicitly accepts. No third-party scripts are touched here — this only
+ * explicitly accepts. No third-party scripts are touched here, this only
  * records the choice in localStorage. Analytics agents should gate behind it.
  */
 export function CookieConsent() {

@@ -5,12 +5,12 @@ import { siteConfig } from "@/lib/site";
 
 export interface LogoProps {
   className?: string;
-  /** Tone of the wordmark — "inverse" for use on the forest-green brand surfaces. */
+  /** Tone of the wordmark, "inverse" for use on the forest-green brand surfaces. */
   tone?: "default" | "inverse";
 }
 
 /**
- * Logo — official Digitplus chain-link mark + DIGITPLUS wordmark.
+ * Logo, official Digitplus chain-link mark + DIGITPLUS wordmark.
  *
  * Uses the brand icon (Pishon Design Studio kit) from /public/brand. The wordmark
  * is set in Montserrat to match the brand headline face. On forest-green surfaces
@@ -24,7 +24,7 @@ export function Logo({ className, tone = "default" }: LogoProps) {
   return (
     <Link
       href="/"
-      aria-label={`${siteConfig.shortName} — home`}
+      aria-label={`${siteConfig.shortName}, home`}
       className={cn(
         "group inline-flex items-center gap-2.5 rounded-md",
         "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",

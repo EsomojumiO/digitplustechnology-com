@@ -12,12 +12,12 @@ type Node = { x: number; y: number; vx: number; vy: number; r: number };
 type Pulse = { a: number; b: number; t: number; speed: number };
 
 /**
- * NetworkField — the Digitplus signature motif: a constellation of infrastructure
+ * NetworkField, the Digitplus signature motif: a constellation of infrastructure
  * nodes (servers, branches, devices) linked by hairlines, with data pulses
  * travelling along connections in the brand accent. Drifts ambiently, reacts to
  * the cursor (nearby nodes nudge, lines brighten), and is fully reduced-motion
  * aware (renders a single static frame). Canvas 2D, DPR-aware, pauses offscreen
- * and when the tab is hidden. Decorative only (aria-hidden) — never carries content.
+ * and when the tab is hidden. Decorative only (aria-hidden), never carries content.
  */
 export function NetworkField({ className, density = 48 }: NetworkFieldProps) {
   const canvasRef = React.useRef<HTMLCanvasElement>(null);

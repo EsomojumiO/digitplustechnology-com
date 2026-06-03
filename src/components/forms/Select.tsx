@@ -16,7 +16,7 @@ export interface SelectProps
   placeholder?: string;
 }
 
-/** Select — token-styled native select with a chevron. Pair with <Field>. */
+/** Select, token-styled native select with a chevron. Pair with <Field>. */
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   function Select(
     { className, options, placeholder, defaultValue, value, ...props },

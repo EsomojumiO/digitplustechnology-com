@@ -17,7 +17,7 @@ const tones = {
 };
 
 /**
- * CTABand — full-width call-to-action band.
+ * CTABand, full-width call-to-action band.
  */
 export function CTABand({
   title,

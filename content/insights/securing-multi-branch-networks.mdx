@@ -17,13 +17,13 @@ coverAlt: "A network diagram showing secure connections between a head office an
 draft: false
 seo:
   metaTitle: "Securing Multi-Branch Networks in Nigeria"
-  metaDescription: "A practical security architecture guide for Nigerian organisations running multi-branch networks — covering segmentation, access control, monitoring, and branch hardening."
+  metaDescription: "A practical security architecture guide for Nigerian organisations running multi-branch networks, covering segmentation, access control, monitoring, and branch hardening."
   ogImage: "/images/insights/securing-multi-branch-networks.jpg"
 ---
 
 Every branch your organisation opens adds a network to secure. When that
 network is connected to your head office and to shared systems, it is not an
-isolated perimeter — it is part of a connected fabric, and a breach at the
+isolated perimeter, it is part of a connected fabric, and a breach at the
 smallest branch can reach the most sensitive systems at headquarters. For
 Nigerian organisations operating in banking, insurance, healthcare, or any
 sector where branch presence is a business model, multi-branch network security
@@ -34,7 +34,7 @@ inconsistently. A branch that was set up quickly, with a consumer-grade router
 and a flat network connecting everything from the ATM to the staff printer,
 represents a gap that attackers are increasingly aware of. Getting this right
 requires applying consistent security architecture across every location from
-the beginning — and remediating inconsistencies in existing branch estates
+the beginning, and remediating inconsistencies in existing branch estates
 before an incident makes the problem visible.
 
 ## Why branch networks are a specific security challenge
@@ -48,7 +48,7 @@ branches specifically attractive to attackers:
 **Reduced local oversight.** No dedicated IT security presence means that
 anomalous behaviour is less likely to be noticed. A device connecting at
 unusual hours, an unfamiliar USB device plugged in, a printer firmware that has
-not been updated in three years — all of these go unobserved at branches.
+not been updated in three years, all of these go unobserved at branches.
 
 **Physical access risk.** Network ports in public-facing areas, accessible
 server rooms, and unsecured switches in cabinets create physical attack vectors.
@@ -87,8 +87,8 @@ deliberate investment in management tooling.
 
 ### Network segmentation at every site
 
-A flat network — where every device at a branch can communicate with every other
-device — is the highest-risk configuration. In a flat network, a compromised
+A flat network, where every device at a branch can communicate with every other
+device, is the highest-risk configuration. In a flat network, a compromised
 device anywhere in the branch can reach every other device: the ATM, the staff
 workstations, the IP phones, the management network, and the WAN link back to
 headquarters.
@@ -98,7 +98,7 @@ access between them:
 
 - **User segment:** Staff workstations and laptops
 - **Operations segment:** ATMs, point-of-sale terminals, specialist banking
-  devices — isolated by design, since these devices rarely need to communicate
+  devices, isolated by design, since these devices rarely need to communicate
   with general user systems
 - **Guest/visitor segment:** Isolated from all internal systems
 - **Management segment:** IT infrastructure, accessible only to IT management
@@ -110,8 +110,8 @@ management segment without traversing the firewall, which has no rule permitting
 that traffic.
 
 Implementing this for [banking and financial services organisations](/industries/banking-financial-services)
-is particularly important because the operations segment — ATMs, card payment
-infrastructure — must meet PCI-DSS requirements that explicitly require isolation.
+is particularly important because the operations segment, ATMs, card payment
+infrastructure, must meet PCI-DSS requirements that explicitly require isolation.
 
 ### Secure WAN architecture
 
@@ -127,18 +127,18 @@ the organisation's control.
 traffic goes directly to the internet rather than through headquarters. This
 reduces WAN bandwidth requirements but means that branch internet traffic
 bypasses the security controls at headquarters. For branches handling sensitive
-data, routing internet traffic through a centralised security stack — or
-implementing a branch security gateway that applies consistent policy locally —
+data, routing internet traffic through a centralised security stack, or
+implementing a branch security gateway that applies consistent policy locally,
 is preferable.
 
 **Link monitoring:** WAN link failures at branches are not only an availability
-issue — a link that flaps repeatedly may indicate physical interference or a
+issue, a link that flaps repeatedly may indicate physical interference or a
 man-in-the-middle attempt. Monitor WAN link health from the centre and
 investigate anomalies.
 
 ### Branch perimeter hardening
 
-Each branch has a perimeter — the boundary between the branch network and the
+Each branch has a perimeter, the boundary between the branch network and the
 wider internet and between the branch LAN and the WAN to headquarters. Both
 need security controls:
 
@@ -151,8 +151,8 @@ creates the boundary between a secured branch and an uncontrolled one.
 **Default-deny outbound policy:** Many organisations implement firewall rules
 at the inbound perimeter but leave outbound traffic unrestricted. Malware
 frequently uses outbound connections to communicate with command-and-control
-servers and to exfiltrate data. A default-deny outbound policy — where only
-necessary outbound destinations are explicitly permitted — reduces the impact
+servers and to exfiltrate data. A default-deny outbound policy, where only
+necessary outbound destinations are explicitly permitted, reduces the impact
 of a compromised device.
 
 **DNS security:** Routing DNS queries through a filtering resolver blocks
@@ -167,7 +167,7 @@ devices.
 
 > **Security architecture for multi-branch networks is not primarily about
 > buying more security products. It is about applying consistent, documented
-> controls across every site — and being able to verify that consistency from
+> controls across every site, and being able to verify that consistency from
 > the centre.**
 
 ### Physical security at branches
@@ -202,7 +202,7 @@ undetected. Centralised visibility must extend to all branches:
 
 For [banking and financial services organisations](/industries/banking-financial-services)
 with regulatory requirements for security monitoring, this centralised visibility
-is not optional — it is a control that auditors will examine.
+is not optional, it is a control that auditors will examine.
 
 ## Remediating an existing branch estate
 
@@ -210,7 +210,7 @@ Organisations that already have multiple branches with inconsistent security
 configurations face a prioritisation challenge. A full remediation across every
 branch simultaneously is rarely feasible. A risk-based approach:
 
-1. **Audit the estate.** Conduct a configuration review of all branches —
+1. **Audit the estate.** Conduct a configuration review of all branches,
    document what equipment is in place, what firmware versions, what network
    architecture, what access controls. The result is a risk-ranked list of
    remediation priorities.
@@ -225,8 +225,8 @@ branch simultaneously is rarely feasible. A risk-based approach:
    ongoing.
 
 Working with an [infrastructure solutions](/services/infrastructure-solutions)
-partner that can deliver consistent branch deployments — including physical
-installation, configuration, and integration with central management — is typically
+partner that can deliver consistent branch deployments, including physical
+installation, configuration, and integration with central management, is typically
 more efficient than managing a multi-city remediation programme with in-house
 resources.
 
@@ -266,8 +266,8 @@ contact or a field engineer dispatch from the nearest location with coverage.
 
 ### What is the most common security gap found in branch network audits?
 
-Flat network architecture — no segmentation between user devices, operational
-systems, and management infrastructure — is consistently the most significant
+Flat network architecture, no segmentation between user devices, operational
+systems, and management infrastructure, is consistently the most significant
 gap. Combined with weak or default firewall configurations and outdated firmware
 on network equipment, a flat network at branch level represents a substantial
 risk to the connected central environment. Segmentation and firmware currency

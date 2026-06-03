@@ -18,7 +18,7 @@ import { JsonLd } from "@/lib/seo/jsonld";
 import { breadcrumbSchema } from "@/lib/seo/schema";
 
 export const metadata: Metadata = {
-  title: "About Us — A Disciplined, Accountable Nigerian IT Partner",
+  title: "About Us, A Disciplined, Accountable Nigerian IT Partner",
   description:
     "Digitplus Technology Limited is a CAC-registered, Abuja-based B2B IT solutions company with 8+ years and 50+ enterprise clients. End-to-end IT built on operational discipline.",
   alternates: { canonical: "/about" },
@@ -45,7 +45,7 @@ export default function AboutPage() {
             as="h1"
             eyebrow="About us"
             title="A disciplined IT partner, not just a supplier"
-            lede="Digitplus Technology Limited exists to take the uncertainty out of IT for Nigerian organisations — by owning the whole journey from plan to support, and doing it with the discipline that serious operations require."
+            lede="Digitplus Technology Limited exists to take the uncertainty out of IT for Nigerian organisations, by owning the whole journey from plan to support, and doing it with the discipline that serious operations require."
           />
         </FadeIn>
       </Section>
@@ -66,7 +66,7 @@ export default function AboutPage() {
             <p>
               Digitplus was built to close those gaps. We bring procurement,
               hardware supply, infrastructure, deployment, advisory, and managed
-              services under one accountable roof — so there is a single partner
+              services under one accountable roof, so there is a single partner
               responsible for the outcome, with the documentation to prove how it
               was delivered.
             </p>
@@ -75,7 +75,7 @@ export default function AboutPage() {
               Discipline is the thread through everything we do. We source only
               through authorised channels. We document every step of a purchase.
               We test against agreed criteria before we sign off. We put our
-              service commitments in writing. None of this is glamorous — it is
+              service commitments in writing. None of this is glamorous, it is
               simply what it takes to be a partner serious organisations can
               depend on, year after year.
             </p>
@@ -104,7 +104,7 @@ export default function AboutPage() {
               <h3 className="text-h4 text-text">8+ years operating</h3>
               <p className="text-body text-muted measure mt-3">
                 Nearly a decade delivering IT to enterprises, government, and
-                institutions across Nigeria — and supporting it long-term.
+                institutions across Nigeria, and supporting it long-term.
               </p>
             </Card>
             <Card padding="lg">
@@ -173,7 +173,7 @@ export default function AboutPage() {
           <Eyebrow className="text-neutral-400">Our commitment</Eyebrow>
           <p className="text-h3 mt-6 font-medium tracking-tight text-neutral-50">
             We treat your procurement, your data, and your operations with the
-            same care we would expect for our own — genuine equipment,
+            same care we would expect for our own, genuine equipment,
             transparent records, and a privacy-first stance on the information
             you share with us.
           </p>

@@ -17,53 +17,53 @@ coverAlt: "A bank branch IT room being set up with a network rack, UPS units, an
 draft: false
 seo:
   metaTitle: "IT Checklist for Opening a New Bank Branch in Nigeria"
-  metaDescription: "A practical IT checklist for Nigerian banks opening a new branch — covering power, connectivity, core banking endpoints, security, and go-live readiness."
+  metaDescription: "A practical IT checklist for Nigerian banks opening a new branch, covering power, connectivity, core banking endpoints, security, and go-live readiness."
   ogImage: "/images/insights/it-checklist-for-opening-a-new-bank-branch.jpg"
 ---
 
-Opening a new bank branch is an IT project as much as it is a property or operations project. The premises may be ready, the staff recruited, and the marketing underway — but if the technology layer is not commissioned correctly before the first customer walks in, you will spend your opening week managing apologies rather than transactions.
+Opening a new bank branch is an IT project as much as it is a property or operations project. The premises may be ready, the staff recruited, and the marketing underway, but if the technology layer is not commissioned correctly before the first customer walks in, you will spend your opening week managing apologies rather than transactions.
 
 This checklist covers the critical IT workstreams a Nigerian bank must address before a branch goes live. It is structured to guide both the internal project team and any third-party partner coordinating the deployment.
 
 ## Why branch IT fails at go-live
 
-Most branch IT failures at opening are not caused by missing equipment. They are caused by equipment that arrived but was not properly commissioned, or by dependencies — power, connectivity, core-banking access — that nobody tracked until the last week. A checklist approach works because it forces each dependency to be owned and verified, not assumed.
+Most branch IT failures at opening are not caused by missing equipment. They are caused by equipment that arrived but was not properly commissioned, or by dependencies, power, connectivity, core-banking access, that nobody tracked until the last week. A checklist approach works because it forces each dependency to be owned and verified, not assumed.
 
 > The question to ask is not "did the equipment arrive?" It is "can a teller open a transaction and complete it right now?" If the answer is no, the branch is not ready.
 
-## Phase 1 — Site and power readiness
+## Phase 1, Site and power readiness
 
 Before any IT equipment is brought on site, the physical environment must be verified.
 
 - [ ] Comms room is ventilated, dry, and physically secure with access control.
-- [ ] Dedicated electrical circuits for IT equipment are installed and tested — never share circuits with HVAC or lighting.
+- [ ] Dedicated electrical circuits for IT equipment are installed and tested, never share circuits with HVAC or lighting.
 - [ ] Generator capacity is confirmed as sufficient for the full IT and essential load.
-- [ ] Automatic transfer switch (ATS) is installed and tested — manual switchover is not acceptable for a branch.
+- [ ] Automatic transfer switch (ATS) is installed and tested, manual switchover is not acceptable for a branch.
 - [ ] UPS units are sized to the actual critical load, not estimated; runtime under load has been verified.
 - [ ] Surge protection and voltage stabilisation are in place on all input circuits.
 - [ ] Cooling in the comms room is adequate and has been running for at least 24 hours before equipment is racked.
 
-## Phase 2 — Structured cabling and network infrastructure
+## Phase 2, Structured cabling and network infrastructure
 
 - [ ] Structured cabling is installed, terminated, and tested to the relevant standard.
 - [ ] All ports and patch panels are labelled clearly and a cabling schedule is on file.
-- [ ] Network rack is installed, earthed, and organised — no loose cable management.
+- [ ] Network rack is installed, earthed, and organised, no loose cable management.
 - [ ] Core switching is installed, configured for the branch VLAN design, and tested.
 - [ ] Access-layer switches serving teller stations, back-office, and public-Wi-Fi (if applicable) are live.
-- [ ] Wireless access points are installed, configured, and on the correct SSID and VLAN — public and corporate traffic must be isolated.
+- [ ] Wireless access points are installed, configured, and on the correct SSID and VLAN, public and corporate traffic must be isolated.
 - [ ] Physical security cameras are on a dedicated, isolated network segment.
 
-## Phase 3 — Connectivity
+## Phase 3, Connectivity
 
 Connectivity is the dependency that most often causes a delayed opening. Do not treat this as an IT task to complete on go-live day.
 
 - [ ] Primary WAN link is live, tested to the bank's minimum throughput and latency specification, and handed over by the carrier.
-- [ ] Secondary/failover link is on a genuinely diverse medium or carrier — two links on the same duct are not diverse.
+- [ ] Secondary/failover link is on a genuinely diverse medium or carrier, two links on the same duct are not diverse.
 - [ ] Edge router or SD-WAN device is configured for automatic failover, and failover has been tested by physically pulling the primary link.
 - [ ] Core-banking application is reachable from the branch and a test transaction has been completed successfully.
 - [ ] Remote management access to network devices is confirmed and restricted to authorised sources.
 
-## Phase 4 — End-user computing and branch equipment
+## Phase 4, End-user computing and branch equipment
 
 - [ ] Teller workstations are deployed, domain-joined (or enrolled to the bank's management platform), and have completed OS and security patching.
 - [ ] Core-banking client, payment processing software, and all required line-of-business applications are installed and activated.
@@ -73,19 +73,19 @@ Connectivity is the dependency that most often causes a delayed opening. Do not 
 - [ ] Safe and vault alarm integration with the central monitoring system has been verified.
 - [ ] Biometric enrollment devices (where applicable) are connected and enrolled to the identity system.
 
-## Phase 5 — Security and compliance
+## Phase 5, Security and compliance
 
 The [banking and financial services](/industries/banking-financial-services) sector operates under CBN guidelines that have specific requirements for branch technology, data handling, and access control.
 
-- [ ] Endpoint security (antivirus/EDR) is installed and reporting to the central management console — not just installed and silent.
+- [ ] Endpoint security (antivirus/EDR) is installed and reporting to the central management console, not just installed and silent.
 - [ ] Disk encryption is enabled on all endpoints that could carry customer data.
 - [ ] Local admin rights are removed from teller and front-office accounts.
-- [ ] User accounts are provisioned in Active Directory (or the bank's identity provider) with the correct role-based permissions — no shared logins.
+- [ ] User accounts are provisioned in Active Directory (or the bank's identity provider) with the correct role-based permissions, no shared logins.
 - [ ] Network access control ensures only authorised devices can connect to the corporate VLAN.
 - [ ] A branch IT security checklist has been completed and signed off by the information security team.
 - [ ] CBN-required signage and disclosures relevant to technology (ATM conditions, data privacy notice) are in place where applicable.
 
-## Phase 6 — Go-live verification and handover
+## Phase 6, Go-live verification and handover
 
 A proper [deployment and implementation](/services/deployment-implementation) engagement ends with a documented sign-off, not a verbal confirmation.
 
@@ -109,11 +109,11 @@ For a standard branch, IT planning should begin at least 10–12 weeks before th
 
 ### Who should sign off on branch IT readiness?
 
-Sign-off should require the IT project lead, the branch manager, and the information security team — not just the IT vendor or contractor. The IT team verifies the technical build; the branch manager verifies that the systems work for their operational workflows; the security team verifies that controls are in place. All three perspectives are necessary.
+Sign-off should require the IT project lead, the branch manager, and the information security team, not just the IT vendor or contractor. The IT team verifies the technical build; the branch manager verifies that the systems work for their operational workflows; the security team verifies that controls are in place. All three perspectives are necessary.
 
 ### Can a branch open with only primary connectivity, without a failover link?
 
-In practice, many branches do — and then spend their first year learning why they should not. A single connectivity link in the Nigerian operating environment is a risk acceptance decision, not a design decision. If the business accepts that risk, it should be documented. For a new branch opening, the cost of commissioning a second link at the same time as the first is significantly lower than retrofitting it after the branch is live.
+In practice, many branches do, and then spend their first year learning why they should not. A single connectivity link in the Nigerian operating environment is a risk acceptance decision, not a design decision. If the business accepts that risk, it should be documented. For a new branch opening, the cost of commissioning a second link at the same time as the first is significantly lower than retrofitting it after the branch is live.
 
 ### What are the most common IT issues discovered at bank branch go-live?
 

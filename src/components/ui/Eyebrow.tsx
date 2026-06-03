@@ -7,7 +7,7 @@ export interface EyebrowProps
 }
 
 /**
- * Eyebrow — small uppercase accent label that sits above a heading.
+ * Eyebrow, small uppercase accent label that sits above a heading.
  */
 export function Eyebrow({
   as: Comp = "p",
@@ -18,7 +18,7 @@ export function Eyebrow({
   return (
     <Comp
       className={cn(
-        // Monospace technical label — restrained-futurism precision signal.
+        // Monospace technical label, restrained-futurism precision signal.
         "font-mono text-caption font-medium uppercase tracking-[0.18em] text-accent",
         className,
       )}
