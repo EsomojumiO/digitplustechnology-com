@@ -1,0 +1,125 @@
+---
+title: "Planning a Phased Migration to Hybrid Cloud When Connectivity Is Unreliable"
+slug: "planning-a-phased-migration-to-hybrid-cloud-when-connectivity-is-unreliable"
+excerpt: "A sequencing guide to phased hybrid cloud migration in Kenya: what stays on-premise, how to design for graceful degradation, and how to stage cutover around unreliable links so no site is stranded."
+category: "Infrastructure"
+tags:
+  - "hybrid cloud"
+  - "cloud migration"
+  - "infrastructure"
+  - "kenya"
+  - "graceful degradation"
+  - "cutover planning"
+author: "Digitplus Technology"
+publishedAt: "2026-06-03"
+updatedAt: "2026-06-03"
+cover: "/images/insights/planning-a-phased-migration-to-hybrid-cloud-when-connectivity-is-unreliable.jpg"
+coverAlt: "A Nairobi data centre technician checking a rack of on-premise servers beside a fibre patch panel and UPS units during a hybrid cloud rollout."
+draft: true
+seo:
+  metaTitle: "Hybrid Cloud Migration in Kenya: A Phased Plan"
+  metaDescription: "A sequencing guide to phased hybrid cloud migration in Kenya: what stays on-prem, designing for graceful degradation, and staging cutover around unreliable links."
+  ogImage: "/images/insights/planning-a-phased-migration-to-hybrid-cloud-when-connectivity-is-unreliable.jpg"
+---
+
+## Hybrid Cloud Migration in Kenya Is a Connectivity Problem, Not a Cloud Problem
+
+Most failed cloud projects in this market do not fail because the cloud was the wrong choice. They fail because someone planned a **hybrid cloud migration** in Kenya as though the link between the office and the data centre would always be there. It will not. If you run an organisation with a head office in Nairobi, a branch in Mombasa, and depots upcountry, you already know the pattern: fibre cuts during road works, microwave links degrade in heavy rain, and the LTE failover that looked fine on paper buckles the moment forty people lean on it at once. The real constraint on your migration is not compute or storage, it is the variable, sometimes absent, path between your users and wherever their workloads now live.
+
+This reframes the whole exercise. A lift-and-shift that moves your core line-of-business system straight to public cloud strands every user the instant the link drops. The till stops. The clinic cannot pull a patient record. The warehouse cannot dispatch. That single failure mode derails more Kenyan rollouts than cost or complexity ever do.
+
+Hybrid, keeping some workloads local, moving others to cloud, is the honest answer. But hybrid is not a halfway compromise; it is a sequencing decision. The question is never "cloud or not." It is *which workload, in what order, with what fallback when the link is gone.* The success test is simple and unforgiving: every site keeps working during an outage, and no team is cut off mid-cutover.
+
+> If a site cannot transact when its link is down, you have not migrated to the cloud, you have made the cloud a single point of failure for your business.
+
+## Deciding What Stays On-Premise (or at the Edge)
+
+Before moving anything, decide what should never fully leave the building. Four tests settle most placement decisions.
+
+**Latency sensitivity.** How much delay can the workload tolerate before it becomes unusable? A point-of-sale terminal or an access-control reader needs a sub-second local response; routing that round-trip through a congested WAN link is a poor trade even when the link is healthy.
+
+**Tolerance for downtime.** If this system is unreachable for an hour, what stops? Anything where the answer is "revenue" or "safety" has a strong claim to a local presence.
+
+**Data gravity.** Large, frequently accessed datasets are expensive and slow to serve across a thin link. Real-time file shares and media-heavy workflows often belong close to the people using them.
+
+**Regulatory pull.** Some data carries a legal reason to stay in-country or under tighter control.
+
+Run through these and a clear local tier emerges: point-of-sale, physical access control, manufacturing and clinical systems, real-time file shares, and identity that must resolve even when the WAN is down. If staff cannot authenticate during an outage, nothing else you kept local will matter.
+
+On the regulatory point, Kenya's **Data Protection Act, 2019** and the Office of the Data Protection Commissioner (ODPC) shape where sensitive and sector-regulated data can sit and how cross-border transfers are handled. For health records, financial data, and customers' personal data, that legal weight often argues for local or in-country processing, and it should be settled with counsel before architecture, not after. Treat compliance as a placement input, not a box ticked at the end.
+
+Then there is cost, and in Kenya cost has two currencies. Cloud is billed in US dollars, so a weakening shilling quietly inflates your monthly spend, and egress charges punish workloads that move large volumes of data back out. Against that, weigh the capital cost of on-premise hardware *and* the diesel and maintenance to keep it running through grid instability. Neither side is free. The discipline is to put a number on both and decide deliberately rather than by default.
+
+## Designing for Graceful Degradation
+
+The defining trait of a system built for this market is that it degrades to a reduced-but-working state rather than failing hard. When the link drops, the branch should still do the essential things, slower, with fewer features, but open for business.
+
+Several patterns buy that resilience:
+
+- **Local caching and read replicas** so common lookups (product catalogues, price lists, patient summaries) resolve on site even when the central system is unreachable.
+- **Offline-first queues** that accept transactions locally and sync to the cloud on reconnect, so a sale or a record entry is never lost to a dropped link.
+- **Conflict-resolution rules** decided in advance for when links return and two sides have diverged, last-write-wins, manual review, or per-field merge. Decide this on a whiteboard, not in production at 2 a.m.
+
+In practice this usually means a local edge node or on-site server that absorbs core functions while the WAN is down and reconciles afterwards. That node is only as reliable as its power. A degradation plan that ignores grid instability is incomplete: the edge server, its switch, and the local link equipment all need UPS cover for ride-through and generator backing for sustained outages. Power continuity is part of the architecture here, not an afterthought handled by facilities. A companion piece on designing power continuity for branch sites goes deeper on sizing UPS and generator cover; it is worth reading alongside this.
+
+This is also where a migration connects to the wider picture. Graceful degradation depends on sound network and power foundations, the kind set out in our [infrastructure solutions](/services/infrastructure-solutions) practice. Get those right first and the cloud layer has something stable to stand on.
+
+## Sequencing the Migration: Which Workloads Move First
+
+With the local tier defined and degradation designed, sequence the move by **reversibility and blast radius**. Start where a mistake is cheap to undo and contained in scope.
+
+That means low-risk, stateless, internet-facing workloads first: your public website, email, and collaboration tools. These are already cloud-shaped, rarely tightly coupled to on-site systems, and easy to roll back. They let your team build muscle on the new operating model before anything critical is at stake.
+
+Before any production workload moves, build the connective tissue:
+
+1. **Identity federation**, so users have one set of credentials that works across local and cloud, and so authentication degrades gracefully.
+2. **Network plumbing**, VPN or SD-WAN with defined failover paths, so traffic has a managed, observable route between sites and cloud.
+3. **Monitoring**, so you can see link health, capacity, and workload behaviour *before* you depend on them in anger.
+
+Skipping this groundwork is the most common sequencing error: teams move a workload, then discover they cannot see why it is slow or cannot fail the link over cleanly.
+
+Adopt a **wave model**. Pilot one tolerant site, somewhere with a relatively good link and a forgiving user base, prove the pattern end to end, then expand to harder sites. Define explicit rollback criteria for each wave before it starts: what signal means "abort," and who decides. And never split a tightly-coupled system across a flaky link mid-migration. If two components chat constantly, they move together or not at all; stretching that conversation across an unreliable WAN guarantees pain.
+
+## Planning the Cutover to Avoid Stranded Users
+
+The cutover is where careful plans meet a live business, and it deserves a written runbook rather than a confident WhatsApp message on the morning of.
+
+A sound cutover runbook contains, at minimum:
+
+- A **change window** aligned to genuinely low-traffic hours for the affected site, and remember a national branch network does not all go quiet at the same time.
+- A **named rollback trigger**: the specific, observable condition that means "revert now," not a vague sense that things feel wrong.
+- **Per-site go/no-go checks** completed and signed off before the switch.
+
+Validate the link before you flip anything. Confirm there is real bandwidth headroom, not the theoretical line speed, but what the site actually gets under load, and confirm a fallback path exists, such as an LTE failover, for each multi-site location. A cutover that assumes a healthy primary link with no second path is a gamble dressed up as a plan.
+
+Plan the human side too. If the cutover stalls, how does the branch keep transacting? The offline-first design from earlier should carry them, but staff need to know the manual or degraded procedure, and one named person must hold the authority to abort. Ambiguity about who can pull the trigger is how a thirty-minute hiccup becomes a half-day outage.
+
+Finally, rehearse. Run a dress rehearsal against a non-production copy, then stage cutovers site by site. A big-bang switch across every location at once concentrates all your risk into a single night with no one left to learn from. Site-by-site means each wave teaches the next, and a bad surprise is contained to one location.
+
+## Where This Fits in Your Broader Infrastructure Strategy
+
+A phased hybrid migration is one move within a longer modernisation and resilience programme, not a destination in itself. It rests on the foundations, network design, power continuity, and multi-site standardisation, that our broader [infrastructure solutions](/services/infrastructure-solutions) work is built to establish. Without those, even a well-sequenced migration sits on sand.
+
+After each wave, revisit three things before committing the next workloads: cost (is the dollar-billed spend tracking your forecast against the shilling?), security posture (have the new links and identities widened your exposure?), and capacity (does the link still have headroom as more workloads lean on it?). Each review sharpens the next wave.
+
+And set expectations honestly with your board: in Kenya's operating environment, hybrid is frequently a durable target state, not merely a transitional phase on the way to full cloud. Designing for that reality, rather than treating on-premise as something to apologise for and eventually delete, is what separates a migration that holds up from one that strands users the first time the fibre is cut.
+
+If you are weighing how to sequence your own move, the most valuable next step is an honest assessment of your sites, links, and workload dependencies before any architecture is drawn. Digitplus works with IT leaders to map that terrain and stage a migration that keeps every site open, talk to us when you are ready to plan the first wave.
+
+## Frequently asked questions
+
+### Which workloads should stay on-premise when connectivity is unreliable?
+
+Keep workloads that are latency-sensitive, cannot tolerate downtime, or carry heavy data locally: point-of-sale, access control, manufacturing and clinical systems, real-time file shares, and identity that must resolve offline. Sector-regulated or sensitive personal data may also need to stay in-country under the Kenya Data Protection Act, 2019. The test is whether the site can still function with that workload if the link disappears.
+
+### How do you sequence a phased hybrid cloud migration to avoid stranded users?
+
+Order workloads by reversibility and blast radius, move low-risk, stateless, internet-facing systems like your website and email first, then core line-of-business systems. Build identity federation, network failover, and monitoring before any production workload moves. Pilot one tolerant site, prove the pattern, and expand in waves with defined rollback criteria for each.
+
+### How do you design cloud applications for graceful degradation during link outages?
+
+Architect each site to drop to a reduced-but-working state rather than failing hard. Use local caching and read replicas for common lookups, offline-first queues that sync on reconnect, and pre-agreed conflict-resolution rules for when links return. Back the local edge node with UPS and generator cover, because a degradation plan that ignores grid instability is incomplete.
+
+### What should a cutover plan cover for a multi-site Kenyan organisation?
+
+A cutover runbook needs change windows aligned to each site's low-traffic hours, a named rollback trigger, and per-site go/no-go checks. Validate real bandwidth headroom and a fallback path such as LTE failover before flipping, and confirm who holds authority to abort. Run a dress rehearsal and stage the cutover site by site rather than switching all locations at once.

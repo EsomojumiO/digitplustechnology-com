@@ -1,0 +1,106 @@
+---
+title: "A Pre-Deployment Site Survey Framework for Rolling Out Equipment Across Multiple Branches"
+slug: "a-pre-deployment-site-survey-framework-for-rolling-out-equipment-across-multiple"
+excerpt: "A repeatable pre-deployment site survey framework for multi-branch IT rollouts in Nigeria, capture power, earthing, space, environment, network and access before you ship a single unit."
+category: "Infrastructure"
+tags:
+  - "site survey"
+  - "multi-site rollout"
+  - "deployment planning"
+  - "power and earthing"
+  - "branch network readiness"
+  - "it infrastructure"
+author: "Digitplus Technology"
+publishedAt: "2026-06-03"
+updatedAt: "2026-06-03"
+cover: "/images/insights/a-pre-deployment-site-survey-framework-for-rolling-out-equipment-across-multiple.jpg"
+coverAlt: "A technician using a clamp meter and clipboard to record power readings at a branch office wall socket beside a network rack and UPS."
+draft: true
+seo:
+  metaTitle: "IT Site Survey Checklist for Multi-Site Rollouts"
+  metaDescription: "A repeatable pre-deployment site survey framework for multi-branch IT rollouts in Nigeria, capture power, earthing, space, environment, network and access before you ship."
+  ogImage: "/images/insights/a-pre-deployment-site-survey-framework-for-rolling-out-equipment-across-multiple.jpg"
+---
+
+A multi-branch equipment rollout is decided long before the first box is opened, by what you knew, or did not know, about each site. An **IT site survey checklist for multi-site** deployments is the instrument that captures that knowledge once, consistently, and early enough to act on it. Without one, equipment specified perfectly on paper arrives at a branch with the wrong power, no rack space, and no clear path to the comms room, and a project that looked clean in the plan turns into a sequence of return trips. This is a framework for what to capture before you ship a single unit.
+
+## Why rollouts fail at the site, not the spec sheet
+
+The spec sheet is rarely the problem. The switch, the UPS, the branch server all work in the lab. What defeats rollouts is the gap between the device and the place it has to live. A unit ships to a Port Harcourt branch where the only available socket sits on an unstable single phase, the "comms room" is a shared store with no ventilation, and the lift is too small for the cabinet. The field team stands idle, the equipment goes back into its box, and a go-live date slips.
+
+Now multiply that by every branch in the estate. Each unsurveyed site carries the same latent risk: a return trip, a second mobilisation of installers, equipment exposed to damage or theft while it waits, and a cascade of slipped dates because branches were sequenced on optimistic assumptions. Where a replacement unit may be weeks away on import and more expensive than it was at order time, an avoidable on-site failure is not a small operational annoyance, it is budget you do not get back.
+
+Set against the cost of a multi-site deployment, a standardised survey is cheap insurance. A day of a competent technician's time per branch, captured on a repeatable form, removes most of the surprises that turn a rollout into a series of emergencies. The principle is simple: assess once, ship with confidence, and never let a truck leave the warehouse for a site nobody has actually seen.
+
+## Power quality and earthing: what to measure before you ship
+
+Power is where Nigerian deployments live or die, and it is the part of a site survey that must never be reduced to "is there electricity here?" Capture the real picture at each branch:
+
+- **Mains voltage range and stability**, measured, not assumed, across a working day where possible, to expose sag and surge behaviour rather than a single convenient reading.
+- **Phase configuration**, single or three phase, and which phase the IT load will actually sit on.
+- **Generator and UPS presence and capacity**, rating, age, fuel logistics, and whether the existing UPS can carry the new load.
+- **Changeover behaviour**, how cleanly the site transitions between grid, generator and UPS, because it is the switching transient, not the steady state, that kills equipment.
+
+Earthing deserves its own explicit attention, because poor earthing fails silently and is easy to overlook. Record earth-to-neutral voltage, earth resistance, and the integrity of bonding. A branch with no proper earth will quietly degrade everything connected to it, and the damage often surfaces months later as "random" failures nobody traces back to the building.
+
+> Equipment rarely fails because it was the wrong choice. More often it fails because nobody measured the power it was asked to run on.
+
+There is a direct FX and import dimension here. Under-protected kit that fails is expensive and slow to replace in a volatile-naira environment, so power conditioning, AVRs and surge protection should be scoped *from the survey findings*, sized to what you actually measured, rather than bolted on after the first dead unit. Getting this right at survey stage is part of the broader discipline of [deployment and implementation planning](/services/deployment-implementation), where power readiness is treated as a precondition, not an afterthought.
+
+## Space, environment and physical conditions
+
+Once power is understood, the survey turns to the physical reality of where active equipment will live. In the field this is rarely a clean data centre; it is a corner of a branch.
+
+Document the available rack or cabinet space, floor loading where weight matters, and the clearances needed for airflow and maintenance access. Record exactly where each piece of active equipment will be mounted, not a vague "in the back office." A device with no defined home on the survey will acquire a bad one on installation day.
+
+Environmental conditions come next, and they must be realistic for branches without dedicated, climate-controlled comms rooms:
+
+- **Ambient temperature and ventilation**, is there cooling, and does it run when the branch is closed and the grid is down?
+- **Dust and humidity**, both degrade equipment in many Nigerian operating environments and shorten its life when ignored.
+- **Cleanliness of the space**, a shared store with cartons stacked against a switch is a fault waiting to happen.
+
+Finally, capture fire safety and the physical security of the location. Can the room be locked? Is access controlled, or does every branch staff member pass through it? For equipment representing real capital, "can this space be secured" is a question the survey must answer in writing, not a hope.
+
+## Network drops, connectivity and branch readiness
+
+A branch can have flawless power and still not be ready to receive equipment if the network underneath it cannot support it. The survey records the existing cabling, the patch points, and the number and location of network drops, then asks the blunt question: does the structured cabling already in place meet what the new equipment needs, or is remediation a prerequisite?
+
+WAN and last-mile connectivity are assessed per site, because this is precisely where branches outside the major cities diverge. Capture the link type, the provider, and whether any redundancy exists. A branch on a single fragile last-mile link is a different deployment from one with a resilient connection, and the survey is where that difference becomes visible before it becomes a day-one outage.
+
+The survey should also surface the dependencies that must be resolved before anything ships: the IP addressing plan, the VLAN design, and a clear answer to whether the site can actually reach central systems on the day it goes live. Equipment that arrives and installs cleanly but cannot see head office has not succeeded, it has merely failed more politely. *(A companion piece on branch network readiness assessment goes deeper on sequencing these connectivity dependencies.)*
+
+## Access logistics and local constraints
+
+The least glamorous section of the survey prevents some of the most expensive failures. Capture the logistics of actually getting equipment into the building: road access for the delivery vehicle, whether there is a lift or only stairs, doorway and corridor dimensions for larger cabinets, permitted working hours, and, critically, who physically grants access to the site.
+
+Local stakeholders and permissions belong on the form explicitly. Note the branch manager, on-site security, and the landlord where the premises are leased or shared. For public-sector or shared sites, record any LPO or procurement sign-off required before works can proceed, because an installation team turning up without the right paper authorisation is a wasted mobilisation regardless of how good the survey was otherwise.
+
+Distance and travel realities across Lagos, Port Harcourt and regional branches then shape the rollout sequence. Installation windows should be planned around how sites actually cluster and how long teams take to move between them, so the schedule is sequenced on logistics rather than wishful thinking.
+
+## Building a repeatable IT site survey checklist for multi-site rollouts
+
+The value compounds only when every field above becomes one standard form. A single template assessed identically at every branch produces results that are comparable across the estate, you can line up forty sites and see at a glance which are ready, which need power remediation, and which need cabling work before any equipment is released to them.
+
+Decide who carries out the survey and how findings are signed off. The realistic options are internal IT, the deploying vendor, or an independent third party, and each carries a different balance of cost, capacity and objectivity (the FAQ below sets out the trade-offs). Whichever you choose, completed surveys should be reviewed and formally accepted before equipment leaves the warehouse for that site, sign-off is the control that stops untested assumptions from shipping.
+
+From there, the completed surveys feed a readiness scorecard: each branch scored on power, space, environment, network and access, with blockers flagged and owners assigned. That scorecard drives the rollout sequence, so ready sites go first and dependent sites are scheduled only once their blockers clear. This is the point where a pile of survey forms becomes a deployment plan, and where the survey connects to the wider [multi-site deployment and implementation](/services/deployment-implementation) approach as the next decision in the chain.
+
+## Frequently asked questions
+
+### What should a pre-deployment site survey capture before equipment is shipped?
+
+It should capture everything about the destination that the spec sheet cannot: power quality and earthing, available rack and floor space, environmental conditions, fire safety and physical security, existing cabling and network drops, last-mile connectivity, and access logistics. The aim is a written, comparable record of each branch's actual readiness. If a field would change whether equipment can be installed and run safely on arrival, it belongs on the survey.
+
+### How do you assess power quality and earthing for a branch IT rollout?
+
+Measure rather than assume. Record mains voltage range and stability across a working period, the phase configuration, generator and UPS presence and capacity, and how cleanly the site changes over between sources. For earthing, capture earth-to-neutral voltage, earth resistance and bonding integrity, because poor earthing degrades equipment silently. These readings then size the power conditioning and surge protection scoped into the deployment.
+
+### How can one survey template be standardised across many branches?
+
+Turn every field into a single structured form with the same questions and the same units at every site, so results are directly comparable across the estate. Standardisation lets you build a readiness scorecard, rank branches by what they still need, and sequence the rollout accordingly. It also removes the variability of different surveyors recording different things in different ways.
+
+### Who should carry out the site survey, internal IT, the vendor, or a third party?
+
+All three are valid; the choice is about capacity and objectivity. Internal IT knows the business context but may lack reach across many distant sites; the deploying vendor has the technical skill but is assessing its own work; an independent third party offers objectivity at additional cost. Whoever surveys, findings should be signed off by someone accountable before equipment is released, so the assessment is a genuine control rather than a formality.
+
+A standardised survey is not paperwork for its own sake, it is the difference between a rollout you can schedule and one you can only hope about. Before your next multi-branch deployment, the most useful thing you can do is assess one branch properly, turn what you learn into a repeatable template, and let that template govern the sequence. If you would like a second perspective on building a survey framework and readiness scorecard for your estate, the Digitplus team can help you plan the assessment before a single unit ships.

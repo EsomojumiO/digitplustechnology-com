@@ -1,0 +1,101 @@
+---
+title: "Building an IT Disaster Recovery Plan When the Primary Risk Is Power, Not Cyberattack"
+slug: "building-an-it-disaster-recovery-plan-when-the-primary-risk-is-power-not-cyberat"
+excerpt: "Most DR templates assume the disaster is a hacker. In Nigeria it is usually the grid. A power-first disaster recovery framework with realistic RTO/RPO targets and tiered recovery."
+category: "IT Strategy & Advisory"
+tags:
+  - "disaster recovery"
+  - "business continuity"
+  - "rto rpo"
+  - "power resilience"
+  - "multi-site operations"
+author: "Digitplus Technology"
+publishedAt: "2026-06-03"
+updatedAt: "2026-06-03"
+cover: "/images/insights/building-an-it-disaster-recovery-plan-when-the-primary-risk-is-power-not-cyberat.jpg"
+coverAlt: "An IT manager inspecting a server room backup generator and UPS units during a grid power outage at a Nigerian office."
+draft: true
+seo:
+  metaTitle: "IT Disaster Recovery Plan Nigeria: Power-First Approach"
+  metaDescription: "Build an IT disaster recovery plan tuned to Nigerian realities, prioritising power, fuel and connectivity failure scenarios with realistic RTO/RPO and tiered recovery."
+  ogImage: "/images/insights/building-an-it-disaster-recovery-plan-when-the-primary-risk-is-power-not-cyberat.jpg"
+---
+
+## Why an IT disaster recovery plan in Nigeria starts with power, not hackers
+
+Most disaster recovery templates in circulation were written for a different operating environment, one where the grid is assumed and the threat that keeps people awake is a ransomware operator. Adopt one of those templates unedited and you will produce an **IT disaster recovery plan in Nigeria** that is rigorous about the rare event and silent about the daily one. Here, the disruption that actually takes systems offline is far more often a DisCo outage that outlasts your batteries, a generator that will not start, an automatic transfer switch that fails to switch, or a fibre cut that isolates a branch, not an attacker on the network.
+
+This is not an argument for ignoring cyber risk. It is an argument for sequencing. A DR plan should be built around the failure modes you experience most frequently and most predictably, then extended to the severe-but-rarer ones. In the Nigerian context that means power, fuel supply, and connectivity sit at the front of the plan, with cyberattack as a serious additional scenario rather than the organising assumption.
+
+The payoff of getting the sequence right is concrete: a plan your team can actually execute at 2 a.m. when the mains drop and the standby fails, because it was written for that night specifically.
+
+## Map the failure scenarios you actually face
+
+A credible plan begins with an honest scenario list, ranked by how often each occurs and how much damage it does. For most organisations operating in Nigeria, the realistic hierarchy looks like this:
+
+- **Extended grid outage.** Not the routine flicker your UPS rides through, but a multi-hour or multi-day DisCo loss that drains battery autonomy and forces a dependence on standby generation.
+- **Generator and fuel failure.** A generator that fails to start, an ATS that does not transfer cleanly, or, increasingly decisive, diesel that is unavailable, mispriced, or contaminated. Fuel logistics are a continuity risk in their own right, not a facilities footnote.
+- **Power-event hardware damage.** Surges, sags, and dirty power on the mains–generator switchover that kill PSUs, drives, and network gear. Replacement is slowed by import lead times and FX-driven parts cost, so a failure can mean days of downtime, not hours.
+- **Connectivity loss.** A single-provider link or a fibre cut that severs a site, especially painful for cloud-dependent workflows and for coordinating across Abuja, Lagos, and Port Harcourt.
+- **Cyber incident.** Ransomware, destructive malware, or account compromise. Lower in frequency for many organisations than power events, but potentially the most damaging single scenario, and the one most likely to corrupt the backups you were counting on.
+- **Physical and site loss.** Fire, flood, theft, or loss of access to a building.
+
+For each scenario, record the trigger, the systems it takes down, and the realistic time-to-impact. That last column is what separates a plan from a wish: a scenario with a fast time-to-impact and a slow recovery path is where your investment belongs first.
+
+> A disaster recovery plan that assumes the disaster will be a hacker, in an environment where the disaster is almost always the grid, is a plan written for the wrong night.
+
+## Set RTO and RPO targets you can actually meet
+
+Two numbers anchor every DR decision. **Recovery Time Objective (RTO)** is how long a system can be down before the impact is unacceptable. **Recovery Point Objective (RPO)** is how much data, measured in time, you can afford to lose. Both are business decisions disguised as technical ones, and both must be set per system rather than as a single organisation-wide figure.
+
+The common failure is aspiration. A core banking-adjacent ledger, a hospital records system, and a public-sector case file each carry a tight tolerance; a training portal or an internal wiki does not. Setting a one-hour RTO across the board guarantees you will miss it everywhere and learn nothing. Instead, classify systems into a small number of tiers and assign each tier a target the budget and infrastructure can genuinely support.
+
+Calibrating those targets to Nigerian conditions is precisely where outside perspective earns its keep. The honest question is not "what RTO do we want?" but "what RTO can we hit given our generator autonomy, our spares position, our connectivity redundancy, and our team's depth?" A [technology advisory](/services/technology-advisory) engagement that pressure-tests proposed targets against real recovery capability is worth more than a glossy plan promising numbers no one can deliver. The targets you publish should be ones you have reason to believe you can meet on your worst day, not your best.
+
+## Build tiered recovery, from ride-through to failover
+
+With scenarios mapped and targets set, recovery becomes a layered architecture rather than a single switch. Each layer buys time against a different depth of failure.
+
+**Layer one, power ride-through and graceful shutdown.** UPS autonomy sized to cover the switchover gap and short outages, plus tested automatic shutdown for systems that cannot run on battery indefinitely. The goal here is not to run forever but to prevent the abrupt power loss that corrupts data and damages hardware. *(For sizing the UPS and generator capacity behind this layer, see our companion piece on [power protection and UPS planning](/insights/power-protection-and-ups-planning).)*
+
+**Layer two, standby generation and fuel assurance.** Generators with a tested start sequence, a maintained ATS, and, the part most plans omit, a fuel strategy: minimum reserve levels, more than one supplier, and a defined reorder trigger. A generator is only as resilient as the diesel behind it.
+
+**Layer three, local redundancy.** Spare units for the components most likely to fail under power stress, redundant network paths, and a second connectivity provider so a single fibre cut does not isolate a site. Holding critical spares locally offsets the import and FX delay that otherwise stretches recovery.
+
+**Layer four, offsite and cross-site recovery.** Backups and, for the highest tiers, the ability to bring a workload up at another site or in the cloud when a primary location is lost entirely. This is the layer that answers site loss and a destructive cyber incident at once.
+
+The discipline is to match each system's tier to the layers it needs. Not everything earns cross-site failover; almost everything earns clean shutdown.
+
+## Coordinate across sites, data, and compliance
+
+A single-site plan is comparatively simple. Coordinating recovery across Abuja, Lagos, and Port Harcourt is where plans quietly break, because a regional power or connectivity event can degrade two sites while you are leaning on the third.
+
+Three things keep multi-site recovery honest. First, **clear ownership per site**, a named recovery lead and a runbook held locally, not only on a server that may be unreachable during the incident. Second, **a documented dependency map** so you know which workloads in Lagos depend on a system in Abuja, and in what order to restore them. Third, **a decision on where each tier recovers**, to itself, to a sister site, or to the cloud, agreed before the event, not improvised during it.
+
+Data recovery carries a compliance dimension that survives any outage. Where backups and failover involve personal data, the **Nigeria Data Protection Act (NDPA) 2023** applies to how that data is stored, where it is replicated, and how it is restored, with oversight by the **Nigeria Data Protection Commission (NDPC)**. If recovery routes personal data across sites or to a cloud region, that movement and its safeguards belong in the plan and in your records of processing. Continuity and compliance are not separate workstreams; the recovery design has to satisfy both.
+
+## Turn the plan into a tested discipline
+
+An untested DR plan is a document, not a capability. The work that converts one into the other is unglamorous and continuous: scheduled restoration tests that prove backups are complete and usable; failover drills that move a workload to its recovery target and back; and generator and ATS tests under realistic load rather than a brief no-load run. Each test should be documented, what was exercised, how long it took, what failed, and reviewed by management, because the gaps surfaced in a drill are exactly the ones you do not want to discover live.
+
+The plan is also a living artefact. Targets drift as systems are added, sites change, fuel and FX conditions move, and teams turn over. Revisit the scenario list and the RTO/RPO tiers on a defined cycle, and after every real incident run a short post-mortem that feeds back into the runbooks. A standing [technology advisory](/services/technology-advisory) relationship can keep that cadence honest and bring an outside read on whether your stated recovery times still match reality.
+
+If your current DR plan was inherited from a cyber-first template, or if you suspect your published RTO and RPO targets would not survive a bad week on the grid, the useful next step is a structured assessment: mapping your real failure scenarios, stress-testing your targets against your recovery capability, and identifying where the gaps actually are. Digitplus can help you put a power-first framework behind your continuity planning before the next extended outage tests it for you.
+
+## Frequently asked questions
+
+### What is the difference between RTO and RPO, and how do we set them?
+
+RTO (Recovery Time Objective) is how long a system can be unavailable before the impact becomes unacceptable; RPO (Recovery Point Objective) is how much data, measured as a time window, you can afford to lose. Set both per system, not as a single organisation-wide figure: group systems into a few tiers, then assign each tier a target your infrastructure and team can realistically meet on a bad day. A target you cannot deliver is worse than an honest, looser one, because it gives false assurance.
+
+### How is a Nigerian disaster recovery plan different from a standard template?
+
+Most off-the-shelf templates are built around cyberattack and assume reliable power. In Nigeria the most frequent disruptions are extended grid outages, generator and fuel failures, power-event hardware damage, and connectivity loss, so the plan should rank and resource those first, then add cyber as a serious additional scenario. It also has to account for import lead times and FX-driven parts cost when sizing spares, and for NDPA 2023 obligations when data is replicated across sites.
+
+### How often should we test our DR plan?
+
+Test the components on a regular, documented cycle rather than once a year as a formality: restoration tests to confirm backups are usable, failover drills for higher-tier systems, and generator and ATS tests under realistic load. Review the results with management, and rerun the relevant tests after any significant change to systems, sites, or suppliers. An untested backup or failover path is an assumption, not a recovery capability.
+
+### If power is our main risk, do we still need cyber recovery?
+
+Yes. Power events are more frequent, but a destructive cyber incident, particularly ransomware that targets backups, can be the single most damaging scenario and can corrupt the very copies you would rely on after an outage. A power-first plan sequences your investment toward the daily risk without removing cyber from the scenario list; offsite or immutable backups and a defined incident response protect both the rare event and the common one.
