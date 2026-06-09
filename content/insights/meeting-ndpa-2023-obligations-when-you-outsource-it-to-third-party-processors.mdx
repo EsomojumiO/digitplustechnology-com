@@ -1,0 +1,96 @@
+---
+title: "Meeting NDPA 2023 Obligations When You Outsource IT to Third-Party Processors"
+slug: "meeting-ndpa-2023-obligations-when-you-outsource-it-to-third-party-processors"
+excerpt: "What the NDPA and NDPC expect of data controllers who outsource IT: processor agreements, breach-notification chains, vendor due diligence, and cross-border transfer safeguards."
+category: "Cybersecurity"
+tags:
+  - "ndpa"
+  - "data protection"
+  - "ndpc"
+  - "data processor agreement"
+  - "cross-border transfer"
+  - "vendor risk"
+author: "Digitplus Technology"
+publishedAt: "2026-06-03"
+updatedAt: "2026-06-03"
+cover: "/images/insights/meeting-ndpa-2023-obligations-when-you-outsource-it-to-third-party-processors.jpg"
+coverAlt: "Two Nigerian IT managers reviewing a printed vendor data processing agreement across a meeting-room table with a laptop showing a compliance checklist."
+draft: true
+seo:
+  metaTitle: "NDPA Data Processor Obligations: Outsourcing IT Safely"
+  metaDescription: "How Nigerian data controllers stay NDPA-compliant when outsourcing IT: processor agreements, breach-notification chains, vendor due diligence and transfer safeguards."
+  ogImage: "/images/insights/meeting-ndpa-2023-obligations-when-you-outsource-it-to-third-party-processors.jpg"
+---
+
+## Why NDPA Data Processor Obligations Still Land on You as the Controller
+
+Outsourcing IT does not outsource accountability. That single fact should shape how you read your NDPA data processor obligations: under the Nigeria Data Protection Act 2023, the data controller answers for personal data even when a third party holds, moves, or secures it on your behalf. When you hand payroll to a bureau, email to a hyperscaler, or your branch network to a managed-service partner, you have distributed the work and concentrated the liability. The Nigeria Data Protection Commission supervises that arrangement, and when something goes wrong it looks first to you.
+
+This matters because most organisations now run on outsourced infrastructure by default. Core systems sit in foreign cloud regions, helpdesks are operated by partners, and backups replicate to data halls you have never visited. Each of those relationships is a processing relationship in the eyes of the NDPA, whether or not the contract ever uses the word. The Act does not accept "the vendor handles that" as a defence. It expects you to have chosen the vendor carefully, instructed them in writing, and retained the means to know when they fail.
+
+The practical consequence is that compliance is something you design into the relationship before signing, not something you bolt on after a complaint. The NDPC can investigate, order remediation, and impose monetary penalties tied to an organisation's revenue, and registration duties fall on controllers and processors of major importance. The sections below set out how to meet those obligations across the lifecycle of an outsourced arrangement, from drawing the controller and processor line to governing the vendor after go-live.
+
+## Drawing the Controller and Processor Line Before You Outsource
+
+The first task is to classify the relationship correctly, because the duties that follow depend entirely on it. A data controller decides why and how personal data is processed. A data processor acts on the controller's instructions and does not determine the purpose for itself. In most outsourcing, you remain the controller and the vendor is your processor: you decide what the payroll data is for, and the bureau simply runs it.
+
+The line blurs in two common situations, and getting either wrong creates exposure. The first is where a vendor begins making its own decisions about the data, for example a marketing platform that profiles your customers for its own model improvement. At that point it may be acting as a controller in its own right, and a plain processor agreement no longer describes reality. The second is joint processing, where you and a partner genuinely share decisions about purpose. Each pattern carries different obligations, so name the relationship explicitly rather than assuming every vendor is a tidy processor.
+
+Work this out per activity, not per vendor. A single managed-service partner might process staff data as your processor, while also acting as a controller for the contact details of your team that it holds for its own account management. Mapping each flow to a role is what tells you which clauses the contract needs and who must notify whom when a breach occurs.
+
+## Due Diligence: Vetting a Processor Before You Sign
+
+The NDPA expects a controller to engage only processors that provide sufficient guarantees of compliance. In practice that means due diligence is a documented step in procurement, not a reference check. The Commission's reasonable question after an incident is simple: what did you know about this vendor's controls when you chose them, and how did you know it?
+
+Build the assessment around evidence you can file:
+
+- **Security posture.** Ask for the technical and organisational measures in concrete terms: encryption in transit and at rest, access control, logging, patching cadence, and incident history. Independent certifications or audit reports carry more weight than a self-assessment questionnaire.
+- **Data location and sub-processors.** Establish where the data will physically sit and which fourth parties the vendor relies on. A processor that quietly sub-contracts storage to a region you never approved is a transfer you did not authorise.
+- **Breach track record and response.** Ask how they detect incidents, how quickly they would tell you, and what their last reportable event taught them. Vagueness here predicts vagueness during a real breach.
+- **Continuity under local conditions.** For data held in-country, probe how power instability is managed. Diesel and UPS-backed data halls are the Nigerian norm, and failover behaviour during grid outages affects both availability and breach exposure.
+
+Keep the completed assessment. Due diligence that lives only in a sales call is, for accountability purposes, due diligence that never happened.
+
+## What the Processor Agreement Must Actually Say
+
+A written agreement is the instrument through which a controller discharges its duties through someone else, and the NDPA treats it as mandatory for processing on your behalf. A generic services contract that bills for support but never mentions data protection is the single most common gap a review exposes.
+
+> The most common gap an NDPC review finds is not a missing contract. It is a processor agreement that names the vendor but never names the data, the instructions, or the breach chain.
+
+At minimum, the agreement should bind the processor to act only on your documented instructions, to keep the data confidential, and to apply security measures appropriate to the risk. It should require your authorisation before any sub-processor is engaged, and pass the same obligations down that chain. It should commit the processor to assist you with data-subject requests and with your own regulatory duties, to notify you without undue delay when it becomes aware of a breach, and to delete or return the data when the engagement ends. Where the processor sits offshore, the agreement must carry the cross-border transfer basis alongside the security terms, because both apply at once.
+
+Then make the contract auditable. Reserve a right to inspect or to receive independent assurance, and record the renewal date and the internal owner. An agreement signed once and never revisited drifts out of step with how the vendor actually operates, and the drift is invisible until an incident makes it visible. For organisations standardising these terms across many vendors, our [managed services practice](/services/managed-services) can help structure the baseline so each new contract starts from a compliant template rather than a blank page.
+
+## Breach-Notification Chains That Meet the Reporting Window
+
+Breach notification is where outsourced arrangements fail under time pressure, because the clock and the knowledge sit in different organisations. The NDPA expects a controller to notify the Commission promptly once aware of a personal-data breach, with the widely applied benchmark being within 72 hours where the breach poses a risk to data subjects. The difficulty is that in an outsourced model, the processor usually becomes aware first, and your 72 hours are running on their detection.
+
+This is why the notification chain has to be engineered, not assumed. The processor agreement should require the vendor to alert you without undue delay, define what "aware" means, and specify a named contact and channel that works outside business hours. Inside your own organisation, decide in advance who receives that alert, who assesses whether it is reportable, who drafts the notice to the NDPC, and who informs affected data subjects where the risk warrants it. A multi-site footprint across Abuja, Lagos, and Port Harcourt makes this harder, because the alert may surface at one location while the decision-makers sit at another.
+
+Test the chain before you need it. A tabletop exercise that walks a simulated breach from the processor's first alert through to a drafted NDPC notification will reveal the broken handoffs, the unmonitored mailbox, and the absent on-call owner far more cheaply than a real incident will. Keeping a current vendor risk register, with each processor's notification contact and escalation path recorded, turns a frantic search into a lookup when the clock is already running.
+
+## Cross-Border Transfers and Governing the Vendor After Go-Live
+
+Much outsourced IT involves moving personal data outside Nigeria, often without anyone framing it that way. Foreign cloud regions, offshore support desks, and global SaaS platforms are all cross-border transfers, and FX pressure quietly intensifies the question by pushing buyers toward cheaper overseas regions over local hosting. The NDPA permits such transfers where the destination offers adequate protection or where another recognised condition applies, and it expects you to identify the basis you rely on for each flow rather than discovering it during an investigation. Record, for every transfer, where the data goes and why that destination is lawful.
+
+Governance does not end at signing. A processor's controls, sub-processors, and hosting locations change over the life of a contract, and your record has to keep pace. Set a review cadence, reassess the vendor on any material change, and treat a new sub-processor or a new data location as an event that triggers fresh scrutiny rather than a footnote in a renewal email. Embed the question "does this change touch personal data, and where?" into your procurement and change-management gates so the record stays current as a by-product of normal operations.
+
+Position all of this inside a wider information-governance programme rather than as isolated paperwork. The most defensible posture is one where due diligence, contracts, breach chains, and transfer records connect to security architecture and board-level risk reporting. For IT and compliance leads building that operating model across an outsourced estate, our [managed services team](/services/managed-services) can help scope and sequence the work before the NDPC, or an incident, sets the timetable for you.
+
+## Frequently asked questions
+
+### Does using a third-party processor transfer our NDPA liability to the vendor?
+
+No. Under the NDPA 2023 you remain the data controller and retain accountability for personal data even when a processor holds or handles it on your behalf. The processor carries its own duties, and a well-drafted agreement lets you allocate responsibilities between you, but it does not move the controller's legal answer to the vendor. The Nigeria Data Protection Commission will look to you first for the lawfulness of the arrangement.
+
+### What must a processor agreement contain under the NDPA?
+
+The agreement should be in writing and bind the processor to act only on your documented instructions, keep the data confidential, and apply security measures appropriate to the risk. It should require your authorisation before any sub-processor is engaged, commit the processor to assist with data-subject requests and breach handling, oblige it to notify you without undue delay of any breach, and return or delete the data at the end of the engagement. Where the processor is offshore, it should also set out the cross-border transfer basis.
+
+### Who notifies the NDPC when a processor causes a breach?
+
+The controller carries the duty to notify the Commission, so the processor must alert you promptly enough for you to meet the reporting window, commonly applied as within 72 hours of becoming aware where the breach poses a risk to data subjects. Build this into the contract by defining what "aware" means, naming an out-of-hours contact, and assigning an internal owner to assess and file the notification. The processor reports to you; you report to the NDPC.
+
+### How do we handle cross-border transfers when our cloud or support sits abroad?
+
+Treat each foreign cloud region, offshore helpdesk, or global SaaS platform as a cross-border transfer and identify the lawful basis for it before go-live. The NDPA allows transfers where the destination provides adequate protection or another recognised condition applies, so record, per flow, where the data goes and why that destination is permitted. Map your processors' actual hosting and sub-processor locations rather than assuming, because vendors change regions without prompting.

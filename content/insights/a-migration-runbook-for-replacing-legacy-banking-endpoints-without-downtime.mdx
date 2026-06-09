@@ -1,0 +1,87 @@
+---
+title: "A Migration Runbook for Replacing Legacy Banking Endpoints Without Downtime"
+slug: "a-migration-runbook-for-replacing-legacy-banking-endpoints-without-downtime"
+excerpt: "A sequenced cutover method for swapping legacy bank branch endpoints in Ghana without downtime: staging, imaging, rollback gates and out-of-hours scheduling under Bank of Ghana availability expectations."
+category: "Infrastructure"
+tags:
+  - "banking it"
+  - "endpoint migration"
+  - "deployment"
+  - "bank of ghana"
+  - "branch infrastructure"
+  - "cutover planning"
+author: "Digitplus Technology"
+publishedAt: "2026-06-03"
+updatedAt: "2026-06-03"
+cover: "/images/insights/a-migration-runbook-for-replacing-legacy-banking-endpoints-without-downtime.jpg"
+coverAlt: "A bank IT technician in a Ghana branch back office staging and imaging new teller workstations on a rollout cart after hours, with cabling and a laptop running deployment software."
+draft: true
+seo:
+  metaTitle: "Banking Endpoint Migration Runbook: Zero-Downtime Cutover"
+  metaDescription: "A sequenced runbook for swapping legacy bank branch endpoints without downtime: staging, imaging, rollback gates and out-of-hours scheduling under Bank of Ghana rules."
+  ogImage: "/images/insights/a-migration-runbook-for-replacing-legacy-banking-endpoints-without-downtime.jpg"
+---
+
+## A Banking Endpoint Migration Runbook for Ghana Starts With One Rule: No Branch Goes Dark
+
+Replacing aging branch hardware is rarely the hard part. The hard part is doing it while the branch keeps trading, while month-end settlement runs, and while the Bank of Ghana expects core services to stay available. A banking endpoint migration runbook for Ghana is therefore not a procurement schedule, it is a cutover method: a sequenced, rehearsed procedure for swapping tellers' workstations, branch servers, and self-service devices in a way that can be paused, evidenced, and reversed before any customer notices. Treated as a refresh, the work slips and breaks at the worst possible hour. Treated as a cutover, it becomes a controlled, repeatable operation you run the same way in every branch.
+
+The distinction matters most under regulatory load. Bank of Ghana's cyber and information security directive and its incident-reporting expectations mean that an availability lapse during a migration is not merely an operational embarrassment, it can become a reportable event. The discipline below assumes that constraint from the first line: every step either preserves service or has a tested way back.
+
+## Stage and Image Before You Touch a Single Branch
+
+The cheapest place to find a migration problem is in a staging room, not on a branch floor. Before the first endpoint is swapped, build and freeze a golden image: the approved operating-system build, core-banking client, endpoint security agent, branch peripherals configuration, and the hardening baseline your security team signs off. Image once, test exhaustively, then clone. Hand-building machines at the branch is how you get drift, and drift is how examiners and incidents both find you.
+
+Staging also absorbs Ghana's supply realities. Cedi movement and import lead times mean replacement hardware does not arrive on demand, so the runbook should treat devices as a managed pool, not a just-in-time delivery. Order against a confirmed branch sequence, receive and image centrally, and pre-position spares regionally so a failed unit in Kumasi or Takoradi does not wait on a courier from Accra. A practical rule: hold a small float of pre-imaged spares per region, sized to your busiest wave, so a hardware fault during cutover is a swap, not a stand-down.
+
+Get the inventory honest before staging closes. Every device in scope needs a record of its location, role, network dependencies, and the data or local configuration that must survive the move. Endpoints that cannot be reimaged cleanly, or that run a legacy application with no modern equivalent, should be flagged now and given a documented compensating plan rather than discovered mid-cutover. This is the same managed-process discipline we apply to [deployment and implementation](/services/deployment-implementation): hardware on a loading dock is not a working system until it is configured, tested, and proven.
+
+## Sequence the Cutover in Tiers and Waves
+
+Not all branches carry equal risk, and the runbook should say so. Tier sites by transaction profile and operational sensitivity: a flagship branch handling high-value corporate flows is not the same migration risk as a cash-light agency outlet. Pilot the method on a low-risk, well-supported branch first, prove the procedure and the rollback, then widen.
+
+Waves give the programme control. Move branches in batches small enough that your team can fully support each cutover and recover from any single failure, rather than attempting a big-bang switch that leaves nowhere to retreat. Within a branch, sequence by dependency: shared infrastructure and connectivity first, then back-office workstations, then customer-facing teller positions and self-service devices last, so the highest-visibility endpoints are migrated only once the foundation under them is confirmed good. Each wave should close with a short, written retrospective that feeds the next, because the runbook is a living document and the tenth branch should be smoother than the first.
+
+## Build Rollback Gates Into Every Step
+
+A cutover without a way back is a gamble, not a method. The runbook needs explicit rollback gates: defined points where the team confirms the new endpoint is functioning against agreed checks before the old one is retired, and a tested procedure to restore the previous state if a check fails. The single most important sequencing decision is to keep the outgoing device recoverable until the incoming one has passed its checks. Do not wipe or remove the legacy unit on the same visit you commission its replacement.
+
+Define what "good" means in advance, as a readiness gate the branch must clear before it is declared live: core-banking client connects and authenticates, a test transaction completes end to end, peripherals and printers respond, endpoint security reports in to the central console, and the device appears correctly in monitoring. If any check fails, the gate holds, and the documented decision is either remediate-in-place within a fixed window or roll back, never improvise.
+
+> No branch goes live until it has cleared the readiness gate, and no legacy endpoint is retired until its replacement has held that gate through a full business cycle. The gate, not the calendar, decides when you move on.
+
+Rollback also needs an owner and a clock. Each gate names who can call the rollback decision and how long the team will attempt a fix before reverting, so a struggling cutover ends in a clean, planned return to service rather than an extended outage while engineers debate. For the underlying security posture these endpoints must meet once live, our companion guidance on [branch network and endpoint hardening](/insights/what-cbns-it-standards-mean-for-branch-network-and-endpoint-hardening) sets out the baseline a freshly imaged device should satisfy.
+
+## Schedule Around Availability Windows and Power Reality
+
+Timing is where Ghanaian context turns a clean method into a successful one. Schedule cutovers out of hours and away from the periods when a branch can least tolerate disruption: month-end settlement, payroll and salary-day peaks, and any local market or civil-service pay cycles that spike branch traffic. The goal is to migrate inside a window where a worst-case rollback still completes before the doors open.
+
+Power is not a footnote in Ghana, it is a planning input. Grid instability and ECG load-shedding (the familiar dumsor) mean an out-of-hours migration can lose mains power midway through an image or a database step, corrupting exactly the work you are trying to protect. The runbook should require confirmed generator coverage and healthy UPS runtime at the branch before a cutover starts, treat available fuel and battery state as a go or no-go check, and design steps so an unexpected power loss leaves the device in a recoverable state rather than a half-migrated one. Connectivity deserves the same caution: confirm the branch link is stable before commencing, because a migration that depends on reaching central services mid-step will fail when the line drops.
+
+Write the schedule against the regulator's expectation, not just your own convenience. If Bank of Ghana availability expectations frame core services as something customers and the regulator assume will be there, then your maintenance windows, customer communication, and fallback manual procedures should all be planned so that, even in a bad cutover, the branch can serve customers or fail over gracefully rather than simply close.
+
+## Close Out With Evidence and a Clean Sign-off
+
+A migration is not finished when the new device boots, it is finished when it is proven and documented. For each branch, capture the evidence the gate produced: the completed readiness checklist, the test-transaction confirmation, the monitoring and security-console check-in, and the record that the legacy device was decommissioned and its data handled appropriately. This artefact trail is what lets you demonstrate, to internal audit and to a regulator, that the change was controlled.
+
+Hold the regulatory edges deliberately. Bank of Ghana's incident-reporting expectations mean that if a cutover does cause an availability event, you need the facts and timeline ready, so synchronise clocks across sites and log each step as it happens. Where the Cyber Security Authority's financial-sector directives bear on how endpoints are configured, secured, and decommissioned, treat them as a parallel obligation to satisfy and evidence, not an afterthought. Keep central-bank availability records and cyber-directive compliance distinct, because they answer to different oversight and call for different proof.
+
+If you are scoping a branch endpoint migration now, the sensible next step is not to buy hardware, it is to design the cutover: tier and sequence the branches, write and rehearse the readiness and rollback gates, and pressure-test the schedule against your power, connectivity, and peak-trading realities. That is precisely the managed approach our [deployment and implementation practice](/services/deployment-implementation) is built to plan and run, turning a risky hardware swap into a controlled, evidenced operation.
+
+## Frequently asked questions
+
+### How do you replace banking endpoints without downtime?
+
+You treat it as a sequenced cutover rather than a hardware swap. Pre-image and test every device in staging, migrate branches in small waves, and keep each outgoing endpoint recoverable until its replacement clears a readiness gate (core-banking connection, a successful test transaction, security and monitoring check-in). Because the old device is retired only after the new one is proven, any failure ends in a planned rollback rather than an outage, so the branch keeps trading throughout.
+
+### When should branch hardware migrations be scheduled in Ghana?
+
+Out of hours, and away from the periods a branch can least afford disruption: month-end settlement, payroll and salary-day peaks, and local pay cycles that spike footfall. Choose a window wide enough that a worst-case rollback still finishes before opening. Crucially, confirm generator coverage, UPS runtime, and a stable network link as go or no-go checks first, because ECG load-shedding or a dropped line mid-cutover is a leading cause of corrupted migrations.
+
+### What belongs in a rollback gate for a banking endpoint cutover?
+
+A defined set of pass or fail checks the new device must clear before the legacy unit is retired, plus a tested procedure to restore the previous state if it fails. The gate names who can call the rollback, sets a fixed window to attempt a fix before reverting, and requires that the outgoing device stay intact and recoverable until the replacement has held the gate through a full business cycle. The gate, not the schedule, decides when the branch goes live.
+
+### How do Bank of Ghana expectations affect a branch migration?
+
+They raise the cost of an availability lapse, so the runbook is designed to preserve service or fail over gracefully at every step, with manual fallback procedures ready. They also shape close-out: synchronise clocks, log each step as it happens, and keep an evidence trail so that if a reportable event occurs you can meet incident-reporting expectations with facts and a timeline. Treat Bank of Ghana availability records and Cyber Security Authority directive compliance as distinct obligations, each separately evidenced.

@@ -91,7 +91,7 @@
   },
   {
     "id": "t_mpxhmrs3_6",
-    "status": "pending",
+    "status": "written",
     "slug": "how-to-structure-an-it-procurement-process-that-survives-a-public-procurement-au",
     "title": "How to Structure an IT Procurement Process That Survives a Public Procurement Audit in Ghana",
     "cluster": "government",
@@ -100,11 +100,13 @@
     "angle": "Mapping IT buying to Ghana's Public Procurement Act and PPA oversight — documentation trails, evaluation committees, and threshold rules that auditors actually check.",
     "primaryKeyword": "public sector IT procurement Ghana",
     "searchIntent": "informational",
-    "funnelStage": "TOFU"
+    "funnelStage": "TOFU",
+    "qaScore": 91,
+    "file": "content/insights/how-to-structure-an-it-procurement-process-that-survives-a-public-procurement-au.mdx"
   },
   {
     "id": "t_mpxhmrs3_7",
-    "status": "pending",
+    "status": "written",
     "slug": "what-cbns-it-standards-mean-for-branch-network-and-endpoint-hardening",
     "title": "What CBN's IT Standards Mean for Branch Network and Endpoint Hardening",
     "cluster": "banking",
@@ -113,11 +115,13 @@
     "angle": "Translating CBN risk-based cybersecurity expectations into concrete branch-level controls — segmentation, endpoint baselines, logging, and patch governance — for IT and compliance leads.",
     "primaryKeyword": "CBN cybersecurity framework branch IT",
     "searchIntent": "informational",
-    "funnelStage": "TOFU"
+    "funnelStage": "TOFU",
+    "qaScore": 89,
+    "file": "content/insights/what-cbns-it-standards-mean-for-branch-network-and-endpoint-hardening.mdx"
   },
   {
     "id": "t_mpxhmrs3_8",
-    "status": "pending",
+    "status": "written",
     "slug": "designing-it-infrastructure-for-continuity-of-care-in-clinics-with-frequent-powe",
     "title": "Designing IT Infrastructure for Continuity of Care in Clinics With Frequent Power Cuts",
     "cluster": "healthcare",
@@ -126,11 +130,13 @@
     "angle": "How to keep EMR access, diagnostics, and records available through outages — offline-first design, local caching, UPS sizing for clinical loads, and a graceful-degradation playbook for care teams.",
     "primaryKeyword": "healthcare IT continuity Nigeria",
     "searchIntent": "informational",
-    "funnelStage": "TOFU"
+    "funnelStage": "TOFU",
+    "qaScore": 89,
+    "file": "content/insights/designing-it-infrastructure-for-continuity-of-care-in-clinics-with-frequent-powe.mdx"
   },
   {
     "id": "t_mpxhmrs3_9",
-    "status": "pending",
+    "status": "written",
     "slug": "how-to-plan-campus-wi-fi-that-holds-up-under-exam-season-load",
     "title": "How to Plan Campus Wi-Fi That Holds Up Under Exam-Season Load",
     "cluster": "education",
@@ -139,11 +145,13 @@
     "angle": "Capacity-led wireless planning for universities — density modelling, AP placement, backhaul sizing, and authentication for thousands of concurrent devices during peak academic events.",
     "primaryKeyword": "campus wifi planning university Nigeria",
     "searchIntent": "informational",
-    "funnelStage": "TOFU"
+    "funnelStage": "TOFU",
+    "qaScore": 91,
+    "file": "content/insights/how-to-plan-campus-wi-fi-that-holds-up-under-exam-season-load.mdx"
   },
   {
     "id": "t_mpxhmrs3_10",
-    "status": "pending",
+    "status": "written",
     "slug": "hardening-field-and-remote-site-it-for-upstream-oil-and-gas-operations",
     "title": "Hardening Field and Remote-Site IT for Upstream Oil and Gas Operations",
     "cluster": "oil-gas-energy",
@@ -152,11 +160,13 @@
     "angle": "Designing resilient connectivity, ruggedised endpoints, and remote management for offshore and remote onshore sites where physical access is costly and downtime halts production.",
     "primaryKeyword": "remote site IT oil and gas Nigeria",
     "searchIntent": "informational",
-    "funnelStage": "TOFU"
+    "funnelStage": "TOFU",
+    "qaScore": 89,
+    "file": "content/insights/hardening-field-and-remote-site-it-for-upstream-oil-and-gas-operations.mdx"
   },
   {
     "id": "t_mpxhmrs3_11",
-    "status": "pending",
+    "status": "written",
     "slug": "how-to-run-a-phishing-resilience-programme-that-changes-behaviour-not-just-click",
     "title": "How to Run a Phishing-Resilience Programme That Changes Behaviour, Not Just Click Rates",
     "cluster": "cybersecurity",
@@ -165,11 +175,13 @@
     "angle": "Moving beyond annual training to a sustained programme — simulation cadence, reporting incentives, role-based risk, and the metrics that actually predict reduced compromise.",
     "primaryKeyword": "phishing awareness programme Nigeria",
     "searchIntent": "informational",
-    "funnelStage": "TOFU"
+    "funnelStage": "TOFU",
+    "qaScore": 90,
+    "file": "content/insights/how-to-run-a-phishing-resilience-programme-that-changes-behaviour-not-just-click.mdx"
   },
   {
     "id": "t_mpxhmrs3_12",
-    "status": "pending",
+    "status": "written",
     "slug": "preparing-your-data-processing-records-for-a-popia-compliance-review",
     "title": "Preparing Your Data Processing Records for a POPIA Compliance Review",
     "cluster": "advisory",
@@ -178,11 +190,13 @@
     "angle": "A step-by-step approach to building the processing inventory, lawful-basis mapping, and operator agreements the Information Regulator expects — aimed at IT and compliance leads under POPIA.",
     "primaryKeyword": "POPIA data processing records",
     "searchIntent": "informational",
-    "funnelStage": "TOFU"
+    "funnelStage": "TOFU",
+    "qaScore": 89,
+    "file": "content/insights/preparing-your-data-processing-records-for-a-popia-compliance-review.mdx"
   },
   {
     "id": "t_mpxhmrs3_13",
-    "status": "pending",
+    "status": "written",
     "slug": "negotiating-hardware-warranty-and-rma-terms-that-hold-up-across-african-borders",
     "title": "Negotiating Hardware Warranty and RMA Terms That Hold Up Across African Borders",
     "cluster": "hardware-supply",
@@ -191,11 +205,13 @@
     "angle": "What to demand in warranty contracts when in-country service is thin — advance replacement, regional depots, SLA-backed turnaround, and how to price the gap when local support doesn't exist.",
     "primaryKeyword": "hardware warranty terms Africa",
     "searchIntent": "commercial-investigation",
-    "funnelStage": "MOFU"
+    "funnelStage": "MOFU",
+    "qaScore": 90,
+    "file": "content/insights/negotiating-hardware-warranty-and-rma-terms-that-hold-up-across-african-borders.mdx"
   },
   {
     "id": "t_mpxhmrs3_14",
-    "status": "pending",
+    "status": "written",
     "slug": "how-to-decide-between-co-location-on-premise-and-edge-for-a-multi-site-business",
     "title": "How to Decide Between Co-location, On-Premise, and Edge for a Multi-Site Business",
     "cluster": "infrastructure",
@@ -204,11 +220,13 @@
     "angle": "A decision framework weighing latency, power reliability, data-residency, and operational control — helping IT leaders place each workload in the right location rather than defaulting to one model.",
     "primaryKeyword": "colocation vs on-premise Nigeria",
     "searchIntent": "informational",
-    "funnelStage": "MOFU"
+    "funnelStage": "MOFU",
+    "qaScore": 90,
+    "file": "content/insights/how-to-decide-between-co-location-on-premise-and-edge-for-a-multi-site-business.mdx"
   },
   {
     "id": "t_mpxhmrs3_15",
-    "status": "pending",
+    "status": "written",
     "slug": "setting-realistic-it-slas-and-kpis-before-you-sign-a-managed-services-contract",
     "title": "Setting Realistic IT SLAs and KPIs Before You Sign a Managed Services Contract",
     "cluster": "managed-services",
@@ -217,11 +235,13 @@
     "angle": "How buyers should define measurable, penalty-backed service targets — availability, response, resolution, and reporting — and avoid vanity metrics that look good but don't protect operations.",
     "primaryKeyword": "managed services SLA KPIs Kenya",
     "searchIntent": "commercial-investigation",
-    "funnelStage": "MOFU"
+    "funnelStage": "MOFU",
+    "qaScore": 89,
+    "file": "content/insights/setting-realistic-it-slas-and-kpis-before-you-sign-a-managed-services-contract.mdx"
   },
   {
     "id": "t_mpxhmrs4_16",
-    "status": "pending",
+    "status": "error",
     "slug": "how-to-build-the-business-case-for-an-it-investment-the-board-will-approve",
     "title": "How to Build the Business Case for an IT Investment the Board Will Approve",
     "cluster": "advisory",
@@ -230,11 +250,12 @@
     "angle": "Structuring a CapEx/OpEx proposal in business terms — risk reduction, continuity, and measurable outcomes — with a reusable template for translating technical need into board-ready justification.",
     "primaryKeyword": "IT investment business case",
     "searchIntent": "informational",
-    "funnelStage": "MOFU"
+    "funnelStage": "MOFU",
+    "error": "claude CLI timed out after 480s"
   },
   {
     "id": "t_mpxhmrs4_17",
-    "status": "pending",
+    "status": "written",
     "slug": "meeting-ndpa-2023-obligations-when-you-outsource-it-to-third-party-processors",
     "title": "Meeting NDPA 2023 Obligations When You Outsource IT to Third-Party Processors",
     "cluster": "cybersecurity",
@@ -243,11 +264,13 @@
     "angle": "What the NDPA and NDPC expect of data controllers using vendors — processor agreements, breach-notification chains, due-diligence, and cross-border transfer safeguards in outsourced IT.",
     "primaryKeyword": "NDPA data processor obligations",
     "searchIntent": "informational",
-    "funnelStage": "TOFU"
+    "funnelStage": "TOFU",
+    "qaScore": 89,
+    "file": "content/insights/meeting-ndpa-2023-obligations-when-you-outsource-it-to-third-party-processors.mdx"
   },
   {
     "id": "t_mpxhmrs4_18",
-    "status": "pending",
+    "status": "written",
     "slug": "a-migration-runbook-for-replacing-legacy-banking-endpoints-without-downtime",
     "title": "A Migration Runbook for Replacing Legacy Banking Endpoints Without Downtime",
     "cluster": "deployment",
@@ -256,11 +279,13 @@
     "angle": "A sequenced cutover method for swapping aging branch hardware — staging, imaging, rollback gates, and out-of-hours scheduling under Bank of Ghana availability expectations.",
     "primaryKeyword": "banking endpoint migration runbook Ghana",
     "searchIntent": "informational",
-    "funnelStage": "MOFU"
+    "funnelStage": "MOFU",
+    "qaScore": 89,
+    "file": "content/insights/a-migration-runbook-for-replacing-legacy-banking-endpoints-without-downtime.mdx"
   },
   {
     "id": "t_mpxhmrs4_19",
-    "status": "pending",
+    "status": "written",
     "slug": "how-to-manage-it-procurement-and-connectivity-across-an-afcfta-multi-country-exp",
     "title": "How to Manage IT Procurement and Connectivity Across an AfCFTA Multi-Country Expansion",
     "cluster": "it-procurement",
@@ -269,6 +294,8 @@
     "angle": "A playbook for IT leaders standardising hardware standards, vendor contracts, and data-residency decisions when expanding operations across African markets under differing regulators.",
     "primaryKeyword": "multi-country IT procurement Africa",
     "searchIntent": "commercial-investigation",
-    "funnelStage": "MOFU"
+    "funnelStage": "MOFU",
+    "qaScore": 91,
+    "file": "content/insights/how-to-manage-it-procurement-and-connectivity-across-an-afcfta-multi-country-exp.mdx"
   }
 ]

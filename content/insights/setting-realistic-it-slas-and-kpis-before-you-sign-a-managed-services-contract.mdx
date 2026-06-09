@@ -1,0 +1,107 @@
+---
+title: "Setting Realistic IT SLAs and KPIs Before You Sign a Managed Services Contract"
+slug: "setting-realistic-it-slas-and-kpis-before-you-sign-a-managed-services-contract"
+excerpt: "Before signing a managed services contract in Kenya, define penalty-backed availability, response and resolution targets, and strip out the vanity metrics that look good on a slide but never protect operations."
+category: "Managed Services"
+tags:
+  - "managed services"
+  - "sla"
+  - "kpis"
+  - "it procurement"
+  - "kenya"
+  - "service credits"
+author: "Digitplus Technology"
+publishedAt: "2026-06-03"
+updatedAt: "2026-06-03"
+cover: "/images/insights/setting-realistic-it-slas-and-kpis-before-you-sign-a-managed-services-contract.jpg"
+coverAlt: "Two IT managers reviewing a printed service-level agreement and uptime dashboard across a meeting table in a Nairobi office."
+draft: true
+seo:
+  metaTitle: "Managed Services SLAs & KPIs: A Kenya Buyer's Guide"
+  metaDescription: "Define penalty-backed availability, response and resolution targets before signing an MSP contract in Kenya, and avoid vanity metrics that look good but never protect operations."
+  ogImage: "/images/insights/setting-realistic-it-slas-and-kpis-before-you-sign-a-managed-services-contract.jpg"
+---
+
+## Why the SLA, Not the Sales Deck, Decides What You Actually Get
+
+A managed services relationship lives or dies on the contract, not the pitch. When you set managed services SLA KPIs in Kenya before you sign, you are deciding what the provider is actually obliged to deliver when a core system fails at month-end, when KPLC drops a feeder during a board meeting, or when a branch in Mombasa loses connectivity for half a day. The sales deck describes intent. The service-level agreement describes the only commitments you can enforce.
+
+A vague or vendor-drafted SLA quietly shifts all interpretation risk onto the buyer. When an outage or a security incident hits, the questions that decide who pays and who fixes it are settled by clauses you either negotiated or accepted by default: what counts as downtime, when the clock starts, which severity tier applies, and what the provider owes you when it misses. If those answers are loose, the MSP will read them in its own favour, and it will be right to, because that is what the document says.
+
+Kenyan operations sharpen the stakes. Grid instability and KPLC outages mean diesel backup and UPS are part of normal running, not an exception. A blended "uptime" figure is close to meaningless across multi-county sites where a Nairobi data room, a Mombasa branch, and an upcountry office face entirely different power and connectivity realities. Uptime has to be scoped per location and per service or it protects nothing. This guide gives you a way to define penalty-backed targets before signing, and to spot the vanity metrics that look reassuring on a slide but collapse the first time you need them.
+
+## Managed Services SLA KPIs in Kenya: The Four Metric Families That Protect Operations
+
+Most workable SLAs reduce to four families. Get these right and the rest is detail.
+
+**Availability**, defined per critical service rather than blended. "99.9% across the estate" hides the fact that your core banking interface can be down for hours while email availability props up the average. Specify the measurement window (calendar month is standard), state exactly what counts as downtime, and distinguish business-hours availability from genuine 24/7 where the service warrants it. A payroll system needs different cover from a customer-facing payment gateway.
+
+**Response time**, meaning the time to acknowledge and actively engage an incident, kept strictly separate from resolution. Conflating the two lets a provider claim a fast "response" by auto-acknowledging a ticket while real work has not begun. Define response as a named engineer engaged and working, not a system-generated email.
+
+**Resolution time and severity tiers.** Resolution targets, often expressed as mean time to restore, are only meaningful against a clear severity model. A P1 core-system outage affecting all users and a P4 cosmetic ticket cannot share one target. Agree the tier definitions, the target for each, and crucially who classifies an incident, because the temptation to downgrade a P1 to a P2 to protect the metric is real.
+
+**Reporting and transparency**, treated as a first-class metric rather than an afterthought. Decide who measures performance, how often, and whether you can audit the raw ticketing and monitoring data rather than trusting a curated dashboard. A target you cannot independently verify is not really a target. Build the audit into the agreement.
+
+> A target you cannot independently verify is not a commitment. It is a hope dressed up as a number.
+
+These four families are one component of a deliberate sourcing strategy, not a standalone exercise. They sit within the broader [managed services](/services/managed-services) decision about what you outsource and why.
+
+## Spotting Vanity Metrics That Look Good but Protect Nothing
+
+Vanity metrics survive procurement because they sound impressive and resist scrutiny. Learn to convert each one into a defensible target.
+
+"99.9% uptime" with no measurement scope is the classic. Over what window? Measured at which point, the server or the user's experience? With which maintenance windows carved out? Without those qualifiers, the headline number can be technically true while your branches sat dark for a working day. Insist on per-service availability with the measurement method and all exclusions written down.
+
+"Average response time" masks worst-case failure. An MSP can post a flattering mean while a handful of critical tickets languished for hours, because averages absorb outliers. Replace the average with a percentile commitment, such as 95% of P1 incidents responded to within 15 minutes, plus a worst-case cap. Percentiles and caps are far harder to game than a mean.
+
+Ticket-closure counts reward closing over fixing. A metric that celebrates volume of resolved tickets quietly incentivises premature closure and re-opened issues. Pair any closure metric with a reopen rate and a first-time-fix rate so the provider cannot game throughput at the expense of actually solving problems.
+
+The structural weakness underneath all of these is self-reported measurement with no independent verification. If the party being graded also owns the only copy of the marksheet, negotiate that out. Require access to the underlying monitoring and ticketing data, or an agreed third-party measurement point, so the numbers in the report can be checked against the source.
+
+## Making Targets Enforceable: Service Credits, Penalties and Exit Triggers
+
+A target with no consequence is advisory. Enforceability comes from three distinct mechanisms, and buyers routinely confuse them.
+
+**Service credits** are automatic and formulaic: miss a defined target, and a stated percentage of the monthly fee is credited back without you having to argue for it. They should be meaningful relative to the fee and should escalate with severity and with repeat breaches. A token 5% credit that the MSP treats as a routine cost of doing business changes no behaviour. Tiered credits that climb as failures stack do.
+
+**Penalties and termination rights** go further than credits. A chronic-failure clause should let you terminate for cause when the provider misses defined thresholds across consecutive months, even if each individual breach was survivable. Define earn-back provisions if you wish, but do not let earn-back become a treadmill that erases accountability for a bad quarter.
+
+**Exit and data handover.** The most important clause in any MSP contract is the one that lets you leave. Define the exit process, the data-handover format and timeline, and continued cooperation during transition, so a failing relationship is escapable without your own data held hostage. Negotiate this when you have leverage, before signing, never during a dispute.
+
+Then there is the Kenya-specific trap: force majeure. A broadly worded force majeure clause can silently absorb the routine power and connectivity failures the MSP is actually paid to mitigate. If diesel backup, UPS maintenance, and failover are part of the service, a KPLC outage is a foreseeable operating condition, not an act of God. Carve those explicitly out of force majeure so the provider cannot disclaim the very risks you hired it to manage.
+
+## Setting Baselines and Reporting Cadence Before You Commit
+
+Targets pulled from a template are aspiration. Targets grounded in your operations are commitments. Establish current-state baselines first: your real incident volume, your actual recovery times, your peak loads across the month. Without a baseline, you cannot tell whether a "99.5%" target is ambitious or a quiet downgrade from what you already achieve.
+
+Agree the reporting cadence and format up front. A workable rhythm is a monthly KPI report against each SLA target, a quarterly business review that looks at trends and root causes rather than raw numbers, and live or near-live access to the ticketing system so you are never wholly dependent on the provider's narrative. Define escalation paths and named contacts for each severity tier, including after-hours coverage that genuinely spans Nairobi, Mombasa, and upcountry sites, because an escalation path that only works in office hours fails exactly when a P1 strikes.
+
+Finally, build in a review-and-revise clause. Your environment will scale, add sites, and change risk profile. SLAs frozen at year-one assumptions drift out of relevance. A scheduled review keeps the targets matched to the operation rather than to a snapshot taken during procurement.
+
+## Aligning SLAs With Kenyan Compliance and Data Obligations
+
+Service targets are also compliance instruments. The Data Protection Act 2019 and the Office of the Data Protection Commissioner impose obligations that belong inside the SLA, not buried in a privacy annex nobody reads. Incident-response and breach-notification timelines, in particular, should be SLA commitments with consequences, because a delayed breach notification is your regulatory exposure, not just the provider's.
+
+Specify where data is hosted and processed. Cloud regions, offshore support desks, and backup locations all determine which jurisdiction your data sits in, and the MSP's obligations as a data processor must be contractually explicit rather than assumed. Require the processor terms the Act expects, including the duty to act on your instruction and to support your own obligations to data subjects.
+
+Layer in sector overlays where they apply. Financial institutions operate under Central Bank of Kenya guidance on outsourcing and operational resilience; public-sector engagements carry ICT Authority expectations. Your SLA should support those obligations rather than undermine them, so that meeting your provider's targets and meeting your regulator's expectations are the same activity, not competing ones.
+
+Read this way, the SLA stops being a procurement formality and becomes the operating contract for your IT risk. The most useful next step is rarely to sign faster. It is to assess honestly: baseline your current performance, define penalty-backed targets per service, strip out the vanity metrics, and confirm the exit and compliance clauses hold before you commit. If you would like a structured review of a managed services agreement before it goes to signature, our [managed services advisory team](/services/managed-services) can help you scope realistic targets grounded in how your operations actually run.
+
+## Frequently asked questions
+
+### What SLA metrics actually matter in a managed services contract?
+
+Four families do most of the work: per-service availability with a defined measurement window, response time measured as a named engineer engaging the incident, resolution time graded against clear severity tiers, and reporting you can independently audit. Blended uptime figures and ticket-closure counts look impressive but protect little. Define each target per critical service rather than across the estate, and make sure you can verify it against the underlying data.
+
+### How do service credits and penalties work if an MSP misses its targets?
+
+Service credits are automatic and formulaic: a missed target triggers a set percentage of the monthly fee credited back without you having to argue for it. They should escalate with severity and repeat breaches, because a flat token credit is just a cost the provider absorbs. Penalties and termination rights go further, letting you exit for cause when failures persist across consecutive months, and they belong alongside a clear data-handover clause so a failing contract is escapable.
+
+### What is the difference between response time and resolution time in an SLA?
+
+Response time is how long the provider takes to acknowledge and actively engage an incident, ideally measured as a named engineer working the problem rather than an automated acknowledgement. Resolution time is how long to actually restore the service, usually graded by severity tier. Keeping them separate matters because a provider can post a fast response while real work stalls; conflating the two lets poor resolution hide behind a quick acknowledgement.
+
+### How often should a managed services provider report on KPIs?
+
+A practical cadence is a monthly KPI report against each SLA target, a quarterly business review covering trends and root causes, and live or near-live access to the ticketing system in between. Monthly reporting catches drift early, while the quarterly review addresses systemic issues rather than individual tickets. Insist that reports draw on auditable source data, not a curated dashboard, so you can verify the figures rather than simply trust them.

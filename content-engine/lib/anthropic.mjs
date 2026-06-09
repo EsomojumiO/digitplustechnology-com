@@ -168,10 +168,13 @@ function spawnText(bin, args, input) {
       return reject(cliMissing(bin, e));
     }
     let out = "", err = "";
+    // Override with CLAUDE_CLI_TIMEOUT_MS. Long, high-effort articles can exceed
+    // the 240s default on the subscription path; raise it for stubborn briefs.
+    const timeoutMs = Math.max(60_000, Number(process.env.CLAUDE_CLI_TIMEOUT_MS) || 240_000);
     const timer = setTimeout(() => {
       child.kill("SIGKILL");
-      reject(new Error("claude CLI timed out after 240s"));
-    }, 240_000);
+      reject(new Error(`claude CLI timed out after ${Math.round(timeoutMs / 1000)}s`));
+    }, timeoutMs);
 
     child.on("error", (e) => {
       clearTimeout(timer);

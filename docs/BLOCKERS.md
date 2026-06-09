@@ -16,12 +16,14 @@ These do not stop the build (we use clearly-labelled placeholders), but must be 
 | 10 | Real quarterly-report PDF (original data) | Minimal valid placeholder PDF | `public/reports/nigeria-enterprise-it-hardware-price-index-q2-2026.pdf` — replace with the real original-data report before launch |
 | 11 | Cover/inline imagery for insights + reports | ✅ **Insights covers done** — all 33 sourced from Unsplash (license: free commercial, no attribution required), 1600×900 JPEG in `public/images/insights/`; photographer credits saved in `public/images/insights/CREDITS.json` (optional use). Topic-matched on concept (not Nigeria-specific stock). **Reports covers still pending** (`public/images/reports/<slug>.jpg`). | swap any specific insight cover by replacing the file; supply report covers |
 
-> ⚠️ **Update 2026-06-03:** 5 new content-engine drafts reference cover images that do **not** yet exist (`public/images/insights/<slug>.jpg`). There is no auto-fetcher script or Unsplash API key in the repo — the existing 33 covers were hand-curated. Curate one Unsplash image per slug (1600×900 JPEG), then add a `CREDITS.json` entry. Slugs needing covers:
-> - `how-to-run-a-vendor-consolidation-review-without-locking-yourself-into-a-single` — *supplier review meeting / procurement contracts*
-> - `planning-a-phased-migration-to-hybrid-cloud-when-connectivity-is-unreliable` — *data centre servers / fibre patch panel*
-> - `total-cost-of-ownership-for-enterprise-hardware-in-a-volatile-naira-environment` — *finance spreadsheet laptop office*
-> - `a-pre-deployment-site-survey-framework-for-rolling-out-equipment-across-multiple` — *technician site survey clipboard network rack*
-> - `building-an-it-disaster-recovery-plan-when-the-primary-risk-is-power-not-cyberat` — *server room generator / UPS backup power*
+> ⚠️ **Update 2026-06-05:** **19 new content-engine drafts** (dated 2026-06, all `draft:true`) reference cover images that do **not** yet exist (`public/images/insights/<slug>.jpg`). There is no auto-fetcher script or Unsplash API key in the repo — the existing 33 covers were hand-curated. For each, curate one Unsplash image (1600×900 JPEG, license: free commercial), save it at `public/images/insights/<slug>.jpg`, and add a `CREDITS.json` entry. **These drafts cannot be published (flip `draft:false`) until their covers exist — the `cover:` paths currently 404.**
+>
+> List the slugs still needing covers at any time with:
+> ```bash
+> # drafts whose cover file is missing
+> for f in content/insights/*.mdx; do s=$(basename "$f" .mdx); \
+>   [ -f "public/images/insights/$s.jpg" ] || echo "$s"; done
+> ```
 
 ## Forms & integrations — stubbed pending decisions
 

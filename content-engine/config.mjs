@@ -82,7 +82,10 @@ export const config = {
   defaultAuthor: "Digitplus Technology",
 
   // ---- Concurrency for the synchronous generate path ----------------------
-  concurrency: 4,
+  // Override with CONTENT_ENGINE_CONCURRENCY. The subscription (cli) provider
+  // throttles under parallel load — 4 concurrent claude processes can push
+  // individual calls past the 240s timeout, so drop to 1-2 for cli batches.
+  concurrency: Math.max(1, Number(process.env.CONTENT_ENGINE_CONCURRENCY) || 4),
 };
 
 export default config;
