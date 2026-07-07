@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button, Container } from "@/components/ui";
 import { cn } from "@/lib/utils";
-import { mainNav, type NavItem } from "@/lib/site";
+import { mainNav, siteConfig, type NavItem } from "@/lib/site";
 import { Logo } from "./Logo";
 
 /* ---------------------------------------------------------------------------
@@ -297,7 +297,7 @@ function MobileMenu({
 
         <div className="border-t border-hairline p-4">
           <Button href="/contact" size="lg" className="w-full" onClick={onClose}>
-            Request Assessment
+            Get a quote
           </Button>
         </div>
       </div>
@@ -354,8 +354,18 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-1.5">
+          <a
+            href={siteConfig.phoneHref}
+            className={cn(
+              "hidden items-center rounded-md px-3 py-2 text-small font-medium text-muted md:inline-flex",
+              "transition-colors duration-[var(--dur-fast)] ease-[var(--ease-out)] hover:text-text",
+              "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green",
+            )}
+          >
+            {siteConfig.phone}
+          </a>
           <Button href="/contact" size="sm" className="hidden sm:inline-flex">
-            Request Assessment
+            Get a quote
           </Button>
 
           <button

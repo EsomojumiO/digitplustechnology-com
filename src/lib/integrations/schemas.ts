@@ -42,9 +42,14 @@ export const contactSchema = z.object({
   email,
   phone: z.string().trim().max(40).optional().or(z.literal("")),
   company: requiredText("Company", 160),
-  serviceInterest: z.enum(serviceInterestValues, {
-    errorMap: () => ({ message: "Select a service interest." }),
-  }),
+  // Optional: the contact form was trimmed to 5 fields; other entry points
+  // (service pages) may still pass a service context. Kept in the schema so the
+  // integration pipeline still records it when present.
+  serviceInterest: z
+    .enum(serviceInterestValues, {
+      errorMap: () => ({ message: "Select a service interest." }),
+    })
+    .optional(),
   message: requiredText("Message", 4000),
   company_website: honeypot,
   page,

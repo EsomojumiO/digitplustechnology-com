@@ -94,7 +94,7 @@ export default async function IndustryDetailPage({
           </StaggerItem>
           <StaggerItem className="mt-2 flex flex-wrap gap-3">
             <Button href="/contact" size="lg">
-              Request a Free IT Assessment
+              Get a quote
             </Button>
             <Button href="/industries" size="lg" variant="secondary">
               All industries

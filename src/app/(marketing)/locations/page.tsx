@@ -70,7 +70,7 @@ export default function LocationsPage() {
         description="We coordinate multi-site programmes from a single point of accountability. Tell us where you operate and we’ll plan around it."
         actions={
           <Button href="/contact" size="lg" variant="secondary">
-            Request a Free IT Assessment
+            Get a quote
           </Button>
         }
       />

@@ -110,7 +110,7 @@ export default function LagosPage() {
         description="Tell us what you’re planning and we’ll come back with practical next steps."
         actions={
           <Button href="/contact" size="lg" variant="secondary">
-            Request a Free IT Assessment
+            Get a quote
           </Button>
         }
       />

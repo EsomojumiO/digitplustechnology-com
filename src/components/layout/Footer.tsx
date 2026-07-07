@@ -87,6 +87,16 @@ export function Footer() {
                   {siteConfig.email}
                 </a>
               </p>
+              <p>
+                <a
+                  href={siteConfig.whatsapp}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="font-medium text-accent-green transition-colors hover:text-[var(--cream)]"
+                >
+                  Chat on WhatsApp
+                </a>
+              </p>
             </address>
 
             <p className="mt-4 text-caption text-brand-200">
