@@ -87,7 +87,7 @@ export function InsightsSearch({ articles, controlsId }: InsightsSearchProps) {
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search insights…"
           autoComplete="off"
-          className="h-11 w-full rounded-md border border-hairline bg-surface-raised pl-10 pr-4 text-body text-text placeholder:text-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          className="h-11 w-full rounded-md border border-hairline bg-surface-raised pl-10 pr-4 text-body text-text placeholder:text-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green"
           aria-controls={controlsId}
         />
       </form>

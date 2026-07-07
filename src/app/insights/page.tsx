@@ -96,7 +96,7 @@ export default async function InsightsHubPage({
           <FadeIn>
             <Link
               href={`/insights/${featured.slug}`}
-              className="group grid items-center gap-8 rounded-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent lg:grid-cols-2 lg:gap-12"
+              className="group grid items-center gap-8 rounded-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-green lg:grid-cols-2 lg:gap-12"
             >
               <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl border border-hairline bg-background">
                 <Image
@@ -147,7 +147,7 @@ export default async function InsightsHubPage({
                 <Link
                   href="/insights"
                   aria-current="page"
-                  className="inline-flex items-center gap-1.5 rounded-full border border-accent bg-accent-subtle px-3.5 py-1.5 text-small font-medium text-accent transition-colors duration-[var(--dur-fast)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-accent bg-accent-subtle px-3.5 py-1.5 text-small font-medium text-accent transition-colors duration-[var(--dur-fast)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green"
                 >
                   All
                   <span className="text-caption text-accent/70">
@@ -159,7 +159,7 @@ export default async function InsightsHubPage({
                 <li key={c.slug}>
                   <Link
                     href={`/insights/category/${c.slug}`}
-                    className="inline-flex items-center gap-1.5 rounded-full border border-hairline bg-surface-raised px-3.5 py-1.5 text-small font-medium text-muted transition-colors duration-[var(--dur-fast)] hover:border-neutral-300 hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                    className="inline-flex items-center gap-1.5 rounded-full border border-hairline bg-surface-raised px-3.5 py-1.5 text-small font-medium text-muted transition-colors duration-[var(--dur-fast)] hover:border-hairline-hover hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green"
                   >
                     {c.label}
                     <span className="text-caption text-muted/60">

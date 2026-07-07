@@ -155,7 +155,7 @@ export default async function ArticlePage({
             <div>
               <Link
                 href={`/insights/category/${article.category.slug}`}
-                className="rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                className="rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green"
               >
                 <Badge tone="accent">{article.category.label}</Badge>
               </Link>

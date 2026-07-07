@@ -88,7 +88,7 @@ export default function EcosystemPage() {
               <article
                 className={cn(
                   "flex h-full flex-col rounded-2xl border border-hairline bg-surface-raised p-8",
-                  "transition-colors duration-[var(--dur-base)] hover:border-neutral-300",
+                  "transition-colors duration-[var(--dur-base)] hover:border-hairline-hover",
                 )}
               >
                 <div className="flex items-center justify-between gap-3">
@@ -116,7 +116,7 @@ export default function EcosystemPage() {
                   className={cn(
                     "mt-6 inline-flex items-center gap-1.5 text-small font-medium text-text",
                     "transition-colors duration-[var(--dur-fast)] hover:text-accent",
-                    "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
+                    "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green",
                   )}
                 >
                   {p.domain}

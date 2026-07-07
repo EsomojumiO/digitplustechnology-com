@@ -47,7 +47,7 @@ export function Footer() {
           className={cn(
             "group inline-flex flex-wrap items-center gap-x-2 gap-y-1 rounded-lg",
             "text-small text-brand-100 transition-colors duration-[var(--dur-fast)] hover:text-[var(--cream)]",
-            "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-300",
+            "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green-300",
           )}
         >
           <span>Looking to purchase hardware?</span>
@@ -111,7 +111,7 @@ export function Footer() {
                         href={link.href}
                         className={cn(
                           "text-small text-brand-100 transition-colors duration-[var(--dur-fast)] hover:text-[var(--cream)]",
-                          "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-300",
+                          "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green-300",
                         )}
                       >
                         {link.label}
@@ -152,7 +152,7 @@ export function Footer() {
                 className={cn(
                   "h-11 w-full rounded-md border border-white/15 bg-white/10 px-3.5 text-body text-[var(--cream)]",
                   "placeholder:text-brand-200",
-                  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-300",
+                  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green-300",
                 )}
               />
               <button
@@ -161,7 +161,7 @@ export function Footer() {
                   "inline-flex h-11 items-center justify-center whitespace-nowrap rounded-md px-5 text-body font-medium",
                   "bg-accent text-accent-foreground shadow-[var(--shadow-sm)]",
                   "transition-colors duration-[var(--dur-fast)] hover:bg-accent-hover",
-                  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-300 active:translate-y-px",
+                  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green-300 active:translate-y-px",
                 )}
               >
                 Subscribe

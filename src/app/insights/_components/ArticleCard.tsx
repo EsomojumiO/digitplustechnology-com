@@ -35,7 +35,7 @@ export function ArticleCard({
     >
       <Link
         href={href}
-        className="flex h-full flex-col rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        className="flex h-full flex-col rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green"
       >
         {/* Cover, fixed 16:10 frame with neutral fallback for layout stability */}
         <div className="relative aspect-[16/10] w-full overflow-hidden bg-surface">

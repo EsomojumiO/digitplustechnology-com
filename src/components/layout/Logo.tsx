@@ -27,7 +27,7 @@ export function Logo({ className, tone = "default" }: LogoProps) {
       aria-label={`${siteConfig.shortName}, home`}
       className={cn(
         "group inline-flex items-center gap-2.5 rounded-md",
-        "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
+        "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green",
         className,
       )}
     >

@@ -19,7 +19,7 @@ const glass =
   "bg-surface-raised/70 backdrop-blur-md " +
   "transition-[box-shadow,transform,border-color] duration-[var(--dur-base)] ease-[var(--ease-out)] " +
   "hover:-translate-y-1 hover:border-accent/30 hover:shadow-[var(--shadow-lg)] " +
-  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";
+  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green";
 
 /**
  * InsightShelfCard, a premium frosted insight card for the home content shelf.

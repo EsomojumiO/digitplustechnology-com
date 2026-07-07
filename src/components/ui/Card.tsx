@@ -33,7 +33,7 @@ export function Card({
         "rounded-lg border border-hairline bg-surface-raised",
         paddings[padding],
         interactive &&
-          "transition-[box-shadow,transform,border-color] duration-[var(--dur-base)] ease-[var(--ease-out)] hover:-translate-y-0.5 hover:shadow-[var(--shadow-md)] hover:border-neutral-300",
+          "transition-[box-shadow,transform,border-color] duration-[var(--dur-base)] ease-[var(--ease-out)] hover:-translate-y-0.5 hover:shadow-[var(--shadow-md)] hover:border-hairline-hover",
         className,
       )}
       {...props}

@@ -70,10 +70,10 @@ export function IndustriesFilter({ industries }: IndustriesFilterProps) {
               className={cn(
                 "relative rounded-full border px-4 py-2 font-mono text-caption font-medium uppercase tracking-[0.12em]",
                 "transition-[color,border-color,background-color] duration-[var(--dur-base)] ease-[var(--ease-out)]",
-                "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
+                "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green",
                 isActive
                   ? "border-transparent text-accent-foreground"
-                  : "border-hairline text-muted hover:border-neutral-300 hover:text-text",
+                  : "border-hairline text-muted hover:border-hairline-hover hover:text-text",
               )}
             >
               {isActive ? (

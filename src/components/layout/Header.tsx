@@ -238,7 +238,7 @@ function MobileMenu({
             className={cn(
               "grid h-10 w-10 place-items-center rounded-md text-muted",
               "transition-colors duration-[var(--dur-fast)] hover:bg-surface hover:text-text",
-              "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
+              "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green",
             )}
           >
             <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5">
@@ -366,7 +366,7 @@ export function Header() {
             className={cn(
               "grid h-10 w-10 place-items-center rounded-md text-text lg:hidden",
               "transition-colors duration-[var(--dur-fast)] hover:bg-surface",
-              "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
+              "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green",
             )}
           >
             <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5">

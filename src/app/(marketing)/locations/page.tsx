@@ -46,7 +46,7 @@ export default function LocationsPage() {
               <a
                 key={loc.slug}
                 href={`/locations/${loc.slug}`}
-                className="group flex flex-col gap-3 rounded-lg border border-hairline bg-surface-raised p-8 transition-[box-shadow,transform,border-color] duration-[var(--dur-base)] ease-[var(--ease-out)] hover:-translate-y-0.5 hover:border-neutral-300 hover:shadow-[var(--shadow-md)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                className="group flex flex-col gap-3 rounded-lg border border-hairline bg-surface-raised p-8 transition-[box-shadow,transform,border-color] duration-[var(--dur-base)] ease-[var(--ease-out)] hover:-translate-y-0.5 hover:border-hairline-hover hover:shadow-[var(--shadow-md)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green"
               >
                 <Badge
                   tone={loc.role === "Headquarters" ? "accent" : "neutral"}

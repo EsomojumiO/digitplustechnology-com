@@ -8,7 +8,7 @@ const base =
   "inline-flex items-center justify-center gap-2 font-medium whitespace-nowrap select-none " +
   "rounded-md transition-[background-color,color,box-shadow,transform,border-color] " +
   "duration-[var(--dur-fast)] ease-[var(--ease-out)] " +
-  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent " +
+  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green " +
   "active:translate-y-px active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50";
 
 const variants: Record<ButtonVariant, string> = {
