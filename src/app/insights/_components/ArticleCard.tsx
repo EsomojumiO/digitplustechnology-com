@@ -45,7 +45,12 @@ export function ArticleCard({
             fill
             priority={priority}
             sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-            className="object-cover transition-transform duration-[var(--dur-slow)] ease-[var(--ease-out)] group-hover:scale-[1.03]"
+            className="object-cover brightness-[0.92] transition-transform duration-[var(--dur-slow)] ease-[var(--ease-out)] group-hover:scale-[1.03]"
+          />
+          {/* dark scrim so light covers seat into the near-black canvas */}
+          <div
+            className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/70 via-background/10 to-transparent"
+            aria-hidden="true"
           />
         </div>
 

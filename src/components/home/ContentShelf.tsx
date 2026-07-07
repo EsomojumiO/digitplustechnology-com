@@ -41,7 +41,12 @@ export function InsightShelfCard({
           alt={coverAlt}
           fill
           sizes="(min-width: 1024px) 24rem, (min-width: 640px) 50vw, 100vw"
-          className="object-cover transition-transform duration-[var(--dur-slow)] ease-[var(--ease-out)] group-hover:scale-[1.04]"
+          className="object-cover brightness-[0.92] transition-transform duration-[var(--dur-slow)] ease-[var(--ease-out)] group-hover:scale-[1.04]"
+        />
+        {/* dark scrim so light covers seat into the near-black canvas */}
+        <div
+          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/70 via-background/10 to-transparent"
+          aria-hidden="true"
         />
         {/* hairline seam between media and body */}
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-hairline" aria-hidden="true" />
