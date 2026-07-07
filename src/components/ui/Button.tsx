@@ -9,7 +9,7 @@ const base =
   "rounded-md transition-[background-color,color,box-shadow,transform,border-color] " +
   "duration-[var(--dur-fast)] ease-[var(--ease-out)] " +
   "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent " +
-  "active:translate-y-px disabled:pointer-events-none disabled:opacity-50";
+  "active:translate-y-px active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50";
 
 const variants: Record<ButtonVariant, string> = {
   primary:
