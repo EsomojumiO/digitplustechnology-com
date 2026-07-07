@@ -13,7 +13,7 @@ export interface LogoProps {
  * Logo, official Digitplus chain-link mark + DIGITPLUS wordmark.
  *
  * Uses the brand icon (Pishon Design Studio kit) from /public/brand. The wordmark
- * is set in Montserrat to match the brand headline face. On forest-green surfaces
+ * is set in the display face (Space Grotesk) to match headlines. On dark surfaces
  * pass tone="inverse" to swap to the white mark + cream wordmark.
  */
 export function Logo({ className, tone = "default" }: LogoProps) {

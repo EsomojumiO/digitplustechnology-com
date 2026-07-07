@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
-import { Inter, Montserrat, JetBrains_Mono } from "next/font/google";
+import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/lib/site";
 import {
@@ -21,9 +21,10 @@ const inter = Inter({
   display: "swap",
 });
 
-// Montserrat, brand headline face (display / H1 / H2).
-const montserrat = Montserrat({
-  variable: "--font-montserrat",
+// Space Grotesk, display face (headlines, stat numbers, nav wordmark) — geometric
+// and technical, reads well on the dark canvas. Replaces Montserrat per client.
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
   weight: ["500", "600", "700"],
   display: "swap",
@@ -99,7 +100,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${montserrat.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         {/* Fine grain texture, restrained futurism (fixed, non-interactive). */}

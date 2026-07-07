@@ -100,13 +100,14 @@
    Enables: bg-surface, text-muted, border-hairline, bg-accent, bg-brand, etc.
    --------------------------------------------------------------------------- */
 @theme inline {
-  /* Fonts — layout.tsx provides Inter (--font-geist-sans) and Montserrat
-     (--font-montserrat). Display headings use Montserrat; everything else Inter. */
+  /* Fonts — layout.tsx provides Inter (--font-geist-sans), Space Grotesk
+     (--font-space-grotesk) and JetBrains Mono. Display headings + stat numbers
+     use Space Grotesk; body/UI use Inter; eyebrows/labels use the mono. */
   --font-sans:
     var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-display:
-    var(--font-montserrat), var(--font-geist-sans), ui-sans-serif, system-ui,
+    var(--font-space-grotesk), var(--font-geist-sans), ui-sans-serif, system-ui,
     sans-serif;
   --font-mono:
     var(--font-geist-mono), ui-monospace, "SF Mono", "Menlo", monospace;
@@ -292,7 +293,7 @@
 
 /* ---------------------------------------------------------------------------
    5. TYPOGRAPHY UTILITIES — fluid modular scale
-   Display/H1/H2 set in Montserrat (brand headline face); rest in Inter.
+   Display/H1/H2 set in Space Grotesk (display face); rest in Inter.
    Large headings: negative tracking + tight leading. Body: 1.6 line-height.
    --------------------------------------------------------------------------- */
 @layer components {
