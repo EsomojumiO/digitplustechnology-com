@@ -415,6 +415,28 @@
     }
   }
 
+  /* Circuit-trace pulse — a short bright dash travels each hero trace via
+     stroke-dashoffset (compositor-cheap). Hidden under reduced motion, leaving
+     the static faint traces. `pathLength=100` normalises every path. */
+  .circuit-pulse {
+    stroke-dasharray: 11 89;
+    animation: circuit-pulse 9s linear infinite;
+    animation-delay: var(--pulse-delay, 0s);
+  }
+  @keyframes circuit-pulse {
+    from {
+      stroke-dashoffset: 100;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .circuit-pulse {
+      display: none;
+    }
+  }
+
   /* Marquee — seamless horizontal loop (two duplicated tracks). */
   @keyframes marquee {
     from {
