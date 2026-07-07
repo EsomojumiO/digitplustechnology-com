@@ -11,8 +11,7 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
     slug: "government",
     title: "Government",
     intro: [
-      "Public-sector IT lives and dies by documentation. Procurement must be traceable, spending must withstand audit, and delivery must match what was specified and approved. Digitplus is built for exactly this kind of accountability in government IT procurement across Nigeria.",
-      "We support ministries, departments, agencies, and parastatals with documented procurement, LPO-aligned purchasing, and delivery that leaves a clean paper trail from requisition to handover, so your technology programmes are defensible at every level.",
+      "Documented, audit-ready IT procurement and delivery built for public-sector accountability and LPO workflows.",
     ],
     concerns: [
       {
@@ -57,8 +56,7 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
     slug: "banking-financial-services",
     title: "Banking & Financial Services",
     intro: [
-      "In financial services, downtime and compliance gaps carry direct cost and risk. Branch networks, data centres, and back-office systems have to stay available, secure, and well-documented, across many locations at once.",
-      "Digitplus delivers bank branch IT infrastructure, resilient networks, and accountable managed services for banks, microfinance institutions, and fintechs across Nigeria, with the vendor accountability and documentation that regulated environments demand.",
+      "Bank branch infrastructure, resilient networks and managed services with the documentation regulated environments demand.",
     ],
     concerns: [
       {
@@ -103,8 +101,7 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
     slug: "enterprise",
     title: "Enterprise",
     intro: [
-      "Large organisations rarely struggle for vendors, they struggle for accountability. Multiple sites, mixed equipment, and a patchwork of suppliers make it hard to know who owns a problem. Digitplus consolidates that into a single, accountable IT partner.",
-      "From multi-site IT infrastructure to enterprise IT support under clear SLAs, we give organisations across Nigeria consistent standards, one point of ownership, and the documentation to manage IT as a discipline rather than a series of fire-fights.",
+      "One accountable IT partner across every site — consistent standards, clear ownership and measured SLAs.",
     ],
     concerns: [
       {
@@ -149,8 +146,7 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
     slug: "sme",
     title: "SME",
     intro: [
-      "Growing businesses need IT that works without needing a department to run it. What they usually get instead is jargon, oversized proposals, and support that disappears after the invoice is paid. Digitplus takes a different approach.",
-      "We give small and medium enterprises practical guidance, right-sized equipment, and dependable support, explained in plain language, priced to fit, and built to grow with you rather than lock you in.",
+      "Right-sized equipment and dependable support in plain language — priced to fit and built to grow.",
     ],
     concerns: [
       {
@@ -195,8 +191,7 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
     slug: "healthcare",
     title: "Healthcare",
     intro: [
-      "In hospitals and clinics, IT failure is not an inconvenience, it interrupts care. Records systems, networks, and the equipment that depends on them must stay available, and the power behind them must hold even when the grid does not.",
-      "Digitplus delivers reliable, high-uptime infrastructure and responsive support for healthcare providers, with the resilience and documentation that clinical environments require.",
+      "High-uptime infrastructure and power protection that keep clinical systems available around the clock.",
     ],
     concerns: [
       {
@@ -241,8 +236,7 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
     slug: "education",
     title: "Education",
     intro: [
-      "Schools, colleges, and universities have to make limited budgets stretch across labs, offices, classrooms, and growing student numbers. The pressure is to spend carefully and avoid replacing things twice.",
-      "Digitplus delivers budget-conscious, dependable IT for the education sector, durable equipment, sensible infrastructure, and support that keeps learning environments running without overspending.",
+      "Durable, budget-conscious IT for labs, campuses and classrooms that keeps learning running.",
     ],
     concerns: [
       {
@@ -287,8 +281,7 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
     slug: "oil-gas-energy",
     title: "Oil, Gas & Energy",
     intro: [
-      "Energy-sector operations are demanding by nature: remote sites, harsh conditions, and a low tolerance for downtime. IT here has to be resilient, well-documented, and supportable far from the nearest city.",
-      "Digitplus delivers robust infrastructure, dependable hardware, and managed services for oil, gas, and energy operations, built for resilience and backed by support that reaches your sites.",
+      "Resilient infrastructure and robust hardware built for demanding, remote energy-sector sites.",
     ],
     concerns: [
       {
@@ -333,8 +326,7 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
     slug: "logistics-manufacturing",
     title: "Logistics & Manufacturing",
     intro: [
-      "In logistics and manufacturing, IT keeps physical operations moving: connected warehouses, plant-floor networks, and the systems that track goods and production. When connectivity drops, throughput drops with it.",
-      "Digitplus delivers connected-site infrastructure, dependable hardware, and responsive support that keep warehouses, plants, and distribution running across every location.",
+      "Connected-site networks and responsive support that keep warehouses and plants moving.",
     ],
     concerns: [
       {

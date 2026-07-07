@@ -62,18 +62,18 @@ export default function HomePage() {
       <Hero
         aurora
         motif
-        eyebrow="IT solutions company in Nigeria"
-        title={siteConfig.tagline}
-        subhead="Digitplus is your one accountable partner for the full lifecycle of your IT, from planning and procurement to deployment and managed services. Built for enterprises, government, and institutions that need their technology to simply work."
+        eyebrow="Enterprise IT · Nigeria"
+        title="Enterprise IT solutions, built to just work"
+        subhead="One accountable partner for the full IT lifecycle — procurement, infrastructure, deployment and managed services — for enterprises, government and banks across Nigeria."
         actions={
           <>
             <Magnetic strength={6}>
               <Button href="/contact" size="lg">
-                Request a Free IT Assessment
+                Get a quote
               </Button>
             </Magnetic>
             <Button href="/approach" size="lg" variant="secondary">
-              See How We Work
+              See how we work
             </Button>
           </>
         }
@@ -92,8 +92,8 @@ export default function HomePage() {
         <FadeIn>
           <SectionHeading
             eyebrow="What we do"
-            title="Six service lines, one accountable partner"
-            lede="Each capability stands on its own, and works better together. Most clients start with one and grow into the rest."
+            title="Six services, one accountable partner"
+            lede="Start with one capability; grow into the rest."
           />
         </FadeIn>
         <Stagger>
@@ -123,7 +123,7 @@ export default function HomePage() {
           <SectionHeading
             eyebrow="Why Digitplus"
             title="The difference is accountability"
-            lede="Plenty of companies will sell you equipment. Fewer will own the outcome from end to end, and stand behind it afterwards."
+            lede="Anyone can sell equipment; few will own the outcome end to end."
           />
         </FadeIn>
         <Stagger>
@@ -146,9 +146,8 @@ export default function HomePage() {
         <FadeIn className="mx-auto max-w-3xl text-center">
           <Eyebrow className="text-neutral-400">Our standard</Eyebrow>
           <p className="text-h2 mt-6 font-medium tracking-tight text-neutral-50">
-            “Most IT projects don’t fail on the equipment. They fail in the gaps
-, between vendors, between purchase and deployment, between handover
-            and support. We exist to close those gaps.”
+            “Most IT projects fail in the gaps, between vendors, between purchase
+            and deployment, between handover and support. We close them.”
           </p>
         </FadeIn>
       </Section>
@@ -160,7 +159,7 @@ export default function HomePage() {
             <SectionHeading
               eyebrow="How we work"
               title="A clear, documented process"
-              lede="Six steps, the same discipline every time, from first conversation to long-term support."
+              lede="Six steps, the same discipline every time."
               className="lg:sticky lg:top-28"
             />
             <div className="mt-8 lg:sticky lg:top-64">
@@ -189,7 +188,7 @@ export default function HomePage() {
           <SectionHeading
             eyebrow="Who we serve"
             title="Built around how your sector works"
-            lede="Government procurement, branch uptime, clinical reliability, campus budgets, every sector has its own demands. We deliver to each."
+            lede="Every sector has its own demands. We deliver to each."
           />
         </FadeIn>
         <IndustriesFilter
@@ -322,12 +321,12 @@ export default function HomePage() {
           className="relative z-10 bg-transparent"
           tone="inverse"
           title="Tell us what you’re planning"
-          description="A short conversation is the fastest way to find out how we can help. Request a free IT assessment and we’ll come back with practical next steps, no obligation."
+          description="A short conversation is the fastest way to see how we can help. No obligation."
           actions={
             <>
               <Magnetic strength={6}>
                 <Button href="/contact" size="lg" variant="secondary">
-                  Request a Free IT Assessment
+                  Get a quote
                 </Button>
               </Magnetic>
               <Button

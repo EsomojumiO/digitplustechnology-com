@@ -13,8 +13,7 @@ export const servicesContent: Record<ServiceSlug, ServiceContent> = {
     title: "IT Procurement",
     tagline: "Documented IT procurement in Nigeria, from requisition to delivery.",
     intro: [
-      "IT procurement is where most projects quietly go wrong: untraceable quotes, grey-market hardware, mismatched specifications, and paperwork that fails an audit. As an IT procurement company in Nigeria, Digitplus runs sourcing as a disciplined, documented process so every purchase is justified, sourced from authorised channels, and traceable end to end.",
-      "We handle hardware and software sourcing for single offices and multi-site rollouts alike, working within your budget cycle, approval chain, and Local Purchase Order (LPO) requirements. You get a single accountable partner instead of a scatter of vendors, and a paper trail that stands up to scrutiny.",
+      "Documented, audit-ready IT procurement in Nigeria — authorised-channel hardware and software, LPO support, and one traceable trail from requisition to delivery.",
     ],
     whatsIncluded: [
       {
@@ -79,8 +78,7 @@ export const servicesContent: Record<ServiceSlug, ServiceContent> = {
     title: "Hardware Supply",
     tagline: "Genuine hardware supply in Nigeria, authorised channels, real warranties.",
     intro: [
-      "The hardware you deploy today sets your reliability and support costs for years. Digitplus is a hardware supply company in Nigeria: we supply servers, workstations, networking, and peripherals sourced exclusively through authorised distribution, equipment that arrives genuine, correctly specified, and covered by valid manufacturer warranties.",
-      "We help you standardise on the right platforms, avoid over- and under-specifying, and plan refresh cycles that fit your budget. Whether you need a single server room build or a fleet of workstations across several sites, you get equipment chosen for fitness, not just price.",
+      "Genuine, warrantied servers, workstations and networking from authorised channels — specified for fit, not just price.",
     ],
     whatsIncluded: [
       {
@@ -141,8 +139,7 @@ export const servicesContent: Record<ServiceSlug, ServiceContent> = {
     title: "Infrastructure Solutions",
     tagline: "Structured cabling, network installation, and server room setup, built to last.",
     intro: [
-      "Reliable IT starts with reliable infrastructure: clean cabling, well-designed networks, properly conditioned server rooms, and power that holds. Get these wrong and you inherit years of intermittent faults that are expensive to diagnose. As an IT infrastructure company working across Abuja, Lagos, and Port Harcourt, Digitplus designs and builds infrastructure to standard, the first time.",
-      "We deliver structured cabling, LAN/WAN network installation, server room setup, and UPS/power systems as a coordinated whole, so your network, environment, and power work together rather than fighting each other. Every build is documented and labelled for the people who will support it later.",
+      "Structured cabling, LAN/WAN and server rooms across Abuja, Lagos and Port Harcourt — designed, built, tested and documented to standard the first time.",
     ],
     whatsIncluded: [
       {
@@ -203,8 +200,7 @@ export const servicesContent: Record<ServiceSlug, ServiceContent> = {
     title: "Managed Services",
     tagline: "Managed IT services in Nigeria, support and monitoring that keep operations running.",
     intro: [
-      "Most organisations do not need more IT staff, they need their IT to simply work, with someone accountable when it does not. Our managed IT services in Nigeria give you that: proactive monitoring, responsive remote and on-site support, and SLAs that put commitments in writing.",
-      "We become the dependable extension of your team, watching the systems that matter, resolving issues before they spread, and reporting clearly on what we are doing. The result is fewer surprises, predictable costs, and time back for your people to focus on the business.",
+      "Managed IT services in Nigeria — proactive monitoring, remote and on-site support, and SLAs in writing, so your IT simply works.",
     ],
     whatsIncluded: [
       {
@@ -265,8 +261,7 @@ export const servicesContent: Record<ServiceSlug, ServiceContent> = {
     title: "Technology Advisory",
     tagline: "Independent guidance that turns IT spend into outcomes.",
     intro: [
-      "Technology decisions are expensive to get wrong and hard to reverse. Digitplus advisory gives decision-makers clear, vendor-neutral guidance: what to invest in, when, and why, grounded in your operations and budget rather than a product catalogue.",
-      "We help you set IT strategy, plan budgets you can defend, select the right vendors, and lay out multi-year roadmaps that sequence investment sensibly. Because we deliver as well as advise, our recommendations are realistic, we know what it takes to implement them.",
+      "Vendor-neutral IT strategy, budgets and multi-year roadmaps — practical advice from a partner who also delivers.",
     ],
     whatsIncluded: [
       {
@@ -327,8 +322,7 @@ export const servicesContent: Record<ServiceSlug, ServiceContent> = {
     title: "Deployment & Implementation",
     tagline: "From delivered boxes to working systems, handover done right.",
     intro: [
-      "Hardware on a loading dock is not a working system. The gap between the two is deployment, and it is where rushed projects fail. Digitplus handles IT deployment and implementation in Nigeria as a managed process, installation, configuration, testing, and user training, so what you bought actually works and your people can use it.",
-      "We plan rollouts around your operations, configure to agreed standards, test against clear acceptance criteria, and only sign off when everything works as intended. You get a clean, documented handover and users who are ready on day one, not weeks of teething problems.",
+      "IT deployment and implementation in Nigeria as one managed process — installation, configuration, testing and training. Working systems, not delivered boxes.",
     ],
     whatsIncluded: [
       {

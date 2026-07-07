@@ -22,8 +22,7 @@ export const locations: LocationContent[] = [
     city: "Abuja",
     role: "Headquarters",
     intro: [
-      "Abuja is home base for Digitplus Technology Limited. From the Federal Capital Territory we serve federal ministries, departments, and agencies, alongside enterprises and institutions across the city.",
-      "Being headquartered in Abuja matters for public-sector work: we understand the documentation, LPO workflows, and audit expectations that come with government procurement, and we deliver to them as standard.",
+      "Our HQ in the FCT — documented, audit-ready IT procurement and delivery for federal agencies and enterprises across Abuja.",
     ],
     highlights: [
       "Documented, audit-ready procurement for federal agencies",
@@ -39,8 +38,7 @@ export const locations: LocationContent[] = [
     city: "Lagos",
     role: "Delivery hub",
     intro: [
-      "Lagos is Nigeria’s commercial engine, and we deliver across the city and its mainland and island business districts. From branch infrastructure to multi-site rollouts, we support the pace Lagos operates at.",
-      "Banks, fintechs, enterprises, and growing SMEs rely on us for procurement, deployment, and managed support, with the same documentation and accountability we apply everywhere.",
+      "Delivery across Nigeria’s commercial capital — branch infrastructure, multi-site rollouts and managed support at Lagos pace.",
     ],
     highlights: [
       "Branch and office infrastructure for banking and financial services",
@@ -56,8 +54,7 @@ export const locations: LocationContent[] = [
     city: "Port Harcourt",
     role: "Delivery hub",
     intro: [
-      "Port Harcourt anchors our delivery in the South-South and the energy corridor. We support operations that demand resilience, including oil, gas, and energy clients with remote and demanding sites.",
-      "From robust infrastructure to dependable managed support, we help organisations in Rivers State and the wider region keep operations-critical systems running.",
+      "Delivery across the South-South energy corridor — resilient infrastructure and support for demanding, remote sites.",
     ],
     highlights: [
       "Resilient infrastructure for oil, gas, and energy operations",
