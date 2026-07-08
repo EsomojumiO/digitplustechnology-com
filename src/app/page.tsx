@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import {
-  Hero,
+  Container,
   Section,
   SectionHeading,
   Grid,
@@ -20,7 +20,9 @@ import {
   StaggerItem,
   CountUp,
   Magnetic,
+  CircuitTraces,
 } from "@/components/motion";
+import { HeroCollage } from "@/components/home/HeroCollage";
 import { TrustMarquee } from "@/components/home/TrustMarquee";
 import { WhyPillar } from "@/components/home/WhyPillar";
 import { IndustriesFilter } from "@/components/home/IndustriesFilter";
@@ -58,27 +60,53 @@ export default function HomePage() {
 
   return (
     <>
-      {/* Hero, signature motif + aurora; magnetic primary CTA */}
-      <Hero
-        aurora
-        motif
-        eyebrow="Enterprise IT · Nigeria"
-        title="Enterprise IT solutions, built to just work"
-        subhead="One accountable partner for the full IT lifecycle — procurement, infrastructure, deployment and managed services — for enterprises, government and banks across Nigeria."
-        actions={
-          <>
-            <Magnetic strength={6}>
-              <Button href="/contact" size="lg">
-                Get a quote
-              </Button>
-            </Magnetic>
-            <Button href="/approach" size="lg" variant="secondary">
-              See how we work
-            </Button>
-          </>
-        }
-        coverage={`Abuja • Lagos • Port Harcourt`}
-      />
+      {/* Hero — text left, 5-image bento collage right. Aurora glow full-bleed;
+          circuit traces sit behind the text zone only so they never fight the
+          photographs. */}
+      <section className="relative overflow-hidden pt-20 pb-16 sm:pt-24 sm:pb-24">
+        <div className="aurora" aria-hidden="true" />
+        <Container className="relative z-10">
+          <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-10">
+            {/* Text zone */}
+            <div className="relative lg:col-span-5">
+              <div
+                className="pointer-events-none absolute -inset-x-8 -inset-y-8 -z-10 [mask-image:radial-gradient(120%_100%_at_30%_40%,black,transparent_72%)]"
+                aria-hidden="true"
+              >
+                <CircuitTraces />
+              </div>
+              <div className="flex flex-col gap-6">
+                <Eyebrow>Enterprise IT · Nigeria</Eyebrow>
+                <h1 className="text-display max-w-[16ch] text-text">
+                  Enterprise IT solutions, built to just work
+                </h1>
+                <p className="text-body-lg measure text-muted">
+                  One accountable partner for the full IT lifecycle —
+                  procurement, infrastructure, deployment and managed services —
+                  for enterprises, government and banks across Nigeria.
+                </p>
+                <div className="mt-2 flex flex-wrap items-center gap-3">
+                  <Magnetic strength={6}>
+                    <Button href="/contact" size="lg">
+                      Get a quote
+                    </Button>
+                  </Magnetic>
+                  <Button href="/approach" size="lg" variant="secondary">
+                    See how we work
+                  </Button>
+                </div>
+                <p className="text-small mt-1 text-muted">
+                  Abuja • Lagos • Port Harcourt
+                </p>
+              </div>
+            </div>
+            {/* Collage zone */}
+            <div className="lg:col-span-7">
+              <HeroCollage />
+            </div>
+          </div>
+        </Container>
+      </section>
 
       {/* Trust strip, partner logos on a slow seamless marquee */}
       <Section tone="muted" spacing="sm">
