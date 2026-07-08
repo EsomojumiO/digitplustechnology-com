@@ -26,6 +26,8 @@ type Tile = {
   mobileAspect: string;
   sizes: string;
   priority?: boolean;
+  /** Lead tile gets a subtle scroll parallax instead of hover-scale. */
+  parallax?: boolean;
 };
 
 const TILES: Tile[] = [
@@ -40,6 +42,7 @@ const TILES: Tile[] = [
     mobileAspect: "aspect-[16/10]",
     sizes: "(min-width: 1024px) 38vw, 100vw",
     priority: true,
+    parallax: true,
   },
   {
     key: "cabling",
@@ -89,13 +92,18 @@ const TILES: Tile[] = [
 
 export function HeroCollage() {
   return (
-    <Stagger className="grid grid-cols-2 gap-3 lg:aspect-[7/6] lg:grid-cols-3 lg:grid-rows-3">
+    <Stagger className="group/collage grid grid-cols-2 gap-3 lg:aspect-[7/6] lg:grid-cols-3 lg:grid-rows-3">
       {TILES.map((t, i) => (
         <StaggerItem key={t.key} delay={i * 70} className={cn("min-w-0", t.area)}>
           <a
             href={t.href}
             aria-label={t.aria}
-            className="group block h-full rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green"
+            className={cn(
+              "group block h-full rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green",
+              // Raycast grid trick: hovering the collage dims siblings (150ms
+              // delay); the hovered tile stays at full opacity, immediately.
+              "transition-opacity duration-[250ms] [transition-delay:150ms] group-hover/collage:opacity-[0.85] hover:!opacity-100 hover:![transition-delay:0ms]",
+            )}
           >
             <div
               className={cn(
@@ -111,7 +119,12 @@ export function HeroCollage() {
                 fill
                 priority={t.priority}
                 sizes={t.sizes}
-                className="object-cover saturate-[0.85] brightness-[0.9] transition-transform duration-[250ms] ease-[var(--ease-out)] group-hover:scale-[1.03]"
+                className={cn(
+                  "object-cover saturate-[0.85] brightness-[0.9]",
+                  t.parallax
+                    ? "parallax-y"
+                    : "transition-transform duration-[250ms] ease-[var(--ease-out)] group-hover:scale-[1.03]",
+                )}
               />
               {/* shared scrim — seats every photo into the near-black canvas */}
               <div
