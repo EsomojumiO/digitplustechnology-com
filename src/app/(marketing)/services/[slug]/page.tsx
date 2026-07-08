@@ -12,6 +12,7 @@ import {
   FAQ,
   CTABand,
   Eyebrow,
+  FeatureImage,
 } from "@/components/ui";
 import Link from "next/link";
 import { FadeIn, Stagger, StaggerItem } from "@/components/motion";
@@ -88,7 +89,8 @@ export default async function ServiceDetailPage({
 
       {/* Intro */}
       <Section spacing="md">
-        <Stagger className="flex max-w-3xl flex-col gap-6">
+        <div className="grid gap-10 lg:grid-cols-[1fr_minmax(0,26rem)] lg:items-center lg:gap-14">
+        <Stagger className="flex flex-col gap-6">
           <StaggerItem>
             <Eyebrow>Service</Eyebrow>
           </StaggerItem>
@@ -116,6 +118,16 @@ export default async function ServiceDetailPage({
             </Button>
           </StaggerItem>
         </Stagger>
+          <FadeIn>
+            <FeatureImage
+              src={`/images/services/${slug}.jpg`}
+              alt={`${content.title} — Digitplus Technology`}
+              label={content.title}
+              aspect="aspect-[4/3]"
+              priority
+            />
+          </FadeIn>
+        </div>
       </Section>
 
       {/* What's included */}

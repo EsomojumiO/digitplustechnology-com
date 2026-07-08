@@ -1,6 +1,7 @@
 export { Button, type ButtonProps } from "./Button";
 export { Card, type CardProps } from "./Card";
 export { Container, type ContainerProps } from "./Container";
+export { FeatureImage, type FeatureImageProps } from "./FeatureImage";
 export { Section, type SectionProps } from "./Section";
 export { SectionHeading, type SectionHeadingProps } from "./SectionHeading";
 export { Grid, type GridProps } from "./Grid";

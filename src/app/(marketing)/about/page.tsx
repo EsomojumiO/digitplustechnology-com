@@ -10,6 +10,7 @@ import {
   CTABand,
   Eyebrow,
   Prose,
+  FeatureImage,
 } from "@/components/ui";
 import { FadeIn, CountUp } from "@/components/motion";
 import { siteConfig } from "@/lib/site";
@@ -80,6 +81,15 @@ export default function AboutPage() {
               depend on, year after year.
             </p>
           </Prose>
+        </FadeIn>
+        <FadeIn className="mt-12">
+          <FeatureImage
+            src="/images/about/team.jpg"
+            alt="The Digitplus Technology team"
+            label="Our team"
+            aspect="aspect-[21/9]"
+            sizes="(min-width: 1024px) 60rem, 100vw"
+          />
         </FadeIn>
       </Section>
 

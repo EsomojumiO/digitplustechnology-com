@@ -8,6 +8,7 @@ import {
   Breadcrumbs,
   CTABand,
   Badge,
+  FeatureImage,
 } from "@/components/ui";
 import { Reveal } from "@/components/motion/Reveal";
 import { siteConfig } from "@/lib/site";
@@ -64,6 +65,13 @@ export default function LagosPage() {
               </p>
             ))}
           </div>
+          <FeatureImage
+            src={`/images/locations/${loc.slug}.jpg`}
+            alt={`Digitplus Technology in ${loc.city}`}
+            label={loc.city}
+            aspect="aspect-[21/9]"
+            sizes="(min-width: 1024px) 60rem, 100vw"
+          />
         </Reveal>
       </Section>
 
