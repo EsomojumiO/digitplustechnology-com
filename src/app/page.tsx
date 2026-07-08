@@ -42,7 +42,7 @@ export const metadata: Metadata = {
 const whyBeats: { label: string; beat: string }[] = [
   { label: "Accountable", beat: "one partner, end to end." },
   { label: "Nationwide", beat: "Abuja, Lagos, Port Harcourt." },
-  { label: "Trusted", beat: "8+ years, 50+ clients." },
+  { label: "Trusted", beat: "since 2022, 50+ clients." },
   { label: "Disciplined", beat: "documented, audit-ready." },
 ];
 
@@ -51,7 +51,10 @@ const whyBeats: { label: string; beat: string }[] = [
 function StatValue({ value }: { value: string }) {
   const match = /^(\d+)(.*)$/.exec(value);
   if (!match) return <>{value}</>;
-  return <CountUp value={Number(match[1])} suffix={match[2]} />;
+  const n = Number(match[1]);
+  // Don't animate a calendar year — a ticking "2022" reads as a counter, not a date.
+  if (match[2] === "" && n >= 1900) return <>{value}</>;
+  return <CountUp value={n} suffix={match[2]} />;
 }
 
 export default function HomePage() {

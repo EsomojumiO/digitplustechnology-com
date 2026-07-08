@@ -20,7 +20,7 @@ import { breadcrumbSchema } from "@/lib/seo/schema";
 export const metadata: Metadata = {
   title: "About Us, A Disciplined, Accountable Nigerian IT Partner",
   description:
-    "Digitplus Technology Limited is a CAC-registered, Abuja-based B2B IT solutions company with 8+ years and 50+ enterprise clients. End-to-end IT built on operational discipline.",
+    "Digitplus Technology Limited is a CAC-registered, Abuja-based B2B IT solutions company operating since 2022, with 50+ enterprise clients. End-to-end IT built on operational discipline.",
   alternates: { canonical: "/about" },
 };
 
@@ -101,7 +101,7 @@ export default function AboutPage() {
               </p>
             </Card>
             <Card padding="lg">
-              <h3 className="text-h4 text-text">8+ years operating</h3>
+              <h3 className="text-h4 text-text">Operating since 2022</h3>
               <p className="text-body text-muted measure mt-3">
                 Nearly a decade delivering IT to enterprises, government, and
                 institutions across Nigeria, and supporting it long-term.
@@ -127,13 +127,11 @@ export default function AboutPage() {
           <StatGrid
             className="mt-12"
             items={[
+              // Real founding year — not a computed "X+ years" (which inflates).
+              { value: "2022", label: "Operating since" },
               {
                 value: <CountUp value={50} suffix="+" />,
                 label: "Enterprise clients",
-              },
-              {
-                value: <CountUp value={8} suffix="+" />,
-                label: "Years operating",
               },
               {
                 value: <CountUp value={6} />,

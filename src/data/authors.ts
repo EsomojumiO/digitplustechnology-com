@@ -30,9 +30,9 @@ export const authors: Author[] = [
     slug: "digitplus-editorial",
     name: "Digitplus Editorial Team",
     role: "IT advisory, procurement & infrastructure specialists",
-    bio: "Articles from the Digitplus Editorial Team are written and reviewed by our procurement, infrastructure, and managed-services practitioners. Digitplus Technology Limited is a CAC-registered Nigerian IT solutions company with 8+ years delivering to enterprises, government, banks, hospitals, and schools across Abuja, Lagos, and Port Harcourt.",
+    bio: "Articles from the Digitplus Editorial Team are written and reviewed by our procurement, infrastructure, and managed-services practitioners. Digitplus Technology Limited is a CAC-registered Nigerian IT solutions company operating since 2022, delivering to enterprises, government, banks, hospitals, and schools across Abuja, Lagos, and Port Harcourt.",
     credentials: [
-      "8+ years in enterprise IT delivery",
+      "Enterprise IT delivery since 2022",
       "50+ enterprise & public-sector clients",
       "Authorised partner channels",
       "Abuja • Lagos • Port Harcourt",
