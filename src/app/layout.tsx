@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
-import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Sora, Figtree, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/lib/site";
 import {
@@ -14,17 +14,17 @@ import { JsonLd } from "@/lib/seo/jsonld";
 import { organizationSchema, websiteSchema } from "@/lib/seo/schema";
 import { Analytics } from "@/components/analytics/Analytics";
 
-// Inter, primary UI/body face (exposed as --font-geist-sans so tokens resolve).
-const inter = Inter({
-  variable: "--font-geist-sans",
+// Figtree, primary UI/body face (client-selected Option A).
+const figtree = Figtree({
+  variable: "--font-figtree",
   subsets: ["latin"],
   display: "swap",
 });
 
-// Space Grotesk, display face (headlines, stat numbers, nav wordmark) — geometric
-// and technical, reads well on the dark canvas. Replaces Montserrat per client.
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
+// Sora, display face + buttons (headlines, stat numbers, CTAs) — distinctive
+// geometric character on the dark canvas. Client-selected Option A.
+const sora = Sora({
+  variable: "--font-sora",
   subsets: ["latin"],
   weight: ["500", "600", "700"],
   display: "swap",
@@ -100,7 +100,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`${figtree.variable} ${sora.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         {/* Fine grain texture, restrained futurism (fixed, non-interactive). */}
