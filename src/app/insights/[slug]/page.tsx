@@ -17,6 +17,7 @@ import {
   getAllArticles,
   getArticleBySlug,
   getRelatedArticles,
+  getPillarForArticle,
   MDXContent,
   type Category,
 } from "@/lib/content";
@@ -124,7 +125,11 @@ export default async function ArticlePage({
 
   const related = getRelatedArticles(slug, 3);
   const author = getAuthor(article.author);
-  const hub = relatedHub(article.category);
+  // Precise per-article pillar (hub-and-spoke); fall back to the category hub.
+  const pillar = getPillarForArticle(article.slug);
+  const hub = pillar
+    ? { href: pillar.href, label: pillar.title }
+    : relatedHub(article.category);
   const url = `${siteConfig.url}/insights/${article.slug}`;
   const updated = article.updatedAt && article.updatedAt !== article.publishedAt;
 

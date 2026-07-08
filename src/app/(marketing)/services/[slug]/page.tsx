@@ -13,8 +13,10 @@ import {
   CTABand,
   Eyebrow,
 } from "@/components/ui";
+import Link from "next/link";
 import { FadeIn, Stagger, StaggerItem } from "@/components/motion";
 import { services, industries } from "@/lib/site";
+import { getSpokeArticles } from "@/lib/content";
 import { getServiceContent } from "@/data/services";
 import { testimonials } from "@/data/testimonials";
 import { JsonLd } from "@/lib/seo/jsonld";
@@ -53,6 +55,9 @@ export default async function ServiceDetailPage({
   const relatedIndustries = content.relevantIndustries
     .map((s) => industries.find((i) => i.slug === s))
     .filter((i): i is (typeof industries)[number] => Boolean(i));
+
+  // Hub-and-spoke: articles that link up to this service pillar.
+  const spokes = getSpokeArticles("service", slug, 5);
 
   // Pick an illustrative testimonial deterministically per service.
   const serviceIndex = services.findIndex((s) => s.slug === slug);
@@ -211,6 +216,32 @@ export default async function ServiceDetailPage({
           </FadeIn>
         </div>
       </Section>
+
+      {/* Further reading — hub-and-spoke: articles linking up to this pillar */}
+      {spokes.length > 0 ? (
+        <Section>
+          <FadeIn>
+            <SectionHeading eyebrow="Further reading" title="Related insights" />
+          </FadeIn>
+          <Stagger className="mt-10 divide-y divide-hairline border-y border-hairline">
+            {spokes.map((a) => (
+              <StaggerItem key={a.slug}>
+                <Link
+                  href={`/insights/${a.slug}`}
+                  className="group flex items-baseline justify-between gap-6 py-4 transition-colors hover:bg-surface/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green"
+                >
+                  <span className="text-body-lg text-text transition-colors group-hover:text-accent-green">
+                    {a.title}
+                  </span>
+                  <span className="shrink-0 font-mono text-caption uppercase tracking-[0.1em] text-muted">
+                    {a.readingTime.text}
+                  </span>
+                </Link>
+              </StaggerItem>
+            ))}
+          </Stagger>
+        </Section>
+      ) : null}
 
       <FadeIn>
         <CTABand

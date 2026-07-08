@@ -47,5 +47,12 @@ export {
   getArchivedReports,
 } from "./reports";
 
+// Hub-and-spoke pillars (internal linking)
+export {
+  getPillarForArticle,
+  getSpokeArticles,
+  type PillarRef,
+} from "./pillars";
+
 // MDX rendering wrapper (server component)
 export { MDXContent, type MDXContentProps } from "./mdx";
