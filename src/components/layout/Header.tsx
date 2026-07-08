@@ -296,10 +296,133 @@ function MobileMenu({
         </nav>
 
         <div className="border-t border-hairline p-4">
+          <div className="mb-3 grid grid-cols-3 gap-2">
+            {CONTACT_ROWS.map((r) => (
+              <a
+                key={r.label}
+                href={r.href(siteConfig)}
+                target={"external" in r && r.external ? "_blank" : undefined}
+                rel={"external" in r && r.external ? "noreferrer noopener" : undefined}
+                onClick={onClose}
+                className={cn(
+                  "rounded-lg border border-hairline px-2 py-2.5 text-center text-caption font-medium text-muted",
+                  "transition-colors duration-[var(--dur-fast)] hover:border-hairline-hover hover:text-text",
+                  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green",
+                )}
+              >
+                {r.label}
+              </a>
+            ))}
+          </div>
           <Button href="/contact" size="lg" className="w-full" onClick={onClose}>
             Get a quote
           </Button>
         </div>
+      </div>
+    </div>
+  );
+}
+
+/* ---------------------------------------------------------------------------
+   Contact menu — replaces a bare phone number with a tidy ghost icon-button
+   that opens Call / WhatsApp / Email. Keyboard + outside-click dismissible.
+   --------------------------------------------------------------------------- */
+function PhoneIcon() {
+  return (
+    <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" className="h-4 w-4">
+      <path
+        d="M6.5 3.5 4 4c-.7 2 .3 5.2 3 8s6 3.7 8 3l.5-2.5-3-1.5-1.4 1.4c-1.2-.6-2.3-1.7-2.9-2.9L9.6 5.5 6.5 3.5Z"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+const CONTACT_ROWS = [
+  { label: "Call", get: (v: typeof siteConfig) => v.phone, href: (v: typeof siteConfig) => v.phoneHref, mono: true },
+  { label: "WhatsApp", get: () => "Chat on WhatsApp", href: (v: typeof siteConfig) => v.whatsapp, external: true },
+  { label: "Email", get: (v: typeof siteConfig) => v.email, href: (v: typeof siteConfig) => `mailto:${v.email}` },
+] as const;
+
+function ContactMenu() {
+  const [open, setOpen] = React.useState(false);
+  const wrapRef = React.useRef<HTMLDivElement>(null);
+  const id = React.useId();
+
+  React.useEffect(() => {
+    if (!open) return;
+    const onDoc = (e: MouseEvent) => {
+      if (wrapRef.current && !wrapRef.current.contains(e.target as Node))
+        setOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("mousedown", onDoc);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onDoc);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  return (
+    <div ref={wrapRef} className="relative hidden sm:block">
+      <button
+        type="button"
+        aria-haspopup="menu"
+        aria-expanded={open}
+        aria-controls={id}
+        aria-label="Contact options"
+        onClick={() => setOpen((o) => !o)}
+        className={cn(
+          "grid h-9 w-9 place-items-center rounded-lg border border-hairline text-muted",
+          "transition-colors duration-[var(--dur-fast)] hover:border-hairline-hover hover:text-text",
+          "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green",
+        )}
+      >
+        <PhoneIcon />
+      </button>
+      <div
+        id={id}
+        role="menu"
+        aria-label="Contact"
+        className={cn(
+          "absolute right-0 top-full z-50 mt-2 w-60 rounded-xl border border-hairline bg-surface-raised p-1.5 shadow-[var(--shadow-lg)]",
+          "transition-[opacity,transform] duration-[var(--dur-base)] ease-[var(--ease-out)]",
+          open
+            ? "pointer-events-auto translate-y-0 opacity-100"
+            : "pointer-events-none -translate-y-1 opacity-0",
+        )}
+      >
+        {CONTACT_ROWS.map((r) => (
+          <a
+            key={r.label}
+            role="menuitem"
+            href={r.href(siteConfig)}
+            target={"external" in r && r.external ? "_blank" : undefined}
+            rel={"external" in r && r.external ? "noreferrer noopener" : undefined}
+            tabIndex={open ? 0 : -1}
+            onClick={() => setOpen(false)}
+            className={cn(
+              "flex items-center justify-between gap-3 rounded-lg px-3 py-2.5",
+              "transition-colors duration-[var(--dur-fast)] hover:bg-surface focus-visible:bg-surface",
+              "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green",
+            )}
+          >
+            <span className="text-small font-medium text-text">{r.label}</span>
+            <span
+              className={cn(
+                "text-caption text-muted",
+                "mono" in r && r.mono && "font-mono",
+              )}
+            >
+              {r.get(siteConfig)}
+            </span>
+          </a>
+        ))}
       </div>
     </div>
   );
@@ -353,17 +476,8 @@ export function Header() {
           </ul>
         </nav>
 
-        <div className="flex items-center gap-1.5">
-          <a
-            href={siteConfig.phoneHref}
-            className={cn(
-              "hidden items-center rounded-md px-3 py-2 text-small font-medium text-muted md:inline-flex",
-              "transition-colors duration-[var(--dur-fast)] ease-[var(--ease-out)] hover:text-text",
-              "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green",
-            )}
-          >
-            {siteConfig.phone}
-          </a>
+        <div className="flex items-center gap-2">
+          <ContactMenu />
           <Button href="/contact" size="sm" className="hidden sm:inline-flex">
             Get a quote
           </Button>
