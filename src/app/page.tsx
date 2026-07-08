@@ -248,7 +248,7 @@ export default function HomePage() {
                   author={t.author}
                   role={t.role}
                   organization={t.organization}
-                  className="h-full [&_blockquote]:text-body-lg"
+                  className="h-full"
                 />
               </StaggerItem>
             ))}
