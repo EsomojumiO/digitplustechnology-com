@@ -45,7 +45,14 @@ Full-height **crossfade carousel** in the hero image zone (text-left / image-rig
 - `tsc --noEmit` clean at every commit. ✅
 - Copy within budgets (hero H1 6 words; subhead 18; intros 1 sentence). ✅
 
-### Pending on Vercel preview (needs imagery downloaded)
+### Live (production build served on localhost — PASS)
+- `next build` succeeds, all routes prerender. ✅ (Fixed a Turbopack bug: `FeatureImage`'s `node:fs` import leaked into the client bundle via the `ui` barrel — now imported directly + `server-only` guarded.)
+- Home: exactly one `<h1>` ("Enterprise IT solutions, built to just work"); carousel present (`aria-roledescription="carousel"`, 5 progress buttons); nav shows "Contact options", no bare number; stats contain "2022"; no app errors. ✅
+- Service page: single H1, "Further reading" spokes, graceful "Image pending" placeholder. ✅
+- About: "Operating since 2022", no "nearly a decade". ✅
+
+### Pending on Vercel preview (needs imagery downloaded + Lighthouse/axe)
+- [ ] Deployment Protection still gates preview URLs (SSO redirect) despite "Only Production" — recheck the setting so stakeholders can view the preview.
 - [ ] Lighthouse mobile — Perf ≥ 90, SEO = 100, CLS < 0.1 (home/article/service)
 - [ ] axe — a11y ≥ 95; green focus rings; reduced-motion emulation
 - [ ] All hero + page images render (no 404s); LCP ≤ 2.5s; carousel: 5 slides render, auto-rotation pauses on hover, indicators keyboard-operable, reduced-motion static, full-width 4:3 at 390px
