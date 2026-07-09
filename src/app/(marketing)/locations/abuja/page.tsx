@@ -8,8 +8,8 @@ import {
   Breadcrumbs,
   CTABand,
   Badge,
-  FeatureImage,
 } from "@/components/ui";
+import { FeatureImage } from "@/components/ui/FeatureImage";
 import { Reveal } from "@/components/motion/Reveal";
 import { siteConfig } from "@/lib/site";
 import { getLocation } from "@/data/locations";

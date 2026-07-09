@@ -11,8 +11,8 @@ import {
   FAQ,
   CTABand,
   Eyebrow,
-  FeatureImage,
 } from "@/components/ui";
+import { FeatureImage } from "@/components/ui/FeatureImage";
 import { FadeIn, Stagger, StaggerItem } from "@/components/motion";
 import { industries, services } from "@/lib/site";
 import { getIndustryContent } from "@/data/industries";

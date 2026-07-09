@@ -10,8 +10,8 @@ import {
   CTABand,
   Eyebrow,
   Prose,
-  FeatureImage,
 } from "@/components/ui";
+import { FeatureImage } from "@/components/ui/FeatureImage";
 import { FadeIn, CountUp } from "@/components/motion";
 import { siteConfig } from "@/lib/site";
 import { whyUs } from "@/data";
@@ -113,8 +113,8 @@ export default function AboutPage() {
             <Card padding="lg">
               <h3 className="text-h4 text-text">Operating since 2022</h3>
               <p className="text-body text-muted measure mt-3">
-                Nearly a decade delivering IT to enterprises, government, and
-                institutions across Nigeria, and supporting it long-term.
+                Delivering IT to enterprises, government, and institutions across
+                Nigeria since 2022, and supporting it long-term.
               </p>
             </Card>
             <Card padding="lg">

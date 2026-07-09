@@ -1,7 +1,9 @@
 export { Button, type ButtonProps } from "./Button";
 export { Card, type CardProps } from "./Card";
 export { Container, type ContainerProps } from "./Container";
-export { FeatureImage, type FeatureImageProps } from "./FeatureImage";
+// NOTE: FeatureImage is intentionally NOT re-exported here — it depends on
+// node:fs (server-only) and this barrel is imported by client components too.
+// Import it directly: `import { FeatureImage } from "@/components/ui/FeatureImage"`.
 export { Section, type SectionProps } from "./Section";
 export { SectionHeading, type SectionHeadingProps } from "./SectionHeading";
 export { Grid, type GridProps } from "./Grid";
