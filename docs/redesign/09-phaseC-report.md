@@ -29,8 +29,11 @@ Sora (display + buttons) / Figtree (body) / JetBrains Mono (eyebrows), via `next
 2. **Nav Contact split** — bare number removed; ghost icon-button → Call/WhatsApp/Email dropdown (keyboard + outside-click dismissible); same 3 actions in mobile menu. Number stays in footer + LocalBusiness JSON-LD.
 3. **Stats** — "8+ years" (wrong; founded 2022) → **"2022 / Operating since"**; band now 2022 · 50+ clients · 6 services · 3 cities (all verifiable). Years also corrected in About, author bio, home beats.
 4. **Testimonials** — quote → body font 19px / 1.6 / white-80; name 14px, role 13px white-50.
-5. **Motion** — hero lead-tile scroll parallax (CSS scroll-timeline, overscan, reduced-motion safe); entrances 0.32→0.65s; bento hover-neighbor dim (Raycast trick, 150ms); route fade-through-black.
-6. **Imagery** — home 5-image bento hero; `FeatureImage` (cover-dark + mono label + graceful placeholder) wired into services/[slug], industries/[slug], About, 3 locations; `reports/image-shortlist.md` + download script.
+5. **Motion** — entrances 0.32→0.65s; route fade-through-black; carousel Ken Burns + crossfade (see 7). (The bento hover-dim + lead-tile parallax were removed with the bento in the carousel change order.)
+6. **Imagery** — `FeatureImage` (cover-dark + mono label + graceful placeholder) wired into services/[slug], industries/[slug], About, 3 locations; `reports/image-shortlist.md` + download script.
+
+### 7. Home hero carousel (change order — replaced the bento)
+Full-height **crossfade carousel** in the hero image zone (text-left / image-right kept): one image at a time, `rounded-2xl` + hairline + cover-dark + saturate, **crossfade 900ms + Ken Burns scale→1.06 over a 6s dwell** (transform/opacity only, no sliding). Caption (mono eyebrow `MANAGED IT · 01` + one line) is a named link to the service; 5 hairline progress bars fill orange→green as the dwell timer, clickable to jump. Pauses on hover/focus, arrow keys when focused, `aria-roledescription="carousel"` + `aria-live="off"`, green focus rings. Reduced motion → static first slide, indicators still clickable. First slide `priority` (LCP), fixed aspect (CLS 0). Slide config is one array in `HeroCarousel.tsx` — the client's dedicated photos drop in by editing 5 lines. Bento component + parallax CSS deleted (no dead code).
 
 ## Verification
 
@@ -45,7 +48,7 @@ Sora (display + buttons) / Figtree (body) / JetBrains Mono (eyebrows), via `next
 ### Pending on Vercel preview (needs imagery downloaded)
 - [ ] Lighthouse mobile — Perf ≥ 90, SEO = 100, CLS < 0.1 (home/article/service)
 - [ ] axe — a11y ≥ 95; green focus rings; reduced-motion emulation
-- [ ] All hero + page images render (no 404s); LCP ≤ 2.5s; collage collapses at 390px
+- [ ] All hero + page images render (no 404s); LCP ≤ 2.5s; carousel: 5 slides render, auto-rotation pauses on hover, indicators keyboard-operable, reduced-motion static, full-width 4:3 at 390px
 - [ ] Every wired image has alt (✅ in code) + a CREDITS entry (pending download)
 
 ## Outstanding (client/asset side)

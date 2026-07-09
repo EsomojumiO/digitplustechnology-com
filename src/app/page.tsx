@@ -22,7 +22,7 @@ import {
   Magnetic,
   CircuitTraces,
 } from "@/components/motion";
-import { HeroCollage } from "@/components/home/HeroCollage";
+import { HeroCarousel } from "@/components/home/HeroCarousel";
 import { TrustMarquee } from "@/components/home/TrustMarquee";
 import { WhyPillar } from "@/components/home/WhyPillar";
 import { IndustriesFilter } from "@/components/home/IndustriesFilter";
@@ -103,9 +103,9 @@ export default function HomePage() {
                 </p>
               </div>
             </div>
-            {/* Collage zone */}
+            {/* Carousel zone */}
             <div className="lg:col-span-7">
-              <HeroCollage />
+              <HeroCarousel />
             </div>
           </div>
         </Container>
