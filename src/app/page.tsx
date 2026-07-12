@@ -42,7 +42,7 @@ export const metadata: Metadata = {
 const whyBeats: { label: string; beat: string }[] = [
   { label: "Accountable", beat: "one partner, end to end." },
   { label: "Nationwide", beat: "Abuja, Lagos, Port Harcourt." },
-  { label: "Trusted", beat: "since 2022, 50+ clients." },
+  { label: "Experienced", beat: "government, banking, healthcare." },
   { label: "Disciplined", beat: "documented, audit-ready." },
 ];
 

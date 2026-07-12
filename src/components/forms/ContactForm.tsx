@@ -120,7 +120,7 @@ export function ContactForm({ className }: ContactFormProps) {
         style={{ outline: "none" }}
       >
         <FormStatus status="success">
-          <p className="font-medium">Thank you, your message has been received.</p>
+          <p className="font-medium">Thank you — your message has been received.</p>
           <p className="mt-1 text-muted">
             Our team will respond shortly. For anything urgent, call{" "}
             <a className="underline" href={siteConfig.phoneHref}>

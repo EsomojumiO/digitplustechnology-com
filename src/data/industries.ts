@@ -281,7 +281,7 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
     slug: "oil-gas-energy",
     title: "Oil, Gas & Energy",
     intro: [
-      "Resilient infrastructure and robust hardware built for demanding, remote energy-sector sites.",
+      "Resilient infrastructure and hardware built to survive demanding, remote energy-sector sites.",
     ],
     concerns: [
       {
@@ -289,7 +289,7 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
         desc: "Networks and power designed for reliability and continuity in demanding, sometimes remote, operating environments.",
       },
       {
-        title: "Robust hardware",
+        title: "Hardened hardware",
         desc: "Equipment specified for the conditions it will run in, sourced genuine and warrantied through authorised channels.",
       },
       {
@@ -319,7 +319,7 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
     ],
     metaTitle: "IT Solutions for Oil, Gas & Energy",
     metaDescription:
-      "Resilient infrastructure, robust hardware, and managed services for oil, gas, and energy operations in Nigeria, built for demanding and remote environments.",
+      "Resilient infrastructure, hardened hardware, and managed services for oil, gas, and energy operations in Nigeria, built for demanding and remote environments.",
   },
 
   "logistics-manufacturing": {

@@ -12,9 +12,9 @@ import { ContactForm } from "@/components/forms";
 import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Contact Us, Request a Free IT Assessment",
+  title: "Contact Digitplus — get a quote",
   description:
-    "Talk to Digitplus about your IT needs by email, phone or WhatsApp — Abuja HQ with delivery across Lagos and Port Harcourt. Request a free IT assessment.",
+    "Talk to Digitplus about your IT project by email, phone or WhatsApp — Abuja HQ, delivery across Lagos and Port Harcourt. We'll come back with next steps.",
   alternates: { canonical: "/contact" },
 };
 

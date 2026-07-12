@@ -60,7 +60,7 @@ export default function ServicesOverviewPage() {
           description="Tell us what you’re trying to achieve. We’ll point you to the right service, or design a plan that combines several."
           actions={
             <Button href="/contact" size="lg" variant="secondary">
-              Speak to Our Team
+              Speak to our team
             </Button>
           }
         />

@@ -30,6 +30,10 @@ export function generateStaticParams() {
 
 export const dynamicParams = false;
 
+// Lowercase a service title for mid-sentence use while preserving the "IT"
+// initialism ("IT Procurement" would otherwise render "it procurement").
+const lowerTitle = (s: string) => s.toLowerCase().replace(/\bit\b/g, "IT");
+
 export async function generateMetadata({
   params,
 }: {
@@ -136,7 +140,7 @@ export default async function ServiceDetailPage({
         <FadeIn>
           <SectionHeading
             eyebrow="What's included"
-            title={`Inside our ${content.title.toLowerCase()}`}
+            title={`Inside our ${lowerTitle(content.title)}`}
           />
         </FadeIn>
         <Grid as={Stagger} columns={2} gap="md" className="mt-12">
@@ -258,7 +262,7 @@ export default async function ServiceDetailPage({
 
       <FadeIn>
         <CTABand
-          title={`Ready to talk about ${content.title.toLowerCase()}?`}
+          title={`Ready to talk about ${lowerTitle(content.title)}?`}
           description="Tell us what you’re planning. We’ll come back with practical next steps and a clear, line-itemised proposal, no obligation."
           actions={
             <Button href="/contact" size="lg" variant="secondary">

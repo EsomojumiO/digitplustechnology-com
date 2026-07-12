@@ -102,7 +102,7 @@ export default function ReportsHubPage() {
             </div>
             <NewsletterForm
               idPrefix="reports-newsletter"
-              buttonLabel="Notify me"
+              buttonLabel="Subscribe"
               className="w-full lg:max-w-md"
             />
           </div>
