@@ -38,7 +38,7 @@ function Cover({
   return (
     <div
       className={cn(
-        "relative overflow-hidden bg-surface ring-1 ring-hairline ring-inset",
+        "relative overflow-hidden bg-surface cover-dark",
         className,
       )}
     >
@@ -78,7 +78,7 @@ export function ReportCard({
         padding="none"
         interactive
         className={cn(
-          "group relative overflow-hidden bg-surface-raised/70 backdrop-blur-sm transition-[box-shadow,transform,border-color] duration-[var(--dur-base)] ease-[var(--ease-out)] hover:-translate-y-1 hover:border-hairline-hover hover:shadow-[var(--shadow-lg)]",
+          "group relative overflow-hidden bg-surface-raised/70 backdrop-blur-sm transition-[box-shadow,transform,border-color] duration-[var(--dur-base)] ease-[var(--ease-out)] hover:-translate-y-0.5 hover:border-hairline-hover hover:shadow-[var(--shadow-md)]",
           className,
         )}
       >
@@ -96,7 +96,7 @@ export function ReportCard({
             <Heading className="text-h2 text-balance text-text">
               <Link
                 href={href}
-                className="rounded-sm outline-none after:absolute after:inset-0 after:content-[''] focus-visible:underline focus-visible:decoration-accent"
+                className="rounded-sm outline-none after:absolute after:inset-0 after:content-[''] focus-visible:underline focus-visible:decoration-accent-green"
               >
                 {report.title}
               </Link>
@@ -133,7 +133,7 @@ export function ReportCard({
       padding="none"
       interactive
       className={cn(
-        "group relative flex flex-col overflow-hidden bg-surface-raised/70 backdrop-blur-sm transition-[box-shadow,transform,border-color] duration-[var(--dur-base)] ease-[var(--ease-out)] hover:-translate-y-1 hover:border-hairline-hover hover:shadow-[var(--shadow-lg)]",
+        "group relative flex flex-col overflow-hidden bg-surface-raised/70 backdrop-blur-sm transition-[box-shadow,transform,border-color] duration-[var(--dur-base)] ease-[var(--ease-out)] hover:-translate-y-0.5 hover:border-hairline-hover hover:shadow-[var(--shadow-md)]",
         className,
       )}
     >
@@ -147,7 +147,7 @@ export function ReportCard({
         <Heading className="text-h4 text-balance text-text">
           <Link
             href={href}
-            className="rounded-sm outline-none after:absolute after:inset-0 after:content-[''] focus-visible:underline focus-visible:decoration-accent"
+            className="rounded-sm outline-none after:absolute after:inset-0 after:content-[''] focus-visible:underline focus-visible:decoration-accent-green"
           >
             {report.title}
           </Link>

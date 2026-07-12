@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Card } from "@/components/ui";
 
 export interface WhyPillarProps {
   /** Short mono keyword, e.g. "Accountable". */
@@ -16,7 +17,7 @@ export interface WhyPillarProps {
  */
 export function WhyPillar({ label, beat, description }: WhyPillarProps) {
   return (
-    <div className="flex h-full flex-col gap-3 rounded-lg border border-hairline bg-surface-raised p-8">
+    <Card padding="lg" className="flex h-full flex-col gap-3">
       <p className="flex flex-wrap items-baseline gap-x-2 text-h4 leading-snug text-text">
         <span className="font-mono text-caption font-medium uppercase tracking-[0.16em] text-accent-green">
           {label}
@@ -27,7 +28,7 @@ export function WhyPillar({ label, beat, description }: WhyPillarProps) {
         <span className="font-medium">{beat}</span>
       </p>
       <p className="text-body text-muted measure">{description}</p>
-    </div>
+    </Card>
   );
 }
 

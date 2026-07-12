@@ -17,7 +17,7 @@ export function AuthorBio({ author }: { author: Author }) {
   return (
     <aside
       aria-label="About the author"
-      className="mt-12 rounded-xl border border-hairline bg-surface-raised p-6 sm:p-8"
+      className="mt-12 rounded-lg border border-hairline bg-surface-raised p-6 sm:p-8"
     >
       <div className="flex flex-col gap-5 sm:flex-row sm:items-start">
         <div

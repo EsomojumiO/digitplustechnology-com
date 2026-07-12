@@ -31,7 +31,7 @@ export function ArticleCard({
       as="article"
       padding="none"
       interactive
-      className="group flex flex-col overflow-hidden bg-surface-raised/70 backdrop-blur-sm transition-[box-shadow,transform,border-color] duration-[var(--dur-base)] ease-[var(--ease-out)] hover:-translate-y-1 hover:border-hairline-hover hover:shadow-[var(--shadow-lg)]"
+      className="group flex flex-col overflow-hidden bg-surface-raised/70 backdrop-blur-sm transition-[box-shadow,transform,border-color] duration-[var(--dur-base)] ease-[var(--ease-out)] hover:-translate-y-0.5 hover:border-hairline-hover hover:shadow-[var(--shadow-md)]"
     >
       <Link
         href={href}
