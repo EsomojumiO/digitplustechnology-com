@@ -29,9 +29,9 @@ export const locations: LocationContent[] = [
       "Infrastructure builds and server-room fit-outs across the FCT",
       "On-site managed support with rapid response in and around Abuja",
     ],
-    metaTitle: "IT Solutions in Abuja, Digitplus Technology HQ",
+    metaTitle: "IT Solutions in Abuja, Our HQ",
     metaDescription:
-      "Digitplus Technology Limited is headquartered in Abuja, delivering documented IT procurement, infrastructure, and managed services to government and enterprises across the FCT.",
+      "Digitplus is headquartered in Abuja, delivering documented IT procurement, infrastructure and managed services to government and enterprises across the FCT.",
   },
   {
     slug: "lagos",
@@ -45,9 +45,9 @@ export const locations: LocationContent[] = [
       "Multi-site procurement and deployment across Lagos",
       "Remote and on-site managed support under clear SLAs",
     ],
-    metaTitle: "IT Solutions in Lagos, Digitplus Technology",
+    metaTitle: "IT Solutions in Lagos",
     metaDescription:
-      "Digitplus delivers IT procurement, infrastructure, deployment, and managed services across Lagos, supporting banks, enterprises, and SMEs with accountable delivery.",
+      "Digitplus delivers IT procurement, infrastructure, deployment and managed services across Lagos — for banks, enterprises and SMEs with accountable delivery.",
   },
   {
     slug: "port-harcourt",
@@ -61,9 +61,9 @@ export const locations: LocationContent[] = [
       "Hardware supply and deployment across the South-South",
       "Managed support models suited to demanding, sometimes remote, sites",
     ],
-    metaTitle: "IT Solutions in Port Harcourt, Digitplus Technology",
+    metaTitle: "IT Solutions in Port Harcourt",
     metaDescription:
-      "Digitplus delivers resilient IT infrastructure, hardware supply, and managed services across Port Harcourt and the South-South, built for demanding environments.",
+      "Digitplus delivers resilient IT infrastructure, hardware supply and managed services across Port Harcourt and the South-South, built for demanding environments.",
   },
 ];
 

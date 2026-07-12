@@ -14,7 +14,7 @@ import { services } from "@/lib/site";
 export const metadata: Metadata = {
   title: "IT Services in Nigeria, Procurement & Managed IT",
   description:
-    "Six IT service lines for organisations across Nigeria: IT procurement, hardware supply, infrastructure, managed IT services, technology advisory, and deployment. Get a quote.",
+    "Six IT service lines for organisations across Nigeria: procurement, hardware supply, infrastructure, managed IT, technology advisory and deployment.",
   alternates: { canonical: "/services" },
 };
 
@@ -39,6 +39,7 @@ export default function ServicesOverviewPage() {
       </Section>
 
       <Section spacing="md">
+        <h2 className="sr-only">Our service lines</h2>
         <Grid as={Stagger} columns={3} gap="md">
           {services.map((s) => (
             <StaggerItem key={s.slug} className="h-full">

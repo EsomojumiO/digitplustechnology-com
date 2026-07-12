@@ -19,6 +19,7 @@ import {
 } from "@/lib/content";
 import { siteConfig } from "@/lib/site";
 import { JsonLd } from "@/lib/seo/jsonld";
+import { clampDescription } from "@/lib/seo/metadata";
 import { reportSchema, breadcrumbSchema } from "@/lib/seo/schema";
 
 /** Static generation: one page per known report, no on-demand params. */
@@ -41,12 +42,16 @@ export async function generateMetadata({
 
   const period = [report.quarter, report.year].filter(Boolean).join(" ");
   const title = report.seo.metaTitle || report.title;
-  const description = report.seo.metaDescription || report.summary;
+  const description = clampDescription(
+    report.seo.metaDescription || report.summary,
+  );
   const ogImage = report.seo.ogImage || report.cover;
   const url = `${siteConfig.url}/reports/${report.slug}`;
 
   return {
-    title,
+    // Absolute: report titles are long; the brand suffix would push them past
+    // the ~60-char SERP cutoff. The title stands alone.
+    title: { absolute: title },
     description,
     alternates: { canonical: `/reports/${report.slug}` },
     openGraph: {

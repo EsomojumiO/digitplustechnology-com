@@ -29,7 +29,7 @@ export const siteConfig = {
   shortName: "Digitplus",
   url: "https://digitplustechnology.com",
   description:
-    "Digitplus Technology Limited is a B2B IT solutions company in Nigeria. We deliver IT procurement, hardware supply, infrastructure, and managed IT services for enterprises, government, banks, hospitals, and schools. Abuja HQ; delivery in Lagos and Port Harcourt.",
+    "Digitplus Technology Limited is a B2B IT solutions company in Nigeria — procurement, infrastructure and managed services for enterprise and government.",
   tagline: "Plan. Procure. Deploy. Manage.",
   email: "hello@digitplustechnology.com",
   phone: "+234 803 786 8120",

@@ -23,6 +23,7 @@ import {
 } from "@/lib/content";
 import { siteConfig } from "@/lib/site";
 import { JsonLd } from "@/lib/seo/jsonld";
+import { clampDescription } from "@/lib/seo/metadata";
 import { articleSchema, breadcrumbSchema } from "@/lib/seo/schema";
 import { ArticleCard } from "../_components/ArticleCard";
 import { ShareBar } from "../_components/ShareBar";
@@ -86,12 +87,16 @@ export async function generateMetadata({
   if (!article) return { title: "Insight" };
 
   const title = article.seo.metaTitle ?? article.title;
-  const description = article.seo.metaDescription ?? article.excerpt;
+  const description = clampDescription(
+    article.seo.metaDescription ?? article.excerpt,
+  );
   const ogImage = article.seo.ogImage ?? article.cover;
   const url = `${siteConfig.url}/insights/${article.slug}`;
 
   return {
-    title,
+    // Absolute: article titles are long and descriptive; appending the brand
+    // suffix pushes them past the ~60-char SERP cutoff. The title stands alone.
+    title: { absolute: title },
     description,
     alternates: { canonical: `/insights/${article.slug}` },
     openGraph: {

@@ -17,6 +17,7 @@ import { FadeIn, Stagger, StaggerItem } from "@/components/motion";
 import { industries, services } from "@/lib/site";
 import { getIndustryContent } from "@/data/industries";
 import { JsonLd } from "@/lib/seo/jsonld";
+import { clampDescription } from "@/lib/seo/metadata";
 import { faqSchema, breadcrumbSchema } from "@/lib/seo/schema";
 
 export function generateStaticParams() {
@@ -35,7 +36,7 @@ export async function generateMetadata({
   if (!content) return { title: "Industry" };
   return {
     title: content.metaTitle,
-    description: content.metaDescription,
+    description: clampDescription(content.metaDescription),
     alternates: { canonical: `/industries/${content.slug}` },
   };
 }

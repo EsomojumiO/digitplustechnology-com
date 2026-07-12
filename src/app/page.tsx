@@ -34,7 +34,7 @@ import { getFeaturedArticles, getFeaturedReport } from "@/lib/content";
 export const metadata: Metadata = {
   title: "IT Solutions Company in Nigeria | Digitplus Technology",
   description:
-    "Digitplus is a B2B IT solutions company in Nigeria, IT procurement, hardware supply, infrastructure, and managed IT services for enterprises, government, and banks. Abuja, Lagos, Port Harcourt.",
+    "Digitplus is a B2B IT solutions company in Nigeria — IT procurement, hardware supply, infrastructure and managed services for enterprise and government.",
 };
 
 /* Raycast-style two-beat leads for the four Why Digitplus pillars, mapped to

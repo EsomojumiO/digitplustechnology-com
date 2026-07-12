@@ -12,9 +12,9 @@ import { FadeIn, Stagger, StaggerItem } from "@/components/motion";
 import { industries } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Industries We Serve, Government, Banking, Healthcare & More",
+  title: "Industries We Serve Across Nigeria",
   description:
-    "Sector-specific IT solutions for government, banking, enterprise, SME, healthcare, education, oil & gas, and logistics across Nigeria. Built around how each sector works.",
+    "Sector-specific IT solutions for government, banking, enterprise, SME, healthcare, education, oil & gas and logistics across Nigeria — shaped by each sector.",
   alternates: { canonical: "/industries" },
 };
 

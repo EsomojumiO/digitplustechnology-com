@@ -13,6 +13,24 @@
 import type { Metadata } from "next";
 import { siteConfig } from "@/lib/site";
 
+/**
+ * Clamp a meta description to the SERP-safe length (≤160 chars) at a word
+ * boundary, so long editorial `metaDescription`/`excerpt` frontmatter never
+ * emits a truncated-mid-word snippet. Meta-only — visible card copy uses the
+ * full `excerpt`, so this has no visual impact.
+ */
+export function clampDescription(text: string, max = 160): string {
+  const s = text.trim();
+  if (s.length <= max) return s;
+  const cut = s.slice(0, max - 1);
+  const lastSpace = cut.lastIndexOf(" ");
+  const base = (lastSpace > max - 40 ? cut.slice(0, lastSpace) : cut).replace(
+    /[\s,;:.–—-]+$/,
+    "",
+  );
+  return `${base}…`;
+}
+
 export interface BuildMetadataInput {
   /** Page <title> (without the template suffix; the layout appends the brand). */
   title: string;
@@ -37,6 +55,7 @@ export function buildMetadata({
 }: BuildMetadataInput): Metadata {
   const url = `${siteConfig.url}${path === "/" ? "" : path}`;
   const images = image ? [{ url: image }] : undefined;
+  description = clampDescription(description);
 
   return {
     title,

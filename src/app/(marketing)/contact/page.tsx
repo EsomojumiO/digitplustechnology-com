@@ -14,7 +14,7 @@ import { siteConfig } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Contact Us, Request a Free IT Assessment",
   description:
-    "Talk to Digitplus Technology Limited about your IT needs. Email, phone, or WhatsApp, Abuja HQ with delivery across Lagos and Port Harcourt. Request a free IT assessment.",
+    "Talk to Digitplus about your IT needs by email, phone or WhatsApp — Abuja HQ with delivery across Lagos and Port Harcourt. Request a free IT assessment.",
   alternates: { canonical: "/contact" },
 };
 

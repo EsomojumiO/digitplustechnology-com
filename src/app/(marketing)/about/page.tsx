@@ -19,9 +19,9 @@ import { JsonLd } from "@/lib/seo/jsonld";
 import { breadcrumbSchema } from "@/lib/seo/schema";
 
 export const metadata: Metadata = {
-  title: "About Us, A Disciplined, Accountable Nigerian IT Partner",
+  title: "About Digitplus, a Nigerian IT Partner",
   description:
-    "Digitplus Technology Limited is a CAC-registered, Abuja-based B2B IT solutions company operating since 2022, with 50+ enterprise clients. End-to-end IT built on operational discipline.",
+    "Digitplus Technology Limited is a CAC-registered, Abuja-based B2B IT solutions company operating since 2022, with 50+ enterprise clients across Nigeria.",
   alternates: { canonical: "/about" },
 };
 

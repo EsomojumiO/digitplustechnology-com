@@ -21,6 +21,7 @@ import { getSpokeArticles } from "@/lib/content";
 import { getServiceContent } from "@/data/services";
 import { testimonials } from "@/data/testimonials";
 import { JsonLd } from "@/lib/seo/jsonld";
+import { clampDescription } from "@/lib/seo/metadata";
 import { serviceSchema, faqSchema, breadcrumbSchema } from "@/lib/seo/schema";
 
 export function generateStaticParams() {
@@ -39,7 +40,7 @@ export async function generateMetadata({
   if (!content) return { title: "Service" };
   return {
     title: content.metaTitle,
-    description: content.metaDescription,
+    description: clampDescription(content.metaDescription),
     alternates: { canonical: `/services/${content.slug}` },
   };
 }
