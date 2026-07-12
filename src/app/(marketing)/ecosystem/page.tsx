@@ -6,6 +6,7 @@ import {
   Breadcrumbs,
   CTABand,
   Button,
+  Card,
 } from "@/components/ui";
 import { FadeIn } from "@/components/motion";
 import { cn } from "@/lib/utils";
@@ -85,11 +86,10 @@ export default function EcosystemPage() {
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {projects.map((p) => (
             <FadeIn key={p.domain}>
-              <article
-                className={cn(
-                  "flex h-full flex-col rounded-2xl border border-hairline bg-surface-raised p-8",
-                  "transition-colors duration-[var(--dur-base)] hover:border-hairline-hover",
-                )}
+              <Card
+                as="article"
+                padding="lg"
+                className="flex h-full flex-col transition-colors duration-[var(--dur-base)] hover:border-hairline-hover"
               >
                 <div className="flex items-center justify-between gap-3">
                   <span className="text-caption font-medium uppercase tracking-[0.12em] text-muted">
@@ -122,7 +122,7 @@ export default function EcosystemPage() {
                   {p.domain}
                   <ExternalIcon />
                 </Link>
-              </article>
+              </Card>
             </FadeIn>
           ))}
         </div>
@@ -131,11 +131,12 @@ export default function EcosystemPage() {
       <CTABand
         title="Need enterprise IT, not a product?"
         description="That is what this arm of Digitplus does, procurement, infrastructure, and managed services for organisations. Let's talk about what you need."
-      >
-        <Button href="/contact" size="lg">
-          Request an assessment
-        </Button>
-      </CTABand>
+        actions={
+          <Button href="/contact" size="lg" variant="secondary">
+            Get a quote
+          </Button>
+        }
+      />
     </>
   );
 }

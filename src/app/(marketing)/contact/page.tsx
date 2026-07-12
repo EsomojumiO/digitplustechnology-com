@@ -100,7 +100,7 @@ export default function ContactPage() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    Message us on WhatsApp
+                    Chat on WhatsApp
                   </a>
                 </DetailRow>
                 <DetailRow label="Headquarters">{siteConfig.hq}</DetailRow>
@@ -115,7 +115,7 @@ export default function ContactPage() {
                   variant="secondary"
                   className="w-full sm:w-auto"
                 >
-                  Chat with us on WhatsApp
+                  Chat on WhatsApp
                 </Button>
                 <Button
                   href={siteConfig.phoneHref}

@@ -286,7 +286,7 @@ export default async function ArticlePage({
         actions={
           <>
             <Button href="/contact" size="lg" variant="secondary">
-              Book a Consultation
+              Get a quote
             </Button>
             <Button href={hub.href} size="lg" variant="ghost">
               Read our insights

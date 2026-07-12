@@ -7,6 +7,7 @@ import {
   Breadcrumbs,
   CTABand,
   Badge,
+  Card,
 } from "@/components/ui";
 import { Reveal } from "@/components/motion/Reveal";
 import { siteConfig } from "@/lib/site";
@@ -43,10 +44,13 @@ export default function LocationsPage() {
         <Reveal>
           <Grid columns={3} gap="md">
             {locations.map((loc) => (
-              <a
+              <Card
                 key={loc.slug}
+                as="a"
+                interactive
+                padding="lg"
                 href={`/locations/${loc.slug}`}
-                className="group flex flex-col gap-3 rounded-lg border border-hairline bg-surface-raised p-8 transition-[box-shadow,transform,border-color] duration-[var(--dur-base)] ease-[var(--ease-out)] hover:-translate-y-0.5 hover:border-hairline-hover hover:shadow-[var(--shadow-md)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green"
+                className="group flex flex-col gap-3"
               >
                 <Badge
                   tone={loc.role === "Headquarters" ? "accent" : "neutral"}
@@ -59,7 +63,7 @@ export default function LocationsPage() {
                 <span className="mt-2 inline-flex items-center gap-1.5 text-small font-medium text-accent">
                   About {loc.city} →
                 </span>
-              </a>
+              </Card>
             ))}
           </Grid>
         </Reveal>

@@ -59,7 +59,7 @@ export default function IndustriesOverviewPage() {
           description="We work across many industries. Tell us about your environment and we’ll explain exactly how we’d approach it."
           actions={
             <Button href="/contact" size="lg" variant="secondary">
-              Talk to an Expert
+              Get a quote
             </Button>
           }
         />

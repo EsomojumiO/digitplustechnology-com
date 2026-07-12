@@ -261,7 +261,7 @@ export default async function ServiceDetailPage({
           description="Tell us what you’re planning. We’ll come back with practical next steps and a clear, line-itemised proposal, no obligation."
           actions={
             <Button href="/contact" size="lg" variant="secondary">
-              {`Get a quote for ${content.title}`}
+              Get a quote
             </Button>
           }
         />

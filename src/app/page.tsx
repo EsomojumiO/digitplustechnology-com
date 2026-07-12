@@ -143,7 +143,7 @@ export default function HomePage() {
         </Stagger>
         <FadeIn className="mt-10">
           <Button href="/services" variant="ghost">
-            View all services →
+            All services →
           </Button>
         </FadeIn>
       </Section>

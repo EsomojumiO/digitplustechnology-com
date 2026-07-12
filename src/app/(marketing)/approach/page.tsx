@@ -60,7 +60,7 @@ export default function ApproachPage() {
         description="The first step costs you nothing but a conversation. Book a discovery call and we’ll begin understanding what you actually need."
         actions={
           <Button href="/contact" size="lg" variant="secondary">
-            Start with a discovery call
+            Get a quote
           </Button>
         }
       />

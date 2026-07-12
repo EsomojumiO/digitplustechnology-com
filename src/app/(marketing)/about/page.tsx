@@ -193,7 +193,7 @@ export default function AboutPage() {
         description={`Reach us at ${siteConfig.email} or start a conversation. We’ll respond with practical next steps.`}
         actions={
           <Button href="/contact" size="lg" variant="secondary">
-            Partner with Digitplus
+            Get a quote
           </Button>
         }
       />
