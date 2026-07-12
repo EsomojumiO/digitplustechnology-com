@@ -83,3 +83,22 @@ shared template (no per-item conditional block divergence within a family).
 | D25 | `components/layout/Footer.tsx:53` | Focus ring (a11y) | Invalid `outline-accent-green-300` token → the "Visit our store" link has no visible focus outline on dark (keyboard nav) | Visible green focus ring on every interactive element | High |
 | D26 | `insights/page.tsx:101`, `insights/[slug]/page.tsx:209`, `reports/_components/ReportCard.tsx:38`, `reports/[slug]/page.tsx:128` | Image scrim | Scrim (`from-background/70…`) applied on `ArticleCard`/`FeatureImage`/`ContentShelf` and `HeroCarousel` (`/80`) but **omitted** on the insights featured image, the article hero cover and all report covers; the `.cover-dark` utility in globals.css (built to standardize this) is never applied | One scrim treatment on every dark cover | Med |
 | D27 | `insights/_components/ArticleCard.tsx:34`, `reports/_components/ReportCard.tsx:81,136`, `components/home/ContentShelf.tsx:21` | Card hover lift | Content cards lift `-translate-y-1` + `shadow-lg`; `Card`/`ServiceCard`/`IndustryCard` lift `-translate-y-0.5` + `shadow-md` — two hover magnitudes | One hover elevation recipe | Med |
+
+---
+
+## Resolution log
+
+All 27 defects resolved on `redesign/dark-raycast`, committed per category (`tsc --noEmit`
+clean + production build green before push). Date closed: 2026-07-12.
+
+| Category | Commit | Defects | Notes |
+|---|---|---|---|
+| Buttons | `689642c` | D1–D9 | Button `secondary`→transparent+hairline-0.14+white; `ghost`→green + animated underline (inline link, opts out of size padding). All quote/contact CTAs → **"Get a quote"**; WhatsApp → **"Chat on WhatsApp"**. D5 ecosystem CTABand button was passed as `children` (never rendered) → moved to `actions`. D9 raw card-as-link (locations index, ecosystem projects) → compose `Card` (gained `href` + focus ring on `interactive`). D7 ghost "see-all" links unified to `All X →`. |
+| Colors | `ac8cb04` | D10–D17 | Orange-as-ink → green (`--accent-green`) across links, prose links, step/finding numbers, mono eyebrows, card arrows & icon chips, hover ink. Card hover borders → `hairline-hover`; `Badge` accent tone → green. D12/D25 invalid `outline-accent-green-300` focus token fixed ×4 (Footer a11y). D13 store link → green. D17 inverse-band eyebrows → `text-muted`. D14 OG image → shipped dark tokens (dark label on the orange tile). Bonus: `FormStatus` success state was orange → green; required asterisk → muted; ReportGate checkbox accent → green. Net: ≤1 orange element (the primary CTA) per viewport (D15). |
+| Typography | `4a4c73f` | D18, D19 | D18 rogue px snapped to scale (`text-body-lg`/`text-small`/`text-caption`); `Button` `text-[15px]` retained (documented CTA control size). **D19 accepted:** all eyebrows already render consistently through the `Eyebrow` component (uppercase mono green); the `index` (`· 01`) prop stays as an available option; ad-hoc `label · qualifier` eyebrows are valid compound labels, not drift — no numeric-index churn imposed. |
+| Templates | `eafd0cc` | D20, D21, D22 | D21 location role badge now derived from `loc.role` in all three city files (can't drift). **D20 accepted:** service-tagline vs industry-intro is a *cross-family* difference; the bar is intra-family identity (6 services identical to each other; 8 industries to each other), which holds. **D22 accepted:** every closing CTABand (green `inverse`) uses the `secondary` button by rule — consistent across the family; primary orange is reserved for on-canvas hero/nav moments. |
+| Spacing | `e929c3a` | D23, D24 | D23 two-tier radius rule: text cards `rounded-lg` (AuthorBio aligned; ecosystem card now composes `Card`); media/image frames + overlays `rounded-xl`; hero carousel `rounded-2xl` (signature exception). D24 `WhyPillar` composes `Card padding="lg"` instead of a raw `p-8` recipe; card padding follows `md` (default) / `lg` (feature) and grid gaps follow section density (dense 3-col `md`, feature 2-col `lg`) — consistent within type. |
+| States | `ac8cb04`, `e929c3a` | D25, D26, D27 | D25 Footer focus-ring token fixed in the colors commit. D26 `.cover-dark` scrim applied to the 4 previously-bare covers — one tonal scrim on every dark cover; caption-overlay covers (FeatureImage/HeroCarousel) keep a stronger bottom gradient for text legibility (documented purposeful variant). D27 one hover-lift recipe (`-translate-y-0.5` + `shadow-md`) across all cards. |
+
+**Pending — Claude Code: none.** Every Phase-1 defect is either fixed or accepted with the
+rationale above.
