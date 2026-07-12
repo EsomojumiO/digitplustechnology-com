@@ -50,7 +50,10 @@ export default function AbujaPage() {
 
       <Section spacing="sm">
         <Reveal className="flex flex-col gap-6">
-          <Badge tone="accent" className="self-start">
+          <Badge
+            tone={loc.role === "Headquarters" ? "accent" : "neutral"}
+            className="self-start"
+          >
             {loc.role}
           </Badge>
           <SectionHeading
