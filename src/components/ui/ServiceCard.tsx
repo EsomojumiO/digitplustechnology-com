@@ -54,13 +54,13 @@ export function ServiceCard({
       {...props}
     >
       {icon ? (
-        <span className="mb-1 inline-flex h-10 w-10 items-center justify-center rounded-md bg-accent-subtle text-accent">
+        <span className="mb-1 inline-flex h-10 w-10 items-center justify-center rounded-md bg-brand-subtle text-accent-green">
           {icon}
         </span>
       ) : null}
       <h3 className="text-h4 text-text">{title}</h3>
       {blurb ? <p className="text-body text-muted measure">{blurb}</p> : null}
-      <span className="mt-2 inline-flex items-center gap-1.5 text-small font-medium text-accent">
+      <span className="mt-2 inline-flex items-center gap-1.5 text-small font-medium text-accent-green">
         Learn more
         <ArrowIcon />
       </span>

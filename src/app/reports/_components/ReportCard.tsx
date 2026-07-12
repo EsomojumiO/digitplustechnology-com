@@ -78,7 +78,7 @@ export function ReportCard({
         padding="none"
         interactive
         className={cn(
-          "group relative overflow-hidden bg-surface-raised/70 backdrop-blur-sm transition-[box-shadow,transform,border-color] duration-[var(--dur-base)] ease-[var(--ease-out)] hover:-translate-y-1 hover:border-accent/40 hover:shadow-[var(--shadow-lg)]",
+          "group relative overflow-hidden bg-surface-raised/70 backdrop-blur-sm transition-[box-shadow,transform,border-color] duration-[var(--dur-base)] ease-[var(--ease-out)] hover:-translate-y-1 hover:border-hairline-hover hover:shadow-[var(--shadow-lg)]",
           className,
         )}
       >
@@ -104,7 +104,7 @@ export function ReportCard({
             {report.summary ? (
               <p className="measure text-body-lg text-muted">{report.summary}</p>
             ) : null}
-            <span className="mt-1 inline-flex items-center gap-1.5 text-body font-medium text-accent">
+            <span className="mt-1 inline-flex items-center gap-1.5 text-body font-medium text-accent-green">
               Read the report
               <svg
                 width="16"
@@ -133,7 +133,7 @@ export function ReportCard({
       padding="none"
       interactive
       className={cn(
-        "group relative flex flex-col overflow-hidden bg-surface-raised/70 backdrop-blur-sm transition-[box-shadow,transform,border-color] duration-[var(--dur-base)] ease-[var(--ease-out)] hover:-translate-y-1 hover:border-accent/40 hover:shadow-[var(--shadow-lg)]",
+        "group relative flex flex-col overflow-hidden bg-surface-raised/70 backdrop-blur-sm transition-[box-shadow,transform,border-color] duration-[var(--dur-base)] ease-[var(--ease-out)] hover:-translate-y-1 hover:border-hairline-hover hover:shadow-[var(--shadow-lg)]",
         className,
       )}
     >
@@ -155,7 +155,7 @@ export function ReportCard({
         {report.summary ? (
           <p className="text-body text-muted line-clamp-3">{report.summary}</p>
         ) : null}
-        <span className="mt-auto inline-flex items-center gap-1.5 pt-2 text-small font-medium text-accent">
+        <span className="mt-auto inline-flex items-center gap-1.5 pt-2 text-small font-medium text-accent-green">
           Read the report
           <svg
             width="14"

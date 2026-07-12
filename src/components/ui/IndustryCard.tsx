@@ -21,7 +21,7 @@ function ArrowIcon() {
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
-      className="text-muted transition-transform duration-[var(--dur-base)] ease-[var(--ease-out)] group-hover:translate-x-1 group-hover:text-accent"
+      className="text-muted transition-transform duration-[var(--dur-base)] ease-[var(--ease-out)] group-hover:translate-x-1 group-hover:text-accent-green"
     >
       <path d="M4 9h10M10 5l4 4-4 4" />
     </svg>
@@ -52,7 +52,7 @@ export function IndustryCard({
       {...props}
     >
       {icon ? (
-        <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-accent-subtle text-accent">
+        <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-brand-subtle text-accent-green">
           {icon}
         </span>
       ) : null}

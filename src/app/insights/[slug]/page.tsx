@@ -249,7 +249,7 @@ export default async function ArticlePage({
             Related to this:{" "}
             <Link
               href={hub.href}
-              className="font-medium text-accent underline decoration-from-font underline-offset-2 hover:text-accent-hover"
+              className="font-medium text-accent-green underline decoration-from-font underline-offset-2 hover:text-accent-green"
             >
               {hub.label}
             </Link>

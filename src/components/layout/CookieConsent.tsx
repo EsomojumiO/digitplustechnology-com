@@ -82,7 +82,7 @@ export function CookieConsent() {
         optional analytics to improve the site. See our{" "}
         <Link
           href="/privacy"
-          className="font-medium text-accent underline-offset-2 hover:underline"
+          className="font-medium text-accent-green underline-offset-2 hover:underline"
         >
           Privacy Policy
         </Link>

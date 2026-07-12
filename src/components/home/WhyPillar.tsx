@@ -18,7 +18,7 @@ export function WhyPillar({ label, beat, description }: WhyPillarProps) {
   return (
     <div className="flex h-full flex-col gap-3 rounded-lg border border-hairline bg-surface-raised p-8">
       <p className="flex flex-wrap items-baseline gap-x-2 text-h4 leading-snug text-text">
-        <span className="font-mono text-caption font-medium uppercase tracking-[0.16em] text-accent">
+        <span className="font-mono text-caption font-medium uppercase tracking-[0.16em] text-accent-green">
           {label}
         </span>
         <span className="text-muted/60" aria-hidden="true">

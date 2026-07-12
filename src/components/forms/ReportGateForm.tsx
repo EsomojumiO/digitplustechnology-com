@@ -177,7 +177,7 @@ export function ReportGateForm({
           <input
             type="checkbox"
             name="subscribe"
-            className="mt-0.5 size-4 rounded-sm border-hairline text-accent accent-[var(--accent)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green"
+            className="mt-0.5 size-4 rounded-sm border-hairline text-accent-green accent-[var(--accent-green)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green"
           />
           <span>Also send me the next quarterly report.</span>
         </label>

@@ -18,7 +18,7 @@ const glass =
   "group relative flex flex-col overflow-hidden rounded-xl border border-hairline " +
   "bg-surface-raised/70 backdrop-blur-md " +
   "transition-[box-shadow,transform,border-color] duration-[var(--dur-base)] ease-[var(--ease-out)] " +
-  "hover:-translate-y-1 hover:border-accent/30 hover:shadow-[var(--shadow-lg)] " +
+  "hover:-translate-y-1 hover:border-hairline-hover hover:shadow-[var(--shadow-lg)] " +
   "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green";
 
 /**

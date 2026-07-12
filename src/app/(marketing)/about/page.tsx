@@ -178,7 +178,7 @@ export default function AboutPage() {
       {/* Trust / compliance statement */}
       <Section tone="inverse" spacing="lg">
         <FadeIn className="mx-auto max-w-3xl text-center">
-          <Eyebrow className="text-neutral-400">Our commitment</Eyebrow>
+          <Eyebrow className="text-muted">Our commitment</Eyebrow>
           <p className="text-h3 mt-6 font-medium tracking-tight text-neutral-50">
             We treat your procurement, your data, and your operations with the
             same care we would expect for our own, genuine equipment,

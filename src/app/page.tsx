@@ -175,7 +175,7 @@ export default function HomePage() {
       {/* Philosophy quote */}
       <Section tone="inverse" spacing="lg">
         <FadeIn className="mx-auto max-w-3xl text-center">
-          <Eyebrow className="text-neutral-400">Our standard</Eyebrow>
+          <Eyebrow className="text-muted">Our standard</Eyebrow>
           <p className="text-h2 mt-6 font-medium tracking-tight text-neutral-50">
             “Most IT projects fail in the gaps, between vendors, between purchase
             and deployment, between handover and support. We close them.”

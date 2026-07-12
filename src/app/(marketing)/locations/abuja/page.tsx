@@ -101,11 +101,11 @@ export default function AbujaPage() {
             </span>
             <p className="text-body text-text">
               {siteConfig.hq} ·{" "}
-              <a className="text-accent underline underline-offset-2" href={siteConfig.phoneHref}>
+              <a className="text-accent-green underline underline-offset-2" href={siteConfig.phoneHref}>
                 {siteConfig.phone}
               </a>{" "}
               ·{" "}
-              <a className="text-accent underline underline-offset-2" href={`mailto:${siteConfig.email}`}>
+              <a className="text-accent-green underline underline-offset-2" href={`mailto:${siteConfig.email}`}>
                 {siteConfig.email}
               </a>
             </p>

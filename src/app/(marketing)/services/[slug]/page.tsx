@@ -100,7 +100,7 @@ export default async function ServiceDetailPage({
             </h1>
           </StaggerItem>
           <StaggerItem>
-            <p className="text-body-lg text-accent measure">{content.tagline}</p>
+            <p className="text-body-lg text-muted measure">{content.tagline}</p>
           </StaggerItem>
           <StaggerItem className="flex flex-col gap-5">
             {content.intro.map((para, i) => (

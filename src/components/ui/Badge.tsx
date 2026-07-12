@@ -9,7 +9,7 @@ export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
 
 const tones: Record<BadgeTone, string> = {
   neutral: "bg-surface text-muted border border-hairline",
-  accent: "bg-accent-subtle text-accent border border-transparent",
+  accent: "bg-brand-subtle text-accent-green border border-transparent",
   outline: "bg-transparent text-text border border-hairline",
 };
 

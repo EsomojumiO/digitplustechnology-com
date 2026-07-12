@@ -31,7 +31,7 @@ export function ArticleCard({
       as="article"
       padding="none"
       interactive
-      className="group flex flex-col overflow-hidden bg-surface-raised/70 backdrop-blur-sm transition-[box-shadow,transform,border-color] duration-[var(--dur-base)] ease-[var(--ease-out)] hover:-translate-y-1 hover:border-accent/40 hover:shadow-[var(--shadow-lg)]"
+      className="group flex flex-col overflow-hidden bg-surface-raised/70 backdrop-blur-sm transition-[box-shadow,transform,border-color] duration-[var(--dur-base)] ease-[var(--ease-out)] hover:-translate-y-1 hover:border-hairline-hover hover:shadow-[var(--shadow-lg)]"
     >
       <Link
         href={href}
@@ -59,7 +59,7 @@ export function ArticleCard({
             <Badge tone="accent">{article.category.label}</Badge>
           </div>
 
-          <Heading className="text-h4 text-text transition-colors duration-[var(--dur-fast)] group-hover:text-accent">
+          <Heading className="text-h4 text-text transition-colors duration-[var(--dur-fast)] group-hover:text-accent-green">
             {article.title}
           </Heading>
 

@@ -31,12 +31,12 @@ export function Prose({
         "[&_p]:leading-relaxed [&_p]:text-text",
         "[&_strong]:font-semibold [&_strong]:text-text",
         // links
-        "[&_a]:font-medium [&_a]:text-accent [&_a]:underline [&_a]:decoration-from-font [&_a]:underline-offset-2 hover:[&_a]:text-accent-hover",
+        "[&_a]:font-medium [&_a]:text-accent-green [&_a]:underline [&_a]:decoration-from-font [&_a]:underline-offset-2 hover:[&_a]:text-accent-green",
         // lists
         "[&_ul]:list-disc [&_ul]:pl-6 [&_ol]:list-decimal [&_ol]:pl-6",
         "[&_li]:mt-2 [&_li]:marker:text-muted",
         // blockquote
-        "[&_blockquote]:border-l-2 [&_blockquote]:border-accent [&_blockquote]:pl-5 [&_blockquote]:text-muted [&_blockquote]:italic",
+        "[&_blockquote]:border-l-2 [&_blockquote]:border-accent-green [&_blockquote]:pl-5 [&_blockquote]:text-muted [&_blockquote]:italic",
         // code
         "[&_code]:rounded [&_code]:bg-surface [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-small [&_code]:font-mono",
         "[&_pre]:overflow-x-auto [&_pre]:rounded-lg [&_pre]:border [&_pre]:border-hairline [&_pre]:bg-surface [&_pre]:p-4 [&_pre]:text-small",

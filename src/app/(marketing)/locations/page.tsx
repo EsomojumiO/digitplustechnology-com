@@ -60,7 +60,7 @@ export default function LocationsPage() {
                 </Badge>
                 <h2 className="text-h3 text-text">{loc.city}</h2>
                 <p className="text-body text-muted measure">{loc.intro[0]}</p>
-                <span className="mt-2 inline-flex items-center gap-1.5 text-small font-medium text-accent">
+                <span className="mt-2 inline-flex items-center gap-1.5 text-small font-medium text-accent-green">
                   About {loc.city} →
                 </span>
               </Card>

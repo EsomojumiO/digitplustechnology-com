@@ -79,7 +79,7 @@ export default function ContactPage() {
               <div className="flex flex-col">
                 <DetailRow label="Email">
                   <a
-                    className="font-medium text-accent underline decoration-from-font underline-offset-2 hover:text-accent-hover"
+                    className="font-medium text-accent-green underline decoration-from-font underline-offset-2 hover:text-accent-green"
                     href={`mailto:${siteConfig.email}`}
                   >
                     {siteConfig.email}
@@ -87,7 +87,7 @@ export default function ContactPage() {
                 </DetailRow>
                 <DetailRow label="Phone">
                   <a
-                    className="font-medium text-accent underline decoration-from-font underline-offset-2 hover:text-accent-hover"
+                    className="font-medium text-accent-green underline decoration-from-font underline-offset-2 hover:text-accent-green"
                     href={siteConfig.phoneHref}
                   >
                     {siteConfig.phone}
@@ -95,7 +95,7 @@ export default function ContactPage() {
                 </DetailRow>
                 <DetailRow label="WhatsApp">
                   <a
-                    className="font-medium text-accent underline decoration-from-font underline-offset-2 hover:text-accent-hover"
+                    className="font-medium text-accent-green underline decoration-from-font underline-offset-2 hover:text-accent-green"
                     href={siteConfig.whatsapp}
                     target="_blank"
                     rel="noopener noreferrer"

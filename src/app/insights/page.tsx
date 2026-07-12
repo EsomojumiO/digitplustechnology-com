@@ -113,7 +113,7 @@ export default async function InsightsHubPage({
                   <Eyebrow as="span">Featured</Eyebrow>
                   <Badge tone="accent">{featured.category.label}</Badge>
                 </div>
-                <h2 className="text-h2 text-text transition-colors duration-[var(--dur-fast)] group-hover:text-accent">
+                <h2 className="text-h2 text-text transition-colors duration-[var(--dur-fast)] group-hover:text-accent-green">
                   {featured.title}
                 </h2>
                 <p className="text-body-lg text-muted measure">
@@ -147,10 +147,10 @@ export default async function InsightsHubPage({
                 <Link
                   href="/insights"
                   aria-current="page"
-                  className="inline-flex items-center gap-1.5 rounded-full border border-accent bg-accent-subtle px-3.5 py-1.5 text-small font-medium text-accent transition-colors duration-[var(--dur-fast)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-accent-green/40 bg-brand-subtle px-3.5 py-1.5 text-small font-medium text-accent-green transition-colors duration-[var(--dur-fast)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green"
                 >
                   All
-                  <span className="text-caption text-accent/70">
+                  <span className="text-caption text-accent-green/70">
                     {all.length}
                   </span>
                 </Link>

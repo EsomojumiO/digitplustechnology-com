@@ -15,11 +15,13 @@ export const alt = `${siteConfig.name}, ${siteConfig.tagline}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-// Literal brand values mirrored from globals.css (@theme cannot be read here).
-const BRAND = "#20493b"; // Forest Green
-const CREAM = "#f7f1e0"; // Light Orange / cream
-const ACCENT = "#c75334"; // Ember Red
-const MUTED = "#a8c2b3"; // brand-200
+// Literal dark-theme token values mirrored from globals.css (@theme cannot be
+// read here). Matches the shipped canvas/accent, not the retired cream theme.
+const BRAND = "#060707"; // --background, green-tinted near-black canvas
+const CREAM = "#fafafa"; // --text, near-white ink on the dark canvas
+const ACCENT = "#ff8a3d"; // --accent, single orange fill (logo tile + rule)
+const ON_ACCENT = "#060707"; // --accent-foreground, dark label on orange (~8.6:1)
+const MUTED = "rgba(250,250,250,0.62)"; // --text-muted equivalent
 
 export default function OpengraphImage() {
   return new ImageResponse(
@@ -47,7 +49,7 @@ export default function OpengraphImage() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              color: CREAM,
+              color: ON_ACCENT,
               fontSize: "36px",
               fontWeight: 700,
             }}

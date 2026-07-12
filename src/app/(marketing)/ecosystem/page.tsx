@@ -96,7 +96,7 @@ export default function EcosystemPage() {
                     {p.tagline}
                   </span>
                   {p.status === "coming-soon" && (
-                    <span className="inline-flex items-center rounded-full border border-accent/30 bg-accent/10 px-2.5 py-0.5 text-caption font-medium text-accent">
+                    <span className="inline-flex items-center rounded-full border border-accent-green/30 bg-brand-subtle px-2.5 py-0.5 text-caption font-medium text-accent-green">
                       Coming soon
                     </span>
                   )}
@@ -115,7 +115,7 @@ export default function EcosystemPage() {
                   rel="noreferrer noopener"
                   className={cn(
                     "mt-6 inline-flex items-center gap-1.5 text-small font-medium text-text",
-                    "transition-colors duration-[var(--dur-fast)] hover:text-accent",
+                    "transition-colors duration-[var(--dur-fast)] hover:text-accent-green",
                     "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green",
                   )}
                 >
