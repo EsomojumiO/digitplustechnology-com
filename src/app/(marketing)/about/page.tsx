@@ -21,7 +21,7 @@ import { breadcrumbSchema } from "@/lib/seo/schema";
 export const metadata: Metadata = {
   title: "About Digitplus, a Nigerian IT Partner",
   description:
-    "Digitplus Technology Limited is a CAC-registered, Abuja-based B2B IT solutions company operating since 2022, with 50+ enterprise clients across Nigeria.",
+    "Digitplus Technology Limited is a CAC-registered, Abuja-based B2B IT solutions company operating since 2022, serving enterprise and government across Nigeria.",
   alternates: { canonical: "/about" },
 };
 

@@ -2,7 +2,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 export interface StatProps extends React.HTMLAttributes<HTMLDivElement> {
-  /** The headline figure, e.g. "50+". */
+  /** The headline figure, e.g. "8". */
   value: React.ReactNode;
   /** Supporting label, e.g. "Enterprise clients". */
   label: React.ReactNode;

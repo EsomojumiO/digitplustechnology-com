@@ -33,7 +33,7 @@ export const authors: Author[] = [
     bio: "Articles from the Digitplus Editorial Team are written and reviewed by our procurement, infrastructure, and managed-services practitioners. Digitplus Technology Limited is a CAC-registered Nigerian IT solutions company operating since 2022, delivering to enterprises, government, banks, hospitals, and schools across Abuja, Lagos, and Port Harcourt.",
     credentials: [
       "Enterprise IT delivery since 2022",
-      "50+ enterprise & public-sector clients",
+      "Enterprise & public-sector clients",
       "Authorised partner channels",
       "Abuja • Lagos • Port Harcourt",
     ],

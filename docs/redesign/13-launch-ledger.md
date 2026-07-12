@@ -56,8 +56,8 @@ Nothing here blocks the build; each ships with a clearly-labelled placeholder.
 ### A. Client inputs (content/assets)
 | # | Item | Owner | What unblocks it | Ref |
 |---|---|---|---|---|
-| H1 | **Real testimonials** — 3 illustrative quotes render as attributed social proof | Client | Supply real, attributable, client-approved quotes (do NOT polish placeholders to sound credible) | C13, BLOCKERS #3 |
-| H2 | **"50+ enterprise clients" figure** unverified | Client | Confirm or correct the number | C14, BLOCKERS |
+| H1 | **Real testimonials** — now **safe role-based placeholders** (realistic quotes, no invented person/company names; marked `// PLACEHOLDER`, listed in `PLACEHOLDERS.md`) | Client | Supply real, attributable, client-approved quotes (do NOT polish placeholders to sound credible) | C13, BLOCKERS #3 |
+| H2 | **"50+ enterprise clients"** — **RESOLVED:** unverifiable claim removed; stats tile now the verifiable "8 · Industries served"; about/author prose rephrased | Client (optional) | Supply a *verified* client count to add it back as a stat | C14 |
 | H3 | **Report data** — "key findings" on the 2026 report are illustrative under a "What the data shows" heading | Client | Provide real survey/portfolio data before it is cited; or soften the framing | C15, BLOCKERS #6/#10 |
 | H4 | **Reseller authorisation** per partner logo (Microsoft, HP, Dell, Cisco, Lenovo, Fortinet) | Client + Legal | Written authorisation before public use of each brand mark | BLOCKERS #2/#9 |
 | H5 | **Legal sign-off** on Privacy & Terms (currently "DRAFT — counsel review required") | Client's counsel | Counsel review + final copy | BLOCKERS #7 |
