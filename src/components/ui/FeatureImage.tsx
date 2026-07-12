@@ -66,7 +66,7 @@ export function FeatureImage({
       {label ? (
         <span
           aria-hidden="true"
-          className="absolute bottom-2.5 left-3 font-mono text-[11px] uppercase tracking-[0.14em] text-white/50"
+          className="absolute bottom-2.5 left-3 font-mono text-caption uppercase tracking-[0.14em] text-white/50"
         >
           {label}
         </span>

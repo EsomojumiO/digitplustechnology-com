@@ -27,15 +27,15 @@ export function Testimonial({
       {...props}
     >
       {/* Quote sits in the BODY face at reading scale — not display scale. */}
-      <blockquote className="text-[19px] leading-[1.6] text-text/80 measure-wide">
+      <blockquote className="text-body-lg leading-[1.6] text-text/80 measure-wide">
         <span aria-hidden="true">&ldquo;</span>
         {quote}
         <span aria-hidden="true">&rdquo;</span>
       </blockquote>
       <figcaption className="flex flex-col gap-0.5">
-        <span className="text-[14px] font-medium text-text">{author}</span>
+        <span className="text-small font-medium text-text">{author}</span>
         {attribution ? (
-          <span className="text-[13px] text-faint">{attribution}</span>
+          <span className="text-small text-faint">{attribution}</span>
         ) : null}
       </figcaption>
     </figure>
