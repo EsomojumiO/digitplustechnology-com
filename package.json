@@ -13,6 +13,9 @@
   },
   "dependencies": {
     "clsx": "^2.1.1",
+    "embla-carousel-autoplay": "^8.6.0",
+    "embla-carousel-fade": "^8.6.0",
+    "embla-carousel-react": "^8.6.0",
     "framer-motion": "^12.42.2",
     "gray-matter": "^4.0.3",
     "lenis": "^1.3.25",

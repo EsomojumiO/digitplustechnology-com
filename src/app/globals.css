@@ -499,16 +499,17 @@
   /* Hero carousel progress bar — the active bar fills orange->green over the 6s
      dwell (compositor-only scaleX), doubling as a timer. Paused via inline
      animation-play-state on hover/focus; static full under reduced motion. */
-  /* Solid orange fill on a #d2d2d7 track. Was an orange->green gradient, which
-     broke both "orange is a fill, never an ink" and the one-hue-per-element
-     restraint. The indicator IS the timer, so orange (the conversion colour)
-     is wrong as ink but right as this small fill — it's the only fill here. */
-  .hero-progress-fill {
+  /* Hero carousel dwell timer — the active progress bar fills left-to-right over
+     the 6s dwell (compositor-only scaleX). WHITE, because it sits on the hero's
+     scrimmed photo, not on the light canvas — this is inside the hero-only
+     scrim exception, so the usual "orange is a fill" reasoning doesn't apply;
+     the bar has to read against a dark image, and white does. Restarts each
+     slide via a React key; static full under reduced motion. */
+  .hero-bar-fill {
     transform-origin: left center;
-    background: var(--accent);
-    animation: hero-progress 6000ms linear forwards;
+    animation: hero-bar 6000ms linear forwards;
   }
-  @keyframes hero-progress {
+  @keyframes hero-bar {
     from {
       transform: scaleX(0);
     }
@@ -517,7 +518,7 @@
     }
   }
   @media (prefers-reduced-motion: reduce) {
-    .hero-progress-fill {
+    .hero-bar-fill {
       animation: none;
       transform: scaleX(1);
     }

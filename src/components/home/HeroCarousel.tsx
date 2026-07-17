@@ -4,189 +4,300 @@ import * as React from "react";
 import Image from "next/image";
 import { Link } from "next-view-transitions";
 import { useReducedMotion } from "framer-motion";
+import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
+import Fade from "embla-carousel-fade";
 import { cn } from "@/lib/utils";
 
 /**
- * HeroCarousel — full-height crossfade carousel for the home hero image zone.
+ * HeroCarousel — full-bleed overlay hero. Edge-to-edge auto-rotating photos with
+ * the headline ON the image over a gradient scrim.
  *
- * Crossfade + slow Ken Burns (no sliding). One image at a time, edge-to-edge,
- * rounded-3xl, no frame, photo full-colour. Caption (green eyebrow +
- * one line) is a named link to the service; 5 hairline progress bars double as
- * the dwell timer (fill orange->green). Pauses on hover/focus; arrow keys when
- * focused; reduced-motion → static first slide, indicators still clickable.
+ * SCRIM-ON-LIGHT EXCEPTION: this is the ONE place on the site where text sits on
+ * a darkened photo. Everywhere else photos run bright and full-colour with no
+ * scrim. The conformance gate encodes that — a scrim anywhere but here is drift.
  *
- * Interim stock imagery — swap the client's dedicated photos by editing SLIDES.
+ * Contrast: the overlaid text is verified per slide against the BRIGHTEST pixel
+ * in its box (worst case), not an average — the scrim only guarantees the floor
+ * if it's actually dark enough behind the text, and a bright image area can
+ * defeat a weak scrim. See scripts/hero-contrast.mjs.
+ *
+ * Engine: embla (autoplay + fade + keyboard + drag). The reveal lesson applies
+ * to slide one's text — it's above the fold by definition, so its entrance is
+ * gated on a `mounted` flag that flips AFTER first paint, ensuring it animates
+ * from the hidden state instead of appearing already-in.
+ *
+ * Reduced motion: no autoplay, no Ken Burns, fade duration 0 (instant swap).
+ * First slide is static; the indicators still work.
  */
-const SLIDES = [
+
+type Slide = {
+  src: string;
+  alt: string;
+  eyebrow: string;
+  headline: string;
+  support: string;
+  cta: { label: string; href: string; conversion?: boolean };
+};
+
+/* Images follow the services-over-faces policy: infrastructure and service
+   context, no posed portraits (hero-engineer.jpg — the arms-folded shot — is
+   deliberately absent; it's flagged for removal in the imagery pass). Copy here
+   is new and logged in docs/redesign/16-copy-refinement.md for the copy audit. */
+const SLIDES: Slide[] = [
   {
-    src: "/images/hero/hero-team-lagos.jpg",
-    eyebrow: "Managed IT · 01",
-    caption: "IT teams that run yours",
-    href: "/services/managed-services",
-    alt: "Managed IT services",
+    src: "/images/services/managed-services.jpg",
+    alt: "A network operations screen showing infrastructure monitoring",
+    eyebrow: "Managed IT",
+    headline: "IT that answers the phone",
+    support:
+      "Monitoring, patching and support for organisations that can't afford downtime.",
+    cta: { label: "Explore managed IT", href: "/services/managed-services" },
+  },
+  {
+    src: "/images/services/deployment-implementation.jpg",
+    alt: "An engineer installing and configuring rack hardware",
+    eyebrow: "Deployment & Implementation",
+    headline: "One team, every site",
+    support:
+      "Supply, cabling, configuration and handover — Abuja, Lagos, Port Harcourt.",
+    cta: { label: "See how we deploy", href: "/services/deployment-implementation" },
+  },
+  {
+    src: "/images/services/it-procurement.jpg",
+    alt: "Boxed IT hardware and equipment in a stockroom",
+    eyebrow: "IT Procurement",
+    headline: "Genuine hardware, documented",
+    support: "Authorised channels, OEM warranties, audit-ready records.",
+    cta: { label: "Explore procurement", href: "/services/it-procurement" },
+  },
+  {
+    src: "/images/services/infrastructure-solutions.jpg",
+    alt: "Structured network cabling in a server room",
+    eyebrow: "Infrastructure",
+    headline: "Networks built once, done right",
+    support:
+      "Structured cabling and server rooms sized for Nigerian power realities.",
+    cta: { label: "Explore infrastructure", href: "/services/infrastructure-solutions" },
   },
   {
     src: "/images/hero/hero-datacenter.jpg",
-    eyebrow: "Data centre · 02",
-    caption: "Infrastructure, kept alive",
-    href: "/services/hardware-supply",
-    alt: "Data-centre hardware supply",
+    alt: "Data-centre racks and infrastructure",
+    eyebrow: "Digitplus",
+    headline: "One partner, plan to support",
+    support:
+      "Procurement, infrastructure, deployment and managed services, from one partner.",
+    // THE conversion slide — the only orange fill in the hero.
+    cta: { label: "Get a proposal", href: "/contact", conversion: true },
   },
-  {
-    src: "/images/hero/hero-cabling.jpg",
-    eyebrow: "Networking · 03",
-    caption: "Structured cabling, done once",
-    href: "/services/infrastructure-solutions",
-    alt: "Infrastructure and networking",
-  },
-  {
-    src: "/images/hero/hero-engineer.jpg",
-    eyebrow: "Support · 04",
-    caption: "Engineers on call, nationwide",
-    href: "/services/deployment-implementation",
-    alt: "Deployment and support engineers",
-  },
-  {
-    src: "/images/hero/hero-enterprise-user.jpg",
-    eyebrow: "Workplace · 05",
-    caption: "Devices your people rely on",
-    href: "/industries/enterprise",
-    alt: "Enterprise workplace",
-  },
-] as const;
+];
 
 const DWELL = 6000;
 
 export function HeroCarousel() {
   const reduce = useReducedMotion();
-  const [active, setActive] = React.useState(0);
-  const [paused, setPaused] = React.useState(false);
-  const rootRef = React.useRef<HTMLDivElement>(null);
-
-  const go = React.useCallback(
-    (i: number) => setActive((i + SLIDES.length) % SLIDES.length),
-    [],
+  const autoplay = React.useRef(
+    Autoplay({ delay: DWELL, stopOnInteraction: false, stopOnMouseEnter: true }),
   );
 
-  // Auto-rotation — disabled under reduced motion or while paused.
+  const plugins = reduce ? [Fade()] : [Fade(), autoplay.current];
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    { loop: true, duration: reduce ? 0 : 32, watchDrag: !reduce },
+    plugins,
+  );
+
+  const [selected, setSelected] = React.useState(0);
+  const [mounted, setMounted] = React.useState(false);
+
   React.useEffect(() => {
-    if (reduce || paused) return;
-    const t = setTimeout(
-      () => setActive((a) => (a + 1) % SLIDES.length),
-      DWELL,
+    if (!emblaApi) return;
+    const onSelect = () => setSelected(emblaApi.selectedScrollSnap());
+    emblaApi.on("select", onSelect);
+    onSelect();
+    // Paint-from-hidden for slide one's text (above the fold by definition):
+    // flip `mounted` two frames after mount so the entrance transition has a
+    // hidden state to animate from, instead of rendering already-revealed.
+    const id = requestAnimationFrame(() =>
+      requestAnimationFrame(() => setMounted(true)),
     );
-    return () => clearTimeout(t);
-  }, [active, paused, reduce]);
+    return () => {
+      emblaApi.off("select", onSelect);
+      cancelAnimationFrame(id);
+    };
+  }, [emblaApi]);
+
+  const go = React.useCallback((i: number) => emblaApi?.scrollTo(i), [emblaApi]);
 
   const onKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "ArrowRight") {
       e.preventDefault();
-      go(active + 1);
+      emblaApi?.scrollNext();
     } else if (e.key === "ArrowLeft") {
       e.preventDefault();
-      go(active - 1);
+      emblaApi?.scrollPrev();
     }
   };
 
-  const current = SLIDES[active];
+  // Pause autoplay while any control inside the hero has focus (keyboard users).
+  const pause = () => autoplay.current?.stop();
+  const resume = () => {
+    if (!reduce) autoplay.current?.play();
+  };
 
   return (
-    <div
-      ref={rootRef}
-      role="group"
+    <section
       aria-roledescription="carousel"
-      aria-label="What we do"
+      aria-label="What Digitplus does"
       aria-live="off"
       onKeyDown={onKeyDown}
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onFocusCapture={() => setPaused(true)}
+      onFocusCapture={pause}
       onBlurCapture={(e) => {
-        if (!rootRef.current?.contains(e.relatedTarget as Node))
-          setPaused(false);
+        if (!e.currentTarget.contains(e.relatedTarget as Node)) resume();
       }}
-      // White surround, no border, larger radius: on white the photo needs no
-      // frame to sit in the page — the hairline was there to separate it from
-      // near-black.
-      // 4:3 on phones (portrait-ish reads better in a narrow column), 16:9 from
-      // sm up now that it spans the full container rather than a 7-of-12 slot.
-      className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl bg-surface sm:aspect-[16/9]"
+      className="relative h-[78vh] min-h-[560px] w-full overflow-hidden bg-[#1d1d1f]"
     >
-      {SLIDES.map((s, i) => {
-        const isActive = i === active;
-        return (
-          <div
-            key={s.src}
-            role="group"
-            aria-roledescription="slide"
-            aria-label={`${i + 1} of ${SLIDES.length}`}
-            aria-hidden={!isActive}
-            className={cn(
-              "absolute inset-0 transition-opacity duration-[900ms] ease-[var(--ease-out)]",
-              isActive ? "z-10 opacity-100" : "z-0 opacity-0",
-            )}
-          >
-            <Image
-              src={s.src}
-              alt={s.alt}
-              fill
-              priority={i === 0}
-              sizes="(min-width: 1024px) 46vw, 100vw"
-              className="object-cover"
-              style={{
-                // Ken Burns: softened to 1.03 — 1.06 reads as a zoom, not drift.
-                transform: isActive && !reduce ? "scale(1.03)" : "scale(1)",
-                transition: isActive && !reduce ? "transform 6000ms linear" : "none",
-              }}
-            />
-            {/* Soft WHITE gradient at the image base, sized to the caption. The
-                dark theme veiled the whole frame in near-black; on white the
-                photo runs full-colour and only the caption zone is lifted. */}
-            <div
-              className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white via-white/70 to-transparent"
-              aria-hidden="true"
-            />
-          </div>
-        );
-      })}
+      <div ref={emblaRef} className="h-full overflow-hidden">
+        <div className="flex h-full">
+          {SLIDES.map((s, i) => {
+            const isActive = i === selected;
+            return (
+              <div
+                key={s.src}
+                className="relative h-full min-w-0 flex-[0_0_100%]"
+                role="group"
+                aria-roledescription="slide"
+                aria-label={`${i + 1} of ${SLIDES.length}: ${s.eyebrow}`}
+              >
+                <Image
+                  src={s.src}
+                  alt={s.alt}
+                  fill
+                  priority={i === 0}
+                  sizes="100vw"
+                  className="object-cover"
+                  style={{
+                    // Ken Burns 1.03 over the dwell, active slide only.
+                    transform: isActive && !reduce ? "scale(1.03)" : "scale(1)",
+                    transition:
+                      isActive && !reduce ? `transform ${DWELL}ms linear` : "none",
+                  }}
+                />
+                {/* Scrim — bottom-left weighted. Layered: a bottom anchor
+                    guarantees the text-zone floor, the diagonal shapes the rest.
+                    Verified per slide against the brightest pixel behind text. */}
+                <div
+                  aria-hidden="true"
+                  // z-[1] above the image ON PURPOSE: the <Image> carries a
+                  // `transform` (Ken Burns, and scale(1) even under reduce),
+                  // which establishes a stacking context and can paint the photo
+                  // OVER a z-auto scrim — that's why bright image pixels bled
+                  // through and failed contrast. Explicit z ordering fixes it.
+                  className="absolute inset-0 z-[1]"
+                  style={{
+                    // Strong to ~50% up so the WHOLE text block sits on dark
+                    // pixels, then fades to show the upper photo. The floor is
+                    // set by the green eyebrow, not white text: green (lum ~0.42)
+                    // needs bg lum ≤ ~0.05 for 4.5:1, which takes ~0.8 black over
+                    // a worst-case white image pixel — so ~0.82 here. Verified
+                    // per slide by scripts/hero-contrast.mjs (worst-case pixel).
+                    background:
+                      "linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.85) 46%, rgba(0,0,0,0.4) 64%, transparent 82%), linear-gradient(to top right, rgba(0,0,0,0.5), rgba(0,0,0,0.1) 55%, transparent)",
+                  }}
+                />
 
-      {/* Caption — crossfades with the slide, links to the service */}
-      <Link
-        href={current.href}
-        className="absolute bottom-4 left-4 z-20 max-w-[80%] rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green"
-      >
-        <span className="text-caption block font-semibold text-accent-green">
-          {current.eyebrow}
-        </span>
-        <span className="mt-1 block font-display text-h4 font-semibold text-text">
-          {current.caption}
-        </span>
-      </Link>
+                {/* Overlay text — bottom-left */}
+                <div className="absolute inset-x-0 bottom-0 z-10">
+                  <div className="mx-auto w-full max-w-6xl px-5 pb-14 sm:px-8 sm:pb-20">
+                    <div
+                      className={cn(
+                        "flex max-w-[46rem] flex-col items-start gap-4 transition-[opacity,transform] duration-[var(--dur-entrance)] ease-[var(--ease-out)]",
+                        // Entrance from hidden — plays once `mounted` flips
+                        // post-paint. Non-active slides stay hidden (they fade
+                        // under the active one anyway).
+                        mounted && isActive
+                          ? "translate-y-0 opacity-100"
+                          : "translate-y-3 opacity-0",
+                      )}
+                    >
+                      <p className="text-caption font-semibold text-[#5fbf94]">
+                        {s.eyebrow}
+                      </p>
+                      {/* h1 (Inter Display size), not the full display scale:
+                          the display size made the block ~430px tall, pushing the
+                          eyebrow up into the transparent part of the scrim. h1
+                          keeps the block short enough to sit entirely on dark. */}
+                      {i === 0 ? (
+                        <h1 className="text-h1 max-w-[18ch] text-white">
+                          {s.headline}
+                        </h1>
+                      ) : (
+                        <p className="text-h1 max-w-[18ch] font-bold tracking-[-0.02em] text-white">
+                          {s.headline}
+                        </p>
+                      )}
+                      <p className="text-body-lg max-w-[38ch] text-white/85">
+                        {s.support}
+                      </p>
+                      <div className="mt-2">
+                        {s.cta.conversion ? (
+                          <Link
+                            href={s.cta.href}
+                            tabIndex={isActive ? 0 : -1}
+                            className="inline-flex items-center rounded-lg bg-accent px-6 py-3 text-body font-semibold text-accent-foreground transition-colors duration-[var(--dur-fast)] hover:bg-accent-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                          >
+                            {s.cta.label}
+                          </Link>
+                        ) : (
+                          <Link
+                            href={s.cta.href}
+                            tabIndex={isActive ? 0 : -1}
+                            className="inline-flex items-center gap-1.5 rounded-lg border border-white/60 px-6 py-3 text-body font-semibold text-white transition-colors duration-[var(--dur-fast)] hover:border-white hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                          >
+                            {s.cta.label}
+                            <span aria-hidden="true">→</span>
+                          </Link>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
 
-      {/* Progress bars (bottom-right) — click to jump; active bar is the timer */}
-      <div className="absolute bottom-4 right-4 z-20 flex items-center gap-1.5">
+      {/* Progress bars — TOP-right. White/0.4 track, white fill; the active bar
+          fills over the dwell as a timer (non-reduced), or is simply full for the
+          current slide under reduced motion.
+          Top, not bottom: at 390px the bottom-right bars overlapped the
+          bottom-left CTA button (the CTA is ~226px and the bars ~180px — they
+          can't both sit at the bottom of a narrow screen). Top-right clears the
+          text column at every width. */}
+      <div className="absolute right-5 top-6 z-20 flex items-center gap-1.5 sm:right-8 sm:top-8">
         {SLIDES.map((s, i) => (
           <button
             key={s.src}
             type="button"
             onClick={() => go(i)}
-            aria-label={`Show slide ${i + 1}: ${s.caption}`}
-            aria-current={i === active ? "true" : undefined}
-            className="relative h-1 w-7 overflow-hidden rounded-full bg-hairline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green"
+            aria-label={`Show slide ${i + 1}: ${s.eyebrow}`}
+            aria-current={i === selected ? "true" : undefined}
+            className="relative h-1 w-8 overflow-hidden rounded-full bg-white/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           >
-            {i === active ? (
-              <span
-                key={active}
-                className="hero-progress-fill absolute inset-0"
-                style={{ animationPlayState: paused ? "paused" : "running" }}
-              />
-            ) : i < active ? (
-              <span className="absolute inset-0 bg-[color-mix(in_oklab,var(--accent-green)_55%,transparent)]" />
+            {i === selected ? (
+              reduce ? (
+                <span className="absolute inset-0 bg-white" />
+              ) : (
+                <span
+                  key={selected}
+                  className="hero-bar-fill absolute inset-0 bg-white"
+                />
+              )
             ) : null}
           </button>
         ))}
       </div>
-    </div>
+    </section>
   );
 }
 

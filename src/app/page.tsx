@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import {
-  Container,
   Section,
   SectionHeading,
   Grid,
@@ -63,44 +62,11 @@ export default function HomePage() {
 
   return (
     <>
-      {/* Hero — centered headline over a wide image band.
-          Was text-left in a 5-of-12 column with the carousel alongside. In that
-          well the headline broke to FOUR lines, which is a wall, not a hero.
-          Full width lets it set in two and matches the centered-headline
-          migration; the carousel drops beneath as home's big image moment. */}
-      <section className="relative pt-16 pb-16 sm:pt-20 sm:pb-24">
-        <Container>
-          <FadeIn className="mx-auto flex max-w-4xl flex-col items-center gap-6 text-center">
-            <Eyebrow>Enterprise IT · Nigeria</Eyebrow>
-            <h1 className="text-display max-w-[22ch] text-text">
-              Enterprise IT solutions, built to just work
-            </h1>
-            <p className="text-body-lg measure text-muted">
-              One accountable partner for the full IT lifecycle — procurement,
-              infrastructure, deployment and managed services — for enterprises,
-              government and banks across Nigeria.
-            </p>
-            <div className="mt-2 flex flex-wrap items-center justify-center gap-3">
-              <Magnetic strength={6}>
-                <Button href="/contact" size="lg">
-                  Get a quote
-                </Button>
-              </Magnetic>
-              <Button href="/approach" size="lg" variant="secondary">
-                See how we work
-              </Button>
-            </div>
-            <p className="text-small mt-1 text-muted">
-              Abuja • Lagos • Port Harcourt
-            </p>
-          </FadeIn>
-        </Container>
-        <Container className="mt-14 sm:mt-16">
-          <FadeIn>
-            <HeroCarousel />
-          </FadeIn>
-        </Container>
-      </section>
+      {/* Hero — full-bleed overlay carousel. The headline sits ON the image now
+          (the split text/carousel hero is gone). The h1 lives on slide one; the
+          other slides' headlines are styled paragraphs so the page keeps exactly
+          one h1. */}
+      <HeroCarousel />
 
       {/* Trust strip, partner logos on a slow seamless marquee */}
       <Section tone="muted" spacing="sm">
