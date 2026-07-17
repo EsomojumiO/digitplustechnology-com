@@ -1,16 +1,44 @@
 # Page Imagery Shortlist (Polish 6)
 
-One accent image per page (two max on About), same treatment as the home hero:
-local file, `.cover-dark` scrim, `saturate(0.85)`, hairline border, mono
-micro-label. **Components are already wired with a graceful fallback** — until a
-file exists the slot shows a hairline placeholder, so the site never breaks.
+One accent image per page (two max on About). **Treatment updated for the
+Apple-light rebuild (2026-07-17):** photos now run **bright and full-colour and
+carry the visual weight** — there is no `.cover-dark` scrim, no
+`saturate(0.85)`, no `brightness(0.92)` and no mono micro-label. All of those
+existed to seat a light photo into a near-black canvas and were deleted in
+Phase 3; on white they invert into a haze over the picture. What remains is the
+container: clipping, a large radius, and a light `#d2d2d7` hairline. Any label
+sits on a soft **white** gradient at the image base, dark-on-light.
 
-## ⚠️ About the photo IDs
-I can't reach the network from here to verify Unsplash IDs, so each row gives **2
-candidate IDs + a search term**. Run the script below; `curl -f` fails loudly on
-a bad ID — for any `FAILED` line, open the search term on unsplash.com, pick a
-free photo (prefer Nigerian photographers for people shots), and swap the ID.
-Then add a line to the matching `CREDITS.json`.
+**Pick bright, full-colour, well-lit frames.** A moody underexposed shot that
+looked good under a scrim will read as a dirty smudge on a white page.
+
+**Components are already wired with a graceful fallback** — until a file exists
+the slot shows a labelled placeholder, so the site never breaks.
+
+## About the photo IDs — now VERIFIED (2026-07-17)
+The original shortlist could not reach the network, so its IDs were unverified
+guesses. **Every ID has now been checked against images.unsplash.com and returns
+HTTP 200.** Findings:
+
+- All 6 services + 8 industries + about IDs were **live** and are unchanged.
+- **All 6 location IDs were fabricated and returned hard 404s.** The prefixes
+  (`photo-1618828665011-…`, `photo-1618828665347-…`) were real; the suffixes
+  (`-0f0f0f0f0f0f`, `-d0e1f0f0f0f0`) were invented. All three cities have been
+  re-sourced from each city's own Unsplash search and verified.
+- `about/team.jpg` was the **same ID** as `technology-advisory` — swapped to the
+  shortlist's candidate B so the two pages don't show an identical photo.
+
+⚠️ **Verified-live is not verified-accurate.** The Abuja and Lagos frames come
+from those cities' Unsplash searches, and the Port Harcourt frame is an aerial
+of a river city from a Rivers State search — but I can't confirm from here that
+each photo actually depicts the city it's filed under, and captioning a photo of
+the wrong city on a real business's location page is a factual claim, not a
+design detail. **Eyeball the three location images before pushing.**
+
+Run `scripts/download-images.sh`. `curl -f` fails loudly on a bad ID — any
+`FAILED` line prints its search term; pick a free photo (prefer Nigerian
+photographers for people shots), swap the ID, re-run. Then add a line to the
+matching `CREDITS.json`.
 
 Expected file paths (what the components look for):
 - Services → `public/images/services/<service-slug>.jpg`
@@ -45,50 +73,32 @@ Expected file paths (what the components look for):
 ### Locations (`public/images/locations/`)
 | City | Subject | Candidate A | Candidate B | Search term |
 |---|---|---|---|---|
-| abuja | Abuja cityscape/landmark | photo-1618828665347-d0e1f0f0f0f0 | photo-1568564264093-1f0f0f0f0f0f | "Abuja Nigeria city" |
-| lagos | Lagos skyline | photo-1618828665011-0f0f0f0f0f0f | photo-1592388748465-0f0f0f0f0f0f | "Lagos Nigeria skyline" |
-| port-harcourt | Port Harcourt / South-South | photo-1590650213165-0f0f0f0f0f0f | photo-1591825729269-0f0f0f0f0f0f | "Port Harcourt Nigeria" |
+| City | Subject | Verified ID (HTTP 200) | Source search | Search term if you want another |
+|---|---|---|---|---|
+| abuja | White arc / architectural landmark | photo-1554457606-ed16c39db884 | unsplash.com/s/photos/abuja | "Abuja Nigeria city" |
+| lagos | Aerial city buildings, daytime | photo-1618828665011-0abd973f7bb8 | unsplash.com/s/photos/lagos-nigeria | "Lagos Nigeria skyline" |
+| port-harcourt | Aerial city with river running through | photo-1704230093731-8dad84d386a9 | unsplash.com/s/photos/rivers-state-nigeria | "Port Harcourt Nigeria aerial" |
 
-> Location IDs above are LOW-confidence placeholders — the city search terms are the reliable path; swap all three.
+> The six original location IDs were fabricated (hard 404). These three are verified live —
+> but **confirm each one actually depicts the right city before pushing**. A Lagos photo on
+> the Abuja page is a factual error on a real business's location page.
 
 ### About (`public/images/about/`, up to 2)
 | File | Subject | Candidate A | Candidate B | Search term |
 |---|---|---|---|---|
-| team.jpg | Nigerian team / office wide | photo-1522071820081-009f0129c71c | photo-1600880292203-757bb62b4baf | "Nigerian tech team office" |
+| team.jpg | Nigerian team / office wide | photo-1600880292203-757bb62b4baf | — | "Nigerian tech team office" |
 
-## Download script (run once, in your terminal)
+> Candidate A (`photo-1522071820081-009f0129c71c`) was dropped: it's the same photo as
+> `services/technology-advisory.jpg`. Both slots would have shown one identical image.
+
+## Download script
+
+`scripts/download-images.sh` — every ID in it is verified live. It creates the
+folders, skips files that already exist, and prints `OK` / `SKIP` / `FAILED` per
+file with a replacement search term on any failure.
+
 ```bash
-cd /Users/esofesola/Developer/digitplustechnology.com
-mkdir -p public/images/services public/images/industries public/images/locations public/images/about
-g() { curl -fL -o "$1" "https://images.unsplash.com/$2?q=80&w=1600&auto=format&fit=crop" && echo "OK  $1" || echo "FAILED  $1  ($2) — swap via search term"; }
-
-# Services
-g public/images/services/it-procurement.jpg          photo-1553413077-190dd305871c
-g public/images/services/hardware-supply.jpg         photo-1591405351990-4726e331f141
-g public/images/services/infrastructure-solutions.jpg photo-1544197150-b99a580bb7a8
-g public/images/services/managed-services.jpg        photo-1551288049-bebda4e38f71
-g public/images/services/technology-advisory.jpg     photo-1522071820081-009f0129c71c
-g public/images/services/deployment-implementation.jpg photo-1581092160562-40aa08e78837
-
-# Industries
-g public/images/industries/government.jpg                 photo-1564013799919-ab600027ffc6
-g public/images/industries/banking-financial-services.jpg photo-1541354329998-f4d9a9f9297f
-g public/images/industries/enterprise.jpg                 photo-1497366216548-37526070297c
-g public/images/industries/sme.jpg                        photo-1600880292089-90a7e086ee0c
-g public/images/industries/healthcare.jpg                 photo-1519494026892-80bbd2d6fd0d
-g public/images/industries/education.jpg                  photo-1523240795612-9a054b0db644
-g public/images/industries/oil-gas-energy.jpg             photo-1518709268805-4e9042af9f23
-g public/images/industries/logistics-manufacturing.jpg    photo-1565891741441-64926e441838
-
-# Locations (verify all three via search term)
-g public/images/locations/abuja.jpg          photo-1618828665347-d0e1f0f0f0f0
-g public/images/locations/lagos.jpg          photo-1618828665011-0f0f0f0f0f0f
-g public/images/locations/port-harcourt.jpg  photo-1590650213165-0f0f0f0f0f0f
-
-# About
-g public/images/about/team.jpg               photo-1522071820081-009f0129c71c
-
-echo "Review any FAILED lines above and swap IDs via the search terms."
+bash scripts/download-images.sh
 ```
 
 After downloading, add a `CREDITS.json` in each folder (photographer + Unsplash
