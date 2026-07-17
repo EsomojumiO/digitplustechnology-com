@@ -76,6 +76,8 @@
   --accent: #ad4527; /* ORANGE (Ember-600) — single primary CTA fill per viewport */
   --accent-hover: #8c3820; /* Ember-700 — DARKEN on hover (light-canvas idiom) */
   --accent-foreground: #ffffff; /* white label on orange — 5.74:1 */
+  --accent-ink: #8c3820; /* Ember-700 — the ONLY orange allowed as ink, and only
+                            for a chevron CTA link. 7.77:1 on white. Never body. */
   --accent-green: #2d5d49; /* GREEN (Forest-500) — 7.57:1 white / 6.95:1 on #f5f5f7.
                               NOT Forest-600: it passes AAA but reads near-black at
                               accent sizes, so the accent stops reading as green. */
@@ -133,6 +135,7 @@
   --color-accent: var(--accent);
   --color-accent-hover: var(--accent-hover);
   --color-accent-foreground: var(--accent-foreground);
+  --color-accent-ink: var(--accent-ink);
   --color-accent-green: var(--accent-green);
   --color-accent-text: var(--accent-text);
   --color-accent-subtle: var(--accent-subtle);

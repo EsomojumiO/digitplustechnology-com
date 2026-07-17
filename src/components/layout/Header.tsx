@@ -485,9 +485,23 @@ export function Header() {
 
         <div className="flex items-center gap-2">
           <ContactMenu />
-          <Button href="/contact" size="sm" className="hidden sm:inline-flex">
+          {/* Orange chevron LINK, not an orange fill. The header is sticky, so
+              an orange pill here put a second fill in every viewport that also
+              showed a page CTA — breaking "one orange fill per viewport". The
+              brief's own prescription for repeat CTA placements is an orange
+              text-link with a chevron, and it lets the page's real CTA own the
+              only fill on screen. Ember-700 ink at 7.77:1. */}
+          <Link
+            href="/contact"
+            className={cn(
+              "hidden items-center gap-1 rounded-md px-3 py-2 text-small font-semibold sm:inline-flex",
+              "text-accent-ink transition-colors duration-[var(--dur-fast)] ease-[var(--ease-out)]",
+              "hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green",
+            )}
+          >
             Get a quote
-          </Button>
+            <span aria-hidden="true">›</span>
+          </Link>
 
           <button
             type="button"

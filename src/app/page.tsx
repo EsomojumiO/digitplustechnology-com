@@ -62,43 +62,42 @@ export default function HomePage() {
 
   return (
     <>
-      {/* Hero — text left, 5-image bento collage right. The photographs carry
-          the visual weight; nothing sits behind them. */}
-      <section className="relative overflow-hidden pt-20 pb-16 sm:pt-24 sm:pb-24">
-        <Container className="relative z-10">
-          <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-10">
-            {/* Text zone */}
-            <div className="relative lg:col-span-5">
-              <div className="flex flex-col gap-6">
-                <Eyebrow>Enterprise IT · Nigeria</Eyebrow>
-                <h1 className="text-display max-w-[16ch] text-text">
-                  Enterprise IT solutions, built to just work
-                </h1>
-                <p className="text-body-lg measure text-muted">
-                  One accountable partner for the full IT lifecycle —
-                  procurement, infrastructure, deployment and managed services —
-                  for enterprises, government and banks across Nigeria.
-                </p>
-                <div className="mt-2 flex flex-wrap items-center gap-3">
-                  <Magnetic strength={6}>
-                    <Button href="/contact" size="lg">
-                      Get a quote
-                    </Button>
-                  </Magnetic>
-                  <Button href="/approach" size="lg" variant="secondary">
-                    See how we work
-                  </Button>
-                </div>
-                <p className="text-small mt-1 text-muted">
-                  Abuja • Lagos • Port Harcourt
-                </p>
-              </div>
+      {/* Hero — centered headline over a wide image band.
+          Was text-left in a 5-of-12 column with the carousel alongside. In that
+          well the headline broke to FOUR lines, which is a wall, not a hero.
+          Full width lets it set in two and matches the centered-headline
+          migration; the carousel drops beneath as home's big image moment. */}
+      <section className="relative pt-16 pb-16 sm:pt-20 sm:pb-24">
+        <Container>
+          <FadeIn className="mx-auto flex max-w-4xl flex-col items-center gap-6 text-center">
+            <Eyebrow>Enterprise IT · Nigeria</Eyebrow>
+            <h1 className="text-display max-w-[22ch] text-text">
+              Enterprise IT solutions, built to just work
+            </h1>
+            <p className="text-body-lg measure text-muted">
+              One accountable partner for the full IT lifecycle — procurement,
+              infrastructure, deployment and managed services — for enterprises,
+              government and banks across Nigeria.
+            </p>
+            <div className="mt-2 flex flex-wrap items-center justify-center gap-3">
+              <Magnetic strength={6}>
+                <Button href="/contact" size="lg">
+                  Get a quote
+                </Button>
+              </Magnetic>
+              <Button href="/approach" size="lg" variant="secondary">
+                See how we work
+              </Button>
             </div>
-            {/* Carousel zone */}
-            <div className="lg:col-span-7">
-              <HeroCarousel />
-            </div>
-          </div>
+            <p className="text-small mt-1 text-muted">
+              Abuja • Lagos • Port Harcourt
+            </p>
+          </FadeIn>
+        </Container>
+        <Container className="mt-14 sm:mt-16">
+          <FadeIn>
+            <HeroCarousel />
+          </FadeIn>
         </Container>
       </section>
 

@@ -108,7 +108,9 @@ export function HeroCarousel() {
       // White surround, no border, larger radius: on white the photo needs no
       // frame to sit in the page — the hairline was there to separate it from
       // near-black.
-      className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl bg-surface lg:aspect-[7/6]"
+      // 4:3 on phones (portrait-ish reads better in a narrow column), 16:9 from
+      // sm up now that it spans the full container rather than a 7-of-12 slot.
+      className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl bg-surface sm:aspect-[16/9]"
     >
       {SLIDES.map((s, i) => {
         const isActive = i === active;
