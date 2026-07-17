@@ -28,7 +28,7 @@ export function AuthorBio({ author }: { author: Author }) {
         </div>
         <div className="flex flex-col gap-2">
           <div>
-            <p className="font-mono text-caption uppercase tracking-[0.14em] text-accent-green">
+            <p className="text-caption font-semibold text-accent-green">
               Written &amp; reviewed by
             </p>
             <p className="text-h4 text-text">{author.name}</p>

@@ -22,10 +22,15 @@ const tones: Record<SectionTone, string> = {
   inverse: "bg-brand text-brand-foreground",
 };
 
+/* Spec: 120–160px desktop, 64–80px mobile. The dark theme ran 64/96 for `md`,
+   which on white reads as crowded — separation now comes from whitespace and
+   background alternation alone, so the air IS the design, not padding around it.
+   `sm` stays deliberately tighter: it's for incidental bands (the trust strip),
+   not for content sections. */
 const spacings = {
-  sm: "py-12 sm:py-16",
-  md: "py-16 sm:py-24",
-  lg: "py-24 sm:py-32",
+  sm: "py-12 sm:py-20", // 48 / 80
+  md: "py-16 sm:py-32", // 64 / 128
+  lg: "py-20 sm:py-40", // 80 / 160
 };
 
 /**

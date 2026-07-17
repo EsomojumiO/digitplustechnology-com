@@ -19,7 +19,7 @@ export function WhyPillar({ label, beat, description }: WhyPillarProps) {
   return (
     <Card padding="lg" className="flex h-full flex-col gap-3">
       <p className="flex flex-wrap items-baseline gap-x-2 text-h4 leading-snug text-text">
-        <span className="font-mono text-caption font-medium uppercase tracking-[0.16em] text-accent-green">
+        <span className="text-caption font-semibold text-accent-green">
           {label}
         </span>
         <span className="text-muted" aria-hidden="true">

@@ -250,7 +250,7 @@ export default async function ServiceDetailPage({
                   <span className="text-body-lg text-text transition-colors group-hover:text-accent-green">
                     {a.title}
                   </span>
-                  <span className="shrink-0 font-mono text-caption uppercase tracking-[0.1em] text-muted">
+                  <span className="shrink-0 text-caption font-medium text-muted">
                     {a.readingTime.text}
                   </span>
                 </Link>

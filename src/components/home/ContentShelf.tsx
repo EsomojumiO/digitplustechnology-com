@@ -52,7 +52,7 @@ export function InsightShelfCard({
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-hairline" aria-hidden="true" />
       </div>
       <div className="flex flex-1 flex-col gap-3 p-6">
-        <div className="flex items-center gap-3 font-mono text-caption uppercase tracking-[0.1em] text-muted">
+        <div className="flex items-center gap-3 text-caption text-muted">
           <Badge tone="accent">{categoryLabel}</Badge>
           <span>{readingTime}</span>
         </div>

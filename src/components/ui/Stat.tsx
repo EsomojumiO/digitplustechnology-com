@@ -25,7 +25,7 @@ export function Stat({
       <span className="font-mono text-[clamp(2.25rem,1.8rem+2vw,3rem)] font-medium leading-none tracking-[-0.03em] tabular-nums text-text">
         {value}
       </span>
-      <span className="font-mono text-caption font-medium uppercase tracking-[0.14em] text-muted">
+      <span className="text-caption font-medium text-muted">
         {label}
       </span>
       {description ? (
