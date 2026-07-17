@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { Card, Badge } from "@/components/ui";
 import type { ArticleMeta } from "@/lib/content";
 import { formatDate, isoDate } from "./format";

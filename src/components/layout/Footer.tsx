@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { Container } from "@/components/ui";
 import { cn } from "@/lib/utils";
 import { siteConfig, footerNav } from "@/lib/site";
@@ -99,7 +99,7 @@ export function Footer() {
               </p>
             </address>
 
-            <p className="mt-4 text-caption text-brand-200">
+            <p className="mt-4 text-caption text-muted">
               Serving {siteConfig.coverage.join(" • ")}
             </p>
           </div>
@@ -111,7 +111,7 @@ export function Footer() {
           >
             {footerNav.map((col) => (
               <div key={col.title}>
-                <h3 className="text-caption font-semibold uppercase tracking-wide text-brand-200">
+                <h3 className="text-caption font-semibold text-text">
                   {col.title}
                 </h3>
                 <ul className="mt-4 space-y-2.5">
@@ -161,7 +161,7 @@ export function Footer() {
                 placeholder="you@company.com"
                 className={cn(
                   "h-11 w-full rounded-md border border-hairline bg-background px-3.5 text-body text-text",
-                  "placeholder:text-brand-200",
+                  "placeholder:text-muted",
                   "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green",
                 )}
               />
@@ -181,7 +181,7 @@ export function Footer() {
         </div>
 
         {/* Legal row */}
-        <div className="mt-12 flex flex-col gap-4 border-t border-hairline pt-6 text-caption text-brand-200 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-12 flex flex-col gap-4 border-t border-hairline pt-6 text-caption text-muted sm:flex-row sm:items-center sm:justify-between">
           <p>
             &copy; {year} {siteConfig.name}. All rights reserved.
           </p>

@@ -381,46 +381,26 @@
     }
   }
 
-  /* Route entrance — plays on each navigation (template.tsx). Resting state is
-     fully visible, so content is never hidden without JS / for crawlers. */
-  @keyframes route-enter {
-    from {
-      opacity: 0;
-      transform: translateY(8px);
-    }
-    to {
-      opacity: 1;
-      transform: none;
-    }
-  }
-  .route-enter {
-    animation: route-enter var(--dur-slow) var(--ease-out) both;
-  }
-  /* Brief fade-through-black between routes: a near-black overlay flashes out on
-     mount. Sits below the sticky header (z-50) so nav never flickers. */
-  .route-enter::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: 40;
-    background: var(--background);
-    pointer-events: none;
-    animation: route-flash 160ms var(--ease-out) both;
-  }
-  @keyframes route-flash {
-    from {
-      opacity: 1;
-    }
-    to {
-      opacity: 0;
-    }
+  /* ---- Route transitions — owned by the View Transitions API ----
+     `.route-enter` and `template.tsx` are GONE. They did two things we no
+     longer want:
+       1. A `transform: translateY(8px)` on a wrapper around every page. For the
+          animation's duration that wrapper became the containing block for any
+          `position: fixed` descendant, collapsing it to 0px. Deleting the
+          wrapper removes the trap at its root rather than working around it.
+       2. A fade-through-BLACK flash (`--background` was near-black). On white
+          that would be a fade-through-white — a strobe.
+     One system: View Transitions owns route changes; framer-motion owns in-page
+     entrances. A cross-fade only — no slide, nothing over 0.8s. */
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 220ms;
+    animation-timing-function: var(--ease-out);
   }
   @media (prefers-reduced-motion: reduce) {
-    .route-enter {
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
       animation: none;
-    }
-    .route-enter::before {
-      display: none;
     }
   }
 
@@ -532,9 +512,13 @@
   /* Hero carousel progress bar — the active bar fills orange->green over the 6s
      dwell (compositor-only scaleX), doubling as a timer. Paused via inline
      animation-play-state on hover/focus; static full under reduced motion. */
+  /* Solid orange fill on a #d2d2d7 track. Was an orange->green gradient, which
+     broke both "orange is a fill, never an ink" and the one-hue-per-element
+     restraint. The indicator IS the timer, so orange (the conversion colour)
+     is wrong as ink but right as this small fill — it's the only fill here. */
   .hero-progress-fill {
     transform-origin: left center;
-    background: linear-gradient(90deg, var(--accent), var(--accent-green));
+    background: var(--accent);
     animation: hero-progress 6000ms linear forwards;
   }
   @keyframes hero-progress {

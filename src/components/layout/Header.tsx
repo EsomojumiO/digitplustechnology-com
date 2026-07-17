@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { usePathname } from "next/navigation";
 import { Button, Container } from "@/components/ui";
 import { cn } from "@/lib/utils";
@@ -442,10 +442,14 @@ export function Header() {
     <header
       className={cn(
         "sticky top-0 z-50 w-full border-b border-hairline",
-        "bg-background/80 backdrop-blur-md backdrop-saturate-150 supports-[backdrop-filter]:bg-background/65",
+        // Frosted white glass: rgba(255,255,255,0.72) + blur over a #d2d2d7
+        // hairline. The opaque fallback stays fully white so the bar never
+        // reads as grey where backdrop-filter is unsupported.
+        "bg-white backdrop-blur-xl backdrop-saturate-150 supports-[backdrop-filter]:bg-white/72",
       )}
     >
-      <Container as="div" className="flex h-16 items-center justify-between gap-4">
+      {/* ~48px bar — Apple's nav is a quiet rail, not a shelf. */}
+      <Container as="div" className="flex h-12 items-center justify-between gap-4">
         <Logo />
 
         <nav aria-label="Primary" className="hidden lg:block">

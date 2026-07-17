@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
  * HeroCarousel — full-height crossfade carousel for the home hero image zone.
  *
  * Crossfade + slow Ken Burns (no sliding). One image at a time, edge-to-edge,
- * rounded-2xl + hairline + cover scrim + saturate. Caption (mono eyebrow +
+ * rounded-3xl, no frame, photo full-colour. Caption (green eyebrow +
  * one line) is a named link to the service; 5 hairline progress bars double as
  * the dwell timer (fill orange->green). Pauses on hover/focus; arrow keys when
  * focused; reduced-motion → static first slide, indicators still clickable.
@@ -20,35 +20,35 @@ import { cn } from "@/lib/utils";
 const SLIDES = [
   {
     src: "/images/hero/hero-team-lagos.jpg",
-    eyebrow: "MANAGED IT · 01",
+    eyebrow: "Managed IT · 01",
     caption: "IT teams that run yours",
     href: "/services/managed-services",
     alt: "Managed IT services",
   },
   {
     src: "/images/hero/hero-datacenter.jpg",
-    eyebrow: "DATA CENTRE · 02",
+    eyebrow: "Data centre · 02",
     caption: "Infrastructure, kept alive",
     href: "/services/hardware-supply",
     alt: "Data-centre hardware supply",
   },
   {
     src: "/images/hero/hero-cabling.jpg",
-    eyebrow: "NETWORKING · 03",
+    eyebrow: "Networking · 03",
     caption: "Structured cabling, done once",
     href: "/services/infrastructure-solutions",
     alt: "Infrastructure and networking",
   },
   {
     src: "/images/hero/hero-engineer.jpg",
-    eyebrow: "SUPPORT · 04",
+    eyebrow: "Support · 04",
     caption: "Engineers on call, nationwide",
     href: "/services/deployment-implementation",
     alt: "Deployment and support engineers",
   },
   {
     src: "/images/hero/hero-enterprise-user.jpg",
-    eyebrow: "WORKPLACE · 05",
+    eyebrow: "Workplace · 05",
     caption: "Devices your people rely on",
     href: "/industries/enterprise",
     alt: "Enterprise workplace",
@@ -105,7 +105,10 @@ export function HeroCarousel() {
         if (!rootRef.current?.contains(e.relatedTarget as Node))
           setPaused(false);
       }}
-      className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-hairline bg-surface lg:aspect-[7/6]"
+      // White surround, no border, larger radius: on white the photo needs no
+      // frame to sit in the page — the hairline was there to separate it from
+      // near-black.
+      className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl bg-surface lg:aspect-[7/6]"
     >
       {SLIDES.map((s, i) => {
         const isActive = i === active;
@@ -129,13 +132,16 @@ export function HeroCarousel() {
               sizes="(min-width: 1024px) 46vw, 100vw"
               className="object-cover"
               style={{
-                // Ken Burns: ease to 1.06 over the dwell on activation.
-                transform: isActive && !reduce ? "scale(1.06)" : "scale(1)",
+                // Ken Burns: softened to 1.03 — 1.06 reads as a zoom, not drift.
+                transform: isActive && !reduce ? "scale(1.03)" : "scale(1)",
                 transition: isActive && !reduce ? "transform 6000ms linear" : "none",
               }}
             />
+            {/* Soft WHITE gradient at the image base, sized to the caption. The
+                dark theme veiled the whole frame in near-black; on white the
+                photo runs full-colour and only the caption zone is lifted. */}
             <div
-              className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/80 via-background/15 to-transparent"
+              className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white via-white/70 to-transparent"
               aria-hidden="true"
             />
           </div>
@@ -147,7 +153,7 @@ export function HeroCarousel() {
         href={current.href}
         className="absolute bottom-4 left-4 z-20 max-w-[80%] rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green"
       >
-        <span className="block font-mono text-caption uppercase tracking-[0.18em] text-accent-green">
+        <span className="text-caption block font-semibold text-accent-green">
           {current.eyebrow}
         </span>
         <span className="mt-1 block font-display text-h4 font-semibold text-text">

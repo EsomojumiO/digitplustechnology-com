@@ -14,7 +14,7 @@ import {
   Eyebrow,
 } from "@/components/ui";
 import { FeatureImage } from "@/components/ui/FeatureImage";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { FadeIn, Stagger, StaggerItem } from "@/components/motion";
 import { services, industries } from "@/lib/site";
 import { getSpokeArticles } from "@/lib/content";

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { Inter, JetBrains_Mono } from "next/font/google";
+import { ViewTransitions } from "next-view-transitions";
 import "./globals.css";
 import { siteConfig } from "@/lib/site";
 import {
@@ -13,6 +14,7 @@ import {
 import { JsonLd } from "@/lib/seo/jsonld";
 import { organizationSchema, websiteSchema } from "@/lib/seo/schema";
 import { Analytics } from "@/components/analytics/Analytics";
+import { SmoothScroll } from "@/components/motion/SmoothScroll";
 
 // Inter — the whole type system for the Apple-light rebuild (client-selected
 // Candidate A at the Phase 2 STOP; see docs/DECISIONS.md).
@@ -98,28 +100,31 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
-    >
-      <body className="flex min-h-full flex-col">
-        <SkipLink />
-        <Header />
-        <main id="main" className="flex-1">
-          {children}
-        </main>
-        <Footer />
-        <WhatsAppWidget />
-        <CookieConsent />
-        {/* Sitewide structured data, Organization + WebSite. */}
-        <JsonLd data={organizationSchema()} />
-        <JsonLd data={websiteSchema()} />
-        {/* React-independent scroll-reveal (works in every browser, incl. Safari).
-            beforeInteractive: sets `reveal-ready` before paint (no flash) and is
-            coupled to this script, if it never runs, content stays visible. */}
-        <Script src="/reveal.js" strategy="beforeInteractive" />
-        <Analytics />
-      </body>
-    </html>
+    <ViewTransitions>
+      <html
+        lang="en"
+        className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      >
+        <body className="flex min-h-full flex-col">
+          <SmoothScroll />
+          <SkipLink />
+          <Header />
+          <main id="main" className="flex-1">
+            {children}
+          </main>
+          <Footer />
+          <WhatsAppWidget />
+          <CookieConsent />
+          {/* Sitewide structured data, Organization + WebSite. */}
+          <JsonLd data={organizationSchema()} />
+          <JsonLd data={websiteSchema()} />
+          {/* React-independent scroll-reveal (works in every browser, incl. Safari).
+              beforeInteractive: sets `reveal-ready` before paint (no flash) and is
+              coupled to this script, if it never runs, content stays visible. */}
+          <Script src="/reveal.js" strategy="beforeInteractive" />
+          <Analytics />
+        </body>
+      </html>
+    </ViewTransitions>
   );
 }
