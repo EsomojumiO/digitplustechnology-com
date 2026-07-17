@@ -46,7 +46,15 @@ export function Section({
   ...props
 }: SectionProps) {
   return (
-    <section className={cn(tones[tone], spacings[spacing], className)} {...props}>
+    // data-tone/data-spacing drive the stacked-same-tone collapse in
+    // globals.css — two adjacent sections of the same tone would otherwise
+    // stack their padding into a hole (measured: 439px of nothing on /about).
+    <section
+      data-tone={tone}
+      data-spacing={spacing}
+      className={cn(tones[tone], spacings[spacing], className)}
+      {...props}
+    >
       {contained ? (
         <Container width={containerWidth}>{children}</Container>
       ) : (

@@ -563,3 +563,48 @@
     transform: translateY(0);
   }
 }
+
+/* ============================================================================
+   7. STACKED SAME-TONE COLLAPSE
+   Two adjacent sections of the same tone stack their padding with nothing
+   between them: on /about that measured 439px of dead space between the lede
+   and the first heading. That's a hole, not negative space.
+
+   Band alternation (white -> #f5f5f7) is the primary fix and is applied per
+   page; this is the systemic fallback for pages where alternation doesn't fit.
+
+   Collapsed values step DOWN the approved scale (128->80, 160->96) rather than
+   taking a raw 40% (which would give 76.8px and put the section off-scale — the
+   conformance gate checks for exactly that).
+
+   Deliberately UNLAYERED. Tailwind's utilities layer comes after @layer
+   components, so a layered rule loses to `sm:py-32` no matter how specific it
+   is — that's the same cascade trap that made `.reveal-rule`'s width beat
+   `w-10`. Unlayered styles win over layered ones, so these land.
+   ============================================================================ */
+@media (min-width: 640px) {
+  section[data-tone="default"] + section[data-tone="default"][data-spacing="sm"],
+  section[data-tone="muted"] + section[data-tone="muted"][data-spacing="sm"] {
+    padding-top: 3rem;
+  }
+  section[data-tone="default"][data-spacing="sm"]:has(+ section[data-tone="default"]),
+  section[data-tone="muted"][data-spacing="sm"]:has(+ section[data-tone="muted"]) {
+    padding-bottom: 3rem;
+  }
+  section[data-tone="default"] + section[data-tone="default"][data-spacing="md"],
+  section[data-tone="muted"] + section[data-tone="muted"][data-spacing="md"] {
+    padding-top: 5rem;
+  }
+  section[data-tone="default"] + section[data-tone="default"][data-spacing="lg"],
+  section[data-tone="muted"] + section[data-tone="muted"][data-spacing="lg"] {
+    padding-top: 6rem;
+  }
+  section[data-tone="default"][data-spacing="md"]:has(+ section[data-tone="default"]),
+  section[data-tone="muted"][data-spacing="md"]:has(+ section[data-tone="muted"]) {
+    padding-bottom: 5rem;
+  }
+  section[data-tone="default"][data-spacing="lg"]:has(+ section[data-tone="default"]),
+  section[data-tone="muted"][data-spacing="lg"]:has(+ section[data-tone="muted"]) {
+    padding-bottom: 6rem;
+  }
+}
