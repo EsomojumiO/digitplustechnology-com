@@ -123,3 +123,60 @@ That cleared it here on the first try.
 stop retrying and **self-host the fonts via `next/font/local`**. The font files become repo assets, the
 build stops depending on a third-party fetch at deploy time, and this failure mode disappears
 permanently. That is the fix; clearing the cache is the workaround.
+
+---
+
+# Apple-light rebuild — ledger addendum (2026-07-17, branch `redesign/apple-light`)
+
+The 2026-07-12 ledger above still stands for copy/IA/URLs/JSON-LD. The rebuild was
+**visual-only** and that is now proven by diff, not asserted:
+
+| Surface | Diff vs `54b6dd7` (branch point) |
+|---|---|
+| `src/data/**`, `content/**` (copy) | **zero** |
+| `src/lib/seo/**`, `sitemap.ts`, `robots.ts`, `next.config.ts` | **zero** |
+| `src/app/api/**`, `src/lib/integrations/**` (forms) | **zero** |
+
+Rendered output re-verified: **71 sitemap URLs**, robots intact, JSON-LD present on
+every template (Organization · WebSite · BreadcrumbList · FAQPage · Service ·
+ListItem), canonical = 1 and h1 = 1 per page.
+
+## Gates (exit standard)
+- `scripts/style-conformance.ts` — **PASS, 15 routes, 0 failures**
+- `scripts/a11y-sweep.mjs` — **15 templates, 0 axe violations**
+- `npx tsc --noEmit` clean · production build compiles
+- Rubric (`15-rubric.md`) — **every page ≥ 8/10**
+
+## DONE in the rebuild (was PENDING — CLAUDE CODE)
+- Type = Inter (Candidate A), Forest-500 green, brand-ramp Ember orange — all client-picked.
+- Light token flip; dark-only primitives deleted (grain, aurora, circuit traces, glow).
+- View Transitions own routes; `template.tsx` deleted; lenis wired (INP-measured, 0ms cost).
+- Sticky storytelling + full-bleed scroll-scrub band on home.
+- Page imagery landed (18 files, `bab736d`) — **blocker #8 partially discharged**.
+- Type scale migrated to real `@theme` utilities; two-tone system enforced at compile time.
+- OG card + `theme-color` + `color-scheme` reskinned to light.
+
+## Defects found and fixed that PRE-DATE this rebuild
+These shipped on `redesign/dark-raycast` (PR #1) too. Two were backported (`69f6cde`):
+1. **Every button had an unreadable label** — tailwind-merge evicted the label colour
+   (~2.35:1 dark / 2.93:1 light), the exact failure `Button.tsx`'s own comment warned
+   about. **Backported.**
+2. **Broken ARIA menu pattern** — 17 critical axe nodes per page. **Backported.**
+3. **Every prose heading rendered at body size** (about/privacy/terms + all 33 articles):
+   `[&_h2]:text-h2` emitted nothing. **Not backported** — fixed here by the type migration.
+4. **WhatsApp widget white-on-#25D366 = 1.98:1.** **Not backported** (out of agreed scope);
+   PR #1 still carries it.
+
+## STILL PENDING — HUMAN (carried over, unchanged)
+- **Real project/team photography** (BLOCKERS #8). Current imagery is interim Unsplash
+  stock — this is what holds marketing pages at 8/10 rather than 9.
+- **Partner logos**: real full-colour marks + reseller authorisation (`PLACEHOLDERS.md` §5).
+  Currently knocked to single dark ink.
+- **Real testimonials** (role-attributed placeholders today).
+- **Report cover images** (`public/images/reports/<slug>.jpg`).
+- Env keys: email / marketing / CRM / analytics.
+
+## CI note
+See the "Failed to fetch Inter from Google Fonts" runbook entry above: a transient
+fetch failure memoises into `.next` and survives network recovery. Clear the cache
+before debugging it as real; a recurrence on Vercel is the trigger to self-host fonts.

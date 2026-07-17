@@ -68,7 +68,6 @@ gap on the site.
   reads generic rather than as a credible named-partner roster. Blocked on assets
   + reseller authorisation (`PLACEHOLDERS.md` §5).
 - **Testimonials are role-attributed placeholders**, not real client quotes.
-- **City-photo accuracy is unverified by me.** The location frames came from each
-  city's Unsplash search and are verified *live*, not verified *accurate*. A photo
-  of the wrong city on a location page is a factual claim, not a design detail.
-  Client check in progress.
+- ~~City-photo accuracy unverified~~ — **CLOSED 2026-07-17.** Client confirmed the
+  Abuja frame is the **Abuja City Gate**, the city's signature landmark. Kept.
+  Lagos and Port Harcourt frames confirmed alongside it.

@@ -15,13 +15,16 @@ export const alt = `${siteConfig.name}, ${siteConfig.tagline}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-// Literal dark-theme token values mirrored from globals.css (@theme cannot be
-// read here). Matches the shipped canvas/accent, not the retired cream theme.
-const BRAND = "#060707"; // --background, green-tinted near-black canvas
-const CREAM = "#fafafa"; // --text, near-white ink on the dark canvas
-const ACCENT = "#ff8a3d"; // --accent, single orange fill (logo tile + rule)
-const ON_ACCENT = "#060707"; // --accent-foreground, dark label on orange (~8.6:1)
-const MUTED = "rgba(250,250,250,0.62)"; // --text-muted equivalent
+// Literal Apple-light token values mirrored from globals.css (@theme cannot be
+// read here — this renders in the OG image runtime, not the browser). Keep in
+// sync with §2 by hand: nothing enforces it, and a stale OG card is invisible
+// until someone shares a link.
+const BRAND = "#ffffff"; // --background, the white canvas
+const CREAM = "#1d1d1f"; // --text, ink on white (16.83:1)
+const ACCENT = "#ad4527"; // --accent, Ember-600, the single orange fill
+const ON_ACCENT = "#ffffff"; // --accent-foreground, white label on orange (5.74:1)
+const GREEN = "#2d5d49"; // --accent-green, Forest-500 — structural rules (7.57:1)
+const MUTED = "#6e6e73"; // --text-muted, a VALUE not alpha (5.07:1 on white)
 
 export default function OpengraphImage() {
   return new ImageResponse(
@@ -96,7 +99,10 @@ export default function OpengraphImage() {
 
         {/* Bottom: accent rule + coverage */}
         <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-          <div style={{ display: "flex", width: "120px", height: "6px", background: ACCENT, borderRadius: "3px" }} />
+          {/* GREEN, not orange: green carries structural rules, orange is
+              conversion-only — and the logo tile above is already the card's
+              one orange fill. */}
+          <div style={{ display: "flex", width: "120px", height: "6px", background: GREEN, borderRadius: "3px" }} />
           <div style={{ color: MUTED, fontSize: "26px", letterSpacing: "0.04em" }}>
             {siteConfig.coverage.join("  •  ")}
           </div>
