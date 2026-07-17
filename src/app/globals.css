@@ -119,6 +119,50 @@
   --font-mono:
     var(--font-geist-mono), ui-monospace, "SF Mono", "Menlo", monospace;
 
+  /* ---- Fluid type scale — REAL font-size utilities ----
+     Was a `--type-*` namespace + hand-written `.text-*` classes in @layer
+     components, explicitly to stop the two colliding. That workaround cost
+     three separate defects, all of the same species — `text-*` names that look
+     like utilities but aren't:
+       1. tailwind-merge saw `text-body` as a COLOUR and evicted
+          `text-accent-foreground`, so every Button shipped an unreadable label
+          (2.93:1 light / ~2.35:1 dark) — on this branch and on dark-raycast.
+       2. `[&_h2]:text-h2` in Prose emitted NOTHING (Tailwind can't resolve a
+          components-layer class inside a variant), so every prose heading on
+          the site rendered at body size with no hierarchy.
+       3. `.reveal-rule`'s `width: 100%` beat a `w-10` utility on source order,
+          drawing every Connective Line edge-to-edge.
+     Under `--text-*` Tailwind generates them properly: they resolve in
+     variants, they sit in the right layer, and they carry their own
+     line-height/tracking/weight. */
+  --text-caption: 0.75rem;
+  --text-caption--line-height: 1.4;
+  --text-small: 0.8125rem;
+  --text-small--line-height: 1.5;
+  --text-body: 1rem;
+  --text-body--line-height: 1.6;
+  --text-body-lg: clamp(1.0625rem, 0.99rem + 0.35vw, 1.1875rem);
+  --text-body-lg--line-height: 1.6;
+  --text-h4: clamp(1.125rem, 1.05rem + 0.4vw, 1.3125rem);
+  --text-h4--line-height: 1.3;
+  --text-h4--font-weight: 600;
+  --text-h3: clamp(1.375rem, 1.2rem + 0.85vw, 1.75rem);
+  --text-h3--line-height: 1.2;
+  --text-h3--letter-spacing: -0.01em;
+  --text-h3--font-weight: 600;
+  --text-h2: clamp(1.75rem, 1.45rem + 1.5vw, 2.5rem);
+  --text-h2--line-height: 1.13;
+  --text-h2--letter-spacing: -0.015em;
+  --text-h2--font-weight: 700;
+  --text-h1: clamp(2.25rem, 1.75rem + 2.6vw, 3.5rem);
+  --text-h1--line-height: 1.07;
+  --text-h1--letter-spacing: -0.02em;
+  --text-h1--font-weight: 700;
+  --text-display: clamp(2.75rem, 1.9rem + 4.3vw, 5rem);
+  --text-display--line-height: 1.02;
+  --text-display--letter-spacing: -0.025em;
+  --text-display--font-weight: 700;
+
   /* Semantic colors */
   --color-background: var(--background);
   --color-foreground: var(--text);
@@ -207,20 +251,6 @@
   --container-prose: 65ch;
 }
 
-/* ---- Fluid type scale (clamp) ----
-   Under a --type-* namespace so they don't auto-generate font-size utilities
-   that collide with the .text-* heading classes in the components layer. */
-:root {
-  --type-caption: 0.75rem;
-  --type-small: 0.8125rem;
-  --type-body: 1rem;
-  --type-body-lg: clamp(1.0625rem, 0.99rem + 0.35vw, 1.1875rem);
-  --type-h4: clamp(1.125rem, 1.05rem + 0.4vw, 1.3125rem);
-  --type-h3: clamp(1.375rem, 1.2rem + 0.85vw, 1.75rem);
-  --type-h2: clamp(1.75rem, 1.45rem + 1.5vw, 2.5rem);
-  --type-h1: clamp(2.25rem, 1.75rem + 2.6vw, 3.5rem);
-  --type-display: clamp(2.75rem, 1.9rem + 4.3vw, 5rem);
-}
 
 /* Motion duration tokens (used in component transitions) */
 :root {
@@ -255,6 +285,11 @@
     background: var(--background);
     color: var(--text);
     font-family: var(--font-sans);
+    /* Inter carries an opsz axis (14–32) and "Inter Display" IS Inter at
+       display optical size. `auto` lets the browser pick opsz from font-size,
+       so headlines get the display cut and body gets the text cut with no
+       per-class `font-variation-settings` pin to keep in sync. */
+    font-optical-sizing: auto;
     font-synthesis-weight: none;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -301,102 +336,13 @@
 }
 
 /* ---------------------------------------------------------------------------
-   5. TYPOGRAPHY UTILITIES — fluid modular scale
-   Display/H1/H2 are Inter at display optical size (`opsz 32` — this is what
-   "Inter Display" means); body is the same family, optically sized for text.
-   Large headings: negative tracking + tight leading. Body: 1.6 line-height.
-   `font-variation-settings` only pins opsz — wght still comes from
-   font-weight, so the weights below keep working.
+   5. TYPOGRAPHY — helpers only
+   The scale itself now lives in @theme (§3) as real --text-* utilities.
+   Inter is the whole system; `font-optical-sizing: auto` (§4) picks the display
+   optical size by font-size, so "Inter Display" needs no explicit opsz pin.
    --------------------------------------------------------------------------- */
 @layer components {
-  .text-display {
-    font-family: var(--font-display);
-    font-variation-settings: "opsz" 32;
-    font-size: var(--type-display);
-    line-height: 1.02;
-    letter-spacing: -0.025em;
-    font-weight: 700;
-  }
-  .text-h1 {
-    font-family: var(--font-display);
-    font-variation-settings: "opsz" 32;
-    font-size: var(--type-h1);
-    line-height: 1.07;
-    letter-spacing: -0.02em;
-    font-weight: 700;
-  }
-  .text-h2 {
-    font-family: var(--font-display);
-    font-variation-settings: "opsz" 32;
-    font-size: var(--type-h2);
-    line-height: 1.13;
-    letter-spacing: -0.015em;
-    font-weight: 700;
-  }
-  /* Prose headings. Real CSS, not `[&_h2]:text-h2` arbitrary variants — those
-     reference a components-layer class Tailwind can't resolve as a utility, so
-     they emitted nothing and every long-form heading inherited body type. */
-  .prose-headings h2 {
-    font-family: var(--font-display);
-    font-variation-settings: "opsz" 32;
-    font-size: var(--type-h2);
-    line-height: 1.13;
-    letter-spacing: -0.015em;
-    font-weight: 700;
-    color: var(--text-heading);
-    margin-top: 3rem;
-    margin-bottom: 1rem;
-  }
-  .prose-headings h3 {
-    font-family: var(--font-display);
-    font-size: var(--type-h3);
-    line-height: 1.2;
-    letter-spacing: -0.01em;
-    font-weight: 600;
-    color: var(--text-heading);
-    margin-top: 2.5rem;
-    margin-bottom: 0.75rem;
-  }
-  .prose-headings h4 {
-    font-family: var(--font-display);
-    font-size: var(--type-h4);
-    line-height: 1.3;
-    font-weight: 600;
-    color: var(--text-heading);
-    margin-top: 2rem;
-    margin-bottom: 0.5rem;
-  }
 
-  .text-h3 {
-    font-size: var(--type-h3);
-    line-height: 1.2;
-    letter-spacing: -0.015em;
-    font-weight: 600;
-  }
-  .text-h4 {
-    font-size: var(--type-h4);
-    line-height: 1.3;
-    letter-spacing: -0.01em;
-    font-weight: 600;
-  }
-  .text-body-lg {
-    font-size: var(--type-body-lg);
-    line-height: 1.6;
-    letter-spacing: -0.005em;
-  }
-  .text-body {
-    font-size: var(--type-body);
-    line-height: 1.6;
-  }
-  .text-small {
-    font-size: var(--type-small);
-    line-height: 1.5;
-  }
-  .text-caption {
-    font-size: var(--type-caption);
-    line-height: 1.45;
-    letter-spacing: 0.01em;
-  }
 }
 
 /* ---------------------------------------------------------------------------
@@ -405,7 +351,6 @@
 @layer utilities {
   .font-display {
     font-family: var(--font-display);
-    font-variation-settings: "opsz" 32;
   }
 
   /* Marquee — seamless horizontal loop (two duplicated tracks). */
