@@ -19,7 +19,7 @@ export interface FadeInProps extends React.HTMLAttributes<HTMLElement> {
 
 export function FadeIn({
   as: Comp = "div",
-  y = 16,
+  y = 20,
   delay = 0,
   className,
   style,
@@ -38,23 +38,60 @@ export function FadeIn({
 }
 
 /**
- * Stagger, passthrough container for a group of <StaggerItem>s. Each item
- * reveals itself as it scrolls in (naturally staggering), so there's no parent
- * orchestration that could leave content hidden.
+ * Stagger, container that gives each descendant <StaggerItem> an incrementing
+ * reveal delay so siblings enter in sequence rather than all at once.
+ *
+ * This used to be a bare passthrough — which meant the "stagger" was a lie: every
+ * StaggerItem defaulted to delay 0, so a grid row revealed simultaneously (all
+ * six service cards measured transitionDelay: 0s). The name promised a sweep the
+ * code never delivered.
+ *
+ * It walks the subtree (StaggerItems usually sit inside a <Grid>, not as direct
+ * children) and assigns `index * step` — capped by a modulo so a 33-item list
+ * can't accumulate a multi-second lag; the sweep repeats per visual group
+ * instead. Still hook-free, so it stays usable in server trees, and it never
+ * hides anything: it only sets a delay on an element that reveals itself.
  */
 export interface StaggerProps extends React.HTMLAttributes<HTMLElement> {
   as?: React.ElementType;
+  /** Per-sibling delay in ms. */
+  step?: number;
+  /** Delays repeat every `groupSize` items so long lists don't drag. */
+  groupSize?: number;
 }
 
 export function Stagger({
   as: Comp = "div",
+  step = 70,
+  groupSize = 5,
   className,
   children,
   ...props
 }: StaggerProps) {
+  let index = 0;
+  const walk = (nodes: React.ReactNode): React.ReactNode =>
+    React.Children.map(nodes, (child) => {
+      if (!React.isValidElement(child)) return child;
+      if (child.type === StaggerItem) {
+        const own = (child.props as StaggerItemProps).delay ?? 0;
+        const delay = own + (index % groupSize) * step;
+        index += 1;
+        return React.cloneElement(child, { delay } as Partial<StaggerItemProps>);
+      }
+      const kids = (child.props as { children?: React.ReactNode }).children;
+      if (kids) {
+        return React.cloneElement(
+          child,
+          {} as never,
+          walk(kids),
+        );
+      }
+      return child;
+    });
+
   return (
     <Comp className={className} {...props}>
-      {children}
+      {walk(children)}
     </Comp>
   );
 }
@@ -69,7 +106,7 @@ export interface StaggerItemProps extends React.HTMLAttributes<HTMLElement> {
 
 export function StaggerItem({
   as: Comp = "div",
-  y = 16,
+  y = 20,
   delay = 0,
   className,
   style,

@@ -18,7 +18,7 @@ export interface ScrollScrubImageProps {
 /**
  * ScrollScrubImage — a full-bleed image band that settles as it enters.
  *
- * Scrubs scale 1.05 -> 1.0 and brightness 0.92 -> 1.0 against scroll progress,
+ * Scrubs scale 1.08 -> 1.0 and brightness 0.92 -> 1.0 against scroll progress,
  * so the image resolves into place rather than animating on a timer. The scrub
  * finishes by the time the band is centred; past that it just sits there.
  *
@@ -45,7 +45,7 @@ export function ScrollScrubImage({
     offset: ["start end", "center center"],
   });
 
-  const scale = useTransform(scrollYProgress, [0, 1], [1.05, 1]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1.08, 1]);
   const brightness = useTransform(scrollYProgress, [0, 1], [0.92, 1]);
   const filter = useTransform(brightness, (b) => `brightness(${b})`);
 
