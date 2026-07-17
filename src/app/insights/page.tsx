@@ -121,13 +121,13 @@ export default async function InsightsHubPage({
                 </p>
                 <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-small text-muted">
                   <span>{featured.author}</span>
-                  <span aria-hidden="true" className="text-muted/50">
+                  <span aria-hidden="true" className="text-muted">
                     &middot;
                   </span>
                   <time dateTime={isoDate(featured.publishedAt)}>
                     {formatDate(featured.publishedAt)}
                   </time>
-                  <span aria-hidden="true" className="text-muted/50">
+                  <span aria-hidden="true" className="text-muted">
                     &middot;
                   </span>
                   <span>{featured.readingTime.text}</span>
@@ -150,7 +150,10 @@ export default async function InsightsHubPage({
                   className="inline-flex items-center gap-1.5 rounded-full border border-accent-green/40 bg-brand-subtle px-3.5 py-1.5 text-small font-medium text-accent-green transition-colors duration-[var(--dur-fast)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green"
                 >
                   All
-                  <span className="text-caption text-accent-green/70">
+                  {/* Green, not muted: #6e6e73 on this green-tinted #eef2f0
+                      chip computes to 4.49:1 — 0.01 under the bar. The count
+                      de-emphasises by size, which doesn't spend contrast. */}
+                  <span className="text-caption text-accent-green">
                     {all.length}
                   </span>
                 </Link>
@@ -162,7 +165,7 @@ export default async function InsightsHubPage({
                     className="inline-flex items-center gap-1.5 rounded-full border border-hairline bg-surface-raised px-3.5 py-1.5 text-small font-medium text-muted transition-colors duration-[var(--dur-fast)] hover:border-hairline-hover hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green"
                   >
                     {c.label}
-                    <span className="text-caption text-muted/60">
+                    <span className="text-caption text-muted">
                       {c.count}
                     </span>
                   </Link>

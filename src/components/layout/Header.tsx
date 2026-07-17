@@ -84,7 +84,6 @@ function DesktopDropdown({
     >
       <Link
         href={item.href}
-        aria-haspopup="true"
         aria-expanded={open}
         aria-controls={id}
         className={cn(
@@ -103,9 +102,16 @@ function DesktopDropdown({
         />
       </Link>
 
+      {/* Disclosure navigation, NOT the ARIA menu pattern (W3C APG). The old
+          markup was role="menu" > <ul> > <li role="none"> > <a role="menuitem">,
+          which axe flags critical three ways: the menu's required child is a
+          menuitem (it got a <ul>), each menuitem's required parent is a
+          menu (it got an <li>), and role="none" on an <li> makes the <ul>
+          contain a non-<li>. role="menu" means an application menu — this is a
+          list of navigation links, so plain semantics are both correct and
+          quieter for screen readers. (Pre-existing: also on redesign/dark-raycast.) */}
       <div
         id={id}
-        role="menu"
         aria-label={item.label}
         className={cn(
           "absolute left-0 top-full z-50 pt-2",
@@ -122,9 +128,8 @@ function DesktopDropdown({
           )}
         >
           {item.children?.map((child) => (
-            <li key={child.href} role="none">
+            <li key={child.href}>
               <Link
-                role="menuitem"
                 href={child.href}
                 tabIndex={open ? 0 : -1}
                 target={child.external ? "_blank" : undefined}
@@ -372,7 +377,6 @@ function ContactMenu() {
     <div ref={wrapRef} className="relative hidden sm:block">
       <button
         type="button"
-        aria-haspopup="menu"
         aria-expanded={open}
         aria-controls={id}
         aria-label="Contact options"
@@ -385,9 +389,9 @@ function ContactMenu() {
       >
         <PhoneIcon />
       </button>
+      {/* Disclosure, not the ARIA menu pattern — see DesktopDropdown. */}
       <div
         id={id}
-        role="menu"
         aria-label="Contact"
         className={cn(
           "absolute right-0 top-full z-50 mt-2 w-60 rounded-xl border border-hairline bg-surface-raised p-1.5 shadow-[var(--shadow-lg)]",
@@ -400,7 +404,6 @@ function ContactMenu() {
         {CONTACT_ROWS.map((r) => (
           <a
             key={r.label}
-            role="menuitem"
             href={r.href(siteConfig)}
             target={"external" in r && r.external ? "_blank" : undefined}
             rel={"external" in r && r.external ? "noreferrer noopener" : undefined}

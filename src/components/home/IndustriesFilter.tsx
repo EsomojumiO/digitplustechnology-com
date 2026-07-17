@@ -68,26 +68,24 @@ export function IndustriesFilter({ industries }: IndustriesFilterProps) {
               onClick={() => setActive(g.id)}
               aria-pressed={isActive}
               className={cn(
-                "relative rounded-full border px-4 py-2 font-mono text-caption font-medium uppercase tracking-[0.12em]",
+                "relative rounded-full border px-4 py-2 text-caption font-medium",
                 "transition-[color,border-color,background-color] duration-[var(--dur-base)] ease-[var(--ease-out)]",
                 "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green",
                 isActive
-                  ? "border-transparent text-accent-foreground"
+                  ? // GREEN, not orange: orange is conversion-only and capped at
+                    // one fill per viewport — this chip put a second one on
+                    // screen beside the header CTA. Green carries active states.
+                    // The fill is on the BUTTON, not on a pill behind it: the
+                    // old layoutId motion.span sat at -z-10, and a contrast
+                    // checker cannot resolve an overlapping sibling as a
+                    // background, so it read the label as white-on-#f5f5f7
+                    // (1.08:1) no matter what colour the pill was. Backgrounds
+                    // belong on the element that owns the text. White on
+                    // Forest-500 is 7.57:1.
+                    "border-transparent bg-accent-green text-accent-foreground"
                   : "border-hairline text-muted hover:border-hairline-hover hover:text-text",
               )}
             >
-              {isActive ? (
-                <motion.span
-                  layoutId="industry-filter-pill"
-                  className="absolute inset-0 -z-10 rounded-full bg-accent"
-                  transition={
-                    reduce
-                      ? { duration: 0 }
-                      : { type: "spring", stiffness: 380, damping: 32 }
-                  }
-                  aria-hidden="true"
-                />
-              ) : null}
               {g.label}
             </button>
           );

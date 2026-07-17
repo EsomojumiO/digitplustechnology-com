@@ -24,7 +24,7 @@ function Separator() {
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
-      className="text-muted/60"
+      className="text-muted"
     >
       <path d="M6 4l4 4-4 4" />
     </svg>

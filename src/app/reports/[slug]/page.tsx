@@ -163,7 +163,7 @@ export default async function ReportLandingPage({
                 >
                   <span
                     aria-hidden="true"
-                    className="mt-0.5 shrink-0 text-h4 font-semibold tabular-nums text-accent-green/70"
+                    className="mt-0.5 shrink-0 text-h4 font-semibold tabular-nums text-accent-green"
                   >
                     {String(i + 1).padStart(2, "0")}
                   </span>

@@ -15,7 +15,13 @@ export function WhatsAppWidget() {
       aria-label="Chat with us on WhatsApp"
       className={cn(
         "group fixed bottom-5 right-5 z-40 inline-flex items-center gap-2.5",
-        "rounded-full bg-[#25D366] py-3 pl-3.5 pr-4 text-white shadow-[var(--shadow-lg)]",
+        // Ink label/icon, not white. WhatsApp's own brand pairing (white on
+        // #25D366) computes to 1.98:1 and fails AA outright — the Phase 1 spec
+        // waved this through as "brand-correct, benign", but axe caught it and
+        // the spec was wrong. Keeping the brand fill EXACT and darkening the
+        // label to #1d1d1f lands 8.49:1 and deviates less than restyling
+        // WhatsApp's green would. The icon inherits via currentColor.
+        "rounded-full bg-[#25D366] py-3 pl-3.5 pr-4 text-[#1d1d1f] shadow-[var(--shadow-lg)]",
         "transition-transform duration-[var(--dur-base)] ease-[var(--ease-out)] hover:scale-[1.03]",
         "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green",
       )}

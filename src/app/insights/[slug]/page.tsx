@@ -179,19 +179,19 @@ export default async function ArticlePage({
 
             <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-small text-muted">
               <span className="font-medium text-text">{author.name}</span>
-              <span aria-hidden="true" className="text-muted/50">
+              <span aria-hidden="true" className="text-muted">
                 &middot;
               </span>
               <time dateTime={isoDate(article.publishedAt)}>
                 {formatDate(article.publishedAt)}
               </time>
-              <span aria-hidden="true" className="text-muted/50">
+              <span aria-hidden="true" className="text-muted">
                 &middot;
               </span>
               <span>{article.readingTime.text}</span>
               {updated ? (
                 <>
-                  <span aria-hidden="true" className="text-muted/50">
+                  <span aria-hidden="true" className="text-muted">
                     &middot;
                   </span>
                   <span>

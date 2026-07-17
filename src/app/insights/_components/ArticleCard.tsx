@@ -71,7 +71,7 @@ export function ArticleCard({
             <time dateTime={isoDate(article.publishedAt)}>
               {formatDate(article.publishedAt)}
             </time>
-            <span aria-hidden="true" className="text-muted/50">
+            <span aria-hidden="true" className="text-muted">
               &middot;
             </span>
             <span>{article.readingTime.text}</span>

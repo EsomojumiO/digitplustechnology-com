@@ -22,7 +22,7 @@ export function WhyPillar({ label, beat, description }: WhyPillarProps) {
         <span className="font-mono text-caption font-medium uppercase tracking-[0.16em] text-accent-green">
           {label}
         </span>
-        <span className="text-muted/60" aria-hidden="true">
+        <span className="text-muted" aria-hidden="true">
 , 
         </span>
         <span className="font-medium">{beat}</span>
