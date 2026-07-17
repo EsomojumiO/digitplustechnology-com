@@ -61,6 +61,11 @@ export function Section({
     // stack their padding into a hole (measured: 439px of nothing on /about).
     <section
       data-tone={tone}
+      // data-band is the RESOLVED colour group, and it's what the collapse rule
+      // keys on. Keying on data-tone was wrong: `raised` renders pure white,
+      // same as `default`, so a default+raised pair is a same-COLOUR stack the
+      // tone-name rule couldn't see. Two tones of paint, three tone names.
+      data-band={tone === "muted" ? "grey" : "white"}
       data-spacing={spacing}
       className={cn(tones[tone], spacings[spacing], className)}
       {...props}

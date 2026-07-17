@@ -7,15 +7,14 @@ export interface CTABandProps extends Omit<React.HTMLAttributes<HTMLElement>, "t
   description?: React.ReactNode;
   /** Action buttons / links slot. */
   actions?: React.ReactNode;
-  tone?: "accent" | "surface";
 }
 
-/* Two tones. `inverse` is gone — post-flip it rendered identically to
-   `surface` (--brand and --surface are both #f5f5f7). */
-const tones = {
-  accent: "bg-accent text-accent-foreground",
-  surface: "bg-surface text-text border-y border-hairline",
-};
+/* One band, no tone prop. `inverse` went first (post-flip it was pixel-identical
+   to `surface`); `accent` — a full-width ORANGE band — had zero call sites and
+   would have broken the one-orange-fill-per-viewport rule the moment anyone used
+   it. Zero call sites + compile-time enforcement beats convention, so it's
+   deleted rather than left as a loaded gun. */
+const BAND = "bg-surface text-text border-y border-hairline";
 
 /**
  * CTABand, full-width call-to-action band.
@@ -24,13 +23,11 @@ export function CTABand({
   title,
   description,
   actions,
-  tone = "surface",
   className,
   ...props
 }: CTABandProps) {
-  const onColor = tone === "surface";
   return (
-    <section className={cn(tones[tone], "py-16 sm:py-20", className)} {...props}>
+    <section className={cn(BAND, "py-16 sm:py-20", className)} {...props}>
       <Container>
         <div className="flex flex-col items-start gap-8 lg:flex-row lg:items-center lg:justify-between">
           <div className="flex flex-col gap-3">
@@ -38,8 +35,9 @@ export function CTABand({
             {description ? (
               <p
                 className={cn(
-                  "text-body-lg measure",
-                  onColor ? "text-muted" : "opacity-85",
+                  // text-muted, never opacity-85: alpha-on-text was the
+                  // dark-canvas idiom and dissolves on white.
+                  "text-body-lg measure text-muted",
                 )}
               >
                 {description}

@@ -565,8 +565,12 @@
 }
 
 /* ============================================================================
-   7. STACKED SAME-TONE COLLAPSE
-   Two adjacent sections of the same tone stack their padding with nothing
+   7. STACKED SAME-BAND COLLAPSE
+   Keys on data-band (the RESOLVED colour), not data-tone. `raised` renders
+   pure white exactly like `default`, so a default+raised pair is a same-colour
+   stack that a tone-name rule cannot see — two tones of paint, three tone names.
+
+   Two adjacent sections of the same band stack their padding with nothing
    between them: on /about that measured 439px of dead space between the lede
    and the first heading. That's a hole, not negative space.
 
@@ -583,28 +587,28 @@
    `w-10`. Unlayered styles win over layered ones, so these land.
    ============================================================================ */
 @media (min-width: 640px) {
-  section[data-tone="default"] + section[data-tone="default"][data-spacing="sm"],
-  section[data-tone="muted"] + section[data-tone="muted"][data-spacing="sm"] {
+  section[data-band="white"] + section[data-band="white"][data-spacing="sm"],
+  section[data-band="grey"] + section[data-band="grey"][data-spacing="sm"] {
     padding-top: 3rem;
   }
-  section[data-tone="default"][data-spacing="sm"]:has(+ section[data-tone="default"]),
-  section[data-tone="muted"][data-spacing="sm"]:has(+ section[data-tone="muted"]) {
+  section[data-band="white"][data-spacing="sm"]:has(+ section[data-band="white"]),
+  section[data-band="grey"][data-spacing="sm"]:has(+ section[data-band="grey"]) {
     padding-bottom: 3rem;
   }
-  section[data-tone="default"] + section[data-tone="default"][data-spacing="md"],
-  section[data-tone="muted"] + section[data-tone="muted"][data-spacing="md"] {
+  section[data-band="white"] + section[data-band="white"][data-spacing="md"],
+  section[data-band="grey"] + section[data-band="grey"][data-spacing="md"] {
     padding-top: 5rem;
   }
-  section[data-tone="default"] + section[data-tone="default"][data-spacing="lg"],
-  section[data-tone="muted"] + section[data-tone="muted"][data-spacing="lg"] {
+  section[data-band="white"] + section[data-band="white"][data-spacing="lg"],
+  section[data-band="grey"] + section[data-band="grey"][data-spacing="lg"] {
     padding-top: 6rem;
   }
-  section[data-tone="default"][data-spacing="md"]:has(+ section[data-tone="default"]),
-  section[data-tone="muted"][data-spacing="md"]:has(+ section[data-tone="muted"]) {
+  section[data-band="white"][data-spacing="md"]:has(+ section[data-band="white"]),
+  section[data-band="grey"][data-spacing="md"]:has(+ section[data-band="grey"]) {
     padding-bottom: 5rem;
   }
-  section[data-tone="default"][data-spacing="lg"]:has(+ section[data-tone="default"]),
-  section[data-tone="muted"][data-spacing="lg"]:has(+ section[data-tone="muted"]) {
+  section[data-band="white"][data-spacing="lg"]:has(+ section[data-band="white"]),
+  section[data-band="grey"][data-spacing="lg"]:has(+ section[data-band="grey"]) {
     padding-bottom: 6rem;
   }
 }

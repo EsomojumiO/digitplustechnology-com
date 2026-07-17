@@ -340,7 +340,6 @@ export default function HomePage() {
       <div className="relative overflow-hidden bg-surface">
         <CTABand
           className="relative z-10 bg-transparent"
-          tone="surface"
           title="Tell us what you’re planning"
           description="A short conversation is the fastest way to see how we can help. No obligation."
           actions={
