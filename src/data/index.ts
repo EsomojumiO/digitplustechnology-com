@@ -14,7 +14,12 @@ export {
   allIndustriesContent,
   getIndustryContent,
 } from "./industries";
-export { testimonials } from "./testimonials";
+export {
+  testimonials,
+  googleReviews,
+  directTestimonials,
+  pendingApprovalCount,
+} from "./testimonials";
 export { processSteps } from "./process";
 export { stats } from "./stats";
 export { whyUs } from "./whyUs";

@@ -28,7 +28,7 @@ import { WhyPillar } from "@/components/home/WhyPillar";
 import { IndustriesFilter } from "@/components/home/IndustriesFilter";
 import { InsightShelfCard } from "@/components/home/ContentShelf";
 import { siteConfig, services, industries } from "@/lib/site";
-import { whyUs, processSteps, stats, testimonials } from "@/data";
+import { whyUs, processSteps, stats, googleReviews, directTestimonials } from "@/data";
 import { getFeaturedArticles, getFeaturedReport } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -222,30 +222,72 @@ export default function HomePage() {
         />
       </Section>
 
-      {/* Testimonials */}
-      <Section>
-        <FadeIn>
-          <SectionHeading
-            eyebrow="In their words"
-            title="What partnership looks like"
-          />
-        </FadeIn>
-        <Stagger>
-          <Grid columns={3} gap="lg" className="mt-12">
-            {testimonials.map((t, i) => (
-              <StaggerItem key={i} className="h-full">
-                <Testimonial
-                  quote={t.quote}
-                  author={t.author}
-                  role={t.role}
-                  organization={t.organization}
-                  className="h-full"
-                />
-              </StaggerItem>
-            ))}
-          </Grid>
-        </Stagger>
-      </Section>
+      {/* Testimonials — main cards are APPROVED direct testimonials only. The
+          section renders nothing at all while approvals are outstanding: an
+          "In their words" heading over an empty grid is worse than no section,
+          and the alternative (publishing unapproved drafts) isn't an option. */}
+      {directTestimonials.length > 0 ? (
+        <Section>
+          <FadeIn>
+            <SectionHeading
+              eyebrow="In their words"
+              title="What partnership looks like"
+            />
+          </FadeIn>
+          <Stagger>
+            <Grid columns={3} gap="lg" className="mt-12">
+              {directTestimonials.map((t) => (
+                <StaggerItem key={t.name} className="h-full">
+                  <Testimonial
+                    quote={t.quote}
+                    author={t.name}
+                    role={t.title}
+                    organization={t.company}
+                    className="h-full"
+                  />
+                </StaggerItem>
+              ))}
+            </Grid>
+          </Stagger>
+        </Section>
+      ) : null}
+
+      {/* Google reviews — public, verbatim, supporting strip. Deliberately a
+          strip and not the main cards: these are retail/hardware-store reviews,
+          so they vouch for the supply line honestly but say nothing about
+          enterprise managed services. Overselling them as enterprise proof is
+          the kind of thing a reader spots immediately. */}
+      {googleReviews.length > 0 ? (
+        <Section tone="muted" spacing="sm">
+          <FadeIn className="flex flex-col items-center gap-8">
+            <div className="flex flex-col items-center gap-2">
+              <p className="text-caption font-semibold text-accent-green">
+                <span aria-hidden="true">★★★★★</span>
+                <span className="sr-only">Five star rating</span>
+              </p>
+              {/* Unlinked on purpose. The package asks for a link to the
+                  Google profile but doesn't include the URL, and a fabricated
+                  Google Maps link on a real business's site is worse than no
+                  link — it's a claim about where these reviews live. Logged in
+                  PLACEHOLDERS.md; wrap this in an <a> once the client supplies
+                  the real profile URL. */}
+              <p className="text-small font-medium text-text">
+                From our Google reviews
+              </p>
+            </div>
+            <ul className="grid w-full grid-cols-1 gap-x-10 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
+              {googleReviews.map((r) => (
+                <li key={r.name} className="flex flex-col gap-1.5">
+                  <p className="text-body text-text">&ldquo;{r.quote}&rdquo;</p>
+                  <p className="text-caption text-muted">
+                    {r.name} <span aria-hidden="true">·</span> Google review
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </FadeIn>
+        </Section>
+      ) : null}
 
       {/* By the numbers, animated count-up */}
       <Section tone="raised">

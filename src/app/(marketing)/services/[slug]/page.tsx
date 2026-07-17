@@ -19,7 +19,7 @@ import { FadeIn, Stagger, StaggerItem } from "@/components/motion";
 import { services, industries } from "@/lib/site";
 import { getSpokeArticles } from "@/lib/content";
 import { getServiceContent } from "@/data/services";
-import { testimonials } from "@/data/testimonials";
+import { directTestimonials } from "@/data/testimonials";
 import { JsonLd } from "@/lib/seo/jsonld";
 import { clampDescription } from "@/lib/seo/metadata";
 import { serviceSchema, faqSchema, breadcrumbSchema } from "@/lib/seo/schema";
@@ -65,9 +65,15 @@ export default async function ServiceDetailPage({
   // Hub-and-spoke: articles that link up to this service pillar.
   const spokes = getSpokeArticles("service", slug, 5);
 
-  // Pick an illustrative testimonial deterministically per service.
+  // Pick an approved direct testimonial deterministically per service.
+  // `directTestimonials` is EMPTY until the drafts come back approved, and
+  // `% 0` is NaN — which would index to undefined and take the whole page down.
+  // Guard the modulo, not just the render.
   const serviceIndex = services.findIndex((s) => s.slug === slug);
-  const testimonial = testimonials[serviceIndex % testimonials.length];
+  const testimonial =
+    directTestimonials.length > 0
+      ? directTestimonials[serviceIndex % directTestimonials.length]
+      : undefined;
 
   return (
     <>
@@ -205,9 +211,9 @@ export default async function ServiceDetailPage({
           <FadeIn className="mx-auto max-w-3xl">
             <Testimonial
               quote={testimonial.quote}
-              author={testimonial.author}
-              role={testimonial.role}
-              organization={testimonial.organization}
+              author={testimonial.name}
+              role={testimonial.title}
+              organization={testimonial.company}
             />
           </FadeIn>
         </Section>

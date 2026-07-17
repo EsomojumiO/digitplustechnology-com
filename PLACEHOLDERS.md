@@ -63,3 +63,47 @@ tracked in `docs/BLOCKERS.md` — usage rights need settling regardless of file 
 
 Until then the strips are visually consistent but flat, and read as generic rather than as a
 credible named-partner roster.
+
+
+## Testimonials — RESOLVED (pending approvals) — 2026-07-17
+
+`src/data/testimonials.ts` no longer contains placeholders. It now holds **real**
+testimonials in two classes, and `approved` is enforced by construction: the raw
+array is module-private and only pre-filtered lists (`testimonials`,
+`googleReviews`, `directTestimonials`) are exported. **An unapproved quote has no
+code path to a page** — forgetting to filter at a call site cannot publish one.
+
+### Live now — 5 Google reviews (`source: "google-review"`, `approved: true`)
+Already published publicly by their authors, so quotable verbatim without further
+approval. Quoted exactly; attributed by name + "Google review". Rendered as a
+compact ★★★★★ **supporting strip**, deliberately not as the main cards: they read
+as retail/hardware-store reviews, which vouches for the supply line honestly but
+says nothing about enterprise managed services.
+
+### PENDING — 3 direct testimonials (`approved: false`)
+Drafts written by us and sent for approval. **They are not testimonials until the
+named person approves in writing.** Currently invisible on the site — verified: none
+of the three quotes or names appears anywhere in the shipped HTML.
+
+| Person | Company | Status |
+|---|---|---|
+| Adel Salimullin (CTO) | Nizamiye | draft sent — awaiting written reply |
+| Arc. Henshaw | Greyboulders | draft sent — awaiting written reply |
+| Bashir Lawal | DewDrop TV | draft sent — awaiting written reply |
+
+**To publish one:** flip `approved: true` **only** on confirmation that the person
+approved in writing — and publish **what they sent back**, not the draft, if they
+edited it. Keep the reply (screenshot/email) as the consent record.
+
+**Consequence while pending:** the home "In their words" section renders **not at
+all** (an empty grid under that heading is worse than no section), and
+`/services/[slug]` shows no testimonial. Both are guarded — `directTestimonials`
+is empty, and `index % 0` is `NaN`, which would otherwise have taken every service
+page down.
+
+### ⚠️ NEEDED FROM CLIENT — Google profile URL
+The package asks for the strip to link to the Google profile, but **no URL was
+supplied**. The label currently renders as plain text. A fabricated Google Maps
+link on a real business's site is a claim about where those reviews live, so it
+was left unlinked rather than invented. Supply the profile URL and wrap the label
+in an `<a>` (`src/app/page.tsx`, the Google reviews strip).

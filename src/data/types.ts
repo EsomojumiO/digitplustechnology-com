@@ -50,11 +50,21 @@ export interface IndustryContent {
   metaDescription: string;
 }
 
+export type TestimonialSource = "google-review" | "direct";
+
 export interface TestimonialContent {
+  /** Verbatim. For google-review the ONLY permitted edit is truncation with "…". */
   quote: string;
-  author: string;
-  role: string;
-  organization: string;
+  name: string;
+  title?: string;
+  company?: string;
+  source: TestimonialSource;
+  /**
+   * google-review: true — already published by its author.
+   * direct: true ONLY once the named person has approved in writing.
+   * Enforced in data/testimonials.ts, which exports pre-filtered lists.
+   */
+  approved: boolean;
 }
 
 export interface ProcessStepContent {
