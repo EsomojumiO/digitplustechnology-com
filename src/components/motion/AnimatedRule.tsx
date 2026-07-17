@@ -30,7 +30,7 @@ export function AnimatedRule({
     <div
       role="presentation"
       aria-hidden="true"
-      className={cn("reveal-rule reveal-init", className)}
+      className={cn("reveal-rule reveal-init w-full", className)}
       style={{
         ...({ "--reveal-delay": delay ? `${delay}ms` : "0ms" } as React.CSSProperties),
         ...style,

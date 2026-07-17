@@ -458,9 +458,14 @@
      orange->green gradient broke "orange is a fill, never an ink", and the
      glow is banned outright on the light canvas — depth comes from value and
      whitespace. Green carries the structure. */
+  /* No `width` here on purpose. This rule lives in @layer utilities, so it does
+     NOT out-specify a `w-10` utility — same layer, and Tailwind's generated
+     utilities are emitted at the @import, i.e. BEFORE this block, so source
+     order handed the win to `width: 100%` and every Connective Line rendered
+     full-bleed. Width is the component's business (AnimatedRule defaults to
+     w-full and callers override), where tailwind-merge resolves it properly. */
   .reveal-rule {
     height: 2px;
-    width: 100%;
     background: var(--accent-green);
     transform-origin: left center;
     transition: transform var(--dur-slow) var(--ease-out);
