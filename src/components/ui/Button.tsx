@@ -12,16 +12,15 @@ const base =
   "active:translate-y-px active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50";
 
 const variants: Record<ButtonVariant, string> = {
-  // 1. PRIMARY — orange fill, near-black label; inner glow + brighten on hover.
-  //    Max ONE per viewport. White-on-orange fails WCAG (~2.2:1); the dark
-  //    label lands ~8.6:1.
-  primary:
-    "bg-accent text-accent-foreground shadow-[var(--shadow-sm)] hover:bg-accent-hover " +
-    "hover:shadow-[inset_0_1px_0_0_rgb(255_255_255/0.25),0_6px_22px_-8px_color-mix(in_oklab,var(--accent)_70%,transparent)]",
-  // 2. SECONDARY — transparent, hairline border (white/0.14), white text;
-  //    border brightens on hover. No fill.
+  // 1. PRIMARY — orange fill (Ember-600), WHITE label at 5.74:1. Max ONE per
+  //    viewport. Hover DARKENS to Ember-700 (the light-canvas idiom) instead of
+  //    brightening. The inner white glow + orange drop-glow are gone: glows are
+  //    banned on white, and depth here comes from the fill alone.
+  primary: "bg-accent text-accent-foreground hover:bg-accent-hover",
+  // 2. SECONDARY — no fill, #d2d2d7 hairline pill, near-black label. The border
+  //    DARKENS on hover rather than brightening.
   secondary:
-    "bg-transparent text-text border border-hairline-hover hover:border-white/28",
+    "bg-transparent text-text border border-hairline hover:border-hairline-hover",
   // 3. GHOST / LINK — green text, animated underline. Sits inline as a link
   //    (size padding/height are skipped below) so the underline hugs the label.
   ghost: "bg-transparent text-accent-green link-underline hover:text-accent-green",

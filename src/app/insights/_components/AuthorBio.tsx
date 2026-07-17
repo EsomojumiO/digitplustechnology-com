@@ -22,7 +22,7 @@ export function AuthorBio({ author }: { author: Author }) {
       <div className="flex flex-col gap-5 sm:flex-row sm:items-start">
         <div
           aria-hidden="true"
-          className="grid size-14 shrink-0 place-items-center rounded-full bg-brand text-[var(--cream)] font-display text-h4 font-bold"
+          className="grid size-14 shrink-0 place-items-center rounded-full bg-brand text-text font-display text-h4 font-bold"
         >
           {initials(author.name)}
         </div>

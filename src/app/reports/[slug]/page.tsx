@@ -130,7 +130,7 @@ export default async function ReportLandingPage({
           {/* Cover, neutral surface fallback when the asset is absent. */}
           <FadeIn
             delay={0.08}
-            className="relative order-first aspect-[3/4] overflow-hidden rounded-lg bg-surface cover-dark lg:order-none"
+            className="relative order-first aspect-[3/4] overflow-hidden rounded-lg bg-surface cover lg:order-none"
           >
             {report.cover ? (
               <Image

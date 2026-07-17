@@ -63,36 +63,38 @@
    Every text/bg pair is WCAG AA-verified — see docs/redesign/05-dark-audit.md.
    --------------------------------------------------------------------------- */
 :root {
-  --background: #060707; /* green-tinted near-black canvas (never #000) */
-  --surface: #0b0d0c; /* barely-lifted band, separated by hairline not lightness */
-  --surface-raised: rgb(255 255 255 / 0.03); /* card fill — 2–4% white max */
-  --border-hairline: rgb(255 255 255 / 0.08); /* hairline everywhere */
-  --border-hairline-hover: rgb(255 255 255 / 0.14); /* brighten on hover */
-  --text: #fafafa; /* display / high-emphasis — never pure #fff — ~19:1 */
-  --text-heading: #fafafa; /* headings are white; green is an accent, not heading ink */
-  --text-muted: rgb(255 255 255 / 0.6); /* secondary / sub-headline — ~7.3:1 */
-  --text-faint: rgb(255 255 255 / 0.5); /* floor for large/decorative — ~5.4:1 */
+  --background: #ffffff; /* primary canvas — pure white */
+  --surface: #f5f5f7; /* alternating band (Apple's exact off-white) */
+  --surface-raised: #ffffff; /* card fill — a VALUE, not alpha-on-dark */
+  --border-hairline: #d2d2d7; /* hairline everywhere */
+  --border-hairline-hover: #86868b; /* non-text: 3.62:1 is fine for a border */
+  --text: #1d1d1f; /* body / high-emphasis — 16.83:1 on white */
+  --text-heading: #1d1d1f; /* headlines are ink; green is an accent, not heading ink */
+  --text-muted: #6e6e73; /* secondary — 5.07:1 on white, 4.66:1 on #f5f5f7 */
+  --text-faint: #6e6e73; /* collapsed into muted: #86868b fails at 3.62:1 */
 
-  --accent: #ff8a3d; /* ORANGE — single primary CTA fill per screen */
-  --accent-hover: #ffa15c; /* brighten on hover */
-  --accent-foreground: #060707; /* DARK label on orange — ~8.6:1 (white would fail) */
-  --accent-green: #3ddc84; /* GREEN structural accent — ~11:1 */
-  --accent-text: var(--accent-green); /* accent-as-ink is green, not orange */
-  --accent-subtle: rgb(255 138 61 / 0.12); /* faint orange glow tint */
+  --accent: #ad4527; /* ORANGE (Ember-600) — single primary CTA fill per viewport */
+  --accent-hover: #8c3820; /* Ember-700 — DARKEN on hover (light-canvas idiom) */
+  --accent-foreground: #ffffff; /* white label on orange — 5.74:1 */
+  --accent-green: #2d5d49; /* GREEN (Forest-500) — 7.57:1 white / 6.95:1 on #f5f5f7.
+                              NOT Forest-600: it passes AAA but reads near-black at
+                              accent sizes, so the accent stops reading as green. */
+  --accent-text: var(--accent-green); /* accent-as-ink is green, never orange */
+  --accent-subtle: rgb(173 69 39 / 0.08); /* faint orange tint */
 
-  /* Brand surfaces — deep near-black-green punctuation bands / footer (subtle). */
-  --brand: #0a100d;
+  /* Brand surfaces — the footer and punctuation bands are NO LONGER dark. */
+  --brand: #f5f5f7;
   --brand-hover: var(--accent-green);
-  --brand-foreground: #fafafa;
-  --brand-subtle: rgb(61 220 132 / 0.1); /* faint green glow tint */
+  --brand-foreground: #1d1d1f;
+  --brand-subtle: rgb(45 93 73 / 0.08); /* faint green tint */
 
-  /* Elevation — near-black glows (cards get their lift from hairline + green
-     hover glow, not from heavy drop shadows). */
-  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.6);
-  --shadow-md: 0 8px 30px -8px rgb(0 0 0 / 0.7);
-  --shadow-lg: 0 30px 60px -20px rgb(0 0 0 / 0.8);
+  /* Elevation — soft neutral shadows. Depth comes from whitespace and value;
+     `md` is a hover state only, never a resting one. No glows. */
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.04);
+  --shadow-md: 0 8px 24px -8px rgb(0 0 0 / 0.12);
+  --shadow-lg: 0 24px 56px -20px rgb(0 0 0 / 0.16);
 
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 /* ---------------------------------------------------------------------------
@@ -369,85 +371,6 @@
     font-variation-settings: "opsz" 32;
   }
 
-  /* Fine grain/noise texture — restrained futurism. Tiled SVG turbulence,
-     fixed, pointer-events-none, very low opacity. Slightly stronger in dark. */
-  .grain-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-    opacity: 0.02; /* fine noise on the near-black canvas */
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    background-size: 160px 160px;
-  }
-
-  /* Aurora — ONE subtle gradient-mesh moment (hero only), built from brand
-     greens + ember. Gentle drift, disabled under reduced motion. */
-  .aurora {
-    position: absolute;
-    inset: -20% -10% auto -10%;
-    height: 130%;
-    pointer-events: none;
-    z-index: 0;
-    background:
-      radial-gradient(
-        40% 50% at 20% 18%,
-        color-mix(in oklab, var(--accent-green) 55%, transparent),
-        transparent 70%
-      ),
-      radial-gradient(
-        34% 46% at 82% 12%,
-        color-mix(in oklab, var(--accent) 40%, transparent),
-        transparent 70%
-      ),
-      radial-gradient(
-        46% 56% at 60% 65%,
-        color-mix(in oklab, var(--accent-green) 40%, transparent),
-        transparent 72%
-      );
-    filter: blur(64px) saturate(110%);
-    opacity: 0.14; /* glows are felt, not seen — 8–15% on the dark canvas */
-    will-change: transform;
-  }
-  @media (prefers-reduced-motion: no-preference) {
-    .aurora {
-      animation: aurora-drift 26s var(--ease-in-out) infinite alternate;
-    }
-  }
-  @keyframes aurora-drift {
-    0% {
-      transform: translate3d(-2%, -1%, 0) scale(1);
-    }
-    50% {
-      transform: translate3d(3%, 2%, 0) scale(1.06);
-    }
-    100% {
-      transform: translate3d(-1%, 3%, 0) scale(1.02);
-    }
-  }
-
-  /* Circuit-trace pulse — a short bright dash travels each hero trace via
-     stroke-dashoffset (compositor-cheap). Hidden under reduced motion, leaving
-     the static faint traces. `pathLength=100` normalises every path. */
-  .circuit-pulse {
-    stroke-dasharray: 11 89;
-    animation: circuit-pulse 9s linear infinite;
-    animation-delay: var(--pulse-delay, 0s);
-  }
-  @keyframes circuit-pulse {
-    from {
-      stroke-dashoffset: 100;
-    }
-    to {
-      stroke-dashoffset: 0;
-    }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .circuit-pulse {
-      display: none;
-    }
-  }
-
   /* Marquee — seamless horizontal loop (two duplicated tracks). */
   @keyframes marquee {
     from {
@@ -551,12 +474,14 @@
      same React-independent reveal mechanism (/reveal.js toggles `.reveal-in`),
      so it degrades to a static rule with no JS and under reduced motion.
      Compositor-only (transform), works at every breakpoint. */
+  /* The Connective Line. Solid green, 2px, no gradient and no glow: the
+     orange->green gradient broke "orange is a fill, never an ink", and the
+     glow is banned outright on the light canvas — depth comes from value and
+     whitespace. Green carries the structure. */
   .reveal-rule {
-    height: 1px;
+    height: 2px;
     width: 100%;
-    /* Signature gradient — orange -> green — one of only two places it appears. */
-    background: linear-gradient(90deg, var(--accent), var(--accent-green));
-    box-shadow: 0 0 8px -1px color-mix(in oklab, var(--accent-green) 70%, transparent);
+    background: var(--accent-green);
     transform-origin: left center;
     transition: transform var(--dur-slow) var(--ease-out);
   }
@@ -592,51 +517,16 @@
     background-size: 100% 1px;
   }
 
-  /* ---- Glow — the core "Raycast" ingredient ----
-     A large, soft radial of the accent colors sitting BEHIND content at low
-     opacity. Colour comes from the gradient itself (no runtime filter: blur),
-     so it's compositor-cheap and never animates `filter`. Absolutely positioned,
-     non-interactive, decorative. Default is green; add .glow-orange for warmth. */
-  .glow {
-    position: absolute;
-    pointer-events: none;
-    z-index: 0;
-    border-radius: 9999px;
-    background: radial-gradient(
-      closest-side,
-      color-mix(in oklab, var(--accent-green) 42%, transparent),
-      transparent 78%
-    );
-    opacity: 0.14;
-    will-change: opacity;
-  }
-  .glow-orange {
-    background: radial-gradient(
-      closest-side,
-      color-mix(in oklab, var(--accent) 40%, transparent),
-      transparent 78%
-    );
-  }
-
-  /* ---- Cover-dark — seat light photos into the near-black canvas ----
-     Wrap a next/image cover; the ::after adds a bottom-up scrim for legibility
-     and a faint overall darken so Unsplash whites don't glare. */
-  .cover-dark {
+  /* ---- Cover — photo container ----
+     Was `.cover-dark`: a brightness(0.92) darken plus a near-black bottom-up
+     scrim, to seat light photos into the near-black canvas. Both are gone.
+     On white the photos carry the visual weight, so they run bright and
+     full-colour and nothing sits on top of them. What remains is the
+     container: clipping, radius and a light hairline. */
+  .cover {
     position: relative;
     overflow: hidden;
     border: 1px solid var(--border-hairline);
-  }
-  .cover-dark > img {
-    filter: brightness(0.92) contrast(1.02);
-  }
-  .cover-dark::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background:
-      linear-gradient(to top, rgb(6 7 7 / 0.65), transparent 55%),
-      rgb(6 7 7 / 0.12);
   }
 
   /* Hero carousel progress bar — the active bar fills orange->green over the 6s

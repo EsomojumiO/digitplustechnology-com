@@ -2,7 +2,6 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Container } from "./Container";
 import { Eyebrow } from "./Eyebrow";
-import { HeroMotif } from "@/components/motion/HeroMotif";
 
 export interface HeroProps extends Omit<React.HTMLAttributes<HTMLElement>, "title"> {
   eyebrow?: React.ReactNode;
@@ -14,10 +13,6 @@ export interface HeroProps extends Omit<React.HTMLAttributes<HTMLElement>, "titl
   coverage?: React.ReactNode;
   /** Optional visual placed alongside on wide screens. */
   media?: React.ReactNode;
-  /** Render the subtle aurora gradient-mesh moment behind the hero (flagship use). */
-  aurora?: boolean;
-  /** Render the signature animated network motif behind the hero (flagship use). */
-  motif?: boolean;
 }
 
 /**
@@ -31,8 +26,6 @@ export function Hero({
   actions,
   coverage,
   media,
-  aurora = false,
-  motif = false,
   className,
   ...props
 }: HeroProps) {
@@ -44,8 +37,6 @@ export function Hero({
       )}
       {...props}
     >
-      {aurora ? <div className="aurora" aria-hidden="true" /> : null}
-      {motif ? <HeroMotif /> : null}
       <Container className="relative z-10">
         <div
           className={cn(

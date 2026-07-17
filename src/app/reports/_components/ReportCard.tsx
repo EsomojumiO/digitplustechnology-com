@@ -38,7 +38,7 @@ function Cover({
   return (
     <div
       className={cn(
-        "relative overflow-hidden bg-surface cover-dark",
+        "relative overflow-hidden bg-surface cover",
         className,
       )}
     >

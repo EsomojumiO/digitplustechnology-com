@@ -12,8 +12,9 @@ export interface EyebrowProps
 }
 
 /**
- * Eyebrow, small uppercase mono label above a heading. Green structural accent
- * on the dark canvas; optional "· 01" section index in the Resend manner.
+ * Eyebrow, small green label above a heading — the structural accent.
+ * Sentence-case semibold sans in Forest-500; optional section index, rendered
+ * muted rather than green-at-alpha (which failed AA on white).
  */
 export function Eyebrow({
   as: Comp = "p",
@@ -27,15 +28,17 @@ export function Eyebrow({
   return (
     <Comp
       className={cn(
-        // Monospace technical label, restrained-futurism precision signal.
-        "font-mono text-caption font-medium uppercase tracking-[0.18em] text-accent-green",
+        // Sentence-case green signpost. The dark theme's mono/uppercase/wide-
+        // tracking idiom is retired: on white it reads as shouty technical
+        // chrome, not as Apple's quiet label.
+        "text-caption font-semibold text-accent-green",
         className,
       )}
       {...props}
     >
       {children}
       {indexLabel != null && (
-        <span className="text-accent-green/50">{" · " + indexLabel}</span>
+        <span className="text-muted">{" · " + indexLabel}</span>
       )}
     </Comp>
   );

@@ -5,22 +5,20 @@ import { siteConfig } from "@/lib/site";
 
 export interface LogoProps {
   className?: string;
-  /** Tone of the wordmark, "inverse" for use on the forest-green brand surfaces. */
-  tone?: "default" | "inverse";
 }
 
 /**
  * Logo, official Digitplus chain-link mark + DIGITPLUS wordmark.
  *
- * Uses the brand icon (Pishon Design Studio kit) from /public/brand. The wordmark
- * is set in the display face (Space Grotesk) to match headlines. On dark surfaces
- * pass tone="inverse" to swap to the white mark + cream wordmark.
+ * Uses the brand icon (Pishon Design Studio kit) from /public/brand.
+ *
+ * The `tone` prop and the white/inverse variant are both gone. The dark theme
+ * hardcoded `inverse = true` because every surface was dark; on the Apple-light
+ * canvas no dark surface survives (the footer is #f5f5f7), so the standard mark
+ * is the correct treatment everywhere and an inverse variant would be dead code.
+ * The white icon asset stays in /public/brand for the dark-raycast fallback.
  */
-export function Logo({ className, tone = "default" }: LogoProps) {
-  // Dark-only theme: every surface is dark, so the white mark + cream wordmark
-  // is the legible treatment everywhere (the `tone` prop is kept for API stability).
-  void tone;
-  const inverse = true;
+export function Logo({ className }: LogoProps) {
   return (
     <Link
       href="/"
@@ -32,7 +30,7 @@ export function Logo({ className, tone = "default" }: LogoProps) {
       )}
     >
       <Image
-        src={inverse ? "/brand/digitplus-icon-white.png" : "/brand/digitplus-icon.png"}
+        src="/brand/digitplus-icon.png"
         alt=""
         aria-hidden="true"
         width={45}
@@ -46,8 +44,10 @@ export function Logo({ className, tone = "default" }: LogoProps) {
       />
       <span
         className={cn(
+          // Ink, not `text-brand`: --brand is now the light #f5f5f7 surface
+          // token, so text-brand would render near-white on white.
           "font-display text-[1.0625rem] font-bold uppercase tracking-[0.02em] leading-none",
-          inverse ? "text-[var(--cream)]" : "text-brand",
+          "text-text",
         )}
       >
         Digitplus

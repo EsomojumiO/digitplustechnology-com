@@ -211,7 +211,7 @@ export default async function ArticlePage({
       <Section spacing="sm" contained={false}>
         <Container width="wide">
           <FadeIn>
-            <div className="relative aspect-[16/9] w-full overflow-hidden rounded-xl bg-surface cover-dark">
+            <div className="relative aspect-[16/9] w-full overflow-hidden rounded-xl bg-surface cover">
               <Image
                 src={article.cover}
                 alt={article.coverAlt || article.title}

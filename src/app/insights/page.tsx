@@ -98,7 +98,7 @@ export default async function InsightsHubPage({
               href={`/insights/${featured.slug}`}
               className="group grid items-center gap-8 rounded-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-green lg:grid-cols-2 lg:gap-12"
             >
-              <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl bg-background cover-dark">
+              <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl bg-background cover">
                 <Image
                   src={featured.cover}
                   alt={featured.coverAlt || featured.title}

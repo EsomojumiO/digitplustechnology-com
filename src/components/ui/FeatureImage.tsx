@@ -17,7 +17,7 @@ export interface FeatureImageProps {
 
 /**
  * FeatureImage — one curated accent image, treated to match the home hero
- * (cover-dark scrim + saturate(0.85) + hairline frame + mono micro-label).
+ * (cover scrim + saturate(0.85) + hairline frame + mono micro-label).
  *
  * Server component: if the file isn't present yet (checked at build via
  * hasPublicFile), it renders a hairline placeholder instead of a broken image,
@@ -49,24 +49,28 @@ export function FeatureImage({
             fill
             sizes={sizes}
             priority={priority}
-            className="object-cover saturate-[0.85] brightness-[0.9]"
+            className="object-cover"
           />
-          <div
-            className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/70 via-background/10 to-transparent"
-            aria-hidden="true"
-          />
+          {/* Soft white gradient at the base — ONLY when there's a label to
+              keep legible. The dark theme veiled the whole image
+              (from-background/70) to seat it into near-black; on white that
+              inverts into a haze over the photo. Photos run clean now. */}
+          {label ? (
+            <div
+              className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white via-white/60 to-transparent"
+              aria-hidden="true"
+            />
+          ) : null}
         </>
       ) : (
-        <div className="absolute inset-0 grid place-items-center bg-[repeating-linear-gradient(135deg,transparent,transparent_10px,rgb(255_255_255/0.02)_10px,rgb(255_255_255/0.02)_20px)]">
-          <span className="font-mono text-caption uppercase tracking-[0.14em] text-faint">
-            Image pending
-          </span>
+        <div className="absolute inset-0 grid place-items-center bg-[repeating-linear-gradient(135deg,transparent,transparent_10px,rgb(0_0_0/0.03)_10px,rgb(0_0_0/0.03)_20px)]">
+          <span className="text-caption text-muted">Image pending</span>
         </div>
       )}
       {label ? (
         <span
           aria-hidden="true"
-          className="absolute bottom-2.5 left-3 font-mono text-caption uppercase tracking-[0.14em] text-white/50"
+          className="text-caption absolute bottom-2.5 left-3 font-medium text-muted"
         >
           {label}
         </span>

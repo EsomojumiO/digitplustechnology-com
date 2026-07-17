@@ -42,3 +42,24 @@ Partner-logo reseller authorisation, real photography, report cover images and P
 env-gated integration keys (email / marketing / CRM / analytics / Supabase / Upstash) are
 placeholders/stubs tracked in [`docs/BLOCKERS.md`](docs/BLOCKERS.md) and consolidated in
 [`docs/redesign/13-launch-ledger.md`](docs/redesign/13-launch-ledger.md) §3 (PENDING — HUMAN).
+
+## 5. Partner logos rendered as single dark ink (Apple-light rebuild, 2026-07-17)
+
+`src/components/ui/TrustStrip.tsx` and `src/components/home/TrustMarquee.tsx` render all 17
+partner marks through `[filter:brightness(0)]` — knocking each one to a single dark ink.
+
+**Why:** the dark theme used `[filter:brightness(0)_invert(1)]` to force the marks to pure
+white. On the white canvas that renders every logo **invisible**. Dark ink is the safe,
+consistent, ships-today treatment (client-approved at the Phase 1 STOP, option b).
+
+**The real end state (option a):** drop the filter entirely and use each partner's real
+full-colour logo. It is the best-looking and most Apple-like treatment, and the reason it
+isn't done yet is that we don't have the assets — not a technical constraint.
+
+**What's needed from the client:** the official logo file for each of the 17 partners
+(SVG preferred, or PNG at ≥2x), ideally each partner's approved monochrome-dark variant as
+a fallback. Note this is coupled to the partner-logo **reseller authorisation** item already
+tracked in `docs/BLOCKERS.md` — usage rights need settling regardless of file format.
+
+Until then the strips are visually consistent but flat, and read as generic rather than as a
+credible named-partner roster.

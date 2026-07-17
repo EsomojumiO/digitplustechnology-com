@@ -103,8 +103,6 @@ export default function RootLayout({
       className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
-        {/* Fine grain texture, restrained futurism (fixed, non-interactive). */}
-        <div className="grain-overlay" aria-hidden="true" />
         <SkipLink />
         <Header />
         <main id="main" className="flex-1">

@@ -40,7 +40,9 @@ export function TrustMarquee() {
             <img
               src={partner.src}
               alt={partner.name}
-              className="h-6 w-auto opacity-65 [filter:brightness(0)_invert(1)] transition-opacity duration-[var(--dur-base)] hover:opacity-100"
+              // brightness(0) alone — single dark ink. invert(1) made these
+              // white for the dark canvas; on white they'd be invisible.
+              className="h-6 w-auto opacity-65 [filter:brightness(0)] transition-opacity duration-[var(--dur-base)] hover:opacity-100"
               loading="lazy"
             />
           </li>

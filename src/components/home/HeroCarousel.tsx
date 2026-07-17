@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
  * HeroCarousel — full-height crossfade carousel for the home hero image zone.
  *
  * Crossfade + slow Ken Burns (no sliding). One image at a time, edge-to-edge,
- * rounded-2xl + hairline + cover-dark scrim + saturate. Caption (mono eyebrow +
+ * rounded-2xl + hairline + cover scrim + saturate. Caption (mono eyebrow +
  * one line) is a named link to the service; 5 hairline progress bars double as
  * the dwell timer (fill orange->green). Pauses on hover/focus; arrow keys when
  * focused; reduced-motion → static first slide, indicators still clickable.
@@ -127,7 +127,7 @@ export function HeroCarousel() {
               fill
               priority={i === 0}
               sizes="(min-width: 1024px) 46vw, 100vw"
-              className="object-cover saturate-[0.85] brightness-[0.9]"
+              className="object-cover"
               style={{
                 // Ken Burns: ease to 1.06 over the dwell on activation.
                 transform: isActive && !reduce ? "scale(1.06)" : "scale(1)",

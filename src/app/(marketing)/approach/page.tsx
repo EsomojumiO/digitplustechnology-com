@@ -48,7 +48,7 @@ export default function ApproachPage() {
       <Section tone="inverse" spacing="lg">
         <FadeIn className="mx-auto max-w-3xl text-center">
           <Eyebrow className="text-muted">The point of process</Eyebrow>
-          <p className="text-h3 mt-6 font-medium tracking-tight text-neutral-50">
+          <p className="text-h3 mt-6 font-medium tracking-tight text-text">
             Every step exists to remove a way projects usually go wrong. The
             result is fewer surprises, a clean paper trail, and technology that
             works on the day you need it to.

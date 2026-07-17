@@ -20,7 +20,6 @@ import {
   StaggerItem,
   CountUp,
   Magnetic,
-  CircuitTraces,
 } from "@/components/motion";
 import { HeroCarousel } from "@/components/home/HeroCarousel";
 import { TrustMarquee } from "@/components/home/TrustMarquee";
@@ -63,21 +62,13 @@ export default function HomePage() {
 
   return (
     <>
-      {/* Hero — text left, 5-image bento collage right. Aurora glow full-bleed;
-          circuit traces sit behind the text zone only so they never fight the
-          photographs. */}
+      {/* Hero — text left, 5-image bento collage right. The photographs carry
+          the visual weight; nothing sits behind them. */}
       <section className="relative overflow-hidden pt-20 pb-16 sm:pt-24 sm:pb-24">
-        <div className="aurora" aria-hidden="true" />
         <Container className="relative z-10">
           <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-10">
             {/* Text zone */}
             <div className="relative lg:col-span-5">
-              <div
-                className="pointer-events-none absolute -inset-x-8 -inset-y-8 -z-10 [mask-image:radial-gradient(120%_100%_at_30%_40%,black,transparent_72%)]"
-                aria-hidden="true"
-              >
-                <CircuitTraces />
-              </div>
               <div className="flex flex-col gap-6">
                 <Eyebrow>Enterprise IT · Nigeria</Eyebrow>
                 <h1 className="text-display max-w-[16ch] text-text">
@@ -176,7 +167,7 @@ export default function HomePage() {
       <Section tone="inverse" spacing="lg">
         <FadeIn className="mx-auto max-w-3xl text-center">
           <Eyebrow className="text-muted">Our standard</Eyebrow>
-          <p className="text-h2 mt-6 font-medium tracking-tight text-neutral-50">
+          <p className="text-h2 mt-6 font-medium tracking-tight text-text">
             “Most IT projects fail in the gaps, between vendors, between purchase
             and deployment, between handover and support. We close them.”
           </p>
@@ -345,9 +336,8 @@ export default function HomePage() {
         </Section>
       ) : null}
 
-      {/* Closing CTA band over an aurora glow */}
+      {/* Closing CTA band — separation by background alternation, not by glow */}
       <div className="relative overflow-hidden bg-brand">
-        <div className="aurora" aria-hidden="true" />
         <CTABand
           className="relative z-10 bg-transparent"
           tone="inverse"
@@ -364,7 +354,7 @@ export default function HomePage() {
                 href={siteConfig.whatsapp}
                 size="lg"
                 variant="ghost"
-                className="text-neutral-50 hover:bg-white/10"
+                className="text-text hover:bg-surface"
               >
                 Chat on WhatsApp
               </Button>

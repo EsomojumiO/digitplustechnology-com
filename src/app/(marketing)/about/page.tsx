@@ -179,7 +179,7 @@ export default function AboutPage() {
       <Section tone="inverse" spacing="lg">
         <FadeIn className="mx-auto max-w-3xl text-center">
           <Eyebrow className="text-muted">Our commitment</Eyebrow>
-          <p className="text-h3 mt-6 font-medium tracking-tight text-neutral-50">
+          <p className="text-h3 mt-6 font-medium tracking-tight text-text">
             We treat your procurement, your data, and your operations with the
             same care we would expect for our own, genuine equipment,
             transparent records, and a privacy-first stance on the information

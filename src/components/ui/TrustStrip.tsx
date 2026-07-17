@@ -37,10 +37,14 @@ const DEFAULT_LOGOS: TrustLogo[] = [
 ];
 
 /**
- * TrustStrip, monochrome partner logo row. Real brand marks are forced to a
- * uniform white (`brightness(0) invert(1)`) and muted via opacity so the row
- * reads as one consistent set on the dark theme; falls back to a text wordmark
- * when a logo has no `src`.
+ * TrustStrip, monochrome partner logo row. Real brand marks are knocked to a
+ * uniform dark ink (`brightness(0)`) and muted via opacity so the row reads as
+ * one consistent set on the white canvas; falls back to a text wordmark when a
+ * logo has no `src`.
+ *
+ * Monochrome is a stopgap, not the design: real full-colour marks are the
+ * intended treatment and are blocked on assets + reseller authorisation. See
+ * PLACEHOLDERS.md §5.
  */
 export function TrustStrip({
   label,
@@ -63,7 +67,12 @@ export function TrustStrip({
               <img
                 src={logo.src}
                 alt={logo.name}
-                className="h-6 w-auto opacity-60 [filter:brightness(0)_invert(1)] transition-opacity duration-[var(--dur-base)] hover:opacity-100"
+                // brightness(0) alone — knock every mark to a single dark ink.
+                // The dark theme added invert(1) to make them white, which on a
+                // white canvas renders all 17 partner logos invisible. Real
+                // full-colour marks are the better end state and are logged as
+                // an asset-collection task in PLACEHOLDERS.md.
+                className="h-6 w-auto opacity-60 [filter:brightness(0)] transition-opacity duration-[var(--dur-base)] hover:opacity-100"
                 loading="lazy"
               />
             ) : (
