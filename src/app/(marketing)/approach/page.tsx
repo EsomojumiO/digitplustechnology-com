@@ -45,7 +45,7 @@ export default function ApproachPage() {
       </Section>
 
       {/* Principle */}
-      <Section tone="inverse" spacing="lg">
+      <Section tone="muted" spacing="lg">
         <FadeIn className="mx-auto max-w-3xl text-center">
           <Eyebrow className="text-muted">The point of process</Eyebrow>
           <p className="text-h3 mt-6 font-medium tracking-tight text-text">

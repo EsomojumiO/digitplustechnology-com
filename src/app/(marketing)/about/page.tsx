@@ -52,7 +52,10 @@ export default function AboutPage() {
       </Section>
 
       {/* Story */}
-      <Section spacing="md">
+      {/* Strict two-tone alternation: white hero -> #f5f5f7 band. This section
+          previously repeated the hero's white, stacking padding into a 439px
+          hole. The team image band lands here, where the hole was. */}
+      <Section tone="muted" spacing="md">
         <FadeIn>
           <Prose>
             <h2>Why we exist</h2>
@@ -94,7 +97,7 @@ export default function AboutPage() {
       </Section>
 
       {/* Credentials */}
-      <Section tone="muted">
+      <Section>
         <FadeIn>
           <SectionHeading
             eyebrow="Credentials"
@@ -176,7 +179,7 @@ export default function AboutPage() {
       </Section>
 
       {/* Trust / compliance statement */}
-      <Section tone="inverse" spacing="lg">
+      <Section tone="muted" spacing="lg">
         <FadeIn className="mx-auto max-w-3xl text-center">
           <Eyebrow className="text-muted">Our commitment</Eyebrow>
           <p className="text-h3 mt-6 font-medium tracking-tight text-text">

@@ -7,12 +7,13 @@ export interface CTABandProps extends Omit<React.HTMLAttributes<HTMLElement>, "t
   description?: React.ReactNode;
   /** Action buttons / links slot. */
   actions?: React.ReactNode;
-  tone?: "accent" | "inverse" | "surface";
+  tone?: "accent" | "surface";
 }
 
+/* Two tones. `inverse` is gone — post-flip it rendered identically to
+   `surface` (--brand and --surface are both #f5f5f7). */
 const tones = {
   accent: "bg-accent text-accent-foreground",
-  inverse: "bg-brand text-brand-foreground",
   surface: "bg-surface text-text border-y border-hairline",
 };
 
@@ -23,7 +24,7 @@ export function CTABand({
   title,
   description,
   actions,
-  tone = "inverse",
+  tone = "surface",
   className,
   ...props
 }: CTABandProps) {

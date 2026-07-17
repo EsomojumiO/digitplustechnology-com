@@ -102,3 +102,24 @@ All green or explicitly ledgered:
 - In-browser Lighthouse/axe, live schema validators, and field CWV → **H19/H20** (need the deployed preview).
 
 **Do not merge.** The client merges PR #1 after reviewing this ledger.
+
+## CI / deploy runbook note — "Failed to fetch Inter from Google Fonts" (added 2026-07-17)
+
+**Symptom:** `npm run build` dies with `Turbopack build failed … next/font: error: Failed to fetch
+\`Inter\` from Google Fonts` (and the same for JetBrains Mono).
+
+**It is almost certainly not a real breakage.** `next/font/google` fetches at BUILD time. A single
+transient DNS/network blip fails the fetch — and the failure is **memoised into `.next`, so it keeps
+failing after the network recovers**. Observed here: `curl` to `fonts.googleapis.com/css2?family=Inter`
+returned HTTP 200 and DNS resolved fine, while the build kept failing on the cached error.
+
+**First response — before anyone debugs it as real:**
+```bash
+rm -rf .next && npm run build
+```
+That cleared it here on the first try.
+
+**Escalation trigger:** if this recurs on **Vercel** builds (where you can't just clear a local cache),
+stop retrying and **self-host the fonts via `next/font/local`**. The font files become repo assets, the
+build stops depending on a third-party fetch at deploy time, and this failure mode disappears
+permanently. That is the fix; clearing the cache is the workaround.

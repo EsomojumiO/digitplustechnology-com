@@ -164,7 +164,7 @@ export default function HomePage() {
       </Section>
 
       {/* Philosophy quote */}
-      <Section tone="inverse" spacing="lg">
+      <Section tone="muted" spacing="lg">
         <FadeIn className="mx-auto max-w-3xl text-center">
           <Eyebrow className="text-muted">Our standard</Eyebrow>
           <p className="text-h2 mt-6 font-medium tracking-tight text-text">
@@ -337,10 +337,10 @@ export default function HomePage() {
       ) : null}
 
       {/* Closing CTA band — separation by background alternation, not by glow */}
-      <div className="relative overflow-hidden bg-brand">
+      <div className="relative overflow-hidden bg-surface">
         <CTABand
           className="relative z-10 bg-transparent"
-          tone="inverse"
+          tone="surface"
           title="Tell us what you’re planning"
           description="A short conversation is the fastest way to see how we can help. No obligation."
           actions={

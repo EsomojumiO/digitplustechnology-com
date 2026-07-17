@@ -2,7 +2,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Container, type ContainerProps } from "./Container";
 
-type SectionTone = "default" | "muted" | "raised" | "inverse";
+type SectionTone = "default" | "muted" | "raised";
 
 export interface SectionProps
   extends React.HTMLAttributes<HTMLElement> {
@@ -15,11 +15,21 @@ export interface SectionProps
   containerWidth?: ContainerProps["width"];
 }
 
+/* TWO tones, by design: white canvas and the #f5f5f7 band. Apple's rhythm is
+   two-tone; green is ink, never canvas.
+
+   `inverse` is GONE, not aliased. After the light flip --brand and --surface
+   both resolved to #f5f5f7, so tone="inverse" and tone="muted" rendered
+   identically — a third code path that produced a second tone's pixels. An
+   alias would have kept that dead path alive; deleting it makes the type system
+   enforce the two-tone rule at every call site.
+
+   `raised` is still white — it's the hairline-bounded variant of the canvas,
+   not a third colour. */
 const tones: Record<SectionTone, string> = {
   default: "bg-background text-text",
   muted: "bg-surface text-text",
   raised: "bg-surface-raised text-text border-y border-hairline",
-  inverse: "bg-brand text-brand-foreground",
 };
 
 /* Spec: 120–160px desktop, 64–80px mobile. The dark theme ran 64/96 for `md`,
