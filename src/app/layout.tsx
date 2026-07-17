@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
-import { Sora, Figtree, JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/lib/site";
 import {
@@ -14,19 +14,19 @@ import { JsonLd } from "@/lib/seo/jsonld";
 import { organizationSchema, websiteSchema } from "@/lib/seo/schema";
 import { Analytics } from "@/components/analytics/Analytics";
 
-// Figtree, primary UI/body face (client-selected Option A).
-const figtree = Figtree({
-  variable: "--font-figtree",
+// Inter — the whole type system for the Apple-light rebuild (client-selected
+// Candidate A at the Phase 2 STOP; see docs/DECISIONS.md).
+//
+// The spec calls this pairing "Inter Display + Inter". Inter Display is not a
+// separate Google Fonts family — but Inter ships an `opsz` axis (14–32), and
+// Inter Display IS Inter at display optical size. So it's one variable family
+// at two optical sizes: globals.css pins `opsz 32` on the display classes and
+// lets body text optically size itself. Requesting the axis here is what makes
+// that possible.
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-  display: "swap",
-});
-
-// Sora, display face + buttons (headlines, stat numbers, CTAs) — distinctive
-// geometric character on the dark canvas. Client-selected Option A.
-const sora = Sora({
-  variable: "--font-sora",
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  axes: ["opsz"],
   display: "swap",
 });
 
@@ -100,7 +100,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${figtree.variable} ${sora.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         {/* Fine grain texture, restrained futurism (fixed, non-interactive). */}

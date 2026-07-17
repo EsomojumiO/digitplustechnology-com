@@ -100,15 +100,18 @@
    Enables: bg-surface, text-muted, border-hairline, bg-accent, bg-brand, etc.
    --------------------------------------------------------------------------- */
 @theme inline {
-  /* Fonts — layout.tsx provides Figtree (--font-figtree), Sora (--font-sora)
-     and JetBrains Mono. Display headings + stat numbers + buttons use Sora;
-     body/UI use Figtree; eyebrows/labels use the mono. */
+  /* Fonts — layout.tsx provides Inter (--font-inter, variable, opsz axis) and
+     JetBrains Mono. Inter is the whole system (Candidate A): display and body
+     are the same family separated by optical size, not by typeface. The
+     display classes in §5 pin `opsz 32` (that is "Inter Display"); body text
+     optically sizes itself.
+     --font-mono is on borrowed time — the mono-uppercase eyebrow idiom retires
+     in Phase 3 when eyebrows become green sentence-case text. */
   --font-sans:
-    var(--font-figtree), ui-sans-serif, system-ui, -apple-system,
+    var(--font-inter), ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-display:
-    var(--font-sora), var(--font-figtree), ui-sans-serif, system-ui,
-    sans-serif;
+    var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-mono:
     var(--font-geist-mono), ui-monospace, "SF Mono", "Menlo", monospace;
 
@@ -294,12 +297,16 @@
 
 /* ---------------------------------------------------------------------------
    5. TYPOGRAPHY UTILITIES — fluid modular scale
-   Display/H1/H2 set in Space Grotesk (display face); rest in Inter.
+   Display/H1/H2 are Inter at display optical size (`opsz 32` — this is what
+   "Inter Display" means); body is the same family, optically sized for text.
    Large headings: negative tracking + tight leading. Body: 1.6 line-height.
+   `font-variation-settings` only pins opsz — wght still comes from
+   font-weight, so the weights below keep working.
    --------------------------------------------------------------------------- */
 @layer components {
   .text-display {
     font-family: var(--font-display);
+    font-variation-settings: "opsz" 32;
     font-size: var(--type-display);
     line-height: 1.02;
     letter-spacing: -0.025em;
@@ -307,6 +314,7 @@
   }
   .text-h1 {
     font-family: var(--font-display);
+    font-variation-settings: "opsz" 32;
     font-size: var(--type-h1);
     line-height: 1.07;
     letter-spacing: -0.02em;
@@ -314,6 +322,7 @@
   }
   .text-h2 {
     font-family: var(--font-display);
+    font-variation-settings: "opsz" 32;
     font-size: var(--type-h2);
     line-height: 1.13;
     letter-spacing: -0.015em;
@@ -357,6 +366,7 @@
 @layer utilities {
   .font-display {
     font-family: var(--font-display);
+    font-variation-settings: "opsz" 32;
   }
 
   /* Fine grain/noise texture — restrained futurism. Tiled SVG turbulence,
