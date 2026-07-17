@@ -21,12 +21,19 @@ export function Prose({
     <Comp
       className={cn(
         "measure text-body text-text",
+        // Headings come from the `.prose-headings` block in globals.css §5.
+        //
+        // They used to be `[&_h2]:text-h2` here, which emitted NOTHING: text-h2
+        // is a hand-written class in @layer components, not a Tailwind utility,
+        // so Tailwind can't resolve it inside an arbitrary variant. It works
+        // applied directly (SectionHeading does that) and silently no-ops as a
+        // variant. Every prose heading on the site — privacy, terms, about, all
+        // 33 articles — was rendering at body size (16px/400) with no hierarchy,
+        // because Tailwind's preflight resets headings to inherit and nothing
+        // ever styled them back.
+        "prose-headings",
         // vertical rhythm
         "[&>*+*]:mt-6",
-        // headings
-        "[&_h2]:text-h2 [&_h2]:mt-12 [&_h2]:mb-4 [&_h2]:text-text",
-        "[&_h3]:text-h3 [&_h3]:mt-10 [&_h3]:mb-3 [&_h3]:text-text",
-        "[&_h4]:text-h4 [&_h4]:mt-8 [&_h4]:mb-2 [&_h4]:text-text",
         // body copy
         "[&_p]:leading-relaxed [&_p]:text-text",
         "[&_strong]:font-semibold [&_strong]:text-text",
