@@ -6,6 +6,8 @@ export const DUR = {
   fast: 0.15,
   base: 0.22,
   slow: 0.32,
+  /** Section/hero entrance reveals — calmer, more deliberate. */
+  entrance: 0.65,
 } as const;
 
 /** Signature entrance easing, matches --ease-out: cubic-bezier(0.22,1,0.36,1). */

@@ -21,7 +21,7 @@ export function FormStatus({ status, children, className }: FormStatusProps) {
       className={cn(
         "flex items-start gap-2.5 rounded-sm border px-3.5 py-3 text-small",
         status === "success"
-          ? "border-accent/30 bg-accent-subtle text-text"
+          ? "border-accent-green/30 bg-brand-subtle text-text"
           : "border-red-500/30 bg-red-50 text-red-700",
         className,
       )}

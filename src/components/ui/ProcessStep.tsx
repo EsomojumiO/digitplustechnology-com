@@ -22,7 +22,7 @@ export function ProcessStep({
   return (
     <div className={cn("flex gap-4", className)} {...props}>
       <span
-        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-hairline bg-surface text-small font-semibold tabular-nums text-accent"
+        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-hairline bg-surface text-small font-semibold tabular-nums text-accent-green"
         aria-hidden="true"
       >
         {String(step).padStart(2, "0")}

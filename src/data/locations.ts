@@ -22,51 +22,48 @@ export const locations: LocationContent[] = [
     city: "Abuja",
     role: "Headquarters",
     intro: [
-      "Abuja is home base for Digitplus Technology Limited. From the Federal Capital Territory we serve federal ministries, departments, and agencies, alongside enterprises and institutions across the city.",
-      "Being headquartered in Abuja matters for public-sector work: we understand the documentation, LPO workflows, and audit expectations that come with government procurement, and we deliver to them as standard.",
+      "Our HQ in the FCT — documented, audit-ready IT procurement and delivery for federal agencies and enterprises across Abuja.",
     ],
     highlights: [
       "Documented, audit-ready procurement for federal agencies",
       "Infrastructure builds and server-room fit-outs across the FCT",
       "On-site managed support with rapid response in and around Abuja",
     ],
-    metaTitle: "IT Solutions in Abuja, Digitplus Technology HQ",
+    metaTitle: "IT Solutions in Abuja, Our HQ",
     metaDescription:
-      "Digitplus Technology Limited is headquartered in Abuja, delivering documented IT procurement, infrastructure, and managed services to government and enterprises across the FCT.",
+      "Digitplus is headquartered in Abuja, delivering documented IT procurement, infrastructure and managed services to government and enterprises across the FCT.",
   },
   {
     slug: "lagos",
     city: "Lagos",
     role: "Delivery hub",
     intro: [
-      "Lagos is Nigeria’s commercial engine, and we deliver across the city and its mainland and island business districts. From branch infrastructure to multi-site rollouts, we support the pace Lagos operates at.",
-      "Banks, fintechs, enterprises, and growing SMEs rely on us for procurement, deployment, and managed support, with the same documentation and accountability we apply everywhere.",
+      "Delivery across Nigeria’s commercial capital — branch infrastructure, multi-site rollouts and managed support at Lagos pace.",
     ],
     highlights: [
       "Branch and office infrastructure for banking and financial services",
       "Multi-site procurement and deployment across Lagos",
       "Remote and on-site managed support under clear SLAs",
     ],
-    metaTitle: "IT Solutions in Lagos, Digitplus Technology",
+    metaTitle: "IT Solutions in Lagos",
     metaDescription:
-      "Digitplus delivers IT procurement, infrastructure, deployment, and managed services across Lagos, supporting banks, enterprises, and SMEs with accountable delivery.",
+      "Digitplus delivers IT procurement, infrastructure, deployment and managed services across Lagos — for banks, enterprises and SMEs with accountable delivery.",
   },
   {
     slug: "port-harcourt",
     city: "Port Harcourt",
     role: "Delivery hub",
     intro: [
-      "Port Harcourt anchors our delivery in the South-South and the energy corridor. We support operations that demand resilience, including oil, gas, and energy clients with remote and demanding sites.",
-      "From robust infrastructure to dependable managed support, we help organisations in Rivers State and the wider region keep operations-critical systems running.",
+      "Delivery across the South-South energy corridor — resilient infrastructure and support for demanding, remote sites.",
     ],
     highlights: [
       "Resilient infrastructure for oil, gas, and energy operations",
       "Hardware supply and deployment across the South-South",
       "Managed support models suited to demanding, sometimes remote, sites",
     ],
-    metaTitle: "IT Solutions in Port Harcourt, Digitplus Technology",
+    metaTitle: "IT Solutions in Port Harcourt",
     metaDescription:
-      "Digitplus delivers resilient IT infrastructure, hardware supply, and managed services across Port Harcourt and the South-South, built for demanding environments.",
+      "Digitplus delivers resilient IT infrastructure, hardware supply and managed services across Port Harcourt and the South-South, built for demanding environments.",
   },
 ];
 

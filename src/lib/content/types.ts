@@ -54,43 +54,43 @@ export const CATEGORIES: readonly Category[] = [
     slug: "it-strategy-advisory",
     label: "IT Strategy & Advisory",
     description:
-      "Planning, budgeting, and roadmap thinking for IT decision-makers, turning technology spend into accountable outcomes.",
+      "Planning, budgeting and roadmap thinking for IT decision-makers in Nigeria — turning technology spend into accountable, measurable business outcomes.",
   },
   {
     slug: "infrastructure",
     label: "Infrastructure",
     description:
-      "Structured cabling, networks, server rooms, and power, the physical foundations of reliable operations.",
+      "Structured cabling, networks, server rooms and power — the physical foundations of reliable IT operations for Nigerian enterprises and institutions.",
   },
   {
     slug: "procurement",
     label: "Procurement",
     description:
-      "Disciplined, documented IT sourcing, vendor accountability, LPO workflows, and audit-ready buying.",
+      "Disciplined, documented IT sourcing for Nigerian organisations — vendor accountability, LPO workflows and audit-ready buying for finance and procurement teams.",
   },
   {
     slug: "cybersecurity",
     label: "Cybersecurity",
     description:
-      "Practical security posture for Nigerian enterprises and institutions, risk, resilience, and compliance.",
+      "Practical security posture for Nigerian enterprises and institutions — managing risk, building resilience and meeting compliance without disruption.",
   },
   {
     slug: "managed-services",
     label: "Managed Services",
     description:
-      "SLAs, monitoring, and support models that keep multi-site operations running.",
+      "SLAs, monitoring and support models that keep multi-site operations running — practical managed-IT guidance for Nigerian enterprises and institutions.",
   },
   {
     slug: "industry-policy",
     label: "Industry & Policy",
     description:
-      "How regulation, sector trends, and market shifts shape IT decisions for government, banking, and beyond.",
+      "How regulation, sector trends and market shifts shape IT decisions for government, banking and enterprise across Nigeria — analysis for decision-makers.",
   },
   {
     slug: "guides",
     label: "Guides",
     description:
-      "Step-by-step, vendor-neutral guidance for planning and running IT, strategy, not product selling.",
+      "Step-by-step, vendor-neutral guidance for planning and running IT in Nigeria — strategy and best practice for decision-makers, not product selling.",
   },
 ] as const;
 

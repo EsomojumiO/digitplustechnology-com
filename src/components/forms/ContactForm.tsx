@@ -3,21 +3,15 @@
 import * as React from "react";
 import { Button } from "@/components/ui";
 import { track } from "@/lib/analytics";
-import { services, siteConfig } from "@/lib/site";
+import { siteConfig } from "@/lib/site";
 import { Field } from "./Field";
 import { FormStatus } from "./FormStatus";
 import { Honeypot } from "./Honeypot";
 import { Input } from "./Input";
-import { Select } from "./Select";
 import { Textarea } from "./Textarea";
 import { isEmail } from "./validation";
 
 type Errors = Partial<Record<string, string>>;
-
-const serviceOptions = [
-  ...services.map((s) => ({ value: s.slug, label: s.title })),
-  { value: "other", label: "Other / Not sure" },
-];
 
 export interface ContactFormProps {
   className?: string;
@@ -44,8 +38,6 @@ export function ContactForm({ className }: ContactFormProps) {
     else if (!isEmail(email)) next.email = "Enter a valid email address.";
     if (!String(fd.get("company") ?? "").trim())
       next.company = "Company is required.";
-    if (!String(fd.get("serviceInterest") ?? ""))
-      next.serviceInterest = "Select a service interest.";
     if (!String(fd.get("message") ?? "").trim())
       next.message = "Message is required.";
     return next;
@@ -78,7 +70,6 @@ export function ContactForm({ className }: ContactFormProps) {
           email: fd.get("email"),
           phone: fd.get("phone") || undefined,
           company: fd.get("company"),
-          serviceInterest: fd.get("serviceInterest"),
           message: fd.get("message"),
           company_website: fd.get("company_website") ?? "",
           page: typeof window !== "undefined" ? window.location.pathname : undefined,
@@ -87,7 +78,7 @@ export function ContactForm({ className }: ContactFormProps) {
       const data = await res.json().catch(() => ({}));
 
       if (res.ok && data.ok) {
-        track("contact_submit", { service: String(fd.get("serviceInterest")) });
+        track("contact_submit", { page: window.location.pathname });
         setDone(true);
         form.reset();
         requestAnimationFrame(() => successRef.current?.focus());
@@ -129,7 +120,7 @@ export function ContactForm({ className }: ContactFormProps) {
         style={{ outline: "none" }}
       >
         <FormStatus status="success">
-          <p className="font-medium">Thank you, your message has been received.</p>
+          <p className="font-medium">Thank you — your message has been received.</p>
           <p className="mt-1 text-muted">
             Our team will respond shortly. For anything urgent, call{" "}
             <a className="underline" href={siteConfig.phoneHref}>
@@ -192,22 +183,6 @@ export function ContactForm({ className }: ContactFormProps) {
             )}
           </Field>
         </div>
-
-        <Field
-          id="contact-serviceInterest"
-          label="Service interest"
-          required
-          error={errors.serviceInterest}
-        >
-          {(aria) => (
-            <Select
-              {...aria}
-              name="serviceInterest"
-              options={serviceOptions}
-              placeholder="Select a service…"
-            />
-          )}
-        </Field>
 
         <Field id="contact-message" label="How can we help?" required error={errors.message}>
           {(aria) => (

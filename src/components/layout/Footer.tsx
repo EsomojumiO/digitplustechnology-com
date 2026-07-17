@@ -47,11 +47,11 @@ export function Footer() {
           className={cn(
             "group inline-flex flex-wrap items-center gap-x-2 gap-y-1 rounded-lg",
             "text-small text-brand-100 transition-colors duration-[var(--dur-fast)] hover:text-[var(--cream)]",
-            "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-300",
+            "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green",
           )}
         >
           <span>Looking to purchase hardware?</span>
-          <span className="inline-flex items-center gap-1 font-medium text-accent-300">
+          <span className="inline-flex items-center gap-1 font-medium text-accent-green">
             Visit our store
             <ArrowRight className="transition-transform duration-[var(--dur-fast)] group-hover:translate-x-0.5" />
           </span>
@@ -87,6 +87,16 @@ export function Footer() {
                   {siteConfig.email}
                 </a>
               </p>
+              <p>
+                <a
+                  href={siteConfig.whatsapp}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="font-medium text-accent-green transition-colors hover:text-[var(--cream)]"
+                >
+                  Chat on WhatsApp
+                </a>
+              </p>
             </address>
 
             <p className="mt-4 text-caption text-brand-200">
@@ -111,7 +121,7 @@ export function Footer() {
                         href={link.href}
                         className={cn(
                           "text-small text-brand-100 transition-colors duration-[var(--dur-fast)] hover:text-[var(--cream)]",
-                          "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-300",
+                          "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green",
                         )}
                       >
                         {link.label}
@@ -152,7 +162,7 @@ export function Footer() {
                 className={cn(
                   "h-11 w-full rounded-md border border-white/15 bg-white/10 px-3.5 text-body text-[var(--cream)]",
                   "placeholder:text-brand-200",
-                  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-300",
+                  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green",
                 )}
               />
               <button
@@ -161,7 +171,7 @@ export function Footer() {
                   "inline-flex h-11 items-center justify-center whitespace-nowrap rounded-md px-5 text-body font-medium",
                   "bg-accent text-accent-foreground shadow-[var(--shadow-sm)]",
                   "transition-colors duration-[var(--dur-fast)] hover:bg-accent-hover",
-                  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-300 active:translate-y-px",
+                  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green active:translate-y-px",
                 )}
               >
                 Subscribe

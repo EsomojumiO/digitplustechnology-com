@@ -31,11 +31,11 @@ export function ArticleCard({
       as="article"
       padding="none"
       interactive
-      className="group flex flex-col overflow-hidden bg-surface-raised/70 backdrop-blur-sm transition-[box-shadow,transform,border-color] duration-[var(--dur-base)] ease-[var(--ease-out)] hover:-translate-y-1 hover:border-accent/40 hover:shadow-[var(--shadow-lg)]"
+      className="group flex flex-col overflow-hidden bg-surface-raised/70 backdrop-blur-sm transition-[box-shadow,transform,border-color] duration-[var(--dur-base)] ease-[var(--ease-out)] hover:-translate-y-0.5 hover:border-hairline-hover hover:shadow-[var(--shadow-md)]"
     >
       <Link
         href={href}
-        className="flex h-full flex-col rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        className="flex h-full flex-col rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green"
       >
         {/* Cover, fixed 16:10 frame with neutral fallback for layout stability */}
         <div className="relative aspect-[16/10] w-full overflow-hidden bg-surface">
@@ -45,7 +45,12 @@ export function ArticleCard({
             fill
             priority={priority}
             sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-            className="object-cover transition-transform duration-[var(--dur-slow)] ease-[var(--ease-out)] group-hover:scale-[1.03]"
+            className="object-cover brightness-[0.92] transition-transform duration-[var(--dur-slow)] ease-[var(--ease-out)] group-hover:scale-[1.03]"
+          />
+          {/* dark scrim so light covers seat into the near-black canvas */}
+          <div
+            className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/70 via-background/10 to-transparent"
+            aria-hidden="true"
           />
         </div>
 
@@ -54,7 +59,7 @@ export function ArticleCard({
             <Badge tone="accent">{article.category.label}</Badge>
           </div>
 
-          <Heading className="text-h4 text-text transition-colors duration-[var(--dur-fast)] group-hover:text-accent">
+          <Heading className="text-h4 text-text transition-colors duration-[var(--dur-fast)] group-hover:text-accent-green">
             {article.title}
           </Heading>
 

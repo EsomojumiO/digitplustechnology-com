@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import {
-  Hero,
+  Container,
   Section,
   SectionHeading,
   Grid,
@@ -20,7 +20,9 @@ import {
   StaggerItem,
   CountUp,
   Magnetic,
+  CircuitTraces,
 } from "@/components/motion";
+import { HeroCarousel } from "@/components/home/HeroCarousel";
 import { TrustMarquee } from "@/components/home/TrustMarquee";
 import { WhyPillar } from "@/components/home/WhyPillar";
 import { IndustriesFilter } from "@/components/home/IndustriesFilter";
@@ -32,7 +34,7 @@ import { getFeaturedArticles, getFeaturedReport } from "@/lib/content";
 export const metadata: Metadata = {
   title: "IT Solutions Company in Nigeria | Digitplus Technology",
   description:
-    "Digitplus is a B2B IT solutions company in Nigeria, IT procurement, hardware supply, infrastructure, and managed IT services for enterprises, government, and banks. Abuja, Lagos, Port Harcourt.",
+    "Digitplus is a B2B IT solutions company in Nigeria — IT procurement, hardware supply, infrastructure and managed services for enterprise and government.",
 };
 
 /* Raycast-style two-beat leads for the four Why Digitplus pillars, mapped to
@@ -40,7 +42,7 @@ export const metadata: Metadata = {
 const whyBeats: { label: string; beat: string }[] = [
   { label: "Accountable", beat: "one partner, end to end." },
   { label: "Nationwide", beat: "Abuja, Lagos, Port Harcourt." },
-  { label: "Trusted", beat: "8+ years, 50+ clients." },
+  { label: "Experienced", beat: "government, banking, healthcare." },
   { label: "Disciplined", beat: "documented, audit-ready." },
 ];
 
@@ -49,7 +51,10 @@ const whyBeats: { label: string; beat: string }[] = [
 function StatValue({ value }: { value: string }) {
   const match = /^(\d+)(.*)$/.exec(value);
   if (!match) return <>{value}</>;
-  return <CountUp value={Number(match[1])} suffix={match[2]} />;
+  const n = Number(match[1]);
+  // Don't animate a calendar year — a ticking "2022" reads as a counter, not a date.
+  if (match[2] === "" && n >= 1900) return <>{value}</>;
+  return <CountUp value={n} suffix={match[2]} />;
 }
 
 export default function HomePage() {
@@ -58,27 +63,53 @@ export default function HomePage() {
 
   return (
     <>
-      {/* Hero, signature motif + aurora; magnetic primary CTA */}
-      <Hero
-        aurora
-        motif
-        eyebrow="IT solutions company in Nigeria"
-        title={siteConfig.tagline}
-        subhead="Digitplus is your one accountable partner for the full lifecycle of your IT, from planning and procurement to deployment and managed services. Built for enterprises, government, and institutions that need their technology to simply work."
-        actions={
-          <>
-            <Magnetic strength={6}>
-              <Button href="/contact" size="lg">
-                Request a Free IT Assessment
-              </Button>
-            </Magnetic>
-            <Button href="/approach" size="lg" variant="secondary">
-              See How We Work
-            </Button>
-          </>
-        }
-        coverage={`Abuja • Lagos • Port Harcourt`}
-      />
+      {/* Hero — text left, 5-image bento collage right. Aurora glow full-bleed;
+          circuit traces sit behind the text zone only so they never fight the
+          photographs. */}
+      <section className="relative overflow-hidden pt-20 pb-16 sm:pt-24 sm:pb-24">
+        <div className="aurora" aria-hidden="true" />
+        <Container className="relative z-10">
+          <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-10">
+            {/* Text zone */}
+            <div className="relative lg:col-span-5">
+              <div
+                className="pointer-events-none absolute -inset-x-8 -inset-y-8 -z-10 [mask-image:radial-gradient(120%_100%_at_30%_40%,black,transparent_72%)]"
+                aria-hidden="true"
+              >
+                <CircuitTraces />
+              </div>
+              <div className="flex flex-col gap-6">
+                <Eyebrow>Enterprise IT · Nigeria</Eyebrow>
+                <h1 className="text-display max-w-[16ch] text-text">
+                  Enterprise IT solutions, built to just work
+                </h1>
+                <p className="text-body-lg measure text-muted">
+                  One accountable partner for the full IT lifecycle —
+                  procurement, infrastructure, deployment and managed services —
+                  for enterprises, government and banks across Nigeria.
+                </p>
+                <div className="mt-2 flex flex-wrap items-center gap-3">
+                  <Magnetic strength={6}>
+                    <Button href="/contact" size="lg">
+                      Get a quote
+                    </Button>
+                  </Magnetic>
+                  <Button href="/approach" size="lg" variant="secondary">
+                    See how we work
+                  </Button>
+                </div>
+                <p className="text-small mt-1 text-muted">
+                  Abuja • Lagos • Port Harcourt
+                </p>
+              </div>
+            </div>
+            {/* Carousel zone */}
+            <div className="lg:col-span-7">
+              <HeroCarousel />
+            </div>
+          </div>
+        </Container>
+      </section>
 
       {/* Trust strip, partner logos on a slow seamless marquee */}
       <Section tone="muted" spacing="sm">
@@ -92,8 +123,8 @@ export default function HomePage() {
         <FadeIn>
           <SectionHeading
             eyebrow="What we do"
-            title="Six service lines, one accountable partner"
-            lede="Each capability stands on its own, and works better together. Most clients start with one and grow into the rest."
+            title="Six services, one accountable partner"
+            lede="Start with one capability; grow into the rest."
           />
         </FadeIn>
         <Stagger>
@@ -112,7 +143,7 @@ export default function HomePage() {
         </Stagger>
         <FadeIn className="mt-10">
           <Button href="/services" variant="ghost">
-            View all services →
+            All services →
           </Button>
         </FadeIn>
       </Section>
@@ -123,7 +154,7 @@ export default function HomePage() {
           <SectionHeading
             eyebrow="Why Digitplus"
             title="The difference is accountability"
-            lede="Plenty of companies will sell you equipment. Fewer will own the outcome from end to end, and stand behind it afterwards."
+            lede="Anyone can sell equipment; few will own the outcome end to end."
           />
         </FadeIn>
         <Stagger>
@@ -144,11 +175,10 @@ export default function HomePage() {
       {/* Philosophy quote */}
       <Section tone="inverse" spacing="lg">
         <FadeIn className="mx-auto max-w-3xl text-center">
-          <Eyebrow className="text-neutral-400">Our standard</Eyebrow>
+          <Eyebrow className="text-muted">Our standard</Eyebrow>
           <p className="text-h2 mt-6 font-medium tracking-tight text-neutral-50">
-            “Most IT projects don’t fail on the equipment. They fail in the gaps
-, between vendors, between purchase and deployment, between handover
-            and support. We exist to close those gaps.”
+            “Most IT projects fail in the gaps, between vendors, between purchase
+            and deployment, between handover and support. We close them.”
           </p>
         </FadeIn>
       </Section>
@@ -160,7 +190,7 @@ export default function HomePage() {
             <SectionHeading
               eyebrow="How we work"
               title="A clear, documented process"
-              lede="Six steps, the same discipline every time, from first conversation to long-term support."
+              lede="Six steps, the same discipline every time."
               className="lg:sticky lg:top-28"
             />
             <div className="mt-8 lg:sticky lg:top-64">
@@ -189,7 +219,7 @@ export default function HomePage() {
           <SectionHeading
             eyebrow="Who we serve"
             title="Built around how your sector works"
-            lede="Government procurement, branch uptime, clinical reliability, campus budgets, every sector has its own demands. We deliver to each."
+            lede="Every sector has its own demands. We deliver to each."
           />
         </FadeIn>
         <IndustriesFilter
@@ -218,7 +248,7 @@ export default function HomePage() {
                   author={t.author}
                   role={t.role}
                   organization={t.organization}
-                  className="h-full [&_blockquote]:text-body-lg"
+                  className="h-full"
                 />
               </StaggerItem>
             ))}
@@ -322,12 +352,12 @@ export default function HomePage() {
           className="relative z-10 bg-transparent"
           tone="inverse"
           title="Tell us what you’re planning"
-          description="A short conversation is the fastest way to find out how we can help. Request a free IT assessment and we’ll come back with practical next steps, no obligation."
+          description="A short conversation is the fastest way to see how we can help. No obligation."
           actions={
             <>
               <Magnetic strength={6}>
                 <Button href="/contact" size="lg" variant="secondary">
-                  Request a Free IT Assessment
+                  Get a quote
                 </Button>
               </Magnetic>
               <Button

@@ -44,11 +44,11 @@ export function ProcessTimeline({ steps }: ProcessTimelineProps) {
       >
         {!reduce ? (
           <motion.div
-            className="absolute inset-x-0 top-0 h-full origin-top bg-gradient-to-b from-accent via-accent to-accent/30"
+            className="absolute inset-x-0 top-0 h-full origin-top bg-gradient-to-b from-accent-green via-accent-green to-accent-green/30"
             style={{ scaleY: lineScale }}
           />
         ) : (
-          <div className="absolute inset-x-0 top-0 h-full bg-accent/40" />
+          <div className="absolute inset-x-0 top-0 h-full bg-accent-green/40" />
         )}
       </div>
 
@@ -84,7 +84,7 @@ function ProcessNode({
       {/* Numbered node sitting on the spine, glass disc, accent numeral. */}
       <span
         aria-hidden="true"
-        className="relative z-10 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-hairline bg-surface/80 text-small font-semibold tabular-nums text-accent shadow-[0_0_0_4px_var(--color-background)] backdrop-blur-sm transition-colors duration-[var(--dur-base)] ease-[var(--ease-out)] group-hover:border-accent sm:h-11 sm:w-11"
+        className="relative z-10 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-hairline bg-surface/80 text-small font-semibold tabular-nums text-accent-green shadow-[0_0_0_4px_var(--color-background)] backdrop-blur-sm transition-colors duration-[var(--dur-base)] ease-[var(--ease-out)] group-hover:border-accent-green sm:h-11 sm:w-11"
       >
         {String(step).padStart(2, "0")}
       </span>

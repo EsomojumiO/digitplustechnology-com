@@ -17,11 +17,13 @@ import {
   getAllArticles,
   getArticleBySlug,
   getRelatedArticles,
+  getPillarForArticle,
   MDXContent,
   type Category,
 } from "@/lib/content";
 import { siteConfig } from "@/lib/site";
 import { JsonLd } from "@/lib/seo/jsonld";
+import { clampDescription } from "@/lib/seo/metadata";
 import { articleSchema, breadcrumbSchema } from "@/lib/seo/schema";
 import { ArticleCard } from "../_components/ArticleCard";
 import { ShareBar } from "../_components/ShareBar";
@@ -85,12 +87,16 @@ export async function generateMetadata({
   if (!article) return { title: "Insight" };
 
   const title = article.seo.metaTitle ?? article.title;
-  const description = article.seo.metaDescription ?? article.excerpt;
+  const description = clampDescription(
+    article.seo.metaDescription ?? article.excerpt,
+  );
   const ogImage = article.seo.ogImage ?? article.cover;
   const url = `${siteConfig.url}/insights/${article.slug}`;
 
   return {
-    title,
+    // Absolute: article titles are long and descriptive; appending the brand
+    // suffix pushes them past the ~60-char SERP cutoff. The title stands alone.
+    title: { absolute: title },
     description,
     alternates: { canonical: `/insights/${article.slug}` },
     openGraph: {
@@ -124,7 +130,11 @@ export default async function ArticlePage({
 
   const related = getRelatedArticles(slug, 3);
   const author = getAuthor(article.author);
-  const hub = relatedHub(article.category);
+  // Precise per-article pillar (hub-and-spoke); fall back to the category hub.
+  const pillar = getPillarForArticle(article.slug);
+  const hub = pillar
+    ? { href: pillar.href, label: pillar.title }
+    : relatedHub(article.category);
   const url = `${siteConfig.url}/insights/${article.slug}`;
   const updated = article.updatedAt && article.updatedAt !== article.publishedAt;
 
@@ -155,7 +165,7 @@ export default async function ArticlePage({
             <div>
               <Link
                 href={`/insights/category/${article.category.slug}`}
-                className="rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                className="rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green"
               >
                 <Badge tone="accent">{article.category.label}</Badge>
               </Link>
@@ -201,7 +211,7 @@ export default async function ArticlePage({
       <Section spacing="sm" contained={false}>
         <Container width="wide">
           <FadeIn>
-            <div className="relative aspect-[16/9] w-full overflow-hidden rounded-xl border border-hairline bg-surface">
+            <div className="relative aspect-[16/9] w-full overflow-hidden rounded-xl bg-surface cover-dark">
               <Image
                 src={article.cover}
                 alt={article.coverAlt || article.title}
@@ -244,7 +254,7 @@ export default async function ArticlePage({
             Related to this:{" "}
             <Link
               href={hub.href}
-              className="font-medium text-accent underline decoration-from-font underline-offset-2 hover:text-accent-hover"
+              className="font-medium text-accent-green underline decoration-from-font underline-offset-2 hover:text-accent-green"
             >
               {hub.label}
             </Link>
@@ -281,7 +291,7 @@ export default async function ArticlePage({
         actions={
           <>
             <Button href="/contact" size="lg" variant="secondary">
-              Book a Consultation
+              Get a quote
             </Button>
             <Button href={hub.href} size="lg" variant="ghost">
               Read our insights

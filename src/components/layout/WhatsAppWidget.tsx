@@ -17,7 +17,7 @@ export function WhatsAppWidget() {
         "group fixed bottom-5 right-5 z-40 inline-flex items-center gap-2.5",
         "rounded-full bg-[#25D366] py-3 pl-3.5 pr-4 text-white shadow-[var(--shadow-lg)]",
         "transition-transform duration-[var(--dur-base)] ease-[var(--ease-out)] hover:scale-[1.03]",
-        "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
+        "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green",
       )}
     >
       <svg

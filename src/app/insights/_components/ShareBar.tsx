@@ -34,7 +34,7 @@ function IconButton({
       target="_blank"
       rel="noopener noreferrer"
       aria-label={label}
-      className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-hairline bg-surface-raised text-muted transition-[color,background-color,border-color] duration-[var(--dur-fast)] hover:bg-surface hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+      className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-hairline bg-surface-raised text-muted transition-[color,background-color,border-color] duration-[var(--dur-fast)] hover:bg-surface hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green"
     >
       {children}
     </a>
@@ -112,7 +112,7 @@ export function ShareBar({ url, title }: ShareBarProps) {
         <button
           type="button"
           onClick={copyLink}
-          className="inline-flex h-10 items-center gap-2 rounded-md border border-hairline bg-surface-raised px-3 text-small font-medium text-muted transition-[color,background-color,border-color] duration-[var(--dur-fast)] hover:bg-surface hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          className="inline-flex h-10 items-center gap-2 rounded-md border border-hairline bg-surface-raised px-3 text-small font-medium text-muted transition-[color,background-color,border-color] duration-[var(--dur-fast)] hover:bg-surface hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green"
         >
           <svg
             width="16"

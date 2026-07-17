@@ -19,5 +19,5 @@ export {
 } from "./schema";
 export type { BreadcrumbItem, FaqItem } from "./schema";
 
-export { buildMetadata } from "./metadata";
+export { buildMetadata, clampDescription } from "./metadata";
 export type { BuildMetadataInput } from "./metadata";

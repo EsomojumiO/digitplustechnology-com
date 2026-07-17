@@ -12,9 +12,9 @@ import { ContactForm } from "@/components/forms";
 import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Contact Us, Request a Free IT Assessment",
+  title: "Contact Digitplus — get a quote",
   description:
-    "Talk to Digitplus Technology Limited about your IT needs. Email, phone, or WhatsApp, Abuja HQ with delivery across Lagos and Port Harcourt. Request a free IT assessment.",
+    "Talk to Digitplus about your IT project by email, phone or WhatsApp — Abuja HQ, delivery across Lagos and Port Harcourt. We'll come back with next steps.",
   alternates: { canonical: "/contact" },
 };
 
@@ -79,7 +79,7 @@ export default function ContactPage() {
               <div className="flex flex-col">
                 <DetailRow label="Email">
                   <a
-                    className="font-medium text-accent underline decoration-from-font underline-offset-2 hover:text-accent-hover"
+                    className="font-medium text-accent-green underline decoration-from-font underline-offset-2 hover:text-accent-green"
                     href={`mailto:${siteConfig.email}`}
                   >
                     {siteConfig.email}
@@ -87,7 +87,7 @@ export default function ContactPage() {
                 </DetailRow>
                 <DetailRow label="Phone">
                   <a
-                    className="font-medium text-accent underline decoration-from-font underline-offset-2 hover:text-accent-hover"
+                    className="font-medium text-accent-green underline decoration-from-font underline-offset-2 hover:text-accent-green"
                     href={siteConfig.phoneHref}
                   >
                     {siteConfig.phone}
@@ -95,12 +95,12 @@ export default function ContactPage() {
                 </DetailRow>
                 <DetailRow label="WhatsApp">
                   <a
-                    className="font-medium text-accent underline decoration-from-font underline-offset-2 hover:text-accent-hover"
+                    className="font-medium text-accent-green underline decoration-from-font underline-offset-2 hover:text-accent-green"
                     href={siteConfig.whatsapp}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    Message us on WhatsApp
+                    Chat on WhatsApp
                   </a>
                 </DetailRow>
                 <DetailRow label="Headquarters">{siteConfig.hq}</DetailRow>
@@ -115,7 +115,7 @@ export default function ContactPage() {
                   variant="secondary"
                   className="w-full sm:w-auto"
                 >
-                  Chat with us on WhatsApp
+                  Chat on WhatsApp
                 </Button>
                 <Button
                   href={siteConfig.phoneHref}

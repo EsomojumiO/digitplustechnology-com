@@ -6,6 +6,7 @@ import {
   Breadcrumbs,
   CTABand,
   Button,
+  Card,
 } from "@/components/ui";
 import { FadeIn } from "@/components/motion";
 import { cn } from "@/lib/utils";
@@ -85,18 +86,17 @@ export default function EcosystemPage() {
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {projects.map((p) => (
             <FadeIn key={p.domain}>
-              <article
-                className={cn(
-                  "flex h-full flex-col rounded-2xl border border-hairline bg-surface-raised p-8",
-                  "transition-colors duration-[var(--dur-base)] hover:border-neutral-300",
-                )}
+              <Card
+                as="article"
+                padding="lg"
+                className="flex h-full flex-col transition-colors duration-[var(--dur-base)] hover:border-hairline-hover"
               >
                 <div className="flex items-center justify-between gap-3">
                   <span className="text-caption font-medium uppercase tracking-[0.12em] text-muted">
                     {p.tagline}
                   </span>
                   {p.status === "coming-soon" && (
-                    <span className="inline-flex items-center rounded-full border border-accent/30 bg-accent/10 px-2.5 py-0.5 text-caption font-medium text-accent">
+                    <span className="inline-flex items-center rounded-full border border-accent-green/30 bg-brand-subtle px-2.5 py-0.5 text-caption font-medium text-accent-green">
                       Coming soon
                     </span>
                   )}
@@ -115,14 +115,14 @@ export default function EcosystemPage() {
                   rel="noreferrer noopener"
                   className={cn(
                     "mt-6 inline-flex items-center gap-1.5 text-small font-medium text-text",
-                    "transition-colors duration-[var(--dur-fast)] hover:text-accent",
-                    "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
+                    "transition-colors duration-[var(--dur-fast)] hover:text-accent-green",
+                    "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green",
                   )}
                 >
                   {p.domain}
                   <ExternalIcon />
                 </Link>
-              </article>
+              </Card>
             </FadeIn>
           ))}
         </div>
@@ -131,11 +131,12 @@ export default function EcosystemPage() {
       <CTABand
         title="Need enterprise IT, not a product?"
         description="That is what this arm of Digitplus does, procurement, infrastructure, and managed services for organisations. Let's talk about what you need."
-      >
-        <Button href="/contact" size="lg">
-          Request an assessment
-        </Button>
-      </CTABand>
+        actions={
+          <Button href="/contact" size="lg" variant="secondary">
+            Get a quote
+          </Button>
+        }
+      />
     </>
   );
 }

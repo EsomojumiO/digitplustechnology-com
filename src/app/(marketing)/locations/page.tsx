@@ -7,6 +7,7 @@ import {
   Breadcrumbs,
   CTABand,
   Badge,
+  Card,
 } from "@/components/ui";
 import { Reveal } from "@/components/motion/Reveal";
 import { siteConfig } from "@/lib/site";
@@ -43,10 +44,13 @@ export default function LocationsPage() {
         <Reveal>
           <Grid columns={3} gap="md">
             {locations.map((loc) => (
-              <a
+              <Card
                 key={loc.slug}
+                as="a"
+                interactive
+                padding="lg"
                 href={`/locations/${loc.slug}`}
-                className="group flex flex-col gap-3 rounded-lg border border-hairline bg-surface-raised p-8 transition-[box-shadow,transform,border-color] duration-[var(--dur-base)] ease-[var(--ease-out)] hover:-translate-y-0.5 hover:border-neutral-300 hover:shadow-[var(--shadow-md)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                className="group flex flex-col gap-3"
               >
                 <Badge
                   tone={loc.role === "Headquarters" ? "accent" : "neutral"}
@@ -56,10 +60,10 @@ export default function LocationsPage() {
                 </Badge>
                 <h2 className="text-h3 text-text">{loc.city}</h2>
                 <p className="text-body text-muted measure">{loc.intro[0]}</p>
-                <span className="mt-2 inline-flex items-center gap-1.5 text-small font-medium text-accent">
+                <span className="mt-2 inline-flex items-center gap-1.5 text-small font-medium text-accent-green">
                   About {loc.city} →
                 </span>
-              </a>
+              </Card>
             ))}
           </Grid>
         </Reveal>
@@ -70,7 +74,7 @@ export default function LocationsPage() {
         description="We coordinate multi-site programmes from a single point of accountability. Tell us where you operate and we’ll plan around it."
         actions={
           <Button href="/contact" size="lg" variant="secondary">
-            Request a Free IT Assessment
+            Get a quote
           </Button>
         }
       />

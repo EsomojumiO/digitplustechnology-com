@@ -84,7 +84,7 @@ export function FAQ({
                 aria-expanded={isOpen}
                 aria-controls={panelId}
                 onClick={() => toggle(i)}
-                className="flex w-full items-center justify-between gap-4 py-5 text-left text-body-lg font-medium text-text transition-colors duration-[var(--dur-fast)] hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                className="flex w-full items-center justify-between gap-4 py-5 text-left text-body-lg font-medium text-text transition-colors duration-[var(--dur-fast)] hover:text-accent-green focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green"
               >
                 <span>{item.question}</span>
                 <ChevronIcon open={isOpen} />

@@ -5,24 +5,33 @@ type ButtonVariant = "primary" | "secondary" | "ghost";
 type ButtonSize = "sm" | "md" | "lg";
 
 const base =
-  "inline-flex items-center justify-center gap-2 font-medium whitespace-nowrap select-none " +
-  "rounded-md transition-[background-color,color,box-shadow,transform,border-color] " +
+  "inline-flex items-center justify-center gap-2 font-display font-semibold tracking-[-0.01em] whitespace-nowrap select-none " +
+  "rounded-lg transition-[background-color,color,box-shadow,transform,border-color,filter] " +
   "duration-[var(--dur-fast)] ease-[var(--ease-out)] " +
-  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent " +
-  "active:translate-y-px disabled:pointer-events-none disabled:opacity-50";
+  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green " +
+  "active:translate-y-px active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50";
 
 const variants: Record<ButtonVariant, string> = {
+  // 1. PRIMARY — orange fill, near-black label; inner glow + brighten on hover.
+  //    Max ONE per viewport. White-on-orange fails WCAG (~2.2:1); the dark
+  //    label lands ~8.6:1.
   primary:
-    "bg-accent text-accent-foreground shadow-[var(--shadow-sm)] hover:bg-accent-hover",
+    "bg-accent text-accent-foreground shadow-[var(--shadow-sm)] hover:bg-accent-hover " +
+    "hover:shadow-[inset_0_1px_0_0_rgb(255_255_255/0.25),0_6px_22px_-8px_color-mix(in_oklab,var(--accent)_70%,transparent)]",
+  // 2. SECONDARY — transparent, hairline border (white/0.14), white text;
+  //    border brightens on hover. No fill.
   secondary:
-    "bg-surface-raised text-text border border-hairline hover:bg-surface shadow-[var(--shadow-sm)]",
-  ghost: "bg-transparent text-text hover:bg-surface",
+    "bg-transparent text-text border border-hairline-hover hover:border-white/28",
+  // 3. GHOST / LINK — green text, animated underline. Sits inline as a link
+  //    (size padding/height are skipped below) so the underline hugs the label.
+  ghost: "bg-transparent text-accent-green link-underline hover:text-accent-green",
 };
 
+// Sizes tuned to the client's button spec: primary CTAs land at 15–16px.
 const sizes: Record<ButtonSize, string> = {
-  sm: "h-9 px-3.5 text-small",
-  md: "h-11 px-5 text-body",
-  lg: "h-12 px-6 text-body-lg",
+  sm: "h-9 px-4 text-small",
+  md: "h-11 px-6 text-[15px]",
+  lg: "h-12 px-6 text-body",
 };
 
 interface CommonProps {
@@ -55,7 +64,13 @@ export const Button = React.forwardRef<
   { variant = "primary", size = "md", className, children, ...props },
   ref,
 ) {
-  const classes = cn(base, variants[variant], sizes[size], className);
+  // Ghost renders as an inline link, so it opts out of the box sizing.
+  const classes = cn(
+    base,
+    variants[variant],
+    variant === "ghost" ? "gap-1" : sizes[size],
+    className,
+  );
 
   if ("href" in props && props.href !== undefined) {
     const { href, ...rest } = props as ButtonAsLink;

@@ -9,6 +9,7 @@ import {
   CTABand,
   Badge,
 } from "@/components/ui";
+import { FeatureImage } from "@/components/ui/FeatureImage";
 import { Reveal } from "@/components/motion/Reveal";
 import { siteConfig } from "@/lib/site";
 import { getLocation } from "@/data/locations";
@@ -49,7 +50,10 @@ export default function PortHarcourtPage() {
 
       <Section spacing="sm">
         <Reveal className="flex flex-col gap-6">
-          <Badge tone="neutral" className="self-start">
+          <Badge
+            tone={loc.role === "Headquarters" ? "accent" : "neutral"}
+            className="self-start"
+          >
             {loc.role}
           </Badge>
           <SectionHeading
@@ -64,6 +68,13 @@ export default function PortHarcourtPage() {
               </p>
             ))}
           </div>
+          <FeatureImage
+            src={`/images/locations/${loc.slug}.jpg`}
+            alt={`Digitplus Technology in ${loc.city}`}
+            label={loc.city}
+            aspect="aspect-[21/9]"
+            sizes="(min-width: 1024px) 60rem, 100vw"
+          />
         </Reveal>
       </Section>
 
@@ -93,11 +104,11 @@ export default function PortHarcourtPage() {
             </span>
             <p className="text-body text-text">
               {siteConfig.hq} ·{" "}
-              <a className="text-accent underline underline-offset-2" href={siteConfig.phoneHref}>
+              <a className="text-accent-green underline underline-offset-2" href={siteConfig.phoneHref}>
                 {siteConfig.phone}
               </a>{" "}
               ·{" "}
-              <a className="text-accent underline underline-offset-2" href={`mailto:${siteConfig.email}`}>
+              <a className="text-accent-green underline underline-offset-2" href={`mailto:${siteConfig.email}`}>
                 {siteConfig.email}
               </a>
             </p>
@@ -110,7 +121,7 @@ export default function PortHarcourtPage() {
         description="Tell us what you’re planning and we’ll come back with practical next steps."
         actions={
           <Button href="/contact" size="lg" variant="secondary">
-            Request a Free IT Assessment
+            Get a quote
           </Button>
         }
       />

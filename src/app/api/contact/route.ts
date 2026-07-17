@@ -44,7 +44,7 @@ export async function POST(req: Request) {
       email: input.email,
       phone: input.phone || undefined,
       company: input.company,
-      serviceInterest: input.serviceInterest,
+      serviceInterest: input.serviceInterest ?? "Not specified",
       message: input.message,
       meta: {
         source: "contact",

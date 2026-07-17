@@ -8,7 +8,7 @@ import { ReportCard } from "./_components/ReportCard";
 
 const TITLE = "Enterprise IT Reports for Nigeria";
 const DESCRIPTION =
-  "Data-rich, citable research on enterprise IT in Nigeria from Digitplus Technology, pricing, procurement, and infrastructure trends for decision-makers. Read the public findings, download the full reports.";
+  "Citable research on enterprise IT in Nigeria — pricing, procurement and infrastructure trends for decision-makers. Read the findings, download the reports.";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -19,11 +19,13 @@ export const metadata: Metadata = {
     description: DESCRIPTION,
     url: `${siteConfig.url}/reports`,
     type: "website",
+    images: [{ url: "/opengraph-image" }],
   },
   twitter: {
     card: "summary_large_image",
     title: `${TITLE} | ${siteConfig.shortName}`,
     description: DESCRIPTION,
+    images: ["/opengraph-image"],
   },
 };
 
@@ -100,7 +102,7 @@ export default function ReportsHubPage() {
             </div>
             <NewsletterForm
               idPrefix="reports-newsletter"
-              buttonLabel="Notify me"
+              buttonLabel="Subscribe"
               className="w-full lg:max-w-md"
             />
           </div>

@@ -11,6 +11,7 @@ import {
   Eyebrow,
   Prose,
 } from "@/components/ui";
+import { FeatureImage } from "@/components/ui/FeatureImage";
 import { FadeIn, CountUp } from "@/components/motion";
 import { siteConfig } from "@/lib/site";
 import { whyUs } from "@/data";
@@ -18,9 +19,9 @@ import { JsonLd } from "@/lib/seo/jsonld";
 import { breadcrumbSchema } from "@/lib/seo/schema";
 
 export const metadata: Metadata = {
-  title: "About Us, A Disciplined, Accountable Nigerian IT Partner",
+  title: "About Digitplus, a Nigerian IT Partner",
   description:
-    "Digitplus Technology Limited is a CAC-registered, Abuja-based B2B IT solutions company with 8+ years and 50+ enterprise clients. End-to-end IT built on operational discipline.",
+    "Digitplus Technology Limited is a CAC-registered, Abuja-based B2B IT solutions company operating since 2022, serving enterprise and government across Nigeria.",
   alternates: { canonical: "/about" },
 };
 
@@ -81,6 +82,15 @@ export default function AboutPage() {
             </p>
           </Prose>
         </FadeIn>
+        <FadeIn className="mt-12">
+          <FeatureImage
+            src="/images/about/team.jpg"
+            alt="The Digitplus Technology team"
+            label="Our team"
+            aspect="aspect-[21/9]"
+            sizes="(min-width: 1024px) 60rem, 100vw"
+          />
+        </FadeIn>
       </Section>
 
       {/* Credentials */}
@@ -101,10 +111,10 @@ export default function AboutPage() {
               </p>
             </Card>
             <Card padding="lg">
-              <h3 className="text-h4 text-text">8+ years operating</h3>
+              <h3 className="text-h4 text-text">Operating since 2022</h3>
               <p className="text-body text-muted measure mt-3">
-                Nearly a decade delivering IT to enterprises, government, and
-                institutions across Nigeria, and supporting it long-term.
+                Delivering IT to enterprises, government, and institutions across
+                Nigeria since 2022, and supporting it long-term.
               </p>
             </Card>
             <Card padding="lg">
@@ -127,13 +137,11 @@ export default function AboutPage() {
           <StatGrid
             className="mt-12"
             items={[
+              // Real founding year — not a computed "X+ years" (which inflates).
+              { value: "2022", label: "Operating since" },
               {
                 value: <CountUp value={50} suffix="+" />,
                 label: "Enterprise clients",
-              },
-              {
-                value: <CountUp value={8} suffix="+" />,
-                label: "Years operating",
               },
               {
                 value: <CountUp value={6} />,
@@ -170,7 +178,7 @@ export default function AboutPage() {
       {/* Trust / compliance statement */}
       <Section tone="inverse" spacing="lg">
         <FadeIn className="mx-auto max-w-3xl text-center">
-          <Eyebrow className="text-neutral-400">Our commitment</Eyebrow>
+          <Eyebrow className="text-muted">Our commitment</Eyebrow>
           <p className="text-h3 mt-6 font-medium tracking-tight text-neutral-50">
             We treat your procurement, your data, and your operations with the
             same care we would expect for our own, genuine equipment,
@@ -185,7 +193,7 @@ export default function AboutPage() {
         description={`Reach us at ${siteConfig.email} or start a conversation. We’ll respond with practical next steps.`}
         actions={
           <Button href="/contact" size="lg" variant="secondary">
-            Partner with Digitplus
+            Get a quote
           </Button>
         }
       />

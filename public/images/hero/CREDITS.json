@@ -1,0 +1,45 @@
+{
+  "_note": "Home hero bento images. Unsplash free tier — attribution not required, retained here as courtesy. Download via the script in the Phase C notes.",
+  "images": [
+    {
+      "file": "hero-team-lagos.jpg",
+      "subject": "Nigerian tech team collaborating on laptops",
+      "speaksTo": "Managed IT / consulting",
+      "photographer": "Desola Lanre-Ologun",
+      "source": "Unsplash",
+      "unsplashId": "photo-1528901166007-3784c7dd3653"
+    },
+    {
+      "file": "hero-engineer.jpg",
+      "subject": "Nigerian engineer at a workstation",
+      "speaksTo": "Deployment / support",
+      "photographer": "Francis Odeyemi",
+      "source": "Unsplash",
+      "unsplashId": "photo-1635766854898-ad3766e5f5e2"
+    },
+    {
+      "file": "hero-datacenter.jpg",
+      "subject": "Server-rack cabling, dark ambient",
+      "speaksTo": "Hardware supply / data centre",
+      "photographer": "Taylor Vick",
+      "source": "Unsplash",
+      "unsplashId": "photo-1558494949-ef010cbdcc31"
+    },
+    {
+      "file": "hero-cabling.jpg",
+      "subject": "Patch-panel network cables close-up",
+      "speaksTo": "Infrastructure / networking",
+      "photographer": "Scott Rodgerson",
+      "source": "Unsplash",
+      "unsplashId": "photo-1683322499436-f4383dd59f5a"
+    },
+    {
+      "file": "hero-enterprise-user.jpg",
+      "subject": "Professional on a laptop",
+      "speaksTo": "Enterprise workplace / devices",
+      "photographer": "Christina @ wocintechchat.com",
+      "source": "Unsplash",
+      "unsplashId": "photo-1573164713988-8665fc963095"
+    }
+  ]
+}

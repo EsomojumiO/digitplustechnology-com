@@ -12,10 +12,12 @@ import {
   CTABand,
   Eyebrow,
 } from "@/components/ui";
+import { FeatureImage } from "@/components/ui/FeatureImage";
 import { FadeIn, Stagger, StaggerItem } from "@/components/motion";
 import { industries, services } from "@/lib/site";
 import { getIndustryContent } from "@/data/industries";
 import { JsonLd } from "@/lib/seo/jsonld";
+import { clampDescription } from "@/lib/seo/metadata";
 import { faqSchema, breadcrumbSchema } from "@/lib/seo/schema";
 
 export function generateStaticParams() {
@@ -34,7 +36,7 @@ export async function generateMetadata({
   if (!content) return { title: "Industry" };
   return {
     title: content.metaTitle,
-    description: content.metaDescription,
+    description: clampDescription(content.metaDescription),
     alternates: { canonical: `/industries/${content.slug}` },
   };
 }
@@ -76,7 +78,8 @@ export default async function IndustryDetailPage({
 
       {/* Intro */}
       <Section spacing="md">
-        <Stagger className="flex max-w-3xl flex-col gap-6">
+        <div className="grid gap-10 lg:grid-cols-[1fr_minmax(0,26rem)] lg:items-center lg:gap-14">
+        <Stagger className="flex flex-col gap-6">
           <StaggerItem>
             <Eyebrow>Industry</Eyebrow>
           </StaggerItem>
@@ -94,13 +97,23 @@ export default async function IndustryDetailPage({
           </StaggerItem>
           <StaggerItem className="mt-2 flex flex-wrap gap-3">
             <Button href="/contact" size="lg">
-              Request a Free IT Assessment
+              Get a quote
             </Button>
             <Button href="/industries" size="lg" variant="secondary">
               All industries
             </Button>
           </StaggerItem>
         </Stagger>
+          <FadeIn>
+            <FeatureImage
+              src={`/images/industries/${slug}.jpg`}
+              alt={`IT solutions for ${content.title} — Digitplus Technology`}
+              label={content.title}
+              aspect="aspect-[4/3]"
+              priority
+            />
+          </FadeIn>
+        </div>
       </Section>
 
       {/* Concerns we address */}
@@ -178,7 +191,7 @@ export default async function IndustryDetailPage({
           description="Tell us about your environment and what you’re planning. We’ll explain exactly how we’d approach it, no obligation."
           actions={
             <Button href="/contact" size="lg" variant="secondary">
-              {`Talk to our ${content.title} team`}
+              Get a quote
             </Button>
           }
         />

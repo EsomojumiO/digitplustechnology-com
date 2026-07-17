@@ -12,9 +12,9 @@ import { FadeIn, Stagger, StaggerItem } from "@/components/motion";
 import { industries } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Industries We Serve, Government, Banking, Healthcare & More",
+  title: "Industries We Serve Across Nigeria",
   description:
-    "Sector-specific IT solutions for government, banking, enterprise, SME, healthcare, education, oil & gas, and logistics across Nigeria. Built around how each sector works.",
+    "Sector-specific IT solutions for government, banking, enterprise, SME, healthcare, education, oil & gas and logistics across Nigeria — shaped by each sector.",
   alternates: { canonical: "/industries" },
 };
 
@@ -59,7 +59,7 @@ export default function IndustriesOverviewPage() {
           description="We work across many industries. Tell us about your environment and we’ll explain exactly how we’d approach it."
           actions={
             <Button href="/contact" size="lg" variant="secondary">
-              Talk to an Expert
+              Get a quote
             </Button>
           }
         />

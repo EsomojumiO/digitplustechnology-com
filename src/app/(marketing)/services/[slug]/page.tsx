@@ -13,11 +13,15 @@ import {
   CTABand,
   Eyebrow,
 } from "@/components/ui";
+import { FeatureImage } from "@/components/ui/FeatureImage";
+import Link from "next/link";
 import { FadeIn, Stagger, StaggerItem } from "@/components/motion";
 import { services, industries } from "@/lib/site";
+import { getSpokeArticles } from "@/lib/content";
 import { getServiceContent } from "@/data/services";
 import { testimonials } from "@/data/testimonials";
 import { JsonLd } from "@/lib/seo/jsonld";
+import { clampDescription } from "@/lib/seo/metadata";
 import { serviceSchema, faqSchema, breadcrumbSchema } from "@/lib/seo/schema";
 
 export function generateStaticParams() {
@@ -25,6 +29,10 @@ export function generateStaticParams() {
 }
 
 export const dynamicParams = false;
+
+// Lowercase a service title for mid-sentence use while preserving the "IT"
+// initialism ("IT Procurement" would otherwise render "it procurement").
+const lowerTitle = (s: string) => s.toLowerCase().replace(/\bit\b/g, "IT");
 
 export async function generateMetadata({
   params,
@@ -36,7 +44,7 @@ export async function generateMetadata({
   if (!content) return { title: "Service" };
   return {
     title: content.metaTitle,
-    description: content.metaDescription,
+    description: clampDescription(content.metaDescription),
     alternates: { canonical: `/services/${content.slug}` },
   };
 }
@@ -53,6 +61,9 @@ export default async function ServiceDetailPage({
   const relatedIndustries = content.relevantIndustries
     .map((s) => industries.find((i) => i.slug === s))
     .filter((i): i is (typeof industries)[number] => Boolean(i));
+
+  // Hub-and-spoke: articles that link up to this service pillar.
+  const spokes = getSpokeArticles("service", slug, 5);
 
   // Pick an illustrative testimonial deterministically per service.
   const serviceIndex = services.findIndex((s) => s.slug === slug);
@@ -83,7 +94,8 @@ export default async function ServiceDetailPage({
 
       {/* Intro */}
       <Section spacing="md">
-        <Stagger className="flex max-w-3xl flex-col gap-6">
+        <div className="grid gap-10 lg:grid-cols-[1fr_minmax(0,26rem)] lg:items-center lg:gap-14">
+        <Stagger className="flex flex-col gap-6">
           <StaggerItem>
             <Eyebrow>Service</Eyebrow>
           </StaggerItem>
@@ -93,7 +105,7 @@ export default async function ServiceDetailPage({
             </h1>
           </StaggerItem>
           <StaggerItem>
-            <p className="text-body-lg text-accent measure">{content.tagline}</p>
+            <p className="text-body-lg text-muted measure">{content.tagline}</p>
           </StaggerItem>
           <StaggerItem className="flex flex-col gap-5">
             {content.intro.map((para, i) => (
@@ -104,13 +116,23 @@ export default async function ServiceDetailPage({
           </StaggerItem>
           <StaggerItem className="mt-2 flex flex-wrap gap-3">
             <Button href="/contact" size="lg">
-              Request a Free IT Assessment
+              Get a quote
             </Button>
             <Button href="/services" size="lg" variant="secondary">
               All services
             </Button>
           </StaggerItem>
         </Stagger>
+          <FadeIn>
+            <FeatureImage
+              src={`/images/services/${slug}.jpg`}
+              alt={`${content.title} — Digitplus Technology`}
+              label={content.title}
+              aspect="aspect-[4/3]"
+              priority
+            />
+          </FadeIn>
+        </div>
       </Section>
 
       {/* What's included */}
@@ -118,7 +140,7 @@ export default async function ServiceDetailPage({
         <FadeIn>
           <SectionHeading
             eyebrow="What's included"
-            title={`Inside our ${content.title.toLowerCase()}`}
+            title={`Inside our ${lowerTitle(content.title)}`}
           />
         </FadeIn>
         <Grid as={Stagger} columns={2} gap="md" className="mt-12">
@@ -212,13 +234,39 @@ export default async function ServiceDetailPage({
         </div>
       </Section>
 
+      {/* Further reading — hub-and-spoke: articles linking up to this pillar */}
+      {spokes.length > 0 ? (
+        <Section>
+          <FadeIn>
+            <SectionHeading eyebrow="Further reading" title="Related insights" />
+          </FadeIn>
+          <Stagger className="mt-10 divide-y divide-hairline border-y border-hairline">
+            {spokes.map((a) => (
+              <StaggerItem key={a.slug}>
+                <Link
+                  href={`/insights/${a.slug}`}
+                  className="group flex items-baseline justify-between gap-6 py-4 transition-colors hover:bg-surface/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green"
+                >
+                  <span className="text-body-lg text-text transition-colors group-hover:text-accent-green">
+                    {a.title}
+                  </span>
+                  <span className="shrink-0 font-mono text-caption uppercase tracking-[0.1em] text-muted">
+                    {a.readingTime.text}
+                  </span>
+                </Link>
+              </StaggerItem>
+            ))}
+          </Stagger>
+        </Section>
+      ) : null}
+
       <FadeIn>
         <CTABand
-          title={`Ready to talk about ${content.title.toLowerCase()}?`}
+          title={`Ready to talk about ${lowerTitle(content.title)}?`}
           description="Tell us what you’re planning. We’ll come back with practical next steps and a clear, line-itemised proposal, no obligation."
           actions={
             <Button href="/contact" size="lg" variant="secondary">
-              {`Get a quote for ${content.title}`}
+              Get a quote
             </Button>
           }
         />

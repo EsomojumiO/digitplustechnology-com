@@ -26,15 +26,16 @@ export function Testimonial({
       className={cn("flex flex-col gap-6", className)}
       {...props}
     >
-      <blockquote className="text-h3 font-medium tracking-tight text-text measure-wide">
+      {/* Quote sits in the BODY face at reading scale — not display scale. */}
+      <blockquote className="text-body-lg leading-[1.6] text-text/80 measure-wide">
         <span aria-hidden="true">&ldquo;</span>
         {quote}
         <span aria-hidden="true">&rdquo;</span>
       </blockquote>
       <figcaption className="flex flex-col gap-0.5">
-        <span className="text-body font-semibold text-text">{author}</span>
+        <span className="text-small font-medium text-text">{author}</span>
         {attribution ? (
-          <span className="text-small text-muted">{attribution}</span>
+          <span className="text-small text-faint">{attribution}</span>
         ) : null}
       </figcaption>
     </figure>

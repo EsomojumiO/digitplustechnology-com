@@ -13,10 +13,12 @@
   },
   "dependencies": {
     "clsx": "^2.1.1",
-    "framer-motion": "^12.40.0",
+    "framer-motion": "^12.42.2",
     "gray-matter": "^4.0.3",
+    "lenis": "^1.3.25",
     "next": "16.2.6",
-    "next-mdx-remote": "^5.0.0",
+    "next-mdx-remote": "^6.0.0",
+    "next-view-transitions": "^0.3.5",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "reading-time": "^1.5.0",
@@ -27,12 +29,14 @@
   },
   "devDependencies": {
     "@anthropic-ai/sdk": "latest",
+    "@axe-core/playwright": "^4.12.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
+    "playwright": "^1.61.1",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
