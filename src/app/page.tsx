@@ -265,15 +265,17 @@ export default function HomePage() {
                 <span aria-hidden="true">★★★★★</span>
                 <span className="sr-only">Five star rating</span>
               </p>
-              {/* Unlinked on purpose. The package asks for a link to the
-                  Google profile but doesn't include the URL, and a fabricated
-                  Google Maps link on a real business's site is worse than no
-                  link — it's a claim about where these reviews live. Logged in
-                  PLACEHOLDERS.md; wrap this in an <a> once the client supplies
-                  the real profile URL. */}
-              <p className="text-small font-medium text-text">
+              <a
+                href={siteConfig.googleReviewsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                // Named for screen readers: "From our Google reviews" alone
+                // doesn't say it leaves the site or where it lands.
+                aria-label="From our Google reviews — read them on our Google Business profile (opens in a new tab)"
+                className="text-small font-medium text-text underline decoration-from-font underline-offset-2 transition-colors duration-[var(--dur-fast)] hover:text-accent-green focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green"
+              >
                 From our Google reviews
-              </p>
+              </a>
             </div>
             <ul className="grid w-full grid-cols-1 gap-x-10 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
               {googleReviews.map((r) => (

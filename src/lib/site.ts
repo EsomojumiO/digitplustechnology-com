@@ -22,6 +22,8 @@ export interface SiteConfig {
   hq: string;
   coverage: readonly string[];
   storeUrl: string;
+  /** Public Google Business profile — the review strip links here. */
+  googleReviewsUrl: string;
 }
 
 export const siteConfig = {
@@ -38,6 +40,9 @@ export const siteConfig = {
   hq: "Abuja, Nigeria",
   coverage: ["Abuja", "Lagos", "Port Harcourt"],
   storeUrl: "https://thedigitplus.com",
+  // Verified 2026-07-17: 302 -> google.com/maps/place/Digitplus+Technologies
+  // at 9.0626, 7.4713 (Abuja). Right business, right city.
+  googleReviewsUrl: "https://maps.app.goo.gl/5RnHHpYhWGDz9ygt9",
 } as const satisfies SiteConfig;
 
 /* ---------------------------------------------------------------------------

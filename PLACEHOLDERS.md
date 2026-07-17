@@ -101,9 +101,9 @@ all** (an empty grid under that heading is worse than no section), and
 is empty, and `index % 0` is `NaN`, which would otherwise have taken every service
 page down.
 
-### ⚠️ NEEDED FROM CLIENT — Google profile URL
-The package asks for the strip to link to the Google profile, but **no URL was
-supplied**. The label currently renders as plain text. A fabricated Google Maps
-link on a real business's site is a claim about where those reviews live, so it
-was left unlinked rather than invented. Supply the profile URL and wrap the label
-in an `<a>` (`src/app/page.tsx`, the Google reviews strip).
+### ~~NEEDED FROM CLIENT — Google profile URL~~ — RESOLVED 2026-07-17
+Client supplied `https://maps.app.goo.gl/5RnHHpYhWGDz9ygt9`. Verified before
+wiring: 302 → `google.com/maps/place/Digitplus+Technologies` at 9.0626, 7.4713
+(Abuja) — right business, right city. Now `siteConfig.googleReviewsUrl`, and the
+strip's "From our Google reviews" label links to it (external, `rel="noopener
+noreferrer"`, `aria-label` naming the destination and the new tab).
