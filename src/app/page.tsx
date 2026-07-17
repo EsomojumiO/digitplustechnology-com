@@ -10,7 +10,6 @@ import {
   ServiceCard,
   StatGrid,
   Testimonial,
-  ProcessStep,
   CTABand,
   Eyebrow,
 } from "@/components/ui";
@@ -20,8 +19,10 @@ import {
   StaggerItem,
   CountUp,
   Magnetic,
+  ScrollScrubImage,
 } from "@/components/motion";
 import { HeroCarousel } from "@/components/home/HeroCarousel";
+import { StickyStory } from "@/components/home/StickyStory";
 import { TrustMarquee } from "@/components/home/TrustMarquee";
 import { WhyPillar } from "@/components/home/WhyPillar";
 import { IndustriesFilter } from "@/components/home/IndustriesFilter";
@@ -173,34 +174,34 @@ export default function HomePage() {
         </FadeIn>
       </Section>
 
-      {/* Process preview */}
-      <Section>
-        <div className="grid gap-12 lg:grid-cols-[minmax(0,22rem)_1fr] lg:gap-16">
-          <FadeIn>
-            <SectionHeading
-              eyebrow="How we work"
-              title="A clear, documented process"
-              lede="Six steps, the same discipline every time."
-              className="lg:sticky lg:top-28"
-            />
-            <div className="mt-8 lg:sticky lg:top-64">
-              <Button href="/approach" variant="secondary">
-                Explore our approach
-              </Button>
-            </div>
-          </FadeIn>
-          <Stagger role="list" className="flex flex-col gap-8">
-            {processSteps.map((s) => (
-              <StaggerItem key={s.step} role="listitem">
-                <ProcessStep
-                  step={s.step}
-                  title={s.title}
-                  description={s.description}
-                />
-              </StaggerItem>
-            ))}
-          </Stagger>
+      {/* Full-bleed image band — edge to edge, scrubbed against scroll. The one
+          place on home where a photograph gets the whole width. */}
+      <ScrollScrubImage
+        src="/images/hero/hero-datacenter.jpg"
+        alt="Data-centre hardware supply"
+        aspect="aspect-[3/2] sm:aspect-[21/9]"
+        sizes="100vw"
+      />
+
+      {/* Process — now the sticky-storytelling moment (client-confirmed: home).
+          Same eyebrow, headline, lede, six steps and CTA as before; the pinned
+          visual is the only thing that's new. Copy unchanged. */}
+      <Section spacing="lg">
+        <FadeIn>
+          <SectionHeading
+            eyebrow="How we work"
+            title="A clear, documented process"
+            lede="Six steps, the same discipline every time."
+          />
+        </FadeIn>
+        <div className="mt-16">
+          <StickyStory />
         </div>
+        <FadeIn className="mt-12 flex justify-center">
+          <Button href="/approach" variant="secondary">
+            Explore our approach
+          </Button>
+        </FadeIn>
       </Section>
 
       {/* Industries, filterable grid */}
