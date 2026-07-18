@@ -1,0 +1,7 @@
+{
+  "_note": "Unsplash free-license images. Attribution not required but recorded. Photographer names retrievable from each Unsplash photo ID. Swapped 2026-07-18 in the imagery-policy pass (#2): services-over-faces, Nigerian/Black subjects, correct subject per slot.",
+  "government.jpg": { "unsplashId": "photo-1741900024959-c406f5e4eaa1", "query": "nigeria modern institutional building", "swappedFrom": "a private house with a pool (wrong subject)" },
+  "oil-gas-energy.jpg": { "unsplashId": "photo-1726731782158-fcf6822b6ca4", "query": "oil refinery industrial facility", "swappedFrom": "a European castle (wrong subject)" },
+  "education.jpg": { "unsplashId": "photo-1643199121319-b3b5695e4acb", "query": "computer training lab", "swappedFrom": "three white men at a laptop (white subjects)" },
+  "sme.jpg": { "unsplashId": "photo-1655720357872-ce227e4164ba", "query": "african women small business laptop", "swappedFrom": "stacked hands incl. white hands (white subjects + cliche)" }
+}

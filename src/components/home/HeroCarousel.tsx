@@ -201,7 +201,7 @@ export function HeroCarousel() {
                     // a worst-case white image pixel — so ~0.82 here. Verified
                     // per slide by scripts/hero-contrast.mjs (worst-case pixel).
                     background:
-                      "linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.85) 46%, rgba(0,0,0,0.4) 64%, transparent 82%), linear-gradient(to top right, rgba(0,0,0,0.5), rgba(0,0,0,0.1) 55%, transparent)",
+                      "linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.82) 50%, rgba(0,0,0,0.34) 68%, transparent 82%), linear-gradient(to top right, rgba(0,0,0,0.45), rgba(0,0,0,0.1) 55%, transparent)",
                   }}
                 />
 

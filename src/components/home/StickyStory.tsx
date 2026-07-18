@@ -31,16 +31,14 @@ import { processSteps } from "@/data";
  */
 
 /* Three phases across the six steps: plan (1–2), deliver (3–4), sustain (5–6).
-   Only the image choice is new here — the alt strings are the ones these exact
-   files already ship with in HeroCarousel. Reused rather than rewritten: they're
-   approved, they stay consistent across the site, and my own first drafts
-   described things the photographs don't actually show (hero-engineer.jpg is a
-   portrait, not someone working on hardware — wrong alt text is worse than
-   terse alt text). */
+   Infrastructure/service context, no posed portraits — the sustain image was
+   hero-engineer.jpg (the arms-folded portrait) until the #2 imagery pass
+   removed that shot from every slot; it's now the dark ops-racks frame, which
+   reads as "kept running." */
 const PHASE_IMAGES = [
-  { src: "/images/hero/hero-team-lagos.jpg", alt: "Managed IT services" },
-  { src: "/images/hero/hero-cabling.jpg", alt: "Infrastructure and networking" },
-  { src: "/images/hero/hero-engineer.jpg", alt: "Deployment and support engineers" },
+  { src: "/images/hero/hero-team-lagos.jpg", alt: "An IT team at work in a Lagos office" },
+  { src: "/images/hero/hero-cabling.jpg", alt: "Structured network cabling" },
+  { src: "/images/hero/hero-datacenter.jpg", alt: "Data-centre racks kept running" },
 ] as const;
 
 const phaseFor = (index: number) => Math.min(2, Math.floor(index / 2));

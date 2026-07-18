@@ -103,3 +103,31 @@ bash scripts/download-images.sh
 
 After downloading, add a `CREDITS.json` in each folder (photographer + Unsplash
 ID per file), mirroring `public/images/hero/CREDITS.json`.
+
+## Imagery-policy pass (#2) — swaps applied 2026-07-18
+
+Audit against the services-over-faces / Nigerian-subjects policy found real
+violations, not just the flagged hero images. All IDs below verified HTTP 200
+AND each downloaded image viewed against its slot before wiring.
+
+| Slot | Was | Now (Unsplash ID) | Reason |
+|---|---|---|---|
+| hero 1 / services/managed-services | bright dashboard screenshot | photo-1680992046626-418f7e910589 (dark racks) | bright/busy behind overlay text |
+| hero 2 / services/deployment-implementation | **pale/white arm sketching** | photo-1507333199169-84fd735371fb (rack cabling) | white subject + wrong subject |
+| industries/government | **a house with a pool** | photo-1741900024959-c406f5e4eaa1 (institutional building) | wrong subject |
+| industries/oil-gas-energy | **a European castle** | photo-1726731782158-fcf6822b6ca4 (refinery) | wrong subject |
+| industries/education | **three white men** | photo-1643199121319-b3b5695e4acb (computer lab) | white subjects |
+| industries/sme | **stacked hands incl. white** | photo-1655720357872-ce227e4164ba (African women, laptop) | white subjects + cliché |
+| about/team | **white man + woman high-five** | photo-1573164574572-cb89e39749b4 (African boardroom team) | white subjects |
+
+Kept (audited OK): abuja (City Gate), lagos, port-harcourt (Rivers aerial),
+enterprise (office corridor), healthcare (clinic interior), logistics (plant
+aerial), it-procurement (warehouse), infrastructure-solutions (patch panel),
+hardware-supply (equipment), hero-datacenter, hero-cabling.
+
+Borderline kept: **banking-financial-services** — a classical columned building
+(reads as a bank; not Nigerian, but correct subject and no people). Swap to a
+Nigerian bank branch if a good frame is sourced.
+
+Removed entirely: **hero-engineer.jpg** (arms-folded posed portrait) — no longer
+referenced anywhere.

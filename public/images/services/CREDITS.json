@@ -1,0 +1,5 @@
+{
+  "_note": "Unsplash free-license. Swapped 2026-07-18 (#2 imagery). managed-services + deployment-implementation re-sourced to dark infrastructure frames (also used as hero slides 1-2). Others from reports/image-shortlist.md.",
+  "managed-services.jpg": { "unsplashId": "photo-1680992046626-418f7e910589", "query": "dark server room racks", "swappedFrom": "a bright busy dashboard screenshot (poor for hero overlay)" },
+  "deployment-implementation.jpg": { "unsplashId": "photo-1507333199169-84fd735371fb", "query": "server rack cabling close-up", "swappedFrom": "a pale/white arm sketching on paper (white subject + wrong subject)" }
+}
