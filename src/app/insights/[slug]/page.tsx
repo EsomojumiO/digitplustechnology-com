@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ctaLabels } from "@/lib/cta";
 import Image from "next/image";
 import { Link } from "next-view-transitions";
 import { notFound } from "next/navigation";
@@ -291,7 +292,7 @@ export default async function ArticlePage({
         actions={
           <>
             <Button href="/contact" size="lg" variant="secondary">
-              Get a quote
+              {ctaLabels.insightsSoft}
             </Button>
             <Button href={hub.href} size="lg" variant="ghost">
               Read our insights

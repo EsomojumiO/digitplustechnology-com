@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ctaLabels } from "@/lib/cta";
 import {
   Section,
   SectionHeading,
@@ -61,7 +62,7 @@ export default function ApproachPage() {
         description="The first step costs you nothing but a conversation. Book a discovery call and we’ll begin understanding what you actually need."
         actions={
           <Button href="/contact" size="lg" variant="secondary">
-            Get a quote
+            {ctaLabels.generic}
           </Button>
         }
       />

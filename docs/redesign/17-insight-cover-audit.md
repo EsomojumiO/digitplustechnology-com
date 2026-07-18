@@ -6,7 +6,7 @@ subject). **No swaps applied** — verdicts and reasons only, for the client to
 approve before a follow-up batch. Every cover was viewed (montages:
 `cov1.jpg` covers 1–20, `cov2.jpg` covers 21–39, delivered separately).
 
-Verdict counts: **KEEP 25 · SWAP 8 · UNCERTAIN 6.**
+Verdict counts: **KEEP 24 · SWAP 9 · UNCERTAIN 6** (all UNCERTAINs later resolved to SWAP → 15 swapped).
 
 The policy's own logic applies: covers that are pure infrastructure/objects
 (racks, cabling, batteries, documents, concept renders) are ethnicity-neutral
@@ -15,7 +15,7 @@ a close-up of **white hands** typing/writing/signing, or white workers in frame.
 
 ---
 
-## SWAP — clear policy violations (8)
+## SWAP — clear policy violations (9, incl. #37 wrong-subject)
 
 | # | Slug | What it shows | Reason |
 |---|---|---|---|

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ctaLabels } from "@/lib/cta";
 import Image from "next/image";
 import {
   Section,
@@ -81,7 +82,7 @@ export default function HomePage() {
           <SectionHeading
             eyebrow="What we do"
             title="Six services, one accountable partner"
-            lede="Start with one capability; grow into the rest."
+            lede="Procurement, infrastructure, deployment, support. Start with one; we grow into the rest as you need us."
           />
         </FadeIn>
         <Stagger>
@@ -157,7 +158,7 @@ export default function HomePage() {
           <SectionHeading
             eyebrow="How we work"
             title="A clear, documented process"
-            lede="Six steps, the same discipline every time."
+            lede="Discovery to handover, six steps, the same documentation and sign-off every time."
           />
         </FadeIn>
         <div className="mt-16">
@@ -176,7 +177,7 @@ export default function HomePage() {
           <SectionHeading
             eyebrow="Who we serve"
             title="Built around how your sector works"
-            lede="Every sector has its own demands. We deliver to each."
+            lede="A hospital can't absorb the downtime a warehouse can. We size, document and support the work to each sector's constraints."
           />
         </FadeIn>
         <IndustriesFilter
@@ -356,7 +357,7 @@ export default function HomePage() {
             <>
               <Magnetic strength={6}>
                 <Button href="/contact" size="lg" variant="secondary">
-                  Get a quote
+                  {ctaLabels.generic}
                 </Button>
               </Magnetic>
               <Button

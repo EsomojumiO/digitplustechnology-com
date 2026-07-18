@@ -201,14 +201,44 @@ async function checkRoute(page: Page, route: string) {
       });
 
       const oranges: string[] = [];
+      const orangeCtas: string[] = [];
       document.querySelectorAll("*").forEach((el) => {
         if (getComputedStyle(el).backgroundColor !== "rgb(173, 69, 39)") return;
         const r = (el as HTMLElement).getBoundingClientRect();
         if (r.bottom < 0 || r.top > innerHeight || r.width === 0) return;
-        oranges.push(`${el.tagName} "${(el.textContent ?? "").trim().slice(0, 16)}"`);
+        const text = (el.textContent ?? "").trim();
+        oranges.push(`${el.tagName} "${text.slice(0, 16)}"`);
+        // Orange links/buttons are the primary CTAs — capture their labels.
+        if (/^(A|BUTTON)$/.test(el.tagName) && text) orangeCtas.push(text);
       });
 
-      return { darkHits, retiredHits, pairs, py, oranges };
+      // Scrim exception: a dark gradient over a photo is allowed ONLY inside the
+      // hero carousel. Anywhere else it's the dark-theme scrim idiom creeping
+      // back. Flag any full-cover dark linear-gradient outside the carousel.
+      const hero = document.querySelector('[aria-roledescription="carousel"]');
+      const scrims: string[] = [];
+      document.querySelectorAll("*").forEach((el) => {
+        const bg = getComputedStyle(el).backgroundImage;
+        // Meaningful DARK alpha (>= 0.1), not the "to-transparent" end which
+        // serialises as rgba(0, 0, 0, 0) and would false-positive every fade.
+        if (!bg.includes("linear-gradient") || !/rgba\(0, 0, 0, (0\.[1-9]|[1-9])/.test(bg)) return;
+        if (hero && hero.contains(el)) return; // hero-only exception
+        const r = (el as HTMLElement).getBoundingClientRect();
+        if (r.width < 40 || r.height < 40) return; // ignore tiny gradient chips
+        scrims.push(`${el.tagName}.${String(el.className).slice(0, 24)}`);
+      });
+
+      // CTA labels: the retired "Get a quote" must not reappear, and every
+      // primary CTA (a/button with the accent fill or a lg pill) should carry an
+      // intent-matched label. We collect all button/link labels for the retired
+      // check; the map is enforced in Node against the approved set.
+      const ctaLabels: string[] = [];
+      document.querySelectorAll("a, button").forEach((el) => {
+        const t = (el.textContent ?? "").trim();
+        if (t) ctaLabels.push(t);
+      });
+
+      return { darkHits, retiredHits, pairs, py, oranges, orangeCtas, scrims, ctaLabels };
     },
     { DARK_TOKENS, RETIRED },
   );
@@ -221,6 +251,34 @@ async function checkRoute(page: Page, route: string) {
   // 3. one orange fill per viewport
   if (report.oranges.length > 1)
     fail(route, "orange-fills", `${report.oranges.length} in viewport: ${report.oranges.join(", ")}`);
+
+  // 9. scrim-on-light exception — dark gradient over a photo is hero-only
+  if (report.scrims.length)
+    fail(route, "scrim-outside-hero", [...new Set(report.scrims)].join("; "));
+
+  // 10. CTA labels — the retired "Get a quote" must not reappear anywhere, and
+  // every PRIMARY (orange-fill) CTA must carry a label from the canonical map
+  // (dynamic "Talk to a …/Reach our …" matched by prefix). Secondary/nav links
+  // aren't constrained; the orange fill is the primary intent per viewport.
+  const APPROVED_CTA = new Set([
+    "Request a proposal",
+    "Send your brief",
+    "Get this working in your business",
+    "Start a conversation",
+    "Get a proposal",
+    "Subscribe", // newsletter — a legitimate orange action, not a page CTA
+  ]);
+  const APPROVED_PREFIX = ["Talk to a ", "Reach our "];
+  const onMap = (l: string) =>
+    APPROVED_CTA.has(l) || APPROVED_PREFIX.some((p) => l.startsWith(p));
+
+  for (const label of report.ctaLabels) {
+    if (label.includes("Get a quote"))
+      fail(route, "cta-retired", `"Get a quote" is retired — use the intent map`);
+  }
+  for (const o of report.orangeCtas) {
+    if (!onMap(o)) fail(route, "cta-offmap", `orange CTA "${o}" not in the intent map`);
+  }
 
   // 4. contrast
   for (const p of report.pairs) {

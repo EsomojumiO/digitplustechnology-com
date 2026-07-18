@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ctaLabels } from "@/lib/cta";
 import {
   Section,
   SectionHeading,
@@ -74,7 +75,7 @@ export default function LocationsPage() {
         description="We coordinate multi-site programmes from a single point of accountability. Tell us where you operate and we’ll plan around it."
         actions={
           <Button href="/contact" size="lg" variant="secondary">
-            Get a quote
+            {ctaLabels.generic}
           </Button>
         }
       />

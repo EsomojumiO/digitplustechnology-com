@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ctaLabels } from "@/lib/cta";
 import { Link } from "next-view-transitions";
 import {
   Section,
@@ -133,7 +134,7 @@ export default function EcosystemPage() {
         description="That is what this arm of Digitplus does, procurement, infrastructure, and managed services for organisations. Let's talk about what you need."
         actions={
           <Button href="/contact" size="lg" variant="secondary">
-            Get a quote
+            {ctaLabels.generic}
           </Button>
         }
       />

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ctaLabels } from "@/lib/cta";
 import {
   Section,
   SectionHeading,
@@ -59,7 +60,7 @@ export default function IndustriesOverviewPage() {
           description="We work across many industries. Tell us about your environment and we’ll explain exactly how we’d approach it."
           actions={
             <Button href="/contact" size="lg" variant="secondary">
-              Get a quote
+              {ctaLabels.generic}
             </Button>
           }
         />

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ctaLabels } from "@/lib/cta";
 import { notFound } from "next/navigation";
 import {
   Section,
@@ -108,7 +109,7 @@ export default async function CategoryArchivePage({
         description="Tell us what you’re working on. We’ll come back with practical next steps, no obligation."
         actions={
           <Button href="/contact" size="lg" variant="secondary">
-            Get a quote
+            {ctaLabels.insightsSoft}
           </Button>
         }
       />

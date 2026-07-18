@@ -199,7 +199,7 @@ export function ContactForm({ className }: ContactFormProps) {
 
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
           <Button type="submit" size="lg" disabled={pending}>
-            {pending ? "Sending…" : "Send message"}
+            {pending ? "Sending…" : "Send your brief"}
           </Button>
           <p className="text-caption text-muted">
             Your details are never shared with third parties.

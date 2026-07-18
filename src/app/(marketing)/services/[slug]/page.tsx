@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { ctaLabels } from "@/lib/cta";
 import type { Metadata } from "next";
 import {
   Section,
@@ -122,7 +123,7 @@ export default async function ServiceDetailPage({
           </StaggerItem>
           <StaggerItem className="mt-2 flex flex-wrap gap-3">
             <Button href="/contact" size="lg">
-              Get a quote
+              {ctaLabels.serviceProposal}
             </Button>
             <Button href="/services" size="lg" variant="secondary">
               All services
@@ -272,7 +273,7 @@ export default async function ServiceDetailPage({
           description="Tell us what you’re planning. We’ll come back with practical next steps and a clear, line-itemised proposal, no obligation."
           actions={
             <Button href="/contact" size="lg" variant="secondary">
-              Get a quote
+              {ctaLabels.serviceProposal}
             </Button>
           }
         />

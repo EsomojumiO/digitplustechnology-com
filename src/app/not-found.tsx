@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ctaLabels } from "@/lib/cta";
 import { Section, Container, Button, Eyebrow } from "@/components/ui";
 
 export const metadata: Metadata = {
@@ -30,7 +31,7 @@ export default function NotFound() {
             Our services
           </Button>
           <Button href="/contact" variant="ghost">
-            Get a quote
+            {ctaLabels.generic}
           </Button>
         </div>
       </Container>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ctaLabels } from "@/lib/cta";
 import {
   Section,
   SectionHeading,
@@ -46,7 +47,7 @@ export default function AboutPage() {
             as="h1"
             eyebrow="About us"
             title="A disciplined IT partner, not just a supplier"
-            lede="Digitplus Technology Limited exists to take the uncertainty out of IT for Nigerian organisations, by owning the whole journey from plan to support, and doing it with the discipline that serious operations require."
+            lede="Digitplus Technology Limited exists to make enterprise IT in Nigeria predictable: one accountable partner from plan to support, genuine authorised-channel hardware, and delivery documentation your auditors will accept."
           />
         </FadeIn>
       </Section>
@@ -196,7 +197,7 @@ export default function AboutPage() {
         description={`Reach us at ${siteConfig.email} or start a conversation. We’ll respond with practical next steps.`}
         actions={
           <Button href="/contact" size="lg" variant="secondary">
-            Get a quote
+            {ctaLabels.generic}
           </Button>
         }
       />

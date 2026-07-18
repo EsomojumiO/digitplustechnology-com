@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { industrySpecialist } from "@/lib/cta";
 import type { Metadata } from "next";
 import {
   Section,
@@ -97,7 +98,7 @@ export default async function IndustryDetailPage({
           </StaggerItem>
           <StaggerItem className="mt-2 flex flex-wrap gap-3">
             <Button href="/contact" size="lg">
-              Get a quote
+              {industrySpecialist(content.title.toLowerCase())}
             </Button>
             <Button href="/industries" size="lg" variant="secondary">
               All industries
@@ -191,7 +192,7 @@ export default async function IndustryDetailPage({
           description="Tell us about your environment and what you’re planning. We’ll explain exactly how we’d approach it, no obligation."
           actions={
             <Button href="/contact" size="lg" variant="secondary">
-              Get a quote
+              {industrySpecialist(content.title.toLowerCase())}
             </Button>
           }
         />

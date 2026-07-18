@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { ctaLabels } from "@/lib/cta";
 import { Link } from "next-view-transitions";
 import { usePathname } from "next/navigation";
 import { Button, Container } from "@/components/ui";
@@ -320,7 +321,7 @@ function MobileMenu({
             ))}
           </div>
           <Button href="/contact" size="lg" className="w-full" onClick={onClose}>
-            Get a quote
+            {ctaLabels.generic}
           </Button>
         </div>
       </div>
@@ -499,7 +500,7 @@ export function Header() {
               "hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green",
             )}
           >
-            Get a quote
+            {ctaLabels.generic}
             <span aria-hidden="true">›</span>
           </Link>
 

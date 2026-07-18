@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { officeCta } from "@/lib/cta";
 import { notFound } from "next/navigation";
 import {
   Section,
@@ -121,7 +122,7 @@ export default function PortHarcourtPage() {
         description="Tell us what you’re planning and we’ll come back with practical next steps."
         actions={
           <Button href="/contact" size="lg" variant="secondary">
-            Get a quote
+            {officeCta(loc.city)}
           </Button>
         }
       />
