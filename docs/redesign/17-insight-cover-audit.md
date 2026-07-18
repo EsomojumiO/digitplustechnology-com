@@ -76,3 +76,44 @@ obscured, correct medical context).
 - Same process as the slot swaps: verify every candidate ID resolves 200 AND
   view each downloaded image against its topic before wiring. Update
   `public/images/insights/CREDITS.json`.
+
+---
+
+## APPLIED 2026-07-18 — all 15 swapped (client-approved rule)
+
+The 8 SWAPs (plus #37 wrong-subject = 9) were approved. The 6 UNCERTAINs were
+resolved by the client's rule: **no people + subject fits = KEEP; non-African
+people OR subject mismatch = SWAP.** Rule applied to each:
+
+| # | Slug | Rule application | Verdict |
+|---|---|---|---|
+| 1 | a-pre-deployment-site-survey… | light-skinned hand on keyboard = **non-African person**; also code ≠ site survey | SWAP |
+| 5 | building-an-it-disaster-recovery… | no people, but a wrecked trailer = **subject mismatch** | SWAP |
+| 20 | it-infrastructure-for-schools… | students read as **non-African** | SWAP |
+| 27 | nigeria-enterprise-it-trends-2026 | no people, but a vintage control panel on a 2026 piece = **subject mismatch** | SWAP |
+| 38 | what-an-it-sla-should-cover | signing hands read as **non-African** (viewed full-size) | SWAP |
+| 39 | what-the-ndpr-means-for-nigerian… | office workers read as **non-African** (viewed full-size) | SWAP |
+
+**All 15 replacements are no-people, topical images** — the safest branch of
+the rule (subject fits, no geography question). Every replacement ID verified
+HTTP 200 AND viewed in a montage against its slot before wiring; CREDITS updated.
+
+| Slug | Replacement subject | Unsplash ID |
+|---|---|---|
+| a-pre-deployment-site-survey… | network nodes (survey/mapping) | photo-1644088379091-d574269d422f |
+| building-an-it-disaster-recovery… | cloud backup / recovery | photo-1667372283496-893f0b1e7c16 |
+| consolidated-vs-reactive-it-purchasing | stacked purchasing files | photo-1583521214690-73421a1829a9 |
+| how-the-lpo-process-works… | official forms | photo-1554224155-1696413565d3 |
+| how-to-build-a-three-year-it-roadmap | connected network mesh | photo-1644325349124-d1756b79dd42 |
+| how-to-evaluate-it-vendors… | binders | photo-1468779036391-52341f60b55d |
+| how-to-write-a-managed-services-scope… | paper stack (SOW) | photo-1516409590654-e8d51fc2d25c |
+| it-infrastructure-for-schools… | computer training lab | photo-1643199187247-b3b6009bf0bb |
+| ndpr-compliance-for-it-teams | padlock on keyboard | photo-1633265486064-086b219458ec |
+| nigeria-enterprise-it-trends-2026 | glowing tech (future) | photo-1653549893012-b8b4fbe97630 |
+| refresh-or-repair-it-hardware-decision | motherboard chip | photo-1675602488512-bdd631490fcb |
+| structuring-a-multi-site-it-refresh | circuit board | photo-1518770660439-4636190af475 |
+| total-cost-of-ownership… | calculator | photo-1611125832047-1d7ad1e8e48f |
+| what-an-it-sla-should-cover | documents / agreement | photo-1562240020-ce31ccb0fa7d |
+| what-the-ndpr-means-for-nigerian… | data mesh / privacy | photo-1590859808308-3d2d9c515b1a |
+
+Banking building (industries slot): KEEP, noted as a future Nigerian-bank swap.
