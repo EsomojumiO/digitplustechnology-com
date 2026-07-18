@@ -71,3 +71,41 @@ gap on the site.
 - ~~City-photo accuracy unverified~~ — **CLOSED 2026-07-17.** Client confirmed the
   Abuja frame is the **Abuja City Gate**, the city's signature landmark. Kept.
   Lagos and Port Harcourt frames confirmed alongside it.
+
+---
+
+## Re-score after the refinement round (2026-07-18)
+
+This round changed the hero (full-bleed overlay carousel), imagery (all slots
+policy-compliant + real photography), motion (the reveal bug fixed — entrances
+now actually run), and copy (sharpened ledes + intent-matched CTAs). Re-scored
+home + the marketing templates, imagery and hero dimensions especially.
+
+| Route | White | Hier | Colour | Imagery | Motion | Consist | Score | Δ |
+|---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+| `/` | 9 | 9 | 9 | 9 | 9 | 9 | **9** | — |
+| `/about` | 9 | 9 | 9 | 8 | 9 | 9 | **9** | +1 |
+| `/services` | 9 | 9 | 9 | 8 | 9 | 9 | **9** | +1 |
+| `/services/[slug]` | 9 | 9 | 9 | 8 | 9 | 9 | **9** | +1 |
+| `/industries/[slug]` | 9 | 9 | 9 | 8 | 9 | 9 | **9** | +1 |
+| `/locations/[city]` | 8 | 9 | 9 | 8 | 9 | 9 | **8** | — |
+| `/insights` | 9 | 9 | 9 | 9 | 9 | 9 | **9** | — |
+| `/contact` | 9 | 9 | 9 | N/A | 9 | 9 | **9** | — |
+
+**What moved:**
+- **Motion 8 → 9 across the board.** The entrances were never running above the
+  fold (the reveal-timing bug). Now they demonstrably do, stagger sweeps, hero
+  crossfades — the "I can't see the motion" complaint is resolved at the source.
+- **Imagery 7 → 8/9 on marketing pages.** The wrong-subject and white-subject
+  stock is gone; the arms-folded portrait is gone; the hero is a real full-bleed
+  moment. Marketing pages sit at **8** now, not because of the imagery quality
+  but because it's still interim Unsplash stock rather than the client's own
+  project/team photography (BLOCKERS #8) — that's the last point to 9.
+- **Home → 9.** The full-bleed overlay hero with per-slide verified contrast is
+  the confident hero moment the rubric rewards.
+
+**Nothing below 8.** `/locations/*` whitespace holds at 8 (the Abuja City Gate
+frame is a cropped sign, not a cityscape — an asset preference, not a defect).
+
+Gates at re-score: conformance PASS 15 (incl. new scrim + CTA checks) ·
+hero-contrast PASS · axe 0 · tsc clean.
