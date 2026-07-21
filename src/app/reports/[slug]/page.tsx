@@ -153,7 +153,9 @@ export default async function ReportLandingPage({
             <div className="flex flex-col gap-3">
               <Eyebrow>Key findings</Eyebrow>
               <h2 className="text-h2 text-balance text-text">
-                What the data shows
+                {/* Not "What the data shows" — both editions state their
+                    figures are directional, not survey data. */}
+                What we are seeing
               </h2>
             </div>
             <ul className="flex flex-col">

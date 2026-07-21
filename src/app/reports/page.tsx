@@ -44,7 +44,7 @@ export default function ReportsHubPage() {
         <FadeIn>
           <SectionHeading
             as="h1"
-            eyebrow="Research"
+            eyebrow="Briefings"
             title="Quarterly reports"
             lede="Practitioner briefings on the cost and shape of enterprise IT in Nigeria, drawn from our own procurement and delivery work. Directional rather than survey data, and every edition is readable in full on the page."
           />

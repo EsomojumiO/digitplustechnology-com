@@ -59,10 +59,6 @@ export default function PrivacyPage() {
               number, service interest, and your message.
             </li>
             <li>
-              <strong>Report downloads.</strong> When you request a report, we
-              collect your name, work email, organisation, and optional role.
-            </li>
-            <li>
               <strong>Newsletter sign-ups.</strong> We collect your email
               address only.
             </li>
@@ -76,7 +72,7 @@ export default function PrivacyPage() {
           <h2>How we use your information</h2>
           <ul>
             <li>To respond to your enquiry and provide the services you ask for.</li>
-            <li>To deliver reports you request and, where you opt in, related updates.</li>
+            <li>To send you the quarterly briefing, where you opted in.</li>
             <li>To maintain and improve the security and performance of the site.</li>
           </ul>
           <p>
