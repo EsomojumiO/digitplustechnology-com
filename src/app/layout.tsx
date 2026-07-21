@@ -7,7 +7,6 @@ import { siteConfig } from "@/lib/site";
 import {
   Header,
   Footer,
-  WhatsAppWidget,
   CookieConsent,
   SkipLink,
 } from "@/components/layout";
@@ -113,7 +112,6 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
-          <WhatsAppWidget />
           <CookieConsent />
           {/* Sitewide structured data, Organization + WebSite. */}
           <JsonLd data={organizationSchema()} />

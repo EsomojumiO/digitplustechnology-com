@@ -61,7 +61,7 @@ Implementation: add a "Related service" up-link block to each article (data-driv
 **Every commercial page (home, service, industry, location):**
 1. **Primary CTA above the fold** — "Get a quote" → short form (or `/contact#quote`). Orange, one per screen.
 2. **Phone clickable** in nav + footer — `tel:+2348037868120`.
-3. **WhatsApp Business CTA** — the existing floating `WhatsAppWidget` (→ `wa.me/2348037868120`) stays as the dominant B2B channel; also surfaced as a footer-level link. It is a deep-link CTA, not a scripted chat widget. ✅ already compliant.
+3. **WhatsApp Business CTA** — a `wa.me/2348037868120` deep link, not a scripted chat widget. **The floating button was removed 2026-07-22 at the client's request**: WhatsApp must not be the most visible contact option on an enterprise B2B site. It remains in the header Contact dropdown, the footer, and /contact. ✅ compliant.
 4. **Proof block before the first CTA** — partner logos (TrustMarquee) / stats band. _Note: partner-logo reseller authorization + real testimonials remain client blockers._
 5. **Contact form ≤ 5 fields** — audit `ContactForm`; trim to Name, Company, Email, Phone, Message (drop anything beyond). Honeypot stays (not a counted field).
 
