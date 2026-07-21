@@ -7,7 +7,7 @@ Every claim below was re-measured on the current build. Where an earlier documen
 asserted something was fixed, this pass checked whether it actually was — and three
 times it was not. Each expert lens was then re-run against the fixes rather than
 assumed to have been satisfied by them; the copy lens went RED → AMBER → GREEN over
-three passes, and the AMBER round caught a regression introduced by this very audit.
+five passes, and two of those rounds caught regressions introduced by this very audit.
 
 ---
 
@@ -16,14 +16,22 @@ three passes, and the AMBER round caught a regression introduced by this very au
 | Lens | Verdict | Basis |
 |---|---|---|
 | **QA / technical** | 🟢 **GREEN** | 71/71 sitemap URLs 200 with non-empty `<main>` · 0 console errors sitewide · conformance gate PASS across 28 routes (12 checks) · axe 0 violations across 15 templates · hero-contrast PASS (worst-case pixel ≥ 4.5:1 on every overlay element, both breakpoints) · `tsc` clean · build 79/79 · 18 redirects all permanent + single-hop + 200 · forms correct in stub mode · 404 branded and returning a true 404 |
-| **Copy** | 🟢 **GREEN** | Prose is the strongest asset here and the AI-tell scan is genuinely clean. Four shipped-artefact defects were found and fixed, and both editorial AMBERs were then closed by client decision (§A.2). Re-audited on the current build. |
+| **Copy** | 🟢 **GREEN** | Prose is the strongest asset here and the AI-tell scan is genuinely clean. The lens ran five times, RED → AMBER ×3 → GREEN; each round fixed what the previous one found, including two regressions this audit introduced. Final sweep of all 71 URLs: no download/citable/original-data claim, no unsubstantiated statistic, no stock image presented as Digitplus's own. |
 | **Design** | 🟢 **GREEN** | Rubric holds at 8–9. One regression introduced during this pass (over-long H1s) was caught by the gate and fixed rather than waived. Image set is 63 files with zero duplicates. |
 | **SEO** | 🟢 **GREEN** | 71 unique titles, 71 unique descriptions, all inside length bounds · 0 orphans · 0 non-descriptive anchors · JSON-LD on every template and valid · 14/14 target pages now carry their keyword in H1 + first 100 words · robots/sitemap/canonicals coherent · no noindex leaks, no draft URLs in the sitemap |
 
 **No REDs remain open, and no AMBER is left to the client's judgement.** Five REDs were
 found: four fixed, one closed by client decision (§A.1). Both editorial AMBERs were then
-also resolved (§A.2). Six known issues remain, every one of them blocked on a human input
+resolved (§A.2), and three further re-audit rounds found and closed five more honesty
+defects (§A.2b). Six known issues remain, every one of them blocked on a human input
 rather than on engineering (§A.3).
+
+> The pattern worth noting for whoever maintains this: **every one of those later finds was
+> a claim about something that did not exist** — a team that isn't ours, a store that is
+> live, premises we don't have, a download we removed, a photograph of a scene that was
+> never taken. None was a writing problem. They survived earlier reviews because a reviewer
+> reading copy cannot see them; you only find them by checking each claim against the thing
+> it describes.
 
 ### A.1 The REDs that were found and what happened to them
 
@@ -66,6 +74,35 @@ Both AMBERs that had been left to the client's judgement are now closed.
   network diagram) — inaccurate before the swap too — and were rewritten to describe
   the actual images.
 
+### A.2b Found by the later re-audit rounds
+
+The copy lens was re-run after every fix rather than assumed satisfied. Rounds 3-5
+each found something the previous round's fixes had not reached:
+
+- **A stock photograph captioned "Our team"** on `/about` — roughly fifteen
+  identifiable people in a visibly American boardroom, alt "The Digitplus Technology
+  team". Not a placeholder: a false claim about real people, on the page a buyer opens
+  to find out who they would work with. **Removed entirely** (`a7fbfc4`); the layout gap
+  is the honest state until the client supplies a real photograph.
+- **37 of 39 insight cover alts described scenes that were not in the photograph**
+  (`f359c77`) — written from the article topic rather than the image. The ransomware
+  cover claimed "A Nigerian IT security team… on a whiteboard" over a Matrix-style
+  falling-code still. Invisible to axe, which can only detect a missing alt, never a
+  wrong one. Every published cover was opened and its alt rewritten.
+- **A live store labelled "Coming soon"** in the nav and on `/ecosystem` while the
+  footer of all 71 pages linked to it as live. `thedigitplus.com` verified serving a
+  full catalogue. Digitplus Retail keeps its "Coming soon" — that domain does not
+  resolve.
+- **`LocalBusiness` JSON-LD asserted Lagos and Port Harcourt premises** the visible
+  copy deliberately calls "Delivery hub" — the exact claim the copy had just been
+  rewritten to avoid, made where no human reviewer reads. Non-HQ cities now carry the
+  real Abuja address and declare the city via `areaServed`.
+- **The privacy policy documented a data flow that no longer runs** (report downloads),
+  and the flagship report rendered an internal editor note — "Do not publish the numbers
+  as fact until verified" — to the public. Both corrected (`bbf2c95`), along with a
+  price index that promised figures it never shows and two stub PDFs still reachable at
+  public URLs.
+
 ### A.3 Known issues we are shipping with (AMBER)
 
 1. **Two service pages miss their keyword in an H2** (`infrastructure-solutions`,
@@ -92,7 +129,7 @@ Both AMBERs that had been left to the client's judgement are now closed.
 
 ## B. SHIPPED
 
-78 commits on `redesign/apple-light`. What the client is launching:
+83 commits on `redesign/apple-light`. What the client is launching:
 
 ### Foundation
 | Commit | What |
@@ -155,6 +192,9 @@ Both AMBERs that had been left to the client's judgement are now closed.
 | `0fbe8a9` | Google reviews relocated to the two service lines they vouch for; both duplicate insight covers broken |
 | `73b1ab6` | Relocated strip made three grey bands in a row — tone corrected |
 | `7a098eb` | Ungating left four download/"citable research" promises live — all removed; gate now reads metadata copy |
+| `bbf2c95` | Privacy documented a deleted data flow; an internal editor note was rendering publicly; the price index promised figures it never shows; stub PDFs deleted |
+| `a7fbfc4` | Stock photo captioned "Our team" removed; live store no longer labelled "coming soon"; LocalBusiness stopped asserting Lagos/PH premises |
+| `f359c77` | 37 cover alts described scenes not in the photograph — every published cover opened and rewritten |
 
 ### Verification harnesses (kept in-repo, re-runnable)
 `scripts/style-conformance.ts` (28 routes, 12 checks against real computed styles and metadata) ·
