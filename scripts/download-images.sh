@@ -3,7 +3,7 @@ set -uo pipefail
 
 cd "$(dirname "$0")/.."
 
-mkdir -p public/images/services public/images/industries public/images/locations public/images/about
+mkdir -p public/images/services public/images/industries public/images/locations public/images/about public/images/reports
 
 FAILURES=0
 
@@ -45,6 +45,12 @@ fetch public/images/locations/lagos.jpg          photo-1618828665011-0abd973f7bb
 fetch public/images/locations/port-harcourt.jpg  photo-1704230093731-8dad84d386a9  "Port Harcourt Nigeria aerial"
 
 fetch public/images/about/team.jpg               photo-1600880292203-757bb62b4baf  "Nigerian tech team office"
+
+# Report covers. INTERIM stand-ins for the client's own designed covers
+# (docs/BLOCKERS.md #10/#11) — without these two files next/image 400s and the
+# cover renders broken on /reports and both report detail pages.
+fetch public/images/reports/state-of-enterprise-it-in-nigeria-2026.jpg          photo-1558494949-ef010cbdcc31  "server racks fibre patch cabling"
+fetch public/images/reports/nigeria-enterprise-it-hardware-price-index-q2-2026.jpg photo-1460925895917-afdab827c52f  "laptop analytics dashboard charts"
 
 echo ""
 if [ "$FAILURES" -eq 0 ]; then

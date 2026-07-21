@@ -1,0 +1,17 @@
+{
+  "_note": "Unsplash assets (licence: free for commercial use, attribution not required). These two are INTERIM covers standing in for the client's own designed report covers — see docs/BLOCKERS.md #10/#11. Photographer attribution could not be resolved from the CDN asset id alone; recorded as null rather than guessed. If the client wants credits published, resolve each via unsplash.com and fill the field.",
+  "state-of-enterprise-it-in-nigeria-2026": {
+    "photographer": null,
+    "profile": null,
+    "source": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31",
+    "query": "server racks fibre patch cabling data centre",
+    "interim": true
+  },
+  "nigeria-enterprise-it-hardware-price-index-q2-2026": {
+    "photographer": null,
+    "profile": null,
+    "source": "https://images.unsplash.com/photo-1460925895917-afdab827c52f",
+    "query": "laptop analytics dashboard trend charts",
+    "interim": true
+  }
+}

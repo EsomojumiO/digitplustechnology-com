@@ -392,15 +392,32 @@
      browsers, or any JS failure always show content. A tiny vanilla script
      (/reveal.js) adds `.reveal-in` when an element scrolls into view; this does
      NOT depend on React/framer, so it works identically in every browser. */
+  /* The transition is armed ONLY on `.reveal-in` — i.e. on the way IN, never on
+     the way into the hidden state. This matters and was a real bug: when the
+     transition lived on `.reveal-init` unconditionally, adding `reveal-ready`
+     made the element ANIMATE from opacity 1 to 0 over --dur-entrance instead of
+     snapping there. reveal.js then adds `reveal-in` two frames later, so an
+     above-the-fold element only ever travelled ~2 frames of a 600ms fade — a
+     ~3% opacity dip, then back. The entrance was measurably never painted from
+     hidden (rAF sampler: min opacity 1.00 on every above-fold element, every
+     route). Below-the-fold was unaffected: those elements sit off-screen long
+     enough to complete the 1->0 fade before the observer reveals them, which is
+     why scroll reveals looked right while the first impression was static.
+     Snapping into the hidden state is what makes the two-rAF defer in
+     reveal.js actually buy a painted start frame. */
   .reveal-init {
-    transition:
-      opacity var(--dur-entrance) var(--ease-out),
-      transform var(--dur-entrance) var(--ease-out);
     transition-delay: var(--reveal-delay, 0ms);
   }
   html.reveal-ready .reveal-init:not(.reveal-in) {
     opacity: 0;
     transform: translateY(var(--reveal-distance, 16px));
+    transition: none;
+  }
+  html.reveal-ready .reveal-init.reveal-in {
+    transition:
+      opacity var(--dur-entrance) var(--ease-out),
+      transform var(--dur-entrance) var(--ease-out);
+    transition-delay: var(--reveal-delay, 0ms);
   }
   @media (prefers-reduced-motion: reduce) {
     /* Never hide under reduced motion, and don't animate. */
@@ -408,7 +425,8 @@
       opacity: 1;
       transform: none;
     }
-    .reveal-init {
+    .reveal-init,
+    html.reveal-ready .reveal-init.reveal-in {
       transition: none;
     }
   }
@@ -450,19 +468,25 @@
     height: 2px;
     background: var(--accent-green);
     transform-origin: left center;
-    transition: transform var(--dur-slow) var(--ease-out);
   }
   /* More specific than the generic reveal-init hidden state, so it overrides the
-     translateY/opacity hide with a horizontal scale-in (staying fully opaque). */
+     translateY/opacity hide with a horizontal scale-in (staying fully opaque).
+     Same arm-on-the-way-in rule as `.reveal-init` above: `transition: none` in
+     the hidden state, so scaleX(0) snaps rather than animating out and eating
+     the entrance. The `.reveal-init` in the reveal-in selector is load-bearing —
+     it makes this (0,4,1) so it beats the generic reveal-in transition on
+     specificity rather than on source order. */
   html.reveal-ready .reveal-rule.reveal-init:not(.reveal-in) {
     opacity: 1;
     transform: scaleX(0);
+    transition: none;
   }
-  html.reveal-ready .reveal-rule.reveal-in {
+  html.reveal-ready .reveal-rule.reveal-init.reveal-in {
     transform: scaleX(1);
+    transition: transform var(--dur-slow) var(--ease-out);
   }
   @media (prefers-reduced-motion: reduce) {
-    .reveal-rule {
+    html.reveal-ready .reveal-rule.reveal-init.reveal-in {
       transition: none;
     }
     html.reveal-ready .reveal-rule.reveal-init:not(.reveal-in) {
