@@ -81,9 +81,12 @@ Both AMBERs that had been left to the client's judgement are now closed.
 5. **Hero slide `alt` attributes are inconsistent** — 3 of 5 describe the image, 2 are
    empty. Empty is arguably correct (the overlay headline is real DOM text, so the
    photo is decorative); the inconsistency is the defect, not the empty value. Cosmetic.
-6. **The CTA gate only inspects orange-fill CTAs.** That is how `/services` shipped an
-   off-map "Speak to our team" as a hairline pill. Fixed at the call site; widening the
-   check to all CTAs needs its own pass to avoid false positives on inline links.
+6. **The on-map CTA check still only inspects orange-fill CTAs.** That is how `/services`
+   shipped an off-map "Speak to our team" as a hairline pill. Fixed at the call site, and
+   the gate now also reads title/description/og:description (which is how the retired
+   "get a quote" was found still living in `/contact`'s `<title>`) — but extending the
+   on-map check to *every* rendered CTA needs its own pass, because secondary and inline
+   links legitimately carry labels that are not in the intent map.
 
 ---
 
@@ -274,7 +277,7 @@ must match the site character for character, or the local signals split.
 ### 11. Supply a street address — client, 5 min once known
 Add it to `siteConfig` in `src/lib/site.ts`; it flows into `Organization` and all three
 `LocalBusiness` blocks automatically. Must be identical to the Google profile.
-**Unblocks:** local-pack eligibility (AMBER #4).
+**Unblocks:** local-pack eligibility (§A.3 item 2).
 
 ### 12. Confirm partner reseller authorisation — client, variable
 Microsoft, HP, HPE, Dell, Cisco, Lenovo, Fortinet, Juniper, Aruba. Either produce the
