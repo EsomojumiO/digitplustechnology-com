@@ -10,18 +10,22 @@ comment (grep for it). This registry exists so nothing is forgotten at swap time
 > ```
 
 ## 1. Testimonials — `src/data/testimonials.ts`
-**Status:** safe placeholders. Realistic quote text with **role-based attributions only** —
-no invented person or company names (e.g. "Head of IT, Lagos manufacturing group").
-Shown on `/` and every `/services/[slug]`.
+**Status: SUPERSEDED — the role-based placeholders described here no longer exist.**
+This section previously listed three invented role-based quotes ("Operations Director ·
+Abuja financial services firm" etc.). They were removed when real reviews landed. It is
+kept only as a pointer, because the stale version contradicted the resolved section
+further down this file and was cited as accurate during the launch-readiness audit.
 
-| Slot | Current attribution | Replace with |
-|---|---|---|
-| 1 | Operations Director · Abuja financial services firm | Real, attributable, client-approved quote + attribution |
-| 2 | Head of IT · Lagos manufacturing group | Real, attributable, client-approved quote + attribution |
-| 3 | Managing Director · Port Harcourt SME | Real, attributable, client-approved quote + attribution |
+**What actually ships:** five real Google reviews, verbatim, attributed by real name +
+"Google review", linked to the verified Google profile. Three direct testimonials are
+drafted but `approved: false` and therefore render nowhere — `testimonials.ts` keeps the
+raw array module-private and exports only pre-filtered lists, so an unapproved quote has
+no code path to a page. Verified against shipped HTML: zero hits for any pending name.
 
-**Do not** polish these to sound more credible — they need genuine client quotes and written
-permission to attribute. Keep role-based (or real named) attributions; never invent a company.
+**Open editorial issue (not a placeholder):** the five live reviews are retail PC-shop
+reviews ("Great store for high-end computing systems"). They are honest and correctly
+handled, but they argue the opposite of the enterprise positioning on the page that
+carries them. See `docs/redesign/18-launch-readiness.md`.
 
 ## 2. Report "key findings" — `content/reports/state-of-enterprise-it-in-nigeria-2026.mdx`
 **Status:** illustrative, already disclaimed in-body (lines 23, 33, 121: "Draft, illustrative
@@ -29,12 +33,18 @@ figures… Do not publish the numbers as fact until verified").
 **Replace with** real survey/portfolio data before the figures are cited as research; until
 then the disclaimer must stay. Do not invent credible-sounding numbers.
 
-## 3. Client-count figure — RESOLVED (no placeholder needed)
-The unverifiable "50+ enterprise clients" claim was **removed**, not placeheld:
-- `src/data/stats.ts` — the "By the numbers" tile is now the **verifiable** "8 · Industries
+## 3. Client-count figure — RESOLVED (verified 2026-07-21)
+The unverifiable "50+ enterprise clients" claim is removed, not placeheld:
+- `src/data/stats.ts` — the "By the numbers" tile is the **verifiable** "8 · Industries
   served" (countable from `src/data/industries.ts`).
 - `src/app/(marketing)/about/page.tsx` and `src/data/authors.ts` — rephrased to verifiable
   sector coverage.
+
+> **This section was previously wrong.** It claimed the removal was complete while
+> `about/page.tsx` still hard-coded `<CountUp value={50} suffix="+" />` → "50+ Enterprise
+> clients" on the very page named as fixed. Corrected in the launch-readiness pass
+> (commit `8e4570a`); the tile is now "8 · Industries served". Re-verified in shipped HTML.
+
 If the client later supplies a **verified** client count, it can be added back as a stat tile.
 
 ## 4. Assets & integrations (tracked in `docs/BLOCKERS.md`)

@@ -193,7 +193,9 @@ export const servicesContent: Record<ServiceSlug, ServiceContent> = {
         a: "We design with headroom and clear documentation so adding floors, branches, or capacity later is straightforward rather than a rebuild.",
       },
     ],
-    metaTitle: "IT Infrastructure Company in Nigeria, Cabling & Networks",
+    // Trimmed: with the "· Digitplus" suffix the longer form ran to 68 chars,
+    // past the ~65 SERP cutoff. Keeps the head term and the location.
+    metaTitle: "IT Infrastructure Company in Nigeria",
     metaDescription:
       "Structured cabling, LAN/WAN, server rooms, and UPS/power, designed and built to standard, tested, and documented for long-term reliability across Nigeria.",
   },
