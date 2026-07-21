@@ -81,7 +81,11 @@ export default function HomePage() {
         <FadeIn>
           <SectionHeading
             eyebrow="What we do"
-            title="Six services, one accountable partner"
+            // Carries "Nigeria" into an H2 above the fold. The home H1 is the
+            // hero carousel line ("IT that answers the phone"), which is the
+            // best copy on the site and not worth trading for a keyword — but
+            // without this the primary query appeared nowhere before the footer.
+            title="Six services, one accountable partner, across Nigeria"
             lede="Procurement, infrastructure, deployment, support. Start with one; we grow into the rest as you need us."
           />
         </FadeIn>

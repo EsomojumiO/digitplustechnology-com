@@ -9,15 +9,16 @@ import {
   Card,
   Prose,
   Eyebrow,
+  Button,
 } from "@/components/ui";
 import { FadeIn } from "@/components/motion";
-import { ReportGateForm } from "@/components/forms";
 import {
   getAllReports,
   getReportBySlug,
   MDXContent,
 } from "@/lib/content";
 import { siteConfig } from "@/lib/site";
+import { ctaLabels } from "@/lib/cta";
 import { JsonLd } from "@/lib/seo/jsonld";
 import { clampDescription } from "@/lib/seo/metadata";
 import { reportSchema, breadcrumbSchema } from "@/lib/seo/schema";
@@ -187,34 +188,40 @@ export default async function ReportLandingPage({
         </Section>
       ) : null}
 
-      {/* ── Gated full-report download ─────────────────────────────────── */}
+      {/*
+        ── Full-report download: UNGATED until the real PDF exists ──────────
+        This was a lead form asking for full name, WORK EMAIL, company and role
+        in exchange for "category-level pricing, the methodology behind every
+        figure". The files in public/reports are 771- and 765-byte one-page
+        stubs (BLOCKERS #10), so the gate was collecting a named buyer's PII for
+        nothing — a reputational problem and an NDPA-consent problem at once.
+        The on-page HTML report above is genuine analysis and stands on its own,
+        so the ask is simply a conversation instead.
+        RESTORE THE GATE when the real PDF lands: re-add <ReportGateForm
+        reportSlug={report.slug} reportTitle={report.title} /> here. The API
+        route, schema, rate limiting and the /api/report-lead tests all remain
+        in place and working — only this call site is removed.
+      */}
       <Section tone="muted" spacing="lg">
         <Container width="narrow" className="px-0">
           <Card padding="lg">
             <div className="flex flex-col gap-2">
               <Eyebrow>Full report</Eyebrow>
               <h2 className="text-h3 text-balance text-text">
-                Download the full report (PDF)
+                Want the underlying detail?
               </h2>
               <p className="text-body text-muted">
-                The complete edition includes category-level pricing, the
-                methodology behind every figure, and procurement guidance for the
-                quarter ahead. Tell us where to send it.
+                The findings above are the substance of this edition. For the
+                category-level detail behind them, or to talk through what it
+                means for a specific procurement cycle, speak to us directly.
               </p>
             </div>
 
             <div className="mt-8">
-              <ReportGateForm
-                reportSlug={report.slug}
-                reportTitle={report.title}
-              />
+              <Button href="/contact" size="lg">
+                {ctaLabels.generic}
+              </Button>
             </div>
-
-            <p className="mt-6 border-t border-hairline pt-5 text-caption text-muted">
-              We ask for a work email so we can confirm your request and send the
-              occasional follow-up report. Your details are never sold or shared
-              with third parties, and you can unsubscribe at any time.
-            </p>
           </Card>
         </Container>
       </Section>

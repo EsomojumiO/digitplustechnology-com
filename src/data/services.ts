@@ -11,6 +11,7 @@ export const servicesContent: Record<ServiceSlug, ServiceContent> = {
   "it-procurement": {
     slug: "it-procurement",
     title: "IT Procurement",
+    h1: "IT procurement in Nigeria",
     tagline: "Documented IT procurement in Nigeria, from requisition to delivery.",
     intro: [
       "Documented, audit-ready IT procurement in Nigeria — authorised-channel hardware and software, LPO support, and one traceable trail from requisition to delivery.",
@@ -76,6 +77,7 @@ export const servicesContent: Record<ServiceSlug, ServiceContent> = {
   "hardware-supply": {
     slug: "hardware-supply",
     title: "Hardware Supply",
+    h1: "IT hardware supply in Nigeria",
     tagline: "Genuine hardware supply in Nigeria, authorised channels, real warranties.",
     intro: [
       "Genuine, warrantied servers, workstations and networking from authorised channels — specified for fit, not just price.",
@@ -137,6 +139,7 @@ export const servicesContent: Record<ServiceSlug, ServiceContent> = {
   "infrastructure-solutions": {
     slug: "infrastructure-solutions",
     title: "Infrastructure Solutions",
+    h1: "IT infrastructure in Nigeria",
     tagline: "Structured cabling, network installation, and server room setup, built to last.",
     intro: [
       "Structured cabling, LAN/WAN and server rooms across Abuja, Lagos and Port Harcourt — designed, built, tested and documented to standard the first time.",
@@ -198,6 +201,7 @@ export const servicesContent: Record<ServiceSlug, ServiceContent> = {
   "managed-services": {
     slug: "managed-services",
     title: "Managed Services",
+    h1: "Managed IT services in Nigeria",
     tagline: "Managed IT services in Nigeria, support and monitoring that keep operations running.",
     intro: [
       "Managed IT services in Nigeria — proactive monitoring, remote and on-site support, and SLAs in writing, so your IT simply works.",
@@ -259,6 +263,7 @@ export const servicesContent: Record<ServiceSlug, ServiceContent> = {
   "technology-advisory": {
     slug: "technology-advisory",
     title: "Technology Advisory",
+    h1: "IT consulting and advisory in Nigeria",
     tagline: "Independent guidance that turns IT spend into outcomes.",
     intro: [
       "Vendor-neutral IT strategy, budgets and multi-year roadmaps — practical advice from a partner who also delivers.",
@@ -320,6 +325,7 @@ export const servicesContent: Record<ServiceSlug, ServiceContent> = {
   "deployment-implementation": {
     slug: "deployment-implementation",
     title: "Deployment & Implementation",
+    h1: "IT deployment in Nigeria",
     tagline: "From delivered boxes to working systems, handover done right.",
     intro: [
       "IT deployment and implementation in Nigeria as one managed process — installation, configuration, testing and training. Working systems, not delivered boxes.",

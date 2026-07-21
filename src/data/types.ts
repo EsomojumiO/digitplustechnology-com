@@ -23,6 +23,12 @@ export interface FAQ {
 export interface ServiceContent {
   slug: ServiceSlug;
   title: string;
+  /**
+   * The page H1. `title` is the short nav/card label ("IT Procurement"); the
+   * H1 carries the location so the target query lands in the strongest
+   * on-page signal. Breadcrumbs, cards and image labels still use `title`.
+   */
+  h1: string;
   tagline: string;
   /** 1–2 paragraphs of intro copy. */
   intro: string[];
@@ -51,6 +57,12 @@ export interface ServiceContent {
  * derived. Editors control the exact wording; nothing is guessed at runtime.
  */
 export interface IndustryPhrasing {
+  /**
+   * The page H1. `title` is a nav/breadcrumb label ("SME"), which made a poor
+   * headline: a one-word H1 reads as a placeholder, and it dropped the target
+   * query from the strongest on-page signal on all 8 sector pages.
+   */
+  h1: string;
   /** Follows "Talk to " and precedes " specialist" — carries its own article. */
   specialist: string;
   /** Complete H2 for the concerns section. */

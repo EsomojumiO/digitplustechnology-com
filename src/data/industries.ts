@@ -11,6 +11,7 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
     slug: "government",
     title: "Government",
     phrasing: {
+      h1: "Government IT in Nigeria",
       specialist: "a government",
       demandsHeading: "What government IT demands",
       ctaHeading: "IT for government, done right",
@@ -61,6 +62,7 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
     slug: "banking-financial-services",
     title: "Banking & Financial Services",
     phrasing: {
+      h1: "Banking IT in Nigeria",
       specialist: "a banking",
       demandsHeading: "What financial services demand",
       ctaHeading: "IT for banking and financial services, done right",
@@ -111,6 +113,7 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
     slug: "enterprise",
     title: "Enterprise",
     phrasing: {
+      h1: "Enterprise IT in Nigeria",
       specialist: "an enterprise",
       demandsHeading: "What large enterprises demand",
       ctaHeading: "IT for enterprise, done right",
@@ -161,6 +164,7 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
     slug: "sme",
     title: "SME",
     phrasing: {
+      h1: "IT for SMEs in Nigeria",
       specialist: "an SME",
       demandsHeading: "What growing SMEs need",
       ctaHeading: "IT for SMEs, done right",
@@ -211,6 +215,7 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
     slug: "healthcare",
     title: "Healthcare",
     phrasing: {
+      h1: "Healthcare IT in Nigeria",
       specialist: "a healthcare",
       demandsHeading: "What healthcare demands",
       ctaHeading: "IT for healthcare, done right",
@@ -261,6 +266,7 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
     slug: "education",
     title: "Education",
     phrasing: {
+      h1: "Education IT in Nigeria",
       specialist: "an education",
       demandsHeading: "What education demands",
       ctaHeading: "IT for education, done right",
@@ -311,6 +317,7 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
     slug: "oil-gas-energy",
     title: "Oil, Gas & Energy",
     phrasing: {
+      h1: "Oil and gas IT in Nigeria",
       specialist: "an energy-sector",
       demandsHeading: "What energy operations demand",
       ctaHeading: "IT for oil, gas and energy, done right",
@@ -361,6 +368,7 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
     slug: "logistics-manufacturing",
     title: "Logistics & Manufacturing",
     phrasing: {
+      h1: "Logistics and plant IT in Nigeria",
       specialist: "a logistics",
       demandsHeading: "What logistics and manufacturing demand",
       ctaHeading: "IT for logistics and manufacturing, done right",

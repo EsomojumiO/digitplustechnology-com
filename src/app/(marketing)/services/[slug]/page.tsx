@@ -108,7 +108,7 @@ export default async function ServiceDetailPage({
           </StaggerItem>
           <StaggerItem>
             <h1 className="text-display text-text text-balance">
-              {content.title}
+              {content.h1}
             </h1>
           </StaggerItem>
           <StaggerItem>

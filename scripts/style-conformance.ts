@@ -26,16 +26,24 @@ const BASE = process.argv[2] ?? "http://localhost:4310";
 const ROUTES = [
   "/",
   "/services",
+  // One route per template was letting per-slug copy bugs through: the sector
+  // CTA/heading strings and the H1s differ per slug, and the awkward ones were
+  // exactly the broken ones. Every service and industry slug is checked.
   "/services/it-procurement",
+  "/services/hardware-supply",
+  "/services/infrastructure-solutions",
+  "/services/managed-services",
+  "/services/technology-advisory",
+  "/services/deployment-implementation",
   "/industries",
   "/industries/government",
-  // One route per template was letting per-slug copy bugs through: the sector
-  // CTA/heading strings differ per industry, and the SME/education/energy
-  // variants were the broken ones. Cover the awkward names explicitly.
   "/industries/sme",
   "/industries/education",
   "/industries/oil-gas-energy",
   "/industries/banking-financial-services",
+  "/industries/enterprise",
+  "/industries/healthcare",
+  "/industries/logistics-manufacturing",
   "/locations",
   "/locations/abuja",
   "/locations/lagos",

@@ -46,7 +46,7 @@ export default function ReportsHubPage() {
             as="h1"
             eyebrow="Research"
             title="Quarterly reports"
-            lede="Independent, data-led research on the cost and shape of enterprise IT in Nigeria, written to be read, cited, and acted on. Every report opens with public findings; the full analysis is a free download."
+            lede="Practitioner briefings on the cost and shape of enterprise IT in Nigeria, drawn from our own procurement and delivery work. Directional rather than survey data, and every edition is readable in full on the page."
           />
         </FadeIn>
       </Section>
@@ -64,7 +64,7 @@ export default function ReportsHubPage() {
           <SectionHeading
             as="h2"
             title="Report archive"
-            lede="Past editions remain available in full, track how the numbers have moved quarter on quarter."
+            lede="Earlier editions, readable in full."
             className="mb-10 sm:mb-12"
           />
           <Stagger className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">

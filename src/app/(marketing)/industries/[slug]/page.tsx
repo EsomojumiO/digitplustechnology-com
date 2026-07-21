@@ -86,7 +86,7 @@ export default async function IndustryDetailPage({
           </StaggerItem>
           <StaggerItem>
             <h1 className="text-display text-text text-balance">
-              {content.title}
+              {content.phrasing.h1}
             </h1>
           </StaggerItem>
           <StaggerItem className="flex flex-col gap-5">
