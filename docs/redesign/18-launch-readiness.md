@@ -5,7 +5,9 @@
 
 Every claim below was re-measured on the current build. Where an earlier document
 asserted something was fixed, this pass checked whether it actually was — and three
-times it was not.
+times it was not. Each expert lens was then re-run against the fixes rather than
+assumed to have been satisfied by them; the copy lens went RED → AMBER → GREEN over
+three passes, and the AMBER round caught a regression introduced by this very audit.
 
 ---
 
@@ -13,7 +15,7 @@ times it was not.
 
 | Lens | Verdict | Basis |
 |---|---|---|
-| **QA / technical** | 🟢 **GREEN** | 71/71 sitemap URLs 200 with non-empty `<main>` · 0 console errors sitewide · conformance gate PASS across 28 routes · axe 0 violations across 15 templates · hero-contrast PASS (worst-case pixel ≥ 4.5:1 on every overlay element, both breakpoints) · `tsc` clean · build 79/79 · 18 redirects all permanent + single-hop + 200 · forms correct in stub mode · 404 branded and returning a true 404 |
+| **QA / technical** | 🟢 **GREEN** | 71/71 sitemap URLs 200 with non-empty `<main>` · 0 console errors sitewide · conformance gate PASS across 28 routes (12 checks) · axe 0 violations across 15 templates · hero-contrast PASS (worst-case pixel ≥ 4.5:1 on every overlay element, both breakpoints) · `tsc` clean · build 79/79 · 18 redirects all permanent + single-hop + 200 · forms correct in stub mode · 404 branded and returning a true 404 |
 | **Copy** | 🟢 **GREEN** | Prose is the strongest asset here and the AI-tell scan is genuinely clean. Four shipped-artefact defects were found and fixed, and both editorial AMBERs were then closed by client decision (§A.2). Re-audited on the current build. |
 | **Design** | 🟢 **GREEN** | Rubric holds at 8–9. One regression introduced during this pass (over-long H1s) was caught by the gate and fixed rather than waived. Image set is 63 files with zero duplicates. |
 | **SEO** | 🟢 **GREEN** | 71 unique titles, 71 unique descriptions, all inside length bounds · 0 orphans · 0 non-descriptive anchors · JSON-LD on every template and valid · 14/14 target pages now carry their keyword in H1 + first 100 words · robots/sitemap/canonicals coherent · no noindex leaks, no draft URLs in the sitemap |
@@ -32,6 +34,17 @@ rather than on engineering (§A.3).
 | R3 | **Stats rendered as zero in shipped HTML.** `CountUp` used `useState(0)`, so crawlers, no-JS visitors and first paint read "**0** Industries served / **0** Service lines / **0** Cities served" on home and "**0+** Enterprise clients" on `/about`. The component docstring claimed the opposite. | **Fixed** (`8e4570a`). Server renders the real figure; the client drops to 0 in a layout effect (before paint) only when it will animate. Verified in shipped HTML: **8 / 6 / 3**. |
 | R4 | **Broken sector grammar on all 8 industry pages, 3 slots each.** Headings and CTAs were built from `title.toLowerCase()`, shipping "Talk to a **sme** specialist", "Talk to a **education** specialist", "Talk to a **oil, gas & energy** specialist", "What **sme** demands". | **Fixed** (`8e4570a`). Sentence forms are now written per sector in an `IndustryPhrasing` block instead of derived. Verified on all 8. |
 | R5 | **A lead gate collecting PII for a 771-byte stub.** The report form asked for full name, work email, company and role in exchange for "category-level pricing, the methodology behind every figure". The files are 771 B and 765 B one-page stubs. | **Closed by client decision** — ungate now, keep the HTML report (`a1707b5`). The API route, schema, honeypot and rate limiting are all intact; only the call site is removed, with restore instructions in place. Hub copy corrected too: it promised "independent, data-led research… written to be cited" over figures the report itself labels "Draft, illustrative… Do not publish the numbers as fact". |
+
+> **R5 had a tail, and the first re-audit caught it.** Removing the gate did not remove
+> the copy pointing at it. A homepage button still read "Download the H1 report", the
+> `/reports` description still promised "Citable research… download the reports", the nav
+> still described Reports as "Original-data research", and the Q2 price index still claimed
+> "independent, original data" while its sibling report had already been corrected to
+> "illustrative and directional" — so the two reports contradicted each other. All fixed
+> in `7a098eb`. The conformance gate now reads title/description/og:description as well
+> (`cta-retired-meta`, `report-overclaim-meta`), because a rendered-CTA check could never
+> see any of it — which is also how `/contact` kept the retired "get a quote" in its
+> `<title>` and its search snippet long after the label was retired on the page.
 
 ### A.2 Resolved after the first draft of this report (client decision, `0fbe8a9`)
 
@@ -76,7 +89,7 @@ Both AMBERs that had been left to the client's judgement are now closed.
 
 ## B. SHIPPED
 
-77 commits on `redesign/apple-light`. What the client is launching:
+78 commits on `redesign/apple-light`. What the client is launching:
 
 ### Foundation
 | Commit | What |
@@ -138,9 +151,10 @@ Both AMBERs that had been left to the client's judgement are now closed.
 | `74c18ad` | Three stale register entries corrected; last over-length SERP title trimmed |
 | `0fbe8a9` | Google reviews relocated to the two service lines they vouch for; both duplicate insight covers broken |
 | `73b1ab6` | Relocated strip made three grey bands in a row — tone corrected |
+| `7a098eb` | Ungating left four download/"citable research" promises live — all removed; gate now reads metadata copy |
 
 ### Verification harnesses (kept in-repo, re-runnable)
-`scripts/style-conformance.ts` (28 routes, 10 checks against real computed styles) ·
+`scripts/style-conformance.ts` (28 routes, 12 checks against real computed styles and metadata) ·
 `scripts/a11y-sweep.mjs` (axe, 15 templates, settled-animation aware) ·
 `scripts/hero-contrast.mjs` (worst-case-pixel contrast on the real composite) ·
 `scripts/download-images.sh` (reproducible image set).
