@@ -1,5 +1,5 @@
 {
-  "_note": "Home hero bento images. Unsplash free tier — attribution not required, retained here as courtesy. Download via the script in the Phase C notes.",
+  "_note": "Home hero bento images. Unsplash free tier \u2014 attribution not required, retained here as courtesy. Download via the script in the Phase C notes. Stale entry for hero-engineer.jpg (no longer on disk) removed in the launch-readiness pass.",
   "images": [
     {
       "file": "hero-team-lagos.jpg",
@@ -8,14 +8,6 @@
       "photographer": "Desola Lanre-Ologun",
       "source": "Unsplash",
       "unsplashId": "photo-1528901166007-3784c7dd3653"
-    },
-    {
-      "file": "hero-engineer.jpg",
-      "subject": "Nigerian engineer at a workstation",
-      "speaksTo": "Deployment / support",
-      "photographer": "Francis Odeyemi",
-      "source": "Unsplash",
-      "unsplashId": "photo-1635766854898-ad3766e5f5e2"
     },
     {
       "file": "hero-datacenter.jpg",

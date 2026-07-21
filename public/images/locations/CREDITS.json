@@ -1,0 +1,18 @@
+{
+  "_note": "Completed in the launch-readiness pass: every image in this folder now has an entry. Unsplash free licence \u2014 attribution not required; photographer names are not resolvable from a CDN asset id alone and are recorded as null rather than guessed. IDs and search terms mirror scripts/download-images.sh, which is the reproducible source.",
+  "abuja.jpg": {
+    "unsplashId": "photo-1554457606-ed16c39db884",
+    "query": "Abuja Nigeria city",
+    "photographer": null
+  },
+  "lagos.jpg": {
+    "unsplashId": "photo-1618828665011-0abd973f7bb8",
+    "query": "Lagos Nigeria skyline",
+    "photographer": null
+  },
+  "port-harcourt.jpg": {
+    "unsplashId": "photo-1704230093731-8dad84d386a9",
+    "query": "Port Harcourt Nigeria aerial",
+    "photographer": null
+  }
+}

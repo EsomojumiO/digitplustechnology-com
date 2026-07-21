@@ -1,11 +1,12 @@
 {
-  "_note": "Unsplash assets (licence: free for commercial use, attribution not required). These two are INTERIM covers standing in for the client's own designed report covers — see docs/BLOCKERS.md #10/#11. Photographer attribution could not be resolved from the CDN asset id alone; recorded as null rather than guessed. If the client wants credits published, resolve each via unsplash.com and fill the field.",
+  "_note": "Unsplash assets (licence: free for commercial use, attribution not required). Both are INTERIM covers standing in for the client's own designed report covers — see docs/BLOCKERS.md #10/#11. Photographer names could not be resolved from a CDN asset id alone, so they are recorded as null rather than guessed; fill them in from unsplash.com if the client wants credits published. Subjects are objects/environments with no people, so they are ethnicity-neutral by the cover audit's own logic (docs/redesign/17-insight-cover-audit.md).",
   "state-of-enterprise-it-in-nigeria-2026": {
     "photographer": null,
     "profile": null,
-    "source": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31",
-    "query": "server racks fibre patch cabling data centre",
-    "interim": true
+    "source": "https://images.unsplash.com/photo-1497366754035-f200968a6e72",
+    "query": "modern office corridor glass partition meeting rooms",
+    "interim": true,
+    "note": "Replaced an earlier pick (photo-1558494949-ef010cbdcc31) that was byte-identical to public/images/hero/hero-datacenter.jpg — the same photo would have run as both a home hero slide and this report cover."
   },
   "nigeria-enterprise-it-hardware-price-index-q2-2026": {
     "photographer": null,

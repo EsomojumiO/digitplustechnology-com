@@ -49,7 +49,7 @@ fetch public/images/about/team.jpg               photo-1600880292203-757bb62b4ba
 # Report covers. INTERIM stand-ins for the client's own designed covers
 # (docs/BLOCKERS.md #10/#11) — without these two files next/image 400s and the
 # cover renders broken on /reports and both report detail pages.
-fetch public/images/reports/state-of-enterprise-it-in-nigeria-2026.jpg          photo-1558494949-ef010cbdcc31  "server racks fibre patch cabling"
+fetch public/images/reports/state-of-enterprise-it-in-nigeria-2026.jpg          photo-1497366754035-f200968a6e72  "modern office corridor glass partitions"
 fetch public/images/reports/nigeria-enterprise-it-hardware-price-index-q2-2026.jpg photo-1460925895917-afdab827c52f  "laptop analytics dashboard charts"
 
 echo ""

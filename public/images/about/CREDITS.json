@@ -1,4 +1,8 @@
 {
-  "_note": "Unsplash free-license. Swapped 2026-07-18 (#2 imagery).",
-  "team.jpg": { "unsplashId": "photo-1573164574572-cb89e39749b4", "query": "african business team boardroom laptops", "swappedFrom": "a white man and woman high-fiving (white subjects)" }
+  "_note": "Unsplash free-license. Swapped 2026-07-18 (#2 imagery). Completed in the launch-readiness pass: every image in this folder now has an entry. Unsplash free licence \u2014 attribution not required; photographer names are not resolvable from a CDN asset id alone and are recorded as null rather than guessed. IDs and search terms mirror scripts/download-images.sh, which is the reproducible source.",
+  "team.jpg": {
+    "unsplashId": "photo-1573164574572-cb89e39749b4",
+    "query": "african business team boardroom laptops",
+    "swappedFrom": "a white man and woman high-fiving (white subjects)"
+  }
 }

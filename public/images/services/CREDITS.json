@@ -1,5 +1,33 @@
 {
-  "_note": "Unsplash free-license. Swapped 2026-07-18 (#2 imagery). managed-services + deployment-implementation re-sourced to dark infrastructure frames (also used as hero slides 1-2). Others from reports/image-shortlist.md.",
-  "managed-services.jpg": { "unsplashId": "photo-1680992046626-418f7e910589", "query": "dark server room racks", "swappedFrom": "a bright busy dashboard screenshot (poor for hero overlay)" },
-  "deployment-implementation.jpg": { "unsplashId": "photo-1507333199169-84fd735371fb", "query": "server rack cabling close-up", "swappedFrom": "a pale/white arm sketching on paper (white subject + wrong subject)" }
+  "_note": "Unsplash free-license. Swapped 2026-07-18 (#2 imagery). managed-services + deployment-implementation re-sourced to dark infrastructure frames (also used as hero slides 1-2). Others from reports/image-shortlist.md. Completed in the launch-readiness pass: every image in this folder now has an entry. Unsplash free licence \u2014 attribution not required; photographer names are not resolvable from a CDN asset id alone and are recorded as null rather than guessed. IDs and search terms mirror scripts/download-images.sh, which is the reproducible source.",
+  "deployment-implementation.jpg": {
+    "unsplashId": "photo-1507333199169-84fd735371fb",
+    "query": "server rack cabling close-up",
+    "swappedFrom": "a pale/white arm sketching on paper (white subject + wrong subject)"
+  },
+  "hardware-supply.jpg": {
+    "unsplashId": "photo-1591405351990-4726e331f141",
+    "query": "server hardware rack",
+    "photographer": null
+  },
+  "infrastructure-solutions.jpg": {
+    "unsplashId": "photo-1544197150-b99a580bb7a8",
+    "query": "network cabling data center",
+    "photographer": null
+  },
+  "it-procurement.jpg": {
+    "unsplashId": "photo-1553413077-190dd305871c",
+    "query": "warehouse inventory laptop",
+    "photographer": null
+  },
+  "managed-services.jpg": {
+    "unsplashId": "photo-1680992046626-418f7e910589",
+    "query": "dark server room racks",
+    "swappedFrom": "a bright busy dashboard screenshot (poor for hero overlay)"
+  },
+  "technology-advisory.jpg": {
+    "unsplashId": "photo-1522071820081-009f0129c71c",
+    "query": "business strategy meeting",
+    "photographer": null
+  }
 }

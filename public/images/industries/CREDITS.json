@@ -1,7 +1,43 @@
 {
-  "_note": "Unsplash free-license images. Attribution not required but recorded. Photographer names retrievable from each Unsplash photo ID. Swapped 2026-07-18 in the imagery-policy pass (#2): services-over-faces, Nigerian/Black subjects, correct subject per slot.",
-  "government.jpg": { "unsplashId": "photo-1741900024959-c406f5e4eaa1", "query": "nigeria modern institutional building", "swappedFrom": "a private house with a pool (wrong subject)" },
-  "oil-gas-energy.jpg": { "unsplashId": "photo-1726731782158-fcf6822b6ca4", "query": "oil refinery industrial facility", "swappedFrom": "a European castle (wrong subject)" },
-  "education.jpg": { "unsplashId": "photo-1643199121319-b3b5695e4acb", "query": "computer training lab", "swappedFrom": "three white men at a laptop (white subjects)" },
-  "sme.jpg": { "unsplashId": "photo-1655720357872-ce227e4164ba", "query": "african women small business laptop", "swappedFrom": "stacked hands incl. white hands (white subjects + cliche)" }
+  "_note": "Unsplash free-license images. Attribution not required but recorded. Photographer names retrievable from each Unsplash photo ID. Swapped 2026-07-18 in the imagery-policy pass (#2): services-over-faces, Nigerian/Black subjects, correct subject per slot. Completed in the launch-readiness pass: every image in this folder now has an entry. Unsplash free licence \u2014 attribution not required; photographer names are not resolvable from a CDN asset id alone and are recorded as null rather than guessed. IDs and search terms mirror scripts/download-images.sh, which is the reproducible source.",
+  "banking-financial-services.jpg": {
+    "unsplashId": "photo-1541354329998-f4d9a9f9297f",
+    "query": "bank branch nigeria",
+    "photographer": null
+  },
+  "education.jpg": {
+    "unsplashId": "photo-1643199121319-b3b5695e4acb",
+    "query": "computer training lab",
+    "swappedFrom": "three white men at a laptop (white subjects)"
+  },
+  "enterprise.jpg": {
+    "unsplashId": "photo-1497366216548-37526070297c",
+    "query": "enterprise office",
+    "photographer": null
+  },
+  "government.jpg": {
+    "unsplashId": "photo-1741900024959-c406f5e4eaa1",
+    "query": "nigeria modern institutional building",
+    "swappedFrom": "a private house with a pool (wrong subject)"
+  },
+  "healthcare.jpg": {
+    "unsplashId": "photo-1519494026892-80bbd2d6fd0d",
+    "query": "hospital technology",
+    "photographer": null
+  },
+  "logistics-manufacturing.jpg": {
+    "unsplashId": "photo-1565891741441-64926e441838",
+    "query": "warehouse logistics",
+    "photographer": null
+  },
+  "oil-gas-energy.jpg": {
+    "unsplashId": "photo-1726731782158-fcf6822b6ca4",
+    "query": "oil refinery industrial facility",
+    "swappedFrom": "a European castle (wrong subject)"
+  },
+  "sme.jpg": {
+    "unsplashId": "photo-1655720357872-ce227e4164ba",
+    "query": "african women small business laptop",
+    "swappedFrom": "stacked hands incl. white hands (white subjects + cliche)"
+  }
 }
