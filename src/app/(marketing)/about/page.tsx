@@ -143,9 +143,15 @@ export default function AboutPage() {
             items={[
               // Real founding year — not a computed "X+ years" (which inflates).
               { value: "2022", label: "Operating since" },
+              // NOT a client count. "50+ enterprise clients" is unverifiable —
+              // the site names no clients and shows no case studies, so a
+              // procurement lead who asks "which fifty?" gets nothing. It was
+              // removed from stats.ts during the copy audit but survived here,
+              // hard-coded, on the one page the register claimed was fixed.
+              // Replaced with the same verifiable figure home already uses.
               {
-                value: <CountUp value={50} suffix="+" />,
-                label: "Enterprise clients",
+                value: <CountUp value={8} />,
+                label: "Industries served",
               },
               {
                 value: <CountUp value={6} />,

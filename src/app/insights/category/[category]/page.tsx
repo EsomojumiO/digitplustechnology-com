@@ -15,6 +15,8 @@ import {
   categoryFromSlug,
 } from "@/lib/content";
 import { ArticleCard } from "../../_components/ArticleCard";
+import { JsonLd } from "@/lib/seo/jsonld";
+import { breadcrumbSchema } from "@/lib/seo/schema";
 
 /**
  * Category archive, /insights/category/[category]
@@ -63,6 +65,15 @@ export default async function CategoryArchivePage({
 
   return (
     <>
+      {/* The visible trail and the schema are built from one array so they can
+          never drift — Google expects the markup to match what's on the page. */}
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", url: "/" },
+          { name: "Insights", url: "/insights" },
+          { name: category.label },
+        ])}
+      />
       <Section spacing="sm">
         <Breadcrumbs
           items={[

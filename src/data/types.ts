@@ -37,9 +37,33 @@ export interface ServiceContent {
   metaDescription: string;
 }
 
+/**
+ * Sector names can't be bent into sentences by interpolation. `title` is a
+ * display label ("SME", "Oil, Gas & Energy", "Banking & Financial Services"),
+ * and the page used to build headings and CTAs from `title.toLowerCase()`.
+ * That shipped "Talk to a sme specialist", "Talk to a education specialist",
+ * "Talk to a oil, gas & energy specialist" and "What banking & financial
+ * services demands" — on all 8 industry pages, in 3 slots each. Lowercasing
+ * destroys the acronym, and no template can fix a/an agreement or subject-verb
+ * agreement across these names.
+ *
+ * So the three sentence positions are written out per sector instead of
+ * derived. Editors control the exact wording; nothing is guessed at runtime.
+ */
+export interface IndustryPhrasing {
+  /** Follows "Talk to " and precedes " specialist" — carries its own article. */
+  specialist: string;
+  /** Complete H2 for the concerns section. */
+  demandsHeading: string;
+  /** Complete H2 for the closing CTA band. */
+  ctaHeading: string;
+}
+
 export interface IndustryContent {
   slug: IndustrySlug;
   title: string;
+  /** Grammatically correct sentence forms for this sector. See IndustryPhrasing. */
+  phrasing: IndustryPhrasing;
   intro: string[];
   /** Sector-specific concerns we address. */
   concerns: TitledItem[];

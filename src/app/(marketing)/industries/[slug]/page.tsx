@@ -98,7 +98,7 @@ export default async function IndustryDetailPage({
           </StaggerItem>
           <StaggerItem className="mt-2 flex flex-wrap gap-3">
             <Button href="/contact" size="lg">
-              {industrySpecialist(content.title.toLowerCase())}
+              {industrySpecialist(content.phrasing.specialist)}
             </Button>
             <Button href="/industries" size="lg" variant="secondary">
               All industries
@@ -122,7 +122,7 @@ export default async function IndustryDetailPage({
         <FadeIn>
           <SectionHeading
             eyebrow="What we address"
-            title={`What ${content.title.toLowerCase()} demands`}
+            title={content.phrasing.demandsHeading}
             lede="The concerns we hear most in this sector, and how we meet them."
           />
         </FadeIn>
@@ -188,11 +188,11 @@ export default async function IndustryDetailPage({
 
       <FadeIn>
         <CTABand
-          title={`IT for ${content.title.toLowerCase()}, done right`}
+          title={content.phrasing.ctaHeading}
           description="Tell us about your environment and what you’re planning. We’ll explain exactly how we’d approach it, no obligation."
           actions={
             <Button href="/contact" size="lg" variant="secondary">
-              {industrySpecialist(content.title.toLowerCase())}
+              {industrySpecialist(content.phrasing.specialist)}
             </Button>
           }
         />

@@ -34,7 +34,7 @@ export default function IndustriesOverviewPage() {
             as="h1"
             eyebrow="Industries"
             title="Industry IT solutions, built around your sector"
-            lede="Documentation for government, uptime for banking, reliability for healthcare, budgets for education, every sector in Nigeria has its own demands. We deliver to each."
+            lede="Documentation for government, uptime for banking, reliability for healthcare, budgets for education. A hospital can't absorb the downtime a warehouse can, so we size, document and support the work to each sector's constraints."
           />
         </FadeIn>
       </Section>

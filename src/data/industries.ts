@@ -10,6 +10,11 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
   government: {
     slug: "government",
     title: "Government",
+    phrasing: {
+      specialist: "a government",
+      demandsHeading: "What government IT demands",
+      ctaHeading: "IT for government, done right",
+    },
     intro: [
       "Documented, audit-ready IT procurement and delivery built for public-sector accountability and LPO workflows.",
     ],
@@ -55,6 +60,11 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
   "banking-financial-services": {
     slug: "banking-financial-services",
     title: "Banking & Financial Services",
+    phrasing: {
+      specialist: "a banking",
+      demandsHeading: "What financial services demand",
+      ctaHeading: "IT for banking and financial services, done right",
+    },
     intro: [
       "Bank branch infrastructure, resilient networks and managed services with the documentation regulated environments demand.",
     ],
@@ -100,6 +110,11 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
   enterprise: {
     slug: "enterprise",
     title: "Enterprise",
+    phrasing: {
+      specialist: "an enterprise",
+      demandsHeading: "What large enterprises demand",
+      ctaHeading: "IT for enterprise, done right",
+    },
     intro: [
       "One accountable IT partner across every site — consistent standards, clear ownership and measured SLAs.",
     ],
@@ -145,6 +160,11 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
   sme: {
     slug: "sme",
     title: "SME",
+    phrasing: {
+      specialist: "an SME",
+      demandsHeading: "What growing SMEs need",
+      ctaHeading: "IT for SMEs, done right",
+    },
     intro: [
       "Right-sized equipment and dependable support in plain language — priced to fit and built to grow.",
     ],
@@ -190,6 +210,11 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
   healthcare: {
     slug: "healthcare",
     title: "Healthcare",
+    phrasing: {
+      specialist: "a healthcare",
+      demandsHeading: "What healthcare demands",
+      ctaHeading: "IT for healthcare, done right",
+    },
     intro: [
       "High-uptime infrastructure and power protection that keep clinical systems available around the clock.",
     ],
@@ -235,6 +260,11 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
   education: {
     slug: "education",
     title: "Education",
+    phrasing: {
+      specialist: "an education",
+      demandsHeading: "What education demands",
+      ctaHeading: "IT for education, done right",
+    },
     intro: [
       "Durable, budget-conscious IT for labs, campuses and classrooms that keeps learning running.",
     ],
@@ -280,6 +310,11 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
   "oil-gas-energy": {
     slug: "oil-gas-energy",
     title: "Oil, Gas & Energy",
+    phrasing: {
+      specialist: "an energy-sector",
+      demandsHeading: "What energy operations demand",
+      ctaHeading: "IT for oil, gas and energy, done right",
+    },
     intro: [
       "Resilient infrastructure and hardware built to survive demanding, remote energy-sector sites.",
     ],
@@ -325,6 +360,11 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
   "logistics-manufacturing": {
     slug: "logistics-manufacturing",
     title: "Logistics & Manufacturing",
+    phrasing: {
+      specialist: "a logistics",
+      demandsHeading: "What logistics and manufacturing demand",
+      ctaHeading: "IT for logistics and manufacturing, done right",
+    },
     intro: [
       "Connected-site networks and responsive support that keep warehouses and plants moving.",
     ],

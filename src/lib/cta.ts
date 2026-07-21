@@ -23,9 +23,15 @@ export const ctaLabels = {
   heroProposal: "Get a proposal",
 } as const;
 
-/** Industry detail — "Talk to a government specialist", etc. */
-export const industrySpecialist = (sector: string) =>
-  `Talk to a ${sector} specialist`;
+/**
+ * Industry detail — "Talk to a government specialist", "Talk to an SME
+ * specialist", etc. Takes the sector's own `phrasing.specialist`, which
+ * CARRIES ITS OWN ARTICLE ("a government", "an SME"). Do not pass a bare
+ * sector name or a lowercased title: that is what produced "Talk to a sme
+ * specialist" and "Talk to a education specialist" on the shipped site.
+ */
+export const industrySpecialist = (sectorWithArticle: string) =>
+  `Talk to ${sectorWithArticle} specialist`;
 
 /** Location detail — "Reach our Abuja office", etc. */
 export const officeCta = (city: string) => `Reach our ${city} office`;

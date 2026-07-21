@@ -10,6 +10,7 @@ import {
 } from "@/components/ui";
 import { FadeIn, Stagger, StaggerItem } from "@/components/motion";
 import { services } from "@/lib/site";
+import { ctaLabels } from "@/lib/cta";
 
 export const metadata: Metadata = {
   title: "IT Services in Nigeria, Procurement & Managed IT",
@@ -60,7 +61,7 @@ export default function ServicesOverviewPage() {
           description="Tell us what you’re trying to achieve. We’ll point you to the right service, or design a plan that combines several."
           actions={
             <Button href="/contact" size="lg" variant="secondary">
-              Speak to our team
+              {ctaLabels.generic}
             </Button>
           }
         />
