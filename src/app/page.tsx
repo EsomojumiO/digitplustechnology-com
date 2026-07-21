@@ -330,22 +330,15 @@ export default function HomePage() {
           className="relative z-10 bg-transparent"
           title="Tell us what you’re planning"
           description="A short conversation is the fastest way to see how we can help. No obligation."
+          // One action per closing band. WhatsApp was a competing contact
+          // channel sitting beside the primary CTA at the decision point;
+          // it stays in the header dropdown, the footer and /contact.
           actions={
-            <>
-              <Magnetic strength={6}>
-                <Button href="/contact" size="lg" variant="secondary">
-                  {ctaLabels.generic}
-                </Button>
-              </Magnetic>
-              <Button
-                href={siteConfig.whatsapp}
-                size="lg"
-                variant="ghost"
-                className="text-text hover:bg-surface"
-              >
-                Chat on WhatsApp
+            <Magnetic strength={6}>
+              <Button href="/contact" size="lg" variant="secondary">
+                {ctaLabels.generic}
               </Button>
-            </>
+            </Magnetic>
           }
         />
       </div>

@@ -289,15 +289,13 @@ export default async function ArticlePage({
       <CTABand
         title="Have a project that needs this thinking?"
         description="Tell us what you’re planning. We’ll come back with practical next steps and a clear, line-itemised proposal, no obligation."
+        // One action per closing band, same rule as home. The hub link is
+        // already reachable from the breadcrumb, the nav and the footer, so it
+        // was costing the contact CTA attention without adding a route.
         actions={
-          <>
-            <Button href="/contact" size="lg" variant="secondary">
-              {ctaLabels.insightsSoft}
-            </Button>
-            <Button href={hub.href} size="lg" variant="ghost">
-              Read our insights
-            </Button>
-          </>
+          <Button href="/contact" size="lg" variant="secondary">
+            {ctaLabels.insightsSoft}
+          </Button>
         }
       />
     </>
