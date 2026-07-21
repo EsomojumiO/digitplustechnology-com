@@ -28,7 +28,7 @@ import { WhyPillar } from "@/components/home/WhyPillar";
 import { IndustriesFilter } from "@/components/home/IndustriesFilter";
 import { InsightShelfCard } from "@/components/home/ContentShelf";
 import { siteConfig, services, industries } from "@/lib/site";
-import { whyUs, processSteps, stats, googleReviews, directTestimonials } from "@/data";
+import { whyUs, processSteps, stats, directTestimonials } from "@/data";
 import { getFeaturedArticles, getFeaturedReport } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -223,44 +223,14 @@ export default function HomePage() {
         </Section>
       ) : null}
 
-      {/* Google reviews — public, verbatim, supporting strip. Deliberately a
-          strip and not the main cards: these are retail/hardware-store reviews,
-          so they vouch for the supply line honestly but say nothing about
-          enterprise managed services. Overselling them as enterprise proof is
-          the kind of thing a reader spots immediately. */}
-      {googleReviews.length > 0 ? (
-        <Section tone="muted" spacing="sm">
-          <FadeIn className="flex flex-col items-center gap-8">
-            <div className="flex flex-col items-center gap-2">
-              <p className="text-caption font-semibold text-accent-green">
-                <span aria-hidden="true">★★★★★</span>
-                <span className="sr-only">Five star rating</span>
-              </p>
-              <a
-                href={siteConfig.googleReviewsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                // Named for screen readers: "From our Google reviews" alone
-                // doesn't say it leaves the site or where it lands.
-                aria-label="From our Google reviews — read them on our Google Business profile (opens in a new tab)"
-                className="text-small font-medium text-text underline decoration-from-font underline-offset-2 transition-colors duration-[var(--dur-fast)] hover:text-accent-green focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green"
-              >
-                From our Google reviews
-              </a>
-            </div>
-            <ul className="grid w-full grid-cols-1 gap-x-10 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
-              {googleReviews.map((r) => (
-                <li key={r.name} className="flex flex-col gap-1.5">
-                  <p className="text-body text-text">&ldquo;{r.quote}&rdquo;</p>
-                  <p className="text-caption text-muted">
-                    {r.name} <span aria-hidden="true">·</span> Google review
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </FadeIn>
-        </Section>
-      ) : null}
+      {/* The Google-review strip used to sit here. It moved to the service
+          pages it actually vouches for (hardware supply, IT procurement):
+          they are retail/hardware-shop reviews, and as the ONLY social proof
+          on a homepage arguing SLAs and audit trails they invited a buyer to
+          reclassify us as a computer shop. See GoogleReviewStrip.
+          Home's testimonial slot above stays dark until the three direct
+          testimonials come back approved — an empty section beats borrowed
+          proof. */}
 
       {/* By the numbers, animated count-up */}
       <Section tone="raised">

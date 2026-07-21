@@ -13,6 +13,7 @@ import {
   FAQ,
   CTABand,
   Eyebrow,
+  GoogleReviewStrip,
 } from "@/components/ui";
 import { FeatureImage } from "@/components/ui/FeatureImage";
 import { Link } from "next-view-transitions";
@@ -30,6 +31,10 @@ export function generateStaticParams() {
 }
 
 export const dynamicParams = false;
+
+/* The service lines the public Google reviews genuinely speak to. Anything
+   outside this set gets no review strip rather than borrowed proof. */
+const REVIEW_STRIP_SLUGS = new Set(["hardware-supply", "it-procurement"]);
 
 // Lowercase a service title for mid-sentence use while preserving the "IT"
 // initialism ("IT Procurement" would otherwise render "it procurement").
@@ -266,6 +271,13 @@ export default async function ServiceDetailPage({
           </Stagger>
         </Section>
       ) : null}
+
+      {/* Google reviews — ONLY on the two service lines they actually vouch
+          for. These are retail/hardware-shop reviews ("very good at sourcing
+          components and building your computer very quickly"), so here they are
+          context-matched proof; on the homepage they were the sole social proof
+          under an enterprise thesis and undercut it. */}
+      {REVIEW_STRIP_SLUGS.has(content.slug) ? <GoogleReviewStrip /> : null}
 
       <FadeIn>
         <CTABand

@@ -29,3 +29,4 @@ export { Badge, type BadgeProps } from "./Badge";
 export { Eyebrow, type EyebrowProps } from "./Eyebrow";
 export { Prose, type ProseProps } from "./Prose";
 export { FAQ, type FAQProps, type FAQItem } from "./FAQ";
+export { GoogleReviewStrip } from "./GoogleReviewStrip";
