@@ -169,6 +169,12 @@ export interface NavItem {
   children?: NavItem[];
   /** External destination, opens in a new tab. */
   external?: boolean;
+  /**
+   * Small pill rendered beside the label, e.g. "Coming soon". The link stays
+   * clickable — a product that isn't live yet is still worth showing, and
+   * disabling the row would hide the destination entirely.
+   */
+  badge?: string;
 }
 
 export const mainNav: NavItem[] = [
@@ -239,8 +245,11 @@ export const mainNav: NavItem[] = [
       {
         label: "Digitplus Retail",
         href: "https://digitplusretail.com",
-        description: "POS and inventory platform for retail. Coming soon.",
+        // "Coming soon" moved out of the prose and into a badge so the status
+        // reads at a glance. Store carries no badge — it is live.
+        description: "POS and inventory platform for retail.",
         external: true,
+        badge: "Coming soon",
       },
     ],
   },

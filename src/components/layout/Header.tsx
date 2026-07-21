@@ -35,6 +35,21 @@ function Chevron({ className }: { className?: string }) {
    Desktop dropdown, accessible: hover + focus open, Escape closes, arrow-key
    roving, and aria-expanded wiring.
    --------------------------------------------------------------------------- */
+/**
+ * NavBadge — status pill beside a nav label, e.g. "Coming soon".
+ *
+ * The row stays a live link on purpose: a product that isn't shipping yet is
+ * still worth linking to, and disabling the row would hide the destination.
+ * Hairline border + muted text so it reads as status, not as a second CTA.
+ */
+function NavBadge({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="inline-flex shrink-0 items-center rounded-full border border-hairline px-2 py-0.5 text-[0.6875rem] font-medium leading-none text-muted">
+      {children}
+    </span>
+  );
+}
+
 function DesktopDropdown({
   item,
   active,
@@ -141,8 +156,9 @@ function DesktopDropdown({
                   "hover:bg-surface focus-visible:bg-surface",
                 )}
               >
-                <span className="flex items-center gap-1 text-small font-medium text-text">
+                <span className="flex items-center gap-1.5 text-small font-medium text-text">
                   {child.label}
+                  {child.badge && <NavBadge>{child.badge}</NavBadge>}
                   {child.external && (
                     <svg
                       aria-hidden="true"
@@ -289,8 +305,11 @@ function MobileMenu({
                             "transition-colors duration-[var(--dur-fast)] hover:bg-surface hover:text-text",
                           )}
                         >
-                          {child.label}
-                          {child.external ? " ↗" : ""}
+                          <span className="inline-flex items-center gap-1.5">
+                            {child.label}
+                            {child.badge && <NavBadge>{child.badge}</NavBadge>}
+                            {child.external ? " ↗" : ""}
+                          </span>
                         </Link>
                       </li>
                     ))}

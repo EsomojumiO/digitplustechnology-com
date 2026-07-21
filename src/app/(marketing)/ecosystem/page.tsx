@@ -15,7 +15,7 @@ import { cn } from "@/lib/utils";
 export const metadata: Metadata = {
   title: "The Digitplus Ecosystem",
   description:
-    "Beyond corporate IT solutions, the Digitplus ecosystem includes a hardware e-commerce store and a retail POS & inventory platform. Both launching soon.",
+    "Beyond corporate IT solutions, the Digitplus ecosystem includes a live hardware e-commerce store and a retail POS & inventory platform launching soon.",
   alternates: { canonical: "/ecosystem" },
 };
 
@@ -101,7 +101,10 @@ export default function EcosystemPage() {
                     {p.tagline}
                   </span>
                   {p.status === "coming-soon" && (
-                    <span className="inline-flex items-center rounded-full border border-accent-green/30 bg-brand-subtle px-2.5 py-0.5 text-caption font-medium text-accent-green">
+                    // Same subtle pill as the nav badge: hairline border,
+                    // muted text. It marks status, not a call to action, so it
+                    // no longer borrows the accent colour.
+                    <span className="inline-flex shrink-0 items-center rounded-full border border-hairline px-2.5 py-0.5 text-[0.6875rem] font-medium leading-none text-muted">
                       Coming soon
                     </span>
                   )}
