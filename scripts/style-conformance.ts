@@ -29,8 +29,16 @@ const ROUTES = [
   "/services/it-procurement",
   "/industries",
   "/industries/government",
+  // One route per template was letting per-slug copy bugs through: the sector
+  // CTA/heading strings differ per industry, and the SME/education/energy
+  // variants were the broken ones. Cover the awkward names explicitly.
+  "/industries/sme",
+  "/industries/education",
+  "/industries/oil-gas-energy",
+  "/industries/banking-financial-services",
   "/locations",
   "/locations/abuja",
+  "/locations/lagos",
   "/about",
   "/approach",
   "/ecosystem",
@@ -268,7 +276,10 @@ async function checkRoute(page: Page, route: string) {
     "Get a proposal",
     "Subscribe", // newsletter — a legitimate orange action, not a page CTA
   ]);
-  const APPROVED_PREFIX = ["Talk to a ", "Reach our "];
+  // "Talk to " not "Talk to a " — the sector labels carry their own article, so
+  // the correct "Talk to an SME specialist" would have failed the narrower
+  // prefix. It only escaped notice because /industries/sme isn't in ROUTES.
+  const APPROVED_PREFIX = ["Talk to ", "Reach our "];
   const onMap = (l: string) =>
     APPROVED_CTA.has(l) || APPROVED_PREFIX.some((p) => l.startsWith(p));
 

@@ -33,8 +33,14 @@ export const ctaLabels = {
 export const industrySpecialist = (sectorWithArticle: string) =>
   `Talk to ${sectorWithArticle} specialist`;
 
-/** Location detail — "Reach our Abuja office", etc. */
-export const officeCta = (city: string) => `Reach our ${city} office`;
+/**
+ * Location detail. Abuja is the only OFFICE — Lagos and Port Harcourt are
+ * delivery hubs, which the pages themselves say. "Reach our Lagos office"
+ * therefore promised a place that doesn't exist, directly above a contact
+ * card printing the Abuja address. Only the HQ gets the office wording.
+ */
+export const officeCta = (city: string, isHq: boolean) =>
+  isHq ? `Reach our ${city} office` : `Talk to us about ${city}`;
 
 /**
  * The full set of exact labels the conformance gate accepts as primary CTAs.

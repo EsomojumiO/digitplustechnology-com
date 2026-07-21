@@ -122,7 +122,7 @@ export default function AbujaPage() {
         description="Tell us what you’re planning and we’ll come back with practical next steps."
         actions={
           <Button href="/contact" size="lg" variant="secondary">
-            {officeCta(loc.city)}
+            {officeCta(loc.city, true)}
           </Button>
         }
       />

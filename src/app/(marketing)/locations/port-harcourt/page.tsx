@@ -101,7 +101,7 @@ export default function PortHarcourtPage() {
         <Reveal>
           <Card padding="lg" className="flex flex-col gap-2">
             <span className="text-caption font-semibold uppercase tracking-[0.12em] text-muted">
-              Get in touch
+              Head office · Abuja
             </span>
             <p className="text-body text-text">
               {siteConfig.hq} ·{" "}
@@ -122,7 +122,7 @@ export default function PortHarcourtPage() {
         description="Tell us what you’re planning and we’ll come back with practical next steps."
         actions={
           <Button href="/contact" size="lg" variant="secondary">
-            {officeCta(loc.city)}
+            {officeCta(loc.city, false)}
           </Button>
         }
       />
