@@ -14,12 +14,14 @@ times it was not.
 | Lens | Verdict | Basis |
 |---|---|---|
 | **QA / technical** | 🟢 **GREEN** | 71/71 sitemap URLs 200 with non-empty `<main>` · 0 console errors sitewide · conformance gate PASS across 28 routes · axe 0 violations across 15 templates · hero-contrast PASS (worst-case pixel ≥ 4.5:1 on every overlay element, both breakpoints) · `tsc` clean · build 79/79 · 18 redirects all permanent + single-hop + 200 · forms correct in stub mode · 404 branded and returning a true 404 |
-| **Copy** | 🟡 **AMBER** | Prose is the strongest asset here and the AI-tell scan is genuinely clean. Four shipped-artefact defects found and fixed. Two known issues remain, both editorial and both listed below. |
-| **Design** | 🟢 **GREEN** | Rubric holds at 8–9. One regression introduced during this pass (over-long H1s) was caught by the gate and fixed rather than waived. Two duplicate insight covers remain — listed. |
+| **Copy** | 🟢 **GREEN** | Prose is the strongest asset here and the AI-tell scan is genuinely clean. Four shipped-artefact defects were found and fixed, and both editorial AMBERs were then closed by client decision (§A.2). Re-audited on the current build. |
+| **Design** | 🟢 **GREEN** | Rubric holds at 8–9. One regression introduced during this pass (over-long H1s) was caught by the gate and fixed rather than waived. Image set is 63 files with zero duplicates. |
 | **SEO** | 🟢 **GREEN** | 71 unique titles, 71 unique descriptions, all inside length bounds · 0 orphans · 0 non-descriptive anchors · JSON-LD on every template and valid · 14/14 target pages now carry their keyword in H1 + first 100 words · robots/sitemap/canonicals coherent · no noindex leaks, no draft URLs in the sitemap |
 
-**No REDs remain open.** Four were found and closed during this pass; a fifth was
-closed by explicit client decision. Details in §A.1.
+**No REDs remain open, and no AMBER is left to the client's judgement.** Five REDs were
+found: four fixed, one closed by client decision (§A.1). Both editorial AMBERs were then
+also resolved (§A.2). Six known issues remain, every one of them blocked on a human input
+rather than on engineering (§A.3).
 
 ### A.1 The REDs that were found and what happened to them
 
@@ -31,35 +33,42 @@ closed by explicit client decision. Details in §A.1.
 | R4 | **Broken sector grammar on all 8 industry pages, 3 slots each.** Headings and CTAs were built from `title.toLowerCase()`, shipping "Talk to a **sme** specialist", "Talk to a **education** specialist", "Talk to a **oil, gas & energy** specialist", "What **sme** demands". | **Fixed** (`8e4570a`). Sentence forms are now written per sector in an `IndustryPhrasing` block instead of derived. Verified on all 8. |
 | R5 | **A lead gate collecting PII for a 771-byte stub.** The report form asked for full name, work email, company and role in exchange for "category-level pricing, the methodology behind every figure". The files are 771 B and 765 B one-page stubs. | **Closed by client decision** — ungate now, keep the HTML report (`a1707b5`). The API route, schema, honeypot and rate limiting are all intact; only the call site is removed, with restore instructions in place. Hub copy corrected too: it promised "independent, data-led research… written to be cited" over figures the report itself labels "Draft, illustrative… Do not publish the numbers as fact". |
 
-### A.2 Known issues we are shipping with (AMBER)
+### A.2 Resolved after the first draft of this report (client decision, `0fbe8a9`)
 
-1. **The five homepage testimonials are retail PC-shop reviews.** They are real,
-   verbatim, correctly attributed and correctly gated — the handling is exemplary.
-   But "Great store for high-end computing systems" and "building your computer very
-   quickly" argue *computer shop* on a site whose thesis is SLAs, audit trails and
-   multi-site delivery. Recommended: move the strip to `/services/hardware-supply`,
-   where it is on-message, and show the Google rating + review count on home instead.
-   Left in place because it is an editorial call about the client's own reviews.
-2. **Two insight covers are byte-identical duplicates** (pre-existing, not introduced
-   here): `structured-cabling-standards-for-nigerian-offices` = `network-installation-checklist-new-office`,
-   and `it-infrastructure-and-nigerias-digital-economy` = `securing-multi-branch-networks`.
-   Article imagery is editorial judgment and the project has a cover-audit process
-   (`17-insight-cover-audit.md`) for exactly this, so they are reported rather than
-   swapped at merge time.
-3. **Two service pages miss their keyword in an H2** (`infrastructure-solutions`,
+Both AMBERs that had been left to the client's judgement are now closed.
+
+- **~~Retail Google reviews as the homepage's only social proof.~~** ✅ Relocated to
+  `/services/hardware-supply` and `/services/it-procurement`, the two lines they
+  genuinely vouch for — context-matched proof rather than borrowed proof. Verified:
+  0 occurrences on `/`, 1 on each of those two pages, 0 on `managed-services` as a
+  control. **Home's testimonial slot stays dark** pending the three direct-testimonial
+  approvals (runbook step 15); it renders nothing rather than showing an empty heading
+  or publishing unapproved drafts.
+- **~~Two byte-identical insight covers.~~** ✅ Both pairs broken. The shared photo
+  stayed on the article it actually illustrated and the other was re-shot:
+  `network-installation-checklist-new-office` → a rack-mounted switch with fibre
+  uplinks above a UPS; `securing-multi-branch-networks` → a symmetrical service
+  corridor. The image set is now **63 files with zero duplicates**. Both `coverAlt`s
+  described staged scenes no stock frame matched (an engineer in an Abuja fit-out; a
+  network diagram) — inaccurate before the swap too — and were rewritten to describe
+  the actual images.
+
+### A.3 Known issues we are shipping with (AMBER)
+
+1. **Two service pages miss their keyword in an H2** (`infrastructure-solutions`,
    `managed-services`). They carry it in the H1 and the first 100 words. Not worth
    keyword-stuffing a heading over.
-4. **`LocalBusiness` / `Organization` carry no `streetAddress`** — only Abuja / FCT /
+2. **`LocalBusiness` / `Organization` carry no `streetAddress`** — only Abuja / FCT /
    NG. Local-pack eligibility is weaker without one. Blocked on BLOCKERS #4.
-5. **Partner logos ship without confirmed reseller authorisation** (BLOCKERS #2/#9).
+3. **Partner logos ship without confirmed reseller authorisation** (BLOCKERS #2/#9).
    Sharpened by the fact that the site's own vendor-evaluation article tells buyers to
    demand exactly that certificate. See runbook step 12.
-6. **`/privacy` and `/terms` carry a live "DRAFT — pending legal counsel review"
+4. **`/privacy` and `/terms` carry a live "DRAFT — pending legal counsel review"
    banner** while four forms collect personal data. See runbook steps 13–14.
-7. **Hero slide `alt` attributes are inconsistent** — 3 of 5 describe the image, 2 are
+5. **Hero slide `alt` attributes are inconsistent** — 3 of 5 describe the image, 2 are
    empty. Empty is arguably correct (the overlay headline is real DOM text, so the
    photo is decorative); the inconsistency is the defect, not the empty value. Cosmetic.
-8. **The CTA gate only inspects orange-fill CTAs.** That is how `/services` shipped an
+6. **The CTA gate only inspects orange-fill CTAs.** That is how `/services` shipped an
    off-map "Speak to our team" as a hairline pill. Fixed at the call site; widening the
    check to all CTAs needs its own pass to avoid false positives on inline links.
 
@@ -67,7 +76,7 @@ closed by explicit client decision. Details in §A.1.
 
 ## B. SHIPPED
 
-73 commits on `redesign/apple-light`. What the client is launching:
+75 commits on `redesign/apple-light`. What the client is launching:
 
 ### Foundation
 | Commit | What |
@@ -127,6 +136,7 @@ closed by explicit client decision. Details in §A.1.
 | `582f33a` | Report cover duplicated the home hero; **every CREDITS file completed** (7 folders, 63 images) |
 | `a1707b5` | Keyword H1s on 14 pages; report gate removed (R5); gate widened 20→28 routes |
 | `74c18ad` | Three stale register entries corrected; last over-length SERP title trimmed |
+| `0fbe8a9` | Google reviews relocated to the two service lines they vouch for; both duplicate insight covers broken |
 
 ### Verification harnesses (kept in-repo, re-runnable)
 `scripts/style-conformance.ts` (28 routes, 10 checks against real computed styles) ·
@@ -139,6 +149,14 @@ closed by explicit client decision. Details in §A.1.
 ## C. PENDING — HUMAN: launch runbook
 
 In execution order. Nothing here is blocked on further engineering.
+
+> **Keep the registers honest as you work through this.** As each item lands, update
+> `docs/BLOCKERS.md` and `PLACEHOLDERS.md` to say what is *actually* true — and if you
+> skip a step, record that too. This pass found three register entries asserting a defect
+> was fixed while it was still shipping (the "50+ enterprise clients" claim was live on the
+> very page the register named as fixed). **A register that lies is worse than no register:**
+> the first one gets trusted and stops anyone looking, the second at least sends someone to
+> check. Every "✅ RESOLVED" below should be earned by looking at the running site.
 
 **The canonical NAP — copy this verbatim wherever it is needed. It must match the site exactly.**
 
@@ -267,7 +285,9 @@ an ugly truth with a false assurance.
 Three direct testimonials are drafted and `approved: false`, so they render nowhere. Get
 written sign-off from each named person, then flip `approved: true` in
 `src/data/testimonials.ts`. **Do not** flip it to make the section look fuller.
-While you are here, decide AMBER #1: move the retail Google reviews off the homepage.
+Approving these is what fills the homepage testimonial slot, which currently renders
+nothing by design. The retail Google reviews are no longer available to fill it — they
+now run only on the two service pages they actually vouch for (§A.2).
 
 ### 16. Swap the placeholder assets as they arrive — variable
 | Asset | Replaces |
@@ -276,7 +296,7 @@ While you are here, decide AMBER #1: move the retail Google reviews off the home
 | Real report data | The illustrative figures and their in-body disclaimer; then the `/reports` hub copy can go back to claiming research. |
 | Client photography | Interim Unsplash imagery throughout (BLOCKERS #8) — the single biggest lift to perceived credibility available. |
 | Designed report covers | The two interim covers in `public/images/reports/`. |
-| Two duplicate insight covers | AMBER #2 — the exact slugs are listed there. |
+| Designed covers for the two swapped insight articles | The interim frames chosen in `0fbe8a9` — optional, they are policy-compliant and no longer duplicated. |
 
 ---
 

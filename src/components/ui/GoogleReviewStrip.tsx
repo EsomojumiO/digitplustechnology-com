@@ -22,7 +22,11 @@ export function GoogleReviewStrip() {
   if (googleReviews.length === 0) return null;
 
   return (
-    <Section tone="muted" spacing="sm">
+    // White, not muted. On home this sat between two white bands so `muted` was
+    // the alternating choice; on the service template it lands after "Where it
+    // applies" and "FAQ", which are both grey, and a muted strip made three grey
+    // bands in a row. The collapse logic fixes the spacing but not the monotony.
+    <Section spacing="sm">
       <FadeIn className="flex flex-col items-center gap-8">
         <div className="flex flex-col items-center gap-2">
           <p className="text-caption font-semibold text-accent-green">
