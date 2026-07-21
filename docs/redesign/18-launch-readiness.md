@@ -76,7 +76,7 @@ Both AMBERs that had been left to the client's judgement are now closed.
 
 ## B. SHIPPED
 
-75 commits on `redesign/apple-light`. What the client is launching:
+77 commits on `redesign/apple-light`. What the client is launching:
 
 ### Foundation
 | Commit | What |
@@ -137,6 +137,7 @@ Both AMBERs that had been left to the client's judgement are now closed.
 | `a1707b5` | Keyword H1s on 14 pages; report gate removed (R5); gate widened 20→28 routes |
 | `74c18ad` | Three stale register entries corrected; last over-length SERP title trimmed |
 | `0fbe8a9` | Google reviews relocated to the two service lines they vouch for; both duplicate insight covers broken |
+| `73b1ab6` | Relocated strip made three grey bands in a row — tone corrected |
 
 ### Verification harnesses (kept in-repo, re-runnable)
 `scripts/style-conformance.ts` (28 routes, 10 checks against real computed styles) ·

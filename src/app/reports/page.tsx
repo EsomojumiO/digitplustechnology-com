@@ -8,7 +8,7 @@ import { ReportCard } from "./_components/ReportCard";
 
 const TITLE = "Enterprise IT Reports for Nigeria";
 const DESCRIPTION =
-  "Citable research on enterprise IT in Nigeria — pricing, procurement and infrastructure trends for decision-makers. Read the findings, download the reports.";
+  "Practitioner briefings on enterprise IT in Nigeria — pricing, procurement and infrastructure trends for decision-makers. Every edition is readable in full.";
 
 export const metadata: Metadata = {
   title: TITLE,

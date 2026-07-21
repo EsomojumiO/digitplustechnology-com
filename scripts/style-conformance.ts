@@ -254,7 +254,18 @@ async function checkRoute(page: Page, route: string) {
         if (t) ctaLabels.push(t);
       });
 
-      return { darkHits, retiredHits, pairs, py, oranges, orangeCtas, scrims, ctaLabels };
+      // Metadata copy. The retired-CTA check reads rendered CTA text only, so
+      // "get a quote" survived in /contact's <title> and SERP snippet long after
+      // the label itself was retired everywhere on the page. Same for download
+      // promises: ungating the report left "download the reports" live in the
+      // /reports description. Metadata is copy too — check it.
+      const metaCopy = [
+        document.title,
+        document.querySelector('meta[name="description"]')?.getAttribute("content") ?? "",
+        document.querySelector('meta[property="og:description"]')?.getAttribute("content") ?? "",
+      ].join(" || ");
+
+      return { darkHits, retiredHits, pairs, py, oranges, orangeCtas, scrims, ctaLabels, metaCopy };
     },
     { DARK_TOKENS, RETIRED },
   );
@@ -295,6 +306,14 @@ async function checkRoute(page: Page, route: string) {
     if (label.includes("Get a quote"))
       fail(route, "cta-retired", `"Get a quote" is retired — use the intent map`);
   }
+  // Retired phrasing in metadata, where the rendered-text checks can't see it.
+  if (/get a quote/i.test(report.metaCopy))
+    fail(route, "cta-retired-meta", `"get a quote" is retired — found in title/description`);
+  // The report gate is gone, so nothing may promise a download or "citable"/
+  // "original data" research. See docs/redesign/18-launch-readiness.md R5.
+  const overclaim = /\bdownload the (report|reports)\b|\bcitable\b|\boriginal-?\s?data research\b/i;
+  if (overclaim.test(report.metaCopy))
+    fail(route, "report-overclaim-meta", `metadata promises a download/citable research that no longer exists`);
   for (const o of report.orangeCtas) {
     if (!onMap(o)) fail(route, "cta-offmap", `orange CTA "${o}" not in the intent map`);
   }

@@ -206,7 +206,8 @@ export default async function ReportLandingPage({
         <Container width="narrow" className="px-0">
           <Card padding="lg">
             <div className="flex flex-col gap-2">
-              <Eyebrow>Full report</Eyebrow>
+              {/* Not "Full report" — this section no longer contains one. */}
+              <Eyebrow>Go deeper</Eyebrow>
               <h2 className="text-h3 text-balance text-text">
                 Want the underlying detail?
               </h2>

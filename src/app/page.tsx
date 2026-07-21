@@ -302,7 +302,10 @@ export default function HomePage() {
                   </p>
                   <div className="mt-2">
                     <Button href={`/reports/${featuredReport.slug}`} size="lg">
-                      Download the {featuredReport.quarter} report
+                      {/* Not "Download the … report": there is no download.
+                          The gate and the PDF promise were removed when the
+                          only file behind them was a 771-byte stub. */}
+                      Read the {featuredReport.quarter} report
                     </Button>
                   </div>
                 </div>

@@ -203,7 +203,7 @@ export const mainNav: NavItem[] = [
       {
         label: "Reports",
         href: "/reports",
-        description: "Original-data research and quarterly benchmarks.",
+        description: "Practitioner briefings and quarterly benchmarks.",
       },
     ],
   },

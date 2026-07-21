@@ -12,7 +12,9 @@ import { ContactForm } from "@/components/forms";
 import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Contact Digitplus — get a quote",
+  // "get a quote" is the retired CTA label. The conformance gate only reads
+  // rendered CTA text, so it survived here in the tab title and the SERP snippet.
+  title: "Contact Digitplus — tell us what you're planning",
   description:
     "Talk to Digitplus about your IT project by email, phone or WhatsApp — Abuja HQ, delivery across Lagos and Port Harcourt. We'll come back with next steps.",
   alternates: { canonical: "/contact" },
