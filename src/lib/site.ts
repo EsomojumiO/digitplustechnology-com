@@ -232,7 +232,8 @@ export const mainNav: NavItem[] = [
       {
         label: "Digitplus Store",
         href: "https://thedigitplus.com",
-        description: "Our e-commerce store for IT hardware. Coming soon.",
+        // Live — see the note in ecosystem/page.tsx.
+        description: "Our e-commerce store for IT hardware.",
         external: true,
       },
       {

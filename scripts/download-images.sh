@@ -44,7 +44,8 @@ fetch public/images/locations/abuja.jpg          photo-1554457606-ed16c39db884  
 fetch public/images/locations/lagos.jpg          photo-1618828665011-0abd973f7bb8  "Lagos Nigeria skyline"
 fetch public/images/locations/port-harcourt.jpg  photo-1704230093731-8dad84d386a9  "Port Harcourt Nigeria aerial"
 
-fetch public/images/about/team.jpg               photo-1600880292203-757bb62b4baf  "Nigerian tech team office"
+# NO team photo: stock images of identifiable strangers must never be captioned
+# "Our team". Restore only with the client's own photograph (BLOCKERS #8).
 
 # Report covers. INTERIM stand-ins for the client's own designed covers
 # (docs/BLOCKERS.md #10/#11) — without these two files next/image 400s and the

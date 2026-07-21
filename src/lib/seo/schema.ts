@@ -271,14 +271,30 @@ const LOCATION_GEO: Record<
   "port-harcourt": { lat: 4.8156, lng: 7.0498, region: "Rivers" },
 };
 
+/**
+ * Only the HQ is premises. Abuja is the registered office; Lagos and Port
+ * Harcourt are delivery hubs, which is exactly what the visible copy on those
+ * pages says ("Delivery hub", "Head office · Abuja", and a CTA that no longer
+ * offers to "reach our Lagos office").
+ *
+ * The schema used to contradict that. It emitted LocalBusiness with a
+ * PostalAddress at the local city and local GeoCoordinates for all three — a
+ * structured assertion of a branch at that address, i.e. precisely the claim
+ * the copy was rewritten to avoid, made in the one place a human reviewer
+ * wouldn't read. Non-HQ cities now carry the real Abuja address and declare the
+ * city via `areaServed`, which is what Google's service-area guidance is for.
+ */
 export function localBusinessSchema(location: LocationContent) {
   const url = `${siteConfig.url}/locations/${location.slug}`;
-  const geo = LOCATION_GEO[location.slug];
+  const isHq = location.role === "Headquarters";
+  const geo = isHq ? LOCATION_GEO[location.slug] : undefined;
   return {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "@id": `${url}#localbusiness`,
-    name: `${siteConfig.name}, ${location.city}`,
+    name: isHq
+      ? `${siteConfig.name}, ${location.city}`
+      : `${siteConfig.name} — ${location.city} coverage`,
     description: location.metaDescription,
     url,
     image: LOGO_URL,
@@ -287,10 +303,12 @@ export function localBusinessSchema(location: LocationContent) {
     telephone: siteConfig.phone,
     priceRange: "$$",
     parentOrganization: orgRef(),
+    // Always the real registered address. No premises are claimed at a
+    // delivery hub.
     address: {
       "@type": "PostalAddress",
-      addressLocality: location.city,
-      addressRegion: geo?.region,
+      addressLocality: isHq ? location.city : "Abuja",
+      addressRegion: isHq ? LOCATION_GEO[location.slug]?.region : "FCT",
       addressCountry: "NG",
     },
     ...(geo

@@ -36,7 +36,11 @@ const projects: EcosystemProject[] = [
     tagline: "E-commerce for IT hardware",
     description:
       "An online store for genuine servers, workstations, networking, and peripherals from authorised channels, with transparent pricing and delivery across Nigeria.",
-    status: "coming-soon",
+    // LIVE, verified 2026-07-21: thedigitplus.com returns 200 and serves a full
+    // catalogue with naira pricing and a cart. It was labelled "coming soon"
+    // while the footer band on all 71 pages said "Visit our store" and linked
+    // to it — the same page contradicting itself.
+    status: "live",
   },
   {
     name: "Digitplus Retail",

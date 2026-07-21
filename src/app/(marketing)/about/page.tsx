@@ -86,15 +86,18 @@ export default function AboutPage() {
             </p>
           </Prose>
         </FadeIn>
-        <FadeIn className="mt-12">
-          <FeatureImage
-            src="/images/about/team.jpg"
-            alt="The Digitplus Technology team"
-            label="Our team"
-            aspect="aspect-[21/9]"
-            sizes="(min-width: 1024px) 60rem, 100vw"
-          />
-        </FadeIn>
+        {/*
+          NO TEAM PHOTO until the client supplies one (BLOCKERS #8).
+          This slot held /images/about/team.jpg — Unsplash stock showing about
+          fifteen identifiable people in a visibly American boardroom — under
+          the caption "Our team" and the alt "The Digitplus Technology team".
+          That is not a placeholder, it is a false claim about real, identifiable
+          people who do not work here, on the page a buyer reads to find out who
+          they would be working with. It also failed the imagery policy the
+          insight covers were audited against (Nigerian/Black subjects where
+          people appear). A gap in the layout is the honest state; restore this
+          block with a real photograph of the real team.
+        */}
       </Section>
 
       {/* Credentials */}
