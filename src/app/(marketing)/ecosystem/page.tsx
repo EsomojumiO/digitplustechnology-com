@@ -82,7 +82,7 @@ export default function EcosystemPage() {
             as="h1"
             eyebrow="The Digitplus ecosystem"
             title="One group, three ways we serve you"
-            lede="This site is our corporate IT solutions arm. Alongside it, we are building two sister products, so whether you are buying hardware online or running a retail floor, there is a Digitplus platform built for it."
+            lede="This site is our corporate IT solutions arm. Alongside it, our online store is live and a retail platform is on the way, so whether you are buying hardware online or running a retail floor, there is a Digitplus platform built for it."
           />
         </FadeIn>
       </Section>

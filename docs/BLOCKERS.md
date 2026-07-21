@@ -18,6 +18,17 @@ These do not stop the build (we use clearly-labelled placeholders), but must be 
 
 > ⚠️ **Update 2026-06-05:** **19 new content-engine drafts** (dated 2026-06, all `draft:true`) reference cover images that do **not** yet exist (`public/images/insights/<slug>.jpg`). There is no auto-fetcher script or Unsplash API key in the repo — the existing 33 covers were hand-curated. For each, curate one Unsplash image (1600×900 JPEG, license: free commercial), save it at `public/images/insights/<slug>.jpg`, and add a `CREDITS.json` entry. **These drafts cannot be published (flip `draft:false`) until their covers exist — the `cover:` paths currently 404.**
 >
+> ⚠️ **When you add those covers, REWRITE the `coverAlt` from the image you actually chose.**
+> The drafts' current alt text describes an ideal staged scene ("A Nigerian clinic nurse
+> reviewing patient records beside a wall-mounted UPS during a power cut") written from the
+> article topic, not from a photograph. Shipping that over a generic stock frame is a
+> fabrication: it tells screen-reader users the picture shows something it does not, and it
+> asserts a nationality and a location no photo can establish. The 39 published covers had
+> exactly this problem and were corrected on 2026-07-21 — the ransomware cover's alt claimed
+> "A Nigerian IT security team reviewing an incident response plan on a whiteboard" over what
+> is actually a Matrix-style falling-code still. Describe what is in the frame; never assert
+> nationality, employer or city unless a readable landmark proves it.
+>
 > List the slugs still needing covers at any time with:
 > ```bash
 > # drafts whose cover file is missing
