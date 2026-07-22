@@ -1,7 +1,6 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Eyebrow } from "./Eyebrow";
-import { AnimatedRule } from "@/components/motion/AnimatedRule";
 
 export interface SectionHeadingProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
@@ -11,8 +10,6 @@ export interface SectionHeadingProps
   /** Heading level for correct document outline. */
   as?: "h1" | "h2" | "h3";
   align?: "left" | "center";
-  /** Draw the Connective Line above the heading. Opt out for dense/inline heads. */
-  rule?: boolean;
 }
 
 /**
@@ -21,9 +18,6 @@ export interface SectionHeadingProps
  * Centered by default: the Apple-light spec migrates section headlines to
  * centre while body copy stays left. Pass align="left" for the exceptions.
  *
- * Renders the Connective Line — the short green rule that draws itself in on
- * section entry. Note this is a NEW feature, not a port: AnimatedRule existed
- * as dead code with zero call sites on every branch. This is its first use.
  */
 export function SectionHeading({
   eyebrow,
@@ -31,7 +25,6 @@ export function SectionHeading({
   lede,
   as: Heading = "h2",
   align = "center",
-  rule = true,
   className,
   ...props
 }: SectionHeadingProps) {
@@ -45,7 +38,6 @@ export function SectionHeading({
       )}
       {...props}
     >
-      {rule ? <AnimatedRule className="w-10" /> : null}
       {eyebrow ? <Eyebrow>{eyebrow}</Eyebrow> : null}
       <Heading className={cn(headingSize, "text-text")}>{title}</Heading>
       {lede ? (

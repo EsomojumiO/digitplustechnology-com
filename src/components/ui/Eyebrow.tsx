@@ -12,9 +12,14 @@ export interface EyebrowProps
 }
 
 /**
- * Eyebrow, small green label above a heading — the structural accent.
- * Sentence-case semibold sans in Forest-500; optional section index, rendered
- * muted rather than green-at-alpha (which failed AA on white).
+ * Eyebrow, the small label above a section heading — a PILL as of the client's
+ * preview review: label inside a rounded-full hairline border, green text,
+ * 12-13px, comfortable padding. It replaces the old thin-rule-above idiom,
+ * which read as decoration rather than as a label and needed a second element
+ * (AnimatedRule) to carry it.
+ *
+ * One component, no per-page variants. Inline-flex so the border hugs the text
+ * and the pill stays centred inside SectionHeading's centred column.
  */
 export function Eyebrow({
   as: Comp = "p",
@@ -31,7 +36,11 @@ export function Eyebrow({
         // Sentence-case green signpost. The dark theme's mono/uppercase/wide-
         // tracking idiom is retired: on white it reads as shouty technical
         // chrome, not as Apple's quiet label.
-        "text-caption font-semibold text-accent-green",
+        // 0.8125rem (13px) rather than --text-caption (12px): inside a bordered
+        // pill the label needs to stay legible, and 12px semibold in green on
+        // white starts to look like fine print.
+        "inline-flex w-fit items-center rounded-full border border-hairline",
+        "px-3 py-1 text-[0.8125rem] font-semibold leading-none text-accent-green",
         className,
       )}
       {...props}
