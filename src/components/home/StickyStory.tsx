@@ -1,133 +1,94 @@
-"use client";
-
-import * as React from "react";
 import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
 import { processSteps } from "@/data";
 
 /**
- * StickyStory — the one sticky-storytelling moment on the site (home only).
+ * ProcessFlow (file kept as StickyStory.tsx for import stability) — the six
+ * delivery steps on home.
  *
- * A pinned visual; the six delivery steps scroll past it, and the visual
- * crossfades through three photographs as you move between phases.
+ * **Every word here is existing approved copy** (`src/data/process.ts`).
  *
- * **Every word here is existing approved copy** (`src/data/process.ts`), which
- * is the whole point: this is a visual treatment of content that already ships,
- * not a new section. The brief asks for "2–3 cycling text steps"; writing three
- * fresh steps would have meant inventing marketing copy, and copy is
- * zero-change on this engagement. So the *visual* cycles through three phases
- * while the text stays the six steps the client already approved. It also means
- * this replaces the old process section rather than duplicating it.
+ * WAS: a sticky-storytelling pin. Each step reserved `min-h-56vh` so the
+ * six-step list ran ~336vh tall, and a pinned visual crossfaded through three
+ * photographs as you scrolled past. The client's preview review called the
+ * result too airy and the imagery cluttered, and both are the same root cause:
+ * the pin only works if the list is tall enough to scroll against, so the
+ * airiness wasn't a spacing choice, it was the mechanic's rent.
  *
- * The pin is `position: sticky`, NOT `fixed` + scroll math — a transformed
- * ancestor becomes the containing block for `fixed` descendants (the trap that
- * ate the Phase 2 preview; see docs/DECISIONS.md). `sticky` is immune, needs no
- * scroll listener, and stays on the compositor.
+ * NOW: a numbered rail. The number sits in its own column, a hairline runs
+ * between consecutive numbers so the steps read as ONE connected flow rather
+ * than six stacked blocks, and the text flows to the right of that rail. Step
+ * rhythm is intra-list rhythm — deliberately tighter than section rhythm, which
+ * is the exception this section needed.
  *
- * Reduced motion: the visual still pins, but never crossfades — one static
- * image and the plain list. The pin stays because `position: sticky` is layout,
- * not animation; nothing moves that wouldn't move anyway when you scroll. What
- * gets dropped is the thing that actually animates.
+ * The three-image crossfade collapses to ONE still: with tight steps the list
+ * is no taller than the image, so there is nothing left to pin and nothing to
+ * cycle. hero-cabling (structured cabling, no people) reads as careful,
+ * documented work — and it avoids a third appearance of hero-datacenter, which
+ * home already shows in the hero carousel and the full-bleed scrub band.
+ *
+ * No client component any more: no IntersectionObserver, no framer, no state.
+ * This renders on the server.
  */
-
-/* Three phases across the six steps: plan (1–2), deliver (3–4), sustain (5–6).
-   Infrastructure/service context, no posed portraits — the sustain image was
-   hero-engineer.jpg (the arms-folded portrait) until the #2 imagery pass
-   removed that shot from every slot; it's now the dark ops-racks frame, which
-   reads as "kept running." */
-const PHASE_IMAGES = [
-  { src: "/images/hero/hero-team-lagos.jpg", alt: "An IT team at work in a Lagos office" },
-  { src: "/images/hero/hero-cabling.jpg", alt: "Structured network cabling" },
-  { src: "/images/hero/hero-datacenter.jpg", alt: "Data-centre racks kept running" },
-] as const;
-
-const phaseFor = (index: number) => Math.min(2, Math.floor(index / 2));
-
 export function StickyStory() {
-  const reduce = useReducedMotion();
-  const [phase, setPhase] = React.useState(0);
-  const stepRefs = React.useRef<(HTMLLIElement | null)[]>([]);
-
-  React.useEffect(() => {
-    if (reduce) return;
-    // Whichever step sits nearest the viewport centre drives the visual. An
-    // IntersectionObserver with a centre band is steadier and cheaper than
-    // redoing this arithmetic in a scroll handler every frame.
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          if (!e.isIntersecting) continue;
-          const i = stepRefs.current.indexOf(e.target as HTMLLIElement);
-          if (i >= 0) setPhase(phaseFor(i));
-        }
-      },
-      { rootMargin: "-45% 0px -45% 0px", threshold: 0 },
-    );
-    for (const el of stepRefs.current) if (el) io.observe(el);
-    return () => io.disconnect();
-  }, [reduce]);
-
   return (
-    <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
-      {/* Pinned visual — lg+ only; there's no room to pin on a phone. */}
+    <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,26rem)] lg:gap-16">
+      <ol className="flex flex-col">
+        {processSteps.map((s, i) => {
+          const last = i === processSteps.length - 1;
+          return (
+            <li key={s.step} className="grid grid-cols-[2.5rem_1fr] gap-x-5">
+              {/* Number + the connecting rail. The line is the point: it turns
+                  six blocks into one flow. */}
+              <div className="flex flex-col items-center">
+                <span
+                  aria-hidden="true"
+                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-hairline text-small font-semibold tabular-nums text-accent-green"
+                >
+                  {String(s.step).padStart(2, "0")}
+                </span>
+                {!last && (
+                  <span
+                    aria-hidden="true"
+                    className="mt-2 w-px flex-1 bg-[var(--border-hairline)]"
+                  />
+                )}
+              </div>
+
+              <div className={last ? "pb-0" : "pb-10"}>
+                {/* The visible number is aria-hidden, so the step index is
+                    carried here for assistive tech instead of being lost. */}
+                <h3 className="text-h4 text-text">
+                  <span className="sr-only">{`Step ${s.step}: `}</span>
+                  {s.title}
+                </h3>
+                <p className="text-body measure mt-2 text-muted">
+                  {s.description}
+                </p>
+              </div>
+            </li>
+          );
+        })}
+      </ol>
+
+      {/* One still, and it DOES stick — just without the crossfade. The list is
+          ~1300px against a ~500px image, so a top-aligned still would leave the
+          right column empty for two thirds of the section: the same airiness,
+          moved sideways. Sticky costs nothing (it is layout, not animation, so
+          reduced-motion users lose nothing) and keeps the column occupied.
+          Hidden below lg: on a phone it would push the steps a screen down. */}
       <div className="hidden lg:block">
         <div className="sticky top-28">
           <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl bg-surface">
-            {reduce ? (
-              <Image
-                src={PHASE_IMAGES[0].src}
-                alt={PHASE_IMAGES[0].alt}
-                fill
-                sizes="50vw"
-                className="object-cover"
-              />
-            ) : (
-              PHASE_IMAGES.map((img, i) => (
-                <motion.div
-                  key={img.src}
-                  aria-hidden={i !== phase}
-                  initial={false}
-                  animate={{ opacity: i === phase ? 1 : 0 }}
-                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                  className="absolute inset-0"
-                >
-                  <Image
-                    src={img.src}
-                    alt={i === phase ? img.alt : ""}
-                    fill
-                    sizes="50vw"
-                    className="object-cover"
-                  />
-                </motion.div>
-              ))
-            )}
+            <Image
+              src="/images/hero/hero-cabling.jpg"
+              alt="Structured network cabling routed and dressed through a patch panel"
+              fill
+              sizes="(min-width: 1024px) 26rem, 100vw"
+              className="object-cover"
+            />
           </div>
         </div>
       </div>
-
-      {/* The six steps — existing copy, unchanged. Steps are never dimmed when
-          inactive: fading them to ~0.35 would put real body copy near 1.5:1,
-          i.e. unreadable text used as decoration. (It would also slip past the
-          conformance gate, which reads `color` and not ancestor opacity — a
-          check you can walk under is worse than no check.) The pinned visual
-          already carries the sense of progression. */}
-      <ol className="flex flex-col">
-        {processSteps.map((s, i) => (
-          <li
-            key={s.step}
-            ref={(el) => {
-              stepRefs.current[i] = el;
-            }}
-            className="flex min-h-[44vh] flex-col justify-center py-8 lg:min-h-[56vh]"
-          >
-            <p className="text-caption font-semibold text-accent-green">
-              Step {String(s.step).padStart(2, "0")}
-            </p>
-            <h3 className="text-h3 mt-3 text-text">{s.title}</h3>
-            <p className="text-body measure mt-3 text-muted">{s.description}</p>
-          </li>
-        ))}
-      </ol>
     </div>
   );
 }
