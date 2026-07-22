@@ -103,9 +103,12 @@ export default function HomePage() {
             ))}
           </Grid>
         </Stagger>
-        <FadeIn className="mt-10">
-          <Button href="/services" variant="ghost">
-            All services →
+        {/* Same secondary style as "Explore our approach" — one section-CTA
+            style sitewide. The manual arrow goes with it: the detail pages'
+            "All services" / "All industries" buttons never had one. */}
+        <FadeIn className="mt-10 flex justify-center">
+          <Button href="/services" variant="secondary">
+            All services
           </Button>
         </FadeIn>
       </Section>
@@ -191,6 +194,11 @@ export default function HomePage() {
             short: i.short,
           }))}
         />
+        <FadeIn className="mt-10 flex justify-center">
+          <Button href="/industries" variant="secondary">
+            All industries
+          </Button>
+        </FadeIn>
       </Section>
 
       {/* Testimonials — main cards are APPROVED direct testimonials only. The
