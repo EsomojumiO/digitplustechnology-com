@@ -34,7 +34,7 @@ export default function ServicesOverviewPage() {
             as="h1"
             eyebrow="Services"
             title="IT solutions in Nigeria, delivered with accountability"
-            lede="From the first plan to long-term support, our six service lines cover the full lifecycle of your technology. Engage one or several, the standard of delivery is the same."
+            lede="From the first plan to long-term support, our six service lines cover the full lifecycle of your technology. Engage one or several; the standard of delivery is the same."
           />
         </FadeIn>
       </Section>

@@ -127,7 +127,7 @@ export const industries = [
     slug: "sme",
     title: "SME",
     short:
-      "Practical guidance and dependable IT for growing businesses, no jargon.",
+      "Practical guidance and dependable IT for growing businesses — no jargon.",
   },
   {
     slug: "healthcare",

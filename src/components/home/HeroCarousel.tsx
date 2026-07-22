@@ -93,9 +93,9 @@ const SLIDES: Slide[] = [
     src: "/images/industries/logistics-manufacturing.jpg",
     alt: "Aerial view of a distribution centre with loading bays and parked trailers",
     eyebrow: "Industries",
-    headline: "Built around how your sector works",
+    headline: "Eight sectors, one standard",
     support:
-      "A hospital can't absorb the downtime a warehouse can. We size the work to each.",
+      "Government, banking, healthcare, energy — the same documentation and sign-off in every one.",
     cta: { label: "See every sector", href: "/industries" },
   },
   {
@@ -104,7 +104,7 @@ const SLIDES: Slide[] = [
     eyebrow: "Digitplus",
     headline: "One partner, plan to support",
     support:
-      "Procurement, infrastructure, deployment and managed services, from one partner.",
+      "Procurement, infrastructure, deployment and managed services, under one accountable roof.",
     // THE conversion slide — the only orange fill in the hero. Stays LAST so the
     // sequence ends on the conversion beat.
     cta: { label: "Get a proposal", href: "/contact", conversion: true },

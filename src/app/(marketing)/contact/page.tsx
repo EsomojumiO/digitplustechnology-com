@@ -73,7 +73,7 @@ export default function ContactPage() {
               <div>
                 <Eyebrow>Reach us directly</Eyebrow>
                 <p className="text-body text-muted measure mt-3">
-                  Prefer to talk first? Use any of the channels below, we read
+                  Prefer to talk first? Use any of the channels below; we read
                   everything that comes in.
                 </p>
               </div>

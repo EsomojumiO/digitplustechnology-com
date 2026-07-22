@@ -85,7 +85,7 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
       },
       {
         title: "Vendor accountability",
-        desc: "A single accountable partner across procurement, build, and support, fewer hand-offs, clearer ownership when something needs fixing.",
+        desc: "A single accountable partner across procurement, build, and support — fewer hand-offs, clearer ownership when something needs fixing.",
       },
     ],
     relevantServices: [

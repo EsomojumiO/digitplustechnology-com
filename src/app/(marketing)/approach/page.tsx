@@ -34,7 +34,7 @@ export default function ApproachPage() {
             as="h1"
             eyebrow="How we work"
             title="One disciplined process, every time"
-            lede="Good IT outcomes are not luck, they’re the result of a repeatable process. We run the same six steps on every engagement, with documentation and accountability throughout."
+            lede="Good IT outcomes are not luck. They’re the result of a repeatable process. We run the same six steps on every engagement, with documentation and accountability throughout."
           />
         </FadeIn>
       </Section>

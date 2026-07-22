@@ -31,7 +31,7 @@ export const servicesContent: Record<ServiceSlug, ServiceContent> = {
       },
       {
         title: "Multi-site coordination",
-        desc: "Consolidated buying and staged delivery across Abuja, Lagos, Port Harcourt, and beyond, one order, one invoice trail, many locations.",
+        desc: "Consolidated buying and staged delivery across Abuja, Lagos, Port Harcourt and beyond — one order, one invoice trail, many locations.",
       },
     ],
     howItWorks: [
@@ -124,7 +124,7 @@ export const servicesContent: Record<ServiceSlug, ServiceContent> = {
       },
       {
         q: "Can you help us standardise our equipment?",
-        a: "That is one of the biggest cost savings we deliver. Standardising on a small set of platforms simplifies support, imaging, and spares, we help you choose and roll it out.",
+        a: "That is one of the biggest cost savings we deliver. Standardising on a small set of platforms simplifies support, imaging and spares; we help you choose and roll it out.",
       },
       {
         q: "Do you offer extended warranty or support cover?",

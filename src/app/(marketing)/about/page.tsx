@@ -46,7 +46,7 @@ export default function AboutPage() {
           <SectionHeading
             as="h1"
             eyebrow="About us"
-            title="A disciplined IT partner, not just a supplier"
+            title="Built to close the gaps"
             lede="Digitplus Technology Limited exists to make enterprise IT in Nigeria predictable: one accountable partner from plan to support, genuine authorised-channel hardware, and delivery documentation your auditors will accept."
           />
         </FadeIn>
@@ -80,7 +80,7 @@ export default function AboutPage() {
               Discipline is the thread through everything we do. We source only
               through authorised channels. We document every step of a purchase.
               We test against agreed criteria before we sign off. We put our
-              service commitments in writing. None of this is glamorous, it is
+              service commitments in writing. None of this is glamorous. It is
               simply what it takes to be a partner serious organisations can
               depend on, year after year.
             </p>
