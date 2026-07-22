@@ -223,7 +223,12 @@ function MobileMenu({
   return (
     <div
       className={cn(
-        "fixed inset-0 z-[60] lg:hidden",
+        // overflow-hidden is load-bearing, not cosmetic: the panel below parks
+        // itself off-canvas with `translate-x-full`, and with nothing clipping
+        // it the document grew to 774px against a 390px viewport — so EVERY
+        // page scrolled sideways on a phone. Clipping here costs nothing (the
+        // panel is fully inside the viewport once open).
+        "fixed inset-0 z-[60] overflow-hidden lg:hidden",
         open ? "pointer-events-auto" : "pointer-events-none",
       )}
       aria-hidden={!open}
