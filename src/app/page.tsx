@@ -8,7 +8,6 @@ import {
   Card,
   Button,
   ServiceCard,
-  StatGrid,
   Testimonial,
   CTABand,
   Eyebrow,
@@ -17,7 +16,6 @@ import {
   FadeIn,
   Stagger,
   StaggerItem,
-  CountUp,
   Magnetic,
   ScrollScrubImage,
 } from "@/components/motion";
@@ -26,10 +24,9 @@ import { StickyStory } from "@/components/home/StickyStory";
 import { TrustMarquee } from "@/components/home/TrustMarquee";
 import { WhyPillar } from "@/components/home/WhyPillar";
 import { IndustriesFilter } from "@/components/home/IndustriesFilter";
-import { InsightShelfCard } from "@/components/home/ContentShelf";
-import { siteConfig, services, industries } from "@/lib/site";
-import { whyUs, processSteps, stats, directTestimonials } from "@/data";
-import { getFeaturedArticles, getFeaturedReport } from "@/lib/content";
+import { services, industries } from "@/lib/site";
+import { whyUs, directTestimonials } from "@/data";
+import { getFeaturedReport } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "IT Solutions Company in Nigeria | Digitplus Technology",
@@ -46,19 +43,7 @@ const whyBeats: { label: string; beat: string }[] = [
   { label: "Disciplined", beat: "documented, audit-ready." },
 ];
 
-/* Map the by-the-numbers stats to animated CountUp figures. "Abuja" stays plain
-   text. Pattern: leading integer + suffix. */
-function StatValue({ value }: { value: string }) {
-  const match = /^(\d+)(.*)$/.exec(value);
-  if (!match) return <>{value}</>;
-  const n = Number(match[1]);
-  // Don't animate a calendar year — a ticking "2022" reads as a counter, not a date.
-  if (match[2] === "" && n >= 1900) return <>{value}</>;
-  return <CountUp value={n} suffix={match[2]} />;
-}
-
 export default function HomePage() {
-  const featuredArticles = getFeaturedArticles(3);
   const featuredReport = getFeaturedReport();
 
   return (
@@ -240,55 +225,17 @@ export default function HomePage() {
           testimonials come back approved — an empty section beats borrowed
           proof. */}
 
-      {/* By the numbers, animated count-up */}
-      <Section tone="raised">
-        <FadeIn>
-          <SectionHeading eyebrow="By the numbers" title="Track record" />
-        </FadeIn>
-        <FadeIn>
-          <StatGrid
-            className="mt-12"
-            items={stats.map((s) => ({
-              ...s,
-              value: <StatValue value={s.value} />,
-            }))}
-          />
-        </FadeIn>
-      </Section>
-
-      {/* Featured insights, glass-framed content shelf */}
-      {featuredArticles.length > 0 ? (
-        <Section>
-          <FadeIn>
-            <div className="flex flex-wrap items-end justify-between gap-6">
-              <SectionHeading
-                eyebrow="Insights"
-                title="Thinking for IT decision-makers"
-              />
-              <Button href="/insights" variant="ghost">
-                All insights →
-              </Button>
-            </div>
-          </FadeIn>
-          <Stagger>
-            <Grid columns={3} gap="md" className="mt-12">
-              {featuredArticles.map((a) => (
-                <StaggerItem key={a.slug} className="h-full">
-                  <InsightShelfCard
-                    href={`/insights/${a.slug}`}
-                    cover={a.cover}
-                    coverAlt={a.coverAlt}
-                    categoryLabel={a.category.label}
-                    readingTime={a.readingTime.text}
-                    title={a.title}
-                    excerpt={a.excerpt}
-                  />
-                </StaggerItem>
-              ))}
-            </Grid>
-          </Stagger>
-        </Section>
-      ) : null}
+      {/* REMOVED at the client's request (preview review):
+          - the "By the numbers / Track record" stats band
+          - the "Thinking for IT decision-makers" insights teaser
+          Insights stay fully reachable from the header nav (with three featured
+          articles in the dropdown) and from the footer, so removing the teaser
+          costs home three contextual links but no route. Reversible: both blocks
+          are in git at 72535a4, and DECISIONS.md records how to restore them if
+          the internal-linking loss shows up in Search Console.
+          The stats were NOT moved to /about — that page already carries the same
+          four figures in its own "Track record" band, so there was nothing to
+          move and no natural second slot to force them into. */}
 
       {/* Featured report, frosted glass shelf */}
       {featuredReport ? (
