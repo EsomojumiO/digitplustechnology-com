@@ -48,7 +48,7 @@ export function Hero({
             {eyebrow ? <Eyebrow>{eyebrow}</Eyebrow> : null}
             <h1 className="text-display max-w-[18ch] text-text">{title}</h1>
             {subhead ? (
-              <p className="text-body-lg measure text-muted">{subhead}</p>
+              <p className="text-body-lg measure lede text-muted">{subhead}</p>
             ) : null}
             {actions ? (
               <div className="mt-2 flex flex-wrap items-center gap-3">

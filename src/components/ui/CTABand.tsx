@@ -37,7 +37,7 @@ export function CTABand({
                 className={cn(
                   // text-muted, never opacity-85: alpha-on-text was the
                   // dark-canvas idiom and dissolves on white.
-                  "text-body-lg measure text-muted",
+                  "text-body-lg measure lede text-muted",
                 )}
               >
                 {description}

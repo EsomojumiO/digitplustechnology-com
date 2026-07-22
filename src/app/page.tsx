@@ -297,7 +297,7 @@ export default function HomePage() {
                     {featuredReport.year}
                   </Eyebrow>
                   <h2 className="text-h2 text-text">{featuredReport.title}</h2>
-                  <p className="text-body-lg text-muted measure">
+                  <p className="text-body-lg text-muted measure lede">
                     {featuredReport.summary}
                   </p>
                   <div className="mt-2">

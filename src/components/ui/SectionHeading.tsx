@@ -51,7 +51,7 @@ export function SectionHeading({
       {lede ? (
         <p
           className={cn(
-            "text-body-lg text-muted measure",
+            "text-body-lg text-muted measure lede",
             align === "center" && "mx-auto",
           )}
         >

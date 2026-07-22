@@ -64,7 +64,7 @@ export default function AbujaPage() {
           />
           <div className="flex flex-col gap-5">
             {loc.intro.map((para, i) => (
-              <p key={i} className="text-body-lg text-muted measure">
+              <p key={i} className="text-body-lg text-muted measure lede">
                 {para}
               </p>
             ))}

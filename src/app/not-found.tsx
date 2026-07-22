@@ -19,7 +19,7 @@ export default function NotFound() {
         <h1 className="text-h1 text-balance text-text">
           This page has moved, or never existed
         </h1>
-        <p className="text-body-lg measure text-muted">
+        <p className="text-body-lg measure lede text-muted">
           The link may be out of date. Here is the way back — head home, browse
           what we do, or tell us what you were looking for.
         </p>

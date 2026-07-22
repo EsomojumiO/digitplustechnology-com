@@ -116,7 +116,7 @@ export default async function InsightsHubPage({
                 <h2 className="text-h2 text-text transition-colors duration-[var(--dur-fast)] group-hover:text-accent-green">
                   {featured.title}
                 </h2>
-                <p className="text-body-lg text-muted measure">
+                <p className="text-body-lg text-muted measure lede">
                   {featured.excerpt}
                 </p>
                 <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-small text-muted">

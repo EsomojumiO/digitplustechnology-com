@@ -102,7 +102,7 @@ export function ReportCard({
               </Link>
             </Heading>
             {report.summary ? (
-              <p className="measure text-body-lg text-muted">{report.summary}</p>
+              <p className="measure lede text-body-lg text-muted">{report.summary}</p>
             ) : null}
             <span className="mt-1 inline-flex items-center gap-1.5 text-body font-medium text-accent-green">
               Read the report

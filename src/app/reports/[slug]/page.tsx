@@ -121,7 +121,7 @@ export default async function ReportLandingPage({
             </div>
             <h1 className="text-h1 text-balance text-text">{report.title}</h1>
             {report.summary ? (
-              <p className="measure text-body-lg text-muted">{report.summary}</p>
+              <p className="measure lede text-body-lg text-muted">{report.summary}</p>
             ) : null}
             <p className="text-small text-muted">
               Published {publishedLabel} · Digitplus Technology

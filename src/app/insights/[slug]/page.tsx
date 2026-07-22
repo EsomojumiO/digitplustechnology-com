@@ -174,7 +174,7 @@ export default async function ArticlePage({
 
             <h1 className="text-h1 text-text text-balance">{article.title}</h1>
 
-            <p className="text-body-lg text-muted measure">
+            <p className="text-body-lg text-muted measure lede">
               {article.excerpt}
             </p>
 
