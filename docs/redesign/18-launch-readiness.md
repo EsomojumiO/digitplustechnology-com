@@ -15,7 +15,7 @@ five passes, and two of those rounds caught regressions introduced by this very 
 
 | Lens | Verdict | Basis |
 |---|---|---|
-| **QA / technical** | 🟢 **GREEN** | 71/71 sitemap URLs 200 with non-empty `<main>` · 0 console errors sitewide · conformance gate PASS across 28 routes (12 checks) · axe 0 violations across 15 templates · hero-contrast PASS (worst-case pixel ≥ 4.5:1 on every overlay element, both breakpoints) · `tsc` clean · build 79/79 · 18 redirects all permanent + single-hop + 200 · forms correct in stub mode · 404 branded and returning a true 404 |
+| **QA / technical** | 🟢 **GREEN** | 71/71 sitemap URLs 200 with non-empty `<main>` · 0 console errors sitewide · conformance gate PASS across 28 routes (12 checks) · axe 0 violations across 15 templates · hero-contrast PASS (worst-case pixel ≥ 4.5:1 on every overlay element, both breakpoints) · `tsc` clean · build 79/79 · 18 redirects all permanent + single-hop + 200 · forms correct in stub mode · 404 branded and returning a true 404 · **0 pages scroll horizontally at 390px or 768px** (was 71/71 at 390px before the sweep) |
 | **Copy** | 🟢 **GREEN** | Prose is the strongest asset here and the AI-tell scan is genuinely clean. The lens ran five times, RED → AMBER ×3 → GREEN; each round fixed what the previous one found, including two regressions this audit introduced. Final sweep of all 71 URLs: no download/citable/original-data claim, no unsubstantiated statistic, no stock image presented as Digitplus's own. |
 | **Design** | 🟢 **GREEN** | Rubric holds at 8–9. One regression introduced during this pass (over-long H1s) was caught by the gate and fixed rather than waived. Image set is 63 files with zero duplicates. |
 | **SEO** | 🟢 **GREEN** | 71 unique titles, 71 unique descriptions, all inside length bounds · 0 orphans · 0 non-descriptive anchors · JSON-LD on every template and valid · 14/14 target pages now carry their keyword in H1 + first 100 words · robots/sitemap/canonicals coherent · no noindex leaks, no draft URLs in the sitemap |
@@ -129,7 +129,7 @@ each found something the previous round's fixes had not reached:
 
 ## B. SHIPPED
 
-83 commits on `redesign/apple-light`. What the client is launching:
+95 commits on `redesign/apple-light`. What the client is launching:
 
 ### Foundation
 | Commit | What |
@@ -201,6 +201,67 @@ each found something the previous round's fixes had not reached:
 `scripts/a11y-sweep.mjs` (axe, 15 templates, settled-animation aware) ·
 `scripts/hero-contrast.mjs` (worst-case-pixel contrast on the real composite) ·
 `scripts/download-images.sh` (reproducible image set).
+
+---
+
+## B.2 Preview punch-list — client review of `dpl_8MnuMH1b…` (2026-07-22)
+
+Client verdict on the deployed preview: *"much cleaner."* Ten changes, one commit each,
+both gates green after every one.
+
+| # | Change | Commit |
+|---|---|---|
+| 1 | Floating WhatsApp button removed sitewide — it was the loudest contact affordance on the site. WhatsApp stays in the header dropdown, footer and /contact. | `52acfc3` |
+| 2 | One action per closing band. Home dropped "Chat on WhatsApp"; the audit found the same pattern on insight articles and fixed that too. 13/13 bands verified in-browser. | `26bb051` |
+| 3 | "Coming soon" is now a badge beside Digitplus Retail, link still clickable. Store carries none — it is live. | `6e93a09` |
+| 4 | Hero 5 → 7 slides (Technology Advisory, Industries), dwell 6s → 5s, Ken Burns 1.03 → 1.055 with a ~2% pan alternating per slide. | `4356dd9` |
+| 5 | Ledes stop breaking mid-phrase — a `.lede` utility carrying `text-wrap: balance`, applied at the type layer, not per string. | `b0b6631` |
+| 6 | Section eyebrows became pills; the rule-above idiom retired. 34 pills, one signature. | `905f8d8` |
+| 7 | Process section rebuilt as a numbered rail with a connecting hairline; three crossfading photos collapsed to one sticky still. Section height 1479px, down from ~3000px+. | `fa4bed3` |
+| 8 | One section-CTA style sitewide; home gained the missing "All industries" link. | `72535a4` |
+| 9 | Home lost the stats band and the insights teaser. | `54c6e48` |
+| 10 | Sweep — see below. | `5a83570` `7029666` `3c72c2b` |
+
+### What the sweep found that the ten items didn't
+
+- **Every page scrolled sideways on a phone.** At 390px the document measured **774px**
+  wide on all 71 routes. The mobile menu panel parks off-canvas with `translate-x-full`
+  inside a `fixed inset-0` container that clipped nothing, so the closed panel stretched
+  the document everywhere. One `overflow-hidden` fixed it. Pre-existing, and invisible to
+  screenshots — the overflow is empty space, and screenshots crop to the viewport. It only
+  shows up if you measure `scrollWidth`.
+- **Two more wrong-country slot images**, on pages the imagery pass never reached:
+  `healthcare.jpg` was a clinic with **Spanish** signage ("BANCO DE SANGRE", "TERAPIA
+  NEONATAL"), and `banking-financial-services.jpg` was the **Bank of Montreal** — a named
+  Canadian bank standing in for Nigerian banking, portrait-aspect in a landscape slot. Both
+  replaced. Worth naming the pattern: generic stock skews American and European, so "no
+  people" is not sufficient — the signage and the branding have to be checked too.
+- **The best line on the site was printing three times.** Adding the Industries hero slide
+  in #4 put the hospital/warehouse contrast in the hero, then again as home's industries H2
+  and lede, then on /industries. The slide was rewritten; the line now lands once.
+- **Comma splices in seven leads**, left behind when an earlier pass swapped every em dash
+  for a comma. Fixed with the punctuation each sentence wanted.
+- **A banned construction in an H1** — /about led with "not just a supplier".
+
+### Judgment calls NOT actioned — for the client
+
+1. **Home now carries no proof.** Removing the stats band (#9, the client's own call) left
+   the homepage with no verifiable third-party or numeric credibility: no years, no sector
+   count, no reviews, no named work. Every claim on it is self-asserted. The figures still
+   render on /about, and the Google reviews still render on two service pages, but a
+   visitor who lands on `/` and bounces sees neither. **Reversible in one revert (`72535a4`).**
+   Options: restore the stats band, move the Google review strip to home, or accept it.
+2. **Three location pages are 93–99 words.** `/locations/{abuja,lagos,port-harcourt}` are
+   indexable URLs targeting "IT company in Lagos" with under 100 words each. They rank for
+   nothing at that length. Needs real local content, which needs client input.
+3. **All 8 industry pages carry no body prose** (288–315 words: hero line, cards, FAQs) and
+   no "Related insights" section, so 33 articles have no path in from the sector pages
+   buyers actually land on.
+4. **`/insights` ends on pagination, not a CTA** — the biggest SEO landing surface is the
+   one page that doesn't ask for anything.
+5. **The Google review strip still reads retail on `/services/it-procurement`** — "great
+   store", "building your computer" on a page about audit-ready public-sector LPO
+   fulfilment. Fine on hardware-supply; off-register there.
 
 ---
 
