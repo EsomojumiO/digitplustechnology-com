@@ -28,7 +28,7 @@ fetch public/images/services/it-procurement.jpg            photo-1553413077-190d
 fetch public/images/services/hardware-supply.jpg           photo-1591405351990-4726e331f141  "server hardware rack"
 fetch public/images/services/infrastructure-solutions.jpg  photo-1544197150-b99a580bb7a8  "network cabling data center"
 fetch public/images/services/managed-services.jpg          photo-1551288049-bebda4e38f71  "monitoring dashboard analytics"
-fetch public/images/services/technology-advisory.jpg       photo-1522071820081-009f0129c71c  "business strategy meeting"
+fetch public/images/services/technology-advisory.jpg       photo-1497366811353-6870744d04b2  "empty modern meeting room glass walls"
 fetch public/images/services/deployment-implementation.jpg photo-1581092160562-40aa08e78837  "IT engineer installation"
 
 fetch public/images/industries/government.jpg                 photo-1564013799919-ab600027ffc6  "government building africa"

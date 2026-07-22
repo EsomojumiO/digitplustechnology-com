@@ -1,33 +1,34 @@
 {
   "_note": "Unsplash free-license. Swapped 2026-07-18 (#2 imagery). managed-services + deployment-implementation re-sourced to dark infrastructure frames (also used as hero slides 1-2). Others from reports/image-shortlist.md. Completed in the launch-readiness pass: every image in this folder now has an entry. Unsplash free licence \u2014 attribution not required; photographer names are not resolvable from a CDN asset id alone and are recorded as null rather than guessed. IDs and search terms mirror scripts/download-images.sh, which is the reproducible source.",
   "deployment-implementation.jpg": {
-    "unsplashId": "photo-1507333199169-84fd735371fb",
     "query": "server rack cabling close-up",
-    "swappedFrom": "a pale/white arm sketching on paper (white subject + wrong subject)"
+    "swappedFrom": "a pale/white arm sketching on paper (white subject + wrong subject)",
+    "unsplashId": "photo-1507333199169-84fd735371fb"
   },
   "hardware-supply.jpg": {
-    "unsplashId": "photo-1591405351990-4726e331f141",
+    "photographer": null,
     "query": "server hardware rack",
-    "photographer": null
+    "unsplashId": "photo-1591405351990-4726e331f141"
   },
   "infrastructure-solutions.jpg": {
-    "unsplashId": "photo-1544197150-b99a580bb7a8",
+    "photographer": null,
     "query": "network cabling data center",
-    "photographer": null
+    "unsplashId": "photo-1544197150-b99a580bb7a8"
   },
   "it-procurement.jpg": {
-    "unsplashId": "photo-1553413077-190dd305871c",
+    "photographer": null,
     "query": "warehouse inventory laptop",
-    "photographer": null
+    "unsplashId": "photo-1553413077-190dd305871c"
   },
   "managed-services.jpg": {
-    "unsplashId": "photo-1680992046626-418f7e910589",
     "query": "dark server room racks",
-    "swappedFrom": "a bright busy dashboard screenshot (poor for hero overlay)"
+    "swappedFrom": "a bright busy dashboard screenshot (poor for hero overlay)",
+    "unsplashId": "photo-1680992046626-418f7e910589"
   },
   "technology-advisory.jpg": {
-    "unsplashId": "photo-1522071820081-009f0129c71c",
-    "query": "business strategy meeting",
-    "photographer": null
+    "photographer": null,
+    "query": "empty modern meeting room glass walls",
+    "swappedFrom": "a casual co-working cabin scene with prominent white subjects \u2014 failed the imagery policy (no white-subject stock; Nigerian/Black subjects where people appear) and read as a startup hangout, not enterprise advisory. Also now hero slide 6.",
+    "unsplashId": "photo-1497366811353-6870744d04b2"
   }
 }

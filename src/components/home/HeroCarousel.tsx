@@ -81,18 +81,47 @@ const SLIDES: Slide[] = [
     cta: { label: "Explore infrastructure", href: "/services/infrastructure-solutions" },
   },
   {
+    src: "/images/services/technology-advisory.jpg",
+    alt: "An empty meeting room with a long table and glass partitions",
+    eyebrow: "Technology Advisory",
+    headline: "Decisions you can defend",
+    support:
+      "Roadmaps, budgets and vendor choices, argued from your constraints — not a product list.",
+    cta: { label: "Explore advisory", href: "/services/technology-advisory" },
+  },
+  {
+    src: "/images/industries/logistics-manufacturing.jpg",
+    alt: "Aerial view of a distribution centre with loading bays and parked trailers",
+    eyebrow: "Industries",
+    headline: "Built around how your sector works",
+    support:
+      "A hospital can't absorb the downtime a warehouse can. We size the work to each.",
+    cta: { label: "See every sector", href: "/industries" },
+  },
+  {
     src: "/images/hero/hero-datacenter.jpg",
     alt: "Data-centre racks and infrastructure",
     eyebrow: "Digitplus",
     headline: "One partner, plan to support",
     support:
       "Procurement, infrastructure, deployment and managed services, from one partner.",
-    // THE conversion slide — the only orange fill in the hero.
+    // THE conversion slide — the only orange fill in the hero. Stays LAST so the
+    // sequence ends on the conversion beat.
     cta: { label: "Get a proposal", href: "/contact", conversion: true },
   },
 ];
 
-const DWELL = 6000;
+const DWELL = 5000;
+
+/**
+ * End state of the Ken Burns move for slide `i`. Direction alternates so two
+ * consecutive slides never drift the same way. Kept well inside the scale
+ * overflow so the pan can't expose a slide edge.
+ */
+const kenBurnsTo = (i: number) => {
+  const dir = i % 2 === 0 ? 1 : -1;
+  return `scale(1.055) translate(${dir * 2}%, ${dir * -1}%)`;
+};
 
 export function HeroCarousel() {
   const reduce = useReducedMotion();
@@ -176,8 +205,15 @@ export function HeroCarousel() {
                   sizes="100vw"
                   className="object-cover"
                   style={{
-                    // Ken Burns 1.03 over the dwell, active slide only.
-                    transform: isActive && !reduce ? "scale(1.03)" : "scale(1)",
+                    // Ken Burns over the dwell, active slide only. 1.055 scale
+                    // plus a ~2% pan that alternates direction per slide, so
+                    // consecutive slides don't drift the same way and the
+                    // sequence never feels mechanical. The pan stays inside the
+                    // scale overflow (5.5% total, 2.75% per edge) so no slide
+                    // edge is ever revealed. Settles at the end of the dwell;
+                    // linear, so it never bounces back.
+                    transform:
+                      isActive && !reduce ? kenBurnsTo(i) : "scale(1) translate(0, 0)",
                     transition:
                       isActive && !reduce ? `transform ${DWELL}ms linear` : "none",
                   }}
