@@ -32,10 +32,10 @@ fetch public/images/services/technology-advisory.jpg       photo-1497366811353-6
 fetch public/images/services/deployment-implementation.jpg photo-1581092160562-40aa08e78837  "IT engineer installation"
 
 fetch public/images/industries/government.jpg                 photo-1564013799919-ab600027ffc6  "government building africa"
-fetch public/images/industries/banking-financial-services.jpg photo-1541354329998-f4d9a9f9297f  "bank branch nigeria"
+fetch public/images/industries/banking-financial-services.jpg photo-1486406146926-c627a92ad1ab  "financial district glass towers"
 fetch public/images/industries/enterprise.jpg                 photo-1497366216548-37526070297c  "enterprise office"
 fetch public/images/industries/sme.jpg                        photo-1600880292089-90a7e086ee0c  "small business team nigeria"
-fetch public/images/industries/healthcare.jpg                 photo-1519494026892-80bbd2d6fd0d  "hospital technology"
+fetch public/images/industries/healthcare.jpg                 photo-1538108149393-fbbd81895907  "hospital ward beds no people"
 fetch public/images/industries/education.jpg                  photo-1523240795612-9a054b0db644  "university computer lab"
 fetch public/images/industries/oil-gas-energy.jpg             photo-1518709268805-4e9042af9f23  "oil gas facility"
 fetch public/images/industries/logistics-manufacturing.jpg    photo-1565891741441-64926e441838  "warehouse logistics"

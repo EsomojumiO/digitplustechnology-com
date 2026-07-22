@@ -1,43 +1,45 @@
 {
   "_note": "Unsplash free-license images. Attribution not required but recorded. Photographer names retrievable from each Unsplash photo ID. Swapped 2026-07-18 in the imagery-policy pass (#2): services-over-faces, Nigerian/Black subjects, correct subject per slot. Completed in the launch-readiness pass: every image in this folder now has an entry. Unsplash free licence \u2014 attribution not required; photographer names are not resolvable from a CDN asset id alone and are recorded as null rather than guessed. IDs and search terms mirror scripts/download-images.sh, which is the reproducible source.",
   "banking-financial-services.jpg": {
-    "unsplashId": "photo-1541354329998-f4d9a9f9297f",
-    "query": "bank branch nigeria",
-    "photographer": null
+    "photographer": null,
+    "query": "financial district glass towers upward view",
+    "swappedFrom": "the Bank of Montreal HQ \u2014 a named Canadian bank on a page about Nigerian banking IT, and portrait-aspect in a landscape slot",
+    "unsplashId": "photo-1486406146926-c627a92ad1ab"
   },
   "education.jpg": {
-    "unsplashId": "photo-1643199121319-b3b5695e4acb",
     "query": "computer training lab",
-    "swappedFrom": "three white men at a laptop (white subjects)"
+    "swappedFrom": "three white men at a laptop (white subjects)",
+    "unsplashId": "photo-1643199121319-b3b5695e4acb"
   },
   "enterprise.jpg": {
-    "unsplashId": "photo-1497366216548-37526070297c",
+    "photographer": null,
     "query": "enterprise office",
-    "photographer": null
+    "unsplashId": "photo-1497366216548-37526070297c"
   },
   "government.jpg": {
-    "unsplashId": "photo-1741900024959-c406f5e4eaa1",
     "query": "nigeria modern institutional building",
-    "swappedFrom": "a private house with a pool (wrong subject)"
+    "swappedFrom": "a private house with a pool (wrong subject)",
+    "unsplashId": "photo-1741900024959-c406f5e4eaa1"
   },
   "healthcare.jpg": {
-    "unsplashId": "photo-1519494026892-80bbd2d6fd0d",
-    "query": "hospital technology",
-    "photographer": null
+    "photographer": null,
+    "query": "hospital ward beds no people",
+    "swappedFrom": "a clinic reception with SPANISH signage (PISO 1 / BANCO DE SANGRE / TERAPIA NEONATAL) \u2014 a Spanish-speaking country's clinic on a page about Nigerian healthcare IT",
+    "unsplashId": "photo-1538108149393-fbbd81895907"
   },
   "logistics-manufacturing.jpg": {
-    "unsplashId": "photo-1565891741441-64926e441838",
+    "photographer": null,
     "query": "warehouse logistics",
-    "photographer": null
+    "unsplashId": "photo-1565891741441-64926e441838"
   },
   "oil-gas-energy.jpg": {
-    "unsplashId": "photo-1726731782158-fcf6822b6ca4",
     "query": "oil refinery industrial facility",
-    "swappedFrom": "a European castle (wrong subject)"
+    "swappedFrom": "a European castle (wrong subject)",
+    "unsplashId": "photo-1726731782158-fcf6822b6ca4"
   },
   "sme.jpg": {
-    "unsplashId": "photo-1655720357872-ce227e4164ba",
     "query": "african women small business laptop",
-    "swappedFrom": "stacked hands incl. white hands (white subjects + cliche)"
+    "swappedFrom": "stacked hands incl. white hands (white subjects + cliche)",
+    "unsplashId": "photo-1655720357872-ce227e4164ba"
   }
 }
