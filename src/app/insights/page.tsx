@@ -8,7 +8,9 @@ import {
   Badge,
   Eyebrow,
   Button,
+  CTABand,
 } from "@/components/ui";
+import { ctaLabels } from "@/lib/cta";
 import { FadeIn, Stagger, StaggerItem } from "@/components/motion";
 import {
   getAllArticles,
@@ -228,6 +230,44 @@ export default async function InsightsHubPage({
           ) : null}
         </div>
       </Section>
+
+      {/* Continue the journey — the hub used to dead-end on pagination. A reader
+          who reaches the end of a page now has a way to branch by topic
+          (crawl path continues) and a reason to act (reader journey continues). */}
+      {categories.length > 0 ? (
+        <Section spacing="sm" tone="muted">
+          <FadeIn>
+            <SectionHeading eyebrow="Browse by topic" title="Explore by category" />
+          </FadeIn>
+          <FadeIn>
+            <nav aria-label="Browse insights by category" className="mt-8">
+              <ul className="flex flex-wrap gap-2.5">
+                {categories.map((c) => (
+                  <li key={c.slug}>
+                    <Link
+                      href={`/insights/category/${c.slug}`}
+                      className="inline-flex items-center gap-1.5 rounded-full border border-hairline bg-surface-raised px-3.5 py-1.5 text-small font-medium text-muted transition-colors duration-[var(--dur-fast)] hover:border-hairline-hover hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green"
+                    >
+                      {c.label}
+                      <span className="text-caption text-muted">{c.count}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </FadeIn>
+        </Section>
+      ) : null}
+
+      <CTABand
+        title="Planning something you've read about here?"
+        description="Tell us about your environment and what you’re weighing up. We’ll explain how we’d approach it, no obligation."
+        actions={
+          <Button href="/contact" size="lg" variant="secondary">
+            {ctaLabels.insightsSoft}
+          </Button>
+        }
+      />
     </>
   );
 }
