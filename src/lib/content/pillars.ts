@@ -20,6 +20,7 @@ const ARTICLE_PILLAR: Record<string, { kind: PillarKind; slug: string }> = {
   "consolidated-vs-reactive-it-purchasing": { kind: "service", slug: "it-procurement" },
   "how-the-lpo-process-works-for-public-sector-it": { kind: "service", slug: "it-procurement" },
   "how-to-evaluate-it-vendors-in-nigeria": { kind: "service", slug: "it-procurement" },
+  "leasing-vs-buying-it-equipment-in-nigeria": { kind: "service", slug: "it-procurement" },
   // infrastructure-solutions
   "designing-a-server-room-power-cooling-ups": { kind: "service", slug: "infrastructure-solutions" },
   "structured-cabling-standards-for-nigerian-offices": { kind: "service", slug: "infrastructure-solutions" },
@@ -27,10 +28,12 @@ const ARTICLE_PILLAR: Record<string, { kind: PillarKind; slug: string }> = {
   "network-installation-checklist-new-office": { kind: "service", slug: "infrastructure-solutions" },
   "power-protection-and-ups-planning": { kind: "service", slug: "infrastructure-solutions" },
   "budgeting-bank-branch-infrastructure": { kind: "service", slug: "infrastructure-solutions" },
+  "cost-of-setting-up-a-server-room-in-nigeria": { kind: "service", slug: "infrastructure-solutions" },
   "securing-multi-branch-networks": { kind: "service", slug: "infrastructure-solutions" },
   // managed-services
   "what-an-it-sla-should-cover": { kind: "service", slug: "managed-services" },
   "proactive-it-monitoring-explained": { kind: "service", slug: "managed-services" },
+  "what-managed-it-services-cost-in-nigeria": { kind: "service", slug: "managed-services" },
   "in-house-vs-outsourced-it-support-nigeria": { kind: "service", slug: "managed-services" },
   "it-support-for-multi-site-operations": { kind: "service", slug: "managed-services" },
   "ransomware-readiness-for-nigerian-organisations": { kind: "service", slug: "managed-services" },
@@ -40,6 +43,7 @@ const ARTICLE_PILLAR: Record<string, { kind: PillarKind; slug: string }> = {
   "aligning-it-strategy-with-business-growth": { kind: "service", slug: "technology-advisory" },
   "how-to-build-a-three-year-it-roadmap": { kind: "service", slug: "technology-advisory" },
   "it-budgeting-for-nigerian-enterprises": { kind: "service", slug: "technology-advisory" },
+  "it-budget-for-opening-a-new-office-in-nigeria": { kind: "service", slug: "technology-advisory" },
   "refresh-or-repair-it-hardware-decision": { kind: "service", slug: "technology-advisory" },
   "structuring-a-multi-site-it-refresh": { kind: "service", slug: "technology-advisory" },
   "nigeria-enterprise-it-trends-2026": { kind: "service", slug: "technology-advisory" },
