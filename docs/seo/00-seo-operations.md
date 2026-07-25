@@ -21,9 +21,9 @@
 | **1.2** | Industry pages → body prose + 5 related insights each (0 broken links) | ✅ **Shipped** `7d5f9f4` |
 | **1.3** | `/insights` dead-end → bottom category nav + closing CTA | ✅ **Shipped** `d36ecf3` |
 | **2.1** | Rebuild keyword→page map against the live site | ✅ **Done** — `01-query-map-v2.md` |
-| **2.2** | Ranked backlog (24 opportunities) + STOP for review | ⛔ **Awaiting client approval** |
-| **2.3** | Write first 4 articles from the top of the backlog | ⏸ **Blocked on 2.2 approval** |
-| **3** | Technical SEO enhancements (schema audit, Service areaServed, internal-link gate, RSS) | ⏳ **Queued** — see below |
+| **2.2** | Ranked backlog (24 opportunities) + STOP for review | ✅ **Approved as ranked** (2026-07-25) |
+| **2.3** | Write first 4 backlog articles + ship the DR draft (#13) | ✅ **Shipped** — 5 articles (`76f408b` DR, `c506923` the four cost/comparison). Published count 33 → 38. |
+| **3** | Technical SEO enhancements | 🟡 **In progress** — internal-link gate ✅ shipped (`447421e`); schema audit, Service areaServed, OG sweep, RSS still queued (below) |
 | **4** | Freshness engine (content calendar + monthly GSC loop) | ⏳ **Queued** — cadence defined below |
 
 ---
