@@ -63,9 +63,11 @@ export default function PrivacyPage() {
               address only.
             </li>
             <li>
-              <strong>Limited technical data.</strong> Basic, privacy-respecting
-              analytics may record aggregate usage. We do not load non-essential
-              tracking before you consent.
+              <strong>Limited technical data.</strong> If you accept
+              non-essential cookies, Google Analytics records aggregate usage to
+              help us improve the site. It sets cookies and is not loaded at all
+              until you consent — decline or ignore the banner and no analytics
+              runs and no data reaches Google.
             </li>
           </ul>
 
@@ -120,8 +122,9 @@ export default function PrivacyPage() {
           </p>
           <p>
             The providers that help us operate may include an email-delivery
-            service, an email-marketing platform, a CRM, and privacy-respecting
-            analytics. We engage them as data processors under appropriate terms.
+            service, an email-marketing platform, a CRM, and Google Analytics
+            (Google LLC) for website analytics. We engage them as data processors
+            under appropriate terms.
           </p>
 
           <h2>International transfers</h2>
