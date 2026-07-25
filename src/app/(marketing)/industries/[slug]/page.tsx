@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { Link } from "next-view-transitions";
 import { industrySpecialist } from "@/lib/cta";
 import type { Metadata } from "next";
 import {
@@ -16,6 +17,7 @@ import {
 import { FeatureImage } from "@/components/ui/FeatureImage";
 import { FadeIn, Stagger, StaggerItem } from "@/components/motion";
 import { industries, services } from "@/lib/site";
+import { getAllArticles } from "@/lib/content";
 import { getIndustryContent } from "@/data/industries";
 import { JsonLd } from "@/lib/seo/jsonld";
 import { clampDescription } from "@/lib/seo/metadata";
@@ -54,6 +56,13 @@ export default async function IndustryDetailPage({
   const relatedServices = content.relevantServices
     .map((s) => services.find((sv) => sv.slug === s))
     .filter((s): s is (typeof services)[number] => Boolean(s));
+
+  // Resolve related-insight slugs against PUBLISHED articles only; drafts and
+  // any stale slug silently drop out so a broken link can never render.
+  const articlesBySlug = new Map(getAllArticles().map((a) => [a.slug, a]));
+  const relatedInsights = content.relatedInsights
+    .map((s) => articlesBySlug.get(s))
+    .filter((a): a is NonNullable<typeof a> => Boolean(a));
 
   return (
     <>
@@ -117,6 +126,19 @@ export default async function IndustryDetailPage({
         </div>
       </Section>
 
+      {/* Sector story — the constraints/compliance/uptime prose */}
+      {content.body.length > 0 ? (
+        <Section spacing="sm">
+          <FadeIn className="flex flex-col gap-5">
+            {content.body.map((para, i) => (
+              <p key={i} className="text-body text-muted measure">
+                {para}
+              </p>
+            ))}
+          </FadeIn>
+        </Section>
+      ) : null}
+
       {/* Concerns we address */}
       <Section tone="muted">
         <FadeIn>
@@ -160,6 +182,43 @@ export default async function IndustryDetailPage({
               </StaggerItem>
             ))}
           </Grid>
+        </Section>
+      ) : null}
+
+      {/* Related insights — crawl path into the content cluster */}
+      {relatedInsights.length > 0 ? (
+        <Section>
+          <FadeIn>
+            <SectionHeading
+              eyebrow="Go deeper"
+              title="Related insights"
+              lede={`Analysis and guides for ${content.title} IT teams.`}
+            />
+          </FadeIn>
+          <FadeIn>
+            <ul className="mt-10 divide-y divide-hairline border-y border-hairline">
+              {relatedInsights.map((a) => (
+                <li key={a.slug}>
+                  <Link
+                    href={`/insights/${a.slug}`}
+                    className="group flex items-baseline justify-between gap-4 py-4"
+                  >
+                    <span className="text-body font-medium text-text transition-colors group-hover:text-accent-green">
+                      {a.title}
+                    </span>
+                    <span className="shrink-0 text-caption text-muted">
+                      {a.category.label}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </FadeIn>
+          <FadeIn className="mt-8">
+            <Button href="/insights" size="lg" variant="secondary">
+              All insights
+            </Button>
+          </FadeIn>
         </Section>
       ) : null}
 

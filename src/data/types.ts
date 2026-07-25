@@ -77,10 +77,22 @@ export interface IndustryContent {
   /** Grammatically correct sentence forms for this sector. See IndustryPhrasing. */
   phrasing: IndustryPhrasing;
   intro: string[];
+  /**
+   * Body prose: the sector's real story (constraints, compliance, uptime).
+   * This is what turns a card-and-FAQ stub into a page that ranks — written
+   * per sector, not templated. Rendered between the concerns grid and the FAQ.
+   */
+  body: string[];
   /** Sector-specific concerns we address. */
   concerns: TitledItem[];
   /** Services most relevant to this sector. */
   relevantServices: ServiceSlug[];
+  /**
+   * Slugs of PUBLISHED insight articles genuinely relevant to this sector
+   * (3–5). Gives sector pages a crawl path into the content cluster and gives
+   * buyers a reason to go deeper. Unresolved/draft slugs are dropped at render.
+   */
+  relatedInsights: string[];
   faqs?: FAQ[];
   metaTitle: string;
   metaDescription: string;

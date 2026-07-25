@@ -19,6 +19,10 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
     intro: [
       "Documented, audit-ready IT procurement and delivery built for public-sector accountability and LPO workflows.",
     ],
+    body: [
+      "Public-sector IT is judged twice: once when it is delivered, and again — sometimes years later — when an auditor opens the file. That second test is the one most vendors fail. Getting the equipment to a ministry is the easy part; producing the quotation, proforma invoice, LPO-matched delivery note and authorised-channel provenance that a query demands is where procurement either holds up or unravels. We build the file as we go, so the paperwork is complete on the day and still complete when it is examined later.",
+      "The work also has to respect how agencies actually buy: formal approval chains, budget lines that cannot be exceeded, and fulfilment that matches the LPO to the letter rather than substituting a different model when stock runs short. We plan around those constraints instead of treating them as friction — which is why our government deliveries move through approval without the back-and-forth that stalls less disciplined suppliers.",
+    ],
     concerns: [
       {
         title: "Documented procurement",
@@ -42,6 +46,13 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
       "infrastructure-solutions",
       "deployment-implementation",
       "technology-advisory",
+    ],
+    relatedInsights: [
+      "audit-ready-it-procurement-for-government",
+      "how-the-lpo-process-works-for-public-sector-it",
+      "it-readiness-checklist-for-government-agencies",
+      "complete-guide-to-it-procurement-in-nigeria",
+      "how-to-evaluate-it-vendors-in-nigeria",
     ],
     faqs: [
       {
@@ -70,6 +81,10 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
     intro: [
       "Bank branch infrastructure, resilient networks and managed services with the documentation regulated environments demand.",
     ],
+    body: [
+      "In banking, the infrastructure is only as good as its worst branch. A network built one way on Victoria Island and another way in a state capital creates exactly the inconsistency that makes support slow and audits painful. We deliver branch builds to a single documented standard — cabling, network, power and configuration the same everywhere — so a fault in one branch is diagnosed the same way as a fault in any other, and opening the next branch is a repeat of a known process rather than a fresh negotiation.",
+      "Regulated environments also raise the bar on evidence and availability. Equipment has to be genuine and traceable, work has to be documented for the compliance team, and customer-facing systems cannot be down during banking hours. We plan cutovers out of hours, size power protection for real conditions, and monitor proactively — treating uptime and the paper trail as requirements, not extras.",
+    ],
     concerns: [
       {
         title: "Branch infrastructure",
@@ -93,6 +108,13 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
       "managed-services",
       "it-procurement",
       "hardware-supply",
+    ],
+    relatedInsights: [
+      "budgeting-bank-branch-infrastructure",
+      "it-checklist-for-opening-a-new-bank-branch",
+      "securing-multi-branch-networks",
+      "lan-wan-design-for-multi-branch-businesses",
+      "ndpr-compliance-for-it-teams",
     ],
     faqs: [
       {
@@ -121,6 +143,10 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
     intro: [
       "One accountable IT partner across every site — consistent standards, clear ownership and measured SLAs.",
     ],
+    body: [
+      "The problem large organisations bring us is rarely a single broken thing — it is fragmentation. Different vendors for different sites, procurement in one place and support in another, and no one who can answer for the whole estate when something goes wrong. That is how a simple fault turns into a week of vendors pointing at each other. We consolidate the estate under one accountable partner, with one set of standards for hardware, infrastructure and configuration, so ownership is clear and the answer to 'who fixes this' is never in dispute.",
+      "Consistency is also what makes growth cheap. When every site is built to the same standard and documented the same way, adding a location, a hundred users or a new capability is an extension of a known pattern, not a bespoke project. We design with that headroom deliberately, and back it with SLAs and reporting so IT performance is a number you can see rather than a feeling — and we extend in-house teams rather than replacing them where that is what you need.",
+    ],
     concerns: [
       {
         title: "Multi-site consistency",
@@ -144,6 +170,13 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
       "infrastructure-solutions",
       "it-procurement",
       "technology-advisory",
+    ],
+    relatedInsights: [
+      "structuring-a-multi-site-it-refresh",
+      "it-budgeting-for-nigerian-enterprises",
+      "how-to-build-a-three-year-it-roadmap",
+      "it-support-for-multi-site-operations",
+      "what-an-it-sla-should-cover",
     ],
     faqs: [
       {
@@ -172,6 +205,10 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
     intro: [
       "Right-sized equipment and dependable support in plain language — priced to fit and built to grow.",
     ],
+    body: [
+      "Smaller businesses get sold to badly. The usual pitch is either enterprise kit priced for a company ten times the size, or the cheapest possible option that has to be replaced within the year. Neither respects the actual constraint, which is that every naira has to earn its place. We size to the business in front of us — enough capacity and reliability to run without drama, without paying today for headroom you will not touch for three years — and we say so in plain language rather than jargon that exists to justify the invoice.",
+      "The other thing an SME rarely has is an IT team, which means support cannot depend on someone in-house noticing a problem. For many of our SME clients we are that function: advice, procurement and responsive support in one place, and choices that scale so adding staff or a second location later is an upgrade rather than a rip-and-replace.",
+    ],
     concerns: [
       {
         title: "Practical, plain-spoken advice",
@@ -195,6 +232,13 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
       "hardware-supply",
       "technology-advisory",
       "deployment-implementation",
+    ],
+    relatedInsights: [
+      "cybersecurity-essentials-for-nigerian-smes",
+      "in-house-vs-outsourced-it-support-nigeria",
+      "refresh-or-repair-it-hardware-decision",
+      "consolidated-vs-reactive-it-purchasing",
+      "network-installation-checklist-new-office",
     ],
     faqs: [
       {
@@ -223,6 +267,10 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
     intro: [
       "High-uptime infrastructure and power protection that keep clinical systems available around the clock.",
     ],
+    body: [
+      "In a care setting, downtime is not an inconvenience — it is a records system a clinician cannot reach, a diagnostic device that will not connect, a queue that stops moving. That raises the stakes on two things most facilities underestimate: power and cabling. Unstable mains supply will corrupt data and shorten equipment life unless UPS and clean-power planning are designed in from the start, and intermittent network faults from poor cabling are precisely the kind of problem that is hardest to trace when a ward is busy. We build both properly the first time and document them, so the infrastructure is not a recurring source of emergencies.",
+      "Support has to match the environment too. A slow fix in a hospital carries a cost an office never sees, so we back healthcare infrastructure with responsive remote support and on-site engineers under SLAs written for settings where availability is not negotiable.",
+    ],
     concerns: [
       {
         title: "Reliability & uptime",
@@ -246,6 +294,13 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
       "managed-services",
       "hardware-supply",
       "deployment-implementation",
+    ],
+    relatedInsights: [
+      "it-setup-guide-for-hospitals-and-clinics",
+      "power-protection-and-ups-planning",
+      "ransomware-readiness-for-nigerian-organisations",
+      "what-an-it-sla-should-cover",
+      "structured-cabling-standards-for-nigerian-offices",
     ],
     faqs: [
       {
@@ -274,6 +329,10 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
     intro: [
       "Durable, budget-conscious IT for labs, campuses and classrooms that keeps learning running.",
     ],
+    body: [
+      "Institutions buy IT against a fixed budget and then live with it for years, often across a campus that grew building by building with no single network plan behind it. That combination punishes the wrong choices twice: equipment that is too fragile fails mid-term when there is no budget to replace it, and a patchwork network makes every new lab or admin system harder to connect than the last. We right-size durable, standardised fleets that are easy to image, support and refresh as cohorts change, and we build campus connectivity as one coherent network rather than another one-off run.",
+      "The support model matters as much as the kit. Labs and offices have to keep running through term, so we set sensible response targets for an institutional setting and standardise the estate enough that a fault is a quick, known fix rather than a bespoke investigation.",
+    ],
     concerns: [
       {
         title: "Budget-conscious choices",
@@ -297,6 +356,13 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
       "infrastructure-solutions",
       "deployment-implementation",
       "managed-services",
+    ],
+    relatedInsights: [
+      "it-infrastructure-for-schools-and-universities",
+      "structured-cabling-standards-for-nigerian-offices",
+      "network-installation-checklist-new-office",
+      "in-house-vs-outsourced-it-support-nigeria",
+      "cybersecurity-essentials-for-nigerian-smes",
     ],
     faqs: [
       {
@@ -325,6 +391,10 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
     intro: [
       "Resilient infrastructure and hardware built to survive demanding, remote energy-sector sites.",
     ],
+    body: [
+      "The energy sector sets requirements an office spec cannot meet. Equipment has to survive heat, humidity and dust, ride through mains power that is anything but clean, and keep running at sites where the nearest engineer may be hours away. Office-grade kit sent into that environment fails early and fails often. We specify for the conditions the equipment will actually operate in, size power protection for real supply quality rather than the nameplate assumption, and source everything genuine and warrantied through authorised channels so a failure in the field is covered, not disputed.",
+      "Remoteness changes the support model as much as the hardware. When you cannot simply send someone that afternoon, resilience has to be designed in — spares planned, configurations documented so on-site staff can keep systems running between visits, and proactive monitoring under SLAs written for sites away from major centres. We plan for HSE requirements and site access up front, so delivery and maintenance are not held up at the gate.",
+    ],
     concerns: [
       {
         title: "Resilient infrastructure",
@@ -348,6 +418,13 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
       "managed-services",
       "hardware-supply",
       "it-procurement",
+    ],
+    relatedInsights: [
+      "it-for-oil-gas-and-energy-operations",
+      "powering-it-through-nigerias-energy-challenges",
+      "power-protection-and-ups-planning",
+      "designing-a-server-room-power-cooling-ups",
+      "proactive-it-monitoring-explained",
     ],
     faqs: [
       {
@@ -376,6 +453,10 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
     intro: [
       "Connected-site networks and responsive support that keep warehouses and plants moving.",
     ],
+    body: [
+      "In logistics and manufacturing, IT is not a back-office convenience — it is part of the line. When the network between a warehouse and head office drops, dispatch stalls; when a scanner or a plant workstation fails, throughput does with it. The environments are harder on equipment than an office, and the cost of an outage is measured in stopped goods, so the priorities invert: reliability and fast recovery come first, and the infrastructure has to be built and standardised for busy, physical sites rather than quiet ones.",
+      "Most of these operations run across several locations, which makes coordination the real work. We connect warehouses, plants and offices on reliable networks, supply genuine standardised hardware that is quick to support, and put monitoring, power protection and SLAs around the systems that move goods — one accountable partner across every site, with consistent standards and documentation for the whole operation.",
+    ],
     concerns: [
       {
         title: "Connected sites",
@@ -399,6 +480,13 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
       "hardware-supply",
       "managed-services",
       "deployment-implementation",
+    ],
+    relatedInsights: [
+      "it-support-for-multi-site-operations",
+      "lan-wan-design-for-multi-branch-businesses",
+      "structured-cabling-standards-for-nigerian-offices",
+      "proactive-it-monitoring-explained",
+      "what-an-it-sla-should-cover",
     ],
     faqs: [
       {
