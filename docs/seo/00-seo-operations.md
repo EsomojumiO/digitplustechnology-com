@@ -36,7 +36,7 @@ Actionable now, independent of the 2.2 gate. Each ships as its own gated commit.
 - [ ] **Service `areaServed`** — add Abuja/Lagos/Port Harcourt to `serviceSchema` (currently `areaServed: Country=Nigeria` only); add `hasOfferCatalog` **only where the catalogue is real** (the 4 sub-capabilities per service qualify; don't invent SKUs).
 - [ ] **Breadcrumb schema** — verify `BreadcrumbList` on every nested route (services, industries, locations, insights, categories, reports). Present on the templates checked; needs the full 71-URL sweep.
 - [ ] **OG images** — verify the top-10 shared-likelihood pages have a valid, non-duplicate OG image (home, services hub, the 6 service pages, top articles).
-- [ ] **Internal-link audit script** — new gate: every page reachable ≤3 clicks from home, descriptive anchors only, **zero orphans**. Wire into the gate suite so it runs on every future commit. This is the highest-leverage Phase 3 item — it makes orphans a build failure forever.
+- [x] **Internal-link audit script** ✅ **Shipped** — `scripts/internal-link-audit.mjs`, wired into the suite as `npm run gates` (a 4th gate beside conformance/a11y/contrast). Every indexable page must have ≥1 inbound internal link, sit ≤3 clicks from home, and be linked with a descriptive anchor. It crawls pagination so page-2+ listings aren't mis-flagged. **On its first run it caught a real orphan cluster** — the entire `/locations` sub-tree (overview + 3 cities) had no inbound link from anywhere reachable from home; fixed by adding Locations to the footer.
 - [x] **hreflang** — **skip.** Single-locale site (en-NG only); adding hreflang would be noise. Decision recorded here per the brief.
 - [ ] **RSS feed for `/insights`** — `/insights/rss.xml` from `getAllArticles()`; link via `<link rel="alternate" type="application/rss+xml">` in the insights head.
 
@@ -79,10 +79,8 @@ Run once a month. Each step is concrete so it survives a handover.
 ```bash
 export PATH="$HOME/.nvm/versions/node/v24.15.0/bin:$PATH"
 npm run build && npx next start -p 4310 &
-node --experimental-strip-types scripts/style-conformance.ts http://localhost:4310
-node scripts/a11y-sweep.mjs      http://localhost:4310
-node scripts/hero-contrast.mjs   http://localhost:4310
-# Phase 3 will add: node scripts/internal-link-audit.mjs http://localhost:4310
+npm run gates            # runs all 4: conformance · a11y · hero-contrast · internal-link-audit
+# individually: npm run gate:conformance | gate:a11y | gate:contrast | gate:links
 ```
 
 ## Out of scope (human / off-site — not this runbook)

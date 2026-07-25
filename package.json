@@ -7,6 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "gate:conformance": "node --experimental-strip-types scripts/style-conformance.ts",
+    "gate:a11y": "node scripts/a11y-sweep.mjs",
+    "gate:contrast": "node scripts/hero-contrast.mjs",
+    "gate:links": "node scripts/internal-link-audit.mjs",
+    "gates": "node scripts/run-gates.mjs",
     "content:plan": "node content-engine/plan.mjs",
     "content:generate": "node content-engine/generate.mjs",
     "content:covers": "node content-engine/fetch-covers.mjs"

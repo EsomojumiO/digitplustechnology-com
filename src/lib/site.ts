@@ -283,6 +283,7 @@ export const footerNav: FooterColumn[] = [
       { label: "Approach", href: "/approach" },
       { label: "Insights", href: "/insights" },
       { label: "Reports", href: "/reports" },
+      { label: "Locations", href: "/locations" },
       { label: "Ecosystem", href: "/ecosystem" },
       { label: "Contact", href: "/contact" },
     ],
