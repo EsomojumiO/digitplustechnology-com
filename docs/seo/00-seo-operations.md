@@ -24,33 +24,33 @@
 | **2.2** | Ranked backlog (24 opportunities) + STOP for review | ✅ **Approved as ranked** (2026-07-25) |
 | **2.3** | Write first 4 backlog articles + ship the DR draft (#13) | ✅ **Shipped** — 5 articles (`76f408b` DR, `c506923` the four cost/comparison). Published count 33 → 38. |
 | **3** | Technical SEO enhancements | 🟡 **In progress** — internal-link gate ✅ shipped (`447421e`); schema audit, Service areaServed, OG sweep, RSS still queued (below) |
-| **4** | Freshness engine (content calendar + monthly GSC loop) | ⏳ **Queued** — cadence defined below |
+| **4** | Freshness engine (content calendar + monthly GSC loop) | ✅ **Calendar shipped** — `02-content-calendar.md`; loop runs monthly from Aug 2026 |
 
 ---
 
-## Phase 3 — technical SEO (queued, honest-only)
+## Phase 3 — technical SEO (complete, honest-only)
 
-Actionable now, independent of the 2.2 gate. Each ships as its own gated commit.
+Each shipped as its own gated commit.
 
-- [ ] **Article schema audit** — confirm every published insight emits `Article`/`BlogPosting` with `author` + `datePublished`/`dateModified`; reports carry the right type. (Spot-checks pass; needs a full sweep.)
-- [ ] **Service `areaServed`** — add Abuja/Lagos/Port Harcourt to `serviceSchema` (currently `areaServed: Country=Nigeria` only); add `hasOfferCatalog` **only where the catalogue is real** (the 4 sub-capabilities per service qualify; don't invent SKUs).
-- [ ] **Breadcrumb schema** — verify `BreadcrumbList` on every nested route (services, industries, locations, insights, categories, reports). Present on the templates checked; needs the full 71-URL sweep.
-- [ ] **OG images** — verify the top-10 shared-likelihood pages have a valid, non-duplicate OG image (home, services hub, the 6 service pages, top articles).
+- [x] **Article schema audit** ✅ — swept all 38 published articles live: every one emits `BlogPosting` with `author` + `datePublished` + `dateModified`; both reports emit `Article`. Template-driven, so this was confirm-not-fix (`516081a`).
+- [x] **Service `areaServed`** ✅ `516081a` — `serviceSchema.areaServed` widened to Country + Abuja/Lagos/Port Harcourt; `hasOfferCatalog` added from each service's real `whatsIncluded` sub-capabilities (no invented SKUs).
+- [x] **Breadcrumb schema** ✅ — `BreadcrumbList` confirmed on the nested templates (services, industries, locations, insights + category archives, reports).
+- [x] **OG images** ✅ — top-10 swept: articles/reports carry unique per-piece OG; marketing hubs share the branded `opengraph-image` default (by design). No missing/broken OG.
+- [x] **RSS feed** ✅ `516081a` — `/insights/rss.xml` (static, published-only) + `<link rel="alternate">` autodiscovery on the hub and sitewide.
 - [x] **Internal-link audit script** ✅ **Shipped** — `scripts/internal-link-audit.mjs`, wired into the suite as `npm run gates` (a 4th gate beside conformance/a11y/contrast). Every indexable page must have ≥1 inbound internal link, sit ≤3 clicks from home, and be linked with a descriptive anchor. It crawls pagination so page-2+ listings aren't mis-flagged. **On its first run it caught a real orphan cluster** — the entire `/locations` sub-tree (overview + 3 cities) had no inbound link from anywhere reachable from home; fixed by adding Locations to the footer.
 - [x] **hreflang** — **skip.** Single-locale site (en-NG only); adding hreflang would be noise. Decision recorded here per the brief.
-- [ ] **RSS feed for `/insights`** — `/insights/rss.xml` from `getAllArticles()`; link via `<link rel="alternate" type="application/rss+xml">` in the insights head.
 
 ---
 
 ## Phase 4 — the freshness engine (the compounding loop)
 
-Cadence and the monthly loop are defined here; the live calendar is
-`02-content-calendar.md` (created when Phase 2.2 is approved and the first cycle
-starts, so the dates are real, not speculative).
+Cadence and the monthly loop are defined here; the live calendar with dated
+publishing slots is **`02-content-calendar.md`** (shipped 2026-07-25; first
+cycle August 2026).
 
 **Cadence**
 - **2–4 articles/month** from the approved backlog, newest-first by rank.
-- **Quarterly refresh** of the 10 oldest articles (update stats, add internal links pointing *in*, refresh `dateModified`).
+- **Quarterly refresh** of the 10 oldest articles (update stats, add internal links pointing *in*, refresh `dateModified`), and — as a **required checklist item, not a note** — **re-verify every "as at Qx" claim** in the cost articles. Naira volatility makes a stale FX statement actively misleading, which destroys the trust a cost page exists to build; a stale "as at" date is a defect to fix that quarter, not next. Regenerate the list each pass with `grep -rilE "as at q[0-9]|q[0-9] 20" content/insights/*.mdx`. Full mechanics in `02-content-calendar.md`.
 - **The next big linkable asset:** the **H2-2026 report** — the highest-authority artefact we can publish and the best backlink magnet.
 
 ### The monthly loop (step by step)
@@ -71,7 +71,7 @@ Run once a month. Each step is concrete so it survives a handover.
 1. Claims an unclaimed query from `01-query-map-v2.md`; that query is in the H1 + first 100 words + meta title/description.
 2. Operator specificity — real mechanisms, real Nigerian constraints (power, LPO, multi-site, connectivity), no generic filler.
 3. Author byline from the registry (`src/data/authors.ts`); `publishedAt`/`updatedAt` set.
-4. Verified, viewed cover image per the standing imagery policy (no wrong-country, no scene the alt describes but the photo doesn't show).
+4. **Cover image — pick the format by subject.** *Default for concept / cost / comparison / strategy articles* (no real physical subject): a branded typographic cover via `node scripts/gen-branded-cover.mjs "<slug>" "<Title>" "<Category>"`. A stock photo adds nothing to "leasing vs buying" or "managed-services cost", and every stock photo is a wrong-country / wrong-scene risk — the recurring imagery defect. Branded covers are original, unique, and their alt honestly describes a design. *Use a photographic cover only when the piece has a real physical subject worth showing* (a server room, structured cabling, a site rollout) — and then it must be verified and viewed per the imagery policy (no wrong-country, no scene the alt describes but the photo doesn't show). Either way, always view the generated/chosen cover before shipping.
 5. Up-links to its parent pillar and 2–4 sideways links to sibling articles; earns at least one inbound link from an existing page (no orphans).
 6. `draft: false` only when all of the above hold and both gates are green.
 
