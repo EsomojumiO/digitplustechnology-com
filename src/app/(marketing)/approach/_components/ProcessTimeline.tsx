@@ -80,11 +80,13 @@ function ProcessNode({
   description: string;
 }) {
   return (
-    <div className="group flex gap-5 sm:gap-6">
+    // `isolate`: the node below lifts itself over the spine. Local ordering,
+    // kept local — see the layer scale in globals.css.
+    <div className="group isolate flex gap-5 sm:gap-6">
       {/* Numbered node sitting on the spine, glass disc, accent numeral. */}
       <span
         aria-hidden="true"
-        className="relative z-10 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-hairline bg-surface/80 text-small font-semibold tabular-nums text-accent-green shadow-[0_0_0_4px_var(--color-background)] backdrop-blur-sm transition-colors duration-[var(--dur-base)] ease-[var(--ease-out)] group-hover:border-accent-green sm:h-11 sm:w-11"
+        className="relative z-content flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-hairline bg-surface/80 text-small font-semibold tabular-nums text-accent-green shadow-[0_0_0_4px_var(--color-background)] backdrop-blur-sm transition-colors duration-[var(--dur-base)] ease-[var(--ease-out)] group-hover:border-accent-green sm:h-11 sm:w-11"
       >
         {String(step).padStart(2, "0")}
       </span>

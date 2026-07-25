@@ -183,7 +183,14 @@ export function HeroCarousel() {
       onBlurCapture={(e) => {
         if (!e.currentTarget.contains(e.relatedTarget as Node)) resume();
       }}
-      className="relative h-[78vh] min-h-[560px] w-full overflow-hidden bg-[#1d1d1f]"
+      // `isolate` is load-bearing. `relative` alone leaves this section at
+      // z-index:auto — which is NOT a stacking context — so the scrim (z-1),
+      // the overlay text (z-content) and the progress bars (z-raised) were
+      // resolved against the ROOT stacking context and competed directly with
+      // site chrome. `isolation: isolate` makes this section a stacking context
+      // whatever its z-index, so those three layers order among themselves and
+      // the whole hero occupies exactly one slot in the page's stacking order.
+      className="relative isolate h-[78vh] min-h-[560px] w-full overflow-hidden bg-[#1d1d1f]"
     >
       <div ref={emblaRef} className="h-full overflow-hidden">
         <div className="flex h-full">
@@ -192,7 +199,12 @@ export function HeroCarousel() {
             return (
               <div
                 key={s.src}
-                className="relative h-full min-w-0 flex-[0_0_100%]"
+                // `isolate` so the image/scrim/text micro-ordering below is
+                // contained per slide. It was relying on embla's fade plugin
+                // happening to set a transform on this node — a stacking
+                // context by accident, owned by a third-party plugin. Declared
+                // explicitly, it no longer depends on that.
+                className="relative isolate h-full min-w-0 flex-[0_0_100%]"
                 role="group"
                 aria-roledescription="slide"
                 aria-label={`${i + 1} of ${SLIDES.length}: ${s.eyebrow}`}
@@ -241,8 +253,9 @@ export function HeroCarousel() {
                   }}
                 />
 
-                {/* Overlay text — bottom-left */}
-                <div className="absolute inset-x-0 bottom-0 z-10">
+                {/* Overlay text — bottom-left. Local layer: ordered inside the
+                    isolated hero, never against the header. */}
+                <div className="absolute inset-x-0 bottom-0 z-content">
                   <div className="mx-auto w-full max-w-6xl px-5 pb-14 sm:px-8 sm:pb-20">
                     <div
                       className={cn(
@@ -310,7 +323,7 @@ export function HeroCarousel() {
           bottom-left CTA button (the CTA is ~226px and the bars ~180px — they
           can't both sit at the bottom of a narrow screen). Top-right clears the
           text column at every width. */}
-      <div className="absolute right-5 top-6 z-20 flex items-center gap-1.5 sm:right-8 sm:top-8">
+      <div className="absolute right-5 top-6 z-raised flex items-center gap-1.5 sm:right-8 sm:top-8">
         {SLIDES.map((s, i) => (
           <button
             key={s.src}

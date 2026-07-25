@@ -32,12 +32,15 @@ export function Hero({
   return (
     <section
       className={cn(
-        "relative overflow-hidden pt-20 pb-16 sm:pt-28 sm:pb-24",
+        // `isolate`: this hero raises its Container above its own background
+        // media. Without a stacking context that z-index leaks into the root
+        // context and competes with site chrome — the hero-carousel bug.
+        "relative isolate overflow-hidden pt-20 pb-16 sm:pt-28 sm:pb-24",
         className,
       )}
       {...props}
     >
-      <Container className="relative z-10">
+      <Container className="relative z-content">
         <div
           className={cn(
             "flex flex-col gap-10",

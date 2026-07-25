@@ -26,7 +26,11 @@ export function CookieConsent() {
       aria-labelledby="cookie-consent-title"
       aria-describedby="cookie-consent-desc"
       className={cn(
-        "fixed inset-x-3 bottom-3 z-[70] sm:inset-x-auto sm:left-5 sm:bottom-5 sm:max-w-md",
+        // z-toast, above the open mobile menu: this is a consent prompt, and a
+        // nav panel must not bury it. Rendered as a direct child of <body>
+        // (layout.tsx) so nothing filtered/transformed can capture its `fixed`
+        // containing block — the trap that broke the mobile menu.
+        "fixed inset-x-3 bottom-3 z-toast sm:inset-x-auto sm:left-5 sm:bottom-5 sm:max-w-md",
         "rounded-xl border border-hairline bg-surface-raised p-5 shadow-[var(--shadow-lg)]",
       )}
     >

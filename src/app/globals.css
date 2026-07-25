@@ -249,6 +249,42 @@
 
   /* ---- Container ---- */
   --container-prose: 65ch;
+
+  /* ---- Layer scale (z-index) ----
+     ONE ordered set of names for the whole site. Never write a raw z-number in
+     a component again: `z-header`, `z-overlay`, `z-toast` etc. are real
+     utilities generated from these, and the ordering argument lives here in one
+     readable place instead of being reverse-engineered from `z-[60]` vs
+     `z-[70]` scattered across five files.
+
+     Gaps are deliberate — room to slot a layer in without renumbering.
+
+     `content`/`raised`/`dropdown` are LOCAL layers: they order children inside
+     a component that is itself a stacking context (see the isolation note
+     below). `header` and above are GLOBAL layers competing in the root
+     stacking context.
+
+     THE RULE THAT MAKES THIS HOLD: any component that stacks things internally
+     must set `isolation: isolate` (the `isolate` utility). Without it, a
+     `relative` wrapper with `z-index: auto` is NOT a stacking context, and its
+     children's z-indices escape into the root context to fight the header —
+     which is exactly how the hero carousel's internals ended up competing with
+     site chrome. Isolating costs nothing and makes local numbers stay local. */
+  --z-index-base: 0;
+  --z-index-content: 10;
+  --z-index-raised: 20;
+  --z-index-dropdown: 30;
+  --z-index-header: 100;
+  --z-index-toast: 200; /* cookie consent, transient notices */
+  --z-index-overlay: 300; /* mobile menu, modal dialogs and their backdrops */
+  --z-index-skip: 400; /* skip link — must beat every layer, including overlay */
+
+  /* WHY overlay SITS ABOVE toast: the mobile nav is `aria-modal="true"` and
+     covers the viewport. With toast on top, the cookie banner (`inset-x-3
+     bottom-3`, i.e. full width at 390px) painted over the open menu's contact
+     row and its "Get a proposal" button — the modal's primary action was
+     unreachable behind a non-modal notice. A modal outranks a notice. Caught by
+     the pixel probe in scripts/overlay-stacking.mjs, not by eye. */
 }
 
 
@@ -588,7 +624,11 @@
     position: absolute;
     top: 0.5rem;
     left: 0.5rem;
-    z-index: 100;
+    /* Top of the layer scale: the skip link is the first stop for a keyboard
+       user and must never be covered — not by the header, not by an open
+       overlay. Was a bare `100`, which as of the layer scale is exactly the
+       header's layer (order-dependent, i.e. luck). */
+    z-index: var(--z-index-skip);
     padding: 0.5rem 1rem;
     border-radius: var(--radius-md);
     background: var(--surface-raised);

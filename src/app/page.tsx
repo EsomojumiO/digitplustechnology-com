@@ -280,9 +280,9 @@ export default function HomePage() {
       ) : null}
 
       {/* Closing CTA band — separation by background alternation, not by glow */}
-      <div className="relative overflow-hidden bg-surface">
+      <div className="relative isolate overflow-hidden bg-surface">
         <CTABand
-          className="relative z-10 bg-transparent"
+          className="relative z-content bg-transparent"
           title="Tell us what you’re planning"
           description="A short conversation is the fastest way to see how we can help. No obligation."
           // One action per closing band. WhatsApp was a competing contact

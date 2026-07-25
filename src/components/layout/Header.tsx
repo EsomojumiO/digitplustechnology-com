@@ -130,7 +130,10 @@ function DesktopDropdown({
         id={id}
         aria-label={item.label}
         className={cn(
-          "absolute left-0 top-full z-50 pt-2",
+          // Local layer inside the header's stacking context (the header is one
+          // already — sticky + z-index + backdrop-filter), so this only has to
+          // beat its siblings in the nav rail, never the page.
+          "absolute left-0 top-full z-dropdown pt-2",
           "transition-[opacity,transform] duration-[var(--dur-base)] ease-[var(--ease-out)]",
           open
             ? "pointer-events-auto translate-y-0 opacity-100"
@@ -228,7 +231,12 @@ function MobileMenu({
         // it the document grew to 774px against a 390px viewport — so EVERY
         // page scrolled sideways on a phone. Clipping here costs nothing (the
         // panel is fully inside the viewport once open).
-        "fixed inset-0 z-[60] overflow-hidden lg:hidden",
+        //
+        // `fixed inset-0` only means "the viewport" while NO ancestor is a
+        // containing block for fixed descendants. That is why this component is
+        // rendered as a SIBLING of <header>, not inside it — see the note at
+        // the Header return. Keep it that way.
+        "fixed inset-0 z-overlay overflow-hidden lg:hidden",
         open ? "pointer-events-auto" : "pointer-events-none",
       )}
       aria-hidden={!open}
@@ -419,7 +427,9 @@ function ContactMenu() {
         id={id}
         aria-label="Contact"
         className={cn(
-          "absolute right-0 top-full z-50 mt-2 w-60 rounded-xl border border-hairline bg-surface-raised p-1.5 shadow-[var(--shadow-lg)]",
+          // Local layer — see DesktopDropdown. The header's stacking context
+          // carries the whole dropdown above the page for free.
+          "absolute right-0 top-full z-dropdown mt-2 w-60 rounded-xl border border-hairline bg-surface-raised p-1.5 shadow-[var(--shadow-lg)]",
           "transition-[opacity,transform] duration-[var(--dur-base)] ease-[var(--ease-out)]",
           open
             ? "pointer-events-auto translate-y-0 opacity-100"
@@ -467,9 +477,10 @@ export function Header() {
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
+    <>
     <header
       className={cn(
-        "sticky top-0 z-50 w-full border-b border-hairline",
+        "sticky top-0 z-header w-full border-b border-hairline",
         // Frosted white glass: rgba(255,255,255,0.72) + blur over a #d2d2d7
         // hairline. The opaque fallback stays fully white so the bar never
         // reads as grey where backdrop-filter is unsupported.
@@ -550,9 +561,27 @@ export function Header() {
           </button>
         </div>
       </Container>
-
-      <MobileMenu open={mobileOpen} onClose={() => setMobileOpen(false)} />
     </header>
+
+    {/* OUTSIDE <header> ON PURPOSE — this was the mobile-nav bug.
+        The header carries `backdrop-blur-xl backdrop-saturate-150`. A non-none
+        `backdrop-filter` (like `filter`, `transform` and `perspective`) makes an
+        element the CONTAINING BLOCK for its `position: fixed` descendants. So
+        while the menu lived inside the header, its `fixed inset-0` resolved
+        against the header's 390x48 box instead of the 390x844 viewport: the
+        panel collapsed to a 48px strip, its own `overflow-hidden` clipped the
+        nav away, and the hero filled the rest of the screen — which reads
+        exactly like "the menu renders behind the hero".
+
+        No z-index could have fixed that; the panel was 48px tall. As a sibling
+        of <header> the menu's containing block is the viewport again, and
+        `z-overlay` puts it cleanly above `z-header`.
+
+        Same trap as the deleted `.route-enter` wrapper (see globals.css §4) —
+        second time this site has been bitten by a fixed descendant inside a
+        filtered/transformed ancestor. */}
+    <MobileMenu open={mobileOpen} onClose={() => setMobileOpen(false)} />
+    </>
   );
 }
 
