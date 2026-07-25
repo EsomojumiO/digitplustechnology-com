@@ -66,6 +66,11 @@ export const metadata: Metadata = {
   publisher: siteConfig.name,
   alternates: {
     canonical: "/",
+    types: {
+      "application/rss+xml": [
+        { url: "/insights/rss.xml", title: `${siteConfig.name} — Insights` },
+      ],
+    },
   },
   openGraph: {
     type: "website",

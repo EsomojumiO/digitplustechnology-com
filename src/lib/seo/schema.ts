@@ -121,9 +121,27 @@ export function serviceSchema(service: ServiceContent) {
       "@id": ORG_ID,
       name: siteConfig.name,
     },
-    areaServed: {
-      "@type": "Country",
-      name: "Nigeria",
+    // The country plus the three cities we actually deliver in — matches the
+    // NAP and the LocalBusiness areaServed on /locations/*.
+    areaServed: [
+      { "@type": "Country", name: "Nigeria" },
+      { "@type": "City", name: "Abuja" },
+      { "@type": "City", name: "Lagos" },
+      { "@type": "City", name: "Port Harcourt" },
+    ],
+    // hasOfferCatalog from the service's REAL sub-capabilities (data/services
+    // `whatsIncluded`) — not invented SKUs. Honest schema only.
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: `${service.title} capabilities`,
+      itemListElement: service.whatsIncluded.map((item) => ({
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: item.title,
+          description: item.desc,
+        },
+      })),
     },
     audience: {
       "@type": "BusinessAudience",

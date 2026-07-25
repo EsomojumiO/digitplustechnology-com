@@ -27,7 +27,14 @@ export const metadata: Metadata = {
   title: "IT Insights for Nigerian Business Leaders",
   description:
     "Practical articles for IT decision-makers in Nigeria, IT strategy, procurement, infrastructure, cybersecurity, and managed services from Digitplus Technology.",
-  alternates: { canonical: "/insights" },
+  alternates: {
+    canonical: "/insights",
+    types: {
+      "application/rss+xml": [
+        { url: "/insights/rss.xml", title: "Digitplus Technology — Insights" },
+      ],
+    },
+  },
 };
 
 /**
