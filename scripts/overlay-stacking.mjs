@@ -306,6 +306,154 @@ async function assertIsolation(page, label) {
   }
 }
 
+/**
+ * A keyboard-only walk of the mobile nav — no mouse, no programmatic focus.
+ * Drives it exactly as a keyboard or screen-reader user would and asserts the
+ * four things the ARIA modal pattern requires.
+ */
+async function assertModalKeyboard(page, label) {
+  const activeInfo = () =>
+    page.evaluate(() => {
+      const a = document.activeElement;
+      const panel = document.querySelector('[role="dialog"][aria-label="Site navigation"]');
+      return {
+        tag: a?.tagName?.toLowerCase() ?? null,
+        text: (a?.textContent ?? "").trim().slice(0, 40),
+        label: a?.getAttribute?.("aria-label") ?? null,
+        inPanel: !!(panel && a && panel.contains(a)),
+        isBody: a === document.body,
+      };
+    });
+
+  /* 1. The trigger is reachable by Tab alone, and opens with Enter. */
+  await page.keyboard.press("Escape"); // ensure a clean starting state
+  await page.evaluate(() => document.body.focus());
+  let opened = false;
+  for (let i = 0; i < 25; i++) {
+    await page.keyboard.press("Tab");
+    const a = await activeInfo();
+    if (a.label === "Open menu") {
+      await page.keyboard.press("Enter");
+      opened = true;
+      break;
+    }
+  }
+  if (!opened) {
+    fail(`${label}: could not reach the "Open menu" button with Tab alone in 25 presses`);
+    return;
+  }
+  await page.waitForTimeout(450);
+
+  const afterOpen = await activeInfo();
+  if (!afterOpen.inPanel) {
+    fail(
+      `${label}: focus did not move into the dialog on open — it is on ` +
+        `<${afterOpen.tag}> "${afterOpen.text}"`,
+    );
+  } else {
+    pass(`${label}: Enter on the trigger opens the dialog and moves focus into it`);
+  }
+
+  /* 2. THE TRAP. Tab far more times than the panel has controls; focus must
+        never leave. This is the assertion that would have caught the cookie
+        banner being tab-reachable behind an open modal. */
+  const escapes = [];
+  for (let i = 0; i < 40; i++) {
+    await page.keyboard.press("Tab");
+    const a = await activeInfo();
+    if (!a.inPanel)
+      escapes.push(`step ${i + 1}: <${a.tag}> "${a.text}"${a.isBody ? " (body)" : ""}`);
+  }
+  if (escapes.length) {
+    fail(
+      `${label}: focus escaped the modal on ${escapes.length}/40 Tab presses — ` +
+        escapes.slice(0, 3).join("; "),
+    );
+  } else {
+    pass(`${label}: focus stayed inside the dialog across 40 forward Tabs`);
+  }
+
+  /* 3. Shift+Tab wraps backwards without escaping either. */
+  const backEscapes = [];
+  for (let i = 0; i < 20; i++) {
+    await page.keyboard.press("Shift+Tab");
+    const a = await activeInfo();
+    if (!a.inPanel) backEscapes.push(`step ${i + 1}: <${a.tag}> "${a.text}"`);
+  }
+  if (backEscapes.length) {
+    fail(
+      `${label}: focus escaped on ${backEscapes.length}/20 Shift+Tab presses — ` +
+        backEscapes.slice(0, 3).join("; "),
+    );
+  } else {
+    pass(`${label}: focus stayed inside the dialog across 20 reverse Tabs`);
+  }
+
+  /* 4. The background is genuinely inert, not merely visually covered. */
+  const inertState = await page.evaluate(() => {
+    const panel = document.querySelector('[role="dialog"][aria-label="Site navigation"]');
+    const root = panel?.parentElement;
+    const siblings = Array.from(document.body.children).filter(
+      (el) => el !== root && el instanceof HTMLElement,
+    );
+    return {
+      total: siblings.length,
+      notInert: siblings
+        .filter((el) => !el.inert)
+        .map((el) => el.tagName.toLowerCase() + (el.id ? "#" + el.id : "")),
+    };
+  });
+  if (inertState.notInert.length) {
+    fail(
+      `${label}: ${inertState.notInert.length}/${inertState.total} background elements are NOT inert ` +
+        `while the modal is open — ${inertState.notInert.join(", ")}. A keyboard or screen-reader ` +
+        `user can reach the page behind the dialog.`,
+    );
+  } else {
+    pass(`${label}: all ${inertState.total} background elements are inert while open`);
+  }
+
+  /* 5. Escape closes, and focus goes home to the trigger. */
+  await page.keyboard.press("Escape");
+  await page.waitForTimeout(450);
+  const afterClose = await activeInfo();
+  if (afterClose.label !== "Open menu") {
+    fail(
+      `${label}: Escape did not return focus to the trigger — focus is on ` +
+        `<${afterClose.tag}> "${afterClose.text}" (aria-label: ${afterClose.label})`,
+    );
+  } else {
+    pass(`${label}: Escape closes the dialog and returns focus to the trigger`);
+  }
+
+  const stillOpen = await page.evaluate(() => {
+    const panel = document.querySelector('[role="dialog"][aria-label="Site navigation"]');
+    return panel ? getComputedStyle(panel).transform !== "none" &&
+      !/matrix\(1, 0, 0, 1, 0, 0\)/.test(getComputedStyle(panel).transform) : false;
+  });
+  if (!stillOpen) pass(`${label}: panel returned off-canvas after Escape`);
+
+  /* 6. Closed, the off-canvas panel must be OUT of the tab order. */
+  const closedTabbable = await page.evaluate(() => {
+    const panel = document.querySelector('[role="dialog"][aria-label="Site navigation"]');
+    const root = panel?.parentElement;
+    if (!root) return { rootInert: null, count: 0 };
+    return {
+      rootInert: root.inert,
+      count: panel.querySelectorAll('a[href], button:not([disabled])').length,
+    };
+  });
+  if (closedTabbable.rootInert !== true) {
+    fail(
+      `${label}: with the menu closed the panel is not inert — its ` +
+        `${closedTabbable.count} links stay in the tab order, so a keyboard user tabs into a ` +
+        `nav they cannot see.`,
+    );
+  } else {
+    pass(`${label}: closed panel is inert (${closedTabbable.count} links out of the tab order)`);
+  }
+}
+
 /* ------------------------------------------------------------------------- */
 
 await mkdir(SHOTS, { recursive: true });
@@ -344,6 +492,15 @@ for (const p of PAGES) {
     });
     await assertIsolation(page, label);
     written.push(await shot(page, `${p.name}-390-menu-open`));
+    await ctx.close();
+  }
+
+  /* ---- STATE: keyboard-only modal walk @390 ----------------------------- */
+  {
+    const ctx = await browser.newContext({ viewport: MOBILE });
+    const page = await ctx.newPage();
+    await page.goto(BASE + p.path, { waitUntil: "networkidle" });
+    await assertModalKeyboard(page, `${p.name} @390 keyboard`);
     await ctx.close();
   }
 

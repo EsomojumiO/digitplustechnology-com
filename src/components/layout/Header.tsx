@@ -194,9 +194,27 @@ function DesktopDropdown({
 }
 
 /* ---------------------------------------------------------------------------
-   Mobile menu, full-screen slide-over. Locks scroll, Escape + backdrop close,
-   focus moves into the panel on open.
+   Mobile menu, full-screen slide-over. A real modal: scroll lock, focus trap,
+   inert background, Escape/backdrop close, and focus returned to the trigger.
    --------------------------------------------------------------------------- */
+
+/** Tabbable descendants, in DOM order, skipping anything hidden or disabled. */
+function focusablesIn(root: HTMLElement): HTMLElement[] {
+  const sel = [
+    "a[href]",
+    "button:not([disabled])",
+    "input:not([disabled])",
+    "select:not([disabled])",
+    "textarea:not([disabled])",
+    '[tabindex]:not([tabindex="-1"])',
+  ].join(",");
+  return Array.from(root.querySelectorAll<HTMLElement>(sel)).filter(
+    // offsetParent is null for display:none subtrees; the panel itself is
+    // always laid out, so this only filters genuinely hidden controls.
+    (el) => el.offsetParent !== null || el === document.activeElement,
+  );
+}
+
 function MobileMenu({
   open,
   onClose,
@@ -205,26 +223,93 @@ function MobileMenu({
   onClose: () => void;
 }) {
   const panelRef = React.useRef<HTMLDivElement>(null);
+  const rootRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
     if (!open) return;
-    const prev = document.body.style.overflow;
+    const panel = panelRef.current;
+    const root = rootRef.current;
+    if (!panel || !root) return;
+
+    /* Remember who opened us, so focus can go home on close. Captured before
+       anything else touches focus. */
+    const trigger =
+      document.activeElement instanceof HTMLElement ? document.activeElement : null;
+
+    const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+
+    /* INERT THE BACKGROUND. This is the half a Tab-cycling trap cannot do:
+       `inert` removes the rest of the page from the tab order AND from the
+       accessibility tree, so a screen-reader user can't swipe-browse into the
+       page behind an open modal either. Without it a keyboard user could tab
+       straight out of the nav and into the cookie banner sitting behind it.
+
+       The menu is a direct child of <body> (it has to be — see the note at the
+       Header return), so its siblings are exactly the page: header, main,
+       footer, the consent banner, the skip link. */
+    const backgrounded: HTMLElement[] = [];
+    for (const el of Array.from(document.body.children)) {
+      if (el === root || !(el instanceof HTMLElement)) continue;
+      if (el.inert) continue; // already inert for another reason — leave it
+      el.inert = true;
+      backgrounded.push(el);
+    }
+
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") {
+        e.preventDefault();
+        onClose();
+        return;
+      }
+      if (e.key !== "Tab") return;
+
+      /* Wrap-around trap. `inert` alone would let Tab escape to the browser
+         chrome at the end of the panel; cycling keeps the user inside the
+         dialog, which is what the ARIA modal pattern asks for. */
+      const items = focusablesIn(panel);
+      if (items.length === 0) {
+        e.preventDefault();
+        panel.focus();
+        return;
+      }
+      const first = items[0];
+      const last = items[items.length - 1];
+      const active = document.activeElement;
+
+      if (e.shiftKey && (active === first || active === panel)) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && active === last) {
+        e.preventDefault();
+        first.focus();
+      } else if (active instanceof Node && !panel.contains(active)) {
+        // Focus somehow landed outside (programmatic focus, browser quirk).
+        e.preventDefault();
+        (e.shiftKey ? last : first).focus();
+      }
     };
     document.addEventListener("keydown", onKey);
-    // Move focus into the panel.
-    const t = setTimeout(() => panelRef.current?.focus(), 0);
+
+    /* Focus the panel itself rather than the first link: a screen reader then
+       announces the dialog's label before its contents. Deferred a tick so it
+       happens after the open transition starts and after inert is applied. */
+    const t = setTimeout(() => panel.focus(), 0);
+
     return () => {
-      document.body.style.overflow = prev;
+      document.body.style.overflow = prevOverflow;
       document.removeEventListener("keydown", onKey);
       clearTimeout(t);
+      for (const el of backgrounded) el.inert = false;
+      /* Return focus to the trigger. Guarded on the element still being in the
+         document — a route change can unmount it while the menu is open. */
+      if (trigger && trigger.isConnected) trigger.focus();
     };
   }, [open, onClose]);
 
   return (
     <div
+      ref={rootRef}
       className={cn(
         // overflow-hidden is load-bearing, not cosmetic: the panel below parks
         // itself off-canvas with `translate-x-full`, and with nothing clipping
@@ -239,6 +324,14 @@ function MobileMenu({
         "fixed inset-0 z-overlay overflow-hidden lg:hidden",
         open ? "pointer-events-auto" : "pointer-events-none",
       )}
+      /* When closed, the panel is only parked off-canvas with `translate-x-full`
+         — its links are still in the DOM and were still TABBABLE. A keyboard
+         user tabbing the page fell into a nav they couldn't see. `inert` is the
+         fix that `aria-hidden` never was: aria-hidden hides from screen readers
+         but leaves the tab order untouched (and aria-hidden wrapped around
+         focusable elements is itself an axe finding). aria-hidden stays as the
+         fallback for browsers without inert. */
+      inert={!open}
       aria-hidden={!open}
     >
       {/* Backdrop */}

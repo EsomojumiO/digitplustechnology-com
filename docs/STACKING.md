@@ -124,6 +124,7 @@ because every other gate only ever looked at a page with nothing open.
 | `<page>-390-menu-open` | 390×844 | the mobile nav paints above the hero |
 | `<page>-768-contact-open` | 768×1024 | the Contact dropdown paints above the hero |
 | `home-390-cookie-banner` | 390×844 | the consent banner paints above the hero |
+| `<page> @390 keyboard` | 390×844 | the modal contract, driven by keyboard only (§5) |
 
 Pages covered: `/` (carousel + scroll-scrub band), `/services` (control),
 `/approach` (timeline's raised nodes).
@@ -149,3 +150,83 @@ Assertions, not eyeballs — a screenshot nobody opens proves nothing:
 The gate is verified non-vacuous: reverting the menu back inside `<header>` makes it
 fail on all three pages with
 `fixed overlay does not span the viewport — got 390x48 ... <header ...> [backdrop-filter]`.
+
+---
+
+## 5. The mobile nav is a real modal
+
+Painting on top is only half of "above". An overlay that covers the page visually
+while the page stays keyboard- and screen-reader-reachable underneath is still broken —
+just invisibly.
+
+`MobileMenu` declares `role="dialog" aria-modal="true"`, so it owes the full contract:
+
+| Requirement | How |
+|---|---|
+| Background unreachable | `inert` on every `<body>` child except the menu root, applied on open and removed on close |
+| Focus stays inside | wrap-around Tab / Shift+Tab trap on the panel |
+| Focus starts inside | the panel itself is focused (not the first link), so a screen reader announces the dialog's label first |
+| Focus returns home | `document.activeElement` is captured before opening and refocused on close, guarded on `isConnected` |
+| Escape closes | `keydown` on document |
+| Closed = out of the way | `inert={!open}` on the root |
+
+### Why `inert`, and why the trap as well
+
+They cover different halves and you need both:
+
+- **`inert`** removes the background from the tab order *and* the accessibility tree.
+  A Tab-cycling trap alone does nothing for a screen-reader user swipe-browsing the
+  page behind the dialog.
+- **The trap** keeps Tab from walking off the end of the panel into browser chrome,
+  which `inert` does not prevent.
+
+`inert` also replaced an `aria-hidden={!open}`-only closed state. That was a real
+defect: `aria-hidden` hides from screen readers but leaves the tab order untouched, so
+the 24 links in the off-canvas panel sat in the tab order of every page at every
+width. `aria-hidden` stays alongside `inert` as a fallback for browsers without it.
+
+### The keyboard walk
+
+`assertModalKeyboard` in the gate drives the nav with the keyboard only — no mouse, no
+programmatic focus. It tabs to the trigger, opens with Enter, presses Tab 40 times and
+Shift+Tab 20 times asserting focus never leaves the dialog, checks every background
+sibling is actually `inert`, presses Escape, and asserts focus lands back on the
+trigger and the closed panel is out of the tab order.
+
+Also verified non-vacuous. With the trap, inerting and focus restore removed it fails
+with, among others:
+
+```
+focus escaped the modal on 16/40 Tab presses — step 25: <a> "Explore managed IT→"
+41/41 background elements are NOT inert while the modal is open — div, a, header, main#main, footer, ...
+Escape did not return focus to the trigger — focus is on <a> "Contact"
+with the menu closed the panel is not inert — its 24 links stay in the tab order
+```
+
+That step-25 escape is the point: focus had walked out of the open menu and onto the
+hero carousel's CTA behind it.
+
+---
+
+## 6. Lint ratchet
+
+`prebuild` runs `eslint` before `next build`, so **lint errors fail the build** — on
+Vercel too, since it invokes `npm run build`. The error count is at 0 and can only go
+down.
+
+Warnings stay advisory (7 at the time of writing, all unused-vars and
+anonymous-default-export in scripts and content tooling); eslint's exit code ignores
+them unless `--max-warnings` is set.
+
+The two errors this replaced were not style nits:
+
+- `HeroCarousel` read `autoplay.current` during render and called `Autoplay()` /
+  `Fade()` on every render. Reading a ref during render is unsafe under concurrent
+  rendering — React can render a component without committing it — and the fresh
+  plugin array made embla re-initialise on every render. Now memoised on `reduce`,
+  with pause/resume going through `emblaApi.plugins().autoplay` instead of a ref.
+- `Stagger` incremented a `let index` declared in the component body from inside a
+  `Children.map` callback. React can render a component more than once per commit, and
+  each pass kept incrementing the same binding — so the delay a `StaggerItem` received
+  depended on how many times React happened to render its parent. The walk is now a
+  module-scope pure function carrying a per-call cursor object.

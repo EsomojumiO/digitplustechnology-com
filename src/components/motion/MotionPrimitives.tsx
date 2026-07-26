@@ -60,6 +60,52 @@ export interface StaggerProps extends React.HTMLAttributes<HTMLElement> {
   groupSize?: number;
 }
 
+/**
+ * The subtree walk, as a module-scope pure function.
+ *
+ * It used to live inside Stagger() and increment a `let index` declared in the
+ * component body. That is a variable in render scope being reassigned from
+ * inside a callback — flagged by the React Compiler ("cannot reassign variable
+ * after render completes") and a genuine hazard, not a style nit: React can
+ * render a component more than once for a single commit, and each extra pass
+ * would keep incrementing the same binding, so the delays a StaggerItem got
+ * depended on how many times React happened to render its parent.
+ *
+ * Here the counter lives on a `cursor` object created fresh per call and
+ * discarded when the walk ends. Nothing outlives the render, so re-rendering
+ * always produces identical output.
+ */
+type StaggerCursor = { count: number; step: number; groupSize: number };
+
+function withStaggerDelays(
+  nodes: React.ReactNode,
+  cursor: StaggerCursor,
+): React.ReactNode {
+  // React.Children.map (not forEach + push) so React keeps doing its own key
+  // namespacing across the nesting levels — hand-rolling keys here would be a
+  // regression waiting to happen.
+  return React.Children.map(nodes, (child) => {
+    if (!React.isValidElement(child)) return child;
+
+    if (child.type === StaggerItem) {
+      const own = (child.props as StaggerItemProps).delay ?? 0;
+      const delay = own + (cursor.count % cursor.groupSize) * cursor.step;
+      cursor.count += 1;
+      return React.cloneElement(child, { delay } as Partial<StaggerItemProps>);
+    }
+
+    // StaggerItems usually sit inside a <Grid>, not as direct children, so the
+    // walk has to descend — carrying the same cursor, which is what makes the
+    // sweep continuous across nesting levels.
+    const kids = (child.props as { children?: React.ReactNode }).children;
+    if (kids) {
+      return React.cloneElement(child, {} as never, withStaggerDelays(kids, cursor));
+    }
+
+    return child;
+  });
+}
+
 export function Stagger({
   as: Comp = "div",
   step = 70,
@@ -68,30 +114,9 @@ export function Stagger({
   children,
   ...props
 }: StaggerProps) {
-  let index = 0;
-  const walk = (nodes: React.ReactNode): React.ReactNode =>
-    React.Children.map(nodes, (child) => {
-      if (!React.isValidElement(child)) return child;
-      if (child.type === StaggerItem) {
-        const own = (child.props as StaggerItemProps).delay ?? 0;
-        const delay = own + (index % groupSize) * step;
-        index += 1;
-        return React.cloneElement(child, { delay } as Partial<StaggerItemProps>);
-      }
-      const kids = (child.props as { children?: React.ReactNode }).children;
-      if (kids) {
-        return React.cloneElement(
-          child,
-          {} as never,
-          walk(kids),
-        );
-      }
-      return child;
-    });
-
   return (
     <Comp className={className} {...props}>
-      {walk(children)}
+      {withStaggerDelays(children, { count: 0, step, groupSize })}
     </Comp>
   );
 }

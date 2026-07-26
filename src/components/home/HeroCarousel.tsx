@@ -125,11 +125,29 @@ const kenBurnsTo = (i: number) => {
 
 export function HeroCarousel() {
   const reduce = useReducedMotion();
-  const autoplay = React.useRef(
-    Autoplay({ delay: DWELL, stopOnInteraction: false, stopOnMouseEnter: true }),
+
+  /* Plugin instances are memoised, not held in a ref.
+     The ref version read `autoplay.current` DURING RENDER, which is unsafe
+     under concurrent rendering — React may render a component without
+     committing it, so a render pass could mutate/observe an instance that
+     never reaches the DOM. It also called `Autoplay()` and `Fade()` on EVERY
+     render, handing embla a fresh plugin array each time and forcing it to
+     re-initialise for no reason.
+
+     Memoised on `reduce` alone, the array identity is stable across ordinary
+     renders and embla re-initialises only when the motion preference actually
+     changes — which is exactly when it should. */
+  const plugins = React.useMemo(
+    () =>
+      reduce
+        ? [Fade()]
+        : [
+            Fade(),
+            Autoplay({ delay: DWELL, stopOnInteraction: false, stopOnMouseEnter: true }),
+          ],
+    [reduce],
   );
 
-  const plugins = reduce ? [Fade()] : [Fade(), autoplay.current];
   const [emblaRef, emblaApi] = useEmblaCarousel(
     { loop: true, duration: reduce ? 0 : 32, watchDrag: !reduce },
     plugins,
@@ -168,9 +186,11 @@ export function HeroCarousel() {
   };
 
   // Pause autoplay while any control inside the hero has focus (keyboard users).
-  const pause = () => autoplay.current?.stop();
+  // Reached through embla's own plugin registry rather than a ref we hold — one
+  // owner for the instance, and nothing to read during render.
+  const pause = () => emblaApi?.plugins()?.autoplay?.stop();
   const resume = () => {
-    if (!reduce) autoplay.current?.play();
+    if (!reduce) emblaApi?.plugins()?.autoplay?.play();
   };
 
   return (
