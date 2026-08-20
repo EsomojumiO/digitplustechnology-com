@@ -6,7 +6,7 @@
  * - `source: "google-review"` — already published publicly by its author on
  *   Google. Quotable verbatim, no approval needed. Quote EXACTLY; the only
  *   permitted edit is truncation with "…".
- * - `source: "direct"` — a draft WE wrote and sent for approval. It is not a
+ * - `source: "direct"` — a draft WE wrote for approval. It is not a
  *   testimonial until the named person approves it in writing. `approved: false`
  *   until that reply exists, and the consent record (screenshot/email) is kept.
  *
@@ -81,7 +81,7 @@ const all: TestimonialContent[] = [
      `approved` to true only on confirmation that the named person approved in
      writing — and publish what came back, not what's written below. */
 
-  // PENDING APPROVAL — draft sent; awaiting written reply.
+  // PENDING APPROVAL — draft written; send status unconfirmed — see PLACEHOLDERS.md
   // Identity withheld here to match the anonymised hospital case study. The
   // real name and employer are tracked in PLACEHOLDERS.md ("PENDING — 3 direct
   // testimonials"); restore them here only alongside written approval.
@@ -95,7 +95,7 @@ const all: TestimonialContent[] = [
     approved: false,
   },
 
-  // PENDING APPROVAL — Arc. Henshaw (draft sent; awaiting written reply)
+  // PENDING APPROVAL — Arc. Henshaw (draft written; send status unconfirmed — see PLACEHOLDERS.md)
   {
     quote:
       "From workstations to networking, DigitPlus equipped our practice end to end. They recommended what we actually needed rather than what was expensive, delivered on schedule, and have been responsive every time we've called since.",
@@ -105,7 +105,7 @@ const all: TestimonialContent[] = [
     approved: false,
   },
 
-  // PENDING APPROVAL — Bashir Lawal (draft sent; awaiting written reply)
+  // PENDING APPROVAL — Bashir Lawal (draft written; send status unconfirmed — see PLACEHOLDERS.md)
   {
     quote:
       "Broadcast work doesn't forgive downtime. DigitPlus sourced and set up our systems quickly, and their after-sales support has kept us running without drama. Dependable people.",

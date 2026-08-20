@@ -98,7 +98,7 @@ All green or explicitly ledgered:
 - JSON-LD valid for every type in use (Organization, WebSite, Service, FAQPage, BreadcrumbList, Article/BlogPosting, LocalBusiness); NAP matches footer. ✅
 - robots 200; 404 route → branded page at HTTP 404; canonicals self-referencing. ✅
 - No invalid focus token (`accent-green-300`) in output; no orange-as-ink class; primary button uses the dark (`accent-foreground`) label. ✅
-- Stats show "2022"; no "8+ years"/false tenure claim; testimonials still labelled illustrative (H1). ✅
+- Stats show "2022"; no "8+ years"/false tenure claim; testimonials still labelled illustrative (H1). ✅ *[Point-in-time record, left as written. The testimonial clause was superseded by `47ecd3c` (2026-07-17) — see §3 H1 for current state.]*
 - In-browser Lighthouse/axe, live schema validators, and field CWV → **H19/H20** (need the deployed preview).
 
 **Do not merge.** The client merges PR #1 after reviewing this ledger.
@@ -172,7 +172,7 @@ These shipped on `redesign/dark-raycast` (PR #1) too. Two were backported (`69f6
   stock — this is what holds marketing pages at 8/10 rather than 9.
 - **Partner logos**: real full-colour marks + reseller authorisation (`PLACEHOLDERS.md` §5).
   Currently knocked to single dark ink.
-- **Real testimonials** (role-attributed placeholders today).
+- **Real testimonials** (role-attributed placeholders today). *[Point-in-time record, left as written. Superseded by `47ecd3c` (2026-07-17) — see §3 H1 for current state.]*
 - **Report cover images** (`public/images/reports/<slug>.jpg`).
 - Env keys: email / marketing / CRM / analytics.
 
