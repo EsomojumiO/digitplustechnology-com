@@ -13,8 +13,25 @@
  * `approved` is enforced by construction, not convention: the exports below are
  * pre-filtered and the raw array is module-private, so an unapproved quote has
  * no code path to a page. Forgetting to filter at a call site can't publish one.
+ *
+ * And `approved: true` cannot be set alone — the type requires `approvedBy` and
+ * `approvedDate` alongside it, so the consent record travels with the quote and
+ * the BUILD FAILS if someone flips the flag without one. See isPublishable().
  */
-import type { TestimonialContent } from "./types";
+import type { ApprovedTestimonial, TestimonialContent } from "./types";
+
+/**
+ * The five Google reviews share one consent basis: the author published the
+ * words publicly themselves on the verified profile, so no further permission
+ * is needed. Captured and verified from that profile on this date (commit
+ * 47ecd3c; profile URL verified in PLACEHOLDERS.md). This is the capture date,
+ * NOT the date each author originally posted — Google does not expose that.
+ */
+const GOOGLE_REVIEW_CONSENT = {
+  approvedBy:
+    "Author — self-published on the public Google profile (siteConfig.googleReviewsUrl)",
+  approvedDate: "2026-07-17",
+} as const;
 
 const all: TestimonialContent[] = [
   /* ---- Google reviews — public, verbatim, approved by publication ----------
@@ -26,12 +43,14 @@ const all: TestimonialContent[] = [
     name: "Dapo Nasir",
     source: "google-review",
     approved: true,
+    ...GOOGLE_REVIEW_CONSENT,
   },
   {
     quote: "Excellent customer service and they deliver up to their reputation",
     name: "Ibrahim",
     source: "google-review",
     approved: true,
+    ...GOOGLE_REVIEW_CONSENT,
   },
   {
     quote:
@@ -39,6 +58,7 @@ const all: TestimonialContent[] = [
     name: "Othman Tofa",
     source: "google-review",
     approved: true,
+    ...GOOGLE_REVIEW_CONSENT,
   },
   {
     quote:
@@ -46,12 +66,14 @@ const all: TestimonialContent[] = [
     name: "Emmanuel Aliyu",
     source: "google-review",
     approved: true,
+    ...GOOGLE_REVIEW_CONSENT,
   },
   {
     quote: "Good service delivery and quality products",
     name: "Praise-God Muagba",
     source: "google-review",
     approved: true,
+    ...GOOGLE_REVIEW_CONSENT,
   },
 
   /* ---- Direct testimonials — DRAFTS AWAITING WRITTEN APPROVAL --------------
@@ -94,16 +116,41 @@ const all: TestimonialContent[] = [
   },
 ];
 
+/**
+ * THE PUBLISH GATE.
+ *
+ * `approved: true` on its own is not enough to ship a quote: it must also
+ * carry WHO cleared it and WHEN. The type already makes that a compile-time
+ * requirement (ApprovedTestimonial), so this runtime check is the second belt
+ * — it catches a malformed record arriving from outside the type system, which
+ * is exactly what happens the day these move to a CMS. A quote that fails the
+ * check is dropped silently rather than published; there is no path where
+ * missing consent still renders.
+ */
+function isPublishable(t: TestimonialContent): t is ApprovedTestimonial {
+  if (!t.approved) return false;
+  if (typeof t.approvedBy !== "string" || t.approvedBy.trim() === "")
+    return false;
+  if (typeof t.approvedDate !== "string") return false;
+  // Real calendar date in YYYY-MM-DD — not just something shaped like one.
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(t.approvedDate)) return false;
+  const parsed = new Date(`${t.approvedDate}T00:00:00Z`);
+  return (
+    !Number.isNaN(parsed.getTime()) &&
+    parsed.toISOString().slice(0, 10) === t.approvedDate
+  );
+}
+
 /** Everything cleared to publish. The only export of the full set. */
-export const testimonials: TestimonialContent[] = all.filter((t) => t.approved);
+export const testimonials: ApprovedTestimonial[] = all.filter(isPublishable);
 
 /** Public Google reviews — the supporting ★★★★★ strip. */
-export const googleReviews: TestimonialContent[] = testimonials.filter(
+export const googleReviews: ApprovedTestimonial[] = testimonials.filter(
   (t) => t.source === "google-review",
 );
 
 /** Approved direct testimonials — the main cards. EMPTY until approvals land. */
-export const directTestimonials: TestimonialContent[] = testimonials.filter(
+export const directTestimonials: ApprovedTestimonial[] = testimonials.filter(
   (t) => t.source === "direct",
 );
 

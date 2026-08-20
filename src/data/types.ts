@@ -100,20 +100,57 @@ export interface IndustryContent {
 
 export type TestimonialSource = "google-review" | "direct";
 
-export interface TestimonialContent {
+interface TestimonialBase {
   /** Verbatim. For google-review the ONLY permitted edit is truncation with "…". */
   quote: string;
   name: string;
   title?: string;
   company?: string;
   source: TestimonialSource;
-  /**
-   * google-review: true — already published by its author.
-   * direct: true ONLY once the named person has approved in writing.
-   * Enforced in data/testimonials.ts, which exports pre-filtered lists.
-   */
-  approved: boolean;
 }
+
+/**
+ * A testimonial cleared to publish. `approved: true` is not a bare boolean:
+ * the consent record travels WITH it, so a quote cannot be flipped live
+ * without saying who cleared it and when. Omitting either field is a type
+ * error, which means the build fails rather than the site quietly publishing
+ * words nobody signed off.
+ */
+export interface ApprovedTestimonial extends TestimonialBase {
+  approved: true;
+  /**
+   * Who granted permission, and the evidence.
+   * - direct: the person who replied in writing (keep the email/screenshot).
+   * - google-review: the author, by publishing it publicly themselves.
+   */
+  approvedBy: string;
+  /**
+   * ISO date (YYYY-MM-DD) the consent record is dated.
+   * - direct: the date of the written reply.
+   * - google-review: the date the review was captured and verified from the
+   *   public profile — NOT the date the author originally posted it, which
+   *   Google does not expose precisely.
+   */
+  approvedDate: string;
+}
+
+/**
+ * A draft awaiting approval. `approvedBy`/`approvedDate` are forbidden here
+ * (`?: never`) so a half-filled consent record cannot sit in the file looking
+ * like it means something.
+ */
+export interface PendingTestimonial extends TestimonialBase {
+  approved: false;
+  approvedBy?: never;
+  approvedDate?: never;
+}
+
+/**
+ * google-review: approved by publication — the author put it in public.
+ * direct: approved ONLY once the named person has confirmed in writing.
+ * Enforced in data/testimonials.ts, which exports pre-filtered lists.
+ */
+export type TestimonialContent = ApprovedTestimonial | PendingTestimonial;
 
 export interface ProcessStepContent {
   step: number;
