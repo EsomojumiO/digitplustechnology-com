@@ -91,15 +91,22 @@ as retail/hardware-store reviews, which vouches for the supply line honestly but
 says nothing about enterprise managed services.
 
 ### PENDING — 3 direct testimonials (`approved: false`)
-Drafts written by us and sent for approval. **They are not testimonials until the
-named person approves in writing.** Currently invisible on the site — verified: none
-of the three quotes or names appears anywhere in the shipped HTML.
+Drafts written by us. **They are not testimonials until the named person approves
+in writing.** Currently invisible on the site — verified: none of the three quotes
+or names appears anywhere in the shipped HTML.
+
+**Send status is unconfirmed.** These rows previously read "draft sent — awaiting
+written reply", but the repo carries no evidence of a send: no date, channel,
+recipient or consent artefact, and the "sent" wording was authored in the same
+commit as the drafts themselves (`47ecd3c`, 2026-07-17) and never updated since.
+Treat the next step as *possibly first contact*, not chasing a reply, until
+someone confirms against their own records.
 
 | Person | Company | Status |
 |---|---|---|
-| Adel Salimullin (CTO) | Nizamiye | draft sent — awaiting written reply |
-| Arc. Henshaw | Greyboulders | draft sent — awaiting written reply |
-| Bashir Lawal | DewDrop TV | draft sent — awaiting written reply |
+| Adel Salimullin (CTO) | Nizamiye | draft written — send status unconfirmed |
+| Arc. Henshaw | Greyboulders | draft written — send status unconfirmed |
+| Bashir Lawal | DewDrop TV | draft written — send status unconfirmed |
 
 **This table is the only record of who the first entry is.** `testimonials.ts`
 carries `name: "Withheld pending approval"` and a generic employer for it, to
