@@ -59,13 +59,16 @@ const all: TestimonialContent[] = [
      `approved` to true only on confirmation that the named person approved in
      writing — and publish what came back, not what's written below. */
 
-  // PENDING APPROVAL — Adel Salimullin (draft sent; awaiting written reply)
+  // PENDING APPROVAL — draft sent; awaiting written reply.
+  // Identity withheld here to match the anonymised hospital case study. The
+  // real name and employer are tracked in PLACEHOLDERS.md ("PENDING — 3 direct
+  // testimonials"); restore them here only alongside written approval.
   {
     quote:
       "DigitPlus has handled our IT infrastructure needs with a level of professionalism that's rare to find. Procurement is fast, the equipment is genuine, and their team understands what an organisation like ours cannot afford to have go down. They've earned our trust.",
-    name: "Adel Salimullin",
+    name: "Withheld pending approval",
     title: "CTO",
-    company: "Nizamiye",
+    company: "Private hospital, Abuja",
     source: "direct",
     approved: false,
   },

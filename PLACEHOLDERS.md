@@ -97,9 +97,15 @@ of the three quotes or names appears anywhere in the shipped HTML.
 
 | Person | Company | Status |
 |---|---|---|
-| Adel Salimullin (CTO) | Nizamiye | draft sent — awaiting written reply |
+| Adel Salimullin (CTO) | Private hospital, Abuja | draft sent — awaiting written reply |
 | Arc. Henshaw | Greyboulders | draft sent — awaiting written reply |
 | Bashir Lawal | DewDrop TV | draft sent — awaiting written reply |
+
+**This table is the only record of who the first entry is.** `testimonials.ts`
+now carries `name: "Withheld pending approval"` for it, to match the anonymised
+hospital case study — so the row above, not the code, is what the follow-up is
+tracked by. Restore the name (and employer) in code only alongside written
+approval. The other two are still named in code.
 
 **To publish one:** flip `approved: true` **only** on confirmation that the person
 approved in writing — and publish **what they sent back**, not the draft, if they
