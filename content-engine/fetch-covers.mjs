@@ -4,11 +4,20 @@
  *   UNSPLASH_ACCESS_KEY=... node content-engine/fetch-covers.mjs        # only missing covers
  *   UNSPLASH_ACCESS_KEY=... node content-engine/fetch-covers.mjs --all  # re-fetch every article
  *   UNSPLASH_ACCESS_KEY=... node content-engine/fetch-covers.mjs --slug <slug>
+ *   UNSPLASH_ACCESS_KEY=... node content-engine/fetch-covers.mjs --slug <slug> --query "server room cabling"
  *
  * For each target article it derives a search query from the title (broadening
  * on no-results, then falling back to a per-category concept), downloads the top
  * landscape photo at 1600x900, writes public/images/insights/<slug>.jpg, and
  * records the photographer in public/images/insights/CREDITS.json.
+ *
+ * --query overrides the derived query and is tried FIRST, with the derived
+ * candidates still behind it as fallback. It exists because the derived query
+ * comes from the title alone, which cannot express the imagery policy: covers
+ * should read as workplace/infrastructure, and must avoid recognisable people
+ * and generic Western office interiors. Steering the search is the only way to
+ * hold that line without hand-picking every file. Applies to the current run
+ * only — nothing is persisted except the chosen query in CREDITS.json.
  *
  * Unsplash licence: free for commercial use, no attribution required (we keep
  * CREDITS.json anyway, in case you ever want an image-credits page).
@@ -44,13 +53,14 @@ const CATEGORY_FALLBACK = {
 };
 
 /** Ordered candidate queries, broadening, then a category concept fallback. */
-function queries(fm) {
+function queries(fm, override) {
   const words = String(fm.title || "")
     .toLowerCase()
     .replace(/[^a-z0-9\s]/g, " ")
     .split(/\s+/)
     .filter((w) => w.length > 2 && !STOP.has(w));
   const cands = [];
+  if (override) cands.push(override);
   if (words.length >= 3) cands.push(words.slice(0, 3).join(" "));
   if (words.length >= 2) cands.push(words.slice(0, 2).join(" "));
   if (words.length >= 1) cands.push(words[0]);
@@ -76,8 +86,8 @@ async function fetchRetry(url, opts = {}, tries = 4) {
   throw last;
 }
 
-async function fetchOne(slug, fm, credits) {
-  for (const q of queries(fm)) {
+async function fetchOne(slug, fm, credits, override) {
+  for (const q of queries(fm, override)) {
     const api = `https://api.unsplash.com/search/photos?query=${encodeURIComponent(q)}&orientation=landscape&per_page=1&content_filter=high`;
     const res = await fetchRetry(api, { headers: { Authorization: `Client-ID ${KEY}`, "Accept-Version": "v1" } });
     if (!res.ok) throw new Error(`search ${res.status}`);
@@ -109,6 +119,11 @@ async function main() {
 
   const only = arg("slug");
   const all = flag("all");
+  const override = arg("query");
+  if (override && !only) {
+    console.error("--query only makes sense with --slug (it steers one article).");
+    process.exit(1);
+  }
   const files = fs.readdirSync(config.insightsDir).filter((f) => f.endsWith(".mdx"));
 
   const creditsPath = path.join(config.imagesDir, "CREDITS.json");
@@ -133,7 +148,7 @@ async function main() {
   let ok = 0, fail = 0;
   for (const { slug, fm } of targets) {
     try {
-      const r = await fetchOne(slug, fm, credits);
+      const r = await fetchOne(slug, fm, credits, override);
       if (r.ok) { ok++; console.log(`  ✓ ${slug}.jpg — ${r.by} | "${r.q}"`); }
       else { fail++; console.log(`  ✗ ${slug} — no results for any query`); }
     } catch (e) {
