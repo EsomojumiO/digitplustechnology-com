@@ -20,6 +20,8 @@ import {
   getRelatedArticles,
   getPillarForArticle,
   MDXContent,
+  tagSlug,
+  CASE_STUDY_TAG_SLUG,
   type Category,
 } from "@/lib/content";
 import { siteConfig } from "@/lib/site";
@@ -240,11 +242,25 @@ export default async function ArticlePage({
           <div className="mt-12 flex flex-col gap-6 border-t border-hairline pt-8">
             {article.tags.length > 0 ? (
               <ul className="flex flex-wrap gap-2">
-                {article.tags.map((tag) => (
-                  <li key={tag}>
-                    <Badge tone="outline">{tag}</Badge>
-                  </li>
-                ))}
+                {article.tags.map((tag) => {
+                  const slug = tagSlug(tag);
+                  // The case-study tag lives at its own canonical URL; linking
+                  // straight there avoids a redirect hop for readers.
+                  const href =
+                    slug === CASE_STUDY_TAG_SLUG
+                      ? "/insights/case-studies"
+                      : `/insights/tag/${slug}`;
+                  return (
+                    <li key={tag}>
+                      <Link
+                        href={href}
+                        className="rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green"
+                      >
+                        <Badge tone="outline">{tag}</Badge>
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             ) : null}
             <ShareBar url={url} title={article.title} />

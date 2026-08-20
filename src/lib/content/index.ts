@@ -35,9 +35,20 @@ export {
   getArticleBySlug,
   getArticlesByCategory,
   getAllCategories,
+  getArticlesByTag,
+  getAllTags,
   getFeaturedArticles,
   getRelatedArticles,
 } from "./articles";
+
+// Tags (pure helpers — safe to import from client components)
+export {
+  tagSlug,
+  tagLabel,
+  TAG_INDEX_THRESHOLD,
+  CASE_STUDY_TAG_SLUG,
+  type TagWithCount,
+} from "./tags";
 
 // Reports
 export {

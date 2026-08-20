@@ -6,6 +6,8 @@
  *   getArticleBySlug(slug): Article | null
  *   getArticlesByCategory(categorySlug): ArticleMeta[]
  *   getAllCategories(): CategoryWithCount[]
+ *   getArticlesByTag(tagSlug): ArticleMeta[]
+ *   getAllTags(): TagWithCount[]
  *   getFeaturedArticles(n?): ArticleMeta[]
  *   getRelatedArticles(slug, n?): ArticleMeta[]
  *
@@ -32,6 +34,7 @@ import {
   toSeo,
   type RawEntry,
 } from "./source";
+import { tagSlug, tagLabel, type TagWithCount } from "./tags";
 
 const COLLECTION = "insights";
 
@@ -148,4 +151,41 @@ export function getRelatedArticles(slug: string, n = 3): ArticleMeta[] {
     (a) => a.slug !== slug && a.category.slug !== current.category.slug,
   );
   return [...sameCategory, ...backfill].slice(0, n);
+}
+
+/* ----------------------------------- Tags ---------------------------------- */
+
+/** Published articles carrying a tag (by tag SLUG), newest first. */
+export function getArticlesByTag(slug: string): ArticleMeta[] {
+  return getAllArticles().filter((a) => a.tags.some((t) => tagSlug(t) === slug));
+}
+
+/**
+ * Every tag in use, with counts, most-used first (ties alphabetical by label).
+ * Raw spellings that slug to the same value are merged into one entry — see
+ * tags.ts for why the slug, not the string, is the identity.
+ */
+export function getAllTags(): TagWithCount[] {
+  const variants = new Map<string, string[]>();
+
+  for (const article of getAllArticles()) {
+    // Dedupe within an article so a repeated tag cannot inflate the count.
+    const seen = new Set<string>();
+    for (const tag of article.tags) {
+      const slug = tagSlug(tag);
+      if (!slug || seen.has(slug)) continue;
+      seen.add(slug);
+      const list = variants.get(slug);
+      if (list) list.push(tag);
+      else variants.set(slug, [tag]);
+    }
+  }
+
+  return [...variants.entries()]
+    .map(([slug, spellings]) => ({
+      slug,
+      label: tagLabel(spellings),
+      count: spellings.length,
+    }))
+    .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label));
 }

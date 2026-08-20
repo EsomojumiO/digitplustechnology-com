@@ -100,6 +100,15 @@ const nextConfig: NextConfig = {
       { source: "/blog", destination: "/insights", permanent: true },
       { source: "/blog/:slug", destination: "/insights/:slug", permanent: true },
       { source: "/news", destination: "/insights", permanent: true },
+
+      // The "case study" tag archive is served from the prettier canonical
+      // URL; the generic tag path is an alias for it. Keep this in step with
+      // CASE_STUDY_TAG_SLUG in src/lib/content/tags.ts.
+      {
+        source: "/insights/tag/case-study",
+        destination: "/insights/case-studies",
+        permanent: true,
+      },
     ];
   },
 };

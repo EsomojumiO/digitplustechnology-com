@@ -7,6 +7,8 @@
  *   - /industries + 8 detail pages
  *   - /locations + 3 city pages
  *   - /insights + category archives (only categories with published articles)
+ *   - /insights/case-studies + tag archives (only tags above the thin-content
+ *     threshold; singleton tags render noindex and are omitted here)
  *   - every published article and report
  *
  * All URLs are absolute (siteConfig.url). lastModified uses updatedAt /
@@ -19,6 +21,9 @@ import {
   getAllArticles,
   getAllReports,
   getAllCategories,
+  getAllTags,
+  TAG_INDEX_THRESHOLD,
+  CASE_STUDY_TAG_SLUG,
 } from "@/lib/content";
 
 type Entry = MetadataRoute.Sitemap[number];
@@ -39,6 +44,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: url("/about"), lastModified: now, changeFrequency: "yearly", priority: 0.7 },
     { url: url("/ecosystem"), lastModified: now, changeFrequency: "monthly", priority: 0.5 },
     { url: url("/insights"), lastModified: now, changeFrequency: "daily", priority: 0.8 },
+    { url: url("/insights/case-studies"), lastModified: now, changeFrequency: "weekly", priority: 0.6 },
     { url: url("/reports"), lastModified: now, changeFrequency: "weekly", priority: 0.8 },
     { url: url("/locations"), lastModified: now, changeFrequency: "yearly", priority: 0.5 },
     { url: url("/contact"), lastModified: now, changeFrequency: "yearly", priority: 0.7 },
@@ -78,6 +84,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.5,
   }));
 
+  // ── Insights tag archives ─────────────────────────────────────────────
+  // Only tags carrying enough articles to be worth indexing. "case study" is
+  // excluded because /insights/tag/case-study 308s to /insights/case-studies,
+  // which is listed as a static entry above.
+  const tagEntries: Entry[] = getAllTags()
+    .filter(
+      (t) =>
+        t.count >= TAG_INDEX_THRESHOLD && t.slug !== CASE_STUDY_TAG_SLUG,
+    )
+    .map((t) => ({
+      url: url(`/insights/tag/${t.slug}`),
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.4,
+    }));
+
   // ── Articles ──────────────────────────────────────────────────────────
   const articleEntries: Entry[] = getAllArticles().map((a) => ({
     url: url(`/insights/${a.slug}`),
@@ -100,6 +122,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...industryEntries,
     ...locationEntries,
     ...categoryEntries,
+    ...tagEntries,
     ...articleEntries,
     ...reportEntries,
   ];

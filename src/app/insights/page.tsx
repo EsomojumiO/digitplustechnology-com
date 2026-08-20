@@ -16,6 +16,8 @@ import {
   getAllArticles,
   getFeaturedArticles,
   getAllCategories,
+  getArticlesByTag,
+  CASE_STUDY_TAG_SLUG,
 } from "@/lib/content";
 import { ArticleCard } from "./_components/ArticleCard";
 import { InsightsSearch } from "./_components/InsightsSearch";
@@ -59,6 +61,7 @@ export default async function InsightsHubPage({
 
   const all = getAllArticles();
   const categories = getAllCategories();
+  const caseStudyCount = getArticlesByTag(CASE_STUDY_TAG_SLUG).length;
   const featured = getFeaturedArticles(1)[0] ?? all[0];
 
   // The grid excludes the featured highlight to avoid duplication.
@@ -147,10 +150,12 @@ export default async function InsightsHubPage({
         </Section>
       ) : null}
 
-      {/* Category filter, server-rendered crawlable links, not client state */}
+      {/* Category filter, server-rendered crawlable links, not client state.
+          The trailing Case Studies chip is a FORMAT (a tag), not a category —
+          it is set off by a divider so the two taxonomies stay legible. */}
       {categories.length > 0 ? (
         <Section spacing="sm">
-          <nav aria-label="Filter insights by category">
+          <nav aria-label="Filter insights">
             <ul className="flex flex-wrap gap-2.5">
               <li>
                 <Link
@@ -180,6 +185,19 @@ export default async function InsightsHubPage({
                   </Link>
                 </li>
               ))}
+              {caseStudyCount > 0 ? (
+                <li className="ml-1 border-l border-hairline pl-3.5">
+                  <Link
+                    href="/insights/case-studies"
+                    className="inline-flex items-center gap-1.5 rounded-full border border-hairline bg-surface-raised px-3.5 py-1.5 text-small font-medium text-muted transition-colors duration-[var(--dur-fast)] hover:border-hairline-hover hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green"
+                  >
+                    Case Studies
+                    <span className="text-caption text-muted">
+                      {caseStudyCount}
+                    </span>
+                  </Link>
+                </li>
+              ) : null}
             </ul>
           </nav>
         </Section>
