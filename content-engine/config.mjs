@@ -42,18 +42,70 @@ export const config = {
     "Guides",
   ],
 
-  // ---- Markets — Nigeria-first, then broader Africa, with real regulators -
-  // The strategist weaves the right regulator/context per market so nothing
-  // reads like generic global filler.
+  // ---- Markets — Nigeria only ---------------------------------------------
+  // Scope narrowed to Nigeria on 2026-08-22. The multi-market list (Ghana,
+  // Kenya, South Africa, Egypt, Rwanda, Pan-African) produced drafts whose
+  // regulatory claims we could not source: the config seeded body NAMES but no
+  // instruments, so the model supplied instrument descriptions of its own
+  // ("Bank of Ghana's cyber and information security directive"), which cannot
+  // be looked up or checked. Re-adding a market means adding its bodies AND
+  // their instruments below, not just the country name.
+  //
+  // `bodies` replaces the old flat `regulators` string list. Each body carries
+  // the instruments it actually issues, cited well enough to pull up. An
+  // obligation claim in an article may cite ONLY these; see instrumentPolicy.
   markets: [
-    { country: "Nigeria", weight: 0.5, regulators: ["NDPA 2023", "NDPC", "NITDA", "CBN", "NCC", "FIRS"] },
-    { country: "Ghana", weight: 0.12, regulators: ["Data Protection Act 2012", "Data Protection Commission", "Bank of Ghana", "NCA"] },
-    { country: "Kenya", weight: 0.12, regulators: ["Data Protection Act 2019", "ODPC", "Central Bank of Kenya", "Communications Authority"] },
-    { country: "South Africa", weight: 0.1, regulators: ["POPIA", "Information Regulator", "SARB", "ICASA"] },
-    { country: "Egypt", weight: 0.06, regulators: ["PDPL 2020", "Central Bank of Egypt", "NTRA"] },
-    { country: "Rwanda", weight: 0.05, regulators: ["Law N° 058/2021 on data protection", "NCSA", "BNR"] },
-    { country: "Pan-African", weight: 0.05, regulators: ["Malabo Convention", "Smart Africa", "AfCFTA digital protocol"] },
+    {
+      country: "Nigeria",
+      weight: 1,
+      bodies: [
+        {
+          acronym: "NDPC",
+          name: "Nigeria Data Protection Commission",
+          instruments: [
+            "Nigeria Data Protection Act 2023 (NDPA 2023) — Act, June 2023",
+            "NDPA General Application and Implementation Directive 2025 (NDPA-GAID 2025) — NDPC directive, March 2025",
+          ],
+        },
+        {
+          acronym: "CBN",
+          name: "Central Bank of Nigeria",
+          instruments: [
+            "CBN Risk-Based Cybersecurity Framework and Guidelines for Deposit Money Banks and Payment Service Banks — issued 31 May 2024, effective 1 July 2024",
+            "CBN Risk-Based Cybersecurity Framework and Guidelines for Other Financial Institutions (2022)",
+          ],
+        },
+        {
+          acronym: "NCC",
+          name: "Nigerian Communications Commission",
+          // No instrument is listed because we have not verified one. The NCC's
+          // relevance here is its REGIME, which may be named as a regime; the
+          // model must not invent a regulation, circular or guideline for it.
+          instruments: [],
+          regimes: [
+            "Type approval of communications equipment",
+            "Spectrum and service licensing",
+          ],
+        },
+        // Bodies with no verified instrument list. They may be named as bodies;
+        // with no instruments, no obligation claim may be attributed to them.
+        { acronym: "NITDA", name: "National Information Technology Development Agency", instruments: [] },
+        { acronym: "FIRS", name: "Federal Inland Revenue Service", instruments: [] },
+      ],
+    },
   ],
+
+  // ---- Instrument policy (enforced in the agent prompts) -------------------
+  // The failure this exists to stop: an article asserting "the CBN cybersecurity
+  // framework requires X" with no identifiable document behind it. A claim you
+  // cannot trace to an instrument cannot be fact-checked, and reads as
+  // authoritative anyway.
+  instrumentPolicy: {
+    /** Obligation claims may cite ONLY instruments listed under markets[].bodies[]. */
+    citedInstrumentsMustBeListed: true,
+    /** If the needed instrument is not listed, drop the claim — do not describe one. */
+    onMissingInstrument: "omit-claim",
+  },
 
   // ---- Cluster model — each maps UP to a /services or /industries pillar ---
   // Internal links from articles flow authority to these conversion pages.
@@ -87,5 +139,32 @@ export const config = {
   // individual calls past the 240s timeout, so drop to 1-2 for cli batches.
   concurrency: Math.max(1, Number(process.env.CONTENT_ENGINE_CONCURRENCY) || 4),
 };
+
+/**
+ * The instruments an article is allowed to cite, as prompt-ready lines.
+ *
+ * Single source of truth for the citation constraint: the agents interpolate
+ * this verbatim, so widening what the model may cite means editing the config
+ * above, never the prompt text.
+ */
+export function allowedInstruments(country = "Nigeria") {
+  const market = config.markets.find((m) => m.country === country);
+  if (!market) return [];
+  return market.bodies.flatMap((b) =>
+    b.instruments.map((i) => `${b.acronym} (${b.name}): ${i}`),
+  );
+}
+
+/** Bodies that may be NAMED but carry no citable instrument. */
+export function bodiesWithoutInstruments(country = "Nigeria") {
+  const market = config.markets.find((m) => m.country === country);
+  if (!market) return [];
+  return market.bodies
+    .filter((b) => b.instruments.length === 0)
+    .map((b) => {
+      const regimes = b.regimes?.length ? ` — regime may be named: ${b.regimes.join("; ")}` : "";
+      return `${b.acronym} (${b.name})${regimes}`;
+    });
+}
 
 export default config;

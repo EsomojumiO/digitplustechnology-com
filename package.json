@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "test": "node --test content-engine/*.test.mjs",
     "gate:conformance": "node --experimental-strip-types scripts/style-conformance.ts",
     "gate:a11y": "node scripts/a11y-sweep.mjs",
     "gate:contrast": "node scripts/hero-contrast.mjs",
@@ -16,7 +17,8 @@
     "gates": "node scripts/run-gates.mjs",
     "content:plan": "node content-engine/plan.mjs",
     "content:generate": "node content-engine/generate.mjs",
-    "content:covers": "node content-engine/fetch-covers.mjs"
+    "content:covers": "node content-engine/fetch-covers.mjs",
+    "content:drafts": "node scripts/draft-status.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -34,6 +36,7 @@
     "reading-time": "^1.5.0",
     "rehype-slug": "^6.0.0",
     "remark-gfm": "^4.0.0",
+    "sharp": "^0.34.5",
     "tailwind-merge": "^3.0.2",
     "zod": "^3.24.1"
   },

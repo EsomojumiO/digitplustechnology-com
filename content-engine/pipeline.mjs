@@ -50,7 +50,11 @@ export async function generateArticle(brief, opts = {}) {
     publishedAt: date,
     updatedAt: date,
     cover: `/images/insights/${slug}.jpg`,
-    coverAlt: seoData.coverAlt,
+    // Empty on purpose: the cover image does not exist yet, and an alt written
+    // now could only describe an imagined one. It is filled in by the script
+    // that fetches or generates the actual image, from that image. A blank alt
+    // is a visible defect; a plausible-sounding wrong one is not.
+    coverAlt: "",
     draft: config.forceDraft ? true : false,
     seo: {
       metaTitle: seoData.metaTitle,

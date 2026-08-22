@@ -16,7 +16,11 @@ These do not stop the build (we use clearly-labelled placeholders), but must be 
 | 10 | Real quarterly-report PDF (original data) | Minimal valid placeholder PDF (771 B / 765 B). **The lead-capture gate that sat in front of it has been REMOVED** — it collected a named buyer's work email, company and role in exchange for a one-page stub, which is a reputational and NDPA-consent problem. Restore the gate (`<ReportGateForm>` in `src/app/reports/[slug]/page.tsx`; the API route, schema and rate limiting are all still in place) only once the real PDF exists. | `public/reports/nigeria-enterprise-it-hardware-price-index-q2-2026.pdf` — replace with the real original-data report before launch |
 | 11 | Cover/inline imagery for insights + reports | ✅ **Insights covers done** — all 33 sourced from Unsplash (license: free commercial, no attribution required), 1600×900 JPEG in `public/images/insights/`; photographer credits saved in `public/images/insights/CREDITS.json` (optional use). Topic-matched on concept (not Nigeria-specific stock). **Report covers now present** — 2 interim Unsplash covers added 2026-07-21 (`public/images/reports/`, CREDITS.json alongside). Before that the files were absent entirely and next/image returned 400, so the covers rendered broken on /reports and both detail pages, and both og:images 404'd. Still interim: replace with the client's own designed covers. | swap any specific insight cover by replacing the file; supply report covers |
 
-> ⚠️ **Update 2026-06-05:** **19 new content-engine drafts** (dated 2026-06, all `draft:true`) reference cover images that do **not** yet exist (`public/images/insights/<slug>.jpg`). There is no auto-fetcher script or Unsplash API key in the repo — the existing 33 covers were hand-curated. For each, curate one Unsplash image (1600×900 JPEG, license: free commercial), save it at `public/images/insights/<slug>.jpg`, and add a `CREDITS.json` entry. **These drafts cannot be published (flip `draft:false`) until their covers exist — the `cover:` paths currently 404.**
+> ⚠️ **Update 2026-06-05, revised 2026-08-22:** some content-engine drafts reference cover images that do **not** yet exist (`public/images/insights/<slug>.jpg`), and cannot be published (flip `draft:false`) until those covers exist — the `cover:` paths 404 until then.
+>
+> **No count is recorded here on purpose.** Run `npm run content:drafts` for the current numbers and the slugs behind them. *These figures are derived from `content/insights/` and `public/images/insights/` at the moment you run it — they are never stored in this document, because a pasted count is right on the day it is pasted and quietly wrong afterwards. This note said "19 drafts" for two months, then "18" for a day.*
+>
+> To fill a missing cover there is an auto-fetcher (`npm run content:covers`, `content-engine/fetch-covers.mjs`), but **no Unsplash API key is present in the repo** — supply `UNSPLASH_ACCESS_KEY` to run it. It writes the image, the `coverAlt`, and the `CREDITS.json` row in one step.
 >
 > ⚠️ **When you add those covers, REWRITE the `coverAlt` from the image you actually chose.**
 > The drafts' current alt text describes an ideal staged scene ("A Nigerian clinic nurse
@@ -31,10 +35,12 @@ These do not stop the build (we use clearly-labelled placeholders), but must be 
 >
 > List the slugs still needing covers at any time with:
 > ```bash
-> # drafts whose cover file is missing
-> for f in content/insights/*.mdx; do s=$(basename "$f" .mdx); \
->   [ -f "public/images/insights/$s.jpg" ] || echo "$s"; done
+> npm run content:drafts   # scripts/draft-status.mjs
 > ```
+>
+> It prints the drafts missing a cover, the drafts that have one, and a
+> published/draft/missing summary line. Archived drafts under `archive/` are
+> invisible to it, exactly as they are to the content loader.
 
 ## Forms & integrations — stubbed pending decisions
 

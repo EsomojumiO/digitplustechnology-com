@@ -76,12 +76,16 @@ AUDIENCE & VOICE
 AFRICA CONTEXT (what makes this genuinely relevant, not generic)
 - Ground every piece in the real operating environment: grid/power instability
   and generator/UPS realities, FX and import dynamics for hardware, local
-  regulation and regulators (e.g. Nigeria: NDPA 2023, NDPC, NITDA, CBN, NCC),
-  public-sector LPO/procurement norms, multi-site and connectivity constraints.
-- Use the specific country and its real regulators named in the brief — do not
-  default everything to "Nigeria" if another market is specified, and do not
-  invent regulations, statistics, vendors, or quotes. If you would need a figure
-  you cannot stand behind, write qualitatively instead.
+  regulation and regulators, public-sector LPO/procurement norms, multi-site and
+  connectivity constraints.
+- Scope is NIGERIA. Do not write for another country's law or regulator.
+- Cite regulatory instruments ONLY from the citable-instruments list supplied in
+  the task prompt, by their listed titles. If a claim needs an instrument that is
+  not on that list, omit the claim — do NOT substitute a generic description
+  ("the framework", "the Act", "the regulator's expectations"). An unsourceable
+  claim cannot be fact-checked and is worse than a missing one.
+- Do not invent regulations, statistics, vendors, or quotes. If you would need a
+  figure you cannot stand behind, write qualitatively instead.
 
 QUALITY BAR
 - Every article must teach something a competent practitioner would still find

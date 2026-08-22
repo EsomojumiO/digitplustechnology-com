@@ -86,7 +86,7 @@ author: "Digitplus Technology"
 publishedAt: "2026-06-01"                        # YYYY-MM-DD
 updatedAt: "2026-06-01"                          # set when you revise it later
 cover: "/images/insights/choosing-a-managed-services-partner.jpg"
-coverAlt: "Describe the cover image for someone who cannot see it"
+coverAlt: "What the cover image actually shows; empty until it exists"
 draft: false                                     # true = hidden; false = live
 seo:
   metaTitle: "Choosing a Managed Services Partner | Digitplus"
@@ -138,7 +138,7 @@ slug: "nigeria-enterprise-it-hardware-price-index-q3-2026"  # matches file name
 quarter: "Q3"
 year: 2026
 cover: "/images/reports/nigeria-enterprise-it-hardware-price-index-q3-2026.jpg"
-coverAlt: "Describe the cover for someone who cannot see it"
+coverAlt: "What the cover actually shows; empty until it exists"
 summary: "One short paragraph teaser, shown on the reports hub and in search."
 keyFindings:
   - "A short, standalone takeaway. These are PUBLIC and indexable."
@@ -170,13 +170,26 @@ slot into the archive grid.
 
 - Save cover images under `public/images/insights/` or
   `public/images/reports/`, named to match the slug, ending `.jpg` (or `.webp`).
-- **`coverAlt` is mandatory.** Write a plain description of what the image shows,
-  for readers using a screen reader and for search engines. Describe the
-  content, not the file ("A bank branch server room with a UPS and network
-  rack"), not ("image1.jpg" or "cover photo").
-- If the real image is not ready yet, still fill in `cover` and `coverAlt` with
-  the intended path and description — the page will show a placeholder until the
-  file is added. (Missing imagery is tracked in `docs/BLOCKERS.md`.)
+- **`coverAlt` describes the image that exists — never one you intend to use.**
+  Write a plain description of what is actually in the frame, for readers using
+  a screen reader and for search engines. Describe the content, not the file
+  ("A bank branch server room with a UPS and network rack"), not ("image1.jpg"
+  or "cover photo"). Never assert a nationality, employer or city unless a
+  readable landmark in the photo proves it.
+- **If the real image is not ready yet, leave `coverAlt` empty.** Fill in `cover`
+  with the intended path, but do NOT write the description you have in mind. An
+  alt describing an imagined photo tells screen-reader users the page shows
+  something it does not — and once a real cover lands, that invented text stays
+  behind and quietly misdescribes it. A blank alt is a visible defect; a
+  plausible-sounding wrong one is not. (Missing imagery is tracked in
+  `docs/BLOCKERS.md`.)
+- **The cover scripts write `coverAlt` for you, and will overwrite yours.**
+  `npm run content:covers` (Unsplash) derives it from the photo's own
+  `alt_description`; `scripts/gen-branded-cover.mjs` derives it from the title
+  and category it draws into the card. Both write the alt in the same step as
+  the image, so the two cannot drift apart. If a photo carries no usable
+  description the script writes an empty `coverAlt` and lists the slug at the
+  end of the run — that is your cue to write one by hand, from the image.
 
 ---
 
@@ -216,7 +229,7 @@ but stay out of the spotlight.)
 - [ ] File name = slug, lowercase-with-hyphens, ends `.mdx`
 - [ ] `slug` in frontmatter matches the file name
 - [ ] Category label is **exactly** one from the fixed list (articles)
-- [ ] `coverAlt` describes the image
+- [ ] `coverAlt` describes the image that exists (empty if there is none yet)
 - [ ] At least one internal link to a `/services` or `/industries` page (articles)
 - [ ] It is **authority/strategy**, not a product buying guide
 - [ ] `draft: false` (article) / PDF saved in `public/reports/` (report)

@@ -11,7 +11,7 @@
  */
 
 import { runAgent } from "./lib/anthropic.mjs";
-import { config } from "./config.mjs";
+import { config, allowedInstruments, bodiesWithoutInstruments } from "./config.mjs";
 
 const clusterKeys = config.clusters.map((c) => c.key);
 const countries = config.markets.map((m) => m.country);
@@ -46,7 +46,7 @@ export async function strategist({ count, knownTitles = [] }) {
     .map((c) => `- ${c.key} → pillar ${c.pillar} (${c.kind}; default category "${c.category}")`)
     .join("\n");
   const marketLines = config.markets
-    .map((m) => `- ${m.country}: ${m.regulators.join(", ")}`)
+    .map((m) => `- ${m.country}: ${m.bodies.map((b) => b.acronym).join(", ")}`)
     .join("\n");
 
   const role = `ROLE: Senior content strategist + SEO lead.
@@ -56,12 +56,14 @@ map to conversion pillars. Each brief becomes one indexable article.
 CLUSTERS (map each topic to exactly one; internal links will flow UP to the pillar):
 ${clusterLines}
 
-MARKETS (use the named country's REAL regulators; Nigeria-weighted but cover Africa):
+MARKETS (Nigeria only — do not propose topics for any other country):
 ${marketLines}
 
 RULES
 - Strictly in-lane: strategy/planning/policy/how-to. NO product round-ups or buying guides.
-- Spread across clusters and markets; avoid clustering everything on Nigeria procurement.
+- Nigeria only. A brief whose angle depends on another country's law or regulator
+  is out of scope — drop it rather than relocating it.
+- Spread across clusters; avoid clustering everything on procurement.
 - Distinct angles — no two titles that would compete for the same query (no cannibalisation).
 - Titles are specific and decision-maker-grade (e.g. "How to structure an audit-ready
   IT procurement process for a Nigerian MDA"), not generic ("IT procurement tips").
@@ -83,7 +85,13 @@ const SEO_SCHEMA = noExtra({
   metaTitle: { type: "string" },
   metaDescription: { type: "string" },
   faqQuestions: { type: "array", items: { type: "string" } },
-  coverAlt: { type: "string" },
+  // No coverAlt. The SEO agent runs before any cover image exists, so anything
+  // it wrote here would be a description of a photograph nobody has taken —
+  // invented from the article topic. That is where the drafts' "A Nigerian
+  // clinic nurse reviewing patient records beside a wall-mounted UPS" alts came
+  // from: fluent, plausible, and describing an image that does not exist.
+  // coverAlt is written by whichever script produces the actual image
+  // (fetch-covers.mjs, gen-branded-cover.mjs), from that image.
 });
 
 export async function seo(brief) {
@@ -94,7 +102,9 @@ For the given brief, return search-optimised metadata for a Nigerian/African B2B
 - primaryKeyword: the single head term (localised, e.g. "IT procurement Nigeria").
 - secondaryKeywords: 3–6 supporting long-tail terms.
 - faqQuestions: 3–4 real questions this audience asks (for a FAQ section / FAQPage schema).
-- coverAlt: one concrete sentence describing an apt, on-topic cover photo (a real scene, not abstract).`;
+
+Do NOT invent cover image alt text. There is no cover image at this stage, and
+alt text describing an imagined one is a fabrication for screen-reader users.`;
 
   const user = JSON.stringify(brief);
   return runAgent({ role, user, schema: SEO_SCHEMA });
@@ -119,6 +129,25 @@ Design a logical H2 structure for a 1,200–1,800 word authority article. 4–7 
 - Open with the decision/problem, not a dictionary definition.
 - Each section: a clear H2 heading + 2–4 bullet points of what it must cover, including
   the specific ${brief.market} context (regulators, power/FX/multi-site realities) where relevant.
+- Do not plan a section whose substance depends on an instrument you may not cite
+  (see the instrument rule below).
+CITABLE INSTRUMENTS — the ONLY instruments you may cite for an obligation claim:
+${allowedInstruments(brief.market).map((l) => `- ${l}`).join("\n")}
+
+Bodies you may NAME but which have no citable instrument here:
+${bodiesWithoutInstruments(brief.market).map((l) => `- ${l}`).join("\n")}
+
+INSTRUMENT RULE (hard constraint)
+- An obligation claim ("X requires/mandates/expects Y") may cite ONLY an
+  instrument from the list above, referred to by its listed title.
+- If the claim you want needs an instrument that is NOT listed, OMIT THE CLAIM.
+  Do not describe the instrument generically instead. Phrases like "the CBN
+  cybersecurity framework", "Bank of Ghana's directive", "the Act", "the
+  regulator's expectations" are FORBIDDEN as the source of an obligation.
+- You may still name a body without citing an instrument, provided you assert no
+  obligation on its authority. A regime listed above may be named as a regime.
+- Never state a deadline, penalty, threshold or notification window unless it
+  comes from a listed instrument.
 - Plan one section that naturally links UP to the cluster pillar.
 - Do NOT include the FAQ in sections (added separately). Stay strictly in-lane.`;
 
@@ -136,6 +165,23 @@ REQUIREMENTS
 - 1,200–1,800 words. Calm, authoritative, specific. No filler, no emoji, no preamble.
 - Weave in the primary keyword naturally in the first 100 words and in at least one H2.
 - Concrete ${brief.market} context throughout (named regulators, power/FX/procurement realities).
+CITABLE INSTRUMENTS — the ONLY instruments you may cite for an obligation claim:
+${allowedInstruments(brief.market).map((l) => `- ${l}`).join("\n")}
+
+Bodies you may NAME but which have no citable instrument here:
+${bodiesWithoutInstruments(brief.market).map((l) => `- ${l}`).join("\n")}
+
+INSTRUMENT RULE (hard constraint)
+- An obligation claim ("X requires/mandates/expects Y") may cite ONLY an
+  instrument from the list above, referred to by its listed title.
+- If the claim you want needs an instrument that is NOT listed, OMIT THE CLAIM.
+  Do not describe the instrument generically instead. Phrases like "the CBN
+  cybersecurity framework", "Bank of Ghana's directive", "the Act", "the
+  regulator's expectations" are FORBIDDEN as the source of an obligation.
+- You may still name a body without citing an instrument, provided you assert no
+  obligation on its authority. A regime listed above may be named as a regime.
+- Never state a deadline, penalty, threshold or notification window unless it
+  comes from a listed instrument.
 - Include 1–2 markdown links UP to the pillar page ${pillar} using natural anchor text,
   plus a place a related-article cross-link could go.
 - End with a "## Frequently asked questions" section answering these, each as "### Question"

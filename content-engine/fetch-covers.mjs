@@ -194,11 +194,18 @@ async function fetchOne(slug, fm, credits, override, file) {
 
     // Photographer credit stays here in CREDITS.json — it does NOT belong in
     // alt text, which describes the picture to someone who cannot see it.
+    // One shape for every row in CREDITS.json (see the file's own entries):
+    // origin, photographer, profile, source, query, note — nulls where unknown,
+    // so a missing photographer is visible rather than papered over with a
+    // placeholder string. `origin` distinguishes these from our own branded
+    // covers, which owe no attribution.
     credits[slug] = {
-      photographer: photo.user.name,
-      profile: photo.user.links.html,
-      source: photo.links.html,
+      origin: "unsplash",
+      photographer: photo.user.name ?? null,
+      profile: photo.user.links.html ?? null,
+      source: photo.links.html ?? null,
       query: q,
+      note: null,
     };
     return { ok: true, by: photo.user.name, q, alt };
   }
