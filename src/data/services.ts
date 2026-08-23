@@ -204,34 +204,34 @@ export const servicesContent: Record<ServiceSlug, ServiceContent> = {
     slug: "managed-services",
     title: "Managed Services",
     h1: "Managed IT services in Nigeria",
-    tagline: "Managed IT services in Nigeria, support and monitoring that keep operations running.",
+    tagline: "Someone is watching the servers at 2am, and you know who to call at 9.",
     intro: [
-      "Managed IT services in Nigeria — proactive monitoring, remote and on-site support, and SLAs in writing, so your IT simply works.",
+      "Managed IT services in Nigeria, run the way support should work: we monitor your servers and networks, fix what breaks, and answer to written response times. Most of what we do, you never see, because it happens before anyone files a ticket.",
     ],
     whatsIncluded: [
       {
         title: "Remote support",
-        desc: "A responsive helpdesk for day-to-day issues, remote diagnosis, and fast resolution without waiting for an on-site visit.",
+        desc: "A helpdesk that picks up. Most day-to-day problems get diagnosed and resolved remotely, without waiting for anyone to drive to your office.",
       },
       {
         title: "On-site support",
-        desc: "Scheduled and on-demand engineer visits for the work that has to happen in person, across your covered locations.",
+        desc: "Some things cannot be fixed down a phone line. Engineers visit on schedule and on demand, across every location we cover for you.",
       },
       {
         title: "Service-level agreements",
-        desc: "Clear response and resolution targets, defined scope, and regular reporting, commitments you can hold us to.",
+        desc: "Response and resolution targets in writing, with the scope spelled out and reported on. Commitments you can hold us to, not intentions.",
       },
       {
         title: "Proactive monitoring",
-        desc: "Continuous monitoring of servers, networks, and critical services so we can act on problems before they become outages.",
+        desc: "Continuous monitoring of servers, networks and the services your business depends on, so we act on a failing disk before it becomes a lost morning.",
       },
     ],
     howItWorks: [
-      "We document your environment and agree what we will support and to what targets.",
-      "We put monitoring and access in place and establish your support channels.",
-      "We handle day-to-day issues remotely, escalating to on-site where needed.",
-      "We act proactively on alerts to prevent avoidable downtime.",
-      "We report regularly on tickets, uptime, and recommendations against the SLA.",
+      "We document what you actually run, and agree in writing what we support and to what targets.",
+      "Monitoring and access go in. Your support channels are set up and tested.",
+      "Day-to-day issues come to us and get handled remotely. Where they cannot be, an engineer goes out.",
+      "Alerts get acted on before they become outages. This is the part you are really paying for.",
+      "You get regular reporting on tickets, uptime and what we think you should fix next.",
     ],
     relevantIndustries: [
       "enterprise",
@@ -242,26 +242,30 @@ export const servicesContent: Record<ServiceSlug, ServiceContent> = {
     faqs: [
       {
         q: "What does your SLA actually commit to?",
-        a: "Defined response and resolution targets for different issue priorities, the scope of what is covered, and regular reporting against those targets. It is written down, so expectations are clear on both sides.",
+        a: "Response and resolution targets by issue priority, the scope of what is covered, and regular reporting against both. It is written down, so neither side is guessing about what was promised.",
       },
       {
         q: "Do you provide managed IT support across multiple locations in Nigeria?",
-        a: "Yes. We deliver remote support nationwide and on-site support across Abuja, Lagos, Port Harcourt, and other agreed locations.",
+        a: "Yes. Remote support runs nationwide. On-site support covers Abuja, Lagos, Port Harcourt and other locations we agree with you.",
       },
       {
         q: "Can you work alongside our in-house IT team?",
-        a: "Absolutely. Many clients use us to extend an existing team, covering monitoring, after-hours support, or specialist work, rather than replacing them.",
+        a: "Often that is the arrangement. Many clients use us to cover monitoring, after-hours work or specialist tasks their team does not carry, rather than to replace anyone.",
       },
       {
         q: "What do you monitor?",
-        a: "Typically servers, networks, internet links, and the business-critical services you depend on. We tailor monitoring to your environment so alerts are meaningful, not noise.",
+        a: "Typically servers, networks, internet links and the business-critical services you depend on. We tune it to your environment, because monitoring that alerts on everything gets ignored.",
       },
     ],
+    cta: {
+      title: "Find out what breaks before we do",
+      description:
+        "Send us what you run and where it sits. We will come back with what we would monitor, the response times we would commit to, and a line-itemised monthly figure. If your current arrangement is working, we will tell you that instead.",
+    },
     metaTitle: "Managed IT Services & Support with SLAs",
     metaDescription:
-      "Proactive monitoring, remote and on-site support, and clear SLAs that keep your operations running. Managed IT services for organisations across Nigeria.",
+      "Managed IT services in Nigeria: monitoring, remote and on-site support, and response times in writing. Most problems handled before you notice them.",
   },
-
   "technology-advisory": {
     slug: "technology-advisory",
     title: "Technology Advisory",

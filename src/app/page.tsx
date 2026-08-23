@@ -31,16 +31,16 @@ import { getFeaturedReport } from "@/lib/content";
 export const metadata: Metadata = {
   title: "IT Solutions Company in Nigeria | Digitplus Technology",
   description:
-    "Digitplus is a B2B IT solutions company in Nigeria — IT procurement, hardware supply, infrastructure and managed services for enterprise and government.",
+    "A B2B IT solutions company in Nigeria. We handle procurement, hardware, infrastructure and managed services for enterprise and government.",
 };
 
 /* Raycast-style two-beat leads for the four Why Digitplus pillars, mapped to
    the existing whyUs data (which carries the longer supporting copy). */
 const whyBeats: { label: string; beat: string }[] = [
-  { label: "Accountable", beat: "one partner, end to end." },
+  { label: "Accountable", beat: "one partner, start to support." },
   { label: "Nationwide", beat: "Abuja, Lagos, Port Harcourt." },
-  { label: "Experienced", beat: "government, banking, healthcare." },
-  { label: "Disciplined", beat: "documented, audit-ready." },
+  { label: "Experienced", beat: "government, banking, healthcare, energy." },
+  { label: "Disciplined", beat: "written down, audit-ready." },
 ];
 
 export default function HomePage() {
@@ -71,7 +71,7 @@ export default function HomePage() {
             // best copy on the site and not worth trading for a keyword — but
             // without this the primary query appeared nowhere before the footer.
             title="Six services, one accountable partner, across Nigeria"
-            lede="Procurement, infrastructure, deployment, support. Start with one; we grow into the rest as you need us."
+            lede="Procurement, infrastructure, deployment, support. Start with one. We grow into the rest when you need us to."
           />
         </FadeIn>
         <Stagger>
@@ -103,8 +103,8 @@ export default function HomePage() {
         <FadeIn>
           <SectionHeading
             eyebrow="Why Digitplus"
-            title="The difference is accountability"
-            lede="Anyone can sell equipment; few will own the outcome end to end."
+            title="Somebody has to own the outcome"
+            lede="Anyone can sell you equipment. Very few will still be answering the phone in two years."
           />
         </FadeIn>
         <Stagger>
@@ -149,8 +149,8 @@ export default function HomePage() {
         <FadeIn>
           <SectionHeading
             eyebrow="How we work"
-            title="A clear, documented process"
-            lede="Discovery to handover, six steps, the same documentation and sign-off every time."
+            title="Six steps, written down"
+            lede="Discovery to handover. The same documentation and the same sign-off, every time."
           />
         </FadeIn>
         <div className="mt-16">
@@ -169,7 +169,7 @@ export default function HomePage() {
           <SectionHeading
             eyebrow="Who we serve"
             title="Built around how your sector works"
-            lede="A hospital can't absorb the downtime a warehouse can. We size, document and support the work to each sector's constraints."
+            lede="A hospital cannot absorb the downtime a warehouse can. We size and support the work to what your sector actually tolerates."
           />
         </FadeIn>
         <IndustriesFilter
@@ -283,15 +283,15 @@ export default function HomePage() {
       <div className="relative isolate overflow-hidden bg-surface">
         <CTABand
           className="relative z-content bg-transparent"
-          title="Tell us what you’re planning"
-          description="A short conversation is the fastest way to see how we can help. No obligation."
+          title="Tell us what you are planning"
+          description="Thirty minutes on a call. You describe what you run and what is going wrong; we tell you what we would do about it and roughly what it costs. If we are not the right fit, we will say so."
           // One action per closing band. WhatsApp was a competing contact
           // channel sitting beside the primary CTA at the decision point;
           // it stays in the header dropdown, the footer and /contact.
           actions={
             <Magnetic strength={6}>
               <Button href="/contact" size="lg" variant="secondary">
-                {ctaLabels.generic}
+                {ctaLabels.homeCall}
               </Button>
             </Magnetic>
           }

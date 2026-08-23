@@ -39,6 +39,13 @@ export interface ServiceContent {
   /** Industries this service is most relevant to. */
   relevantIndustries: IndustrySlug[];
   faqs: FAQ[];
+  /**
+   * Optional closing CTA for this service. When absent the template falls back
+   * to the generic band, so adding one service's CTA does not oblige the other
+   * five. The button LABEL is not set here — it comes from `ctaLabels` in
+   * src/lib/cta.ts, which the conformance gate validates against.
+   */
+  cta?: { title: string; description: string };
   metaTitle: string;
   metaDescription: string;
 }

@@ -60,7 +60,7 @@ const SLIDES: Slide[] = [
     eyebrow: "Deployment & Implementation",
     headline: "One team, every site",
     support:
-      "Supply, cabling, configuration and handover — Abuja, Lagos, Port Harcourt.",
+      "Supply, cabling, configuration and handover, in Abuja, Lagos and Port Harcourt.",
     cta: { label: "See how we deploy", href: "/services/deployment-implementation" },
   },
   {
@@ -86,7 +86,7 @@ const SLIDES: Slide[] = [
     eyebrow: "Technology Advisory",
     headline: "Decisions you can defend",
     support:
-      "Roadmaps, budgets and vendor choices, argued from your constraints — not a product list.",
+      "Roadmaps, budgets and vendor choices, argued from your constraints rather than a product list.",
     cta: { label: "Explore advisory", href: "/services/technology-advisory" },
   },
   {
@@ -95,7 +95,7 @@ const SLIDES: Slide[] = [
     eyebrow: "Industries",
     headline: "Eight sectors, one standard",
     support:
-      "Government, banking, healthcare, energy — the same documentation and sign-off in every one.",
+      "Government, banking, healthcare, energy. The same documentation and sign-off in every one.",
     cta: { label: "See every sector", href: "/industries" },
   },
   {

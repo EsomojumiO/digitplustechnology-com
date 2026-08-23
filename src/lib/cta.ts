@@ -21,6 +21,12 @@ export const ctaLabels = {
   generic: "Start a conversation",
   /** Home hero conversion slide (already wired in HeroCarousel). */
   heroProposal: "Get a proposal",
+  /**
+   * Home closing band. "Start a conversation" named no step and promised no
+   * outcome, which is the generic-CTA problem this map exists to solve. This
+   * one says how long it takes.
+   */
+  homeCall: "Book a 30-minute call",
 } as const;
 
 /**
