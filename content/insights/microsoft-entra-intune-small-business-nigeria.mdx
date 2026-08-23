@@ -1,7 +1,7 @@
 ---
 title: "Managed Devices for a Law Practice: Entra ID and Intune for a Small Nigerian Firm"
 slug: "microsoft-entra-intune-small-business-nigeria"
-excerpt: "How we moved a Nigerian law practice from personal laptops and shared passwords to a fully managed Microsoft Entra ID and Intune environment — and why every small firm handling confidential client data needs this."
+excerpt: "How we moved a Nigerian law practice from personal laptops and shared passwords to a managed Microsoft Entra ID and Intune environment, and the friction that came with it."
 category: "Cybersecurity"
 tags:
   - "small business"
@@ -12,13 +12,13 @@ tags:
   - "device management"
 author: "Digitplus Technology"
 publishedAt: "2026-08-15"
-updatedAt: "2026-08-15"
+updatedAt: "2026-08-23"
 cover: "/images/insights/microsoft-entra-intune-small-business-nigeria.jpg"
 coverAlt: "An open filing cabinet drawer packed with paper client record cards"
 draft: false
 seo:
   metaTitle: "Entra ID & Intune for Small Businesses in Nigeria"
-  metaDescription: "How a Nigerian law practice replaced personal laptops and shared passwords with managed Microsoft Entra ID and Intune — identity, encryption and four-minute offboarding."
+  metaDescription: "How a Nigerian law practice replaced personal laptops and shared passwords with managed Entra ID and Intune: identity, encryption, and what it cost in friction."
   ogImage: "/images/insights/microsoft-entra-intune-small-business-nigeria.jpg"
 ---
 
@@ -32,14 +32,14 @@ offboarding process consists of hoping.
 
 For a law firm, this is not untidy. It is a professional exposure.
 
-An Abuja law practice we worked with was in roughly this position — not
-through negligence, but because it is the default state of every growing
-business that has never had a reason to solve it. A stolen laptop, one
-departing staff member with a grudge, or one convincing phishing email would
-each have produced a confidentiality breach that no amount of good lawyering
-could undo afterwards.
+An Abuja law practice we worked with was in roughly this position, not through
+negligence, but because it is the default state of every growing business that
+has never had a reason to solve it. A stolen laptop, one departing staff member
+with a grudge, or one convincing phishing email would each have produced a
+confidentiality breach that no amount of good lawyering could undo afterwards.
 
-Here is what we built instead.
+Here is what we built instead, and what it cost the firm in friction to get
+there.
 
 ## Why a law firm specifically
 
@@ -50,79 +50,76 @@ client's, not the firm's. There are the Rules of Professional Conduct, which
 impose a confidentiality duty that does not soften just because the breach was
 technical rather than deliberate. And since 2023 there is the Nigeria Data
 Protection Act, which applies to any organisation processing personal data of
-Nigerians — which a law firm does on every single matter it touches.
+Nigerians, which a law firm does on every single matter it touches.
 
 None of these frameworks accept "the laptop was stolen and it wasn't
 encrypted" as an answer. Nor should they.
 
-The practical translation: the firm needs to be able to prove that client
-data is encrypted at rest, that access is controlled by identity rather than
-by who happens to be holding a device, and that access can be revoked
-completely and immediately.
-
-That is exactly what Microsoft Entra ID and Intune do.
+The practical translation: the firm needs to prove that client data is
+encrypted at rest, that access is controlled by identity rather than by who
+happens to be holding a device, and that access can be revoked completely and
+immediately. That is what Microsoft Entra ID and Intune do.
 
 ## The stack: one SKU, not five products
 
 We deployed **Microsoft 365 Business Premium**. This is a committed
 recommendation, not a survey of options.
 
-Business Premium is, for firms under 300 staff, the single best-value security
-product available anywhere. In one licence it bundles Entra ID P1 for identity
-and conditional access, Intune for device management, Defender for Business
-for endpoint protection, Purview for information protection, and the entire
-Office and Exchange and SharePoint and Teams estate.
+For firms under 300 staff, which is the plan's hard ceiling, it is the single
+best-value security product available. One licence bundles Entra ID P1 for
+identity and conditional access, Intune Plan 1 for device management, Defender
+for Business for endpoint protection, Purview data loss prevention and
+information protection, and the whole Office, Exchange, SharePoint and Teams
+estate. Buying those capabilities separately costs multiples of the bundle.
 
-Buying those capabilities separately costs multiples of the bundle price. The
-mistake small firms make is buying Business Standard because it is cheaper and
-looks like it has Office in it — which it does, and none of the security,
-which is the entire point.
+Two buying traps, both live as at August 2026. The first is Business Standard,
+which small firms pick because it is cheaper and looks like it has Office in
+it. It does, and none of the security, which is the entire point. The second is
+newer: Microsoft's main pricing page now leads with a Copilot-bundled Business
+Premium at a materially higher price. If you do not want Copilot, make sure you
+are buying the plain SKU.
 
-## What we actually built
+## Identity first, and the mail nobody thinks about
 
-### 1. Identity first
-
-Everything begins with identity, because in a modern environment identity *is*
+Everything begins with identity, because in a modern environment identity is
 the perimeter. There is no office firewall protecting anything when half the
 staff are working from a laptop at home.
 
-- **Named accounts for every individual.** No shared logins, no generic
-  "info@" that four people use. Every action in the tenant is attributable to
-  a person. For a firm that may one day need to demonstrate who accessed what,
-  this is foundational.
-- **Multi-factor authentication enforced for everyone, without exception.**
-  Enforced through Conditional Access policy rather than left to individual
-  choice. MFA alone eliminates the overwhelming majority of account compromise
-  attempts.
-- **Legacy authentication blocked.** Old mail protocols that cannot enforce
-  MFA are the most common way attackers walk around it. Blocked at the tenant.
+- **Named accounts for every individual.** No shared logins, no generic "info@"
+  that four people use. Every action in the tenant is attributable to a person.
+  For a firm that may one day need to demonstrate who accessed what, this is
+  foundational.
+- **Multi-factor authentication enforced for everyone.** Enforced through
+  Conditional Access policy rather than left to individual choice. MFA alone
+  eliminates the overwhelming majority of account compromise attempts.
+- **Legacy authentication blocked.** Old mail protocols that cannot enforce MFA
+  are the most common way attackers walk around it. Blocked at the tenant.
 - **A break-glass administrator account,** excluded from conditional access,
-  with credentials held securely offline. This exists so that a misconfigured
-  policy can never lock the firm out of its own tenant. It is the first thing
-  a competent engineer sets up and the thing amateurs forget until the day it
+  with credentials held securely offline. This exists so a misconfigured policy
+  can never lock the firm out of its own tenant. It is the first thing a
+  competent engineer sets up and the thing amateurs forget until the day it
   matters.
 - **Self-service password reset,** so a forgotten password on a Monday morning
-  is a two-minute self-fix, not a call to us.
+  is a two-minute self-fix rather than a call to us.
 
-### 2. Domain and mail hygiene
+Then the invisible work: we verified the firm's domain and configured **SPF,
+DKIM and DMARC** properly. Without it, anybody in the world can send email that
+appears to come from the firm's domain, to clients, to opposing counsel, to the
+court registry. Business email compromise in Nigeria frequently takes exactly
+this shape: a forged mail from a "partner" instructing a client to pay into a
+different account. Correct mail authentication makes that attack substantially
+harder to land.
 
-We verified the firm's domain and configured **SPF, DKIM and DMARC** properly.
-
-This is invisible work with disproportionate impact. Without it, anybody in
-the world can send email that appears to come from the firm's domain — to
-clients, to opposing counsel, to the court registry. Business email compromise
-in Nigeria frequently takes exactly this shape: a forged mail from a "partner"
-instructing a client to pay into a different account. Correct mail
-authentication makes that attack substantially harder to land.
-
-### 3. Device enrolment and compliance
+## Devices, and the policy that makes it real
 
 Every firm-owned Windows device was enrolled into Intune. New devices are
-configured for **Windows Autopilot**, which means a machine can be shipped
-sealed to a staff member, and it configures itself into the firm's environment
-on first boot with no engineer touching it.
+configured for **Windows Autopilot**, so a machine can be shipped sealed to a
+staff member and configure itself into the firm's environment on first boot
+with no engineer touching it. That depends on the device being registered to
+your tenant, which the supplier has to do at the point of sale, so confirm your
+reseller can before you order.
 
-Then we set compliance policies. A device is only considered compliant if:
+A device is only considered compliant if:
 
 - **BitLocker disk encryption is enabled,** with recovery keys escrowed
   automatically to Entra ID. This is the single control that turns a stolen
@@ -132,91 +129,103 @@ Then we set compliance policies. A device is only considered compliant if:
 - **A password or PIN is set,** with screen lock after a short idle period.
 - **The firewall is on.**
 
-### 4. Conditional Access: the actual control
-
-This is where it all becomes real. The core policy is simple to state and
-powerful in effect:
+Then the control that makes all of it real. The core Conditional Access policy
+is simple to state and powerful in effect:
 
 > Access to firm data requires a managed, compliant device and a successfully
 > authenticated user with MFA.
 
 An unmanaged personal laptop cannot reach the firm's SharePoint. A stolen
-device that has been marked non-compliant loses access. An attacker with a
-correct password but no second factor gets nothing.
+device marked non-compliant loses access. An attacker with a correct password
+but no second factor gets nothing. Everything else is refinement: sign-in risk
+policies, session controls, and geographic restrictions that make sense for a
+practice not operating outside Nigeria.
 
-Everything else is refinement — sign-in risk policies, session controls,
-geographic restrictions where they make sense for a practice that does not
-operate outside Nigeria.
+Applications follow the same logic. Office, PDF tooling, browsers and the
+practice's line-of-business software are deployed and updated through Intune.
+Nobody downloads an installer from a search result. Nobody runs a three-year-old
+PDF reader with known vulnerabilities because updating it was somebody else's
+job. This is ordinary
+[managed services](/services/managed-services) discipline applied to a
+twelve-person firm.
 
-### 5. Applications, deployed centrally
-
-Office, PDF tooling, browsers and the practice's line-of-business software are
-all deployed and updated through Intune. Nobody downloads an installer from a
-search result. Nobody is running a three-year-old PDF reader with known
-vulnerabilities because updating it was somebody else's job.
-
-### 6. Getting files off laptops and into the tenant
+## Files, phones, and the four-minute offboarding
 
 We enabled **OneDrive Known Folder Move**, which redirects Desktop, Documents
-and Pictures into OneDrive automatically and silently.
-
-The effect is that files stop existing solely on one laptop. A device failure
-stops being a data loss event. It becomes an inconvenience for one afternoon.
+and Pictures into OneDrive automatically. Files stop existing solely on one
+laptop, so a device failure stops being a data loss event and becomes an
+inconvenience for one afternoon.
 
 Matter files moved into structured SharePoint libraries, organised by client
 and matter, with permissions applied by group. Versioning is on, so an
 overwritten document is recoverable. The recycle bin retains deletions. A
-junior who deletes the wrong folder on a Friday is a five-minute fix on
-Monday.
+junior who deletes the wrong folder on a Friday is a five-minute fix on Monday.
 
-### 7. Personal phones, without managing personal phones
+For personal phones, **App Protection Policies** do the work without the firm
+managing anybody's handset. Firm data inside Outlook and Teams is
+containerised: it requires a PIN to open, it cannot be copied out into WhatsApp
+or a personal notes app, and it can be wiped remotely without touching a single
+personal photo. The staff member's phone remains their phone.
 
-Staff want firm email on their own phones. The firm does not want to manage —
-or be responsible for — anybody's personal device.
+Which brings us to offboarding, the clearest demonstration of the project's
+value. Previously a departing staff member meant changing the shared password,
+hoping they kept no copies, and having no idea what was on their laptop. Now:
+disable the account, revoke active sessions, issue a remote wipe. Access to
+email, files, Teams and every connected application terminates within minutes.
 
-**App Protection Policies** resolve this cleanly. The firm's data inside
-Outlook and Teams on a personal phone is containerised: it requires a PIN to
-open, it cannot be copied out into WhatsApp or a personal notes app, and it
-can be wiped remotely without touching a single personal photo.
+One honest caveat on that last step. Account disable and session revocation
+take effect immediately, server-side. The **device wipe only lands when the
+device next checks in.** A laptop kept switched off or off the network stays
+un-wiped until it reconnects, which is exactly what a determined leaver would
+do. The encryption is what protects you in that window, not the wipe. This is
+true of every MDM platform, not a shortcoming of Intune, and it is worth
+understanding before you rely on the wipe as your control.
 
-The staff member's phone remains their phone. The firm's data remains the
-firm's data. This distinction, explained clearly during rollout, is what makes
-staff cooperate rather than resist.
+## What it costs, and what it cost in friction
 
-### 8. Offboarding that takes four minutes
-
-The clearest demonstration of the whole project's value.
-
-Previously, a departing staff member meant: change the shared password, hope
-they did not keep copies, and have no idea what was on their laptop.
-
-Now: disable the account, revoke all active sessions, and issue a remote wipe
-to the device. Access to email, files, Teams and every connected application
-terminates in minutes. The device, wherever it is, becomes an inert piece of
-aluminium.
-
-For a practice holding privileged client material, that capability is worth
-the entire cost of the project on its own.
-
-## What it costs
-
-Microsoft 365 Business Premium runs in the region of twenty-odd US dollars per
-user per month on an annual commitment. Confirm current pricing at the point
-of purchase — Microsoft adjusts it, and Nigerian billing has its own
+Microsoft 365 Business Premium lists at **$22.00 per user per month on an
+annual commitment**, as at August 2026. Confirm current pricing at the point of
+purchase, because Microsoft adjusts it and Nigerian billing has its own
 considerations.
 
-For a small practice, that is a genuinely modest operating cost. The
-comparison worth making is not against the cheaper licence tier. It is against
-the cost of one breach: the client relationship, the professional exposure,
-the regulatory position under the NDPA, and the reputational damage in a
-market where a law firm's entire product is trust.
+For a small practice that is a genuinely modest operating cost. The comparison
+worth making is not against the cheaper licence tier. It is against the cost of
+one breach: the client relationship, the professional exposure, the regulatory
+position under the NDPA, and the reputational damage in a market where a law
+firm's entire product is trust.
+
+The friction is the part these write-ups usually leave out, so here it is.
+
+**Personal laptops stop working.** Conditional Access requiring a managed,
+compliant device is the whole point, and it means anyone who had been working
+off their own machine cannot any more. Either they get a firm device or they
+lose access. Budget for the hardware, and decide the policy before you switch
+the rule on rather than during the week it starts blocking people.
+
+**Someone will not want firm email on their phone.** Once staff understand that
+the firm can wipe its own data from a personal handset, a proportion will
+decline, and they are entitled to. Have an answer ready: a work phone, or
+browser-only access with no local data. Telling people what the wipe does and
+does not touch, before enrolment rather than after, is what keeps this a
+conversation instead of an argument.
+
+**MFA needs a second factor everybody actually has.** Enforcing it without
+exception means deciding in advance what happens for anyone without a suitable
+phone, and doing that in advance rather than granting exclusions under pressure,
+because an exclusion granted in a hurry tends to become permanent.
+
+None of these are reasons not to do the work. They are the reasons it is worth
+planning the rollout as a change to how people work, rather than as a
+configuration exercise that happens to them.
 
 ## This is not just for lawyers
 
 Everything above applies, essentially unchanged, to any Nigerian business of
-roughly five to fifty people that handles information it cannot afford to
-leak. Accounting practices. Medical practices. Consultancies. Financial
-advisors. Recruitment firms. Any business with staff turnover and laptops.
+roughly five to fifty people that handles information it cannot afford to leak.
+Accounting practices. Medical practices. Consultancies. Financial advisors.
+Recruitment firms. Any business with staff turnover and laptops. The wider
+[cybersecurity essentials](/insights/cybersecurity-essentials-for-nigerian-smes)
+picture is the same argument at a lower level of detail.
 
 The pattern is always the same, and the trigger is almost always the same too:
 somebody leaves badly, or a laptop goes missing, and the firm discovers in a
