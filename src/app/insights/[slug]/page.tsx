@@ -33,16 +33,28 @@ import { ShareBar } from "../_components/ShareBar";
 import { AuthorBio } from "../_components/AuthorBio";
 import { formatDate, isoDate } from "../_components/format";
 import { getAuthor } from "@/data";
+import {
+  draftPreviewEnabled,
+  getDraftSlugsForPreview,
+} from "@/lib/content/articles";
 
 /**
  * Article template, /insights/[slug]
  *
  * SSG: one static page per published article. ISR: revalidate hourly so editors
  * can publish/update without a redeploy once a CMS is wired in.
- * dynamicParams=false ⇒ unknown slugs (incl. drafts) are 404, not on-demand.
+ * dynamicParams=false ⇒ unknown slugs are 404, not on-demand.
+ *
+ * In development the draft slugs are added so a draft can be reviewed at its
+ * real URL. getDraftSlugsForPreview() returns [] in production, so there the
+ * set is unchanged and every draft still 404s via dynamicParams=false. Drafts
+ * never enter getAllArticles(), so they stay out of the hub, the archives, the
+ * sitemap and the RSS feed in every environment.
  */
 export function generateStaticParams() {
-  return getAllArticles().map((a) => ({ slug: a.slug }));
+  const published = getAllArticles().map((a) => ({ slug: a.slug }));
+  const drafts = getDraftSlugsForPreview().map((slug) => ({ slug }));
+  return [...published, ...drafts];
 }
 
 export const dynamicParams = false;
@@ -99,9 +111,12 @@ export async function generateMetadata({
   return {
     // Absolute: article titles are long and descriptive; appending the brand
     // suffix pushes them past the ~60-char SERP cutoff. The title stands alone.
-    title: { absolute: title },
+    title: { absolute: article.draft ? `[DRAFT] ${title}` : title },
     description,
     alternates: { canonical: `/insights/${article.slug}` },
+    // A draft is only reachable in development, but mark it noindex anyway:
+    // this is the backstop if the environment gate is ever wrong.
+    ...(article.draft ? { robots: { index: false, follow: false } } : {}),
     openGraph: {
       type: "article",
       title,
@@ -143,7 +158,9 @@ export default async function ArticlePage({
 
   return (
     <>
-      <JsonLd data={articleSchema(article, url)} />
+      {/* No Article schema for a draft — structured data for unpublished copy
+          is exactly what should not exist, even on a local machine. */}
+      {!article.draft && <JsonLd data={articleSchema(article, url)} />}
       <JsonLd
         data={breadcrumbSchema([
           { name: "Home", url: "/" },
@@ -151,6 +168,16 @@ export default async function ArticlePage({
           { name: article.title },
         ])}
       />
+      {article.draft && draftPreviewEnabled() && (
+        <div
+          role="status"
+          className="sticky top-0 z-50 border-b-2 border-amber-500 bg-amber-100 px-4 py-2.5 text-center text-sm font-semibold tracking-wide text-amber-950 dark:bg-amber-950 dark:text-amber-100"
+        >
+          DRAFT — not published. Visible only in development; excluded from the
+          sitemap, the RSS feed and every archive, and served noindex.
+        </div>
+      )}
+
       <Section spacing="sm">
         <Breadcrumbs
           items={[

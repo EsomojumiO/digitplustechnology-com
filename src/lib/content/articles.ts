@@ -11,8 +11,21 @@
  *   getFeaturedArticles(n?): ArticleMeta[]
  *   getRelatedArticles(slug, n?): ArticleMeta[]
  *
- * Server-only (reads the filesystem at build time). Drafts are excluded from
- * every query here, there is no public path to a draft.
+ * Server-only (reads the filesystem at build time).
+ *
+ * DRAFTS. Every list query here — and therefore the hub, category and tag
+ * archives, related rails, sitemap.ts and rss.xml, all of which go through
+ * getAllArticles() — returns published articles ONLY, in every environment.
+ * That is the property that keeps a draft out of the sitemap and the feed, and
+ * it is deliberately not configurable.
+ *
+ * The single exception is getArticleBySlug(), which will return a draft when
+ * draftPreviewEnabled() is true, so a draft can be reviewed at its own URL
+ * before publication. The gate is NODE_ENV !== "production" and nothing else:
+ * no config key, no env var, no query parameter. A production build cannot be
+ * made to serve a draft by changing a setting, because there is no setting.
+ * The article page additionally renders drafts noindex and shows a banner, so
+ * a draft is still marked even if this gate is ever wrong.
  */
 
 import "server-only";
@@ -76,6 +89,17 @@ function toArticle(entry: RawEntry): Article {
   };
 }
 
+/**
+ * Is draft preview available in this environment?
+ *
+ * NODE_ENV is set by the toolchain — `next build` forces "production" — so this
+ * cannot be flipped from a dashboard or a .env file the way a custom flag could.
+ * That is the whole reason it is the gate.
+ */
+export function draftPreviewEnabled(): boolean {
+  return process.env.NODE_ENV !== "production";
+}
+
 /** Strip the body for list/card contexts. */
 function toMeta(article: Article): ArticleMeta {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -103,14 +127,33 @@ export function getAllArticles(): ArticleMeta[] {
 
 /**
  * Full article (incl. raw MDX body + reading time) by slug.
- * Returns null for missing OR draft articles, there is no public draft route.
+ *
+ * Returns null for a missing article, and for a draft in production. In
+ * development a draft IS returned so it can be reviewed at its real URL; the
+ * caller is responsible for marking it (noindex + banner) — see
+ * app/insights/[slug]/page.tsx.
  */
 export function getArticleBySlug(slug: string): Article | null {
   const entry = readEntry(COLLECTION, slug);
   if (!entry) return null;
   const article = toArticle(entry);
-  if (article.draft) return null;
+  if (article.draft && !draftPreviewEnabled()) return null;
   return article;
+}
+
+/**
+ * Slugs of draft articles, for generateStaticParams only.
+ *
+ * Empty in production, so the route's dynamicParams=false continues to 404
+ * every draft there. Not exported through lib/content's public index: this is
+ * a build-time detail of the article route, not part of the CMS seam.
+ */
+export function getDraftSlugsForPreview(): string[] {
+  if (!draftPreviewEnabled()) return [];
+  return readCollection(COLLECTION)
+    .map(toArticle)
+    .filter((a) => a.draft)
+    .map((a) => a.slug);
 }
 
 /** Published articles in a category (by category SLUG), newest first. */
