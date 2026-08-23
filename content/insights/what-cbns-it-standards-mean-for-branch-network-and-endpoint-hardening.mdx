@@ -1,7 +1,7 @@
 ---
 title: "What CBN's IT Standards Mean for Branch Network and Endpoint Hardening"
 slug: "what-cbns-it-standards-mean-for-branch-network-and-endpoint-hardening"
-excerpt: "The CBN's 2024 Risk-Based Cybersecurity Framework sets minimum requirements for banks and payment service banks. What it actually says, section by section — and what a bank has to build at branch level to satisfy it."
+excerpt: "The CBN's 2024 Risk-Based Cybersecurity Framework sets minimum requirements for banks and payment service banks. What it actually says, section by section, and what a bank has to build at branch level to satisfy it."
 category: "Industry & Policy"
 tags:
   - "cbn compliance"
@@ -28,7 +28,7 @@ The governing document is the **CBN Risk-Based Cybersecurity Framework and Guide
 
 Its scope is stated precisely, and it is narrower than "Nigerian financial institutions". The framework "shall apply to the following financial institutions under the purview of Banking Supervision Department – Commercial banks, Merchant banks, Non-Interest banks and Payment Service banks, which are hereinafter jointly referred to as Supervised Financial Institutions (SFIs)" (Introduction). If your institution is not one of those four, this instrument is not the one that binds you: Other Financial Institutions are addressed by the separate CBN Risk-Based Cybersecurity Framework and Guidelines for Other Financial Institutions (2022). The 2024 framework states that it replaces the October 2018 Risk-Based Cybersecurity Framework and Guidelines for Deposit Money Banks and Payment Service Providers, and that it takes account of BOFIA 2020 and the NDPA 2023 (Introduction).
 
-Everything below separates two things that are easy to blur. **What the framework requires** is cited to a section. **What a bank has to build to satisfy it at branch level** is our engineering view, and is labelled as such — the word "branch" does not appear anywhere in the framework, so any branch-specific design is an implementation choice, not a mandate.
+Everything below separates two things that are easy to blur. **What the framework requires** is cited to a section. **What a bank has to build to satisfy it at branch level** is our engineering view, and is labelled as such: the word "branch" does not appear anywhere in the framework, so any branch-specific design is an implementation choice, not a mandate.
 
 ## What the Framework Actually Requires
 
@@ -51,7 +51,7 @@ Several requirements carry explicit frequencies, and these are the ones most oft
 - **Annual vulnerability assessments and threat analysis**; a third-party **penetration test annually** at a minimum; **internal vulnerability scans quarterly** (2.2, ii–iv).
 - **Risk assessment annually** and whenever major changes occur, documented in a Cybersecurity Risk Control Self-Assessment (2.1.2).
 - **Annual maturity evaluation using the CBN Cybersecurity Self-Assessment Tool (CSAT)** (2.4), with the self-assessment for the previous January–December "submitted to the Director, Banking Supervision Department of the Central Bank of Nigeria annually, not later than February 28", signed by the CISO after endorsement by Executive Management (2.5).
-- **Quarterly board reports** on the cybersecurity programme, with contents specified at 1.1(viii) — including cyber risk assessment updates, incidents and losses, vulnerability and penetration test reports, and status of compliance with Board-approved cyber risk thresholds (5.0, iv).
+- **Quarterly board reports** on the cybersecurity programme, with contents specified at 1.1(viii), including cyber risk assessment updates, incidents and losses, vulnerability and penetration test reports, and status of compliance with Board-approved cyber risk thresholds (5.0, iv).
 - **Cyber incidents reported within 24 hours** of detection to the Director of Banking Supervision, using the Appendix VII template (5.0, v). Appendix I defines a cyber-incident to include a financial loss exceeding 0.01% of shareholders' funds unimpaired by losses, data breach or destruction, unplanned Core Banking Application outage, and website defacement.
 - **Annual policy review**: the cybersecurity policy is reviewed "annually at a minimum, or when there are significant changes to the SFI's cyber-risk exposure" (1.1.1, iv).
 
@@ -65,7 +65,7 @@ The framework does not prescribe branch controls. It does not mandate network se
 
 What it does require, and what branch estates most often fail, is inventory and topology. An SFI shall "maintain an up-to-date inventory of all authorised IT assets on-premises and in cloud infrastructure… such as workstations, laptops, ATMs, POS, network switches, routers, firewall, printers, scanners, photocopiers, IP Phones, Mobile devices, surveillance cameras" (Appendix II, 1.1, a), "maintain an approved up-to-date network topology diagram of wired and wireless networks irrespective of location" (Appendix II, 1.1, i), and "maintain a catalogue of all network connections to regulatory authorities, switches, third parties and wholesale customers" (Appendix II, 1.1, j).
 
-That phrase — *irrespective of location* — is where a multi-site bank's obligation and its branch reality collide. The rest of this article is our answer to that collision. It is engineering guidance, not regulation.
+That phrase, *irrespective of location*, is where a multi-site bank's obligation and its branch reality collide. The rest of this article is our answer to that collision. It is engineering guidance, not regulation.
 
 ## Our View: Segmenting the Branch Network
 
@@ -93,13 +93,13 @@ Monitoring requirements are specific. SFIs shall "establish a non-intrusive cont
 
 Patch management is set out at Appendix III, 1.9: specify responsibilities and timelines for remediation by category (a); "scan patches for malware prior to application" (b); "deploy security updates promptly after thorough testing and in accordance with its Patch Management Policy" (c); confirm patches applied successfully after deployment (d); and ensure the process is "audited regularly and reports presented to Senior Management" (e).
 
-**Our addition.** Set patch timelines by branch risk tier as well as vulnerability severity, run a test-then-deploy ring so updates are validated before they reach branch endpoints, and keep a written record of compensating controls for legacy systems that cannot be patched — tighter access scoping, enhanced monitoring — rather than leaving the gap undocumented. Synchronise time across all sites so logs correlate; skewed clocks make an incident timeline unprovable, which matters directly against the 24-hour reporting duty at 5.0(v).
+**Our addition.** Set patch timelines by branch risk tier as well as vulnerability severity, run a test-then-deploy ring so updates are validated before they reach branch endpoints, and keep a written record of compensating controls for legacy systems that cannot be patched (tighter access scoping, enhanced monitoring) rather than leaving the gap undocumented. Synchronise time across all sites so logs correlate; skewed clocks make an incident timeline unprovable, which matters directly against the 24-hour reporting duty at 5.0(v).
 
 Budget honesty belongs here too. FX pressure means premium tooling cannot be deployed uniformly across dozens of sites. Concentrate logging depth and patch automation where transaction risk is highest, and document that prioritisation as a deliberate risk-based choice. The framework's own logic supports this: the risk management system runs on identification, assessment, measurement, mitigation and monitoring (2.1.1–2.1.5), and mitigation measures are to be "consistent with the criticality of information assets" (2.1.4).
 
 ## Operating the Controls
 
-Controls decay without ownership. The workable split is that a central security team maintains the baselines, regional or branch IT executes and reports, and compliance holds the evidence — with an escalation path and a named owner for each deviation.
+Controls decay without ownership. The workable split is that a central security team maintains the baselines, regional or branch IT executes and reports, and compliance holds the evidence, with an escalation path and a named owner for each deviation.
 
 The artefact that makes an examination survivable is a control matrix mapping each framework requirement to its implementation and its evidence source. Build it against the seven parts and the appendices, not against a remembered summary, and populate the annual and quarterly obligations first: they have dates attached, and a missed 28 February CSAT submission or a late 24-hour incident report is a discrete, provable failure in a way that a thin baseline is not.
 
@@ -115,7 +115,7 @@ It applies to commercial banks, merchant banks, non-interest banks and payment s
 
 ### What does the framework require at branch level specifically?
 
-Nothing branch-specific — the word does not appear in it. What binds a branch estate are requirements that apply irrespective of location: an up-to-date inventory of all authorised IT assets including workstations, ATMs, POS, switches, routers and surveillance cameras (Appendix II, 1.1, a); an approved current network topology diagram of wired and wireless networks "irrespective of location" (Appendix II, 1.1, i); centrally managed security policies that users cannot disable locally (Appendix III, 1.5, b); and hardening standards maintained across servers, ATMs, workstations and network devices (Appendix III, 1.5, d).
+Nothing branch-specific: the word does not appear in it. What binds a branch estate are requirements that apply irrespective of location: an up-to-date inventory of all authorised IT assets including workstations, ATMs, POS, switches, routers and surveillance cameras (Appendix II, 1.1, a); an approved current network topology diagram of wired and wireless networks "irrespective of location" (Appendix II, 1.1, i); centrally managed security policies that users cannot disable locally (Appendix III, 1.5, b); and hardening standards maintained across servers, ATMs, workstations and network devices (Appendix III, 1.5, d).
 
 ### What are the reporting deadlines?
 

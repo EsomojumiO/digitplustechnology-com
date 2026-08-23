@@ -18,8 +18,15 @@
  *   6. Only the winning fonts load
  *   7. No retired classnames
  *   8. Hero headline line budget: <=2 desktop / <=3 mobile
+ *   9. Em dash budget per article: <=1 per 400 words (content, not rendered)
+ *
+ * Check 9 reads content/insights/*.mdx directly and runs before the browser
+ * launches, so it reports even without a Playwright browser installed.
  */
 import { chromium, type Page } from "playwright";
+import fs from "node:fs";
+import path from "node:path";
+import { allCtaLabels } from "../src/lib/cta.ts";
 
 const BASE = process.argv[2] ?? "http://localhost:4310";
 
@@ -287,12 +294,12 @@ async function checkRoute(page: Page, route: string) {
   // every PRIMARY (orange-fill) CTA must carry a label from the canonical map
   // (dynamic "Talk to a …/Reach our …" matched by prefix). Secondary/nav links
   // aren't constrained; the orange fill is the primary intent per viewport.
-  const APPROVED_CTA = new Set([
-    "Request a proposal",
-    "Send your brief",
-    "Get this working in your business",
-    "Start a conversation",
-    "Get a proposal",
+  // Read from the single source of truth. This used to be a hand-copied
+  // duplicate of `ctaLabels`, which is two records of one fact with nothing
+  // keeping them aligned: adding a label in cta.ts failed the gate until
+  // someone remembered to edit this list too. Now a new intent is one edit.
+  const APPROVED_CTA = new Set<string>([
+    ...allCtaLabels,
     "Subscribe", // newsletter — a legitimate orange action, not a page CTA
   ]);
   // "Talk to " not "Talk to a " — the sector labels carry their own article, so
@@ -355,6 +362,69 @@ async function checkHeadline(page: Page, route: string, width: number) {
   const budget = width <= 767 ? 3 : 2;
   if (lines > budget) fail(route, "headline-lines", `${lines} lines at ${width}px (budget ${budget})`);
 }
+
+/* ---------------------------------------------------------------------------
+   9. Em dash budget, PER ARTICLE.
+   The corpus average is the wrong unit and hides the problem: it sits at 0.58
+   per 400 words, inside budget, while leasing-vs-buying-it-equipment runs 9.16.
+   An average passes because 45 clean articles outvote 7 bad ones. Budget is
+   therefore enforced on each file.
+
+   Content-only, so it runs before Chromium launches and reports even on a
+   machine with no Playwright browser installed.
+   --------------------------------------------------------------------------- */
+const EM_DASH_PER_400 = 1;
+const INSIGHTS_DIR = path.join(import.meta.dirname, "..", "content", "insights");
+
+/**
+ * No exemptions. The CBN article was briefly held out here on the theory that a
+ * file nobody may restyle should not redden the gate; the em dashes turned out
+ * to be ordinary connective punctuation that a comma, colon or bracket replaced
+ * without touching a single citation or quoted passage. An exemption would have
+ * hidden a fixable problem behind a rule about a different problem.
+ *
+ * If a future em dash sits inside a statutory quotation it must stay, and the
+ * fix is to exempt that ONE file with the quotation named in a comment — not to
+ * keep a standing list.
+ */
+const EM_DASH_EXEMPT = new Set<string>([]);
+
+function checkEmDashBudget() {
+  if (!fs.existsSync(INSIGHTS_DIR)) return;
+  for (const file of fs.readdirSync(INSIGHTS_DIR).filter((f) => f.endsWith(".mdx"))) {
+    const slug = file.replace(/\.mdx$/, "");
+    if (EM_DASH_EXEMPT.has(slug)) continue;
+    const body = fs
+      .readFileSync(path.join(INSIGHTS_DIR, file), "utf8")
+      .replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n/, "")
+      .replace(/```[\s\S]*?```/g, " ");
+    const words = body.split(/\s+/).filter(Boolean).length;
+    if (!words) continue;
+    const dashes = (body.match(/—/g) ?? []).length;
+    const rate = (dashes / words) * 400;
+    if (rate > EM_DASH_PER_400) {
+      fail(
+        `/insights/${slug}`,
+        "em-dash-budget",
+        `${rate.toFixed(2)} per 400 words (${dashes} in ${words}); budget ${EM_DASH_PER_400.toFixed(2)}`,
+      );
+    }
+  }
+}
+
+checkEmDashBudget();
+
+// Report the content findings before launching Chromium. The browser step can
+// fail for environmental reasons (no Playwright browser installed), and when it
+// does, everything already found would otherwise die with it unreported.
+const contentFailures = failures.length;
+console.log(
+  contentFailures === 0
+    ? "content checks: PASS — em dash budget met by every article"
+    : `content checks: ${contentFailures} failure(s) — em dash budget exceeded:`,
+);
+for (const f of failures) console.log(`    ${f.route}  [${f.check}] ${f.detail}`);
+console.log("");
 
 const browser = await chromium.launch();
 const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
