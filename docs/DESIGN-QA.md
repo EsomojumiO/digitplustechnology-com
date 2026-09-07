@@ -1,3 +1,15 @@
+> ## ⚠️ SUPERSEDED — kept as history, do not build from this
+>
+> This documents the **dark-default Raycast-style reskin of 2026-06-02**, which was
+> later abandoned. Nothing in it describes the shipped site. Specifically, the site is
+> now **light-only** (`color-scheme: light`; dark token values are a hard failure in
+> `npm run gate:conformance`), `NetworkField` no longer exists, and the aurora, grain
+> and `route-enter` treatments are all on the gate's `RETIRED` list.
+>
+> Current sources of truth: **`docs/redesign/14-apple-light-spec.md`** (visual spec),
+> `docs/DECISIONS.md` (binding decisions), `docs/DESIGN-AUDIT.md` (2026-09-07 HIG audit),
+> `.claude/skills/restrained-futurism/SKILL.md` (the design language).
+
 # Design QA — Raycast-grade Motion Revamp (dark-default)
 
 Date: 2026-06-02 · Scope: dark-first reskin + site-wide motion system + signature network

@@ -8,28 +8,11 @@ import { Button, Container } from "@/components/ui";
 import { cn } from "@/lib/utils";
 import { mainNav, siteConfig, type NavItem } from "@/lib/site";
 import { Logo } from "./Logo";
+import { ChevronDown, Close, ExternalArrow, Menu, Phone } from "@/components/ui/icons";
 
 /* ---------------------------------------------------------------------------
    Small chevron icon (pixel-aligned, consistent stroke).
    --------------------------------------------------------------------------- */
-function Chevron({ className }: { className?: string }) {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 16 16"
-      fill="none"
-      className={cn("h-3.5 w-3.5", className)}
-    >
-      <path
-        d="M4 6l4 4 4-4"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
 
 /* ---------------------------------------------------------------------------
    Desktop dropdown, accessible: hover + focus open, Escape closes, arrow-key
@@ -44,7 +27,7 @@ function Chevron({ className }: { className?: string }) {
  */
 function NavBadge({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-flex shrink-0 items-center rounded-full border border-hairline px-2 py-0.5 text-[0.6875rem] font-medium leading-none text-muted">
+    <span className="inline-flex shrink-0 items-center rounded-full border border-hairline px-2 py-0.5 text-caption font-medium leading-none text-muted">
       {children}
     </span>
   );
@@ -53,9 +36,18 @@ function NavBadge({ children }: { children: React.ReactNode }) {
 function DesktopDropdown({
   item,
   active,
+  align = "start",
 }: {
   item: NavItem;
   active: boolean;
+  /**
+   * Which edge the panel hangs from. `max-width` clamps a panel's width but not
+   * its left edge, so a 34rem panel anchored `left-0` to a trigger near the end
+   * of the rail runs past the viewport — at a 200% page zoom the closed panels
+   * alone pushed the document to 1934px against a 1440px viewport, and the page
+   * scrolled sideways with nothing open. Trailing items hang from the right.
+   */
+  align?: "start" | "end";
 }) {
   const [open, setOpen] = React.useState(false);
   const closeTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -110,7 +102,7 @@ function DesktopDropdown({
         )}
       >
         {item.label}
-        <Chevron
+        <ChevronDown size={14}
           className={cn(
             "text-muted transition-transform duration-[var(--dur-fast)]",
             open && "rotate-180",
@@ -133,7 +125,8 @@ function DesktopDropdown({
           // Local layer inside the header's stacking context (the header is one
           // already — sticky + z-index + backdrop-filter), so this only has to
           // beat its siblings in the nav rail, never the page.
-          "absolute left-0 top-full z-dropdown pt-2",
+          "absolute top-full z-dropdown pt-2",
+          align === "end" ? "right-0" : "left-0",
           "transition-[opacity,transform] duration-[var(--dur-base)] ease-[var(--ease-out)]",
           open
             ? "pointer-events-auto translate-y-0 opacity-100"
@@ -163,20 +156,7 @@ function DesktopDropdown({
                   {child.label}
                   {child.badge && <NavBadge>{child.badge}</NavBadge>}
                   {child.external && (
-                    <svg
-                      aria-hidden="true"
-                      viewBox="0 0 16 16"
-                      fill="none"
-                      className="h-3 w-3 text-muted"
-                    >
-                      <path
-                        d="M6 3h7v7M13 3l-8 8"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
+                    <ExternalArrow size={12} className="text-muted" />
                   )}
                 </span>
                 {child.description && (
@@ -364,19 +344,12 @@ function MobileMenu({
             onClick={onClose}
             aria-label="Close menu"
             className={cn(
-              "grid h-10 w-10 place-items-center rounded-md text-muted",
+              "grid h-11 w-11 place-items-center rounded-md text-muted",
               "transition-colors duration-[var(--dur-fast)] hover:bg-surface hover:text-text",
               "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green",
             )}
           >
-            <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5">
-              <path
-                d="M6 6l12 12M18 6L6 18"
-                stroke="currentColor"
-                strokeWidth="1.75"
-                strokeLinecap="round"
-              />
-            </svg>
+            <Close size={20} />
           </button>
         </div>
 
@@ -391,7 +364,7 @@ function MobileMenu({
                   href={item.href}
                   onClick={onClose}
                   className={cn(
-                    "block rounded-lg px-3 py-2.5 text-body font-medium text-text",
+                    "flex min-h-11 items-center rounded-lg px-3 py-2.5 text-body font-medium text-text",
                     "transition-colors duration-[var(--dur-fast)] hover:bg-surface",
                   )}
                 >
@@ -407,7 +380,7 @@ function MobileMenu({
                           target={child.external ? "_blank" : undefined}
                           rel={child.external ? "noreferrer noopener" : undefined}
                           className={cn(
-                            "block rounded-md px-3 py-2 text-small text-muted",
+                            "flex min-h-11 items-center rounded-md px-3 py-2 text-small text-muted",
                             "transition-colors duration-[var(--dur-fast)] hover:bg-surface hover:text-text",
                           )}
                         >
@@ -436,7 +409,7 @@ function MobileMenu({
                 rel={"external" in r && r.external ? "noreferrer noopener" : undefined}
                 onClick={onClose}
                 className={cn(
-                  "rounded-lg border border-hairline px-2 py-2.5 text-center text-caption font-medium text-muted",
+                  "flex min-h-11 flex-col items-center justify-center rounded-lg border border-hairline px-2 py-2.5 text-center text-caption font-medium text-muted",
                   "transition-colors duration-[var(--dur-fast)] hover:border-hairline-hover hover:text-text",
                   "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green",
                 )}
@@ -458,18 +431,6 @@ function MobileMenu({
    Contact menu — replaces a bare phone number with a tidy ghost icon-button
    that opens Call / WhatsApp / Email. Keyboard + outside-click dismissible.
    --------------------------------------------------------------------------- */
-function PhoneIcon() {
-  return (
-    <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" className="h-4 w-4">
-      <path
-        d="M6.5 3.5 4 4c-.7 2 .3 5.2 3 8s6 3.7 8 3l.5-2.5-3-1.5-1.4 1.4c-1.2-.6-2.3-1.7-2.9-2.9L9.6 5.5 6.5 3.5Z"
-        stroke="currentColor"
-        strokeWidth="1.4"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
 
 const CONTACT_ROWS = [
   { label: "Call", get: (v: typeof siteConfig) => v.phone, href: (v: typeof siteConfig) => v.phoneHref, mono: true },
@@ -508,12 +469,12 @@ function ContactMenu() {
         aria-label="Contact options"
         onClick={() => setOpen((o) => !o)}
         className={cn(
-          "grid h-9 w-9 place-items-center rounded-lg border border-hairline text-muted",
+          "grid h-11 w-11 place-items-center rounded-lg border border-hairline text-muted",
           "transition-colors duration-[var(--dur-fast)] hover:border-hairline-hover hover:text-text",
           "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green",
         )}
       >
-        <PhoneIcon />
+        <Phone />
       </button>
       {/* Disclosure, not the ARIA menu pattern — see DesktopDropdown. */}
       <div
@@ -522,7 +483,9 @@ function ContactMenu() {
         className={cn(
           // Local layer — see DesktopDropdown. The header's stacking context
           // carries the whole dropdown above the page for free.
-          "absolute right-0 top-full z-dropdown mt-2 w-60 rounded-xl border border-hairline bg-surface-raised p-1.5 shadow-[var(--shadow-lg)]",
+          // w-72, not w-60: at 240px the row left 174px for the value and the
+          // email address needs ~180px, so it wrapped to two lines.
+          "absolute right-0 top-full z-dropdown mt-2 w-72 rounded-xl border border-hairline bg-surface-raised p-1.5 shadow-[var(--shadow-lg)]",
           "transition-[opacity,transform] duration-[var(--dur-base)] ease-[var(--ease-out)]",
           open
             ? "pointer-events-auto translate-y-0 opacity-100"
@@ -543,10 +506,19 @@ function ContactMenu() {
               "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green",
             )}
           >
-            <span className="text-small font-medium text-text">{r.label}</span>
+            {/* `shrink-0` + `overflow-wrap: normal` on the label. The global
+                `overflow-wrap: anywhere` (globals.css §4) lowers min-content so
+                grid and flex tracks can shrink, which is what makes the site
+                survive a 200% text size — but in a `justify-between` row it also
+                let flex squeeze these cells until the five-letter word "Email"
+                broke across two lines. A fixed UI label should never break; the
+                value beside it still may. */}
+            <span className="shrink-0 text-small font-medium text-text [overflow-wrap:normal]">
+              {r.label}
+            </span>
             <span
               className={cn(
-                "text-caption text-muted",
+                "text-right text-caption text-muted",
                 "mono" in r && r.mono && "font-mono",
               )}
             >
@@ -592,6 +564,10 @@ export function Header() {
                   key={item.href}
                   item={item}
                   active={isActive(item.href)}
+                  // Trailing items open leftward so the panel stays on screen.
+                  align={
+                    mainNav.indexOf(item) >= mainNav.length - 2 ? "end" : "start"
+                  }
                 />
               ) : (
                 <li key={item.href}>
@@ -638,19 +614,12 @@ export function Header() {
             aria-label="Open menu"
             aria-expanded={mobileOpen}
             className={cn(
-              "grid h-10 w-10 place-items-center rounded-md text-text lg:hidden",
+              "grid h-11 w-11 place-items-center rounded-md text-text lg:hidden",
               "transition-colors duration-[var(--dur-fast)] hover:bg-surface",
               "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green",
             )}
           >
-            <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5">
-              <path
-                d="M4 7h16M4 12h16M4 17h16"
-                stroke="currentColor"
-                strokeWidth="1.75"
-                strokeLinecap="round"
-              />
-            </svg>
+            <Menu size={20} />
           </button>
         </div>
       </Container>

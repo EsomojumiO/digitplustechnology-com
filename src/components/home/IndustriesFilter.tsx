@@ -68,7 +68,7 @@ export function IndustriesFilter({ industries }: IndustriesFilterProps) {
               onClick={() => setActive(g.id)}
               aria-pressed={isActive}
               className={cn(
-                "relative rounded-full border px-4 py-2 text-caption font-medium",
+                "relative inline-flex min-h-11 items-center rounded-full border px-4 py-2 text-caption font-medium sm:min-h-9",
                 "transition-[color,border-color,background-color] duration-[var(--dur-base)] ease-[var(--ease-out)]",
                 "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green",
                 isActive

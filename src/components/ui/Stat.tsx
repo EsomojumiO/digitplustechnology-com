@@ -22,7 +22,7 @@ export function Stat({
 }: StatProps) {
   return (
     <div className={cn("flex flex-col gap-1.5", className)} {...props}>
-      <span className="font-mono text-[clamp(2.25rem,1.8rem+2vw,3rem)] font-medium leading-none tracking-[-0.03em] tabular-nums text-text">
+      <span className="font-mono text-stat font-medium tabular-nums text-text">
         {value}
       </span>
       <span className="text-caption font-medium text-muted">

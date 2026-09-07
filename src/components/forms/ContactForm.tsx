@@ -144,7 +144,7 @@ export function ContactForm({ className }: ContactFormProps) {
       <div className="flex flex-col gap-5">
         {serverError && <FormStatus status="error">{serverError}</FormStatus>}
 
-        <div className="grid gap-5 sm:grid-cols-2">
+        <div className="grid gap-5 sm:grid-cols-2 [&>*]:min-w-0">
           <Field id="contact-fullName" label="Full name" required error={errors.fullName}>
             {(aria) => (
               <Input {...aria} name="fullName" autoComplete="name" maxLength={120} />
@@ -164,7 +164,7 @@ export function ContactForm({ className }: ContactFormProps) {
           </Field>
         </div>
 
-        <div className="grid gap-5 sm:grid-cols-2">
+        <div className="grid gap-5 sm:grid-cols-2 [&>*]:min-w-0">
           <Field id="contact-phone" label="Phone" hint="Optional" error={errors.phone}>
             {(aria) => (
               <Input

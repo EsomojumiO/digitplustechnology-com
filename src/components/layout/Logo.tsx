@@ -24,7 +24,9 @@ export function Logo({ className }: LogoProps) {
       href="/"
       aria-label={`${siteConfig.shortName}, home`}
       className={cn(
-        "group inline-flex items-center gap-2.5 rounded-md",
+        // min-h-11 so the brand link is a real target; it sits in an
+        // items-center row, so the extra height costs no layout.
+        "group inline-flex min-h-11 items-center gap-2.5 rounded-md",
         "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green",
         className,
       )}
@@ -46,7 +48,7 @@ export function Logo({ className }: LogoProps) {
         className={cn(
           // Ink, not `text-brand`: --brand is now the light #f5f5f7 surface
           // token, so text-brand would render near-white on white.
-          "font-display text-[1.0625rem] font-bold uppercase tracking-[0.02em] leading-none",
+          "font-display text-wordmark font-bold uppercase tracking-[0.02em]",
           "text-text",
         )}
       >

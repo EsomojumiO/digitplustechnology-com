@@ -1,5 +1,6 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
+import { ChevronRight } from "./icons";
 
 export interface BreadcrumbItem {
   label: string;
@@ -12,24 +13,6 @@ export interface BreadcrumbsProps
   items: BreadcrumbItem[];
 }
 
-function Separator() {
-  return (
-    <svg
-      width="14"
-      height="14"
-      viewBox="0 0 16 16"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      className="text-muted"
-    >
-      <path d="M6 4l4 4-4 4" />
-    </svg>
-  );
-}
 
 /**
  * Breadcrumbs, accessible trail. Renders an ordered list inside a labelled
@@ -59,7 +42,7 @@ export function Breadcrumbs({ items, className, ...props }: BreadcrumbsProps) {
                   {item.label}
                 </span>
               )}
-              {!isLast ? <Separator /> : null}
+              {!isLast ? <ChevronRight size={14} className="text-muted" /> : null}
             </li>
           );
         })}

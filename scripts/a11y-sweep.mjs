@@ -2,13 +2,20 @@ import { chromium } from "playwright";
 import { AxeBuilder } from "@axe-core/playwright";
 
 const BASE = process.argv[2] ?? "http://localhost:4310";
-const ROUTES = ["/","/services","/services/it-procurement","/industries","/industries/government","/locations","/locations/abuja","/about","/approach","/ecosystem","/insights","/reports","/contact","/privacy","/terms"];
+// Content templates were absent from this list, so /insights/[slug] and
+// /reports/[slug] — the longest-form surfaces on the site — were never scanned.
+const ROUTES = ["/","/services","/services/it-procurement","/industries","/industries/government","/locations","/locations/abuja","/about","/approach","/ecosystem","/insights","/reports","/contact","/privacy","/terms","/insights/what-an-it-sla-should-cover","/insights/category/procurement","/insights/case-studies","/reports/nigeria-enterprise-it-hardware-price-index-q2-2026","/this-route-does-not-exist"];
+
+// axe is run at both widths. A mobile layout is a different tree: the drawer nav
+// replaces the rail, grids collapse, and elements that were side by side stack.
+const WIDTHS = [1440, 390];
 
 const browser = await chromium.launch();
 let total = 0;
 
 for (const route of ROUTES) {
-  const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+ for (const width of WIDTHS) {
+  const ctx = await browser.newContext({ viewport: { width, height: 900 } });
   const page = await ctx.newPage();
   await page.goto(BASE + route, { waitUntil: "load" });
   await page.evaluate(() => document.fonts.ready);
@@ -38,11 +45,12 @@ for (const route of ROUTES) {
   const res = await new AxeBuilder({ page }).withTags(["wcag2a","wcag2aa","wcag21a","wcag21aa"]).analyze();
   total += res.violations.length;
   const mark = res.violations.length === 0 ? "OK " : "!! ";
-  console.log(`${mark}${route.padEnd(30)} violations=${res.violations.length}${stillAnimating ? "  (WARN: animations still running — result unreliable)" : ""}`);
+  console.log(`${mark}${route.padEnd(56)} @${String(width).padEnd(4)} violations=${res.violations.length}${stillAnimating ? "  (WARN: animations still running — result unreliable)" : ""}`);
   for (const v of res.violations) console.log(`      [${v.impact}] ${v.id} x${v.nodes.length}`);
   await ctx.close();
+ }
 }
 
-console.log(`\naxe: ${ROUTES.length} templates, ${total} violation(s)`);
+console.log(`\naxe: ${ROUTES.length} templates x ${WIDTHS.length} widths, ${total} violation(s)`);
 await browser.close();
 process.exit(total === 0 ? 0 : 1);

@@ -16,7 +16,8 @@ export interface EyebrowProps
  * preview review: label inside a rounded-full hairline border, green text,
  * 12-13px, comfortable padding. It replaces the old thin-rule-above idiom,
  * which read as decoration rather than as a label and needed a second element
- * (AnimatedRule) to carry it.
+ * to carry it. That element (AnimatedRule, "the Connective Line") went unused
+ * for long enough that it was deleted; the `.reveal-rule` styles went with it.
  *
  * One component, no per-page variants. Inline-flex so the border hugs the text
  * and the pill stays centred inside SectionHeading's centred column.
@@ -40,7 +41,9 @@ export function Eyebrow({
         // pill the label needs to stay legible, and 12px semibold in green on
         // white starts to look like fine print.
         "inline-flex w-fit items-center rounded-full border border-hairline",
-        "px-3 py-1 text-[0.8125rem] font-semibold leading-none text-accent-green",
+        // text-small IS 0.8125rem — the arbitrary value was a duplicate of the
+        // ladder step, not a deviation from it.
+        "px-3 py-1 text-small font-semibold leading-none text-accent-green",
         className,
       )}
       {...props}

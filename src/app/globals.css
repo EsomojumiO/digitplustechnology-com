@@ -90,6 +90,24 @@
   --brand-foreground: #1d1d1f;
   --brand-subtle: rgb(45 93 73 / 0.08); /* faint green tint */
 
+  /* Danger / error. Added 2026-09-07: there was no error token, so four form
+     files each reached for a different raw Tailwind red (red-500/600/700/50),
+     which put the one state the palette gate cannot see outside the system.
+     Computed on both canvases:
+       --danger        #b3261e  6.54:1 on #ffffff, 6.00:1 on #f5f5f7  (text)
+       --danger-border #d13c31  4.77:1 / 4.38:1                       (non-text, floor 3:1)
+       --danger-subtle #fdf2f1  carries --danger at 5.96:1 */
+  /* Hero eyebrow, on the photographic scrim only. Not a canvas colour: it is
+     the one green that clears 4.5:1 against a worst-case scrimmed image pixel,
+     verified per slide by scripts/hero-contrast.mjs. It lived as a bare
+     `text-[#5fbf94]` in HeroCarousel, which made the first coloured word on the
+     site a hex in no ramp. Named here rather than re-picked. */
+  --hero-eyebrow: #5fbf94;
+
+  --danger: #b3261e;
+  --danger-border: #d13c31;
+  --danger-subtle: #fdf2f1;
+
   /* Elevation — soft neutral shadows. Depth comes from whitespace and value;
      `md` is a hover state only, never a resting one. No glows. */
   --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.04);
@@ -97,6 +115,23 @@
   --shadow-lg: 0 24px 56px -20px rgb(0 0 0 / 0.16);
 
   color-scheme: light;
+}
+
+/* Increased contrast. The default palette already clears 4.5:1 everywhere, so
+   this is an accommodation rather than a fix: when someone turns on Increase
+   Contrast the site previously changed nothing at all. Muted ink steps from
+   5.07:1 to 8.67:1, hairlines from 1.51:1 to 5.07:1 (reusing the known-good
+   muted value), and both accents step to their darker ramp entries. */
+@media (prefers-contrast: more) {
+  :root {
+    --text-muted: #4b4b50;        /* 8.67:1 on white, 7.96:1 on #f5f5f7 */
+    --text-faint: #4b4b50;
+    --border-hairline: #6e6e73;   /* 5.07:1 — dividers become plainly visible */
+    --border-hairline-hover: #1d1d1f;
+    --accent: var(--accent-700);  /* #8c3820, 7.77:1 with a white label */
+    --accent-green: #20493b;      /* Forest-600, 10.11:1 */
+    --danger: #8f1d17;
+  }
 }
 
 /* ---------------------------------------------------------------------------
@@ -158,6 +193,22 @@
   --text-h1--line-height: 1.07;
   --text-h1--letter-spacing: -0.02em;
   --text-h1--font-weight: 700;
+  /* Two sizes that sit OUTSIDE the nine-step ladder on purpose, named here so
+     they are still part of the system rather than arbitrary values inline.
+     A ladder step is for text that shares a role with other text; these two are
+     single-purpose optical sizes:
+       --text-wordmark  the DIGITPLUS lockup. 17px is an optical match to the
+                        mark beside it, not a step anything else should use.
+       --text-stat      the figure in <Stat>. A display number, tabular and
+                        mono, tracked tighter than any heading.
+     Both are rem/clamp based, so unlike the `text-[15px]` they replace they
+     still respond to the reader's font-size setting. */
+  --text-wordmark: 1.0625rem;
+  --text-wordmark--line-height: 1;
+  --text-stat: clamp(2.25rem, 1.8rem + 2vw, 3rem);
+  --text-stat--line-height: 1;
+  --text-stat--letter-spacing: -0.03em;
+
   --text-display: clamp(2.75rem, 1.9rem + 4.3vw, 5rem);
   --text-display--line-height: 1.02;
   --text-display--letter-spacing: -0.025em;
@@ -188,6 +239,11 @@
   --color-brand-hover: var(--brand-hover);
   --color-brand-foreground: var(--brand-foreground);
   --color-brand-subtle: var(--brand-subtle);
+
+  --color-hero-eyebrow: var(--hero-eyebrow);
+  --color-danger: var(--danger);
+  --color-danger-border: var(--danger-border);
+  --color-danger-subtle: var(--danger-subtle);
 
   /* Accent ramp exposed for fine control */
   --color-accent-50: var(--accent-50);
@@ -330,6 +386,17 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     line-height: 1.6;
+  /* A long unbreakable token (hello@digitplustechnology.com is 29 characters)
+     sets a box's min-content width. At a 200% user text size that one string
+     was 446px inside a 390px viewport and the page scrolled sideways.
+     `anywhere` rather than `break-word` because only `anywhere` also lowers the
+     element's MIN-CONTENT width — which is what a flex/grid item's default
+     `min-width: auto` reads, and therefore what actually lets a column shrink.
+     `break-word` permits the break but keeps the old intrinsic size, so the
+     track stays too wide and the page still scrolls.
+     It only ever breaks a word that would not fit on a line of its own, so it
+     costs nothing at ordinary sizes. Enforced by scripts/text-scaling.mjs. */
+  overflow-wrap: anywhere;
   }
 
   /* Visible green focus ring for keyboard users (high contrast on near-black) */
@@ -497,51 +564,11 @@
     border-color: var(--border-hairline);
   }
 
-  /* ---- Signature motif: "The Connective Line" ----
-     A 1px Forest-Green rule that draws itself in (scaleX 0->1) as it scrolls
-     into view — the brand's "we close the gaps" story made literal. Uses the
-     same React-independent reveal mechanism (/reveal.js toggles `.reveal-in`),
-     so it degrades to a static rule with no JS and under reduced motion.
-     Compositor-only (transform), works at every breakpoint. */
-  /* The Connective Line. Solid green, 2px, no gradient and no glow: the
-     orange->green gradient broke "orange is a fill, never an ink", and the
-     glow is banned outright on the light canvas — depth comes from value and
-     whitespace. Green carries the structure. */
-  /* No `width` here on purpose. This rule lives in @layer utilities, so it does
-     NOT out-specify a `w-10` utility — same layer, and Tailwind's generated
-     utilities are emitted at the @import, i.e. BEFORE this block, so source
-     order handed the win to `width: 100%` and every Connective Line rendered
-     full-bleed. Width is the component's business (AnimatedRule defaults to
-     w-full and callers override), where tailwind-merge resolves it properly. */
-  .reveal-rule {
-    height: 2px;
-    background: var(--accent-green);
-    transform-origin: left center;
-  }
-  /* More specific than the generic reveal-init hidden state, so it overrides the
-     translateY/opacity hide with a horizontal scale-in (staying fully opaque).
-     Same arm-on-the-way-in rule as `.reveal-init` above: `transition: none` in
-     the hidden state, so scaleX(0) snaps rather than animating out and eating
-     the entrance. The `.reveal-init` in the reveal-in selector is load-bearing —
-     it makes this (0,4,1) so it beats the generic reveal-in transition on
-     specificity rather than on source order. */
-  html.reveal-ready .reveal-rule.reveal-init:not(.reveal-in) {
-    opacity: 1;
-    transform: scaleX(0);
-    transition: none;
-  }
-  html.reveal-ready .reveal-rule.reveal-init.reveal-in {
-    transform: scaleX(1);
-    transition: transform var(--dur-slow) var(--ease-out);
-  }
-  @media (prefers-reduced-motion: reduce) {
-    html.reveal-ready .reveal-rule.reveal-init.reveal-in {
-      transition: none;
-    }
-    html.reveal-ready .reveal-rule.reveal-init:not(.reveal-in) {
-      transform: none;
-    }
-  }
+  /* "The Connective Line" (.reveal-rule) lived here: a 2px Forest-Green rule
+     that drew itself in on scroll. Removed 2026-09-07 with its only consumer,
+     src/components/motion/AnimatedRule.tsx, which had zero usages while staying
+     exported from the motion barrel. Recoverable from git if the motif is ever
+     wanted back. See docs/DESIGN-AUDIT.md M7. */
 
   /* Animated underline for text links — draws left-to-right on hover/focus.
      Background-size only (compositor-friendly), reduced-motion killed globally. */

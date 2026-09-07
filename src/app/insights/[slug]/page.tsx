@@ -8,6 +8,7 @@ import {
   Container,
   Badge,
   Prose,
+  proseMdxComponents,
   Breadcrumbs,
   SectionHeading,
   CTABand,
@@ -171,7 +172,7 @@ export default async function ArticlePage({
       {article.draft && draftPreviewEnabled() && (
         <div
           role="status"
-          className="sticky top-0 z-50 border-b-2 border-amber-500 bg-amber-100 px-4 py-2.5 text-center text-sm font-semibold tracking-wide text-amber-950 dark:bg-amber-950 dark:text-amber-100"
+          className="sticky top-0 z-toast border-b-2 border-danger-border bg-danger-subtle px-4 py-2.5 text-center text-small font-semibold tracking-wide text-danger"
         >
           DRAFT — not published. Visible only in development; excluded from the
           sitemap, the RSS feed and every archive, and served noindex.
@@ -261,7 +262,7 @@ export default async function ArticlePage({
           <FadeIn>
             <Prose as="article">
               {/* Prose styles MDX elements incl. blockquotes (pull-quote treatment). */}
-              <MDXContent source={article.body} />
+              <MDXContent source={article.body} components={proseMdxComponents} />
             </Prose>
           </FadeIn>
 

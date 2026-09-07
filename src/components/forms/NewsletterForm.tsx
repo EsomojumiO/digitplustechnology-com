@@ -116,7 +116,7 @@ export function NewsletterForm({
         </Button>
       </div>
       {error && (
-        <p id={`${id}-error`} className="text-caption text-red-600" role="alert">
+        <p id={`${id}-error`} className="text-caption text-danger" role="alert">
           {error}
         </p>
       )}

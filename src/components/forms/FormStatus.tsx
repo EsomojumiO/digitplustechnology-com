@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
+import { Check, Warning } from "@/components/ui/icons";
 
 export interface FormStatusProps {
   status: "success" | "error";
@@ -22,31 +23,15 @@ export function FormStatus({ status, children, className }: FormStatusProps) {
         "flex items-start gap-2.5 rounded-sm border px-3.5 py-3 text-small",
         status === "success"
           ? "border-accent-green/30 bg-brand-subtle text-text"
-          : "border-red-500/30 bg-red-50 text-red-700",
+          : "border-danger-border/40 bg-danger-subtle text-danger",
         className,
       )}
     >
       <span aria-hidden="true" className="mt-px shrink-0">
         {status === "success" ? (
-          <svg viewBox="0 0 20 20" className="size-4" fill="none">
-            <path
-              d="M4 10.5l3.5 3.5L16 6"
-              stroke="currentColor"
-              strokeWidth="1.75"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+<Check />
         ) : (
-          <svg viewBox="0 0 20 20" className="size-4" fill="none">
-            <path
-              d="M10 6.5v4M10 13.5h.01M10 2.5L1.5 17h17L10 2.5z"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+<Warning />
         )}
       </span>
       <div>{children}</div>

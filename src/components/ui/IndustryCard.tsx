@@ -1,5 +1,7 @@
 import * as React from "react";
+import { Link } from "next-view-transitions";
 import { cn } from "@/lib/utils";
+import { ArrowRight } from "./icons";
 
 export interface IndustryCardProps
   extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "title"> {
@@ -7,26 +9,15 @@ export interface IndustryCardProps
   title: React.ReactNode;
   blurb?: React.ReactNode;
   icon?: React.ReactNode;
+  /**
+   * Heading level for the title. The title used to be a hard-coded <span>, so
+   * it looked like a heading (text-h4) and carried a heading's job while
+   * staying out of the document outline — its sibling ServiceCard has always
+   * used <h3>. Callers set the level that fits their page.
+   */
+  headingAs?: "h2" | "h3" | "h4" | "span";
 }
 
-function ArrowIcon() {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 18 18"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      className="text-muted transition-transform duration-[var(--dur-base)] ease-[var(--ease-out)] group-hover:translate-x-1 group-hover:text-accent-green"
-    >
-      <path d="M4 9h10M10 5l4 4-4 4" />
-    </svg>
-  );
-}
 
 /**
  * IndustryCard, compact link card for a sector, with title, blurb and arrow.
@@ -36,11 +27,12 @@ export function IndustryCard({
   title,
   blurb,
   icon,
+  headingAs: Heading = "h3",
   className,
   ...props
 }: IndustryCardProps) {
   return (
-    <a
+    <Link
       href={href}
       className={cn(
         "group flex items-start gap-4 rounded-lg border border-hairline bg-surface-raised p-5",
@@ -57,13 +49,15 @@ export function IndustryCard({
         </span>
       ) : null}
       <span className="flex flex-1 flex-col gap-1">
-        <span className="text-h4 text-text">{title}</span>
+        <Heading className="text-h4 text-text">{title}</Heading>
         {blurb ? <span className="text-small text-muted">{blurb}</span> : null}
       </span>
       <span className="pt-1.5">
-        <ArrowIcon />
+        <ArrowRight
+          className="text-muted transition-transform duration-[var(--dur-base)] ease-[var(--ease-out)] group-hover:translate-x-1 group-hover:text-accent-green"
+        />
       </span>
-    </a>
+    </Link>
   );
 }
 

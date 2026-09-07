@@ -42,3 +42,6 @@ next-env.d.ts
 
 # Visual check states written by scripts/overlay-stacking.mjs
 .screenshots/
+
+# Local, per-machine Claude Code permissions — not shared
+.claude/settings.local.json

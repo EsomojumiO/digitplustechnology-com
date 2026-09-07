@@ -1,5 +1,7 @@
 import * as React from "react";
+import { Link } from "next-view-transitions";
 import { cn } from "@/lib/utils";
+import { ArrowRight } from "./icons";
 
 export interface ServiceCardProps
   extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "title"> {
@@ -8,26 +10,10 @@ export interface ServiceCardProps
   blurb?: React.ReactNode;
   /** Optional leading icon. */
   icon?: React.ReactNode;
+  /** Heading level for the title. Matches IndustryCard. */
+  headingAs?: "h2" | "h3" | "h4";
 }
 
-function ArrowIcon() {
-  return (
-    <svg
-      width="18"
-      height="18"
-      viewBox="0 0 18 18"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      className="transition-transform duration-[var(--dur-base)] ease-[var(--ease-out)] group-hover:translate-x-1"
-    >
-      <path d="M4 9h10M10 5l4 4-4 4" />
-    </svg>
-  );
-}
 
 /**
  * ServiceCard, link card with title, blurb and an arrow affordance.
@@ -38,11 +24,12 @@ export function ServiceCard({
   title,
   blurb,
   icon,
+  headingAs: Heading = "h3",
   className,
   ...props
 }: ServiceCardProps) {
   return (
-    <a
+    <Link
       href={href}
       className={cn(
         "group flex flex-col gap-3 rounded-lg border border-hairline bg-surface-raised p-6",
@@ -58,13 +45,16 @@ export function ServiceCard({
           {icon}
         </span>
       ) : null}
-      <h3 className="text-h4 text-text">{title}</h3>
+      <Heading className="text-h4 text-text">{title}</Heading>
       {blurb ? <p className="text-body text-muted measure">{blurb}</p> : null}
       <span className="mt-2 inline-flex items-center gap-1.5 text-small font-medium text-accent-green">
         Learn more
-        <ArrowIcon />
+        <ArrowRight
+          size={18}
+          className="transition-transform duration-[var(--dur-base)] ease-[var(--ease-out)] group-hover:translate-x-1"
+        />
       </span>
-    </a>
+    </Link>
   );
 }
 

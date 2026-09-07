@@ -205,6 +205,13 @@ export default async function InsightsHubPage({
 
       {/* Search island + server-rendered paginated grid */}
       <Section spacing="sm">
+        {/*
+          This section had no heading of its own, so every card's h3 was
+          announced as a subsection of the FEATURED ARTICLE's h2 above:
+          h1 > h2 "<featured title>" > h3 x12. The sr-only h2 restores a flat
+          outline. Same pattern as /approach, /services and the footer.
+        */}
+        <h2 className="sr-only">All articles</h2>
         <InsightsSearch articles={all} controlsId="insights-grid" />
 
         <div id="insights-grid" className="mt-2">
