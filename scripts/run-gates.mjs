@@ -27,6 +27,7 @@ const GATES = [
   { name: "hero-contrast", cmd: "node", args: ["scripts/hero-contrast.mjs", url] },
   { name: "internal-link-audit", cmd: "node", args: ["scripts/internal-link-audit.mjs", url] },
   { name: "overlay-stacking", cmd: "node", args: ["scripts/overlay-stacking.mjs", url] },
+  { name: "text-scaling", cmd: "node", args: ["scripts/text-scaling.mjs", url] },
 ];
 
 const failed = [];

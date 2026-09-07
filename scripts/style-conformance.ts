@@ -17,11 +17,20 @@
  *   5. Section padding from the approved scale
  *   6. Only the winning fonts load
  *   7. No retired classnames
- *   8. Hero headline line budget: <=2 desktop / <=3 mobile
+ *   8. Headline fit: hero line budget (<=2 desktop / <=3 mobile) on marketing
+ *      routes; headline DENSITY (chars per rendered line) on content detail,
+ *      where the title is editorial and its length is not a design choice
  *   9. Em dash budget per article: <=1 per 400 words (content, not rendered)
  *
  * Check 9 reads content/insights/*.mdx directly and runs before the browser
  * launches, so it reports even without a Playwright browser installed.
+ *
+ * COVERAGE (widened 2026-09-07 after docs/DESIGN-AUDIT.md). This gate used to
+ * run at 1440px only, and its route list skipped every [slug] template. Four of
+ * the six worst findings in that audit lived in exactly those two gaps:
+ * the article tables (an ungated [slug] route) and the mobile-only off-scale
+ * padding (a width this never rendered). Every check that can vary by viewport
+ * now runs at 1440 AND 390, and the content templates are in the route list.
  */
 import { chromium, type Page } from "playwright";
 import fs from "node:fs";
@@ -62,6 +71,21 @@ const ROUTES = [
   "/contact",
   "/privacy",
   "/terms",
+  "/locations/port-harcourt",
+  // Content templates. These were absent, so /insights/[slug] and
+  // /reports/[slug] — the two longest-form surfaces on the site, and the only
+  // ones rendering author-written MDX — were never checked at all. The article
+  // tables shipped with zero cell padding for exactly this reason.
+  "/insights/what-an-it-sla-should-cover",
+  "/insights/complete-guide-to-it-procurement-in-nigeria",
+  // The longest PUBLISHED article title (91 chars), so the relaxed
+  // content-detail headline budget is exercised rather than assumed. It must be
+  // a published slug: drafts 404 in a production build.
+  "/insights/it-asset-procurement-hospitals-nigeria",
+  "/insights/category/procurement",
+  "/insights/tag/sla",
+  "/insights/case-studies",
+  "/reports/nigeria-enterprise-it-hardware-price-index-q2-2026",
 ];
 
 /** Dark-theme values that must not survive the flip. */
@@ -122,10 +146,13 @@ async function dismissOverlays(page: Page) {
   await page.waitForTimeout(250);
 }
 
-async function checkRoute(page: Page, route: string) {
+async function checkRoute(page: Page, route: string, width: number) {
+  // Failures are tagged with the width they were found at: "mobile only" is a
+  // real and common shape of defect, and an untagged report hides it.
+  const label = `${route} @${width}`;
   const res = await page.goto(BASE + route, { waitUntil: "load", timeout: 45000 });
   if (!res || res.status() !== 200) {
-    fail(route, "http", `status ${res?.status()}`);
+    fail(label, "http", `status ${res?.status()}`);
     return;
   }
   await page.evaluate(() => document.fonts.ready);
@@ -134,7 +161,7 @@ async function checkRoute(page: Page, route: string) {
 
   // 2. exactly one h1
   const h1s = await page.locator("h1").count();
-  if (h1s !== 1) fail(route, "one-h1", `found ${h1s}`);
+  if (h1s !== 1) fail(label, "one-h1", `found ${h1s}`);
 
   // 6. fonts
   const fonts: string[] = await page.evaluate(() =>
@@ -142,7 +169,7 @@ async function checkRoute(page: Page, route: string) {
   );
   const allowed = new Set(["Inter", "Inter Fallback", "JetBrains Mono", "JetBrains Mono Fallback"]);
   const stray = fonts.filter((f) => !allowed.has(f));
-  if (stray.length) fail(route, "fonts", `unexpected: ${stray.join(", ")}`);
+  if (stray.length) fail(label, "fonts", `unexpected: ${stray.join(", ")}`);
 
   // 1 + 4 + 7: walk the rendered tree once
   const report = await page.evaluate(
@@ -228,7 +255,13 @@ async function checkRoute(page: Page, route: string) {
       document.querySelectorAll("*").forEach((el) => {
         if (getComputedStyle(el).backgroundColor !== "rgb(173, 69, 39)") return;
         const r = (el as HTMLElement).getBoundingClientRect();
+        // Both axes. This tested the vertical bounds only, which was invisible
+        // while the gate ran at 1440 alone: at 390 the mobile drawer is parked
+        // off-canvas with `translate-x-full`, so its CTA sat at x > innerWidth,
+        // passed the vertical test, and counted as a second orange fill on 16
+        // routes. It is not on screen.
         if (r.bottom < 0 || r.top > innerHeight || r.width === 0) return;
+        if (r.right < 0 || r.left > innerWidth) return;
         const text = (el.textContent ?? "").trim();
         oranges.push(`${el.tagName} "${text.slice(0, 16)}"`);
         // Orange links/buttons are the primary CTAs — capture their labels.
@@ -278,17 +311,17 @@ async function checkRoute(page: Page, route: string) {
   );
 
   if (report.darkHits.length)
-    fail(route, "dark-tokens", [...new Set(report.darkHits)].join("; "));
+    fail(label, "dark-tokens", [...new Set(report.darkHits)].join("; "));
   if (report.retiredHits.length)
-    fail(route, "retired-classnames", [...new Set(report.retiredHits)].join("; "));
+    fail(label, "retired-classnames", [...new Set(report.retiredHits)].join("; "));
 
   // 3. one orange fill per viewport
   if (report.oranges.length > 1)
-    fail(route, "orange-fills", `${report.oranges.length} in viewport: ${report.oranges.join(", ")}`);
+    fail(label, "orange-fills", `${report.oranges.length} in viewport: ${report.oranges.join(", ")}`);
 
   // 9. scrim-on-light exception — dark gradient over a photo is hero-only
   if (report.scrims.length)
-    fail(route, "scrim-outside-hero", [...new Set(report.scrims)].join("; "));
+    fail(label, "scrim-outside-hero", [...new Set(report.scrims)].join("; "));
 
   // 10. CTA labels — the retired "Get a quote" must not reappear anywhere, and
   // every PRIMARY (orange-fill) CTA must carry a label from the canonical map
@@ -311,18 +344,18 @@ async function checkRoute(page: Page, route: string) {
 
   for (const label of report.ctaLabels) {
     if (label.includes("Get a quote"))
-      fail(route, "cta-retired", `"Get a quote" is retired — use the intent map`);
+      fail(label, "cta-retired", `"Get a quote" is retired — use the intent map`);
   }
   // Retired phrasing in metadata, where the rendered-text checks can't see it.
   if (/get a quote/i.test(report.metaCopy))
-    fail(route, "cta-retired-meta", `"get a quote" is retired — found in title/description`);
+    fail(label, "cta-retired-meta", `"get a quote" is retired — found in title/description`);
   // The report gate is gone, so nothing may promise a download or "citable"/
   // "original data" research. See docs/redesign/18-launch-readiness.md R5.
   const overclaim = /\bdownload the (report|reports)\b|\bcitable\b|\boriginal-?\s?data research\b/i;
   if (overclaim.test(report.metaCopy))
-    fail(route, "report-overclaim-meta", `metadata promises a download/citable research that no longer exists`);
+    fail(label, "report-overclaim-meta", `metadata promises a download/citable research that no longer exists`);
   for (const o of report.orangeCtas) {
-    if (!onMap(o)) fail(route, "cta-offmap", `orange CTA "${o}" not in the intent map`);
+    if (!onMap(o)) fail(label, "cta-offmap", `orange CTA "${o}" not in the intent map`);
   }
 
   // 4. contrast
@@ -335,13 +368,13 @@ async function checkRoute(page: Page, route: string) {
     const large = p.size >= 24 || (p.size >= 18.66 && p.weight >= 700);
     const bar = large ? 3.0 : 4.5;
     if (r < bar)
-      fail(route, "contrast", `${r.toFixed(2)}:1 (need ${bar}) ${p.fg} on ${p.bg} — "${p.text}"`);
+      fail(label, "contrast", `${r.toFixed(2)}:1 (need ${bar}) ${p.fg} on ${p.bg} — "${p.text}"`);
   }
 
   // 5. spacing scale
   for (const s of report.py) {
     for (const v of [s.top, s.bottom]) {
-      if (v !== 0 && !ALLOWED_PY.includes(v)) fail(route, "spacing", `section padding ${v}px off-scale`);
+      if (v !== 0 && !ALLOWED_PY.includes(v)) fail(label, "spacing", `section padding ${v}px off-scale`);
     }
   }
 }
@@ -351,16 +384,51 @@ async function checkHeadline(page: Page, route: string, width: number) {
   await page.goto(BASE + route, { waitUntil: "load", timeout: 45000 });
   await page.evaluate(() => document.fonts.ready);
   await page.waitForTimeout(500);
-  const lines = await page.evaluate(() => {
+  const { lines, chars } = await page.evaluate(() => {
     const h1 = document.querySelector("h1");
-    if (!h1) return 0;
+    if (!h1) return { lines: 0, chars: 0 };
     const r = document.createRange();
     r.selectNodeContents(h1);
     const rects = [...r.getClientRects()].filter((x) => x.height > 4);
-    return new Set(rects.map((x) => Math.round(x.top))).size;
+    return {
+      lines: new Set(rects.map((x) => Math.round(x.top))).size,
+      chars: (h1.textContent ?? "").trim().length,
+    };
   });
+  // Two different questions, so two different assertions.
+  //
+  // MARKETING hero: the headline is copy. Its length is a design decision, and
+  // three lines means rewrite it. Hard line budget, unchanged.
+  //
+  // CONTENT DETAIL: the h1 is the document's real title. The longest published
+  // article is 91 characters and a report is a named quarterly index — no width
+  // and no type step fits those in two lines, and trimming a title to satisfy a
+  // gate would be the gate setting editorial policy. A line count says nothing
+  // useful here; what a broken layout actually looks like is a title crammed
+  // into a column far too narrow for it. So assert DENSITY instead: the title
+  // must average at least a floor of characters per rendered line. A 91-char
+  // title over 4 lines is 22.8 — healthy. The same title over 9 lines would be
+  // 10.1, and that is the collapsed-column defect worth catching.
+  const isContentDetail =
+    /^\/(insights|reports)\/[^/]+$/.test(route) &&
+    !/^\/insights\/(category|tag|case-studies)/.test(route);
+
+  if (isContentDetail) {
+    if (!lines || !chars) return;
+    const perLine = chars / lines;
+    const floor = width <= 767 ? 11 : 15;
+    if (perLine < floor)
+      fail(
+        route,
+        "headline-density",
+        `${perLine.toFixed(1)} chars/line at ${width}px over ${lines} lines (floor ${floor}) — the title column is too narrow for its content`,
+      );
+    return;
+  }
+
   const budget = width <= 767 ? 3 : 2;
-  if (lines > budget) fail(route, "headline-lines", `${lines} lines at ${width}px (budget ${budget})`);
+  if (lines > budget)
+    fail(route, "headline-lines", `${lines} lines at ${width}px (budget ${budget})`);
 }
 
 /* ---------------------------------------------------------------------------
@@ -430,8 +498,17 @@ const browser = await chromium.launch();
 const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
 const page = await ctx.newPage();
 
+// Every viewport-sensitive check runs at both widths. Padding utilities are
+// routinely responsive (`pb-10 sm:pb-12`), the orange-fill count depends on what
+// is on screen, and contrast depends on what is composited behind the text — all
+// three can pass at 1440 and fail at 390. They did.
+const WIDTHS = [1440, 390];
+
 for (const route of ROUTES) {
-  await checkRoute(page, route);
+  for (const width of WIDTHS) {
+    await page.setViewportSize({ width, height: 900 });
+    await checkRoute(page, route, width);
+  }
   await checkHeadline(page, route, 1440);
   await checkHeadline(page, route, 390);
   await page.setViewportSize({ width: 1440, height: 900 });
@@ -439,7 +516,9 @@ for (const route of ROUTES) {
 await browser.close();
 
 if (failures.length === 0) {
-  console.log(`style-conformance: PASS — ${ROUTES.length} routes, 0 failures`);
+  console.log(
+    `style-conformance: PASS — ${ROUTES.length} routes x ${WIDTHS.length} widths, 0 failures`,
+  );
   process.exit(0);
 }
 

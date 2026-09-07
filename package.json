@@ -14,6 +14,7 @@
     "gate:contrast": "node scripts/hero-contrast.mjs",
     "gate:links": "node scripts/internal-link-audit.mjs",
     "gate:stacking": "node scripts/overlay-stacking.mjs",
+    "gate:textscale": "node scripts/text-scaling.mjs",
     "gates": "node scripts/run-gates.mjs",
     "content:plan": "node content-engine/plan.mjs",
     "content:generate": "node content-engine/generate.mjs",
