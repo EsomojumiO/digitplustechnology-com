@@ -1,3 +1,14 @@
+> ## ⚠️ SUPERSEDED — kept as history, do not build from this
+>
+> This is the brief for the **dark-default reskin** that was abandoned. The site is now
+> light-only with an Apple-derived token set, and several values proposed here fail their
+> own contrast bar (`#e0561f` computes to 3.80:1 against a white label; see
+> `docs/redesign/14-apple-light-spec.md` §1.1).
+>
+> Current sources of truth: **`docs/redesign/14-apple-light-spec.md`** (visual spec),
+> `docs/DECISIONS.md` (binding decisions), `docs/DESIGN-AUDIT.md` (2026-09-07 HIG audit),
+> `.claude/skills/restrained-futurism/SKILL.md` (the design language).
+
 # Design Revamp Brief — digitplustechnology.com (reconciled)
 
 Elevate the site to a modern, minimalist, futuristic-in-craft design ("restrained
