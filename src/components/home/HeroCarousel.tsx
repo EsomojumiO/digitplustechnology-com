@@ -143,7 +143,27 @@ export function HeroCarousel() {
         ? [Fade()]
         : [
             Fade(),
-            Autoplay({ delay: DWELL, stopOnInteraction: false, stopOnMouseEnter: true }),
+            // stopOnMouseEnter was TRUE, and it made the hero look broken.
+            // This section is `h-[78vh] min-h-[560px]` and full-bleed, so it is
+            // most of the viewport on load — wherever a visitor happens to leave
+            // the pointer is usually inside it. Autoplay then stopped on the
+            // first slide and stayed there for as long as the cursor rested
+            // anywhere on the hero, which is how "the homepage is just one
+            // picture" happens. Verified: static for 12s with the pointer at
+            // (700,450), rotating again within 12s of moving it to (5,5).
+            //
+            // It was there as the pause affordance for mouse users. There is now
+            // an explicit pause control, so stopping the hero is deliberate
+            // rather than accidental, and hovering the artwork no longer halts
+            // it.
+            //
+            // A hover-pause scoped to just the controls row was tried and
+            // removed: `mouseenter` fires correctly, but a slide change replaces
+            // the progress-fill node under the pointer, React synthesises a
+            // leave/enter pair from that, and `resume` restarts what `pause` had
+            // just stopped. It measured as not pausing at all. The explicit
+            // button is next to the dots and does the job honestly.
+            Autoplay({ delay: DWELL, stopOnInteraction: false, stopOnMouseEnter: false }),
           ],
     [reduce],
   );
