@@ -698,9 +698,22 @@ Root causes worth keeping, because none of them were the obvious suspect:
 
 - **H1 — mobile hero scrim.** Attempted, measured, reverted. The scrim is not the
   cause; see the corrected entry above. Needs art direction, tracked at BLOCKERS #8.
-- **H5 — icon system.** 20 inline SVGs across 5 stroke widths and 4 grids. This is
-  a mechanical replacement across 12 files and deserves its own pass rather than
-  being folded into a fix batch.
+- ~~**H5 — icon system.**~~ **CLOSED 2026-09-07.** `src/components/ui/icons.tsx`
+  now holds the set, and the 20 inline SVGs are down to 2: the LinkedIn and X
+  brand marks in ShareBar, which are logotypes with fixed official geometry
+  rather than interface icons.
+
+  The fix is not "declare stroke 1.5 everywhere", which is what produced the
+  mismatch in the first place. Stroke width is in user units, so 1.5 on a 16
+  viewBox rendered into a 16px box is 1.5 device px while 1.5 on a 24 viewBox in
+  the same box is 1.0 — visibly thinner beside it. Each icon keeps the grid its
+  geometry wants and the stroke is derived: `1.5 * (grid / 20)`.
+
+  Measured on the rendered pages: at a 14px box every grid resolves to a 1.05px
+  stroke, at 16px every grid resolves to 1.2px, at 18px every grid resolves to
+  1.35px. Grid no longer affects appearance. Stroke still scales with rendered
+  size, which is correct — a larger icon carries a proportionally heavier stroke,
+  as a symbol family does with point size.
 - **M1 — remaining off-ladder type sizes.** `Button`'s `text-[15px]` is gone. Still
   outstanding: `Eyebrow.tsx:43`, `Logo.tsx:49`, `Stat.tsx:25`, `Header.tsx:47`,
   `ecosystem/page.tsx:107`, and the two raw Tailwind sizes.

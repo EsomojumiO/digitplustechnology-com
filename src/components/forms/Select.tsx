@@ -3,6 +3,7 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { controlBase } from "./controls";
+import { ChevronDown } from "@/components/ui/icons";
 
 export interface SelectOption {
   value: string;
@@ -44,20 +45,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             </option>
           ))}
         </select>
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 20 20"
-          fill="none"
-          className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-muted"
-        >
-          <path
-            d="M6 8l4 4 4-4"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
+        <ChevronDown className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-muted" />
       </div>
     );
   },

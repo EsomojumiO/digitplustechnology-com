@@ -8,28 +8,11 @@ import { Button, Container } from "@/components/ui";
 import { cn } from "@/lib/utils";
 import { mainNav, siteConfig, type NavItem } from "@/lib/site";
 import { Logo } from "./Logo";
+import { ChevronDown, Close, ExternalArrow, Menu, Phone } from "@/components/ui/icons";
 
 /* ---------------------------------------------------------------------------
    Small chevron icon (pixel-aligned, consistent stroke).
    --------------------------------------------------------------------------- */
-function Chevron({ className }: { className?: string }) {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 16 16"
-      fill="none"
-      className={cn("h-3.5 w-3.5", className)}
-    >
-      <path
-        d="M4 6l4 4 4-4"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
 
 /* ---------------------------------------------------------------------------
    Desktop dropdown, accessible: hover + focus open, Escape closes, arrow-key
@@ -119,7 +102,7 @@ function DesktopDropdown({
         )}
       >
         {item.label}
-        <Chevron
+        <ChevronDown size={14}
           className={cn(
             "text-muted transition-transform duration-[var(--dur-fast)]",
             open && "rotate-180",
@@ -173,20 +156,7 @@ function DesktopDropdown({
                   {child.label}
                   {child.badge && <NavBadge>{child.badge}</NavBadge>}
                   {child.external && (
-                    <svg
-                      aria-hidden="true"
-                      viewBox="0 0 16 16"
-                      fill="none"
-                      className="h-3 w-3 text-muted"
-                    >
-                      <path
-                        d="M6 3h7v7M13 3l-8 8"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
+                    <ExternalArrow size={12} className="text-muted" />
                   )}
                 </span>
                 {child.description && (
@@ -379,14 +349,7 @@ function MobileMenu({
               "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green",
             )}
           >
-            <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5">
-              <path
-                d="M6 6l12 12M18 6L6 18"
-                stroke="currentColor"
-                strokeWidth="1.75"
-                strokeLinecap="round"
-              />
-            </svg>
+            <Close size={20} />
           </button>
         </div>
 
@@ -468,18 +431,6 @@ function MobileMenu({
    Contact menu — replaces a bare phone number with a tidy ghost icon-button
    that opens Call / WhatsApp / Email. Keyboard + outside-click dismissible.
    --------------------------------------------------------------------------- */
-function PhoneIcon() {
-  return (
-    <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" className="h-4 w-4">
-      <path
-        d="M6.5 3.5 4 4c-.7 2 .3 5.2 3 8s6 3.7 8 3l.5-2.5-3-1.5-1.4 1.4c-1.2-.6-2.3-1.7-2.9-2.9L9.6 5.5 6.5 3.5Z"
-        stroke="currentColor"
-        strokeWidth="1.4"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
 
 const CONTACT_ROWS = [
   { label: "Call", get: (v: typeof siteConfig) => v.phone, href: (v: typeof siteConfig) => v.phoneHref, mono: true },
@@ -523,7 +474,7 @@ function ContactMenu() {
           "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green",
         )}
       >
-        <PhoneIcon />
+        <Phone />
       </button>
       {/* Disclosure, not the ARIA menu pattern — see DesktopDropdown. */}
       <div
@@ -668,14 +619,7 @@ export function Header() {
               "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green",
             )}
           >
-            <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5">
-              <path
-                d="M4 7h16M4 12h16M4 17h16"
-                stroke="currentColor"
-                strokeWidth="1.75"
-                strokeLinecap="round"
-              />
-            </svg>
+            <Menu size={20} />
           </button>
         </div>
       </Container>

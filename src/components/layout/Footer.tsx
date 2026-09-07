@@ -3,25 +3,7 @@ import { Container } from "@/components/ui";
 import { cn } from "@/lib/utils";
 import { siteConfig, footerNav } from "@/lib/site";
 import { Logo } from "./Logo";
-
-function ArrowRight({ className }: { className?: string }) {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 16 16"
-      fill="none"
-      className={cn("h-3.5 w-3.5", className)}
-    >
-      <path
-        d="M3 8h10M9 4l4 4-4 4"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
+import { ArrowRight } from "@/components/ui/icons";
 
 /**
  * Footer, multi-column nav, NAP block, store cross-link, a minimal newsletter
@@ -53,7 +35,7 @@ export function Footer() {
           <span>Looking to purchase hardware?</span>
           <span className="inline-flex items-center gap-1 font-medium text-accent-green">
             Visit our store
-            <ArrowRight className="transition-transform duration-[var(--dur-fast)] group-hover:translate-x-0.5" />
+            <ArrowRight size={14} className="transition-transform duration-[var(--dur-fast)] group-hover:translate-x-0.5" />
           </span>
         </Link>
       </Container>

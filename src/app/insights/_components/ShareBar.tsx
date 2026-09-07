@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { LinkIcon } from "@/components/ui/icons";
 
 /**
  * ShareBar, accessible social-share row with no external SDKs.
@@ -120,20 +121,7 @@ export function ShareBar({ url, title }: ShareBarProps) {
           aria-label="Copy link to this article"
           className="inline-flex h-11 items-center gap-2 rounded-md border border-hairline bg-surface-raised px-3 text-small font-medium text-muted transition-[color,background-color,border-color] duration-[var(--dur-fast)] hover:bg-surface hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green"
         >
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
-            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
-          </svg>
+          <LinkIcon />
           <span aria-hidden="true">{copied ? "Copied" : "Copy link"}</span>
           <span className="sr-only" role="status" aria-live="polite">
             {copied ? "Link copied to clipboard" : ""}

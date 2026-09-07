@@ -4,6 +4,7 @@ import { Link } from "next-view-transitions";
 import { Card, Badge } from "@/components/ui";
 import { cn } from "@/lib/utils";
 import type { ReportMeta } from "@/lib/content";
+import { ArrowRight } from "@/components/ui/icons";
 
 export interface ReportCardProps {
   report: ReportMeta;
@@ -106,20 +107,7 @@ export function ReportCard({
             ) : null}
             <span className="mt-1 inline-flex items-center gap-1.5 text-body font-medium text-accent-green">
               Read the report
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.75"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-                className="transition-transform duration-[var(--dur-fast)] ease-[var(--ease-out)] group-hover:translate-x-0.5"
-              >
-                <path d="M3 8h10M9 4l4 4-4 4" />
-              </svg>
+              <ArrowRight className="transition-transform duration-[var(--dur-fast)] ease-[var(--ease-out)] group-hover:translate-x-0.5" />
             </span>
           </div>
         </div>
@@ -157,20 +145,7 @@ export function ReportCard({
         ) : null}
         <span className="mt-auto inline-flex items-center gap-1.5 pt-2 text-small font-medium text-accent-green">
           Read the report
-          <svg
-            width="14"
-            height="14"
-            viewBox="0 0 16 16"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.75"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
-            className="transition-transform duration-[var(--dur-fast)] ease-[var(--ease-out)] group-hover:translate-x-0.5"
-          >
-            <path d="M3 8h10M9 4l4 4-4 4" />
-          </svg>
+          <ArrowRight size={14} className="transition-transform duration-[var(--dur-fast)] ease-[var(--ease-out)] group-hover:translate-x-0.5" />
         </span>
       </div>
     </Card>

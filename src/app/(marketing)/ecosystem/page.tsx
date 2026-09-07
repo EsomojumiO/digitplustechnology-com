@@ -11,6 +11,7 @@ import {
 } from "@/components/ui";
 import { FadeIn } from "@/components/motion";
 import { cn } from "@/lib/utils";
+import { ExternalArrow } from "@/components/ui/icons";
 
 export const metadata: Metadata = {
   title: "The Digitplus Ecosystem",
@@ -52,20 +53,6 @@ const projects: EcosystemProject[] = [
     status: "coming-soon",
   },
 ];
-
-function ExternalIcon({ className }: { className?: string }) {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 16 16" fill="none" className={cn("h-3.5 w-3.5", className)}>
-      <path
-        d="M6 3h7v7M13 3l-8 8"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
 
 export default function EcosystemPage() {
   return (
@@ -128,7 +115,7 @@ export default function EcosystemPage() {
                   )}
                 >
                   {p.domain}
-                  <ExternalIcon />
+                  <ExternalArrow size={14} />
                 </Link>
               </Card>
             </FadeIn>

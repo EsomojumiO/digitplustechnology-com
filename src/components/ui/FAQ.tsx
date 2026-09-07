@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
+import { ChevronDown } from "./icons";
 
 export interface FAQItem {
   question: React.ReactNode;
@@ -18,23 +19,13 @@ export interface FAQProps extends React.HTMLAttributes<HTMLDivElement> {
 
 function ChevronIcon({ open }: { open: boolean }) {
   return (
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
+    <ChevronDown
+      size={20}
       className={cn(
-        "shrink-0 text-muted transition-transform duration-[var(--dur-base)] ease-[var(--ease-out)]",
+        "text-muted transition-transform duration-[var(--dur-base)] ease-[var(--ease-out)]",
         open && "rotate-180",
       )}
-    >
-      <path d="M6 8l4 4 4-4" />
-    </svg>
+    />
   );
 }
 

@@ -8,6 +8,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import Fade from "embla-carousel-fade";
 import { cn } from "@/lib/utils";
+import { Pause, Play } from "@/components/ui/icons";
 
 /**
  * HeroCarousel — full-bleed overlay hero. Edge-to-edge auto-rotating photos with
@@ -430,22 +431,7 @@ export function HeroCarousel() {
             aria-label={paused ? "Resume the slideshow" : "Pause the slideshow"}
             className="relative -my-5 ml-2 flex h-11 w-11 items-center justify-center rounded-full border border-white/40 text-white transition-colors duration-[var(--dur-fast)] ease-[var(--ease-out)] hover:border-white hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           >
-            <svg
-              viewBox="0 0 20 20"
-              className="size-4"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              {paused ? (
-                <path d="M6.5 4.5l9 5.5-9 5.5V4.5z" />
-              ) : (
-                <path d="M7.5 4.5v11M12.5 4.5v11" />
-              )}
-            </svg>
+            {paused ? <Play /> : <Pause />}
           </button>
         ) : null}
       </div>
