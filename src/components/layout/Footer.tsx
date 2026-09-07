@@ -68,13 +68,13 @@ export function Footer() {
               institutions across Nigeria.
             </p>
 
-            <address className="mt-6 space-y-1.5 text-small not-italic text-muted">
+            <address className="mt-6 min-w-0 space-y-1.5 text-small not-italic text-muted">
               <p className="font-medium text-text">{siteConfig.name}</p>
               <p>{siteConfig.hq}</p>
               <p>
                 <a
                   href={siteConfig.phoneHref}
-                  className="transition-colors hover:text-text"
+                  className="inline-block py-3 transition-colors duration-[var(--dur-fast)] ease-[var(--ease-out)] hover:text-text sm:py-0"
                 >
                   {siteConfig.phone}
                 </a>
@@ -82,7 +82,12 @@ export function Footer() {
               <p>
                 <a
                   href={`mailto:${siteConfig.email}`}
-                  className="transition-colors hover:text-text"
+                  // `overflow-wrap: anywhere`, not `break-word`: only `anywhere`
+                  // also lowers the element's min-content width, which is what
+                  // an inline-block's shrink-to-fit actually reads. The address
+                  // is 29 unbroken characters and was the last thing widening
+                  // the page at a 200% text size.
+                  className="inline-block py-3 [overflow-wrap:anywhere] transition-colors duration-[var(--dur-fast)] ease-[var(--ease-out)] hover:text-text sm:py-0"
                 >
                   {siteConfig.email}
                 </a>
@@ -92,7 +97,7 @@ export function Footer() {
                   href={siteConfig.whatsapp}
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="font-medium text-accent-green transition-colors hover:text-text"
+                  className="inline-block py-3 font-medium text-accent-green transition-colors duration-[var(--dur-fast)] ease-[var(--ease-out)] hover:text-text sm:py-0"
                 >
                   Chat on WhatsApp
                 </a>
@@ -107,20 +112,24 @@ export function Footer() {
           {/* Link columns */}
           <nav
             aria-label="Footer"
-            className="grid grid-cols-2 gap-8 sm:grid-cols-4 lg:col-span-8"
+            className="grid grid-cols-2 gap-8 sm:grid-cols-4 lg:col-span-8 [&>*]:min-w-0"
           >
             {footerNav.map((col) => (
               <div key={col.title}>
                 <h3 className="text-caption font-semibold text-text">
                   {col.title}
                 </h3>
-                <ul className="mt-4 space-y-2.5">
+                {/* space-y tightens on mobile because each link now carries a
+                    44px box of its own — the list stays about as tall as it was
+                    while every target clears the HIG minimum. */}
+                <ul className="mt-4 space-y-1 sm:space-y-2.5">
                   {col.links.map((link) => (
                     <li key={link.href}>
                       <Link
                         href={link.href}
                         className={cn(
-                          "text-small text-muted transition-colors duration-[var(--dur-fast)] hover:text-text",
+                          "block py-3 text-small text-muted sm:py-0",
+                          "transition-colors duration-[var(--dur-fast)] ease-[var(--ease-out)] hover:text-text",
                           "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green",
                         )}
                       >
@@ -187,12 +196,18 @@ export function Footer() {
           </p>
           <ul className="flex items-center gap-5">
             <li>
-              <Link href="/privacy" className="transition-colors hover:text-text">
+              <Link
+                href="/privacy"
+                className="inline-block py-3 transition-colors duration-[var(--dur-fast)] ease-[var(--ease-out)] hover:text-text sm:py-0"
+              >
                 Privacy
               </Link>
             </li>
             <li>
-              <Link href="/terms" className="transition-colors hover:text-text">
+              <Link
+                href="/terms"
+                className="inline-block py-3 transition-colors duration-[var(--dur-fast)] ease-[var(--ease-out)] hover:text-text sm:py-0"
+              >
                 Terms
               </Link>
             </li>

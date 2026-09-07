@@ -45,6 +45,21 @@ export function Prose({
         "[&_code]:rounded [&_code]:bg-surface [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-small [&_code]:font-mono",
         "[&_pre]:overflow-x-auto [&_pre]:rounded-lg [&_pre]:border [&_pre]:border-hairline [&_pre]:bg-surface [&_pre]:p-4 [&_pre]:text-small",
         "[&_pre_code]:bg-transparent [&_pre_code]:p-0",
+        // tables. remark-gfm is enabled in lib/content/mdx.tsx, so markdown
+        // tables become real <table> elements — but nothing styled them, so
+        // they inherited browser defaults: zero cell padding and no rules.
+        // Adjacent cells collided ("MediumSingle-user issue…2 hours") at every
+        // width, on five published articles. The horizontal scroll container
+        // comes from `proseMdxComponents` below; these rules do the reading.
+        // Width is owned by `proseMdxComponents.table` below, not here — a
+        // `[&_table]:w-*` variant would outrank the override's own class.
+        "[&_table]:border-collapse [&_table]:text-small",
+        "[&_thead]:border-b [&_thead]:border-hairline",
+        "[&_th]:py-3 [&_th]:pr-6 [&_th]:text-left [&_th]:align-bottom [&_th]:font-semibold [&_th]:text-text",
+        "[&_td]:py-3 [&_td]:pr-6 [&_td]:align-top [&_td]:text-muted",
+        "[&_th:last-child]:pr-0 [&_td:last-child]:pr-0",
+        "[&_tbody_tr]:border-b [&_tbody_tr]:border-hairline",
+        "[&_tbody_tr:last-child]:border-0",
         // media & rules
         "[&_img]:rounded-lg [&_img]:border [&_img]:border-hairline",
         "[&_hr]:my-10 [&_hr]:border-hairline",
@@ -58,5 +73,31 @@ export function Prose({
     </Comp>
   );
 }
+
+/**
+ * MDX element overrides the design system owns, passed to `<MDXContent components={…}>`.
+ * `lib/content/mdx.tsx` is deliberately style-agnostic ("this library never
+ * hard-codes design decisions it doesn't own"), so the wrapper lives here.
+ *
+ * A four-column table inside a 65ch measure cannot fit a 390px screen. Without
+ * a scroll container it crushes to three-line cells that run into the next row.
+ * `w-max` lets the table take its natural width and the parent scrolls.
+ */
+export const proseMdxComponents = {
+  table: (props: React.HTMLAttributes<HTMLTableElement>) => (
+    // `tabIndex` + a named role because a scrollable region has to be reachable
+    // by keyboard: someone who cannot use a pointer still needs to scroll a wide
+    // table sideways. Adding the scroll container without this traded one
+    // barrier for another (axe `scrollable-region-focusable`, serious).
+    <div
+      tabIndex={0}
+      role="region"
+      aria-label="Table"
+      className="-mx-5 my-8 overflow-x-auto px-5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green sm:mx-0 sm:px-0"
+    >
+      <table {...props} className="w-max min-w-full" />
+    </div>
+  ),
+};
 
 export default Prose;

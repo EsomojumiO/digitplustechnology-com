@@ -58,14 +58,17 @@ export default function ContactPage() {
       </Section>
 
       <Section spacing="md">
-        <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr] lg:gap-16">
+        {/* `[&>*]:min-w-0` so a track can shrink below its content's
+            min-content. Grid and flex items default to min-width:auto,
+            which is what let the form widen the page at 200% text. */}
+        <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr] lg:gap-16 [&>*]:min-w-0">
           {/* Form */}
           <FadeIn>
             <ContactForm />
           </FadeIn>
 
           {/* Direct details */}
-          <FadeIn delay={0.08}>
+          <FadeIn delay={80}>
             <Card
               padding="lg"
               className="flex flex-col gap-6 lg:sticky lg:top-28"

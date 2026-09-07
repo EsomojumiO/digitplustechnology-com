@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Link } from "next-view-transitions";
 import { cn } from "@/lib/utils";
 
 export interface IndustryCardProps
@@ -7,6 +8,13 @@ export interface IndustryCardProps
   title: React.ReactNode;
   blurb?: React.ReactNode;
   icon?: React.ReactNode;
+  /**
+   * Heading level for the title. The title used to be a hard-coded <span>, so
+   * it looked like a heading (text-h4) and carried a heading's job while
+   * staying out of the document outline — its sibling ServiceCard has always
+   * used <h3>. Callers set the level that fits their page.
+   */
+  headingAs?: "h2" | "h3" | "h4" | "span";
 }
 
 function ArrowIcon() {
@@ -36,11 +44,12 @@ export function IndustryCard({
   title,
   blurb,
   icon,
+  headingAs: Heading = "h3",
   className,
   ...props
 }: IndustryCardProps) {
   return (
-    <a
+    <Link
       href={href}
       className={cn(
         "group flex items-start gap-4 rounded-lg border border-hairline bg-surface-raised p-5",
@@ -57,13 +66,13 @@ export function IndustryCard({
         </span>
       ) : null}
       <span className="flex flex-1 flex-col gap-1">
-        <span className="text-h4 text-text">{title}</span>
+        <Heading className="text-h4 text-text">{title}</Heading>
         {blurb ? <span className="text-small text-muted">{blurb}</span> : null}
       </span>
       <span className="pt-1.5">
         <ArrowIcon />
       </span>
-    </a>
+    </Link>
   );
 }
 

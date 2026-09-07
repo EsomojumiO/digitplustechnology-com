@@ -185,12 +185,24 @@ export function HeroCarousel() {
     }
   };
 
-  // Pause autoplay while any control inside the hero has focus (keyboard users).
-  // Reached through embla's own plugin registry rather than a ref we hold — one
-  // owner for the instance, and nothing to read during render.
+  // Explicit pause, owned by the visitor rather than by the pointer.
+  //
+  // Autoplay used to stop on hover and on focus only. Both are mouse/keyboard
+  // paths: on touch there is no hover, and no focus without committing to a
+  // tap, so a phone visitor got a 5-second rotation across seven slides with no
+  // way out. WCAG 2.2.2 wants a real mechanism, and it is Level A.
+  const [paused, setPaused] = React.useState(false);
+
   const pause = () => emblaApi?.plugins()?.autoplay?.stop();
+  // Hover/focus-out must not restart something the visitor deliberately stopped.
   const resume = () => {
-    if (!reduce) emblaApi?.plugins()?.autoplay?.play();
+    if (!reduce && !paused) emblaApi?.plugins()?.autoplay?.play();
+  };
+  const togglePaused = () => {
+    const next = !paused;
+    setPaused(next);
+    if (next) emblaApi?.plugins()?.autoplay?.stop();
+    else emblaApi?.plugins()?.autoplay?.play();
   };
 
   return (
@@ -210,7 +222,7 @@ export function HeroCarousel() {
       // site chrome. `isolation: isolate` makes this section a stacking context
       // whatever its z-index, so those three layers order among themselves and
       // the whole hero occupies exactly one slot in the page's stacking order.
-      className="relative isolate h-[78vh] min-h-[560px] w-full overflow-hidden bg-[#1d1d1f]"
+      className="relative isolate h-[78vh] min-h-[560px] w-full overflow-hidden bg-text"
     >
       <div ref={emblaRef} className="h-full overflow-hidden">
         <div className="flex h-full">
@@ -253,6 +265,22 @@ export function HeroCarousel() {
                 {/* Scrim — bottom-left weighted. Layered: a bottom anchor
                     guarantees the text-zone floor, the diagonal shapes the rest.
                     Verified per slide against the brightest pixel behind text. */}
+                {/* Scrim — bottom-left weighted. Layered: a bottom anchor
+                    guarantees the text-zone floor, the diagonal shapes the rest.
+                    Verified per slide against the brightest pixel behind text.
+
+                    A mobile-specific variant was tried and reverted (2026-09-07).
+                    The audit flagged that slide 1 renders near-black at 390 while
+                    reading well at 1440, and blamed the scrim. Dropping the
+                    diagonal and shortening the ramp on mobile moved the hero's
+                    mean luminance from 47.7 to 47.9 on slide 1 and 82.7 to 83.8
+                    on slide 3 — nothing — while a first attempt at it failed
+                    hero-contrast on slide 5's eyebrow at 3.43:1. The scrim is not
+                    what darkens slide 1: managed-services.jpg is a low-key
+                    photograph and `object-cover` at 390x658 crops a shadow-heavy
+                    centre slice out of it. That is an art-direction fix (a
+                    brighter frame, or per-slide object-position), not a CSS one.
+                    See BLOCKERS #8 and docs/DESIGN-AUDIT.md H1. */}
                 <div
                   aria-hidden="true"
                   // z-[1] above the image ON PURPOSE: the <Image> carries a
@@ -288,7 +316,7 @@ export function HeroCarousel() {
                           : "translate-y-3 opacity-0",
                       )}
                     >
-                      <p className="text-caption font-semibold text-[#5fbf94]">
+                      <p className="text-caption font-semibold text-hero-eyebrow">
                         {s.eyebrow}
                       </p>
                       {/* h1 (Inter Display size), not the full display scale:
@@ -351,20 +379,55 @@ export function HeroCarousel() {
             onClick={() => go(i)}
             aria-label={`Show slide ${i + 1}: ${s.eyebrow}`}
             aria-current={i === selected ? "true" : undefined}
-            className="relative h-1 w-8 overflow-hidden rounded-full bg-white/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            // The visible bar is 32x4. That was also the whole target — the only
+            // way to move between slides on touch, at a ninth of the 44pt HIG
+            // minimum. The button is 44px tall now and the negative margin keeps
+            // the row's layout height at the bar, so nothing moved on screen.
+            className="relative -my-5 flex h-11 w-8 items-center justify-center rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           >
-            {i === selected ? (
-              reduce ? (
-                <span className="absolute inset-0 bg-white" />
-              ) : (
-                <span
-                  key={selected}
-                  className="hero-bar-fill absolute inset-0 bg-white"
-                />
-              )
-            ) : null}
+            <span className="relative block h-1 w-full overflow-hidden rounded-full bg-white/40">
+              {i === selected ? (
+                reduce || paused ? (
+                  <span className="absolute inset-0 bg-white" />
+                ) : (
+                  <span
+                    key={selected}
+                    className="hero-bar-fill absolute inset-0 bg-white"
+                  />
+                )
+              ) : null}
+            </span>
           </button>
         ))}
+
+        {/* Under reduced motion autoplay never starts, so there is nothing to
+            pause and the control would be a lie. */}
+        {!reduce ? (
+          <button
+            type="button"
+            onClick={togglePaused}
+            aria-pressed={paused}
+            aria-label={paused ? "Resume the slideshow" : "Pause the slideshow"}
+            className="relative -my-5 ml-2 flex h-11 w-11 items-center justify-center rounded-full border border-white/40 text-white transition-colors duration-[var(--dur-fast)] ease-[var(--ease-out)] hover:border-white hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          >
+            <svg
+              viewBox="0 0 20 20"
+              className="size-4"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              {paused ? (
+                <path d="M6.5 4.5l9 5.5-9 5.5V4.5z" />
+              ) : (
+                <path d="M7.5 4.5v11M12.5 4.5v11" />
+              )}
+            </svg>
+          </button>
+        ) : null}
       </div>
     </section>
   );

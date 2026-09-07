@@ -90,6 +90,24 @@
   --brand-foreground: #1d1d1f;
   --brand-subtle: rgb(45 93 73 / 0.08); /* faint green tint */
 
+  /* Danger / error. Added 2026-09-07: there was no error token, so four form
+     files each reached for a different raw Tailwind red (red-500/600/700/50),
+     which put the one state the palette gate cannot see outside the system.
+     Computed on both canvases:
+       --danger        #b3261e  6.54:1 on #ffffff, 6.00:1 on #f5f5f7  (text)
+       --danger-border #d13c31  4.77:1 / 4.38:1                       (non-text, floor 3:1)
+       --danger-subtle #fdf2f1  carries --danger at 5.96:1 */
+  /* Hero eyebrow, on the photographic scrim only. Not a canvas colour: it is
+     the one green that clears 4.5:1 against a worst-case scrimmed image pixel,
+     verified per slide by scripts/hero-contrast.mjs. It lived as a bare
+     `text-[#5fbf94]` in HeroCarousel, which made the first coloured word on the
+     site a hex in no ramp. Named here rather than re-picked. */
+  --hero-eyebrow: #5fbf94;
+
+  --danger: #b3261e;
+  --danger-border: #d13c31;
+  --danger-subtle: #fdf2f1;
+
   /* Elevation — soft neutral shadows. Depth comes from whitespace and value;
      `md` is a hover state only, never a resting one. No glows. */
   --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.04);
@@ -97,6 +115,23 @@
   --shadow-lg: 0 24px 56px -20px rgb(0 0 0 / 0.16);
 
   color-scheme: light;
+}
+
+/* Increased contrast. The default palette already clears 4.5:1 everywhere, so
+   this is an accommodation rather than a fix: when someone turns on Increase
+   Contrast the site previously changed nothing at all. Muted ink steps from
+   5.07:1 to 8.67:1, hairlines from 1.51:1 to 5.07:1 (reusing the known-good
+   muted value), and both accents step to their darker ramp entries. */
+@media (prefers-contrast: more) {
+  :root {
+    --text-muted: #4b4b50;        /* 8.67:1 on white, 7.96:1 on #f5f5f7 */
+    --text-faint: #4b4b50;
+    --border-hairline: #6e6e73;   /* 5.07:1 — dividers become plainly visible */
+    --border-hairline-hover: #1d1d1f;
+    --accent: var(--accent-700);  /* #8c3820, 7.77:1 with a white label */
+    --accent-green: #20493b;      /* Forest-600, 10.11:1 */
+    --danger: #8f1d17;
+  }
 }
 
 /* ---------------------------------------------------------------------------
@@ -188,6 +223,11 @@
   --color-brand-hover: var(--brand-hover);
   --color-brand-foreground: var(--brand-foreground);
   --color-brand-subtle: var(--brand-subtle);
+
+  --color-hero-eyebrow: var(--hero-eyebrow);
+  --color-danger: var(--danger);
+  --color-danger-border: var(--danger-border);
+  --color-danger-subtle: var(--danger-subtle);
 
   /* Accent ramp exposed for fine control */
   --color-accent-50: var(--accent-50);
@@ -330,6 +370,17 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     line-height: 1.6;
+  /* A long unbreakable token (hello@digitplustechnology.com is 29 characters)
+     sets a box's min-content width. At a 200% user text size that one string
+     was 446px inside a 390px viewport and the page scrolled sideways.
+     `anywhere` rather than `break-word` because only `anywhere` also lowers the
+     element's MIN-CONTENT width — which is what a flex/grid item's default
+     `min-width: auto` reads, and therefore what actually lets a column shrink.
+     `break-word` permits the break but keeps the old intrinsic size, so the
+     track stays too wide and the page still scrolls.
+     It only ever breaks a word that would not fit on a line of its own, so it
+     costs nothing at ordinary sizes. Enforced by scripts/text-scaling.mjs. */
+  overflow-wrap: anywhere;
   }
 
   /* Visible green focus ring for keyboard users (high contrast on near-black) */

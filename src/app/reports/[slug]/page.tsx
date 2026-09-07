@@ -8,6 +8,7 @@ import {
   Badge,
   Card,
   Prose,
+  proseMdxComponents,
   Eyebrow,
   Button,
 } from "@/components/ui";
@@ -103,7 +104,9 @@ export default async function ReportLandingPage({
         ])}
       />
       {/* ── Ungated, indexable preview ─────────────────────────────────── */}
-      <Section spacing="lg" className="pb-10 sm:pb-12">
+      {/* pb-12 both ways: pb-10 is 40px, which is not on ALLOWED_PY. It was
+          mobile-only, so the 1440-px-only gate never rendered it. */}
+      <Section spacing="lg" className="pb-12">
         <Breadcrumbs
           className="mb-8"
           items={[
@@ -130,7 +133,7 @@ export default async function ReportLandingPage({
 
           {/* Cover, neutral surface fallback when the asset is absent. */}
           <FadeIn
-            delay={0.08}
+            delay={80}
             className="relative order-first aspect-[3/4] overflow-hidden rounded-lg bg-surface cover lg:order-none"
           >
             {report.cover ? (
@@ -183,7 +186,7 @@ export default async function ReportLandingPage({
           <Container width="narrow" className="px-0">
             <FadeIn>
               <Prose>
-                <MDXContent source={report.body} />
+                <MDXContent source={report.body} components={proseMdxComponents} />
               </Prose>
             </FadeIn>
           </Container>

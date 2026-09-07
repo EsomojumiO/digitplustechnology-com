@@ -53,9 +53,18 @@ function NavBadge({ children }: { children: React.ReactNode }) {
 function DesktopDropdown({
   item,
   active,
+  align = "start",
 }: {
   item: NavItem;
   active: boolean;
+  /**
+   * Which edge the panel hangs from. `max-width` clamps a panel's width but not
+   * its left edge, so a 34rem panel anchored `left-0` to a trigger near the end
+   * of the rail runs past the viewport — at a 200% page zoom the closed panels
+   * alone pushed the document to 1934px against a 1440px viewport, and the page
+   * scrolled sideways with nothing open. Trailing items hang from the right.
+   */
+  align?: "start" | "end";
 }) {
   const [open, setOpen] = React.useState(false);
   const closeTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -133,7 +142,8 @@ function DesktopDropdown({
           // Local layer inside the header's stacking context (the header is one
           // already — sticky + z-index + backdrop-filter), so this only has to
           // beat its siblings in the nav rail, never the page.
-          "absolute left-0 top-full z-dropdown pt-2",
+          "absolute top-full z-dropdown pt-2",
+          align === "end" ? "right-0" : "left-0",
           "transition-[opacity,transform] duration-[var(--dur-base)] ease-[var(--ease-out)]",
           open
             ? "pointer-events-auto translate-y-0 opacity-100"
@@ -364,7 +374,7 @@ function MobileMenu({
             onClick={onClose}
             aria-label="Close menu"
             className={cn(
-              "grid h-10 w-10 place-items-center rounded-md text-muted",
+              "grid h-11 w-11 place-items-center rounded-md text-muted",
               "transition-colors duration-[var(--dur-fast)] hover:bg-surface hover:text-text",
               "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green",
             )}
@@ -391,7 +401,7 @@ function MobileMenu({
                   href={item.href}
                   onClick={onClose}
                   className={cn(
-                    "block rounded-lg px-3 py-2.5 text-body font-medium text-text",
+                    "flex min-h-11 items-center rounded-lg px-3 py-2.5 text-body font-medium text-text",
                     "transition-colors duration-[var(--dur-fast)] hover:bg-surface",
                   )}
                 >
@@ -407,7 +417,7 @@ function MobileMenu({
                           target={child.external ? "_blank" : undefined}
                           rel={child.external ? "noreferrer noopener" : undefined}
                           className={cn(
-                            "block rounded-md px-3 py-2 text-small text-muted",
+                            "flex min-h-11 items-center rounded-md px-3 py-2 text-small text-muted",
                             "transition-colors duration-[var(--dur-fast)] hover:bg-surface hover:text-text",
                           )}
                         >
@@ -436,7 +446,7 @@ function MobileMenu({
                 rel={"external" in r && r.external ? "noreferrer noopener" : undefined}
                 onClick={onClose}
                 className={cn(
-                  "rounded-lg border border-hairline px-2 py-2.5 text-center text-caption font-medium text-muted",
+                  "flex min-h-11 flex-col items-center justify-center rounded-lg border border-hairline px-2 py-2.5 text-center text-caption font-medium text-muted",
                   "transition-colors duration-[var(--dur-fast)] hover:border-hairline-hover hover:text-text",
                   "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green",
                 )}
@@ -508,7 +518,7 @@ function ContactMenu() {
         aria-label="Contact options"
         onClick={() => setOpen((o) => !o)}
         className={cn(
-          "grid h-9 w-9 place-items-center rounded-lg border border-hairline text-muted",
+          "grid h-11 w-11 place-items-center rounded-lg border border-hairline text-muted",
           "transition-colors duration-[var(--dur-fast)] hover:border-hairline-hover hover:text-text",
           "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green",
         )}
@@ -522,7 +532,9 @@ function ContactMenu() {
         className={cn(
           // Local layer — see DesktopDropdown. The header's stacking context
           // carries the whole dropdown above the page for free.
-          "absolute right-0 top-full z-dropdown mt-2 w-60 rounded-xl border border-hairline bg-surface-raised p-1.5 shadow-[var(--shadow-lg)]",
+          // w-72, not w-60: at 240px the row left 174px for the value and the
+          // email address needs ~180px, so it wrapped to two lines.
+          "absolute right-0 top-full z-dropdown mt-2 w-72 rounded-xl border border-hairline bg-surface-raised p-1.5 shadow-[var(--shadow-lg)]",
           "transition-[opacity,transform] duration-[var(--dur-base)] ease-[var(--ease-out)]",
           open
             ? "pointer-events-auto translate-y-0 opacity-100"
@@ -543,10 +555,19 @@ function ContactMenu() {
               "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green",
             )}
           >
-            <span className="text-small font-medium text-text">{r.label}</span>
+            {/* `shrink-0` + `overflow-wrap: normal` on the label. The global
+                `overflow-wrap: anywhere` (globals.css §4) lowers min-content so
+                grid and flex tracks can shrink, which is what makes the site
+                survive a 200% text size — but in a `justify-between` row it also
+                let flex squeeze these cells until the five-letter word "Email"
+                broke across two lines. A fixed UI label should never break; the
+                value beside it still may. */}
+            <span className="shrink-0 text-small font-medium text-text [overflow-wrap:normal]">
+              {r.label}
+            </span>
             <span
               className={cn(
-                "text-caption text-muted",
+                "text-right text-caption text-muted",
                 "mono" in r && r.mono && "font-mono",
               )}
             >
@@ -592,6 +613,10 @@ export function Header() {
                   key={item.href}
                   item={item}
                   active={isActive(item.href)}
+                  // Trailing items open leftward so the panel stays on screen.
+                  align={
+                    mainNav.indexOf(item) >= mainNav.length - 2 ? "end" : "start"
+                  }
                 />
               ) : (
                 <li key={item.href}>
@@ -638,7 +663,7 @@ export function Header() {
             aria-label="Open menu"
             aria-expanded={mobileOpen}
             className={cn(
-              "grid h-10 w-10 place-items-center rounded-md text-text lg:hidden",
+              "grid h-11 w-11 place-items-center rounded-md text-text lg:hidden",
               "transition-colors duration-[var(--dur-fast)] hover:bg-surface",
               "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green",
             )}
