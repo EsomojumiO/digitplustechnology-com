@@ -48,7 +48,7 @@ export function Logo({ className }: LogoProps) {
         className={cn(
           // Ink, not `text-brand`: --brand is now the light #f5f5f7 surface
           // token, so text-brand would render near-white on white.
-          "font-display text-[1.0625rem] font-bold uppercase tracking-[0.02em] leading-none",
+          "font-display text-wordmark font-bold uppercase tracking-[0.02em]",
           "text-text",
         )}
       >

@@ -91,7 +91,7 @@ export default function EcosystemPage() {
                     // Same subtle pill as the nav badge: hairline border,
                     // muted text. It marks status, not a call to action, so it
                     // no longer borrows the accent colour.
-                    <span className="inline-flex shrink-0 items-center rounded-full border border-hairline px-2.5 py-0.5 text-[0.6875rem] font-medium leading-none text-muted">
+                    <span className="inline-flex shrink-0 items-center rounded-full border border-hairline px-2.5 py-0.5 text-caption font-medium leading-none text-muted">
                       Coming soon
                     </span>
                   )}

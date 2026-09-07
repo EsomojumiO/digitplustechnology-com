@@ -714,12 +714,43 @@ Root causes worth keeping, because none of them were the obvious suspect:
   1.35px. Grid no longer affects appearance. Stroke still scales with rendered
   size, which is correct — a larger icon carries a proportionally heavier stroke,
   as a symbol family does with point size.
-- **M1 — remaining off-ladder type sizes.** `Button`'s `text-[15px]` is gone. Still
-  outstanding: `Eyebrow.tsx:43`, `Logo.tsx:49`, `Stat.tsx:25`, `Header.tsx:47`,
-  `ecosystem/page.tsx:107`, and the two raw Tailwind sizes.
-- **M4, M6, M7** — off-scale padding, the duplicated `SectorPage` / pull-quote /
-  `/about` structures, and the four dead components. All are refactors, not
-  defects; M7 in particular should be a deliberate deletion, not a drive-by.
+- ~~**M1 — remaining off-ladder type sizes.**~~ **CLOSED 2026-09-07.** No
+  arbitrary type value survives anywhere in `src/**`. `Eyebrow` was a duplicate
+  of `text-small` (0.8125rem either way); the two 11px pills moved up to the
+  12px `text-caption` floor, since 11px is the HIG mobile *minimum* and both
+  paired it with `text-muted`; and the two legitimate one-offs became named
+  tokens, `--text-wordmark` and `--text-stat`, so they are part of the system
+  even though they are off the ladder.
+
+  Adding those two tokens reproduced the exact defect `src/lib/utils.ts` was
+  written to prevent. `--text-wordmark` was defined correctly, but its name was
+  not registered in that file's `TYPE_SCALE`, so tailwind-merge read
+  `text-wordmark` as a colour and `text-text` later in the same `cn()` call
+  evicted it — the lockup silently rendered at 16px instead of 17. Its sibling
+  `--text-stat` looked fine only because `<Stat>` builds that class list as a
+  plain string, so twMerge never ran. Two tokens added the same way, one broken,
+  and nothing in the CSS showed the difference. `TYPE_SCALE` now says out loud
+  that it is a registration rather than documentation.
+- ~~**M7 — dead components.**~~ **CLOSED 2026-09-07.** `TrustStrip`, `Hero`,
+  `AnimatedRule` and `ContentShelf` are deleted, along with their barrel exports
+  and the 45 lines of `.reveal-rule` CSS that existed only for `AnimatedRule`.
+  All four had zero usages while staying publicly exported, and two carried live
+  defects that no gate could see precisely because they never rendered:
+  `TrustStrip` held the 2.87:1 `opacity-70` text and the retired uppercase
+  eyebrow, `Hero` held the off-scale 112px padding. Recoverable from git.
+
+- **M4 — CTABand rhythm.** `py-16 sm:py-20` (64/80) is a pair that exists nowhere
+  in `Section.spacings`, so every page closes on a rhythm no other section uses.
+  Both values are on the approved scale, so this is a consistency argument rather
+  than a defect, and changing it alters the closing band on every page. Left as
+  an accepted deviation pending a deliberate call.
+
+- **M6 — the duplicated templates.** `/services/[slug]` and `/industries/[slug]`
+  are one `<SectorPage>`; the pull-quote band is hand-built three times; `/about`
+  runs the same section shape three times and renders `whyUs` a second time. This
+  is the last structural item and the only one that needs a decision rather than
+  an edit: where the two templates diverge it is arbitrary rather than
+  considered, so extracting them means picking which version wins.
 - **The gate blind spots.** Unchanged, and still the reason most of this survived.
   Extending `style-conformance.ts` and `a11y-sweep.mjs` to the `[slug]` routes,
   adding a 390px pass, and asserting `scrollWidth <= clientWidth` at a 32px root

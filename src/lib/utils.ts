@@ -20,6 +20,19 @@ import { extendTailwindMerge } from "tailwind-merge";
  * and a colour coexist and neither evicts the other. Fixing it here fixes every
  * component that calls cn(), not just Button.
  */
+/**
+ * ADDING A `--text-*` TOKEN? ADD ITS NAME HERE TOO. This list is not
+ * documentation, it is the registration — a token that is not in it gets
+ * treated as a colour again and silently evicted by any `text-<colour>` later
+ * in the same `cn()` call.
+ *
+ * That is not hypothetical. `--text-wordmark` was added to globals.css and the
+ * lockup immediately rendered at 16px instead of 17: `cn("... text-wordmark
+ * ...", "text-text")` and twMerge dropped the size. The sibling `--text-stat`
+ * looked fine only because <Stat> happens to build that class list as a plain
+ * string, so twMerge never ran on it. Two tokens added the same way, one broken,
+ * and the difference was invisible from the CSS.
+ */
 const TYPE_SCALE = [
   "display",
   "h1",
@@ -30,6 +43,9 @@ const TYPE_SCALE = [
   "body-lg",
   "small",
   "caption",
+  // Single-purpose optical sizes, deliberately off the ladder. See globals.css §3.
+  "wordmark",
+  "stat",
 ];
 
 const twMerge = extendTailwindMerge({

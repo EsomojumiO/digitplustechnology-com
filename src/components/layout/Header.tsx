@@ -27,7 +27,7 @@ import { ChevronDown, Close, ExternalArrow, Menu, Phone } from "@/components/ui/
  */
 function NavBadge({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-flex shrink-0 items-center rounded-full border border-hairline px-2 py-0.5 text-[0.6875rem] font-medium leading-none text-muted">
+    <span className="inline-flex shrink-0 items-center rounded-full border border-hairline px-2 py-0.5 text-caption font-medium leading-none text-muted">
       {children}
     </span>
   );
