@@ -3,7 +3,7 @@
 import * as React from "react";
 import Image from "next/image";
 import { Link } from "next-view-transitions";
-import { useReducedMotion } from "framer-motion";
+import { useReducedMotion } from "@/components/motion/useReducedMotion";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import Fade from "embla-carousel-fade";
