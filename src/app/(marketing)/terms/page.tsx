@@ -5,7 +5,6 @@ import {
   Breadcrumbs,
   Eyebrow,
   Prose,
-  Badge,
 } from "@/components/ui";
 import { siteConfig } from "@/lib/site";
 
@@ -26,10 +25,9 @@ export default function TermsPage() {
         />
         <Eyebrow>Legal</Eyebrow>
         <h1 className="text-h1 mt-3 text-text">Terms of Use</h1>
-        <div className="mt-4 flex flex-wrap items-center gap-3">
-          <Badge tone="outline">DRAFT, pending legal counsel review</Badge>
-          <span className="text-small text-muted">Last updated: May 2026</span>
-        </div>
+        <p className="mt-4 text-small text-muted">
+          Last updated: September 2026
+        </p>
 
         <Prose className="mt-10">
           <p>
