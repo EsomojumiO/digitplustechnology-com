@@ -26,7 +26,10 @@ and run **axe** for full WCAG AA (article a11y 92 → check muted-text contrast 
 
 ## ⛔ Pending — needs the client / external accounts
 **Integrations (5-minute each once you have accounts)**
-- [ ] `RESEND_API_KEY` (+ verify sending domain) — lead notification emails
+- [~] `RESEND_API_KEY` — **set in Vercel** (Preview + Production). Sending-domain
+      verification is **unconfirmed**: `vercel env pull` redacts Secret values as
+      `[SENSITIVE]`, so it cannot be tested from here. Check resend.com/domains, or submit
+      the live contact form once and confirm the mail lands at hello@.
 - [ ] `MARKETING_API_KEY` + `MARKETING_LIST_ID` (Brevo) — newsletter/report list
 - [ ] `CRM_WEBHOOK_URL` or `CRM_API_KEY` (HubSpot) — lead sync
 - [ ] `NEXT_PUBLIC_ANALYTICS` = domain (Plausible) — analytics + event tracking
@@ -49,16 +52,33 @@ and run **axe** for full WCAG AA (article a11y 92 → check muted-text contrast 
 - [ ] Real **report data** — replace the benchmark report's illustrative figures
 
 **Legal**
-- [ ] Privacy + Terms reviewed and signed off by counsel; NDPC registration if applicable
+- [x] Privacy + Terms published as final (DRAFT badge removed 2026-09-08); copy verified
+      to describe the system truthfully.
+- [ ] **Still needed:** counsel sign-off on the wording, and NDPC registration if applicable.
+      Removing the badge was an engineering check, not legal review.
 
 **Deploy & SEO ops**
-- [ ] Deploy to Vercel on the canonical domain over HTTPS; set env vars
+- [x] Deploy to Vercel on the canonical domain over HTTPS — **live 2026-09-08** at
+      https://digitplustechnology.com, served from the Cape Town edge (`x-vercel-cache: HIT`,
+      warm TTFB ~0.35s). `www` 308s to the apex. `NEXT_PUBLIC_GA_ID` and `RESEND_API_KEY`
+      are set; the rest remain stubs (see below).
 - [x] App-level `www → non-www` + `digitplus.tech → canonical` 308s in `next.config.ts`
       (`digitplus.tech` rule fires once that domain is attached to the Vercel project)
 - [ ] Verify in **Google Search Console**; submit `sitemap.xml`
 - [ ] **Google Business Profile** — NAP identical to `src/lib/site.ts`
-- [ ] Confirm 301s from old single-page anchors are live
-- [ ] Final favicon/OG check; re-run Lighthouse + axe on staging
+- [ ] Confirm 301s from old single-page anchors — **needs the old URL list.** Only the
+      www->apex canonical redirect exists (verified 308). Fragment anchors like `/#services`
+      are not separate URLs to a crawler and need no redirect, so this may be moot; it
+      matters only if the old site had real indexed paths.
+- [x] **Favicon fixed 2026-09-09.** `icon.png` was the 3508x2481 print master, 123KB and
+      non-square, so browsers downloaded it for a 16px tab and squashed it. Now a square
+      512x512 (24KB) plus a 180x180 `apple-icon.png` on white, both generated from the
+      brand mark. OG/Twitter/canonical verified correct on production.
+- [x] axe: 0 violations across 20 templates x 2 widths (`npm run gates`).
+- [ ] Lighthouse: **not reliably measurable from a dev machine** — the same URL scored
+      95/55/55 with LCP 2.1s-18.4s, which is network and cold-start noise, not the site.
+      JS transfer is 288KB brotli (911KB figure was uncompressed and misleading).
+      Use https://pagespeed.web.dev for a trustworthy number.
 
 ## Recommended go-live order
 1. Deploy to staging (Vercel) → 2. Add integration keys → 3. Wire DB + rate-limit →
