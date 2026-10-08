@@ -108,3 +108,25 @@ npm install
 npm run lint && npx tsc --noEmit && npm run build
 PORT=3210 npm run start    # then curl the routes above
 ```
+
+---
+
+## Addendum 2026-10-08: ten articles, the 2026 annual report, /portfolio
+
+Branch `content/articles-report-portfolio`. **Verdict: PASS.**
+
+| Check | Result |
+|---|---|
+| `npx tsc --noEmit` | clean |
+| `npm run build` | success (0 lint errors; the 7 pre-existing warnings unchanged) |
+| `npm run gates` | all 6 green: style-conformance (39 routes × 1440/390, now including `/portfolio`, one new article and the new report), a11y-sweep, hero-contrast, internal-link-audit (0 orphans, all ≤3 clicks), overlay-stacking (50 assertions), text-scaling |
+| Sitemap | `/portfolio`, all ten articles and `/reports/digitplus-industry-report-2026` present |
+| JSON-LD | `/portfolio`: BreadcrumbList + CollectionPage/ItemList of the case-study URLs |
+| PDF | `/reports/digitplus-industry-report-2026.pdf` serves 200, 348 KB, linked from the report page |
+| Visual | `/portfolio` at 1440, 1030 (header fit with the added nav item) and 390 (no horizontal scroll); report detail and hub covers at their crops |
+
+**Content process.** Each article was written by one agent against `docs/VOICE.md` and a shared honesty brief, then edited by a second, independent agent that removed eleven unverifiable claims and one false technical claim (2.5GbE as standard on business desktops). Mechanical audit across all ten: 0 em dashes, 0 semicolons, 0 banned words, no client named, all internal links resolve. The annual report was researched by one agent (33 sources) and every numbered claim re-checked against its source by a second, which corrected about a dozen (including the NDPA breach-notification clock and the scope of the Auditor-General's 29-body figure) and replaced two dead citations. Open confirmations: `docs/BLOCKERS.md` #19–26.
+
+**Gate flake worth knowing about.** After clearing `.next/cache/images`, style-conformance and overlay-stacking timed out on `/services/infrastructure-solutions` three runs in a row. Cause: one AVIF encode of that page's image at w=640 stalled while the machine was at load average 12. Next deduplicates in-flight optimisations per image key, so every later request for the same key waited on the stuck job until the server restarted. The file itself encodes in ~100 ms in sharp. Restarting `next start` cleared it, and all six gates passed. If a gate times out on a page load, restart the server before suspecting the page.
+
+**Second pass, same day (owner-delegated decisions + drafts).** Applied the decisions recorded in DECISIONS 2026-10-08 (no partner status claimed, same-day as a target, quote validity policy, adjusted 2027 plan, PDF re-rendered). Published all 11 drafts (62 published, 0 drafts) and added style-conformance check 10 (no links to unpublished articles). Re-verified on a fresh build: `tsc` clean, build 0 errors (one lint error from an unescaped apostrophe was caught by `prebuild` and fixed), all 6 gates green, former-draft URLs return 200, /industries/healthcare lists the hospital articles.

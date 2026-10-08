@@ -66,7 +66,7 @@ and run **axe** for full WCAG AA (article a11y 92 → check muted-text contrast 
       (`digitplus.tech` rule fires once that domain is attached to the Vercel project)
 - [ ] Verify in **Google Search Console**; submit `sitemap.xml`
 - [ ] **Google Business Profile** — NAP identical to `src/lib/site.ts`
-- [ ] Confirm 301s from old single-page anchors — **needs the old URL list.** Only the
+- [x] ~~Confirm 301s from old single-page anchors~~ **Closed 2026-10-08: fragments never reach the server, so no 301 can match them (DECISIONS).** Original note: — **needs the old URL list.** Only the
       www->apex canonical redirect exists (verified 308). Fragment anchors like `/#services`
       are not separate URLs to a crawler and need no redirect, so this may be moot; it
       matters only if the old site had real indexed paths.
