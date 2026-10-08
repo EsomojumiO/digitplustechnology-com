@@ -38,7 +38,7 @@ export const metadata: Metadata = {
    the existing whyUs data (which carries the longer supporting copy). */
 const whyBeats: { label: string; beat: string }[] = [
   { label: "Accountable", beat: "one partner, start to support." },
-  { label: "Nationwide", beat: "Abuja, Lagos, Port Harcourt." },
+  { label: "Nationwide", beat: "Abuja HQ, with Lagos and Port Harcourt." },
   { label: "Experienced", beat: "government, banking, healthcare, energy." },
   { label: "Disciplined", beat: "written down, audit-ready." },
 ];
@@ -54,9 +54,15 @@ export default function HomePage() {
           one h1. */}
       <HeroCarousel />
 
-      {/* Trust strip, partner logos on a slow seamless marquee */}
+      {/* Trust strip: brands we source and support, on a slow seamless
+          marquee. Captioned so the logos do not read as partnerships, which
+          no manufacturer has confirmed (BLOCKERS #2). */}
       <Section tone="muted" spacing="sm">
         <FadeIn>
+          <p className="mb-6 px-4 text-center text-small text-muted">
+            Equipment we source and support, bought through manufacturers&apos;
+            authorised distribution
+          </p>
           <TrustMarquee />
         </FadeIn>
       </Section>
