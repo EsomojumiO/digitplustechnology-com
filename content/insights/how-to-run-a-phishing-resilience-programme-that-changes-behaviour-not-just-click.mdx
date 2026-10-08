@@ -1,108 +1,202 @@
 ---
 title: "How to Run a Phishing-Resilience Programme That Changes Behaviour, Not Just Click Rates"
 slug: "how-to-run-a-phishing-resilience-programme-that-changes-behaviour-not-just-click"
-excerpt: "Annual training and a falling click rate tell you little about real risk. Here is how to build a phishing awareness programme in Nigeria that changes behaviour and measures what predicts reduced compromise."
+excerpt: "A falling click rate says little about real risk. How to run a phishing awareness programme in Nigeria that gets suspicious mail reported fast, and pairs it with the payment rule that makes one mistake survivable."
 category: "Cybersecurity"
 tags:
   - "phishing"
   - "cybersecurity"
   - "security awareness"
-  - "nigeria"
   - "business email compromise"
   - "behaviour change"
 author: "Digitplus Technology"
-publishedAt: "2026-06-03"
-updatedAt: "2026-06-03"
+publishedAt: "2026-10-08"
+updatedAt: "2026-10-08"
 cover: "/images/insights/how-to-run-a-phishing-resilience-programme-that-changes-behaviour-not-just-click.jpg"
-coverAlt: "A Nigerian security awareness lead reviewing phishing simulation reporting dashboards with a team in an office meeting room."
-draft: true
+coverAlt: "Branded cover: the article title \"How to Run a Phishing-Resilience Programme That Changes Behaviour, Not Just Click Rates\" set in white on a dark green gradient, labelled Cybersecurity, with the Digitplus Technology wordmark."
+draft: false
 seo:
-  metaTitle: "Phishing Awareness Programme: Change Behaviour, Not Clicks"
-  metaDescription: "Build a phishing-resilience programme that actually cuts compromise in Nigeria: simulation cadence, reporting incentives, role-based risk, and metrics that predict real risk."
+  metaTitle: "Phishing Awareness Programmes That Change Behaviour"
+  metaDescription: "A phishing awareness programme for Nigerian organisations that measures reporting, not clicks, focuses on finance and executives, and adds payment checks."
   ogImage: "/images/insights/how-to-run-a-phishing-resilience-programme-that-changes-behaviour-not-just-click.jpg"
 ---
 
-Most organisations can show you a security awareness certificate and a click rate that fell from one year to the next, and conclude that their people are now harder to fool. Neither tells you much. A phishing awareness programme in Nigeria that runs once a year, measures only who clicked, and never changes what people actually do at their desks is a compliance artefact, not a control. The attackers running business email compromise against Nigerian finance teams are not deterred by a slide deck somebody watched in January.
+A falling click rate is the wrong thing to be proud of.
 
-The goal of a phishing-resilience programme is narrow and practical: make it more likely that a targeted employee notices something is wrong, hesitates, and reports it, and less likely that a single mistake turns into a fraudulent payment or a foothold in your network. That is a behavioural outcome, not a training-completion statistic. This article sets out how to run such a programme as a sustained operation, with the cadence, incentives, role-based focus, and metrics that move the outcome rather than the optics.
+Most organisations can show a training certificate and a simulated-phishing
+click rate that went down this year. Neither says much about whether a real
+attack would succeed. A phishing awareness programme in Nigeria that runs once a
+year and counts only who clicked is a record of training, not a control. The
+people running business email compromise against finance teams are not slowed
+down by a module somebody watched in January.
+
+The goal is narrow. A targeted employee notices something is off and reports
+it. And when someone does get fooled, one mistake does not become a
+payment to the wrong account. Both are behaviours, and both can be measured.
+
+This piece covers the human programme. The technical baseline under it, from
+mail filtering to SPF, DKIM and DMARC, is set out in our
+[cybersecurity essentials for Nigerian SMEs](/insights/cybersecurity-essentials-for-nigerian-smes).
+Do that first. Training people to spot forged mail from your own domain is
+wasted effort if anyone in the world can still send it.
 
 ## Why click rate is the wrong scoreboard
 
-Click rate, the percentage of simulated recipients who clicked a test link, is easy to measure, which is exactly why it dominates. It is also a weak proxy for the thing you care about. A low click rate can be produced by simulations that are too easy, by employees who have learned the look of your test templates, or by people who quietly delete anything suspicious without reporting it, which leaves your security team blind to live campaigns hitting other inboxes.
+Click rate is easy to measure, which is why it dominates. It is also easy to
+move without changing anything. Make the simulations easier and it falls. Run
+the same templates every quarter and staff learn the templates, not the attack.
+Worst of all, people who quietly delete anything suspicious score perfectly,
+and your security team learns nothing about the live campaign landing in other
+inboxes.
 
-Worse, click rate frames the employee as the failure point. People click links for a living. The buyer who opens a supplier quotation, the HR officer who opens a CV, the accounts clerk who opens an invoice, are doing their jobs. A programme built to shame clickers produces fear and concealment, not resilience. The organisations that improve are the ones that shift the question from "who clicked" to "how quickly did we find out, and what happened next".
+Click rate also casts the employee as the failure. Opening attachments is the
+job. HR opens CVs. Accounts opens invoices. A
+programme built to shame clickers teaches people to hide mistakes, and a hidden
+mistake is the expensive kind. Change the question from "who clicked" to "how
+fast did we find out, and what happened next".
 
-## From an annual event to a sustained phishing awareness programme in Nigeria
+## A programme that runs all year
 
-The single most important change is to stop treating awareness as an event. Behaviour decays. A skill practised once a year is not a skill. A resilient programme runs continuously and has four working parts that reinforce each other: realistic simulations on a steady cadence, role-based content, a reporting culture that is rewarded rather than punished, and a feedback loop that feeds live attack data back into the next round.
+Behaviour fades. A skill practised once a year is not a skill. The programme
+has to run continuously, and it does not need a large team to do it. It needs
+an owner with a calendar, and the discipline to act on what the numbers say.
 
-None of this requires a large internal team. It requires ownership, a defined cadence, and the discipline to act on what the data shows.
+**Simulate on a steady cadence.** Monthly or every other month suits most
+organisations. Rotate the theme and the difficulty so staff learn the cues, not
+your templates. Build the lures from the fraud that actually reaches Nigerian
+inboxes: a supplier announcing new bank details, an urgent instruction that
+appears to come from a director, a fake LPO chasing payment, a login page
+asking for a mailbox password. When someone falls for a simulation, show a short
+page at once explaining the cues they missed, with no penalty. That correction,
+at the moment of the mistake, does more than any annual course.
 
-### Simulation cadence that builds a habit
+**Weight the effort by role.** Not everyone carries the same risk.
 
-Simulations should be frequent enough to keep recognition sharp and varied enough to avoid pattern-matching on your own templates. A monthly or every-other-month cadence works for most organisations, with difficulty and theme rotated rather than repeated. The point is not to catch people out; it is to give them low-stakes practice at the exact moment of decision, so the real thing feels familiar.
+- **Finance and accounts payable** are the main target for invoice fraud and
+  changed bank details. They need payment-themed simulations more often than
+  anyone else, and a fixed rule described below.
+- **Executives and their assistants** are impersonated in authority fraud and
+  are often left out of training out of deference. That exemption is the gap.
+  The fraud works because the assistant believes the instruction came from the
+  principal.
+- **HR and procurement staff** open unsolicited files as part of the
+  job, so their simulations should look like their real inbox.
+- **IT and anyone with admin rights** hold the credentials that unlock the most.
+  They get the hardest simulations and no exceptions to multi-factor
+  authentication.
 
-Vary the pretext deliberately. Mix credential-harvesting login pages, attachment lures, and, importantly, payment and procurement themes that mirror the fraud actually aimed at Nigerian organisations: a changed supplier bank account, an urgent request that appears to come from a director, a fake local purchase order (LPO) chasing payment. When someone interacts with a simulation, the most valuable moment is the immediate, calm, non-punitive teaching screen that explains the specific cues they missed. That just-in-time correction does more than any annual module.
+## The rule that matters more than training
 
-### Role-based risk, not blanket content
+The most reliable defence against changed-bank-detail fraud is not awareness.
+It is a procedure no single person can skip under pressure. Any change to a
+supplier's bank details, and any unusual payment instruction, is confirmed by a
+phone call to a number already on file. Never a number in the email. Never a
+reply to the email. A second person approves the change before the next payment
+goes out.
 
-Not every employee carries the same risk, and treating them identically wastes effort where it matters most. Map your phishing exposure to roles and weight the programme accordingly.
+Write it down and tell suppliers it exists. Awareness
+lowers the odds of a mistake. The procedure makes sure one mistake cannot
+release money on its own. You need both, but if you can only do one this month,
+do the procedure.
 
-- **Finance and accounts payable** are the primary target for business email compromise, invoice fraud, and bank-detail changes. They need frequent, payment-themed simulations and a hard procedural rule: any change to supplier banking details is verified out of band, by a phone call to a known number, never by replying to the email.
-- **Executives and their assistants** are targeted for authority-based fraud and are often exempted from training out of deference. That exemption is a gap. Whaling works precisely because the assistant believes the urgent instruction came from the principal.
-- **HR, procurement, and customer-facing staff** open unsolicited attachments and links as a core part of the job and need content tuned to their workflow.
-- **IT and privileged users** are high-value because their credentials unlock more. They warrant the most demanding simulations and the strongest enforcement of multi-factor authentication.
+## Make reporting the behaviour you reward
 
-Role-based design also tells you where to put non-training controls. The most reliable defence against the changed-bank-account fraud is not awareness at all; it is a verification procedure that no single employee can bypass under pressure.
+A reported phishing email is an early warning. It lets someone pull the same
+message from every other inbox before a second person acts on it. A deleted one
+protects one person and leaves everyone else exposed.
 
-### Make reporting the rewarded behaviour
+> The organisations that improve are the ones where reporting a suspicious
+> email takes one click and is quietly expected. The security team then hears
+> about a live campaign within minutes, not after the money has left.
 
-The metric that best predicts a contained incident is how fast and how often your people report suspicious messages. A reported phishing email is an early-warning signal that lets your team pull the same message from other inboxes before someone acts on it. An unreported one that was simply deleted protects one person and leaves everyone else exposed.
+Make it effortless. A report button in the mail client beats an address nobody
+remembers, and Microsoft 365 and Google Workspace can both provide one. Thank
+every report, including the false alarms, because punishing a wrong guess
+teaches people to stop reporting. And when a report stops a real campaign, tell
+the organisation, without naming anyone. People repeat behaviour they can see
+matters.
 
-> The organisations that improve are not the ones with the lowest click rate. They are the ones where reporting a suspicious email is fast, frictionless, and quietly expected, so the security team learns about a live campaign in minutes rather than after the money has left.
+## Measure what predicts a contained incident
 
-To get there, make reporting effortless and make it pay. A one-click report button in the mail client beats asking people to forward to an inbox they cannot remember. Acknowledge every report, including the false alarms, because punishing a wrong guess teaches people to stop reporting. Recognise teams with strong reporting rates. And close the loop visibly: when a report helps stop a real campaign, tell the organisation, without naming or shaming anyone. People repeat behaviour that is seen to matter.
+Replace the single click-rate number with a few measures that track the
+behaviour you want.
 
-## The metrics that actually predict reduced compromise
+- **Report rate.** The share of simulated and real phishing that gets reported.
+  This is the headline. If it rises, the programme is working.
+- **Time to first report.** How long until the first person flags a given
+  campaign. The shorter it is, the fewer people the campaign reaches.
+- **Repeat susceptibility.** People who fall for several simulations in a row.
+  This small group is where coaching and tighter technical controls should go.
+- **Results by role.** The same measures for each high-risk role on its own,
+  so an average does not hide the groups that matter most.
+- **Real outcomes.** Payment fraud attempts stopped before money moved, and how
+  long any compromised account stayed in an attacker's hands.
 
-Replace the single click-rate vanity number with a small set of measures that track the behaviour you want.
+Report these to leadership in plain language. Section 39 of the Nigeria Data
+Protection Act 2023 requires organisations that handle personal data to put
+appropriate technical and organisational measures in place to secure it. A
+trend line showing reporting rising in finance and the executive office is
+evidence that one of those measures is operating, which a completion
+certificate is not.
 
-- **Report rate**: the share of simulated and real phishing that gets reported. This is the headline metric. Rising report rate is the clearest sign the programme is working.
-- **Time to first report**: how quickly the first person flags a given campaign. Shorter is better, because it shortens the window in which others can be caught.
-- **Repeat-susceptibility**: the proportion of people who interact across multiple simulations. A small recurring group is where targeted coaching and tighter technical controls should go.
-- **Resilience by role**: report and interaction rates broken down for finance, executives, and privileged users specifically, so you can see whether your highest-risk groups are actually improving.
-- **Real-incident outcomes**: near-misses caught, fraudulent payment attempts stopped before funds moved, and dwell time on any credential compromise. These are the outcomes the programme exists to change.
+## What the local setting changes
 
-Report these to leadership in plain language. Under the Nigeria Data Protection Act 2023, accountability for personal-data security sits with the organisation's leadership and its data protection arrangements, so a board-level view of human-risk trends is a governance expectation, not a courtesy. Trend lines that show report rate climbing and high-risk-role susceptibility falling are the evidence that the control is operating, rather than that training was delivered once.
+Most organisations spread across Abuja, Lagos and Port Harcourt cannot gather
+everyone in one room, so the programme runs and reports centrally. Some staff
+work on shared machines or mainly on phones over mobile data, so keep the
+material short and readable on a phone, not an hour of video. Contract staff and
+new joiners should be enrolled in the simulations on their first week,
+automatically. And when imported security licences are priced in dollars, a
+well-run programme and a firm payment procedure are some of the cheapest
+protection you can buy.
 
-## Grounding the programme in the Nigerian threat reality
+## Where we fit, and where we do not
 
-Generic phishing content does not prepare your people for the fraud actually aimed at them. The dominant local threats are financial and social: business email compromise, fake or altered LPOs chasing payment, invoice and supplier-bank-detail fraud, and authority-based requests impersonating directors. Your simulations and your verification rules should mirror these patterns directly.
-
-The operating environment shapes execution too. Multi-site organisations spread across Abuja, Lagos, and Port Harcourt cannot rely on everyone sitting through the same in-person session, so the programme has to run and report centrally while reaching every location. Shared workstations and low-bandwidth or mobile-first access in some sites mean training must be short, lightweight, and accessible on a phone, not a one-hour video that nobody can stream. Staff rotation and contract hiring mean onboarding must enrol new joiners into the simulation cadence automatically, rather than depending on an annual cycle they may miss entirely. And foreign-exchange pressure on the cost of imported security tooling is a real constraint: when licence renewals are expensive, a well-run behavioural programme and a few firm procedural controls deliver disproportionate protection for the spend.
-
-## Where a managed partner fits
-
-Running simulations, tuning role-based content, triaging reported messages, and feeding real campaign data back into the programme is ongoing operational work that many organisations cannot sustain in-house alongside everything else. This is a natural fit for [managed security services](/services/managed-services), where a partner operates the simulation cadence, monitors the reporting inbox, and reports human-risk trends to your leadership on a regular rhythm.
-
-Whatever the model, the human programme is one layer, not the whole defence. It works alongside email-gateway filtering, multi-factor authentication, and out-of-band payment verification. For finance teams specifically, the behavioural programme should be paired with the procedural payment-fraud controls covered in our related guidance, because awareness reduces the odds of a mistake while the procedure ensures a single mistake cannot release funds on its own. [Related: payment-fraud controls for Nigerian finance teams.]
-
-The organisations that genuinely reduce phishing compromise are not the ones with the lowest click rate on a year-end report. They are the ones where reporting is fast and rewarded, where finance and executives get focused attention, and where leadership watches the report rate climb quarter on quarter. That is a programme you operate, not a course you complete. A short assessment of your current cadence, reporting culture, and role-based exposure is usually the most useful place to start.
+Phishing simulation is not one of our service lines. The programme above is
+yours to run, or to buy from a specialist. What we set up is the layer underneath it:
+multi-factor authentication enforced for everyone, legacy sign-in blocked, mail
+authentication on your domain, and managed devices. That is the work described
+in our [Entra ID and Intune write-up for a law practice](/insights/microsoft-entra-intune-small-business-nigeria),
+and it is part of our [deployment and implementation](/services/deployment-implementation)
+work for [small and mid-sized firms](/industries/sme). If ransomware is the worry behind the phishing
+question, our [ransomware readiness guide](/insights/ransomware-readiness-for-nigerian-organisations)
+covers recovery.
 
 ## Frequently asked questions
 
 ### How often should we run phishing simulations?
 
-Frequently enough to keep recognition sharp without causing fatigue. For most organisations a monthly or every-other-month cadence works, with the theme and difficulty rotated each time and payment or procurement lures included to mirror real local fraud. Frequency matters more than volume: steady, varied practice builds the habit of hesitating and reporting, while a single annual exercise decays long before the next one.
+Often enough that recognition stays sharp, not so often that people tune out.
+Monthly or every other month suits most organisations, with the theme and
+difficulty rotated and payment lures included. Steady, varied practice builds
+the habit of stopping and reporting. A single annual exercise has faded long
+before the next one.
 
 ### Is click rate a useful measure of a phishing awareness programme in Nigeria?
 
-On its own, no. Click rate is easy to measure but weakly linked to real risk, and a programme built around it tends to shame employees and suppress reporting. Track report rate and time to first report as your headline measures, broken down for high-risk roles such as finance and executives, and tie them to real outcomes like fraudulent payment attempts stopped before funds moved.
+On its own, no. It is easy to move without changing real risk, and a programme
+built around it tends to shame staff into silence. Make report rate and time to
+first report the headline measures, broken down for finance and executives, and
+tie them to real outcomes such as fraud attempts stopped before money moved.
 
-### Should senior executives be included in phishing simulations?
+### Should senior executives be included in simulations?
 
-Yes, and they are often the most important group to include. Executives and their assistants are prime targets for authority-based fraud and business email compromise, precisely because requests appearing to come from a director carry weight. Exempting leadership out of deference creates the gap attackers exploit. Include them, and pair the awareness with an out-of-band verification rule for any payment or banking-detail request.
+Yes. They and their assistants are the people attackers impersonate and target
+in authority fraud. Leaving them out creates the exact gap the fraud uses.
+Include them, and back it with the call-back rule for any payment or
+bank-detail request.
 
-### How does a phishing-resilience programme support regulatory compliance?
+### Does the NDPA require phishing training?
 
-A sustained programme produces evidence a one-off training record cannot. The Nigeria Data Protection Act 2023 places accountability for personal-data security with the organisation's leadership. Reporting human-risk trends, such as a rising report rate and falling susceptibility in high-risk roles, to your board gives you defensible evidence of an operating control rather than a one-off training record.
+The Act does not name phishing training. Section 39 requires appropriate
+technical and organisational measures to keep personal data secure, and staff
+awareness is a normal part of that. A programme that produces trend data gives
+you better evidence of an operating measure than a one-off training record.
+
+## Where to start
+
+This week, write the payment call-back rule and get the finance lead and one
+director to sign it. Next month, add a report button to your mail client and run
+one payment-themed simulation on the finance team. If the controls underneath
+are not in place yet, send us what you run on through our
+[contact page](/contact) and we will tell you which of them you are missing.

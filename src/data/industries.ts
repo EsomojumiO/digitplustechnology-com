@@ -114,7 +114,7 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
       "it-checklist-for-opening-a-new-bank-branch",
       "securing-multi-branch-networks",
       "lan-wan-design-for-multi-branch-businesses",
-      "ndpr-compliance-for-it-teams",
+      "what-cbns-it-standards-mean-for-branch-network-and-endpoint-hardening",
     ],
     faqs: [
       {
@@ -234,11 +234,11 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
       "deployment-implementation",
     ],
     relatedInsights: [
+      "it-support-for-private-companies-in-abuja",
+      "it-procurement-for-private-companies-in-abuja",
+      "how-to-read-an-it-quote",
       "cybersecurity-essentials-for-nigerian-smes",
       "in-house-vs-outsourced-it-support-nigeria",
-      "refresh-or-repair-it-hardware-decision",
-      "consolidated-vs-reactive-it-purchasing",
-      "network-installation-checklist-new-office",
     ],
     faqs: [
       {
@@ -296,11 +296,11 @@ export const industriesContent: Record<IndustrySlug, IndustryContent> = {
       "deployment-implementation",
     ],
     relatedInsights: [
+      "it-asset-procurement-hospitals-nigeria",
+      "after-go-live-how-we-support-a-private-hospital-in-abuja",
+      "it-support-for-private-hospitals-in-abuja",
+      "choosing-an-it-partner-for-a-private-hospital-in-abuja",
       "it-setup-guide-for-hospitals-and-clinics",
-      "power-protection-and-ups-planning",
-      "ransomware-readiness-for-nigerian-organisations",
-      "what-an-it-sla-should-cover",
-      "structured-cabling-standards-for-nigerian-offices",
     ],
     faqs: [
       {
