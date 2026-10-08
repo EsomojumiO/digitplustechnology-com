@@ -23,4 +23,9 @@ export {
 export { processSteps } from "./process";
 export { stats } from "./stats";
 export { whyUs } from "./whyUs";
+export {
+  portfolioProjects,
+  type PortfolioProject,
+  type PortfolioFigure,
+} from "./portfolio";
 export { authors, getAuthor, type Author } from "./authors";
