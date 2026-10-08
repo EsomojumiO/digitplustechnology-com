@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { existsSync, statSync } from "node:fs";
+import path from "node:path";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import {
@@ -28,6 +30,21 @@ import { reportSchema, breadcrumbSchema } from "@/lib/seo/schema";
 export const dynamicParams = false;
 /** ISR, revalidate hourly so freshly-published reports appear without a redeploy. */
 export const revalidate = 3600;
+
+/**
+ * The report's PDF, if a real one is on disk. Anything under 10 KB is treated
+ * as absent: the earlier placeholders were ~770-byte one-page stubs, and a
+ * download button in front of one of those is the problem BLOCKERS #10 records.
+ */
+function realPdf(href: string): { sizeLabel: string } | null {
+  if (!href.startsWith("/")) return null;
+  const file = path.join(process.cwd(), "public", href);
+  if (!existsSync(file)) return null;
+  const bytes = statSync(file).size;
+  if (bytes < 10 * 1024) return null;
+  const mb = bytes / (1024 * 1024);
+  return { sizeLabel: mb >= 1 ? `${mb.toFixed(1)} MB` : `${Math.round(bytes / 1024)} KB` };
+}
 
 export function generateStaticParams() {
   return getAllReports().map((report) => ({ slug: report.slug }));
@@ -85,6 +102,7 @@ export default async function ReportLandingPage({
   const report = getReportBySlug(slug);
   if (!report) notFound();
 
+  const pdf = realPdf(report.pdf);
   const period = [report.quarter, report.year].filter(Boolean).join(" ");
   const publishedLabel = new Date(report.publishedAt).toLocaleDateString(
     "en-GB",
@@ -120,7 +138,9 @@ export default async function ReportLandingPage({
           <FadeIn className="flex flex-col gap-5">
             <div className="flex flex-wrap items-center gap-2.5">
               {period ? <Badge tone="accent">{period}</Badge> : null}
-              <Badge tone="neutral">Quarterly report</Badge>
+              <Badge tone="neutral">
+                {report.quarter === "Annual" ? "Annual report" : "Quarterly report"}
+              </Badge>
             </div>
             <h1 className="text-h1 text-balance text-text">{report.title}</h1>
             {report.summary ? (
@@ -194,39 +214,62 @@ export default async function ReportLandingPage({
       ) : null}
 
       {/*
-        ── Full-report download: UNGATED until the real PDF exists ──────────
-        This was a lead form asking for full name, WORK EMAIL, company and role
-        in exchange for "category-level pricing, the methodology behind every
-        figure". The files in public/reports are 771- and 765-byte one-page
-        stubs (BLOCKERS #10), so the gate was collecting a named buyer's PII for
-        nothing — a reputational problem and an NDPA-consent problem at once.
-        The on-page HTML report above is genuine analysis and stands on its own,
-        so the ask is simply a conversation instead.
-        RESTORE THE GATE when the real PDF lands: re-add <ReportGateForm
-        reportSlug={report.slug} reportTitle={report.title} /> here. The API
-        route, schema, rate limiting and the /api/report-lead tests all remain
-        in place and working — only this call site is removed.
+        ── Full-report download ─────────────────────────────────────────────
+        The old lead gate asked for full name, WORK EMAIL, company and role in
+        exchange for 771- and 765-byte one-page stubs (BLOCKERS #10): PII for
+        nothing, a reputational and NDPA-consent problem at once. So the PDF
+        is offered only when a real file exists on disk at build time, and it
+        is offered UNGATED: the lead integrations are still stubs, so a gate
+        would collect details that go nowhere useful.
+        To RESTORE THE GATE once email delivery and the CRM are live, render
+        <ReportGateForm reportSlug={report.slug} reportTitle={report.title} />
+        in place of the download button. The API route, schema, rate limiting
+        and the /api/report-lead tests all remain in place and working.
       */}
       <Section tone="muted" spacing="lg">
         <Container width="narrow" className="px-0">
           <Card padding="lg">
-            <div className="flex flex-col gap-2">
-              {/* Not "Full report" — this section no longer contains one. */}
-              <Eyebrow>Go deeper</Eyebrow>
-              <h2 className="text-h3 text-balance text-text">
-                Want the underlying detail?
-              </h2>
-              <p className="text-body text-muted">
-                The findings above are the substance of this edition. For the
-                category-level detail behind them, or to talk through what it
-                means for a specific procurement cycle, speak to us directly.
-              </p>
-            </div>
+            {pdf ? (
+              <div className="flex flex-col gap-2">
+                <Eyebrow>Full report</Eyebrow>
+                <h2 className="text-h3 text-balance text-text">
+                  Read the whole edition
+                </h2>
+                <p className="text-body text-muted">
+                  The full report carries the detail behind every finding above,
+                  with numbered sources. PDF, {pdf.sizeLabel}. No form to fill.
+                </p>
+              </div>
+            ) : (
+              <div className="flex flex-col gap-2">
+                {/* Not "Full report": this branch does not contain one. */}
+                <Eyebrow>Go deeper</Eyebrow>
+                <h2 className="text-h3 text-balance text-text">
+                  Want the underlying detail?
+                </h2>
+                <p className="text-body text-muted">
+                  The findings above are the substance of this edition. For the
+                  category-level detail behind them, or to talk through what it
+                  means for a specific procurement cycle, speak to us directly.
+                </p>
+              </div>
+            )}
 
-            <div className="mt-8">
-              <Button href="/contact" size="lg">
-                {ctaLabels.generic}
-              </Button>
+            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
+              {pdf ? (
+                <>
+                  <Button href={report.pdf} download size="lg">
+                    Download the full report
+                  </Button>
+                  <Button href="/contact" variant="ghost">
+                    {ctaLabels.generic}
+                  </Button>
+                </>
+              ) : (
+                <Button href="/contact" size="lg">
+                  {ctaLabels.generic}
+                </Button>
+              )}
             </div>
           </Card>
         </Container>
