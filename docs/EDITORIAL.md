@@ -124,7 +124,19 @@ write in the body, plus the key findings) and a **gated PDF** (the full thing,
 delivered after someone fills in the download form).
 
 ### Step 1 — The PDF
-Save the full report PDF in `public/reports/` using the same slug:
+Write the full report as Markdown in `docs/reports/<slug>.md` and print it
+(needs a developer machine with Playwright's Chromium):
+
+```
+node scripts/render-report-pdf.mjs <slug>
+```
+
+That writes `public/reports/<slug>.pdf`. Re-run it after every edit to the
+Markdown. The download button appears on the report page only once a real PDF
+(over 10 KB) is in place. For a branded cover, run
+`node scripts/gen-branded-cover.mjs "<slug>" "<Title>" "Annual report" reports`.
+
+Or, if the PDF was designed elsewhere, save it in `public/reports/` using the same slug:
 
 ```
 public/reports/nigeria-enterprise-it-hardware-price-index-q3-2026.pdf

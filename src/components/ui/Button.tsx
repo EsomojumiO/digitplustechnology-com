@@ -91,8 +91,10 @@ export const Button = React.forwardRef<
     // article cards already use. As a raw <a> every CTA on the site was a full
     // document reload that skipped the App Router and the 220ms view
     // transition, so a service card white-flashed while an article crossfaded.
-    // mailto:, tel: and absolute URLs stay raw anchors.
-    const internal = href.startsWith("/") || href.startsWith("#");
+    // mailto:, tel: and absolute URLs stay raw anchors. So does a `download`
+    // link: a file is not a route, and the router would try to render it.
+    const internal =
+      (href.startsWith("/") || href.startsWith("#")) && !("download" in rest);
     if (internal) {
       return (
         <Link

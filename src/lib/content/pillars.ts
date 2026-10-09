@@ -56,6 +56,29 @@ const ARTICLE_PILLAR: Record<string, { kind: PillarKind; slug: string }> = {
   "it-infrastructure-for-schools-and-universities": { kind: "industry", slug: "education" },
   "it-readiness-checklist-for-government-agencies": { kind: "industry", slug: "government" },
   "it-setup-guide-for-hospitals-and-clinics": { kind: "industry", slug: "healthcare" },
+  // October 2026: hospital and private-company clusters
+  "after-go-live-how-we-support-a-private-hospital-in-abuja": { kind: "service", slug: "managed-services" },
+  "it-support-for-private-hospitals-in-abuja": { kind: "industry", slug: "healthcare" },
+  "standardising-repeat-it-procurement-for-hospitals": { kind: "service", slug: "it-procurement" },
+  "choosing-an-it-partner-for-a-private-hospital-in-abuja": { kind: "industry", slug: "healthcare" },
+  "it-support-for-private-companies-in-abuja": { kind: "service", slug: "managed-services" },
+  "one-partner-for-it-procurement-and-support": { kind: "service", slug: "it-procurement" },
+  "it-procurement-for-private-companies-in-abuja": { kind: "industry", slug: "sme" },
+  "how-to-read-an-it-quote": { kind: "service", slug: "it-procurement" },
+  "what-customer-first-means-in-an-it-company": { kind: "service", slug: "technology-advisory" },
+  "how-an-it-engagement-with-digitplus-works": { kind: "service", slug: "deployment-implementation" },
+  // Former content-engine drafts, published October 2026
+  "what-cbns-it-standards-mean-for-branch-network-and-endpoint-hardening": { kind: "industry", slug: "banking-financial-services" },
+  "meeting-ndpa-2023-obligations-when-you-outsource-it-to-third-party-processors": { kind: "service", slug: "managed-services" },
+  "a-pre-deployment-site-survey-framework-for-rolling-out-equipment-across-multiple": { kind: "service", slug: "deployment-implementation" },
+  "designing-it-infrastructure-for-continuity-of-care-in-clinics-with-frequent-powe": { kind: "industry", slug: "healthcare" },
+  "hardening-field-and-remote-site-it-for-upstream-oil-and-gas-operations": { kind: "industry", slug: "oil-gas-energy" },
+  "how-to-decide-between-co-location-on-premise-and-edge-for-a-multi-site-business": { kind: "service", slug: "infrastructure-solutions" },
+  "how-to-plan-campus-wi-fi-that-holds-up-under-exam-season-load": { kind: "industry", slug: "education" },
+  "how-to-run-a-phishing-resilience-programme-that-changes-behaviour-not-just-click": { kind: "service", slug: "managed-services" },
+  "how-to-run-a-vendor-consolidation-review-without-locking-yourself-into-a-single": { kind: "service", slug: "it-procurement" },
+  "how-to-write-a-managed-services-scope-of-work-that-prevents-scope-creep": { kind: "service", slug: "managed-services" },
+  "total-cost-of-ownership-for-enterprise-hardware-in-a-volatile-naira-environment": { kind: "service", slug: "technology-advisory" },
 };
 
 export interface PillarRef {

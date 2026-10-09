@@ -28,12 +28,15 @@ export type TrustMarqueeProps = Record<string, never>;
  * logo scroll. Real brand marks forced to uniform white via CSS filter and
  * muted with opacity for a consistent set on the dark theme. Reduced-motion
  * safe via the Marquee primitive (content stays static and fully readable).
- * Logos only, no heading.
+ * Captioned on the home page as manufacturers we source from and support, NOT
+ * as partners: no reseller or partner status is confirmed for any of these
+ * brands (docs/BLOCKERS.md #2). Do not relabel as "partners" until a
+ * manufacturer confirms it in writing.
  */
 export function TrustMarquee() {
   return (
     <Marquee speed={42} pauseOnHover className="w-full">
-      <ul className="flex items-center gap-12 pr-12" aria-label="Technology partners">
+      <ul className="flex items-center gap-12 pr-12" aria-label="Manufacturers whose equipment we source and support">
         {PARTNERS.map((partner) => (
           <li key={partner.name} className="flex items-center">
             {/* eslint-disable-next-line @next/next/no-img-element */}

@@ -1,7 +1,7 @@
 ---
 title: "Designing IT Infrastructure for Continuity of Care in Clinics With Frequent Power Cuts"
 slug: "designing-it-infrastructure-for-continuity-of-care-in-clinics-with-frequent-powe"
-excerpt: "How Nigerian clinics keep EMR, diagnostics, and records available through power cuts: offline-first design, local caching, UPS sizing, and a graceful-degradation playbook."
+excerpt: "How to design clinic IT so care continues through power cuts: where the records live, which loads need UPS and for how long, signing in without the cloud, and the modes staff switch between."
 category: "Guides"
 tags:
   - "healthcare it"
@@ -9,109 +9,113 @@ tags:
   - "emr"
   - "ups sizing"
   - "offline-first"
-  - "disaster recovery"
 author: "Digitplus Technology"
-publishedAt: "2026-06-03"
-updatedAt: "2026-06-03"
+publishedAt: "2026-10-08"
+updatedAt: "2026-10-08"
 cover: "/images/insights/designing-it-infrastructure-for-continuity-of-care-in-clinics-with-frequent-powe.jpg"
-coverAlt: "A Nigerian clinic nurse reviewing patient records on a workstation beside a wall-mounted UPS unit during a power cut, with a backup indicator light on."
-draft: true
+coverAlt: "Branded cover: the article title \"Designing IT Infrastructure for Continuity of Care in Clinics With Frequent Power Cuts\" set in white on a dark green gradient, labelled Guides, with the Digitplus Technology wordmark."
+draft: false
 seo:
-  metaTitle: "Healthcare IT Continuity in Nigeria: Clinics & Power Cuts"
-  metaDescription: "How Nigerian clinics keep EMR, diagnostics, and records available through power cuts: offline-first design, local caching, UPS sizing, and a degradation playbook."
+  metaTitle: "Clinic IT for Power Cuts: Designing for Continuity of Care"
+  metaDescription: "Designing clinic IT for continuity of care through power cuts: where patient records live, UPS sizing by changeover gap, offline sign-in and planned downtime."
   ogImage: "/images/insights/designing-it-infrastructure-for-continuity-of-care-in-clinics-with-frequent-powe.jpg"
 ---
 
-## The Real Risk: When the Power Drops, Care Stalls
+A power cut in a clinic is a clinical problem before it is an IT one.
 
-In a Nigerian clinic, the moment the grid fails is not an IT inconvenience. It is a clinical event. A nurse mid-way through triage loses the patient's allergy list. A locum, unable to pull a history, repeat-prescribes blindly. The continuity-of-care record, the thread that lets one clinician safely pick up where another left off, simply snaps. Building genuine **healthcare IT continuity in Nigeria** means designing for this reality rather than pretending it away: power that transitions between mains and generator several times a day, brownouts that corrupt a database write mid-transaction, and stretches where neither grid nor diesel is dependable.
+A nurse at triage loses the screen with the allergy list. A doctor cannot open the notes from the last visit. A lab result sits in a system nobody can reach. The outage did not cause any of that. IT designed as if the outage would not happen did. Designing IT infrastructure for continuity of care means starting from the power cut and working back.
 
-The operating environment is unforgiving in ways generic vendor playbooks ignore. Many clinics run on a daily rhythm of outages and switchovers, and each transition is a small risk window. A workstation that loses power during a save can leave a record half-written. A server that browns out repeatedly ages its storage and its battery faster than the warranty assumes.
+This piece covers that design: where the records live, what has to stay powered and for how long, and what staff do when the systems go partial. The basics of a clinic build are in our [IT setup guide for hospitals and clinics](/insights/it-setup-guide-for-hospitals-and-clinics). The support side, including downtime forms and who tests the backups, is in [hospital IT support in Abuja](/insights/it-support-for-private-hospitals-in-abuja).
 
-Three things must survive an outage, and it helps to name them separately because they fail differently:
+## Decide what has to keep working
 
-- **Read access to existing records.** Clinicians need to see history, medications, and results even when nothing else works.
-- **The ability to capture new clinical data.** Notes, vitals, and orders generated during the outage must be recorded somewhere trustworthy, not lost or scribbled onto paper that never makes it back into the system.
-- **Safe diagnostics and imaging workflows.** A scan or lab result captured during an outage must not be orphaned or silently corrupted.
+Start with the clinical steps, not the equipment. During an outage, clinicians need to read the records that already exist. They need to record what happens during the outage, somewhere it will not be lost. And the desks that print patient cards, lab slips and prescriptions need to keep printing.
 
-The goal is not five-nines uptime. That is the wrong target for a clinic that cannot control its own power supply. The right target is **graceful degradation**: when systems go partial, the clinic keeps treating patients on a known, practised fallback, and every piece of data created in that mode is reconciled cleanly once full service returns.
+Each of those fails differently, so write them down separately and decide how each one is kept alive.
 
-## Offline-First vs Cloud-Only: Choosing an EMR Architecture for Healthcare IT Continuity in Nigeria
+Uptime is the wrong target. A clinic that cannot control its own power supply will not reach five nines, and money spent chasing that figure is money wasted. The right target is a known fallback for each failure, practised by staff, with every record made during the outage back in the system afterwards.
 
-The single most consequential decision is architecture. A cloud-only EMR is elegant when the link is up and useless the instant power or connectivity drops. If your patient records live exclusively on a server in another country and reach the clinic only over a single fibre line, then every outage, on either end, is a clinical blackout.
+## Where the records live
 
-An offline-first design inverts the assumption. A clinic-side database, running on a local server or edge appliance, becomes the source of truth that workstations read from and write to even when the internet is down. When the link returns, the local store syncs with the central system. Staff never notice the difference at the point of care, which is precisely the point.
+This is the decision everything else follows from.
 
-> The question is not "cloud or local" but "where does care happen when the link is gone." Design for the worst hour of the worst day, and the good days take care of themselves.
+A cloud-only EMR works well while the clinic's power, its router and its internet link are all up. Lose any one of them and the screen is empty. The cloud did not fail. The path to it did.
 
-This choice carries a regulatory dimension clinics cannot treat as an afterthought. Under the Nigeria Data Protection Act 2023, patient records are sensitive personal data, and you must be able to say where they physically reside, on what lawful basis they are processed, and how you would notify the Nigeria Data Protection Commission (NDPC) in the event of a breach. An offline-first model keeps a copy on-premises, which has data-residency advantages, but it also multiplies the number of places records live. Each local store is something you must secure, encrypt, and account for.
+An offline-first setup keeps a working copy of the records on a server inside the clinic. Workstations read and write to it over the local network. The internet link is only needed to sync with the central system. When the link drops, care carries on and changes queue. When it returns, they sync.
 
-The trade-off to plan for is sync conflict. The moment two sites, or two nurses, can edit while disconnected, you need conflict resolution and an audit trail so that one update does not silently overwrite another. Insist that your EMR records who changed what, when, and from which device, and that it surfaces conflicts for a human to resolve rather than picking a winner quietly. For clinics mapping this against their wider obligations, our [healthcare IT pillar](/industries/healthcare) sets the architecture decision in the context of a full clinical-infrastructure roadmap.
+That design has a cost. A local server is one more machine to power, back up, secure and eventually replace. And two people editing the same record while disconnected creates a conflict. Ask the EMR vendor two questions before you choose:
 
-## Sizing Power Backup for Clinical Loads
+1. Does the system work with no internet connection at all, and which functions stop?
+2. When two offline edits clash, does it show the conflict to a person with an audit trail of who changed what, or does it quietly keep one version?
 
-Once the data can survive an outage, the hardware has to as well. The common mistake is treating power backup as one undifferentiated problem. It is at least three.
+If the answer to the first is "it needs the internet", the clinic needs two internet links on different providers, and enough backup power to keep the router and the links running. That is a valid design. It is harder to make reliable than it looks.
 
-Separate your loads by criticality:
+Offline-first is not automatically the answer. A small single-site clinic with two good links and a well-protected router can run a hosted system safely. A clinic on one link in an area with long outages should not.
 
-1. **Servers and core network** (router, switches, the local EMR host). These must never blink. A single brownout here can corrupt the database every workstation depends on.
-2. **The clinical workstation fleet** at points of care: triage, consulting rooms, pharmacy, the lab.
-3. **Non-clinical desktops** in administration and back office, which can wait.
+### Where patient data sits under the NDPA
 
-UPS sizing follows from this. Add up the real VA and watt draw of the equipment in each tier (read the nameplate ratings, do not guess), then decide a target runtime. For most clinics the critical runtime requirement is short but absolute: enough to ride through the gap between the mains failing and the generator taking the load, plus a safety margin so an unattended outage does not immediately drop the servers. Build in headroom, because batteries lose capacity as they age and the runtime you commission is the best it will ever be.
+Health data is sensitive personal data under the Nigeria Data Protection Act 2023. A local server keeps records on site, but it also adds a place where records live, and each place has to be secured. Encrypt the server's disks, lock the room it sits in and log who signs in.
 
-The mains-to-generator transition is where the type of UPS matters most. A line-interactive UPS is adequate for ordinary desktops, but it switches to battery with a brief break and tolerates dirty input poorly. The server rack deserves an online double-conversion UPS, which feeds the load from the inverter continuously and isolates your most important equipment from every spike, sag, and switchover the generator throws at it. This is the one place not to economise.
+Records hosted outside Nigeria are a cross-border transfer, which the Act permits only on the conditions it sets out. Either way, section 40(2) requires a controller to notify the Nigeria Data Protection Commission within 72 hours of becoming aware of a breach likely to put patients at risk.
 
-Finally, budget honestly for the Nigerian reality. Batteries are a consumable, not a capital purchase, and FX and import dynamics mean replacements are a recurring cost that arrives whether or not the budget anticipated it. Size for the load you actually have, with sensible headroom, rather than over-buying expensive imported capacity you will struggle to replace on the same terms in three years.
+## Sizing power by the gap it has to bridge
 
-## Designing for Multi-Site Clinics and Intermittent Connectivity
+Split the load into tiers by what stops when it goes dark.
 
-A single clinic is hard enough. A group running sites across Lagos, Abuja, and Port Harcourt multiplies every failure mode. The guiding principle is autonomy: each site must run independently when its link to head office or the cloud is down, then reconcile centrally once connectivity returns. No site's ability to treat patients should depend on another site, or a single ISP, staying up.
+1. **The server and core network.** The local EMR host, the router and the switches. These must not drop at all, because every desk depends on them.
+2. **Point-of-care workstations**, at triage, consulting rooms, pharmacy and the lab, with the printers those desks use.
+3. **Administration**, which can wait for the generator.
 
-That means connectivity itself needs redundancy. A primary link with an automatic backup on a different carrier or technology removes the single point of failure that takes a whole site offline. But redundancy at the network layer is not a substitute for offline-first data: the records must keep working even in the rare window when both links are down.
+Then work out the runtime from the gap you actually have. Time your changeover. With an automatic transfer switch and a generator that starts first time, the gap is under a minute. With manual changeover, someone has to notice, walk to the generator and switch it. At night that can take ten minutes or more.
 
-Backups and disaster recovery should be centralised and, crucially, tested. Off-site, encrypted copies are necessary but not sufficient. The number that matters is your recovery time: how long, realistically, to restore a site from backup after a hardware failure or ransomware event. If no one has rehearsed a restore, you do not have a backup, you have a hope. Set a recovery-time expectation per site and prove you can meet it.
+Size tier 1 to that real gap, plus a margin for the night the generator does not start, plus enough time to shut the server down cleanly if it never does. Tier 2 needs to cover the gap and save open work. Tier 3 may need nothing beyond surge protection.
 
-One detail is routinely overlooked: identity and access control must work offline. If staff authenticate against a cloud directory that is unreachable during an outage, they cannot log in to the very systems designed to keep working without the cloud. Make sure local authentication degrades gracefully so clinicians are not locked out at the worst possible moment.
+Read the nameplate or measure the draw. Do not guess. Then add headroom, because a battery gives its best runtime on the day it is installed and less every year after. Several changeovers a day, in a warm room, age a battery faster than the datasheet assumes.
 
-## A Graceful-Degradation Playbook for Care Teams
+The server belongs on an online double-conversion UPS, which runs the load from its inverter all the time, so the changeover never reaches the server. Point-of-care desktops can sit on line-interactive units. The UPS types are compared in our guide to [power protection and UPS planning](/insights/power-protection-and-ups-planning).
 
-Technology buys you options. A playbook turns them into safe behaviour under pressure. Define clear operating modes with named triggers, so that switching between them is a decision someone makes deliberately rather than a scramble:
+Do not over-buy. A clinic with an automatic transfer switch does not need two hours of battery on every desk. That money does more as a second internet link or a spare workstation. Batteries are also a consumable, imported and priced in dollars at replacement time, so every kVA you buy now is a kVA you will replace later. Size for the load you have.
 
-- **Full system:** everything online, cloud sync active.
-- **Local-only:** the link is down, the clinic runs on its local EMR, edits queue for sync.
-- **Full manual fallback:** systems are wholly unavailable; the clinic moves to paper.
+## Signing in when the cloud is gone
 
-The paper bridge deserves real design. Pre-printed downtime forms, matched to the EMR's fields, let staff capture structured clinical data by hand. Just as important is a disciplined back-entry process so those notes reach the EMR once systems recover, with a check that nothing was dropped. Manual notes that never make it back into the record are a continuity-of-care failure dressed up as a workaround.
+One failure catches clinics that did everything else right. Staff sign in against a cloud directory. The link drops. The local EMR is running, and nobody can sign in to reach it.
 
-Assign roles before you need them. Someone declares the mode change. Someone logs the time and reason. Someone owns the reconciliation afterwards. Without named ownership, a mode change becomes everyone's responsibility and therefore no one's.
+Check two things. Workstations should allow cached sign-in for the people who normally use them. The local EMR should have its own accounts, or a local directory it can check without the internet.
 
-Finally, build muscle memory. Scheduled downtime drills, run a few times a year, turn the fallback from a document into a reflex. A team that has practised local-only and manual modes in a calm rehearsal will execute them without panic during a real outage. A companion piece on building a clinic business-continuity plan is a natural next read for teams formalising this.
+Then test it. Unplug the internet link on a quiet afternoon and ask a nurse to log in and open a record. If they cannot, you found the problem on a good day.
 
-## Turning Continuity Into an Operating Discipline
+## A group with more than one site
 
-Power-and-systems continuity is not a one-off purchase to be solved with a bigger UPS and forgotten. It is part of a broader healthcare IT strategy, and it decays without attention. Batteries fade, loads grow as the clinic adds workstations, and a restore procedure that worked last year may not survive this year's software upgrade.
+A clinic group with sites in more than one city adds one rule. Each site must be able to treat patients with its link to head office down. No site should depend on another site's server, or on a single internet provider, to open a record.
 
-Put a recurring cadence in place: periodic load audits to confirm the UPS still covers what is plugged into it, battery health checks, restore tests against real backups, and a review of how the last drills went. Treat each as a scheduled obligation, not a reaction to the last failure.
+Central backups still matter, because a local server can fail or be encrypted by ransomware. Keep encrypted copies off site, restore one on a schedule, and write down how long the restore took. That time is your real recovery time, whatever the plan says. Recovery planning across sites, with power as the main risk, is covered in [building an IT disaster recovery plan when the primary risk is power](/insights/building-an-it-disaster-recovery-plan-when-the-primary-risk-is-power-not-cyberat).
 
-For clinics without in-house IT depth, the build-versus-partner decision is a fair one to weigh openly. Some groups have the engineering bench to own this; many do not, and there is no shame in partnering for design, sizing, and the discipline of regular review. Whichever path you choose, the test is the same: when the power drops next week, does care continue.
+## The modes staff switch between
 
-If you are mapping continuity into a fuller clinical-infrastructure plan, our [healthcare practice](/industries/healthcare) is a useful starting point, and the team at Digitplus is available to assess your current setup, model your clinical loads, and pressure-test your fallback before an outage does it for you.
+Write down the modes the clinic can run in, and what triggers each one.
+
+- **Normal.** Everything is up and syncing.
+- **Local only.** The internet link is down. The clinic runs on its local server and changes queue for sync.
+- **Paper.** The local system is down too. Staff use printed downtime forms laid out like the EMR screens, so the notes go back in quickly.
+
+A named person on each shift declares a change of mode. When systems return, someone owns entering the paper notes and checking that none were missed. Practise the switch on a quiet day, at least twice a year, so the first time is not the real time.
+
+The infrastructure work behind this, from the server room to the UPS at each desk, is part of our [infrastructure solutions](/services/infrastructure-solutions). How it fits a wider clinical setup is on our [healthcare](/industries/healthcare) page.
 
 ## Frequently asked questions
 
-### How do clinics keep EMR access running during a power outage?
+### Is an offline-first EMR always better for a clinic with frequent power cuts?
 
-The reliable approach is an offline-first EMR with a clinic-side database that workstations can read and write to even when the internet and grid are down, backed by a UPS that protects the local server through every switchover. Cloud-only systems that depend on a live link will lock staff out the moment power or connectivity drops. The local store then syncs with the central system once service returns.
+No. It is better where the internet link is the weak point. A single-site clinic with two internet links on different providers, and a router on a UPS that outlasts the changeover, can run a hosted EMR safely. What matters is whether clinicians can open a record when the link is down, and the vendor should answer that in writing.
 
-### What UPS capacity do I need for clinical workstations and servers?
+### How much UPS runtime does a clinic need?
 
-Start by adding up the real VA and watt draw of the equipment you must protect, separated by tier: servers and core network first, then clinical workstations, then everything else. Size runtime to comfortably cover the gap between mains failing and your generator taking the load, with headroom for battery ageing. The server rack should sit behind an online double-conversion UPS; ordinary desktops can use line-interactive units.
+It depends on the changeover gap. Time how long the clinic goes from mains failing to the generator carrying the load, including at night. Size the server and network UPS to that gap plus a margin and a clean shutdown. Workstations need enough to cover the gap and save open work.
 
-### Is an offline-first or cloud-based EMR safer for unreliable power?
+### What should a clinic test before relying on its continuity design?
 
-For Nigerian clinics with frequent outages, offline-first is generally safer because care does not stop when the link drops. The trade-off is that local copies multiply the places patient data lives, so you must secure and encrypt each one and handle sync conflicts with a proper audit trail, in line with NDPA 2023 obligations to the NDPC. A well-designed offline-first system combines local resilience with central reconciliation.
+Three things, on a quiet day. Unplug the internet link and confirm staff can still sign in and open records. Switch off the mains and time the changeover with the server running on its UPS. Restore a backup to spare hardware and note how long it took. Write down each result and repeat after any significant change.
 
-### What should care teams do when systems go fully offline?
+## Next step
 
-Switch to a pre-agreed manual fallback using pre-printed downtime forms that mirror the EMR's fields, so clinical data is captured in a structured way. Someone should formally declare the mode change, log it, and own the back-entry of those notes into the EMR once systems recover. Practising this in scheduled drills is what makes it work calmly during a real outage rather than improvised under pressure.
+Start with two facts: how long your changeover takes, and what is plugged into each UPS. Send us that list and we will tell you where the gaps are. [Contact us](/contact) to arrange it.

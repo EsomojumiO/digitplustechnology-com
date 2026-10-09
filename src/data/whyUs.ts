@@ -12,7 +12,7 @@ export const whyUs: WhyUsPillar[] = [
   {
     title: "Nationwide reach",
     description:
-      "Headquartered in Abuja with delivery across Lagos and Port Harcourt, we coordinate multi-site programmes to a single standard wherever your operations are.",
+      "Headquartered in Abuja with delivery across Lagos and Port Harcourt. Remote support runs nationwide, and on-site work elsewhere is agreed per project, to the same standard.",
   },
   {
     title: "Sector-specific experience",

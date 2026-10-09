@@ -1,7 +1,7 @@
 ---
 title: "How to Decide Between Co-location, On-Premise, and Edge for a Multi-Site Business"
 slug: "how-to-decide-between-co-location-on-premise-and-edge-for-a-multi-site-business"
-excerpt: "A decision framework for placing each workload where it belongs: weigh latency, power, data residency, control, and FX-linked cost instead of defaulting every system in a Nigerian multi-site business to one model."
+excerpt: "Co-location, on-premise or edge is a decision you make per system, not per company. Five questions that place each workload in a Nigerian multi-site business, starting with what happens when the link drops."
 category: "Infrastructure"
 tags:
   - "colocation"
@@ -9,83 +9,187 @@ tags:
   - "multi-site infrastructure"
   - "data residency"
   - "workload placement"
-  - "hybrid infrastructure"
 author: "Digitplus Technology"
-publishedAt: "2026-06-03"
-updatedAt: "2026-06-03"
+publishedAt: "2026-10-08"
+updatedAt: "2026-10-08"
 cover: "/images/insights/how-to-decide-between-co-location-on-premise-and-edge-for-a-multi-site-business.jpg"
-coverAlt: "A Nigerian data centre technician checking cabling on a rack of servers inside a colocation facility, with a separate small server cabinet visible in a branch office."
-draft: true
+coverAlt: "Branded cover: the article title \"How to Decide Between Co-location, On-Premise, and Edge for a Multi-Site Business\" set in white on a dark green gradient, labelled Infrastructure, with the Digitplus Technology wordmark."
+draft: false
 seo:
-  metaTitle: "Colocation vs On-Premise vs Edge: A Nigeria Guide"
-  metaDescription: "A decision framework for Nigerian IT leaders: weigh power, latency, data residency, and control to place each workload across colocation, on-premise, or edge."
+  metaTitle: "Co-location vs On-Premise vs Edge for Multi-Site Firms"
+  metaDescription: "Co-location, on-premise or edge in Nigeria: five questions that place each system in a multi-site business, from link outages and power to NDPA data transfers."
   ogImage: "/images/insights/how-to-decide-between-co-location-on-premise-and-edge-for-a-multi-site-business.jpg"
 ---
 
-## Colocation vs On-Premise in Nigeria: Stop Defaulting Every Workload to One Model
+Most multi-site businesses never choose where their systems live. They inherit it.
 
-The colocation vs on-premise question in Nigeria is rarely answered on its merits. Most multi-site businesses inherit a default, usually a server room at head office, and then bolt every new system onto it because that is where the last one went. Others swing the opposite way and assume colocation or public cloud solves everything, only to discover that a payment terminal in a Port Harcourt branch still needs to work when the leased line is down. Neither default is a decision. It is the absence of one.
+The usual inheritance is a server room at head office, with every new system
+added to it because that is where the last one went. The usual overcorrection is
+to move everything to a data centre or the cloud, and then find that a branch in
+Port Harcourt cannot raise an invoice while its one link is down. Neither is a
+decision about co-location, on-premise or edge. Both are defaults.
 
-The useful frame is not which model is best. No single model is best across a portfolio. The frame is workload placement: deciding, system by system, where each workload should physically live so that its latency, availability, data residency, and cost characteristics match what the business actually needs. A multi-site operation running across Abuja, Lagos, and Port Harcourt will almost always end up with a deliberate mix. The goal of this article is to give IT leaders a repeatable way to reach that mix on evidence rather than habit.
+The decision worth making is smaller: where each system should sit. Not where
+the company sits. A branch is a set of workloads with different needs, and one
+branch can reasonably use all three models at once.
 
-## The Three Models, Defined for a Nigerian Context
+## What each model actually buys you
 
-**On-premise** means infrastructure that sits inside a site you operate: a head-office server room or a branch comms cabinet. You own the hardware, the power protection, the cooling, and the physical security. Control is total, and so is responsibility. Every diesel top-up, UPS battery replacement, and air-conditioning fault is yours.
+**On-premise** is equipment in a room you run: a head-office server room or a
+comms cabinet in a branch. You own the hardware and everything around it, from
+the UPS and the generator changeover to the air conditioning and the lock on the
+door. Control is total. So is the bill for every battery and every litre of
+diesel.
 
-**Colocation** means renting rack space, power, cooling, and connectivity in a third-party data centre, while you still own and manage the servers inside the rack. In practice it buys you the one thing a branch server room cannot reliably provide in Nigeria: redundant grid feeds, N+1 generators, proper cooling, and carrier-neutral connectivity. You trade some physical proximity and some monthly cost for resilience you would struggle to build yourself.
+**Co-location** is rented rack space, power, cooling and connectivity in someone
+else's data centre. The servers are still yours, and so is managing them. What
+you pay for is the room: power and cooling built to run all day, every day, and
+a choice of carriers in the building. A branch server room in Nigeria finds
+exactly those things hardest to provide.
 
-**Edge** means compute placed close to where data is produced or consumed, typically a small, ruggedised footprint at each site that processes locally and syncs centrally. For a multi-site business, edge computing is what keeps a branch functioning during a WAN outage, runs the point-of-sale or production-line logic locally, and avoids hauling every transaction across an unreliable link before it can complete.
+**Edge** is a small amount of compute at the site where the work happens. It
+processes locally and syncs to the centre when it can. Its job is to keep a
+branch working through a WAN outage.
 
-These are not rivals competing for a single winner. They are three places to stand, and most portfolios need all three.
+One local fact shapes the co-location option before anything else. As of 2026,
+most of Nigeria's commercial co-location capacity is in Lagos, close to the
+submarine cable landings. Abuja has a small number of facilities, and much of
+that capacity serves government hosting. Outside those two cities the choice is
+thin. For a business with sites in Abuja, Lagos and Port Harcourt, co-location
+usually means a rack in Lagos, reached from everywhere else over the WAN. That
+makes your links part of the co-location decision, not a separate one.
 
-## A Five-Factor Decision Framework
+## Five questions to ask of each system
 
-For each significant workload, score it against five factors. The pattern of scores, not any single one, points to the right home.
+Take each significant system in turn. Skip the weighted scoring sheet. Ask
+these questions and write the answers down.
 
-**1. Latency and connectivity dependence.** Ask a blunt question: what happens to this workload when the link to its host goes dark? A core financial ledger can tolerate a few seconds of round-trip latency to a colocation facility. A branch point-of-sale system or a clinic's patient check-in cannot tolerate the link being gone entirely. Workloads that must keep working during a circuit failure belong at the edge, on-site, regardless of where their data eventually consolidates. Many Nigerian branch sites are single-homed on one provider, which makes link failure a when, not an if.
+**What happens when the link goes down?** This one decides more placements than
+the other four together. A finance ledger used from head office can live in a
+Lagos data centre and tolerate the round trip. A branch till or a clinic's
+patient check-in cannot tolerate the link being gone. If staff stop work when
+the circuit drops, that function needs a local copy at the site, whatever
+happens to the data afterwards. Many branches run on a single provider, so plan
+for the outage as a matter of when.
 
-**2. Power reliability.** This is where Nigerian placement decisions diverge most sharply from imported playbooks. A branch server room is only as available as its generator, its fuel supply, and its UPS runtime. If a workload needs high uptime and your site power is a single generator with manual changeover, that workload is safer in a colocation facility engineered for continuous operation. Conversely, an edge node must be designed to ride out exactly the power transitions a Nigerian site throws at it: it needs sized UPS protection and clean shutdown logic, not an assumption of always-on mains.
+**How good is the power where it would sit?** A branch server room is as
+available as its generator, its fuel and its UPS runtime. If the site has one
+generator with a manual changeover, a system that must stay up is safer in a
+facility built for continuous running. An edge box still has to ride through
+the changeovers at its own site, so it needs a UPS sized for that gap and a
+clean shutdown when the batteries run out. Our piece on
+[disaster recovery when the main risk is power](/insights/building-an-it-disaster-recovery-plan-when-the-primary-risk-is-power-not-cyberat)
+covers how to set those recovery targets.
 
-**3. Data residency and regulation.** Some data carries obligations about where and how it is held. Personal data falls under the Nigeria Data Protection Act 2023 and the oversight of the NDPC. The practical effect on data residency under the NDPA is less about a single storage rule and more about being able to demonstrate control, lawful basis, and accountability for the location and processing of the data. Workloads carrying regulated data need a home where you can evidence that control, which often favours a known colocation facility or a governed on-premise environment over an arrangement you cannot fully account for. Where you are unsure, treat the obligation as real and design for evidence.
+**Where is the data allowed to go?** The Nigeria Data Protection Act 2023 does
+not require personal data to be stored in Nigeria. It controls transfers out of
+the country. Section 41 allows a transfer where the recipient is subject to a
+law, binding corporate rules, contractual clauses, a code of conduct or a
+certification mechanism that gives adequate protection, or where one of the
+conditions in section 43 applies. So a Lagos rack and a cloud region abroad are
+not equivalent. The first keeps the data in Nigeria. The second is a
+cross-border transfer you have to justify and document. Some sectors add their
+own hosting rules on top. Public bodies and CBN-regulated institutions should
+check their regulator's position before moving anything.
 
-**4. Operational control.** How much direct, hands-on control does this workload genuinely require, and do you have the staff to exercise it? On-premise gives maximum control but demands local capability at every site, which is exactly what thin branch IT cannot provide. Colocation removes the facilities burden while keeping you in charge of the systems. Be honest about the team you have, not the team you wish you had. Control you cannot staff is a liability, not an asset.
+**Who will look after it?** On-premise gives you the most control and asks for
+local skill at every site that has it. Co-location removes the building work
+and leaves the systems with you. Be honest about the team you have. A server in
+a branch that nobody there can restart is a liability.
 
-**5. Cost and FX exposure.** Hardware is largely imported and priced against the naira, so on-premise expansion concentrates capital expenditure at the mercy of the exchange rate on the day you buy. Colocation converts part of that into a predictable recurring operating cost, though facility pricing itself often tracks FX and diesel. Edge multiplies small hardware units across many sites, so a design that is cheap per node can be expensive in aggregate and in maintenance. Cost is rarely the deciding factor on its own, but it disciplines the others.
+**What does it cost, and in which currency?** Server hardware is imported and
+priced in dollars, so expanding on-premise puts a capital purchase at the mercy
+of the exchange rate on the day you order. Co-location turns the room into a
+monthly fee, but that fee also tracks diesel and the exchange rate, so do not
+treat it as fixed. Edge looks cheap per site and adds up across twenty sites.
+The [server room cost breakdown](/insights/cost-of-setting-up-a-server-room-in-nigeria)
+shows what sits behind the on-premise number.
 
-> If a workload going dark for an hour causes real business loss, that fact decides its placement before cost, convenience, or preference get a say.
+> If an hour without a system stops the business, that fact decides where it
+> lives. Cost gets a vote after that, not before.
 
-## Mapping Workloads to Locations
+## What the answers usually look like
 
-With the five factors scored, clear patterns emerge. Latency-sensitive, link-dependent systems that must survive an outage, such as branch point-of-sale, local authentication, and production or clinical systems, belong at the **edge**, running locally and syncing when the link returns. Centralised systems that need high availability and carry regulated data, such as core databases, financial ledgers, and consolidated reporting, are strong candidates for **colocation**, where engineered power and connectivity do the heavy lifting. Workloads that demand deep, hands-on control, involve sensitive data you must keep physically close, or are simply too entangled with on-site equipment to move, stay **on-premise**, provided you accept the facilities burden that comes with them.
+Patterns come out quickly. Tills and local sign-in go to the edge, as does
+anything clinical or on a production line. They run at the site and sync when
+the link returns. The finance system and consolidated reporting are strong
+co-location candidates, because they need the power and the carriers more than
+they need to be near anyone. Systems tied to equipment on site, or that the team
+has to touch often, stay on-premise, provided you accept the room that comes
+with them.
 
-The output of this exercise is not a single answer but a placement map: a list of your significant workloads, each with a deliberate home and a one-line reason. That map is the artefact worth producing, because it turns an architecture argument into a documented decision you can defend and revisit. Running this consistently across sites is part of supporting [multi-site operations](/insights/it-support-for-multi-site-operations) without letting each branch drift into its own accidental design.
+Now argue yourself out of the expensive answer where it is not needed. A
+ten-person branch that works in a web application and email may need no local
+server at all. Two links from different providers and a UPS on the network kit
+will do more for it than an edge box. Local compute earns its place only where
+there is work that must continue offline.
 
-## Hybrid Is the Realistic Answer, So Sequence It
+The output is a placement list: every significant system, where it sits, and
+one line saying why. That list is the thing to keep. It turns an argument about
+architecture into a decision someone else can check. The network that joins
+those places is covered in
+[LAN and WAN design for multi-branch businesses](/insights/lan-wan-design-for-multi-branch-businesses).
 
-For almost any multi-site Nigerian business, the honest conclusion is hybrid: edge at the branches for continuity, colocation for resilient centralised systems, and a contained on-premise footprint where control genuinely demands it. The risk with hybrid is not the architecture, it is the sprawl. Three models running without discipline produce three sets of patching, monitoring, and backup gaps.
+## Hybrid, done in order
 
-So sequence the move rather than attempting it all at once. Start by placing the workloads whose current home is most clearly wrong, usually a critical system sitting on a single-generator branch server room that should be in colocation, or a system that fails completely during WAN outages and should be pushed to the edge. Standardise the edge node design so every site gets the same build, not a bespoke one. Keep one consolidated view of monitoring and backup across all three models, because a hybrid estate you cannot see is more fragile than the single server room you replaced. Data residency and continuity decisions move together here, so plan them as one workstream rather than two.
+For most multi-site businesses the answer is a mix. The risk in a mix is not the
+design. It is the sprawl: three models, each with its own patching and backups,
+and gaps between them that nobody owns.
 
-Placement is not a one-time project. Circuits improve, sites open and close, regulation sharpens, and the naira moves. Revisit the placement map on a regular cycle so it keeps reflecting the business rather than the day it was drawn. A structured [infrastructure solutions](/services/infrastructure-solutions) review is the most direct way to keep that map honest as the estate evolves.
+So do it in order. Start with the systems whose current home is clearly wrong.
+Usually that is a critical system in a single-generator branch server room, or
+one that stops completely whenever the WAN drops. Build one standard edge
+configuration and give every site the same one. A different build at every
+branch is how a hybrid estate becomes unsupportable.
 
-## Frequently Asked Questions
+Keep one view of monitoring and backups across all three places. A mixed estate
+you cannot see is more fragile than the single server room it replaced. That is
+the [multi-site support model](/insights/it-support-for-multi-site-operations)
+applied to placement.
 
-### Is colocation always more expensive than on-premise in Nigeria?
+Then revisit the list once a year. Links improve and sites open and close. The
+list should describe the business you have now, not the one you had when it was
+drawn.
 
-Not when you compare like for like. On-premise looks cheaper because the recurring costs are hidden: diesel, UPS batteries, cooling maintenance, physical security, and the staff time spent keeping a branch server room alive. Colocation makes those costs explicit and predictable as a monthly fee, and it provides redundant power and connectivity that a single site rarely matches. For high-availability workloads, the better question is the total cost of the uptime you actually need, not the rack rental in isolation.
+## Frequently asked questions
 
-### Where does public cloud fit alongside these three models?
+### Is co-location more expensive than on-premise in Nigeria?
 
-Public cloud is effectively a fourth placement option, and the same five factors apply. It excels for elastic, centralised workloads but inherits Nigeria's connectivity constraint: anything that must keep working during a link outage still needs an edge presence on-site. Treat cloud as one more home to weigh per workload, and pay particular attention to data residency obligations and the cost of moving data back out before committing regulated systems to it.
+Compared line for line, often not. On-premise hides its running costs: diesel,
+UPS batteries, air-conditioning servicing, security and staff time. Co-location
+puts the room into a monthly fee and gives you redundant power and carriers that
+a single site rarely matches. Price the uptime you need, not the rack rental on
+its own. We do not publish a naira figure, because the fee depends on the power
+you draw and the exchange rate, and a number written today would not hold.
 
-### How do I handle data residency under the NDPA when choosing a location?
+### Where does public cloud fit?
 
-Focus on accountability rather than a single storage rule. Under the Nigeria Data Protection Act 2023 and the oversight of the NDPC, you need to be able to demonstrate lawful basis and genuine control over where personal data sits and how it is processed. In placement terms, that favours homes where you can evidence and govern the arrangement, a known colocation facility or a controlled on-premise environment, over any setup you cannot fully account for. Where a workload also falls under sector-specific rules, design to satisfy whichever obligation is stricter.
+It is a fourth place to put a workload, and the same five questions apply. It
+suits central systems whose load changes. It does nothing for a branch when the
+link is down. Putting personal data in a region outside Nigeria is a
+cross-border transfer under the NDPA that you have to justify. Price the cost of
+moving data back out before you commit a large system to it.
 
-### Can a single branch use more than one model at once?
+### Does the NDPA require us to keep data in Nigeria?
 
-Yes, and most should. A branch typically runs an edge node locally for continuity-critical systems while relying on a central colocation or cloud environment for everything that consolidates upstream. The point of the framework is precisely this granularity: you place workloads, not whole sites. A branch is a collection of workloads with different needs, and a good design reflects that rather than forcing the whole site into one model.
+No. The Act regulates transfers out of Nigeria rather than banning them. A
+transfer needs a basis under sections 41 to 43, such as adequate protection at
+the recipient or one of the listed conditions, and you need to be able to show
+which one you relied on. Sector rules can be stricter, so check your regulator.
+Our guide to [NDPR compliance for IT teams](/insights/ndpr-compliance-for-it-teams)
+covers the rest of the record-keeping.
 
-## Placing Your Estate on Purpose
+### Can one branch use more than one model?
 
-The businesses that get this right are not the ones that pick a model. They are the ones that stop picking a model and start placing workloads, each in the home its latency, power, residency, control, and cost profile actually call for. If your current estate grew by default rather than by design, a structured placement review is the fastest way to surface the workloads that are in the wrong place and the risks that come with them. Our team works through exactly this kind of assessment as part of [infrastructure solutions](/services/infrastructure-solutions) for multi-site operations, and we are glad to talk it through with you.
+Yes, and most should. A typical branch runs its offline-critical work on a small
+local system and uses central co-location or cloud for everything else. You
+place systems, not sites.
+
+## Where to start
+
+List every system you run across your sites. Next to each, write what happens
+when that site's link drops. That one column will show you most of the wrong
+placements. Then send us the list through
+[infrastructure solutions](/services/infrastructure-solutions). We will come
+back with where we would put each item and why, including the ones we think
+should stay exactly where they are.

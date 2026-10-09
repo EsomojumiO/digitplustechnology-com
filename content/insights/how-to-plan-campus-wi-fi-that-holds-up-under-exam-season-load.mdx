@@ -1,7 +1,7 @@
 ---
 title: "How to Plan Campus Wi-Fi That Holds Up Under Exam-Season Load"
 slug: "how-to-plan-campus-wi-fi-that-holds-up-under-exam-season-load"
-excerpt: "Campus Wi-Fi that survives exam season is planned for the worst ninety minutes, not the average week. A capacity-led guide for Nigerian universities: density modelling, AP placement, backhaul sizing and login design."
+excerpt: "Campus Wi-Fi is judged in the hour a full hall logs in at once. How Nigerian universities plan for that hour: whether the exam belongs on Wi-Fi at all, then density, radios, the wire behind them and the login rush."
 category: "Guides"
 tags:
   - "education"
@@ -9,85 +9,199 @@ tags:
   - "wireless"
   - "network capacity"
   - "campus wifi planning"
-  - "nigeria"
 author: "Digitplus Technology"
-publishedAt: "2026-06-03"
-updatedAt: "2026-06-03"
+publishedAt: "2026-10-08"
+updatedAt: "2026-10-08"
 cover: "/images/insights/how-to-plan-campus-wi-fi-that-holds-up-under-exam-season-load.jpg"
-coverAlt: "Students seated in a packed Nigerian university lecture hall using laptops and phones during an online exam, with a ceiling-mounted wireless access point overhead."
-draft: true
+coverAlt: "Branded cover: the article title \"How to Plan Campus Wi-Fi That Holds Up Under Exam-Season Load\" set in white on a dark green gradient, labelled Guides, with the Digitplus Technology wordmark."
+draft: false
 seo:
   metaTitle: "Campus Wi-Fi Planning for Exam-Season Load in Nigeria"
-  metaDescription: "Plan university Wi-Fi that survives exam-season peaks: density modelling, AP placement, backhaul sizing and authentication for thousands of concurrent devices."
+  metaDescription: "Campus Wi-Fi planning for Nigerian universities: what belongs on wire, counting devices per hall, sizing radios and uplinks, and the exam-day login rush."
   ogImage: "/images/insights/how-to-plan-campus-wi-fi-that-holds-up-under-exam-season-load.jpg"
 ---
 
-Most campus networks are not tested by daily traffic. They are tested for ninety minutes, twice a year, when a 500-seat hall fills with students sitting a computer-based test at the same moment. Sound campus Wi-Fi planning at a university in Nigeria has to design backwards from that moment, not from the gentle average of a normal Tuesday. The network that feels fast at 10 per cent occupancy is a different network from the one that has to carry thousands of concurrent, actively transmitting devices during an online examination, a results-release day, or a registration window. Getting from the first to the second is a question of capacity, and capacity is planned deliberately or not at all.
+A campus network is judged on its worst hour, not its average week.
 
-## Why exam season breaks coverage-based Wi-Fi
+That hour is a full hall at the start of a timed assessment, or the morning
+results go up. Campus Wi-Fi planning at a
+Nigerian university has to start from that hour and work backwards. A network
+that feels fast at a tenth of its occupancy is a different network from the one
+that has to carry every device in the room at once.
 
-Most campus wireless is designed for coverage: walk the building, confirm there is signal everywhere, sign off. Coverage answers the question "can a device see the network?" It says nothing about the question that matters during an exam: "can several hundred devices in one room all transmit at once without the airtime collapsing?"
+## Coverage is not capacity
 
-Those are different problems with different solutions. A single access point can blanket a large hall with a strong signal and still buckle when 300 laptops associate to it, because radio is a shared medium. Devices take turns to transmit, and as the number of clients on one radio rises, each client waits longer for its turn. Throughput per device falls, retries climb, and the symptom students report is not "no signal" but "the page is loading" and "my submission timed out."
+Most campus wireless is designed for coverage. Someone walks the building,
+confirms there is signal everywhere, and signs it off. Coverage answers one
+question: can a device see the network? During an exam the question is
+different. Can every device in this room transmit without the airtime running
+out?
 
-Exam season concentrates every variable that coverage-based design ignores. The devices are densely packed, they are all active at once rather than idle in pockets, and the cost of failure is acute: a dropped session during a timed assessment is not an inconvenience, it is a disputed result. This is why a network that has performed adequately for years can fail on its most visible day. Nothing broke. It was never built for the load.
+Radio is a shared medium. Devices on the same channel take turns to transmit,
+so as the number of active clients on one radio rises, each waits longer for its
+turn. Throughput per device falls and retries climb. Students do not report "no
+signal". They report a page that will not load and a submission that timed out.
 
-## Campus Wi-Fi planning starts with modelling device density
+That is why a network that has been fine for years can fail on its most visible
+day. Nothing broke. It was never built for that load.
 
-Capacity planning starts with a number you have to estimate honestly: how many devices will be associated and active in each space at peak. Count generously. A 400-capacity hall does not present 400 devices; many students carry a phone and a laptop, and a phone left in a pocket still associates, scans, and consumes airtime. A 400-seat hall can easily present 600 to 800 associations during a busy session.
+## First, decide whether the exam belongs on Wi-Fi
 
-Work through your real peak events rather than a generic figure. The spaces that matter are the large examination halls, lecture theatres used for computer-based tests, the library during revision weeks, and any auditorium used for registration or town-hall events. For each, estimate concurrent active devices and the kind of traffic they generate. A browser-based test platform behaves differently from a session streaming video, and your per-device throughput assumption should reflect the heaviest realistic use, not the lightest.
+Say this before buying a single access point: if you can put a timed exam on a
+wired lab, do. A cabled computer-based test centre with a UPS behind the
+switches takes airtime and the login rush out of the problem entirely. Most of the work in this article exists because a hall full of
+students' own laptops has to be served over the air.
 
-> Design for the worst ninety minutes of the year, not the average week. A network sized for the peak handles the ordinary day comfortably; a network sized for the average fails exactly when it is most visible.
+So there are two honest designs. One is a wired exam room and Wi-Fi for
+everything else: the library, registration, results day, lectures. The other is
+a hall where students sit the exam on their own devices over Wi-Fi, which is the
+harder case and the one the rest of this piece plans for. Pick deliberately.
+Many institutions end up in the second by accident, because a hall built for
+lectures got used for an exam.
 
-The output of this stage is a per-room target: concurrent devices, throughput per device, and therefore the number of radios required. Buying decisions follow from that target. Buying before it is how institutions end up with expensive equipment that is still under-provisioned in the three rooms that count.
+## Count the devices you will actually see
 
-## Access point placement and channel design for high-density halls
+Capacity starts with an honest number: how many devices will be connected and
+active in each space at peak. Count generously. Four hundred students who each
+carry a phone and a laptop is up to 800 devices. A phone left in a pocket still
+connects and uses airtime, even if nobody touches it.
 
-High density is solved by putting more radios closer to the users and shrinking the area each one serves, not by turning up the power on a few. A common and counter-productive instinct is to maximise transmit power so one access point reaches the whole hall. In a dense room that makes things worse: every device hears every access point, co-channel interference rises, and the cells cannot be reused.
+Do this per room, for the rooms that carry the peak: exam halls, lecture
+theatres used for tests, the library in revision weeks, and wherever
+registration happens. For each, write down the device count and what those
+devices will be doing. A browser-based test platform behaves differently from a
+hall streaming a lecture, so base the throughput per device on the heaviest use
+you expect in that room.
 
-The better pattern for a large hall is several access points, each at lower power, each serving a defined zone of seats, with overlapping but controlled coverage. This is a job for a wireless design and a survey, not a floor-plan guess. Nigerian campus buildings make the survey non-negotiable: reinforced concrete, blockwork, and steel rebar attenuate and reflect signal far more than the plasterboard partitions much vendor design guidance assumes. A predictive design should be validated on site, because the building physics will not match the model.
+The output is a target for each room: devices times throughput per device,
+which gives the number of radios you need. Buy after that, never before. Buying first is how a
+campus ends up with expensive equipment that is still short in the three rooms
+that count.
 
-Channel planning is the other half. The 5 GHz band offers many more non-overlapping channels than 2.4 GHz and should carry the load in dense spaces; 2.4 GHz is best treated as a fallback for older devices because its handful of usable channels interfere badly at density. Where the hardware supports 6 GHz, it adds valuable spectrum for capacity. Plan channel width deliberately: narrower channels yield more independent cells, which usually matters more in a packed hall than the headline speed of a wide channel.
+## More radios, less power
 
-## Sizing backhaul, switching, and the internet uplink
+High density is solved by putting more radios closer to the users, each serving
+a smaller area. The instinct to turn up the transmit power so one access point
+reaches the whole hall makes things worse. Every device hears every access
+point, and channels can no longer be reused across the room.
 
-Wireless capacity is wasted if the wired path behind it is the bottleneck. Each high-density access point needs a wired uplink sized to the aggregate traffic it will carry, and the switches serving exam halls should have the port capacity and uplink headroom to carry every access point at once, not on average. Power over Ethernet has to be planned as deliberately as data: confirm the switches can deliver the required PoE standard to every access point simultaneously, including the newer access points that draw more power.
+The pattern that works in a large hall is several access points at lower power,
+each serving a defined block of seats. That needs a design and an on-site
+survey, not a guess from the floor plan. Nigerian campus buildings make the
+survey non-negotiable. Reinforced concrete and blockwork absorb and reflect
+signal far more than the plasterboard partitions much design guidance assumes,
+so a predictive model has to be checked in the real room.
 
-The internet uplink deserves separate scrutiny, because it behaves differently depending on where the exam platform lives. A locally hosted or on-campus assessment system keeps most traffic on the internal network and leans less on the external link. A cloud-hosted platform routes every student's session out through the campus uplink, and that link becomes the single point of failure for the entire examination. Size it for concurrent active sessions at peak, and treat redundancy as part of the design rather than an upgrade for later. Last-mile fibre cuts are a routine operational reality in Nigeria, so a diverse second path, ideally on a different carrier and a different physical route, is the difference between a degraded exam and a cancelled one.
+Channel planning is the other half. The 2.4 GHz band has only three
+non-overlapping channels, which interfere badly at density, so treat it as a
+fallback for old devices. Put the load on 5 GHz, which has many more. Use
+narrower channels in dense rooms: more independent cells usually matter more in
+a packed hall than the headline speed of a wide channel.
 
-None of this survives a power event without protection. The network core, the distribution switches, and the access layer feeding an exam hall all need UPS coverage with enough runtime to ride through a grid outage and a generator changeover, with generator priority for the rooms that carry the load. A campus that plans wireless capacity but leaves the switch closet on unprotected mains has simply moved the point of failure. The same discipline that applies to the server room applies here; the principles are set out in our guide to [designing a server room with the right power, cooling and UPS](/insights/designing-a-server-room-power-cooling-ups).
+There is also new room to work with. Since February 2026 the Nigerian
+Communications Commission's framework allows licence-exempt Wi-Fi in the lower
+6 GHz band, 5925 to 6425 MHz, indoors at low power and on NCC type-approved
+equipment. Only Wi-Fi 6E and Wi-Fi 7 devices can use it, so it relieves the
+5 GHz band rather than replacing it. Read the framework's conditions before you
+plan a hall around it.
 
-## Authentication and onboarding that survive a login stampede
+## The wire behind the radios
 
-Capacity is not only about throughput. The first thing several hundred students do when they enter a hall is connect, and if every device tries to authenticate in the same few minutes, the authentication path becomes the bottleneck before a single exam page loads. A captive portal that asks each student to enter credentials in a browser, or a single RADIUS server with no headroom, will queue, time out, and produce a wave of failed logins that looks like a network outage.
+Wireless capacity is wasted if the cable behind it is the bottleneck. Each
+access point needs an uplink sized for what it will carry, and the switches
+feeding an exam hall need the uplink headroom to carry every access point at
+full load at the same time. Plan Power over Ethernet as carefully as data. Many
+current access points need PoE+ (802.3at, up to 30 W per port) to run all their
+radios, and the switch has a total PoE budget that every port draws from.
 
-Design onboarding for the stampede. WPA2-Enterprise or WPA3-Enterprise with a properly resourced and ideally redundant RADIUS back end handles re-authentication far better than a portal, because returning devices reconnect without manual entry. Pre-enrolling devices, or onboarding students well before exam day rather than at the door, flattens the spike. Keep authentication infrastructure on protected power alongside the network core, because an authentication server that drops during a grid event takes the whole hall offline regardless of how well the radios were planned.
+The internet link depends on where the exam platform lives. A platform hosted on
+campus keeps most of the traffic inside. A cloud platform sends every student's
+session out through the campus uplink, and that link becomes the single point of
+failure for the whole exam. Size it for concurrent sessions at peak. Fibre cuts
+are a routine operating fact in Nigeria, so put the second path on a different
+carrier and, where you can, a different physical route.
 
-Segmentation supports both performance and compliance. Examination traffic, general student access, staff and administrative systems, and campus IoT such as CCTV and access control should sit on separate SSIDs and VLANs. This isolates the exam network from contention and contains risk. It also matters for data protection: student records and assessment data fall under the Nigeria Data Protection Act 2023 and the oversight of the NDPC, so the access controls, logging, and segmentation around examination and administrative systems should reflect those obligations rather than be bolted on afterwards.
+None of it survives a grid outage without protection. Every switch between the
+core and the exam hall needs UPS cover with enough runtime to ride through the
+changeover to generator. Wireless
+capacity planned in detail, with the switch closet on raw mains, has only moved
+the point of failure. Our guide to
+[power protection and UPS planning](/insights/power-protection-and-ups-planning)
+covers the sizing.
 
-## Validating capacity and operating through peak events
+## Plan for the login rush
 
-A design is a hypothesis until it is tested under something like real load. Post-installation validation should go beyond a coverage walk with a signal meter. Load testing that simulates hundreds of associated, actively transmitting clients in a hall reveals the airtime and backhaul limits that a coverage survey cannot. Where a full simulation is impractical, a controlled mock examination with real devices in the actual room is a reasonable substitute and surfaces most problems while there is still time to fix them.
+The first thing several hundred students do when they sit down is connect. If
+every device tries to log in within the same few minutes, authentication
+becomes the bottleneck before a single exam page loads. A captive portal that
+asks each student to type credentials into a browser will queue and time out,
+and a wave of failed logins looks exactly like an outage.
 
-Operating through peak events is a discipline of its own. The network team should watch the exam halls live during the event, with visibility of client counts, channel utilisation, and authentication success rates, so that a developing problem is caught in the room rather than reported afterwards. For an institution running examinations across multiple campuses, in Abuja, Lagos, and Port Harcourt for example, this monitoring and response capability has to exist at each site, because a centralised team cannot physically attend three halls at once. A short post-event review, capturing what saturated and what held, turns each peak into evidence for the next capacity decision. Building this operating capability alongside the academic systems is part of a coherent [education IT strategy](/industries/education) rather than a separate afterthought.
+Use WPA2-Enterprise or WPA3-Enterprise with at least two RADIUS servers behind
+it. Devices that have connected before reconnect without anyone typing
+anything, which flattens the spike. Get students onboarded in the weeks before
+the exam, not at the door. Put the authentication servers on the same protected
+power as the network core, because a RADIUS server that drops in an outage takes
+the whole hall offline however well the radios were planned.
 
-The through-line is simple. Coverage gets you a signal everywhere; capacity gets you a network that works when everyone uses it at once. For a university, the second is the one that protects the integrity of an examination, and it is the one that has to be planned, modelled, and validated before the hall fills. If you are assessing whether your current campus network would hold up under exam-season load, the place to start is an honest density model and a site survey of the rooms that carry the peak. Our team works with institutions across the [education sector](/industries/education) to assess and plan capacity-led campus networks; the goal is a network that is ready for its hardest ninety minutes, not one that discovers its limits during them.
+Keep exam traffic on its own SSID and VLAN, apart from general student access
+and staff systems. The wider segmentation of a campus network, including CCTV
+and access control, is covered in our guide to
+[IT infrastructure for schools and universities](/insights/it-infrastructure-for-schools-and-universities).
+Student records and exam results are personal data under the Nigeria Data
+Protection Act 2023, so the access controls and logging around those systems
+should be designed in from the start.
+
+## Rehearse before the real thing
+
+A design is a guess until it carries real load. A coverage walk with a signal
+meter proves nothing about capacity. Run a mock exam in the actual hall with
+real devices and real students, weeks before the live one. It shows where the
+airtime and the uplink run out while there is still time to fix them.
+
+On the day, someone should be watching the hall live: client counts per access
+point and login success. A problem caught in the room can be
+handled. One reported afterwards becomes a disputed result. Write down what
+saturated and what held, and use it for the next capacity decision.
 
 ## Frequently asked questions
 
-### How many access points does a large examination hall actually need?
+### How many access points does a large exam hall need?
 
-There is no single number; it follows from the density model. Estimate the concurrent active devices at peak, decide on a realistic throughput per device for your exam platform, and let those figures determine how many radios are required and how the hall is divided into cells. A 400-seat hall presenting 600 to 800 associations typically needs several access points at controlled power serving defined zones, not one or two high-power units, and the exact count should be confirmed by a site survey.
+There is no single number. It follows from the device count and the throughput
+each device needs on your exam platform. A 400-seat hall where students bring a
+phone and a laptop can present up to 800 devices, which means several access
+points at controlled power serving defined blocks of seats, not one or two
+powerful ones. A site survey in the real room confirms the count.
 
-### Is coverage testing enough to confirm the network is ready for exams?
+### Is a coverage survey enough to show the network is ready for exams?
 
-No. A coverage survey confirms that devices can see the network, which is a different question from whether hundreds of devices can transmit at once without the airtime collapsing. Readiness has to be validated with load testing that simulates many active clients, or with a controlled mock examination using real devices in the actual hall, before relying on the network for a live timed assessment.
+No. Coverage shows that devices can see the network. It says nothing about
+whether hundreds of them can transmit at once. Readiness is shown by a mock exam
+with real devices in the actual hall, or by load testing that simulates many
+active clients.
 
-### What is the most common cause of Wi-Fi failure during a computer-based test?
+### What usually fails during a computer-based test on Wi-Fi?
 
-In practice it is rarely the radios themselves. The frequent culprits are an under-resourced authentication path that cannot handle a simultaneous login surge, a wired uplink or internet link sized for average rather than peak load, and a single point of failure such as one RADIUS server, one carrier link, or unprotected switch power that fails during a grid event. Each of these can present to students as a network outage even when wireless coverage is fine.
+Rarely the radios themselves. The usual cause is something behind them: an
+authentication service that cannot take a simultaneous login surge, or a single
+point of failure such as one RADIUS server or a switch on unprotected power. An
+internet link sized for an average day fails the same way. Each of them looks like a network outage to
+the students in the hall.
 
-### Do data protection rules affect how campus Wi-Fi should be designed?
+### Can we use the new 6 GHz band in Nigeria?
 
-Yes. Student records and examination data are personal data under the Nigeria Data Protection Act 2023, overseen by the NDPC, so the network should segment examination and administrative systems from general student and IoT traffic using separate SSIDs and VLANs, with appropriate access controls and logging. Designing this segmentation in from the start is more defensible and less costly than retrofitting it after an examination platform is already live.
+Yes, the lower part of it. The NCC's framework opens 5925 to 6425 MHz for
+licence-exempt indoor Wi-Fi on type-approved equipment. Only Wi-Fi 6E and
+newer devices can use it, so plan for 5 GHz first and treat 6 GHz as extra
+capacity for the devices that support it.
+
+## Where to start
+
+Pick the one room that carries your heaviest peak. Write down its seat count
+and where the exam platform is hosted. Those two facts are enough for a first
+capacity estimate. We survey and design campus networks as
+part of our [infrastructure solutions](/services/infrastructure-solutions) work
+for the [education sector](/industries/education). Send us those two facts and
+we will tell you whether that room should be wired or wireless, and whether the
+network it has today would hold.

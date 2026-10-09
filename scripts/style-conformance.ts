@@ -21,6 +21,7 @@
  *      routes; headline DENSITY (chars per rendered line) on content detail,
  *      where the title is editorial and its length is not a design choice
  *   9. Em dash budget per article: <=1 per 400 words (content, not rendered)
+ *  10. No published article or report links to a draft or missing article
  *
  * Check 9 reads content/insights/*.mdx directly and runs before the browser
  * launches, so it reports even without a Playwright browser installed.
@@ -65,6 +66,7 @@ const ROUTES = [
   "/locations/lagos",
   "/about",
   "/approach",
+  "/portfolio",
   "/ecosystem",
   "/insights",
   "/reports",
@@ -78,6 +80,8 @@ const ROUTES = [
   // tables shipped with zero cell padding for exactly this reason.
   "/insights/what-an-it-sla-should-cover",
   "/insights/complete-guide-to-it-procurement-in-nigeria",
+  "/insights/after-go-live-how-we-support-a-private-hospital-in-abuja",
+  "/reports/digitplus-industry-report-2026",
   // The longest PUBLISHED article title (91 chars), so the relaxed
   // content-detail headline budget is exercised rather than assumed. It must be
   // a published slug: drafts 404 in a production build.
@@ -482,14 +486,58 @@ function checkEmDashBudget() {
 
 checkEmDashBudget();
 
+/**
+ * Check 10 — no published page links to an unpublished article.
+ *
+ * A draft renders in development (NODE_ENV-gated preview) and 404s in
+ * production, so a link to one looks fine in every local check and breaks on
+ * the live site. Four October articles shipped linking to drafts for exactly
+ * that reason. This reads the MDX directly: any `/insights/<slug>` in a
+ * published article or report whose target is `draft: true`, or does not exist,
+ * fails.
+ */
+const REPORTS_DIR = path.join(import.meta.dirname, "..", "content", "reports");
+function checkLinksToDrafts() {
+  if (!fs.existsSync(INSIGHTS_DIR)) return;
+  const isDraft = (src: string) => /^draft:\s*true\s*$/m.test(src);
+  const published = new Set<string>();
+  const sources: { route: string; src: string }[] = [];
+  for (const file of fs.readdirSync(INSIGHTS_DIR).filter((f) => f.endsWith(".mdx"))) {
+    const src = fs.readFileSync(path.join(INSIGHTS_DIR, file), "utf8");
+    const slug = file.replace(/\.mdx$/, "");
+    if (isDraft(src)) continue;
+    published.add(slug);
+    sources.push({ route: `/insights/${slug}`, src });
+  }
+  if (fs.existsSync(REPORTS_DIR)) {
+    for (const file of fs.readdirSync(REPORTS_DIR).filter((f) => f.endsWith(".mdx"))) {
+      sources.push({
+        route: `/reports/${file.replace(/\.mdx$/, "")}`,
+        src: fs.readFileSync(path.join(REPORTS_DIR, file), "utf8"),
+      });
+    }
+  }
+  // Static segments under /insights that are routes, not articles.
+  const ROUTES = new Set(["case-studies", "category", "tag", "rss.xml"]);
+  for (const { route, src } of sources) {
+    for (const m of src.matchAll(/\]\(\/insights\/([a-z0-9-]+)/g)) {
+      const target = m[1];
+      if (ROUTES.has(target) || published.has(target)) continue;
+      fail(route, "link-to-unpublished", `links to /insights/${target}, which is a draft or does not exist`);
+    }
+  }
+}
+
+checkLinksToDrafts();
+
 // Report the content findings before launching Chromium. The browser step can
 // fail for environmental reasons (no Playwright browser installed), and when it
 // does, everything already found would otherwise die with it unreported.
 const contentFailures = failures.length;
 console.log(
   contentFailures === 0
-    ? "content checks: PASS — em dash budget met by every article"
-    : `content checks: ${contentFailures} failure(s) — em dash budget exceeded:`,
+    ? "content checks: PASS — em dash budget met, no links to unpublished articles"
+    : `content checks: ${contentFailures} failure(s):`,
 );
 for (const f of failures) console.log(`    ${f.route}  [${f.check}] ${f.detail}`);
 console.log("");

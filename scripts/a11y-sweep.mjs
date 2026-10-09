@@ -4,7 +4,7 @@ import { AxeBuilder } from "@axe-core/playwright";
 const BASE = process.argv[2] ?? "http://localhost:4310";
 // Content templates were absent from this list, so /insights/[slug] and
 // /reports/[slug] — the longest-form surfaces on the site — were never scanned.
-const ROUTES = ["/","/services","/services/it-procurement","/industries","/industries/government","/locations","/locations/abuja","/about","/approach","/ecosystem","/insights","/reports","/contact","/privacy","/terms","/insights/what-an-it-sla-should-cover","/insights/category/procurement","/insights/case-studies","/reports/nigeria-enterprise-it-hardware-price-index-q2-2026","/this-route-does-not-exist"];
+const ROUTES = ["/","/services","/services/it-procurement","/industries","/industries/government","/locations","/locations/abuja","/about","/approach","/portfolio","/ecosystem","/insights","/reports","/contact","/privacy","/terms","/insights/what-an-it-sla-should-cover","/insights/category/procurement","/insights/case-studies","/reports/nigeria-enterprise-it-hardware-price-index-q2-2026","/this-route-does-not-exist"];
 
 // axe is run at both widths. A mobile layout is a different tree: the drawer nav
 // replaces the rail, grids collapse, and elements that were side by side stack.

@@ -42,6 +42,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: url("/industries"), lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: url("/approach"), lastModified: now, changeFrequency: "yearly", priority: 0.6 },
     { url: url("/about"), lastModified: now, changeFrequency: "yearly", priority: 0.7 },
+    { url: url("/portfolio"), lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: url("/ecosystem"), lastModified: now, changeFrequency: "monthly", priority: 0.5 },
     { url: url("/insights"), lastModified: now, changeFrequency: "daily", priority: 0.8 },
     { url: url("/insights/case-studies"), lastModified: now, changeFrequency: "weekly", priority: 0.6 },

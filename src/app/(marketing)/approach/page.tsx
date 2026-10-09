@@ -54,6 +54,11 @@ export default function ApproachPage() {
             result is fewer surprises, a clean paper trail, and technology that
             works on the day you need it to.
           </p>
+          <div className="mt-8">
+            <Button href="/portfolio" variant="ghost">
+              See it on real projects
+            </Button>
+          </div>
         </FadeIn>
       </Section>
 

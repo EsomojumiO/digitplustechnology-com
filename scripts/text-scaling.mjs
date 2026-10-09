@@ -33,6 +33,7 @@ const ROUTES = [
   "/industries/government",
   "/about",
   "/approach",
+  "/portfolio",
   "/locations/abuja",
   "/insights",
   "/insights/what-an-it-sla-should-cover",

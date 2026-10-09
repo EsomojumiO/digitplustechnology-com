@@ -34,7 +34,7 @@ export const authors: Author[] = [
     credentials: [
       "Enterprise IT delivery since 2022",
       "Enterprise & public-sector clients",
-      "Authorised partner channels",
+      "Authorised distribution channels",
       "Abuja • Lagos • Port Harcourt",
     ],
     type: "organization",

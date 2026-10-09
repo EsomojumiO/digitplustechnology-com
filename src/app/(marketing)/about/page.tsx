@@ -127,7 +127,7 @@ export default function AboutPage() {
             <Card padding="lg">
               <h3 className="text-h4 text-text">Authorised channels</h3>
               <p className="text-body text-muted measure mt-3">
-                We supply through authorised reseller and distribution channels,
+                We buy through manufacturers&apos; authorised distribution channels,
                 so equipment is genuine and warranties are valid.
               </p>
             </Card>
@@ -163,6 +163,15 @@ export default function AboutPage() {
               { value: "Abuja", label: "Headquarters" },
             ]}
           />
+        </FadeIn>
+        {/* The figures say how long and how wide. The portfolio shows the
+            work itself, which is the stronger answer to "track record". */}
+        <FadeIn>
+          <div className="mt-12">
+            <Button href="/portfolio" variant="ghost">
+              See the projects behind the numbers
+            </Button>
+          </div>
         </FadeIn>
       </Section>
 

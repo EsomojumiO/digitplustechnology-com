@@ -60,7 +60,7 @@ export const locations: LocationContent[] = [
       },
       {
         title: "Same-city response",
-        desc: "For managed and break-fix support in the FCT, an engineer can be on site the same day. Distance is measured across a city, not across states.",
+        desc: "For managed and break-fix support in the FCT, we aim to have an engineer on site the same day for priority faults. The committed time is written into each support agreement.",
       },
       {
         title: "Procurement paperwork that holds",
@@ -84,7 +84,7 @@ export const locations: LocationContent[] = [
     highlights: [
       "Documented, audit-ready procurement for federal agencies",
       "Infrastructure builds and server-room fit-outs across the FCT",
-      "On-site managed support with same-day response in and around Abuja",
+      "On-site managed support in and around Abuja, aiming for same-day response",
     ],
     faqs: [
       {
@@ -97,7 +97,7 @@ export const locations: LocationContent[] = [
       },
       {
         q: "How quickly can an engineer get to our Abuja office for support?",
-        a: "For managed and break-fix support in the FCT, we aim for same-day on-site response. Our team and equipment base are in the city, so support is not routed through another state.",
+        a: "For managed and break-fix support in the FCT, we aim for same-day on-site response to priority faults, and the committed time is written into your support agreement. Our team and equipment base are in the city, so support is not routed through another state.",
       },
     ],
     metaTitle: "IT Company in Abuja — Our HQ",

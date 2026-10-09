@@ -196,6 +196,9 @@ export const mainNav: NavItem[] = [
       },
     ],
   },
+  // Directly after Services: the work is the evidence for the service list.
+  // A plain link, no dropdown — the page itself is the index of projects.
+  { label: "Portfolio", href: "/portfolio" },
   {
     label: "Insights",
     href: "/insights",
@@ -281,6 +284,7 @@ export const footerNav: FooterColumn[] = [
     links: [
       { label: "About", href: "/about" },
       { label: "Approach", href: "/approach" },
+      { label: "Portfolio", href: "/portfolio" },
       { label: "Insights", href: "/insights" },
       { label: "Reports", href: "/reports" },
       { label: "Locations", href: "/locations" },
