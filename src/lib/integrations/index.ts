@@ -6,9 +6,9 @@
  * the whole request), records the lead, and aggregates results.
  *
  *   contact      -> store + email.notify + crm.createLead
- *   newsletter   -> store + marketing.subscribe
- *   report-lead  -> store + marketing.addLead + crm.createLead (+ subscribe if
- *                   opted in) and returns the PDF url for the client to reveal.
+ *   newsletter   -> store + marketing.subscribe + email.notify
+ *   report-lead  -> store + crm.createLead + email.notify (+ marketing.subscribe
+ *                   ONLY if opted in) and returns the PDF url to reveal.
  */
 
 import { siteConfig } from "@/lib/site";
@@ -112,6 +112,17 @@ async function handleNewsletter(
   const entries = await Promise.all([
     safe("store", () => persist(lead, leadId)),
     safe("marketing", () => marketingProvider.subscribe(payload)),
+    safe("email", () =>
+      emailNotifier.notify({
+        to: siteConfig.email,
+        replyTo: payload.email,
+        subject: `New newsletter sign-up — ${payload.email}`,
+        text:
+          `New newsletter sign-up\n\n` +
+          `Email: ${payload.email}\n\n` +
+          `— submitted ${payload.meta.submittedAt} from ${payload.meta.page ?? "site"}`,
+      }),
+    ),
   ]);
 
   return { ok: true, leadId, providers: aggregate(entries) };
@@ -123,10 +134,29 @@ async function handleReportLead(
   const lead: LeadPayload = { kind: "report-lead", ...payload };
   const { id: leadId } = record(lead);
 
+  // No marketing-list call unless the person ticked the opt-in below. This
+  // used to add every downloader to the marketing platform, which would have
+  // emailed people who never agreed to it (NDPA consent) the day a real
+  // provider was connected.
   const calls: Array<Promise<[string, AdapterResult]>> = [
     safe("store", () => persist(lead, leadId)),
-    safe("marketing", () => marketingProvider.addLead(payload)),
     safe("crm", () => crmProvider.createLead(payload)),
+    safe("email", () =>
+      emailNotifier.notify({
+        to: siteConfig.email,
+        replyTo: payload.workEmail,
+        subject: `Report download — ${payload.company}`,
+        text:
+          `Someone downloaded a report\n\n` +
+          `Report:   ${payload.reportSlug}\n` +
+          `Name:     ${payload.fullName}\n` +
+          `Email:    ${payload.workEmail}\n` +
+          `Company:  ${payload.company}\n` +
+          `Role:     ${payload.role ?? "—"}\n` +
+          `Opted in to email: ${payload.subscribe ? "yes" : "no"}\n\n` +
+          `— submitted ${payload.meta.submittedAt} from ${payload.meta.page ?? "site"}`,
+      }),
+    ),
   ];
 
   // Optional explicit newsletter opt-in.

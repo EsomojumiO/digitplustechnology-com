@@ -179,7 +179,7 @@ export function ReportGateForm({
             name="subscribe"
             className="mt-0.5 size-4 rounded-sm border-hairline text-accent-green accent-[var(--accent-green)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green"
           />
-          <span>Also send me the next quarterly report.</span>
+          <span>Email me future reports and occasional insights. Unsubscribe any time.</span>
         </label>
 
         <Honeypot />
@@ -189,8 +189,12 @@ export function ReportGateForm({
             {pending ? "Preparing…" : "Get the report"}
           </Button>
           <p className="text-caption text-muted">
-            We use your details only to deliver this report and relevant updates.
-            Never shared with third parties.
+            We use your details to deliver this report and to know who reads it.
+            We email you again only if you tick the box above. Never sold. See our{" "}
+            <a href="/privacy" className="underline underline-offset-2 hover:text-text">
+              Privacy Policy
+            </a>
+            .
           </p>
         </div>
       </div>

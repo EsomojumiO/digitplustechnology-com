@@ -15,6 +15,7 @@ import {
   Button,
 } from "@/components/ui";
 import { FadeIn } from "@/components/motion";
+import { ReportGateForm } from "@/components/forms";
 import {
   getAllReports,
   getReportBySlug,
@@ -215,62 +216,56 @@ export default async function ReportLandingPage({
 
       {/*
         ── Full-report download ─────────────────────────────────────────────
-        The old lead gate asked for full name, WORK EMAIL, company and role in
-        exchange for 771- and 765-byte one-page stubs (BLOCKERS #10): PII for
-        nothing, a reputational and NDPA-consent problem at once. So the PDF
-        is offered only when a real file exists on disk at build time, and it
-        is offered UNGATED: the lead integrations are still stubs, so a gate
-        would collect details that go nowhere useful.
-        To RESTORE THE GATE once email delivery and the CRM are live, render
-        <ReportGateForm reportSlug={report.slug} reportTitle={report.title} />
-        in place of the download button. The API route, schema, rate limiting
-        and the /api/report-lead tests all remain in place and working.
+        GATED when a real PDF exists (over 10 KB; the old ~770-byte stubs never
+        qualify, BLOCKERS #10). The gate came back on 2026-10-09 once leads had
+        somewhere real to go: every submission lands in public.website_leads in
+        the dp-os Supabase project. Marketing email only goes to people who
+        tick the unticked-by-default box (NDPA consent). Without a real PDF the
+        card falls back to a conversation, and asks for nothing.
       */}
       <Section tone="muted" spacing="lg">
         <Container width="narrow" className="px-0">
           <Card padding="lg">
             {pdf ? (
-              <div className="flex flex-col gap-2">
-                <Eyebrow>Full report</Eyebrow>
-                <h2 className="text-h3 text-balance text-text">
-                  Read the whole edition
-                </h2>
-                <p className="text-body text-muted">
-                  The full report carries the detail behind every finding above,
-                  with numbered sources. PDF, {pdf.sizeLabel}. No form to fill.
-                </p>
-              </div>
+              <>
+                <div className="flex flex-col gap-2">
+                  <Eyebrow>Full report</Eyebrow>
+                  <h2 className="text-h3 text-balance text-text">
+                    Read the whole edition
+                  </h2>
+                  <p className="text-body text-muted">
+                    The full report carries the detail behind every finding
+                    above, with numbered sources. PDF, {pdf.sizeLabel}. Tell us
+                    who you are and the download opens straight away.
+                  </p>
+                </div>
+                <ReportGateForm
+                  className="mt-8"
+                  reportSlug={report.slug}
+                  reportTitle={report.title}
+                />
+              </>
             ) : (
-              <div className="flex flex-col gap-2">
-                {/* Not "Full report": this branch does not contain one. */}
-                <Eyebrow>Go deeper</Eyebrow>
-                <h2 className="text-h3 text-balance text-text">
-                  Want the underlying detail?
-                </h2>
-                <p className="text-body text-muted">
-                  The findings above are the substance of this edition. For the
-                  category-level detail behind them, or to talk through what it
-                  means for a specific procurement cycle, speak to us directly.
-                </p>
-              </div>
-            )}
-
-            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
-              {pdf ? (
-                <>
-                  <Button href={report.pdf} download size="lg">
-                    Download the full report
-                  </Button>
-                  <Button href="/contact" variant="ghost">
+              <>
+                <div className="flex flex-col gap-2">
+                  {/* Not "Full report": this branch does not contain one. */}
+                  <Eyebrow>Go deeper</Eyebrow>
+                  <h2 className="text-h3 text-balance text-text">
+                    Want the underlying detail?
+                  </h2>
+                  <p className="text-body text-muted">
+                    The findings above are the substance of this edition. For the
+                    category-level detail behind them, or to talk through what it
+                    means for a specific procurement cycle, speak to us directly.
+                  </p>
+                </div>
+                <div className="mt-8">
+                  <Button href="/contact" size="lg">
                     {ctaLabels.generic}
                   </Button>
-                </>
-              ) : (
-                <Button href="/contact" size="lg">
-                  {ctaLabels.generic}
-                </Button>
-              )}
-            </div>
+                </div>
+              </>
+            )}
           </Card>
         </Container>
       </Section>
