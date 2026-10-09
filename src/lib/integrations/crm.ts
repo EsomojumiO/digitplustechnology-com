@@ -29,9 +29,10 @@ async function createLead(
   // ---- STUB MODE -----------------------------------------------------------
   if (!hasWebhook() && !hasApiKey()) {
      
+    // The lead itself is already in public.website_leads (store.ts), so the
+    // stub logs no personal data, only that a CRM push was skipped.
     console.info(
-      "[crm:stub] createLead (no CRM_* env — not pushed):",
-      JSON.stringify(payload),
+      `[crm:stub] createLead skipped (no CRM_* env); ${payload.meta.source} lead is in website_leads`,
     );
     return { ok: true, skipped: true };
   }

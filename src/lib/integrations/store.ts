@@ -168,7 +168,12 @@ function identify(lead: LeadPayload): {
 
 /** Light redaction for logs — keep emails readable but trim message bodies. */
 function redact(lead: LeadPayload): Record<string, unknown> {
-  const clone: Record<string, unknown> = { ...lead };
+  // No IP in the logs either: the privacy policy says it is used briefly to
+  // stop abuse and then discarded, and platform logs are kept for days.
+  const clone: Record<string, unknown> = {
+    ...lead,
+    meta: { ...lead.meta, ip: undefined },
+  };
   if ("message" in clone && typeof clone.message === "string") {
     clone.message =
       clone.message.length > 120
