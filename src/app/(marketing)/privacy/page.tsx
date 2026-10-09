@@ -26,7 +26,7 @@ export default function PrivacyPage() {
         <Eyebrow>Legal</Eyebrow>
         <h1 className="text-h1 mt-3 text-text">Privacy Policy</h1>
         <p className="mt-4 text-small text-muted">
-          Last updated: September 2026
+          Last updated: October 2026
         </p>
 
         <Prose className="mt-10">
@@ -59,6 +59,13 @@ export default function PrivacyPage() {
             <li>
               <strong>Newsletter sign-ups.</strong> We collect your email
               address only.
+            </li>
+            <li>
+              <strong>Report downloads.</strong> To download a full report, we
+              ask for your name, work email, company and, optionally, your role,
+              and record which report you downloaded. We email you afterwards
+              only if you tick the box that asks to receive future reports and
+              insights. It is unticked by default.
             </li>
             <li>
               <strong>Limited technical data.</strong> If you accept
@@ -119,25 +126,32 @@ export default function PrivacyPage() {
             information where required by law.
           </p>
           <p>
-            The providers that help us operate may include an email-delivery
-            service, an email-marketing platform, a CRM, and Google Analytics
-            (Google LLC) for website analytics. We engage them as data processors
-            under appropriate terms.
+            Form submissions (contact enquiries, newsletter sign-ups and report
+            downloads) are stored in a database hosted for us by Supabase, which
+            only our own staff can access. Other providers that help us operate
+            may include an email-delivery service, an email-marketing platform
+            and Google Analytics (Google LLC) for website analytics. We engage
+            them as data processors under appropriate terms. We do not store
+            your IP address with your submission. It is used briefly to stop
+            automated abuse of our forms, then discarded.
           </p>
 
           <h2>International transfers</h2>
           <p>
-            Some of our service providers may store or process data outside
-            Nigeria. Where that happens, we take reasonable steps to ensure your
+            Some of our service providers store or process data outside Nigeria.
+            Our form database is hosted in the European Union (Ireland). Where that happens, we take reasonable steps to ensure your
             information remains protected to a standard consistent with the NDPA,
             including through the providers’ contractual and security commitments.
           </p>
 
           <h2>Data retention</h2>
           <p>
-            We keep enquiry and lead information only as long as needed to act on
-            it and to meet legitimate business and legal requirements, then
-            delete or anonymise it.
+            We keep contact enquiries and report-download details for up to 24
+            months after our last contact with you, unless you become a client,
+            in which case our client-records obligations apply. We keep a
+            newsletter address until you unsubscribe. After that we delete or
+            anonymise it. You can ask us to delete your details sooner at any
+            time.
           </p>
 
           <h2>Your rights as a data subject</h2>

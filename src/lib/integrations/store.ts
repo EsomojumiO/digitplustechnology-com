@@ -4,17 +4,17 @@
  * Two layers:
  *   1. An in-memory ring buffer (debug/inspection only — per-instance, wiped on
  *      cold start; NEVER a source of truth).
- *   2. Durable persistence via `persist()` — a Supabase REST insert when
- *      SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY are present (no SDK dependency,
- *      mirrors the Resend/Brevo REST adapters). Falls back to STUB mode
- *      (console log, { ok, skipped }) when env is absent, so the build and the
- *      forms work with NO keys set.
+ *   2. Durable persistence via `persist()` — a call to the token-guarded
+ *      `ingest_website_lead` function in Supabase when SUPABASE_URL,
+ *      SUPABASE_PUBLISHABLE_KEY and LEADS_INGEST_TOKEN are present (no SDK
+ *      dependency). Falls back to STUB mode (console log, { ok, skipped }) when
+ *      env is absent, so the build and the forms work with NO keys set.
  *
  * The facade calls `record()` once (synchronous id + buffer) then `persist()`
  * inside its isolated `safe()` wrapper, so a DB outage never fails the request.
  *
- * To go live: set the two env vars and run the SQL in
- * `supabase/migrations/0001_leads.sql` (or paste it into the Supabase SQL editor).
+ * Live since 2026-10-09: rows land in `public.website_leads` in the dp-os
+ * project. See supabase/migrations/0002_website_leads.sql.
  */
 
 import type { AdapterResult, LeadPayload } from "./types";
@@ -53,49 +53,60 @@ export function record(lead: LeadPayload): { id: string } {
 
 function hasSupabase(): boolean {
   return Boolean(
-    process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY,
+    process.env.SUPABASE_URL &&
+      process.env.SUPABASE_PUBLISHABLE_KEY &&
+      process.env.LEADS_INGEST_TOKEN,
   );
 }
 
 /**
- * Durably persist a lead. Returns { ok, skipped } in stub mode (no Supabase
- * env), otherwise inserts a row into the `leads` table via the Supabase REST
- * API. Designed to be called inside the facade's `safe()` wrapper.
+ * Durably persist a lead into `public.website_leads` in the dp-os Supabase
+ * project (supabase/migrations/0002_website_leads.sql). Returns { ok, skipped }
+ * in stub mode (env absent), so local builds and previews work with no keys.
+ *
+ * It calls the `ingest_website_lead` function with the publishable key plus a
+ * shared token, server-side only. The table itself has no API access at all,
+ * so neither key nor token in isolation can read a single lead. The visitor's
+ * IP is dropped here: the rate limiter needs it for a moment, the database
+ * never does (NDPA data minimisation).
  */
 export async function persist(
   lead: LeadPayload,
   id: string,
 ): Promise<AdapterResult> {
-  // ---- STUB MODE -----------------------------------------------------------
   if (!hasSupabase()) {
     return { ok: true, skipped: true };
   }
 
-  // ---- REAL PROVIDER: Supabase via REST (no SDK dependency) ----------------
   const base = process.env.SUPABASE_URL!.replace(/\/$/, "");
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+  const key = process.env.SUPABASE_PUBLISHABLE_KEY!;
   const contact = identify(lead);
+  const payload = { ...lead, meta: { ...lead.meta, ip: undefined } };
 
   try {
-    const res = await fetch(`${base}/rest/v1/leads`, {
+    const res = await fetch(`${base}/rest/v1/rpc/ingest_website_lead`, {
       method: "POST",
       headers: {
         apikey: key,
         Authorization: `Bearer ${key}`,
         "Content-Type": "application/json",
-        Prefer: "return=minimal",
       },
       body: JSON.stringify({
-        id,
-        kind: lead.kind,
-        email: contact.email,
-        name: contact.name,
-        company: contact.company,
-        source: lead.meta.source,
-        page: lead.meta.page ?? null,
-        ip: lead.meta.ip ?? null,
-        payload: lead,
-        created_at: lead.meta.submittedAt,
+        p_token: process.env.LEADS_INGEST_TOKEN,
+        p_lead: {
+          id,
+          kind: lead.kind,
+          email: contact.email,
+          name: contact.name,
+          company: contact.company,
+          report_slug: lead.kind === "report-lead" ? lead.reportSlug : null,
+          marketing_opt_in: optedIn(lead),
+          source: lead.meta.source,
+          page: lead.meta.page ?? null,
+          environment: process.env.VERCEL_ENV ?? "development",
+          payload,
+          created_at: lead.meta.submittedAt,
+        },
       }),
     });
 
@@ -113,6 +124,17 @@ export async function persist(
       error: e instanceof Error ? e.message : "Supabase request failed",
     };
   }
+}
+
+/**
+ * Whether this person agreed to marketing email. A newsletter sign-up is the
+ * agreement. A report download counts only if the box was ticked (it is
+ * unticked by default). A contact enquiry never does.
+ */
+function optedIn(lead: LeadPayload): boolean {
+  if (lead.kind === "newsletter") return true;
+  if (lead.kind === "report-lead") return lead.subscribe === true;
+  return false;
 }
 
 /** Snapshot of retained leads (debug only). */
