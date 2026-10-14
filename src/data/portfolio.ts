@@ -125,7 +125,7 @@ export const portfolioProjects: PortfolioProject[] = [
     industry: "education",
     location: "Ipele, Ondo State",
     summary:
-      "A complete lab for a school with no fixed-line internet and unreliable grid power: solar and battery, Starlink, twenty wired seats, and the maintenance plan that keeps the room teaching past year three.",
+      "A complete lab for a school with no fixed-line internet and unreliable grid power: a protected power circuit, Starlink, twenty wired seats, and the maintenance plan that keeps the room teaching past year three.",
     services: [
       "infrastructure-solutions",
       "hardware-supply",
@@ -134,13 +134,12 @@ export const portfolioProjects: PortfolioProject[] = [
     ],
     figures: [
       { value: "20", label: "Wired workstations" },
-      { value: "5kVA", label: "Inverter on a 48V bus" },
-      { value: "~10kWh", label: "Usable LiFePO4 storage" },
-      { value: "~5kWp", label: "Solar array" },
+      { value: "3 weeks", label: "From start to handover" },
+      { value: "1", label: "Standard image on every machine" },
     ],
     delivered: [
       "20 business-class small-form-factor desktops: quad-core, 8GB RAM, 256GB SSD, Windows 11 Pro, 22-inch monitors",
-      "Solar, LiFePO4 storage and inverter on a dedicated, surge-protected, earthed circuit",
+      "Power protection: the lab on its own dedicated, surge-protected, earthed circuit",
       "Starlink, roof-mounted and earthed, bridged into a gateway with DNS filtering and per-device rate limits",
       "A wired gigabit backbone to every seat, with Wi-Fi for staff devices",
       "One golden image cloned to all twenty machines, students on standard accounts",
@@ -149,8 +148,8 @@ export const portfolioProjects: PortfolioProject[] = [
     constraint:
       "No fibre to pull, mobile broadband too weak for twenty sessions, and grid power that cannot be trusted for a forty-minute lesson.",
     decision: {
-      title: "Power first, then connectivity, then machines",
-      body: "Schools usually spend the whole budget on computers and find nothing to run them on. We sized power from measured load, about 2.25kW sustained, and took the inverter to 5kVA where 3.5kVA would have passed, so the school can add seats without replacing the system. Small-form-factor desktops draw less, which cut the solar and battery spend.",
+      title: "Protect the power, then connect, then equip",
+      body: "Schools usually spend the whole budget on computers and find nothing safe to run them on. We measured the load, about 2.25kW sustained, and put the lab on its own protected, earthed circuit before anything else. Small-form-factor desktops keep that load low, and only then came Starlink and the machines.",
     },
     writeUps: ["school-computer-lab-ipele-ondo-starlink"],
   },
