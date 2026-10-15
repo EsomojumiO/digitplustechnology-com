@@ -1,18 +1,18 @@
 ---
 title: "A 20-Seat Computer Lab in Ipele: What It Actually Takes to Put a Rural School Online"
 slug: "school-computer-lab-ipele-ondo-starlink"
-excerpt: "How we built a 20-workstation secondary school lab in Ipele, Ondo State, with solar power and Starlink connectivity, and the maintenance design that keeps it alive past year three."
+excerpt: "How we built a 20-workstation secondary school lab in Ipele, Ondo State, with protected power and Starlink connectivity, and the maintenance design that keeps it alive past year three."
 category: "Infrastructure"
 tags:
   - "education"
   - "schools"
   - "case study"
   - "starlink"
-  - "solar power"
+  - "power protection"
   - "computer lab"
 author: "Digitplus Technology"
 publishedAt: "2026-08-15"
-updatedAt: "2026-08-23"
+updatedAt: "2026-10-14"
 cover: "/images/insights/school-computer-lab-ipele-ondo-starlink.jpg"
 coverAlt: "A room filled with lots of desks and computers"
 draft: false
@@ -55,7 +55,7 @@ whole budget, then discover there is nothing to run them on.
 
 ## Power: the actual maths
 
-We sized the system from measured load, not guesswork.
+We worked from measured load, not guesswork.
 
 | Load | Draw |
 | --- | --- |
@@ -71,27 +71,10 @@ That gives a sustained draw of roughly 2.25kW, with peaks around 2.6kW during
 simultaneous startup, which is exactly what happens when twenty students power
 on at 8:00am.
 
-Our specification:
-
-- **Inverter:** 5kVA on a 48V bus. We deliberately over-sized past the 3.5kVA
-  the numbers technically permit. Headroom costs a little now and prevents the
-  whole system being replaced when the school adds a printer, a second
-  projector or four more seats.
-- **Battery bank:** roughly 10kWh of usable LiFePO4 capacity, sized for four
-  hours of full lab operation. That is a complete morning of back-to-back
-  lessons with no grid and no sun.
-- **Solar array:** approximately 5kWp. At Ondo's typical peak-sun hours that
-  generates enough to carry the daytime load and refill the bank before the
-  next school day.
-
-Lithium over lead-acid was not a close call. In a school, nobody is going to
-check electrolyte levels, and a lead-acid bank deeply discharged twice a week
-will be scrap inside eighteen months. LiFePO4 costs more once and then mostly
-does nothing except work.
-
-The lab also went onto its own dedicated, surge-protected, properly earthed
-circuit, separate from the rest of the school's wiring. When a fault takes out
-the staff room, the lab stays up. That circuit is ordinary
+That number sized the lab's circuit. The lab went onto its own dedicated,
+surge-protected, properly earthed circuit, separate from the rest of the
+school's wiring, so a surge on the grid does not reach twenty machines at once.
+When a fault takes out the staff room, the lab stays up. That circuit is ordinary
 [infrastructure work](/services/infrastructure-solutions), and it is the
 cheapest part of the build to get right at installation and the most expensive
 to retrofit.
@@ -148,8 +131,8 @@ than consumer towers. The reasoning is unglamorous and correct:
 - **Parts and serviceability.** Spares are abundant and cheap. A failed power
   supply is a same-week fix, not a discontinued-model hunt.
 - **Small footprint and low draw.** They pull far less power than a full tower,
-  which directly reduced the solar and battery spend above. The machines paid
-  for part of their own power system.
+  which keeps the lab's load low on its circuit and makes any backup power the
+  school adds later smaller and cheaper.
 - **Tool-less internals.** A trained teacher can swap RAM or a drive without an
   engineer on site.
 
@@ -209,7 +192,7 @@ building on the day they happen.
 
 **A written maintenance schedule.** Physical cleaning and dust removal
 quarterly, because dust is the primary killer of computers in this climate.
-Battery and inverter check quarterly. Image refresh annually.
+Electrical and surge-protection check quarterly. Image refresh annually.
 
 **Remote support.** We can reach the lab remotely for anything that does not
 require hands, which is most things.
@@ -229,10 +212,10 @@ the lab loses its internet and we lose the remote support that depends on the
 same link, which is precisely when a school most needs both. This belongs in
 the school's annual budget as a fixed line, not as something someone remembers.
 
-**The battery bank, eventually.** LiFePO4 is the right chemistry and it will
-outlast lead-acid by years, but it is not permanent. It has a finite cycle life
-and it will need replacing. Better to know the year it is coming than to
-discover it during exams.
+**Power for outages.** The lab is protected, not backed up. When the grid goes
+down mid-lesson, the lesson stops. A school that wants teaching to continue
+through outages needs backup power, sized from the load above; the dedicated
+circuit is ready for it, and it belongs in the next budget, not the next crisis.
 
 **A second person who knows the room.** A single named custodian is the right
 design and also a single point of failure. That person can transfer, resign or
